@@ -9115,7 +9115,12 @@ void main_manu_function(void)
                 }
                 else if(current_ekran.current_level == EKRAN_TYPE_OUTPUT_UVV)
                 {
-                  if ((edition_settings.type_of_output & ((unsigned int)(~((1<<NUMBER_OUTPUTS)-1)))) == 0)
+                  if (
+                      ( ( (2*(NUMBER_OUTPUTS & 0xf)) % sizeof(unsigned int) ) == 0 ) /*випадок, коли немає резервних бітів*/
+                      ||
+                      (( *( (&edition_settings.type_of_output)  + ( NUMBER_OUTPUTS >> (5-1) ) ) & ((unsigned int)(~( (1 << (2*(NUMBER_OUTPUTS & 0xf)) ) - 1 ))) ) == 0) /*резервні біти мають бути нульовими*/
+                     )   
+//                  if ((edition_settings.type_of_output & ((unsigned int)(~((1<<NUMBER_OUTPUTS)-1)))) == 0)
                   {
                     if (edition_settings.type_of_output != current_settings.type_of_output)
                     {
@@ -12926,7 +12931,7 @@ void main_manu_function(void)
                 make_ekran_dopusk_dv();
               }
               else if((current_ekran.current_level == EKRAN_TYPE_INPUT_UVV ) || (current_ekran.current_level == EKRAN_TYPE_INPUT_SIGNAL_UVV) ||
-                      (current_ekran.current_level == EKRAN_TYPE_OUTPUT_UVV) || (current_ekran.current_level == EKRAN_TYPE_LED_UVV         ))
+                      (current_ekran.current_level == EKRAN_TYPE_LED_UVV   ))
               {
                 unsigned int value = (1 << current_ekran.index_position);
           
@@ -12941,16 +12946,23 @@ void main_manu_function(void)
                   edition_settings.type_of_input_signal ^= value;
                   make_ekran_type_input_uvv(1);
                 }
-                else if (current_ekran.current_level == EKRAN_TYPE_OUTPUT_UVV)
-                {
-                  edition_settings.type_of_output ^= value;
-                  make_ekran_type_output_uvv();
-                }
                 else 
                 {
                   edition_settings.type_of_led ^= value;
                   make_ekran_type_led_uvv();
                 }
+              }
+              else if(current_ekran.current_level == EKRAN_TYPE_OUTPUT_UVV)
+              {
+                unsigned int index = current_ekran.index_position >> (5-1);
+                unsigned int shift = 2*(current_ekran.index_position & 0xf);
+                
+                int value = ( *( (&edition_settings.type_of_output)  + index ) & (0x3 << shift ) ) >> shift;
+                if ((++value) >= 3) value = 0;
+                
+                *( (&edition_settings.type_of_output)  + index ) &= (unsigned int)(~(0x3 << shift));
+                *( (&edition_settings.type_of_output)  + index ) |= (unsigned int)(value << shift);
+                make_ekran_type_output_uvv();
               }
               else if(current_ekran.current_level == EKRAN_ADDRESS)
               {
@@ -14283,7 +14295,7 @@ void main_manu_function(void)
                 make_ekran_dopusk_dv();
               }
               else if((current_ekran.current_level == EKRAN_TYPE_INPUT_UVV ) || (current_ekran.current_level == EKRAN_TYPE_INPUT_SIGNAL_UVV) ||
-                      (current_ekran.current_level == EKRAN_TYPE_OUTPUT_UVV) || (current_ekran.current_level == EKRAN_TYPE_LED_UVV         ))
+                      (current_ekran.current_level == EKRAN_TYPE_LED_UVV   ))
               {
                 unsigned int value = (1 << current_ekran.index_position);
           
@@ -14298,16 +14310,23 @@ void main_manu_function(void)
                   edition_settings.type_of_input_signal ^= value;
                   make_ekran_type_input_uvv(1);
                 }
-                else if (current_ekran.current_level == EKRAN_TYPE_OUTPUT_UVV)
-                {
-                  edition_settings.type_of_output ^= value;
-                  make_ekran_type_output_uvv();
-                }
                 else
                 {
                   edition_settings.type_of_led ^= value;
                   make_ekran_type_led_uvv();
                 }
+              }
+              else if(current_ekran.current_level == EKRAN_TYPE_OUTPUT_UVV)
+              {
+                unsigned int index = current_ekran.index_position >> (5-1);
+                unsigned int shift = 2*(current_ekran.index_position & 0xf);
+                
+                int value = ( *( (&edition_settings.type_of_output)  + index ) & (0x3 << shift ) ) >> shift;
+                if ((--value) < 0) value = 2;
+                
+                *( (&edition_settings.type_of_output)  + index ) &= (unsigned int)(~(0x3 << shift));
+                *( (&edition_settings.type_of_output)  + index ) |= (unsigned int)(value << shift);
+                make_ekran_type_output_uvv();
               }
               else if(current_ekran.current_level == EKRAN_ADDRESS)
               {

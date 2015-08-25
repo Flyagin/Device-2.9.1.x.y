@@ -18,6 +18,7 @@
 #define MAX_NUMBER_LINES_VMP            8
 
 #define DELTA_TIME_FOR_TIMERS           1
+#define PERIOD_SIGNAL_OUTPUT_MODE_2     1000 /*мс*/
 
 #define NUMBER_ANALOG_CANALES           8
 

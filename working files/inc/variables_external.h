@@ -149,7 +149,8 @@ extern unsigned int i1_bilshe_porogu, i2_bilshe_porogu;
 
 extern volatile unsigned int state_inputs;
 extern volatile unsigned int active_inputs;
-extern volatile unsigned int state_outputs;
+extern unsigned int state_outputs;
+extern unsigned int state_outputs_raw;
 extern volatile unsigned int state_signal_outputs;
 extern volatile unsigned int state_leds;
 extern volatile unsigned int state_trigger_leds;
@@ -173,6 +174,8 @@ extern volatile unsigned int set_diagnostyka[3];
 extern volatile unsigned int clear_diagnostyka[3];
 
 extern int global_timers[MAX_NUMBER_GLOBAL_TIMERS];
+extern unsigned int timer_prt_signal_output_mode_2;
+extern unsigned int output_timer_prt_signal_output_mode_2;
 extern unsigned int etap_execution_df[NUMBER_DEFINED_FUNCTIONS];
 extern unsigned int state_df;
 

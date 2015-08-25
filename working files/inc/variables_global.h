@@ -261,7 +261,8 @@ unsigned int i1_bilshe_porogu = 0, i2_bilshe_porogu = 0;
 
 volatile unsigned int state_inputs = 0; //"є сигнал " - відповідає встановленому біту (1); "немає сигналу" - відповідає скинутому біту (0)
 volatile unsigned int active_inputs = 0; //"вхід активний" - відповідає встановленому біту (1); "вхід пасивний" - відповідає скинутому біту (0)
-volatile unsigned int state_outputs = 0;
+unsigned int state_outputs = 0;
+unsigned int state_outputs_raw = 0;
 volatile unsigned int state_signal_outputs = 0;
 volatile unsigned int state_leds = 0;
 volatile unsigned int state_trigger_leds = 0;
@@ -285,6 +286,8 @@ volatile unsigned int set_diagnostyka[3] = {0, 0, 0};
 volatile unsigned int clear_diagnostyka[3] = {0, 0, 0};
 
 int global_timers[MAX_NUMBER_GLOBAL_TIMERS]; //Масив глобальних таймерів
+unsigned int timer_prt_signal_output_mode_2 = 0;
+unsigned int output_timer_prt_signal_output_mode_2 = false;
 unsigned int etap_execution_df[NUMBER_DEFINED_FUNCTIONS]; //Етап виконання опреділюваної функції
 unsigned int state_df = 0; //Текучий стан опреділюваних функцій
 

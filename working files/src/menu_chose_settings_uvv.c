@@ -386,28 +386,32 @@ void make_ekran_type_output_uvv(void)
       {
         //Ó ïàðíîìó íîìåð³ ðÿäêó âèâîäèìî çíà÷åííÿ 
         unsigned int index_ctr = (index_of_ekran>>1);
-        unsigned int temp_data;
 
-        const unsigned char information[MAX_NAMBER_LANGUAGE][2][MAX_COL_LCD] = 
+        const unsigned char information[MAX_NAMBER_LANGUAGE][4][MAX_COL_LCD] = 
         {
-          {"   ÊÎÌÀÍÄÍÛÉ    ", "   ÑÈÃÍÀËÜÍÛÉ   "},
-          {"   ÊÎÌÀÍÄÍÈÉ    ", "   ÑÈÃÍÀËÜÍÈÉ   "},
-          {"    COMMAND     ", "     SIGNAL     "},
-          {"   ÊÎÌÀÍÄÍÛÉ    ", "   ÑÈÃÍÀËÜÍÛÉ   "}
+          {"   ÊÎÌÀÍÄÍÛÉ    ", "   ÑÈÃÍÀËÜÍÛÉ   ", " ÑÈÃÍÀËÜÍÛÉ ÈÌÏ ", "  ÎØÈÁÊÀ ÄÀÍÛÕ  "},
+          {"   ÊÎÌÀÍÄÍÈÉ    ", "   ÑÈÃÍÀËÜÍÈÉ   ", " ÑÈÃÍÀËÜÍÈÉ ²ÌÏ ", "  ÏÎÌÈËÊÀ ÄÀÍÈÕ "},
+          {"    COMMAND     ", "     SIGNAL     ", "   SIGNAL IMP   ", "   DATA ERROR   "},
+          {"   ÊÎÌÀÍÄÍÛÉ    ", "   ÑÈÃÍÀËÜÍÛÉ   ", " ÑÈÃÍÀËÜÍÛÉ ÈÌÏ ", "  ÎØÈÁÊÀ ÄÀÍÛÕ  "}
         };
-        const unsigned int cursor_x[MAX_NAMBER_LANGUAGE][2] = 
+        const unsigned int cursor_x[MAX_NAMBER_LANGUAGE][4] = 
         {
-          {2, 2},
-          {2, 2},
-          {3, 4},
-          {2, 2}
+          {2, 2, 0, 1},
+          {2, 2, 0, 1},
+          {3, 4, 2, 2},
+          {2, 2, 0, 1}
         };
+
+        unsigned int *p_temp_data;
+        if(current_ekran.edition == 0) p_temp_data = &current_settings.type_of_output;
+        else p_temp_data = &edition_settings.type_of_output;
         
-        if(current_ekran.edition == 0) temp_data = current_settings.type_of_output;
-        else temp_data = edition_settings.type_of_output;
+        unsigned int index_tmp = index_ctr >> (5-1);
+        unsigned int shift_tmp = 2*(index_ctr & 0xf);
+        int value = ( *(p_temp_data  + index_tmp) & (0x3 << shift_tmp ) ) >> shift_tmp;
         
-        for (unsigned int j = 0; j<MAX_COL_LCD; j++) working_ekran[i][j] = information[index_language][(temp_data >> index_ctr) & 0x1][j];
-        current_ekran.position_cursor_x = cursor_x[index_language][(temp_data >> index_ctr) & 0x1];
+        for (unsigned int j = 0; j<MAX_COL_LCD; j++) working_ekran[i][j] = information[index_language][value][j];
+        current_ekran.position_cursor_x = cursor_x[index_language][value];
       }
     }
     else

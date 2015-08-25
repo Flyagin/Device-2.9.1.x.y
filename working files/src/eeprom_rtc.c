@@ -1941,7 +1941,7 @@ void main_routines_for_i2c(void)
             //Виконувалося зчитування станів тригерних світлоіндикаторів/сигнальних виходів
 
             //Відновлюємо інформацію по сигнальних виходах
-            state_outputs = state_signal_outputs = state_signal_outputs_tmp;
+            state_outputs_raw = state_outputs = state_signal_outputs = state_signal_outputs_tmp;
           }
 
           state_i2c_task &= (unsigned int)(~STATE_STATE_OUTPUTS_EEPROM_FAIL);
@@ -2008,7 +2008,7 @@ void main_routines_for_i2c(void)
         unsigned int temp_state_outputs = 0;
         for (unsigned int index = 0; index < NUMBER_OUTPUTS; index++)
         {
-          if ((state_outputs & (1 << index)) != 0)
+          if ((state_outputs_raw & (1 << index)) != 0)
           {
             if (index < NUMBER_OUTPUTS_1)
               temp_state_outputs |= 1 << (NUMBER_OUTPUTS_1 - index - 1);
