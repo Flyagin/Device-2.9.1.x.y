@@ -129,6 +129,8 @@ extern int sector_2_mtz_tznp[8];
 extern unsigned int sector_directional_mtz[4][3];
 extern unsigned int Uxy_bilshe_porogu[3];
 extern unsigned int Ix_bilshe_porogu[3];
+extern unsigned int temp_states_for_mtz;
+
 
 //ÍÇÇ
 extern int sector_1[8];

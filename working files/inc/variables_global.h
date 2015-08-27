@@ -233,6 +233,7 @@ int sector_2_mtz_tznp[8];
 unsigned int sector_directional_mtz[4][3] = {{0, 0, 0}, {0, 0, 0}, {0, 0, 0}, {0, 0, 0}};
 unsigned int Uxy_bilshe_porogu[3] = {0, 0, 0};
 unsigned int Ix_bilshe_porogu[3] = {0, 0, 0};
+unsigned int temp_states_for_mtz = 0;
 
 //ÍÇÇ
 int sector_1[8];

@@ -2984,7 +2984,7 @@ inline void mtz_handler(unsigned int *activated_functions, unsigned int number_g
     } else {
       unsigned int tmp = 0;
       _AND2(tmp_value, 18, tmp_value, 11, tmp, 0);
-      _TIMER_0_T(INDEX_TIMER_MTZ2_VVID_PR, current_settings_prt.timeout_mtz_2_vvid_pr[number_group_stp], tmp, 0, tmp, 1);
+      _TIMER_IMPULSE(INDEX_TIMER_MTZ2_VVID_PR, current_settings_prt.timeout_mtz_2_vvid_pr[number_group_stp], temp_states_for_mtz, 0, tmp, 0, tmp, 1);
       _OR2(tmp, 1, tmp_value, 10, tmp, 2);
       _AND2(tmp_value, 9, tmp, 2, tmp, 3);
       _INVERTOR(tmp, 3, tmp, 4);
