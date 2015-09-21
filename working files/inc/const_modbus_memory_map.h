@@ -355,12 +355,12 @@
 #define BIT_MA_CONTROL_TZNP1                  55048
 #define BIT_MA_CONTROL_TZNP1_VPERED           55049
 #define BIT_MA_CONTROL_TZNP1_NAZAD            55050
-#define BIT_MA_CONTROL_TZNP2                  55048
-#define BIT_MA_CONTROL_TZNP2_VPERED           55049
-#define BIT_MA_CONTROL_TZNP2_NAZAD            55050
-#define BIT_MA_CONTROL_TZNP3                  55048
-#define BIT_MA_CONTROL_TZNP3_VPERED           55049
-#define BIT_MA_CONTROL_TZNP3_NAZAD            55050
+#define BIT_MA_CONTROL_TZNP2                  55051
+#define BIT_MA_CONTROL_TZNP2_VPERED           55052
+#define BIT_MA_CONTROL_TZNP2_NAZAD            55053
+#define BIT_MA_CONTROL_TZNP3                  55054
+#define BIT_MA_CONTROL_TZNP3_VPERED           55055
+#define BIT_MA_CONTROL_TZNP3_NAZAD            55056
 
 #define MA_CONTROL_ZOP                    554
 #define BIT_MA_CONTROL_ZOP_BASE               55064
