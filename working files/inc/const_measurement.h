@@ -246,7 +246,7 @@ Koef_1 = 64,883134509545420915167731259667 (4152/64 = 64,875)
 
 #define I_3I0         0
 #define I_Ia          1
-#define I_Ib          2
+#define I_Ib_I04      2
 #define I_Ic          3
 #define I_Ua          4
 #define I_Ub          5
@@ -262,13 +262,14 @@ Koef_1 = 64,883134509545420915167731259667 (4152/64 = 64,875)
 #define IM_IC          6
 #define IM_I2          7
 #define IM_I1          8
-#define IM_UA          9
-#define IM_UB          10
-#define IM_UC          11
-#define IM_3U0         12
-#define IM_UAB         13
-#define IM_UBC         14
-#define IM_UCA         15
+#define IM_I04         9
+#define IM_UA          10
+#define IM_UB          11
+#define IM_UC          12
+#define IM_3U0         13
+#define IM_UAB         14
+#define IM_UBC         15
+#define IM_UCA         16
 
 #define PORIG_FOR_FAPCH 10000
 
@@ -300,6 +301,7 @@ FULL_ORT_Ib,
 FULL_ORT_Ic,
 FULL_ORT_3I0,
 FULL_ORT_3I0_r,
+FULL_ORT_I04,
 
 FULL_ORT_MAX
 };

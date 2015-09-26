@@ -8,6 +8,7 @@ void make_ekran_chose_extra_settings(void)
   const unsigned char name_string[MAX_NAMBER_LANGUAGE][MAX_ROW_FOR_CHOSE_EXTRA_SETTINGS][MAX_COL_LCD] = 
   {
     {
+      "    Ib/I0.4     ",
       " Вх.напряжения  ",
       "Бл.Гот.к ТУ от з",
       " Инф.об отключ. ",
@@ -16,6 +17,7 @@ void make_ekran_chose_extra_settings(void)
       "Бл.Откл.ВВ от ДВ"
     },
     {
+      "    Ib/I0.4     ",
       " Вхідні напруги ",
       "Бл.Гот.до ТУ в.з",
       "Інф.про вимкнен.",
@@ -24,6 +26,7 @@ void make_ekran_chose_extra_settings(void)
       " Бл.Вимк.від ДВ "
     },
     {
+      "    Ib/I0.4     ",
       " Вх.напряжения  ",
       "Бл.Гот.к ТУ от з",
       " Инф.об отключ. ",
@@ -32,6 +35,7 @@ void make_ekran_chose_extra_settings(void)
       "Blc.Off CB fr.DI"
     },
     {
+      "    Ib/I0.4     ",
       " Вх.напряжения  ",
       "Бл.Гот.к ТУ от з",
       " Инф.об отключ. ",
@@ -62,6 +66,12 @@ void make_ekran_chose_extra_settings(void)
         //У парному номері рядку виводимо стан
         const unsigned char information[MAX_ROW_FOR_CHOSE_EXTRA_SETTINGS][MAX_NAMBER_LANGUAGE][2][MAX_COL_LCD] = 
         {
+          {
+            {"       Ib       ", "      I0.4      "},
+            {"       Ib       ", "      I0.4      "},
+            {"       Ib       ", "      I0.4      "},
+            {"       Ib       ", "      I0.4      "}
+          },
           {
             {"     Фазные     ", "    Линейные    "},
             {"     Фазні      ", "    Лінійні     "},
@@ -101,6 +111,12 @@ void make_ekran_chose_extra_settings(void)
         };
         const unsigned int cursor_x[MAX_ROW_FOR_CHOSE_EXTRA_SETTINGS][MAX_NAMBER_LANGUAGE][2] = 
         {
+          {
+            {6, 5},
+            {6, 5},
+            {6, 5},
+            {6, 5}
+          },
           {
             {4, 3},
             {4, 3},

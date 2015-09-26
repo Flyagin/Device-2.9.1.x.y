@@ -1029,11 +1029,8 @@ inline void calc_measurement(unsigned int number_group_stp)
   /***
   Довертаємо кути і копіюємо ортогональні для низькопріоритетних задач
   ***/
-  const unsigned int *point_to_index_converter;
-  if ((current_settings_prt.control_extra_settings_1 & CTR_EXTRA_SETTINGS_1_CTRL_PHASE_LINE) == 0)
-    point_to_index_converter = index_converter_p;
-  else
-    point_to_index_converter = index_converter_l;
+  const unsigned int *array_point_to_index_converter[4] = {index_converter_Ib_p, index_converter_I04_p, index_converter_Ib_l, index_converter_I04_l};
+  const unsigned int *point_to_index_converter = array_point_to_index_converter[current_settings_prt.control_extra_settings_1 & (CTR_EXTRA_SETTINGS_1_CTRL_IB_I04 | CTR_EXTRA_SETTINGS_1_CTRL_PHASE_LINE)];
 
   unsigned int copy_to_low_tasks = (semaphore_measure_values_low == 0) ? true : false;
   for (unsigned int i = 0; i < NUMBER_ANALOG_CANALES; i++)
@@ -1151,10 +1148,18 @@ inline void calc_measurement(unsigned int number_group_stp)
           index_ort = FULL_ORT_Ia;
           break;
         }
-      case I_Ib:
+      case I_Ib_I04:
         {
-          index_m = IM_IB;
-          index_ort = FULL_ORT_Ib;
+          if ((current_settings_prt.control_extra_settings_1 & CTR_EXTRA_SETTINGS_1_CTRL_IB_I04) == 0)
+          {
+            index_m = IM_IB;
+            index_ort = FULL_ORT_Ib;
+          }
+          else
+          {
+            index_m = IM_I04;
+            index_ort = FULL_ORT_I04;
+          }
           break;
         }
       case I_Ic:
@@ -1235,19 +1240,60 @@ inline void calc_measurement(unsigned int number_group_stp)
   /***/
 
   /***
-  Дорозраховунок 3I0(розрахункове) і лінійних напруг
+  Дорозраховунок 3I0(розрахункове, якщо є Ib), лінійних напруг і Ib(якщо Ib немає)
   ***/
   int _x, _y;
 
-  //3I0(розрахункове)
-  _x = ortogonal_calc[2*FULL_ORT_3I0_r + 0] = ortogonal_calc[2*FULL_ORT_Ia    ] + ortogonal_calc[2*FULL_ORT_Ib    ] + ortogonal_calc[2*FULL_ORT_Ic    ];
-  _y = ortogonal_calc[2*FULL_ORT_3I0_r + 1] = ortogonal_calc[2*FULL_ORT_Ia + 1] + ortogonal_calc[2*FULL_ORT_Ib + 1] + ortogonal_calc[2*FULL_ORT_Ic + 1];
-  if (copy_to_low_tasks == true)
-  {
-    ortogonal_calc_low[2*FULL_ORT_3I0_r + 0] = _x;
-    ortogonal_calc_low[2*FULL_ORT_3I0_r + 1] = _y;
+  if ((current_settings_prt.control_extra_settings_1 & CTR_EXTRA_SETTINGS_1_CTRL_IB_I04) == 0)
+  {   
+    //3I0(розрахункове), стрму I0.4 немає
+    
+    ortogonal_calc[2*FULL_ORT_I04 + 0] = 0;
+    ortogonal_calc[2*FULL_ORT_I04 + 1] = 0;
+    measurement[IM_I04] = 0;
+    
+    _x = ortogonal_calc[2*FULL_ORT_3I0_r + 0] = ortogonal_calc[2*FULL_ORT_Ia    ] + ortogonal_calc[2*FULL_ORT_Ib    ] + ortogonal_calc[2*FULL_ORT_Ic    ];
+    _y = ortogonal_calc[2*FULL_ORT_3I0_r + 1] = ortogonal_calc[2*FULL_ORT_Ia + 1] + ortogonal_calc[2*FULL_ORT_Ib + 1] + ortogonal_calc[2*FULL_ORT_Ic + 1];
+    if (copy_to_low_tasks == true)
+    {
+      ortogonal_calc_low[2*FULL_ORT_I04 + 0] = 0;
+      ortogonal_calc_low[2*FULL_ORT_I04 + 1] = 0;
+      
+      ortogonal_calc_low[2*FULL_ORT_3I0_r + 0] = _x;
+      ortogonal_calc_low[2*FULL_ORT_3I0_r + 1] = _y;
+    }
+    measurement[IM_3I0_r] = ( MNOGNYK_I_DIJUCHE*(sqrt_64((unsigned long long)((long long)_x*(long long)_x) + (unsigned long long)((long long)_y*(long long)_y))) ) >> (VAGA_DILENNJA_I_DIJUCHE + 4);
   }
-  measurement[IM_3I0_r] = ( MNOGNYK_I_DIJUCHE*(sqrt_64((unsigned long long)((long long)_x*(long long)_x) + (unsigned long long)((long long)_y*(long long)_y))) ) >> (VAGA_DILENNJA_I_DIJUCHE + 4);
+  else
+  {
+    //Ib(розрахункове), струму 3I0(розрахункове) немає
+    
+    ortogonal_calc[2*FULL_ORT_3I0_r + 0] = 0;
+    ortogonal_calc[2*FULL_ORT_3I0_r + 1] = 0;
+    measurement[IM_3I0_r] = 0;
+    
+    int ortogonal_local_3I0[2];
+  
+#if (4 + VAGA_DILENNJA_3I0_DIJUCHE_D_mA) >= VAGA_DILENNJA_I_DIJUCHE  
+    ortogonal_local_3I0[0] = ((MNOGNYK_3I0_DIJUCHE_D_mA*ortogonal_calc[2*FULL_ORT_3I0 + 0]) >> (4 + VAGA_DILENNJA_3I0_DIJUCHE_D_mA - VAGA_DILENNJA_I_DIJUCHE))/MNOGNYK_I_DIJUCHE;
+    ortogonal_local_3I0[1] = ((MNOGNYK_3I0_DIJUCHE_D_mA*ortogonal_calc[2*FULL_ORT_3I0 + 1]) >> (4 + VAGA_DILENNJA_3I0_DIJUCHE_D_mA - VAGA_DILENNJA_I_DIJUCHE))/MNOGNYK_I_DIJUCHE;
+#else
+    ortogonal_local_3I0[0] = ((MNOGNYK_3I0_DIJUCHE_D_mA*ortogonal_calc[2*FULL_ORT_3I0 + 0]) << (VAGA_DILENNJA_I_DIJUCHE - (VAGA_DILENNJA_3I0_DIJUCHE_D_mA + 4)))/MNOGNYK_I_DIJUCHE;
+    ortogonal_local_3I0[1] = ((MNOGNYK_3I0_DIJUCHE_D_mA*ortogonal_calc[2*FULL_ORT_3I0 + 1]) << (VAGA_DILENNJA_I_DIJUCHE - (VAGA_DILENNJA_3I0_DIJUCHE_D_mA + 4)))/MNOGNYK_I_DIJUCHE;
+#endif
+  
+    _x = ortogonal_calc[2*FULL_ORT_Ib + 0] = ortogonal_local_3I0[0] - (ortogonal_calc[2*FULL_ORT_Ia + 0] + ortogonal_calc[2*FULL_ORT_Ic + 0]);
+    _y = ortogonal_calc[2*FULL_ORT_Ib + 1] = ortogonal_local_3I0[1] - (ortogonal_calc[2*FULL_ORT_Ia + 1] + ortogonal_calc[2*FULL_ORT_Ic + 1]);
+    if (copy_to_low_tasks == true)
+    {
+      ortogonal_calc_low[2*FULL_ORT_3I0_r + 0] = 0;
+      ortogonal_calc_low[2*FULL_ORT_3I0_r + 1] = 0;
+
+      ortogonal_calc_low[2*FULL_ORT_Ib + 0] = _x;
+      ortogonal_calc_low[2*FULL_ORT_Ib + 1] = _y;
+    }
+    measurement[IM_IB] = ( MNOGNYK_I_DIJUCHE*(sqrt_32((unsigned int)(_x*_x) + (unsigned int)(_y*_y))) ) >> (VAGA_DILENNJA_I_DIJUCHE + 4);
+  }
     
   if ((current_settings_prt.control_extra_settings_1 & CTR_EXTRA_SETTINGS_1_CTRL_PHASE_LINE) == 0)
   {
@@ -1322,7 +1368,10 @@ inline void calc_measurement(unsigned int number_group_stp)
   directional_mtz(ortogonal_calc, number_group_stp);
   /***/
 
-  if ((current_settings_prt.configuration & (1<<TZNP_BIT_CONFIGURATION)) != 0)
+  if (
+      ((current_settings_prt.control_extra_settings_1 & CTR_EXTRA_SETTINGS_1_CTRL_IB_I04) == 0) &&
+      ((current_settings_prt.configuration & (1<<TZNP_BIT_CONFIGURATION)) != 0)
+     )   
   {
     /***/
     //Фазочутливий елемент для ТЗНП (всіх ступенів)
@@ -1582,7 +1631,7 @@ inline void clocking_global_timers(void)
         }
       case INDEX_TIMER_MTZ2_DEPENDENT:
         {
-          max_value =  50001;
+          max_value =  TIMEOUT_MTZ2_MAX + 1;
           break;
         }
       case INDEX_TIMER_MTZ2_PR:
@@ -2708,12 +2757,12 @@ inline int timeout_dependent_general(unsigned int i, unsigned int number_group_s
       register float timeout_dependent = K*timeout/(rising_to_power - 1);
 
       int timeout_dependent_int = (int)timeout_dependent;
-      if (timeout_dependent_int > 50) timeout_dependent = 50;
+      if (timeout_dependent_int > (TIMEOUT_MTZ2_MAX/1000)) timeout_dependent = (TIMEOUT_MTZ2_MAX/1000);
       else if (timeout_dependent_int < 0) timeout_dependent = 0;
     
       timeout_result = (int)(timeout_dependent*1000.0f);
     }
-    else timeout_result = 50000;
+    else timeout_result = TIMEOUT_MTZ2_MAX;
   }
   
   return timeout_result;
@@ -2990,7 +3039,7 @@ inline void mtz_handler(unsigned int *activated_functions, unsigned int number_g
       _INVERTOR(tmp, 3, tmp, 4);
       _AND3(tmp, 4, tmp_value, 3, tmp_value, 21, tmp, 5);
       _AND2(tmp, 3, tmp_value, 21, tmp, 6);
-      _AND3(tmp, 4, tmp_value, 21, tmp_value, 2, tmp, 7);
+      _AND2(tmp, 4, tmp_value, 21, /*tmp_value, 2, */tmp, 7);
       _AND2(tmp, 4, tmp_value, 22, tmp, 8);
       _AND2(tmp, 3, tmp_value, 22, tmp, 9);
       _AND2(tmp, 4, tmp_value, 23, tmp, 10);
@@ -8385,7 +8434,10 @@ inline void main_protection(void)
 
       //Блок для МТЗ
       activated_functions[RANG_OUTPUT_LED_DF_REG_BLOCK_MTZ1     >> 5] |= (_CHECK_SET_BIT(temp_value_for_activated_function_2, RANG_INPUT_BLOCK_MTZ1    ) != 0) << (RANG_OUTPUT_LED_DF_REG_BLOCK_MTZ1     & 0x1f);
+      activated_functions[RANG_OUTPUT_LED_DF_REG_BLOCK_MTZ2     >> 5] |= (_CHECK_SET_BIT(temp_value_for_activated_function_2, RANG_INPUT_BLOCK_MTZ2    ) != 0) << (RANG_OUTPUT_LED_DF_REG_BLOCK_MTZ2     & 0x1f);
       activated_functions[RANG_OUTPUT_LED_DF_REG_BLOCK_USK_MTZ2 >> 5] |= (_CHECK_SET_BIT(temp_value_for_activated_function_2, RANG_INPUT_BLOCK_USK_MTZ2) != 0) << (RANG_OUTPUT_LED_DF_REG_BLOCK_USK_MTZ2 & 0x1f);
+      activated_functions[RANG_OUTPUT_LED_DF_REG_BLOCK_MTZ3     >> 5] |= (_CHECK_SET_BIT(temp_value_for_activated_function_2, RANG_INPUT_BLOCK_MTZ3    ) != 0) << (RANG_OUTPUT_LED_DF_REG_BLOCK_MTZ3     & 0x1f);
+      activated_functions[RANG_OUTPUT_LED_DF_REG_BLOCK_MTZ4     >> 5] |= (_CHECK_SET_BIT(temp_value_for_activated_function_2, RANG_INPUT_BLOCK_MTZ4    ) != 0) << (RANG_OUTPUT_LED_DF_REG_BLOCK_MTZ4     & 0x1f);
 
       //Блок для ЗДЗ
       activated_functions[RANG_OUTPUT_LED_DF_REG_PUSK_ZDZ_VID_DV >> 5] |= (_CHECK_SET_BIT(temp_value_for_activated_function_2, RANG_INPUT_PUSK_ZDZ_VID_DV) != 0) << (RANG_OUTPUT_LED_DF_REG_PUSK_ZDZ_VID_DV & 0x1f);
@@ -8601,7 +8653,7 @@ inline void main_protection(void)
   unsigned int bank_measurement_high_tmp = (bank_measurement_high ^ 0x1) & 0x1;
   if(semaphore_measure_values_low1 == 0)
   {
-    for (unsigned int i = 0; i < (NUMBER_ANALOG_CANALES + 8); i++) 
+    for (unsigned int i = 0; i < (NUMBER_ANALOG_CANALES + 9); i++) 
     {
       measurement_high[bank_measurement_high_tmp][i] = measurement_middle[i] = measurement[i];
     }
@@ -8609,7 +8661,7 @@ inline void main_protection(void)
   }
   else
   {
-    for (unsigned int i = 0; i < (NUMBER_ANALOG_CANALES + 8); i++) 
+    for (unsigned int i = 0; i < (NUMBER_ANALOG_CANALES + 9); i++) 
     {
       measurement_high[bank_measurement_high_tmp][i] = measurement[i];
     }

@@ -1491,7 +1491,38 @@ void main_manu_function(void)
             }
             else if(current_ekran.current_level == EKRAN_MEASURMENT_CURRENT)
             {
+              const unsigned int index_array[MAX_ROW_FOR_MEASURMENT_CURRENT] = 
+              {
+                IM_3I0_i,
+                IM_3I0,
+                IM_3I0_other_g,
+                IM_3I0_r,
+                IM_IA,
+                IM_IB,
+                IM_IC,
+                IM_I2,
+                IM_I1,
+                IM_I04
+              };
+              
               if(current_ekran.index_position >= MAX_ROW_FOR_MEASURMENT_CURRENT) current_ekran.index_position = 0;
+              while(
+                    (
+                     ((current_settings.control_extra_settings_1 & CTR_EXTRA_SETTINGS_1_CTRL_IB_I04) == 0)
+                     &&
+                     (index_array[current_ekran.index_position] == IM_I04)
+                    )
+                    ||
+                    (
+                     ((current_settings.control_extra_settings_1 & CTR_EXTRA_SETTINGS_1_CTRL_IB_I04) != 0)
+                     &&
+                     (index_array[current_ekran.index_position] == IM_3I0_r)
+                    )
+                   )
+              {
+                if(++current_ekran.index_position >= MAX_ROW_FOR_MEASURMENT_CURRENT) current_ekran.index_position = 0;
+              }
+
               position_in_current_level_menu[EKRAN_MEASURMENT_CURRENT] = current_ekran.index_position;
               //Формуємо екран вимірювання струмів
               make_ekran_current(pervynna_vtorynna);
@@ -1525,14 +1556,30 @@ void main_manu_function(void)
             }
             else if(current_ekran.current_level == EKRAN_MEASURMENT_ANGLE)
             {
-              int min_index;
-              if ((current_settings.control_extra_settings_1 & CTR_EXTRA_SETTINGS_1_CTRL_PHASE_LINE) == 0)
-                min_index = FULL_ORT_Ua;
-              else
-                min_index = FULL_ORT_Uab;
-              if(current_ekran.index_position < min_index) current_ekran.index_position = min_index;
+              if(current_ekran.index_position >= MAX_ROW_FOR_MEASURMENT_ANGLE) current_ekran.index_position = 0;
+              while(
+                    (
+                     ((current_settings.control_extra_settings_1 & CTR_EXTRA_SETTINGS_1_CTRL_PHASE_LINE) != 0)
+                     &&
+                     (current_ekran.index_position < FULL_ORT_Uab)
+                    )
+                    ||  
+                    (
+                     ((current_settings.control_extra_settings_1 & CTR_EXTRA_SETTINGS_1_CTRL_IB_I04) == 0)
+                     &&
+                     (current_ekran.index_position == FULL_ORT_I04)
+                    )
+                    ||
+                    (
+                     ((current_settings.control_extra_settings_1 & CTR_EXTRA_SETTINGS_1_CTRL_IB_I04) != 0)
+                     &&
+                     (current_ekran.index_position == FULL_ORT_3I0_r)
+                    )
+                   )
+              {
+                if(++current_ekran.index_position >= MAX_ROW_FOR_MEASURMENT_ANGLE) current_ekran.index_position = 0;
+              }
 
-              if(current_ekran.index_position >= MAX_ROW_FOR_MEASURMENT_ANGLE) current_ekran.index_position = min_index;
               position_in_current_level_menu[EKRAN_MEASURMENT_ANGLE] = current_ekran.index_position;
               //Формуємо екран відображення кутів
               make_ekran_angle();
@@ -3200,7 +3247,38 @@ void main_manu_function(void)
               }
               else if(current_ekran.current_level == EKRAN_MEASURMENT_CURRENT)
               {
+                const unsigned int index_array[MAX_ROW_FOR_MEASURMENT_CURRENT] = 
+                {
+                  IM_3I0_i,
+                  IM_3I0,
+                  IM_3I0_other_g,
+                  IM_3I0_r,
+                  IM_IA,
+                  IM_IB,
+                  IM_IC,
+                  IM_I2,
+                  IM_I1,
+                  IM_I04
+                };
+              
                 if(--current_ekran.index_position < 0) current_ekran.index_position = MAX_ROW_FOR_MEASURMENT_CURRENT - 1;
+                while(
+                      (
+                       ((current_settings.control_extra_settings_1 & CTR_EXTRA_SETTINGS_1_CTRL_IB_I04) == 0)
+                       &&
+                       (index_array[current_ekran.index_position] == IM_I04)
+                      )
+                      ||
+                      (
+                       ((current_settings.control_extra_settings_1 & CTR_EXTRA_SETTINGS_1_CTRL_IB_I04) != 0)
+                       &&
+                       (index_array[current_ekran.index_position] == IM_3I0_r)
+                      )
+                     )
+                {
+                  if(--current_ekran.index_position < 0) current_ekran.index_position = MAX_ROW_FOR_MEASURMENT_CURRENT - 1;
+                }
+
                 position_in_current_level_menu[EKRAN_MEASURMENT_CURRENT] = current_ekran.index_position;
                 //Формуємо екран вимірювання струмів вікна
                 make_ekran_current(pervynna_vtorynna);
@@ -3244,14 +3322,30 @@ void main_manu_function(void)
               }
               else if(current_ekran.current_level == EKRAN_MEASURMENT_ANGLE)
               {
-                int min_index;
-                if ((current_settings.control_extra_settings_1 & CTR_EXTRA_SETTINGS_1_CTRL_PHASE_LINE) == 0)
-                  min_index = FULL_ORT_Ua;
-                else
-                  min_index = FULL_ORT_Uab;
-                if(current_ekran.index_position < min_index) current_ekran.index_position = min_index;
-                
-                if(--current_ekran.index_position < min_index) current_ekran.index_position = MAX_ROW_FOR_MEASURMENT_ANGLE - 1;
+                if(--current_ekran.index_position < 0) current_ekran.index_position = MAX_ROW_FOR_MEASURMENT_ANGLE - 1;
+                while( 
+                      (
+                       ((current_settings.control_extra_settings_1 & CTR_EXTRA_SETTINGS_1_CTRL_PHASE_LINE) != 0)
+                       &&
+                       (current_ekran.index_position < FULL_ORT_Uab)
+                      )
+                      ||  
+                      (
+                       ((current_settings.control_extra_settings_1 & CTR_EXTRA_SETTINGS_1_CTRL_IB_I04) == 0)
+                       &&
+                       (current_ekran.index_position == FULL_ORT_I04)
+                      )
+                      ||
+                      (
+                       ((current_settings.control_extra_settings_1 & CTR_EXTRA_SETTINGS_1_CTRL_IB_I04) != 0)
+                       &&
+                       (current_ekran.index_position == FULL_ORT_3I0_r)
+                      )
+                     )
+                {
+                  if(--current_ekran.index_position < 0) current_ekran.index_position = MAX_ROW_FOR_MEASURMENT_ANGLE - 1;
+                }
+
                 position_in_current_level_menu[EKRAN_MEASURMENT_ANGLE] = current_ekran.index_position;
                 //Формуємо екран вимірювання кутів
                 make_ekran_angle();
@@ -3737,7 +3831,38 @@ void main_manu_function(void)
               }
               else if(current_ekran.current_level == EKRAN_MEASURMENT_CURRENT)
               {
+                const unsigned int index_array[MAX_ROW_FOR_MEASURMENT_CURRENT] = 
+                {
+                  IM_3I0_i,
+                  IM_3I0,
+                  IM_3I0_other_g,
+                  IM_3I0_r,
+                  IM_IA,
+                  IM_IB,
+                  IM_IC,
+                  IM_I2,
+                  IM_I1,
+                  IM_I04
+                };
+              
                 if(++current_ekran.index_position >= MAX_ROW_FOR_MEASURMENT_CURRENT) current_ekran.index_position = 0;
+                while(
+                      (
+                       ((current_settings.control_extra_settings_1 & CTR_EXTRA_SETTINGS_1_CTRL_IB_I04) == 0)
+                       &&
+                       (index_array[current_ekran.index_position] == IM_I04)
+                      )
+                      ||
+                      (
+                       ((current_settings.control_extra_settings_1 & CTR_EXTRA_SETTINGS_1_CTRL_IB_I04) != 0)
+                       &&
+                       (index_array[current_ekran.index_position] == IM_3I0_r)
+                      )
+                     )
+                {
+                  if(++current_ekran.index_position >= MAX_ROW_FOR_MEASURMENT_CURRENT) current_ekran.index_position = 0;
+                }
+
                 position_in_current_level_menu[EKRAN_MEASURMENT_CURRENT] = current_ekran.index_position;
                 //Формуємо екран вимірювання струмів вікна
                 make_ekran_current(pervynna_vtorynna);
@@ -3771,14 +3896,30 @@ void main_manu_function(void)
               }
               else if(current_ekran.current_level == EKRAN_MEASURMENT_ANGLE)
               {
-                int min_index;
-                if ((current_settings.control_extra_settings_1 & CTR_EXTRA_SETTINGS_1_CTRL_PHASE_LINE) == 0)
-                  min_index = FULL_ORT_Ua;
-                else
-                  min_index = FULL_ORT_Uab;
-                if(current_ekran.index_position < min_index) current_ekran.index_position = min_index;
-                
-                if(++current_ekran.index_position >= MAX_ROW_FOR_MEASURMENT_ANGLE) current_ekran.index_position = min_index;
+                if(++current_ekran.index_position >= MAX_ROW_FOR_MEASURMENT_ANGLE) current_ekran.index_position = 0;
+                while( 
+                      (
+                       ((current_settings.control_extra_settings_1 & CTR_EXTRA_SETTINGS_1_CTRL_PHASE_LINE) != 0)
+                       &&
+                       (current_ekran.index_position < FULL_ORT_Uab)
+                      )
+                      ||  
+                      (
+                       ((current_settings.control_extra_settings_1 & CTR_EXTRA_SETTINGS_1_CTRL_IB_I04) == 0)
+                       &&
+                       (current_ekran.index_position == FULL_ORT_I04)
+                      )
+                      ||
+                      (
+                       ((current_settings.control_extra_settings_1 & CTR_EXTRA_SETTINGS_1_CTRL_IB_I04) != 0)
+                       &&
+                       (current_ekran.index_position == FULL_ORT_3I0_r)
+                      )
+                     )
+                {
+                  if(++current_ekran.index_position >= MAX_ROW_FOR_MEASURMENT_ANGLE) current_ekran.index_position = 0;
+                }
+
                 position_in_current_level_menu[EKRAN_MEASURMENT_ANGLE] = current_ekran.index_position;
                 //Формуємо екран вимірювання кутів
                 make_ekran_angle();

@@ -578,8 +578,8 @@ void SPI_ADC_IRQHandler(void)
     if ((status_adc_read_work & DATA_VAL_READ) != 0)
     {
       command_word |= (1 << I_3I0)|
-                      (1 << I_Ia) | (1 << I_Ib) | (1 << I_Ic) |
-                      (1 << I_Ua) | (1 << I_Ub) | (1 << I_Uc) |
+                      (1 << I_Ia) | (1 << I_Ib_I04) | (1 << I_Ic) |
+                      (1 << I_Ua) | (1 << I_Ub    ) | (1 << I_Uc) |
                        (1 << I_3U0);
         
     }
@@ -688,25 +688,25 @@ void SPI_ADC_IRQHandler(void)
     /*****/
 
     /*****/
-    //Формуємо значення Ib
+    //Формуємо значення Ib/I0.4
     /*****/
-    if ((command_word & (1 << I_Ib)) != 0)
+    if ((command_word & (1 << I_Ib_I04)) != 0)
     {
-      _x1 = ADCs_data_raw[I_Ib].tick;
-      _y1 = ADCs_data_raw[I_Ib].value;
+      _x1 = ADCs_data_raw[I_Ib_I04].tick;
+      _y1 = ADCs_data_raw[I_Ib_I04].value;
         
       _y2 = output_adc[C_Ib_1].value - gnd_adc - vref_adc;
       if (abs(_y2) > 87)
       {
         _x2 = output_adc[C_Ib_1].tick;
-        _y2 = (int)(_y2*ustuvannja_meas[I_Ib])>>(USTUVANNJA_VAGA - 4);
+        _y2 = (int)(_y2*ustuvannja_meas[I_Ib_I04])>>(USTUVANNJA_VAGA - 4);
       }
       else
       {
         _y2 = output_adc[C_Ib_16].value - gnd_adc - vref_adc;
 
         _x2 = output_adc[C_Ib_16].tick;
-        _y2 = (int)((-_y2)*ustuvannja_meas[I_Ib])>>(USTUVANNJA_VAGA);
+        _y2 = (int)((-_y2)*ustuvannja_meas[I_Ib_I04])>>(USTUVANNJA_VAGA);
       }
       
       if (_x2 > _x1) _DX = _x2 - _x1;
@@ -723,10 +723,10 @@ void SPI_ADC_IRQHandler(void)
       }
       _y = ((long long)_y1) + ((long long)(_y2 - _y1))*((long long)_dx)/((long long)_DX);
 
-      ADCs_data[I_Ib] = _y;
+      ADCs_data[I_Ib_I04] = _y;
       
-      ADCs_data_raw[I_Ib].tick = _x2;
-      ADCs_data_raw[I_Ib].value = _y2;
+      ADCs_data_raw[I_Ib_I04].tick = _x2;
+      ADCs_data_raw[I_Ib_I04].value = _y2;
     }
     /*****/
     
@@ -1404,7 +1404,7 @@ void calc_angle(void)
 {
   //Копіюємо вимірювання
   semaphore_measure_values_low1 = 1;
-  for (unsigned int i = 0; i < (NUMBER_ANALOG_CANALES + 8); i++ ) 
+  for (unsigned int i = 0; i < (NUMBER_ANALOG_CANALES + 9); i++ ) 
   {
     measurement_low[i] = measurement_middle[i];
   }
@@ -1590,6 +1590,12 @@ void calc_angle(void)
             {
               porig_chutlyvosti = PORIG_CHUTLYVOSTI_CURRENT;
               index_m = IM_3I0_r;
+              break;
+            }
+          case FULL_ORT_I04:
+            {
+              porig_chutlyvosti = PORIG_CHUTLYVOSTI_CURRENT;
+              index_m = IM_I04;
               break;
             }
           default:

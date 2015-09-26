@@ -466,9 +466,10 @@ void make_ekran_current(unsigned int pervynna_vtorynna)
     " Ib   =         ",
     " Ic   =         ",
     " I2   =         ",
-    " I1   =         "
+    " I1   =         ",
+    " I0.4 =         "
   };
-  const unsigned int index_array[MAX_ROW_FOR_MEASURMENT_CURRENT] = 
+  unsigned int index_array[MAX_ROW_FOR_MEASURMENT_CURRENT] = 
   {
     IM_3I0_i,
     IM_3I0,
@@ -478,7 +479,8 @@ void make_ekran_current(unsigned int pervynna_vtorynna)
     IM_IB,
     IM_IC,
     IM_I2,
-    IM_I1
+    IM_I1,
+    IM_I04
   };
   
   //Копіюємо вимірювання які потрібні для відображення
@@ -494,46 +496,98 @@ void make_ekran_current(unsigned int pervynna_vtorynna)
   for (unsigned int i = 0; i < MAX_ROW_FOR_MEASURMENT_CURRENT; i++)
   {
     name_string[i][MAX_COL_LCD - 1] = odynyci_vymirjuvannja[index_language][INDEX_A];
-    if (index_array[i] == IM_3I0_r)
+    if (
+        (
+         (index_array[i] == IM_3I0_r) &&
+         ((current_settings.control_extra_settings_1 & CTR_EXTRA_SETTINGS_1_CTRL_IB_I04) == 0)
+        )
+        ||
+        (
+         (index_array[i] == IM_IB) &&
+         ((current_settings.control_extra_settings_1 & CTR_EXTRA_SETTINGS_1_CTRL_IB_I04) != 0)
+        )
+       )   
     {
       if (index_language == INDEX_LANGUAGE_EN) name_string[i][4] = 'c';
       else name_string[i][4] = 'р';
     }
+
+    if (
+        (index_array[i] == IM_IB) &&
+        ((current_settings.control_extra_settings_1 & CTR_EXTRA_SETTINGS_1_CTRL_IB_I04) != 0)
+       )   
+    {
+      name_string[i][5] = '.';
+    }
   }
   
-  unsigned int position_temp = current_ekran.index_position;
-  unsigned int index_of_ekran;
-  
+  int additional_current = 0;
+  int position_temp = current_ekran.index_position;
+  int index_of_ekran;
+  /******************************************/
+  //Виключаємо, які вимірювання не треба відображати
+  /******************************************/
+  {
+    int delete_index;
+    if ((current_settings.control_extra_settings_1 & CTR_EXTRA_SETTINGS_1_CTRL_IB_I04) == 0)
+      delete_index = IM_I04;
+    else
+      delete_index = IM_3I0_r;
+
+    int i = delete_index - additional_current;
+    if ((i+1) <= position_temp) position_temp--;
+    do
+    {
+      for(unsigned int j = 0; j < MAX_COL_LCD; j++)
+      {
+        if ((i + 1) < (MAX_ROW_FOR_MEASURMENT_CURRENT - additional_current)) name_string[i][j] = name_string[i + 1][j];
+        else name_string[i][j] = ' ';
+      }
+          
+      if ((i+1) < (MAX_ROW_FOR_MEASURMENT_CURRENT - additional_current)) index_array[i] = index_array[i + 1];
+      else index_array[i] = 255;
+    
+      i++;
+    }
+    while (i< (MAX_ROW_FOR_MEASURMENT_CURRENT - additional_current));
+    additional_current++;
+  }
+  /******************************************/
+
   index_of_ekran = (position_temp >> POWER_MAX_ROW_LCD) << POWER_MAX_ROW_LCD;
   
   //Копіюємо  рядки у робочий екран
   for (unsigned int i=0; i< MAX_ROW_LCD; i++)
   {
     //Наступні рядки треба перевірити, чи їх требе відображати у текучій кофігурації
-    if (index_of_ekran < MAX_ROW_FOR_MEASURMENT_CURRENT)
+    if (index_of_ekran < (MAX_ROW_FOR_MEASURMENT_CURRENT - additional_current))
     {
       /********************************/
       //Вводимо вимірювальні значення  
-      unsigned int start_number_digit_after_point;
-      if (
-          (index_of_ekran == INDEX_ML_3I0_i      ) ||
-          (index_of_ekran == INDEX_ML_3I0        ) ||
-          (index_of_ekran == INDEX_ML_3I0_other_g)
-        ) 
-        start_number_digit_after_point = 2;
-      else 
-        start_number_digit_after_point = 3;
+      unsigned int index = index_array[index_of_ekran];
+      if (index != 255)
+      {
+        unsigned int start_number_digit_after_point;
+        if (
+            (index == INDEX_ML_3I0_i      ) ||
+            (index == INDEX_ML_3I0        ) ||
+            (index == INDEX_ML_3I0_other_g)
+           ) 
+          start_number_digit_after_point = 2;
+        else 
+          start_number_digit_after_point = 3;
 
-      if (pervynna_vtorynna == 0) convert_and_insert_char_for_measurement(start_number_digit_after_point, measurement_low[index_array[index_of_ekran]], 1, 1, name_string[index_of_ekran], 7);
-      else if (index_of_ekran < IM_3I0_r)
-      {
-        //Струми , які відповідають 3I0 і не розраховуються з фазних струмів
-        convert_and_insert_char_for_measurement(start_number_digit_after_point, measurement_low[index_array[index_of_ekran]], current_settings.T0, 1, name_string[index_of_ekran], 7);
-      }
-      else
-      {
-        //Фазні струми, 3I0-1 (розраховується з фазних струмів), струм зворотньої послідовності і струм прямої послідовності
-        convert_and_insert_char_for_measurement(start_number_digit_after_point, measurement_low[index_array[index_of_ekran]], current_settings.TCurrent, 1, name_string[index_of_ekran], 7);
+        if (pervynna_vtorynna == 0) convert_and_insert_char_for_measurement(start_number_digit_after_point, measurement_low[index], 1, 1, name_string[index_of_ekran], 7);
+        else if (index < IM_3I0_r)
+        {
+          //Струми , які відповідають 3I0 і не розраховуються з фазних струмів
+          convert_and_insert_char_for_measurement(start_number_digit_after_point, measurement_low[index], current_settings.T0, 1, name_string[index_of_ekran], 7);
+        }
+        else
+        {
+          //Фазні струми, 3I0-1 (розраховується з фазних струмів), струм зворотньої послідовності, струм прямої послідовності, струм I0.4
+          convert_and_insert_char_for_measurement(start_number_digit_after_point, measurement_low[index], current_settings.TCurrent, 1, name_string[index_of_ekran], 7);
+        }
       }
       /********************************/
 
@@ -860,6 +914,7 @@ void make_ekran_angle(void)
       " Ic -           ",
       " 3I0-           ",
       "3I0 -           ",
+      "I0.4-           "
     };
 #define SIZE_UNDEF      6
     const unsigned char undefined[MAX_NAMBER_LANGUAGE][SIZE_UNDEF] =
@@ -877,8 +932,11 @@ void make_ekran_angle(void)
     /*************
     Завершуємо формування назв кутів
     *************/
-    if (index_language == INDEX_LANGUAGE_EN) name_string[FULL_ORT_3I0_r][3] = 'c';
-    else name_string[FULL_ORT_3I0_r][3] = 'р';
+    if ((current_settings.control_extra_settings_1 & CTR_EXTRA_SETTINGS_1_CTRL_IB_I04) == 0)
+    {
+      if (index_language == INDEX_LANGUAGE_EN) name_string[FULL_ORT_3I0_r][3] = 'c';
+      else name_string[FULL_ORT_3I0_r][3] = 'р';
+    }
 
 #define SIZE_NAME_ANALOG_CANAL   4
     for (int index_1 = 0; index_1 < MAX_ROW_FOR_MEASURMENT_ANGLE; index_1++) 
@@ -889,7 +947,7 @@ void make_ekran_angle(void)
 #undef SIZE_NAME_ANALOG_CANAL
     /*************/
         
-    unsigned int value_index_shift[MAX_ROW_FOR_MEASURMENT_ANGLE] = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
+    unsigned int value_index_shift[MAX_ROW_FOR_MEASURMENT_ANGLE] = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
     unsigned int additional_current = 0;
     unsigned int position_temp = current_ekran.index_position;
     unsigned int index_of_ekran;
@@ -917,6 +975,30 @@ void make_ekran_angle(void)
         while (i < (MAX_ROW_FOR_MEASURMENT_ANGLE - additional_current));
         additional_current = additional_current_new;
       }
+    }
+
+    {
+      int delete_index;
+      if ((current_settings.control_extra_settings_1 & CTR_EXTRA_SETTINGS_1_CTRL_IB_I04) == 0)
+        delete_index = FULL_ORT_I04;
+      else
+        delete_index = FULL_ORT_3I0_r;
+
+      unsigned int i = delete_index - additional_current;
+      unsigned int additional_current_new = additional_current + 1;
+      if ((i+1) <= position_temp) position_temp--;
+      do
+      {
+        for(unsigned int j = 0; j < MAX_COL_LCD; j++)
+        {
+          if ((i + 1) < (MAX_ROW_FOR_MEASURMENT_ANGLE - additional_current)) name_string[i][j] = name_string[i + 1][j];
+          else name_string[i][j] = ' ';
+        }
+        value_index_shift[i] = additional_current_new;
+        i++;
+      }
+      while (i< (MAX_ROW_FOR_MEASURMENT_ANGLE - additional_current));
+      additional_current = additional_current_new;
     }
     /******************************************/
 

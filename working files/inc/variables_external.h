@@ -92,13 +92,15 @@ extern volatile unsigned int semaphore_measure_values_low1;
 
 extern unsigned int number_inputs_for_fix_one_second;
 extern unsigned int number_inputs_for_fix_one_period;
-extern volatile unsigned int measurement[NUMBER_ANALOG_CANALES + 8];
-extern unsigned int measurement_high[2][NUMBER_ANALOG_CANALES + 8], bank_measurement_high;
-extern unsigned int measurement_middle[NUMBER_ANALOG_CANALES + 8]; 
-extern unsigned int measurement_low[NUMBER_ANALOG_CANALES + 8]; 
+extern volatile unsigned int measurement[NUMBER_ANALOG_CANALES + 9];
+extern unsigned int measurement_high[2][NUMBER_ANALOG_CANALES + 9], bank_measurement_high;
+extern unsigned int measurement_middle[NUMBER_ANALOG_CANALES + 9]; 
+extern unsigned int measurement_low[NUMBER_ANALOG_CANALES + 9]; 
 
-extern const unsigned int index_converter_p[NUMBER_ANALOG_CANALES];
-extern const unsigned int index_converter_l[NUMBER_ANALOG_CANALES];
+extern const unsigned int index_converter_Ib_p[NUMBER_ANALOG_CANALES];
+extern const unsigned int index_converter_I04_p[NUMBER_ANALOG_CANALES];
+extern const unsigned int index_converter_Ib_l[NUMBER_ANALOG_CANALES];
+extern const unsigned int index_converter_I04_l[NUMBER_ANALOG_CANALES];
 extern int ortogonal_calc[2*FULL_ORT_MAX];
 extern int ortogonal_calc_low[2*FULL_ORT_MAX];
 extern int phi_angle[FULL_ORT_MAX];
