@@ -105,7 +105,7 @@ extern void make_ekran_chose_of_inputs_outputs_leds_df_buttons_for_ranguvannja(u
 extern void make_ekran_transformator(void);
 extern void make_ekran_set_function_in_input(unsigned int);
 extern void make_ekran_set_function_in_output_led_df_dt_reg(unsigned int, unsigned int);
-extern void check_current_index_is_presented_in_configuration(unsigned int*, int*, int, int, int, int, int, int, int, int, int, int, int, int, int);
+extern void check_current_index_is_presented_in_configuration(unsigned int*, int*, int, int, int, int, int, int, int, int, int, int, int, int, int, int);
 extern void make_ekran_setpoint_switch(void);
 extern void make_ekran_timeout_switch(void);
 extern void make_ekran_control_switch(void);
@@ -158,6 +158,7 @@ extern void make_ekran_grupa_ustavok(void);
 extern void make_ekran_vidkluchenja(void);
 
 extern unsigned int action_after_changing_of_configuration(unsigned int, __SETTINGS *);
+extern unsigned int action_after_changing_Ib_I04(__SETTINGS *);
 extern void action_after_changing_zz1_type(__SETTINGS *);
 extern void calculate_namber_bit_waiting_for_rs_485(void);
 extern void fix_change_settings(unsigned int, unsigned int);

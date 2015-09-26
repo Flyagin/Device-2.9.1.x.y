@@ -38,6 +38,7 @@
 
 enum _configuration {
 MTZ_BIT_CONFIGURATION = 0,
+MTZ04_BIT_CONFIGURATION,
 ZDZ_BIT_CONFIGURATION,
 ZZ_BIT_CONFIGURATION,
 TZNP_BIT_CONFIGURATION,
@@ -82,6 +83,7 @@ RANG_BUTTON_RESET_BLOCK_READY_TU_VID_ZAHYSTIV
 
 #define NUMBER_GENERAL_SIGNAL_FOR_RANG_BUTTON     22
 #define NUMBER_MTZ_SIGNAL_FOR_RANG_BUTTON         0
+#define NUMBER_MTZ04_SIGNAL_FOR_RANG_BUTTON       0
 #define NUMBER_ZDZ_SIGNAL_FOR_RANG_BUTTON         0
 #define NUMBER_ZZ_SIGNAL_FOR_RANG_BUTTON          0
 #define NUMBER_TZNP_SIGNAL_FOR_RANG_BUTTON        0
@@ -96,6 +98,7 @@ RANG_BUTTON_RESET_BLOCK_READY_TU_VID_ZAHYSTIV
 #define NUMBER_TOTAL_SIGNAL_FOR_RANG_BUTTON       (                                           \
                                                    NUMBER_GENERAL_SIGNAL_FOR_RANG_BUTTON     + \
                                                    NUMBER_MTZ_SIGNAL_FOR_RANG_BUTTON         + \
+                                                   NUMBER_MTZ04_SIGNAL_FOR_RANG_BUTTON       + \
                                                    NUMBER_ZDZ_SIGNAL_FOR_RANG_BUTTON         + \
                                                    NUMBER_ZZ_SIGNAL_FOR_RANG_BUTTON          + \
                                                    NUMBER_TZNP_SIGNAL_FOR_RANG_BUTTON        + \
@@ -179,6 +182,7 @@ RANG_INPUT_BLOCK_UMAX2,
 
 #define NUMBER_GENERAL_SIGNAL_FOR_RANG_INPUT     31
 #define NUMBER_MTZ_SIGNAL_FOR_RANG_INPUT         5
+#define NUMBER_MTZ04_SIGNAL_FOR_RANG_INPUT       0
 #define NUMBER_ZDZ_SIGNAL_FOR_RANG_INPUT         1
 #define NUMBER_ZZ_SIGNAL_FOR_RANG_INPUT          1
 #define NUMBER_TZNP_SIGNAL_FOR_RANG_INPUT        3
@@ -193,6 +197,7 @@ RANG_INPUT_BLOCK_UMAX2,
 #define NUMBER_TOTAL_SIGNAL_FOR_RANG_INPUT       (                                          \
                                                   NUMBER_GENERAL_SIGNAL_FOR_RANG_INPUT    + \
                                                   NUMBER_MTZ_SIGNAL_FOR_RANG_INPUT        + \
+                                                  NUMBER_MTZ04_SIGNAL_FOR_RANG_INPUT      + \
                                                   NUMBER_ZDZ_SIGNAL_FOR_RANG_INPUT        + \
                                                   NUMBER_ZZ_SIGNAL_FOR_RANG_INPUT         + \
                                                   NUMBER_TZNP_SIGNAL_FOR_RANG_INPUT       + \
@@ -398,6 +403,7 @@ RANG_OUTPUT_LED_DF_REG_UMAX2
 
 #define NUMBER_GENERAL_SIGNAL_FOR_RANG_OUTPUT_LED_DF_REG     57
 #define NUMBER_MTZ_SIGNAL_FOR_RANG_OUTPUT_LED_DF_REG         39
+#define NUMBER_MTZ04_SIGNAL_FOR_RANG_OUTPUT_LED_DF_REG       0
 #define NUMBER_ZDZ_SIGNAL_FOR_RANG_OUTPUT_LED_DF_REG         2
 #define NUMBER_ZZ_SIGNAL_FOR_RANG_OUTPUT_LED_DF_REG          8
 #define NUMBER_TZNP_SIGNAL_FOR_RANG_OUTPUT_LED_DF_REG        30
@@ -412,6 +418,7 @@ RANG_OUTPUT_LED_DF_REG_UMAX2
 #define NUMBER_TOTAL_SIGNAL_FOR_RANG_OUTPUT_LED_DF_REG       (                                                      \
                                                               NUMBER_GENERAL_SIGNAL_FOR_RANG_OUTPUT_LED_DF_REG    + \
                                                               NUMBER_MTZ_SIGNAL_FOR_RANG_OUTPUT_LED_DF_REG        + \
+                                                              NUMBER_MTZ04_SIGNAL_FOR_RANG_OUTPUT_LED_DF_REG      + \
                                                               NUMBER_ZDZ_SIGNAL_FOR_RANG_OUTPUT_LED_DF_REG        + \
                                                               NUMBER_ZZ_SIGNAL_FOR_RANG_OUTPUT_LED_DF_REG         + \
                                                               NUMBER_TZNP_SIGNAL_FOR_RANG_OUTPUT_LED_DF_REG       + \

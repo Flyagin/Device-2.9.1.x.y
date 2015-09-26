@@ -362,6 +362,7 @@ void make_ekran_set_function_in_button(unsigned int number_ekran)
                                                      {-1,-1},
                                                      {-1,-1},
                                                      {-1,-1},
+                                                     {-1,-1},
                                                      {-1,-1}
                                                     };
       
@@ -875,37 +876,38 @@ void make_ekran_set_function_in_input(unsigned int number_ekran)
        (NUMBER_GENERAL_SIGNAL_FOR_RANG_INPUT + NUMBER_MTZ_SIGNAL_FOR_RANG_INPUT),
        (NUMBER_GENERAL_SIGNAL_FOR_RANG_INPUT + NUMBER_MTZ_SIGNAL_FOR_RANG_INPUT + NUMBER_ZDZ_SIGNAL_FOR_RANG_INPUT - 1)
       },
+      {-1,-1},
       {
-       (NUMBER_GENERAL_SIGNAL_FOR_RANG_INPUT + NUMBER_MTZ_SIGNAL_FOR_RANG_INPUT + NUMBER_ZDZ_SIGNAL_FOR_RANG_INPUT),
-       (NUMBER_GENERAL_SIGNAL_FOR_RANG_INPUT + NUMBER_MTZ_SIGNAL_FOR_RANG_INPUT + NUMBER_ZDZ_SIGNAL_FOR_RANG_INPUT + NUMBER_ZZ_SIGNAL_FOR_RANG_INPUT - 1)
+       (NUMBER_GENERAL_SIGNAL_FOR_RANG_INPUT + NUMBER_MTZ_SIGNAL_FOR_RANG_INPUT + NUMBER_MTZ04_SIGNAL_FOR_RANG_INPUT + NUMBER_ZDZ_SIGNAL_FOR_RANG_INPUT),
+       (NUMBER_GENERAL_SIGNAL_FOR_RANG_INPUT + NUMBER_MTZ_SIGNAL_FOR_RANG_INPUT + NUMBER_MTZ04_SIGNAL_FOR_RANG_INPUT + NUMBER_ZDZ_SIGNAL_FOR_RANG_INPUT + NUMBER_ZZ_SIGNAL_FOR_RANG_INPUT - 1)
       },
       {
-       (NUMBER_GENERAL_SIGNAL_FOR_RANG_INPUT + NUMBER_MTZ_SIGNAL_FOR_RANG_INPUT + NUMBER_ZDZ_SIGNAL_FOR_RANG_INPUT + NUMBER_ZZ_SIGNAL_FOR_RANG_INPUT),
-       (NUMBER_GENERAL_SIGNAL_FOR_RANG_INPUT + NUMBER_MTZ_SIGNAL_FOR_RANG_INPUT + NUMBER_ZDZ_SIGNAL_FOR_RANG_INPUT + NUMBER_ZZ_SIGNAL_FOR_RANG_INPUT + NUMBER_TZNP_SIGNAL_FOR_RANG_INPUT - 1)
+       (NUMBER_GENERAL_SIGNAL_FOR_RANG_INPUT + NUMBER_MTZ_SIGNAL_FOR_RANG_INPUT + NUMBER_MTZ04_SIGNAL_FOR_RANG_INPUT + NUMBER_ZDZ_SIGNAL_FOR_RANG_INPUT + NUMBER_ZZ_SIGNAL_FOR_RANG_INPUT),
+       (NUMBER_GENERAL_SIGNAL_FOR_RANG_INPUT + NUMBER_MTZ_SIGNAL_FOR_RANG_INPUT + NUMBER_MTZ04_SIGNAL_FOR_RANG_INPUT + NUMBER_ZDZ_SIGNAL_FOR_RANG_INPUT + NUMBER_ZZ_SIGNAL_FOR_RANG_INPUT + NUMBER_TZNP_SIGNAL_FOR_RANG_INPUT - 1)
       },
       {
-       (NUMBER_GENERAL_SIGNAL_FOR_RANG_INPUT + NUMBER_MTZ_SIGNAL_FOR_RANG_INPUT + NUMBER_ZDZ_SIGNAL_FOR_RANG_INPUT + NUMBER_ZZ_SIGNAL_FOR_RANG_INPUT + NUMBER_TZNP_SIGNAL_FOR_RANG_INPUT),
-       (NUMBER_GENERAL_SIGNAL_FOR_RANG_INPUT + NUMBER_MTZ_SIGNAL_FOR_RANG_INPUT + NUMBER_ZDZ_SIGNAL_FOR_RANG_INPUT + NUMBER_ZZ_SIGNAL_FOR_RANG_INPUT + NUMBER_TZNP_SIGNAL_FOR_RANG_INPUT + NUMBER_APV_SIGNAL_FOR_RANG_INPUT - 1)
+       (NUMBER_GENERAL_SIGNAL_FOR_RANG_INPUT + NUMBER_MTZ_SIGNAL_FOR_RANG_INPUT + NUMBER_MTZ04_SIGNAL_FOR_RANG_INPUT + NUMBER_ZDZ_SIGNAL_FOR_RANG_INPUT + NUMBER_ZZ_SIGNAL_FOR_RANG_INPUT + NUMBER_TZNP_SIGNAL_FOR_RANG_INPUT),
+       (NUMBER_GENERAL_SIGNAL_FOR_RANG_INPUT + NUMBER_MTZ_SIGNAL_FOR_RANG_INPUT + NUMBER_MTZ04_SIGNAL_FOR_RANG_INPUT + NUMBER_ZDZ_SIGNAL_FOR_RANG_INPUT + NUMBER_ZZ_SIGNAL_FOR_RANG_INPUT + NUMBER_TZNP_SIGNAL_FOR_RANG_INPUT + NUMBER_APV_SIGNAL_FOR_RANG_INPUT - 1)
       },
       {
-       (NUMBER_GENERAL_SIGNAL_FOR_RANG_INPUT + NUMBER_MTZ_SIGNAL_FOR_RANG_INPUT + NUMBER_ZDZ_SIGNAL_FOR_RANG_INPUT + NUMBER_ZZ_SIGNAL_FOR_RANG_INPUT + NUMBER_TZNP_SIGNAL_FOR_RANG_INPUT + NUMBER_APV_SIGNAL_FOR_RANG_INPUT),
-       (NUMBER_GENERAL_SIGNAL_FOR_RANG_INPUT + NUMBER_MTZ_SIGNAL_FOR_RANG_INPUT + NUMBER_ZDZ_SIGNAL_FOR_RANG_INPUT + NUMBER_ZZ_SIGNAL_FOR_RANG_INPUT + NUMBER_TZNP_SIGNAL_FOR_RANG_INPUT + NUMBER_APV_SIGNAL_FOR_RANG_INPUT + NUMBER_ACHR_CHAPV_SIGNAL_FOR_RANG_INPUT - 1)
+       (NUMBER_GENERAL_SIGNAL_FOR_RANG_INPUT + NUMBER_MTZ_SIGNAL_FOR_RANG_INPUT + NUMBER_MTZ04_SIGNAL_FOR_RANG_INPUT + NUMBER_ZDZ_SIGNAL_FOR_RANG_INPUT + NUMBER_ZZ_SIGNAL_FOR_RANG_INPUT + NUMBER_TZNP_SIGNAL_FOR_RANG_INPUT + NUMBER_APV_SIGNAL_FOR_RANG_INPUT),
+       (NUMBER_GENERAL_SIGNAL_FOR_RANG_INPUT + NUMBER_MTZ_SIGNAL_FOR_RANG_INPUT + NUMBER_MTZ04_SIGNAL_FOR_RANG_INPUT + NUMBER_ZDZ_SIGNAL_FOR_RANG_INPUT + NUMBER_ZZ_SIGNAL_FOR_RANG_INPUT + NUMBER_TZNP_SIGNAL_FOR_RANG_INPUT + NUMBER_APV_SIGNAL_FOR_RANG_INPUT + NUMBER_ACHR_CHAPV_SIGNAL_FOR_RANG_INPUT - 1)
       },
       {
-       (NUMBER_GENERAL_SIGNAL_FOR_RANG_INPUT + NUMBER_MTZ_SIGNAL_FOR_RANG_INPUT + NUMBER_ZDZ_SIGNAL_FOR_RANG_INPUT + NUMBER_ZZ_SIGNAL_FOR_RANG_INPUT + NUMBER_TZNP_SIGNAL_FOR_RANG_INPUT + NUMBER_APV_SIGNAL_FOR_RANG_INPUT + NUMBER_ACHR_CHAPV_SIGNAL_FOR_RANG_INPUT),
-       (NUMBER_GENERAL_SIGNAL_FOR_RANG_INPUT + NUMBER_MTZ_SIGNAL_FOR_RANG_INPUT + NUMBER_ZDZ_SIGNAL_FOR_RANG_INPUT + NUMBER_ZZ_SIGNAL_FOR_RANG_INPUT + NUMBER_TZNP_SIGNAL_FOR_RANG_INPUT + NUMBER_APV_SIGNAL_FOR_RANG_INPUT + NUMBER_ACHR_CHAPV_SIGNAL_FOR_RANG_INPUT + NUMBER_UROV_SIGNAL_FOR_RANG_INPUT - 1)
+       (NUMBER_GENERAL_SIGNAL_FOR_RANG_INPUT + NUMBER_MTZ_SIGNAL_FOR_RANG_INPUT + NUMBER_MTZ04_SIGNAL_FOR_RANG_INPUT + NUMBER_ZDZ_SIGNAL_FOR_RANG_INPUT + NUMBER_ZZ_SIGNAL_FOR_RANG_INPUT + NUMBER_TZNP_SIGNAL_FOR_RANG_INPUT + NUMBER_APV_SIGNAL_FOR_RANG_INPUT + NUMBER_ACHR_CHAPV_SIGNAL_FOR_RANG_INPUT),
+       (NUMBER_GENERAL_SIGNAL_FOR_RANG_INPUT + NUMBER_MTZ_SIGNAL_FOR_RANG_INPUT + NUMBER_MTZ04_SIGNAL_FOR_RANG_INPUT + NUMBER_ZDZ_SIGNAL_FOR_RANG_INPUT + NUMBER_ZZ_SIGNAL_FOR_RANG_INPUT + NUMBER_TZNP_SIGNAL_FOR_RANG_INPUT + NUMBER_APV_SIGNAL_FOR_RANG_INPUT + NUMBER_ACHR_CHAPV_SIGNAL_FOR_RANG_INPUT + NUMBER_UROV_SIGNAL_FOR_RANG_INPUT - 1)
       },
       {
-       (NUMBER_GENERAL_SIGNAL_FOR_RANG_INPUT + NUMBER_MTZ_SIGNAL_FOR_RANG_INPUT + NUMBER_ZDZ_SIGNAL_FOR_RANG_INPUT + NUMBER_ZZ_SIGNAL_FOR_RANG_INPUT + NUMBER_TZNP_SIGNAL_FOR_RANG_INPUT + NUMBER_APV_SIGNAL_FOR_RANG_INPUT + NUMBER_ACHR_CHAPV_SIGNAL_FOR_RANG_INPUT + NUMBER_UROV_SIGNAL_FOR_RANG_INPUT),
-       (NUMBER_GENERAL_SIGNAL_FOR_RANG_INPUT + NUMBER_MTZ_SIGNAL_FOR_RANG_INPUT + NUMBER_ZDZ_SIGNAL_FOR_RANG_INPUT + NUMBER_ZZ_SIGNAL_FOR_RANG_INPUT + NUMBER_TZNP_SIGNAL_FOR_RANG_INPUT + NUMBER_APV_SIGNAL_FOR_RANG_INPUT + NUMBER_ACHR_CHAPV_SIGNAL_FOR_RANG_INPUT + NUMBER_UROV_SIGNAL_FOR_RANG_INPUT + NUMBER_ZOP_SIGNAL_FOR_RANG_INPUT - 1)
+       (NUMBER_GENERAL_SIGNAL_FOR_RANG_INPUT + NUMBER_MTZ_SIGNAL_FOR_RANG_INPUT + NUMBER_MTZ04_SIGNAL_FOR_RANG_INPUT + NUMBER_ZDZ_SIGNAL_FOR_RANG_INPUT + NUMBER_ZZ_SIGNAL_FOR_RANG_INPUT + NUMBER_TZNP_SIGNAL_FOR_RANG_INPUT + NUMBER_APV_SIGNAL_FOR_RANG_INPUT + NUMBER_ACHR_CHAPV_SIGNAL_FOR_RANG_INPUT + NUMBER_UROV_SIGNAL_FOR_RANG_INPUT),
+       (NUMBER_GENERAL_SIGNAL_FOR_RANG_INPUT + NUMBER_MTZ_SIGNAL_FOR_RANG_INPUT + NUMBER_MTZ04_SIGNAL_FOR_RANG_INPUT + NUMBER_ZDZ_SIGNAL_FOR_RANG_INPUT + NUMBER_ZZ_SIGNAL_FOR_RANG_INPUT + NUMBER_TZNP_SIGNAL_FOR_RANG_INPUT + NUMBER_APV_SIGNAL_FOR_RANG_INPUT + NUMBER_ACHR_CHAPV_SIGNAL_FOR_RANG_INPUT + NUMBER_UROV_SIGNAL_FOR_RANG_INPUT + NUMBER_ZOP_SIGNAL_FOR_RANG_INPUT - 1)
       },
       {
-       (NUMBER_GENERAL_SIGNAL_FOR_RANG_INPUT + NUMBER_MTZ_SIGNAL_FOR_RANG_INPUT + NUMBER_ZDZ_SIGNAL_FOR_RANG_INPUT + NUMBER_ZZ_SIGNAL_FOR_RANG_INPUT + NUMBER_TZNP_SIGNAL_FOR_RANG_INPUT + NUMBER_APV_SIGNAL_FOR_RANG_INPUT + NUMBER_ACHR_CHAPV_SIGNAL_FOR_RANG_INPUT + NUMBER_UROV_SIGNAL_FOR_RANG_INPUT + NUMBER_ZOP_SIGNAL_FOR_RANG_INPUT),
-       (NUMBER_GENERAL_SIGNAL_FOR_RANG_INPUT + NUMBER_MTZ_SIGNAL_FOR_RANG_INPUT + NUMBER_ZDZ_SIGNAL_FOR_RANG_INPUT + NUMBER_ZZ_SIGNAL_FOR_RANG_INPUT + NUMBER_TZNP_SIGNAL_FOR_RANG_INPUT + NUMBER_APV_SIGNAL_FOR_RANG_INPUT + NUMBER_ACHR_CHAPV_SIGNAL_FOR_RANG_INPUT + NUMBER_UROV_SIGNAL_FOR_RANG_INPUT + NUMBER_ZOP_SIGNAL_FOR_RANG_INPUT + NUMBER_UMIN_SIGNAL_FOR_RANG_INPUT - 1)
+       (NUMBER_GENERAL_SIGNAL_FOR_RANG_INPUT + NUMBER_MTZ_SIGNAL_FOR_RANG_INPUT + NUMBER_MTZ04_SIGNAL_FOR_RANG_INPUT + NUMBER_ZDZ_SIGNAL_FOR_RANG_INPUT + NUMBER_ZZ_SIGNAL_FOR_RANG_INPUT + NUMBER_TZNP_SIGNAL_FOR_RANG_INPUT + NUMBER_APV_SIGNAL_FOR_RANG_INPUT + NUMBER_ACHR_CHAPV_SIGNAL_FOR_RANG_INPUT + NUMBER_UROV_SIGNAL_FOR_RANG_INPUT + NUMBER_ZOP_SIGNAL_FOR_RANG_INPUT),
+       (NUMBER_GENERAL_SIGNAL_FOR_RANG_INPUT + NUMBER_MTZ_SIGNAL_FOR_RANG_INPUT + NUMBER_MTZ04_SIGNAL_FOR_RANG_INPUT + NUMBER_ZDZ_SIGNAL_FOR_RANG_INPUT + NUMBER_ZZ_SIGNAL_FOR_RANG_INPUT + NUMBER_TZNP_SIGNAL_FOR_RANG_INPUT + NUMBER_APV_SIGNAL_FOR_RANG_INPUT + NUMBER_ACHR_CHAPV_SIGNAL_FOR_RANG_INPUT + NUMBER_UROV_SIGNAL_FOR_RANG_INPUT + NUMBER_ZOP_SIGNAL_FOR_RANG_INPUT + NUMBER_UMIN_SIGNAL_FOR_RANG_INPUT - 1)
       },
       {
-       (NUMBER_GENERAL_SIGNAL_FOR_RANG_INPUT + NUMBER_MTZ_SIGNAL_FOR_RANG_INPUT + NUMBER_ZDZ_SIGNAL_FOR_RANG_INPUT + NUMBER_ZZ_SIGNAL_FOR_RANG_INPUT + NUMBER_TZNP_SIGNAL_FOR_RANG_INPUT + NUMBER_APV_SIGNAL_FOR_RANG_INPUT + NUMBER_ACHR_CHAPV_SIGNAL_FOR_RANG_INPUT + NUMBER_UROV_SIGNAL_FOR_RANG_INPUT + NUMBER_ZOP_SIGNAL_FOR_RANG_INPUT + NUMBER_UMIN_SIGNAL_FOR_RANG_INPUT),
-       (NUMBER_GENERAL_SIGNAL_FOR_RANG_INPUT + NUMBER_MTZ_SIGNAL_FOR_RANG_INPUT + NUMBER_ZDZ_SIGNAL_FOR_RANG_INPUT + NUMBER_ZZ_SIGNAL_FOR_RANG_INPUT + NUMBER_TZNP_SIGNAL_FOR_RANG_INPUT + NUMBER_APV_SIGNAL_FOR_RANG_INPUT + NUMBER_ACHR_CHAPV_SIGNAL_FOR_RANG_INPUT + NUMBER_UROV_SIGNAL_FOR_RANG_INPUT + NUMBER_ZOP_SIGNAL_FOR_RANG_INPUT + NUMBER_UMIN_SIGNAL_FOR_RANG_INPUT + NUMBER_UMAX_SIGNAL_FOR_RANG_INPUT - 1)
+       (NUMBER_GENERAL_SIGNAL_FOR_RANG_INPUT + NUMBER_MTZ_SIGNAL_FOR_RANG_INPUT + NUMBER_MTZ04_SIGNAL_FOR_RANG_INPUT + NUMBER_ZDZ_SIGNAL_FOR_RANG_INPUT + NUMBER_ZZ_SIGNAL_FOR_RANG_INPUT + NUMBER_TZNP_SIGNAL_FOR_RANG_INPUT + NUMBER_APV_SIGNAL_FOR_RANG_INPUT + NUMBER_ACHR_CHAPV_SIGNAL_FOR_RANG_INPUT + NUMBER_UROV_SIGNAL_FOR_RANG_INPUT + NUMBER_ZOP_SIGNAL_FOR_RANG_INPUT + NUMBER_UMIN_SIGNAL_FOR_RANG_INPUT),
+       (NUMBER_GENERAL_SIGNAL_FOR_RANG_INPUT + NUMBER_MTZ_SIGNAL_FOR_RANG_INPUT + NUMBER_MTZ04_SIGNAL_FOR_RANG_INPUT + NUMBER_ZDZ_SIGNAL_FOR_RANG_INPUT + NUMBER_ZZ_SIGNAL_FOR_RANG_INPUT + NUMBER_TZNP_SIGNAL_FOR_RANG_INPUT + NUMBER_APV_SIGNAL_FOR_RANG_INPUT + NUMBER_ACHR_CHAPV_SIGNAL_FOR_RANG_INPUT + NUMBER_UROV_SIGNAL_FOR_RANG_INPUT + NUMBER_ZOP_SIGNAL_FOR_RANG_INPUT + NUMBER_UMIN_SIGNAL_FOR_RANG_INPUT + NUMBER_UMAX_SIGNAL_FOR_RANG_INPUT - 1)
       },
       {-1,-1}
      };
@@ -922,7 +924,7 @@ void make_ekran_set_function_in_input(unsigned int number_ekran)
       if((current_settings.configuration & (1 << i)) != 0)
       {
         //Захист присутнійсть, тому функції фільтрувати не потрібно - переводимо індекс на наступні функції
-        //Додаємо кфлькість функцій до поточного індексу, якщо для поточного захисту реально були присутні функції,
+        //Додаємо кількість функцій до поточного індексу, якщо для поточного захисту реально були присутні функції,
         //бо інкаше ми вже знаходимося на індексі наступного захисту
         if(min_max_number[i][0] >=0)
         {
@@ -2170,37 +2172,38 @@ void make_ekran_set_function_in_output_led_df_dt_reg(unsigned int number_ekran, 
        (NUMBER_GENERAL_SIGNAL_FOR_RANG_OUTPUT_LED_DF_REG + NUMBER_MTZ_SIGNAL_FOR_RANG_OUTPUT_LED_DF_REG),
        (NUMBER_GENERAL_SIGNAL_FOR_RANG_OUTPUT_LED_DF_REG + NUMBER_MTZ_SIGNAL_FOR_RANG_OUTPUT_LED_DF_REG + NUMBER_ZDZ_SIGNAL_FOR_RANG_OUTPUT_LED_DF_REG - 1)
       },
+      {-1,-1},
       {
-       (NUMBER_GENERAL_SIGNAL_FOR_RANG_OUTPUT_LED_DF_REG + NUMBER_MTZ_SIGNAL_FOR_RANG_OUTPUT_LED_DF_REG + NUMBER_ZDZ_SIGNAL_FOR_RANG_OUTPUT_LED_DF_REG),
-       (NUMBER_GENERAL_SIGNAL_FOR_RANG_OUTPUT_LED_DF_REG + NUMBER_MTZ_SIGNAL_FOR_RANG_OUTPUT_LED_DF_REG + NUMBER_ZDZ_SIGNAL_FOR_RANG_OUTPUT_LED_DF_REG + NUMBER_ZZ_SIGNAL_FOR_RANG_OUTPUT_LED_DF_REG - 1)
+       (NUMBER_GENERAL_SIGNAL_FOR_RANG_OUTPUT_LED_DF_REG + NUMBER_MTZ_SIGNAL_FOR_RANG_OUTPUT_LED_DF_REG + NUMBER_MTZ04_SIGNAL_FOR_RANG_OUTPUT_LED_DF_REG + NUMBER_ZDZ_SIGNAL_FOR_RANG_OUTPUT_LED_DF_REG),
+       (NUMBER_GENERAL_SIGNAL_FOR_RANG_OUTPUT_LED_DF_REG + NUMBER_MTZ_SIGNAL_FOR_RANG_OUTPUT_LED_DF_REG + NUMBER_MTZ04_SIGNAL_FOR_RANG_OUTPUT_LED_DF_REG + NUMBER_ZDZ_SIGNAL_FOR_RANG_OUTPUT_LED_DF_REG + NUMBER_ZZ_SIGNAL_FOR_RANG_OUTPUT_LED_DF_REG - 1)
       },
       {
-       (NUMBER_GENERAL_SIGNAL_FOR_RANG_OUTPUT_LED_DF_REG + NUMBER_MTZ_SIGNAL_FOR_RANG_OUTPUT_LED_DF_REG + NUMBER_ZDZ_SIGNAL_FOR_RANG_OUTPUT_LED_DF_REG + NUMBER_ZZ_SIGNAL_FOR_RANG_OUTPUT_LED_DF_REG),
-       (NUMBER_GENERAL_SIGNAL_FOR_RANG_OUTPUT_LED_DF_REG + NUMBER_MTZ_SIGNAL_FOR_RANG_OUTPUT_LED_DF_REG + NUMBER_ZDZ_SIGNAL_FOR_RANG_OUTPUT_LED_DF_REG + NUMBER_ZZ_SIGNAL_FOR_RANG_OUTPUT_LED_DF_REG + NUMBER_TZNP_SIGNAL_FOR_RANG_OUTPUT_LED_DF_REG - 1)
+       (NUMBER_GENERAL_SIGNAL_FOR_RANG_OUTPUT_LED_DF_REG + NUMBER_MTZ_SIGNAL_FOR_RANG_OUTPUT_LED_DF_REG + NUMBER_MTZ04_SIGNAL_FOR_RANG_OUTPUT_LED_DF_REG + NUMBER_ZDZ_SIGNAL_FOR_RANG_OUTPUT_LED_DF_REG + NUMBER_ZZ_SIGNAL_FOR_RANG_OUTPUT_LED_DF_REG),
+       (NUMBER_GENERAL_SIGNAL_FOR_RANG_OUTPUT_LED_DF_REG + NUMBER_MTZ_SIGNAL_FOR_RANG_OUTPUT_LED_DF_REG + NUMBER_MTZ04_SIGNAL_FOR_RANG_OUTPUT_LED_DF_REG + NUMBER_ZDZ_SIGNAL_FOR_RANG_OUTPUT_LED_DF_REG + NUMBER_ZZ_SIGNAL_FOR_RANG_OUTPUT_LED_DF_REG + NUMBER_TZNP_SIGNAL_FOR_RANG_OUTPUT_LED_DF_REG - 1)
       },
       {
-       (NUMBER_GENERAL_SIGNAL_FOR_RANG_OUTPUT_LED_DF_REG + NUMBER_MTZ_SIGNAL_FOR_RANG_OUTPUT_LED_DF_REG + NUMBER_ZDZ_SIGNAL_FOR_RANG_OUTPUT_LED_DF_REG + NUMBER_ZZ_SIGNAL_FOR_RANG_OUTPUT_LED_DF_REG + NUMBER_TZNP_SIGNAL_FOR_RANG_OUTPUT_LED_DF_REG),
-       (NUMBER_GENERAL_SIGNAL_FOR_RANG_OUTPUT_LED_DF_REG + NUMBER_MTZ_SIGNAL_FOR_RANG_OUTPUT_LED_DF_REG + NUMBER_ZDZ_SIGNAL_FOR_RANG_OUTPUT_LED_DF_REG + NUMBER_ZZ_SIGNAL_FOR_RANG_OUTPUT_LED_DF_REG + NUMBER_TZNP_SIGNAL_FOR_RANG_OUTPUT_LED_DF_REG + NUMBER_APV_SIGNAL_FOR_RANG_OUTPUT_LED_DF_REG - 1)
+       (NUMBER_GENERAL_SIGNAL_FOR_RANG_OUTPUT_LED_DF_REG + NUMBER_MTZ_SIGNAL_FOR_RANG_OUTPUT_LED_DF_REG + NUMBER_MTZ04_SIGNAL_FOR_RANG_OUTPUT_LED_DF_REG + NUMBER_ZDZ_SIGNAL_FOR_RANG_OUTPUT_LED_DF_REG + NUMBER_ZZ_SIGNAL_FOR_RANG_OUTPUT_LED_DF_REG + NUMBER_TZNP_SIGNAL_FOR_RANG_OUTPUT_LED_DF_REG),
+       (NUMBER_GENERAL_SIGNAL_FOR_RANG_OUTPUT_LED_DF_REG + NUMBER_MTZ_SIGNAL_FOR_RANG_OUTPUT_LED_DF_REG + NUMBER_MTZ04_SIGNAL_FOR_RANG_OUTPUT_LED_DF_REG + NUMBER_ZDZ_SIGNAL_FOR_RANG_OUTPUT_LED_DF_REG + NUMBER_ZZ_SIGNAL_FOR_RANG_OUTPUT_LED_DF_REG + NUMBER_TZNP_SIGNAL_FOR_RANG_OUTPUT_LED_DF_REG + NUMBER_APV_SIGNAL_FOR_RANG_OUTPUT_LED_DF_REG - 1)
       },
       {
-       (NUMBER_GENERAL_SIGNAL_FOR_RANG_OUTPUT_LED_DF_REG + NUMBER_MTZ_SIGNAL_FOR_RANG_OUTPUT_LED_DF_REG + NUMBER_ZDZ_SIGNAL_FOR_RANG_OUTPUT_LED_DF_REG + NUMBER_ZZ_SIGNAL_FOR_RANG_OUTPUT_LED_DF_REG + NUMBER_TZNP_SIGNAL_FOR_RANG_OUTPUT_LED_DF_REG + NUMBER_APV_SIGNAL_FOR_RANG_OUTPUT_LED_DF_REG),
-       (NUMBER_GENERAL_SIGNAL_FOR_RANG_OUTPUT_LED_DF_REG + NUMBER_MTZ_SIGNAL_FOR_RANG_OUTPUT_LED_DF_REG + NUMBER_ZDZ_SIGNAL_FOR_RANG_OUTPUT_LED_DF_REG + NUMBER_ZZ_SIGNAL_FOR_RANG_OUTPUT_LED_DF_REG + NUMBER_TZNP_SIGNAL_FOR_RANG_OUTPUT_LED_DF_REG + NUMBER_APV_SIGNAL_FOR_RANG_OUTPUT_LED_DF_REG + NUMBER_ACHR_CHAPV_SIGNAL_FOR_RANG_OUTPUT_LED_DF_REG - 1)
+       (NUMBER_GENERAL_SIGNAL_FOR_RANG_OUTPUT_LED_DF_REG + NUMBER_MTZ_SIGNAL_FOR_RANG_OUTPUT_LED_DF_REG + NUMBER_MTZ04_SIGNAL_FOR_RANG_OUTPUT_LED_DF_REG + NUMBER_ZDZ_SIGNAL_FOR_RANG_OUTPUT_LED_DF_REG + NUMBER_ZZ_SIGNAL_FOR_RANG_OUTPUT_LED_DF_REG + NUMBER_TZNP_SIGNAL_FOR_RANG_OUTPUT_LED_DF_REG + NUMBER_APV_SIGNAL_FOR_RANG_OUTPUT_LED_DF_REG),
+       (NUMBER_GENERAL_SIGNAL_FOR_RANG_OUTPUT_LED_DF_REG + NUMBER_MTZ_SIGNAL_FOR_RANG_OUTPUT_LED_DF_REG + NUMBER_MTZ04_SIGNAL_FOR_RANG_OUTPUT_LED_DF_REG + NUMBER_ZDZ_SIGNAL_FOR_RANG_OUTPUT_LED_DF_REG + NUMBER_ZZ_SIGNAL_FOR_RANG_OUTPUT_LED_DF_REG + NUMBER_TZNP_SIGNAL_FOR_RANG_OUTPUT_LED_DF_REG + NUMBER_APV_SIGNAL_FOR_RANG_OUTPUT_LED_DF_REG + NUMBER_ACHR_CHAPV_SIGNAL_FOR_RANG_OUTPUT_LED_DF_REG - 1)
       },
       {
-       (NUMBER_GENERAL_SIGNAL_FOR_RANG_OUTPUT_LED_DF_REG + NUMBER_MTZ_SIGNAL_FOR_RANG_OUTPUT_LED_DF_REG + NUMBER_ZDZ_SIGNAL_FOR_RANG_OUTPUT_LED_DF_REG + NUMBER_ZZ_SIGNAL_FOR_RANG_OUTPUT_LED_DF_REG + NUMBER_TZNP_SIGNAL_FOR_RANG_OUTPUT_LED_DF_REG + NUMBER_APV_SIGNAL_FOR_RANG_OUTPUT_LED_DF_REG + NUMBER_ACHR_CHAPV_SIGNAL_FOR_RANG_OUTPUT_LED_DF_REG),
-       (NUMBER_GENERAL_SIGNAL_FOR_RANG_OUTPUT_LED_DF_REG + NUMBER_MTZ_SIGNAL_FOR_RANG_OUTPUT_LED_DF_REG + NUMBER_ZDZ_SIGNAL_FOR_RANG_OUTPUT_LED_DF_REG + NUMBER_ZZ_SIGNAL_FOR_RANG_OUTPUT_LED_DF_REG + NUMBER_TZNP_SIGNAL_FOR_RANG_OUTPUT_LED_DF_REG + NUMBER_APV_SIGNAL_FOR_RANG_OUTPUT_LED_DF_REG + NUMBER_ACHR_CHAPV_SIGNAL_FOR_RANG_OUTPUT_LED_DF_REG  + NUMBER_UROV_SIGNAL_FOR_RANG_OUTPUT_LED_DF_REG - 1)
+       (NUMBER_GENERAL_SIGNAL_FOR_RANG_OUTPUT_LED_DF_REG + NUMBER_MTZ_SIGNAL_FOR_RANG_OUTPUT_LED_DF_REG + NUMBER_MTZ04_SIGNAL_FOR_RANG_OUTPUT_LED_DF_REG + NUMBER_ZDZ_SIGNAL_FOR_RANG_OUTPUT_LED_DF_REG + NUMBER_ZZ_SIGNAL_FOR_RANG_OUTPUT_LED_DF_REG + NUMBER_TZNP_SIGNAL_FOR_RANG_OUTPUT_LED_DF_REG + NUMBER_APV_SIGNAL_FOR_RANG_OUTPUT_LED_DF_REG + NUMBER_ACHR_CHAPV_SIGNAL_FOR_RANG_OUTPUT_LED_DF_REG),
+       (NUMBER_GENERAL_SIGNAL_FOR_RANG_OUTPUT_LED_DF_REG + NUMBER_MTZ_SIGNAL_FOR_RANG_OUTPUT_LED_DF_REG + NUMBER_MTZ04_SIGNAL_FOR_RANG_OUTPUT_LED_DF_REG + NUMBER_ZDZ_SIGNAL_FOR_RANG_OUTPUT_LED_DF_REG + NUMBER_ZZ_SIGNAL_FOR_RANG_OUTPUT_LED_DF_REG + NUMBER_TZNP_SIGNAL_FOR_RANG_OUTPUT_LED_DF_REG + NUMBER_APV_SIGNAL_FOR_RANG_OUTPUT_LED_DF_REG + NUMBER_ACHR_CHAPV_SIGNAL_FOR_RANG_OUTPUT_LED_DF_REG  + NUMBER_UROV_SIGNAL_FOR_RANG_OUTPUT_LED_DF_REG - 1)
       },
       {
-       (NUMBER_GENERAL_SIGNAL_FOR_RANG_OUTPUT_LED_DF_REG + NUMBER_MTZ_SIGNAL_FOR_RANG_OUTPUT_LED_DF_REG + NUMBER_ZDZ_SIGNAL_FOR_RANG_OUTPUT_LED_DF_REG + NUMBER_ZZ_SIGNAL_FOR_RANG_OUTPUT_LED_DF_REG + NUMBER_TZNP_SIGNAL_FOR_RANG_OUTPUT_LED_DF_REG + NUMBER_APV_SIGNAL_FOR_RANG_OUTPUT_LED_DF_REG + NUMBER_ACHR_CHAPV_SIGNAL_FOR_RANG_OUTPUT_LED_DF_REG  + NUMBER_UROV_SIGNAL_FOR_RANG_OUTPUT_LED_DF_REG),
-       (NUMBER_GENERAL_SIGNAL_FOR_RANG_OUTPUT_LED_DF_REG + NUMBER_MTZ_SIGNAL_FOR_RANG_OUTPUT_LED_DF_REG + NUMBER_ZDZ_SIGNAL_FOR_RANG_OUTPUT_LED_DF_REG + NUMBER_ZZ_SIGNAL_FOR_RANG_OUTPUT_LED_DF_REG + NUMBER_TZNP_SIGNAL_FOR_RANG_OUTPUT_LED_DF_REG + NUMBER_APV_SIGNAL_FOR_RANG_OUTPUT_LED_DF_REG + NUMBER_ACHR_CHAPV_SIGNAL_FOR_RANG_OUTPUT_LED_DF_REG  + NUMBER_UROV_SIGNAL_FOR_RANG_OUTPUT_LED_DF_REG + NUMBER_ZOP_SIGNAL_FOR_RANG_OUTPUT_LED_DF_REG - 1)
+       (NUMBER_GENERAL_SIGNAL_FOR_RANG_OUTPUT_LED_DF_REG + NUMBER_MTZ_SIGNAL_FOR_RANG_OUTPUT_LED_DF_REG + NUMBER_MTZ04_SIGNAL_FOR_RANG_OUTPUT_LED_DF_REG + NUMBER_ZDZ_SIGNAL_FOR_RANG_OUTPUT_LED_DF_REG + NUMBER_ZZ_SIGNAL_FOR_RANG_OUTPUT_LED_DF_REG + NUMBER_TZNP_SIGNAL_FOR_RANG_OUTPUT_LED_DF_REG + NUMBER_APV_SIGNAL_FOR_RANG_OUTPUT_LED_DF_REG + NUMBER_ACHR_CHAPV_SIGNAL_FOR_RANG_OUTPUT_LED_DF_REG  + NUMBER_UROV_SIGNAL_FOR_RANG_OUTPUT_LED_DF_REG),
+       (NUMBER_GENERAL_SIGNAL_FOR_RANG_OUTPUT_LED_DF_REG + NUMBER_MTZ_SIGNAL_FOR_RANG_OUTPUT_LED_DF_REG + NUMBER_MTZ04_SIGNAL_FOR_RANG_OUTPUT_LED_DF_REG + NUMBER_ZDZ_SIGNAL_FOR_RANG_OUTPUT_LED_DF_REG + NUMBER_ZZ_SIGNAL_FOR_RANG_OUTPUT_LED_DF_REG + NUMBER_TZNP_SIGNAL_FOR_RANG_OUTPUT_LED_DF_REG + NUMBER_APV_SIGNAL_FOR_RANG_OUTPUT_LED_DF_REG + NUMBER_ACHR_CHAPV_SIGNAL_FOR_RANG_OUTPUT_LED_DF_REG  + NUMBER_UROV_SIGNAL_FOR_RANG_OUTPUT_LED_DF_REG + NUMBER_ZOP_SIGNAL_FOR_RANG_OUTPUT_LED_DF_REG - 1)
       },
       {
-       (NUMBER_GENERAL_SIGNAL_FOR_RANG_OUTPUT_LED_DF_REG + NUMBER_MTZ_SIGNAL_FOR_RANG_OUTPUT_LED_DF_REG + NUMBER_ZDZ_SIGNAL_FOR_RANG_OUTPUT_LED_DF_REG + NUMBER_ZZ_SIGNAL_FOR_RANG_OUTPUT_LED_DF_REG + NUMBER_TZNP_SIGNAL_FOR_RANG_OUTPUT_LED_DF_REG + NUMBER_APV_SIGNAL_FOR_RANG_OUTPUT_LED_DF_REG + NUMBER_ACHR_CHAPV_SIGNAL_FOR_RANG_OUTPUT_LED_DF_REG  + NUMBER_UROV_SIGNAL_FOR_RANG_OUTPUT_LED_DF_REG + NUMBER_ZOP_SIGNAL_FOR_RANG_OUTPUT_LED_DF_REG),
-       (NUMBER_GENERAL_SIGNAL_FOR_RANG_OUTPUT_LED_DF_REG + NUMBER_MTZ_SIGNAL_FOR_RANG_OUTPUT_LED_DF_REG + NUMBER_ZDZ_SIGNAL_FOR_RANG_OUTPUT_LED_DF_REG + NUMBER_ZZ_SIGNAL_FOR_RANG_OUTPUT_LED_DF_REG + NUMBER_TZNP_SIGNAL_FOR_RANG_OUTPUT_LED_DF_REG + NUMBER_APV_SIGNAL_FOR_RANG_OUTPUT_LED_DF_REG + NUMBER_ACHR_CHAPV_SIGNAL_FOR_RANG_OUTPUT_LED_DF_REG  + NUMBER_UROV_SIGNAL_FOR_RANG_OUTPUT_LED_DF_REG + NUMBER_ZOP_SIGNAL_FOR_RANG_OUTPUT_LED_DF_REG + NUMBER_UMIN_SIGNAL_FOR_RANG_OUTPUT_LED_DF_REG - 1)
+       (NUMBER_GENERAL_SIGNAL_FOR_RANG_OUTPUT_LED_DF_REG + NUMBER_MTZ_SIGNAL_FOR_RANG_OUTPUT_LED_DF_REG + NUMBER_MTZ04_SIGNAL_FOR_RANG_OUTPUT_LED_DF_REG + NUMBER_ZDZ_SIGNAL_FOR_RANG_OUTPUT_LED_DF_REG + NUMBER_ZZ_SIGNAL_FOR_RANG_OUTPUT_LED_DF_REG + NUMBER_TZNP_SIGNAL_FOR_RANG_OUTPUT_LED_DF_REG + NUMBER_APV_SIGNAL_FOR_RANG_OUTPUT_LED_DF_REG + NUMBER_ACHR_CHAPV_SIGNAL_FOR_RANG_OUTPUT_LED_DF_REG  + NUMBER_UROV_SIGNAL_FOR_RANG_OUTPUT_LED_DF_REG + NUMBER_ZOP_SIGNAL_FOR_RANG_OUTPUT_LED_DF_REG),
+       (NUMBER_GENERAL_SIGNAL_FOR_RANG_OUTPUT_LED_DF_REG + NUMBER_MTZ_SIGNAL_FOR_RANG_OUTPUT_LED_DF_REG + NUMBER_MTZ04_SIGNAL_FOR_RANG_OUTPUT_LED_DF_REG + NUMBER_ZDZ_SIGNAL_FOR_RANG_OUTPUT_LED_DF_REG + NUMBER_ZZ_SIGNAL_FOR_RANG_OUTPUT_LED_DF_REG + NUMBER_TZNP_SIGNAL_FOR_RANG_OUTPUT_LED_DF_REG + NUMBER_APV_SIGNAL_FOR_RANG_OUTPUT_LED_DF_REG + NUMBER_ACHR_CHAPV_SIGNAL_FOR_RANG_OUTPUT_LED_DF_REG  + NUMBER_UROV_SIGNAL_FOR_RANG_OUTPUT_LED_DF_REG + NUMBER_ZOP_SIGNAL_FOR_RANG_OUTPUT_LED_DF_REG + NUMBER_UMIN_SIGNAL_FOR_RANG_OUTPUT_LED_DF_REG - 1)
       },
       {
-       (NUMBER_GENERAL_SIGNAL_FOR_RANG_OUTPUT_LED_DF_REG + NUMBER_MTZ_SIGNAL_FOR_RANG_OUTPUT_LED_DF_REG + NUMBER_ZDZ_SIGNAL_FOR_RANG_OUTPUT_LED_DF_REG + NUMBER_ZZ_SIGNAL_FOR_RANG_OUTPUT_LED_DF_REG + NUMBER_TZNP_SIGNAL_FOR_RANG_OUTPUT_LED_DF_REG + NUMBER_APV_SIGNAL_FOR_RANG_OUTPUT_LED_DF_REG + NUMBER_ACHR_CHAPV_SIGNAL_FOR_RANG_OUTPUT_LED_DF_REG  + NUMBER_UROV_SIGNAL_FOR_RANG_OUTPUT_LED_DF_REG + NUMBER_ZOP_SIGNAL_FOR_RANG_OUTPUT_LED_DF_REG + NUMBER_UMIN_SIGNAL_FOR_RANG_OUTPUT_LED_DF_REG),
-       (NUMBER_GENERAL_SIGNAL_FOR_RANG_OUTPUT_LED_DF_REG + NUMBER_MTZ_SIGNAL_FOR_RANG_OUTPUT_LED_DF_REG + NUMBER_ZDZ_SIGNAL_FOR_RANG_OUTPUT_LED_DF_REG + NUMBER_ZZ_SIGNAL_FOR_RANG_OUTPUT_LED_DF_REG + NUMBER_TZNP_SIGNAL_FOR_RANG_OUTPUT_LED_DF_REG + NUMBER_APV_SIGNAL_FOR_RANG_OUTPUT_LED_DF_REG + NUMBER_ACHR_CHAPV_SIGNAL_FOR_RANG_OUTPUT_LED_DF_REG  + NUMBER_UROV_SIGNAL_FOR_RANG_OUTPUT_LED_DF_REG + NUMBER_ZOP_SIGNAL_FOR_RANG_OUTPUT_LED_DF_REG + NUMBER_UMIN_SIGNAL_FOR_RANG_OUTPUT_LED_DF_REG + NUMBER_UMAX_SIGNAL_FOR_RANG_OUTPUT_LED_DF_REG - 1)
+       (NUMBER_GENERAL_SIGNAL_FOR_RANG_OUTPUT_LED_DF_REG + NUMBER_MTZ_SIGNAL_FOR_RANG_OUTPUT_LED_DF_REG + NUMBER_MTZ04_SIGNAL_FOR_RANG_OUTPUT_LED_DF_REG + NUMBER_ZDZ_SIGNAL_FOR_RANG_OUTPUT_LED_DF_REG + NUMBER_ZZ_SIGNAL_FOR_RANG_OUTPUT_LED_DF_REG + NUMBER_TZNP_SIGNAL_FOR_RANG_OUTPUT_LED_DF_REG + NUMBER_APV_SIGNAL_FOR_RANG_OUTPUT_LED_DF_REG + NUMBER_ACHR_CHAPV_SIGNAL_FOR_RANG_OUTPUT_LED_DF_REG  + NUMBER_UROV_SIGNAL_FOR_RANG_OUTPUT_LED_DF_REG + NUMBER_ZOP_SIGNAL_FOR_RANG_OUTPUT_LED_DF_REG + NUMBER_UMIN_SIGNAL_FOR_RANG_OUTPUT_LED_DF_REG),
+       (NUMBER_GENERAL_SIGNAL_FOR_RANG_OUTPUT_LED_DF_REG + NUMBER_MTZ_SIGNAL_FOR_RANG_OUTPUT_LED_DF_REG + NUMBER_MTZ04_SIGNAL_FOR_RANG_OUTPUT_LED_DF_REG + NUMBER_ZDZ_SIGNAL_FOR_RANG_OUTPUT_LED_DF_REG + NUMBER_ZZ_SIGNAL_FOR_RANG_OUTPUT_LED_DF_REG + NUMBER_TZNP_SIGNAL_FOR_RANG_OUTPUT_LED_DF_REG + NUMBER_APV_SIGNAL_FOR_RANG_OUTPUT_LED_DF_REG + NUMBER_ACHR_CHAPV_SIGNAL_FOR_RANG_OUTPUT_LED_DF_REG  + NUMBER_UROV_SIGNAL_FOR_RANG_OUTPUT_LED_DF_REG + NUMBER_ZOP_SIGNAL_FOR_RANG_OUTPUT_LED_DF_REG + NUMBER_UMIN_SIGNAL_FOR_RANG_OUTPUT_LED_DF_REG + NUMBER_UMAX_SIGNAL_FOR_RANG_OUTPUT_LED_DF_REG - 1)
       },
       {-1,-1}
     };
@@ -2887,6 +2890,7 @@ void check_current_index_is_presented_in_configuration(
                                                                   int plus_minus,
                                                                   int number_general_function,
                                                                   int number_mtz_function,
+                                                                  int number_mtz04_function,
                                                                   int number_zdz_function,
                                                                   int number_zz_function,
                                                                   int number_tznp_function,
@@ -2909,55 +2913,60 @@ void check_current_index_is_presented_in_configuration(
         if ((current_settings.configuration & (1<<MTZ_BIT_CONFIGURATION)) != 0) *found_new_index_tmp = 1;
         else current_ekran.index_position = number_general_function + number_mtz_function;
       }
-      else if (current_ekran.index_position < (number_general_function + number_mtz_function + number_zdz_function))
+      else if (current_ekran.index_position < (number_general_function + number_mtz04_function))
+      {
+        if ((current_settings.configuration & (1<<MTZ04_BIT_CONFIGURATION)) != 0) *found_new_index_tmp = 1;
+        else current_ekran.index_position = number_general_function + number_mtz04_function;
+      }
+      else if (current_ekran.index_position < (number_general_function + number_mtz_function + number_mtz04_function + number_zdz_function))
       {
         if ((current_settings.configuration & (1<<ZDZ_BIT_CONFIGURATION)) != 0) *found_new_index_tmp = 1;
-        else current_ekran.index_position = number_general_function + number_mtz_function + number_zdz_function;
+        else current_ekran.index_position = number_general_function + number_mtz_function + number_mtz04_function + number_zdz_function;
       }
-      else if (current_ekran.index_position < (number_general_function + number_mtz_function + number_zdz_function + number_zz_function))
+      else if (current_ekran.index_position < (number_general_function + number_mtz_function + number_mtz04_function + number_zdz_function + number_zz_function))
       {
         if ((current_settings.configuration & (1<<ZZ_BIT_CONFIGURATION)) != 0) *found_new_index_tmp = 1;
-        else current_ekran.index_position = number_general_function + number_mtz_function + number_zdz_function + number_zz_function;
+        else current_ekran.index_position = number_general_function + number_mtz_function + number_mtz04_function + number_zdz_function + number_zz_function;
       }
-      else if (current_ekran.index_position < (number_general_function + number_mtz_function + number_zdz_function + number_zz_function + number_tznp_function))
+      else if (current_ekran.index_position < (number_general_function + number_mtz_function + number_mtz04_function + number_zdz_function + number_zz_function + number_tznp_function))
       {
         if ((current_settings.configuration & (1<<TZNP_BIT_CONFIGURATION)) != 0) *found_new_index_tmp = 1;
-        else current_ekran.index_position = number_general_function + number_mtz_function + number_zdz_function + number_zz_function + number_tznp_function;
+        else current_ekran.index_position = number_general_function + number_mtz_function + number_mtz04_function + number_zdz_function + number_zz_function + number_tznp_function;
       }
-      else if (current_ekran.index_position < (number_general_function + number_mtz_function + number_zdz_function + number_zz_function + number_tznp_function + number_apv_function))
+      else if (current_ekran.index_position < (number_general_function + number_mtz_function + number_mtz04_function + number_zdz_function + number_zz_function + number_tznp_function + number_apv_function))
       {
         if ((current_settings.configuration & (1<<APV_BIT_CONFIGURATION)) != 0) *found_new_index_tmp = 1;
-        else current_ekran.index_position = number_general_function + number_mtz_function + number_zdz_function + number_zz_function + number_tznp_function + number_apv_function;
+        else current_ekran.index_position = number_general_function + number_mtz_function + number_mtz04_function + number_zdz_function + number_zz_function + number_tznp_function + number_apv_function;
       }
-      else if (current_ekran.index_position < (number_general_function + number_mtz_function + number_zdz_function + number_zz_function + number_tznp_function + number_apv_function + number_achr_chapv_function))
+      else if (current_ekran.index_position < (number_general_function + number_mtz_function + number_mtz04_function + number_zdz_function + number_zz_function + number_tznp_function + number_apv_function + number_achr_chapv_function))
       {
         if ((current_settings.configuration & (1<<ACHR_CHAPV_BIT_CONFIGURATION)) != 0) *found_new_index_tmp = 1;
-        else current_ekran.index_position = number_general_function + number_mtz_function + number_zdz_function + number_zz_function + number_tznp_function + number_apv_function + number_achr_chapv_function;
+        else current_ekran.index_position = number_general_function + number_mtz_function + number_mtz04_function + number_zdz_function + number_zz_function + number_tznp_function + number_apv_function + number_achr_chapv_function;
       }
-      else if (current_ekran.index_position < (number_general_function + number_mtz_function + number_zdz_function + number_zz_function + number_tznp_function + number_apv_function + number_achr_chapv_function + number_urov_function))
+      else if (current_ekran.index_position < (number_general_function + number_mtz_function + number_mtz04_function + number_zdz_function + number_zz_function + number_tznp_function + number_apv_function + number_achr_chapv_function + number_urov_function))
       {
         if ((current_settings.configuration & (1<<UROV_BIT_CONFIGURATION)) != 0) *found_new_index_tmp = 1;
-        else current_ekran.index_position = number_general_function + number_mtz_function + number_zdz_function + number_zz_function + number_tznp_function + number_apv_function + number_achr_chapv_function + number_urov_function;
+        else current_ekran.index_position = number_general_function + number_mtz_function + number_mtz04_function + number_zdz_function + number_zz_function + number_tznp_function + number_apv_function + number_achr_chapv_function + number_urov_function;
       }
-      else if (current_ekran.index_position < (number_general_function + number_mtz_function + number_zdz_function + number_zz_function + number_tznp_function + number_apv_function + number_achr_chapv_function + number_urov_function + number_zop_function))
+      else if (current_ekran.index_position < (number_general_function + number_mtz_function + number_mtz04_function + number_zdz_function + number_zz_function + number_tznp_function + number_apv_function + number_achr_chapv_function + number_urov_function + number_zop_function))
       {
         if ((current_settings.configuration & (1<<ZOP_BIT_CONFIGURATION)) != 0) *found_new_index_tmp = 1;
-        else current_ekran.index_position = number_general_function + number_mtz_function + number_zdz_function + number_zz_function + number_tznp_function + number_apv_function + number_achr_chapv_function + number_urov_function + number_zop_function;
+        else current_ekran.index_position = number_general_function + number_mtz_function + number_mtz04_function + number_zdz_function + number_zz_function + number_tznp_function + number_apv_function + number_achr_chapv_function + number_urov_function + number_zop_function;
       }
-      else if (current_ekran.index_position < (number_general_function + number_mtz_function + number_zdz_function + number_zz_function + number_tznp_function + number_apv_function + number_achr_chapv_function + number_urov_function + number_zop_function + number_Umin_function))
+      else if (current_ekran.index_position < (number_general_function + number_mtz_function + number_mtz04_function + number_zdz_function + number_zz_function + number_tznp_function + number_apv_function + number_achr_chapv_function + number_urov_function + number_zop_function + number_Umin_function))
       {
         if ((current_settings.configuration & (1<<UMIN_BIT_CONFIGURATION)) != 0) *found_new_index_tmp = 1;
-        else current_ekran.index_position = number_general_function + number_mtz_function + number_zdz_function + number_zz_function + number_tznp_function + number_apv_function + number_achr_chapv_function + number_urov_function + number_zop_function + number_Umin_function;
+        else current_ekran.index_position = number_general_function + number_mtz_function + number_mtz04_function + number_zdz_function + number_zz_function + number_tznp_function + number_apv_function + number_achr_chapv_function + number_urov_function + number_zop_function + number_Umin_function;
       }
-      else if (current_ekran.index_position < (number_general_function + number_mtz_function + number_zdz_function + number_zz_function + number_tznp_function + number_apv_function + number_achr_chapv_function + number_urov_function + number_zop_function + number_Umin_function + number_Umax_function))
+      else if (current_ekran.index_position < (number_general_function + number_mtz_function + number_mtz04_function + number_zdz_function + number_zz_function + number_tznp_function + number_apv_function + number_achr_chapv_function + number_urov_function + number_zop_function + number_Umin_function + number_Umax_function))
       {
         if ((current_settings.configuration & (1<<UMAX_BIT_CONFIGURATION)) != 0) *found_new_index_tmp = 1;
-        else current_ekran.index_position = number_general_function + number_mtz_function + number_zdz_function + number_zz_function + number_tznp_function + number_apv_function + number_achr_chapv_function + number_urov_function + number_zop_function + number_Umin_function + number_Umax_function;
+        else current_ekran.index_position = number_general_function + number_mtz_function + number_mtz04_function + number_zdz_function + number_zz_function + number_tznp_function + number_apv_function + number_achr_chapv_function + number_urov_function + number_zop_function + number_Umin_function + number_Umax_function;
       }
-      else if (current_ekran.index_position < (number_general_function + number_mtz_function + number_zdz_function + number_zz_function + number_tznp_function + number_apv_function + number_achr_chapv_function + number_urov_function + number_zop_function + number_Umin_function + number_Umax_function + number_vmp_function))
+      else if (current_ekran.index_position < (number_general_function + number_mtz_function + number_mtz04_function + number_zdz_function + number_zz_function + number_tznp_function + number_apv_function + number_achr_chapv_function + number_urov_function + number_zop_function + number_Umin_function + number_Umax_function + number_vmp_function))
       {
         if ((current_settings.configuration & (1<<VMP_BIT_CONFIGURATION)) != 0) *found_new_index_tmp = 1;
-        else current_ekran.index_position = number_general_function + number_mtz_function + number_zdz_function + number_zz_function + number_tznp_function + number_apv_function + number_achr_chapv_function + number_urov_function + number_zop_function + number_Umin_function + number_Umax_function + number_vmp_function;
+        else current_ekran.index_position = number_general_function + number_mtz_function + number_mtz04_function + number_zdz_function + number_zz_function + number_tznp_function + number_apv_function + number_achr_chapv_function + number_urov_function + number_zop_function + number_Umin_function + number_Umax_function + number_vmp_function;
       }
     }
 
@@ -2988,55 +2997,60 @@ void check_current_index_is_presented_in_configuration(
         if ((current_settings.configuration & (1<<MTZ_BIT_CONFIGURATION)) != 0) *found_new_index_tmp = 1;
         else current_ekran.index_position = number_general_function - 1;
       }
-      else if (current_ekran.index_position < (number_general_function + number_mtz_function + number_zdz_function))
+      else if (current_ekran.index_position < (number_general_function + number_mtz_function + number_mtz04_function))
       {
-        if ((current_settings.configuration & (1<<ZDZ_BIT_CONFIGURATION)) != 0) *found_new_index_tmp = 1;
+        if ((current_settings.configuration & (1<<MTZ04_BIT_CONFIGURATION)) != 0) *found_new_index_tmp = 1;
         else current_ekran.index_position = number_general_function + number_mtz_function - 1;
       }
-      else if (current_ekran.index_position < (number_general_function + number_mtz_function + number_zdz_function + number_zz_function))
+      else if (current_ekran.index_position < (number_general_function + number_mtz_function + number_mtz04_function + number_zdz_function))
+      {
+        if ((current_settings.configuration & (1<<ZDZ_BIT_CONFIGURATION)) != 0) *found_new_index_tmp = 1;
+        else current_ekran.index_position = number_general_function + number_mtz_function + number_mtz04_function - 1;
+      }
+      else if (current_ekran.index_position < (number_general_function + number_mtz_function + number_mtz04_function + number_zdz_function + number_zz_function))
       {
         if ((current_settings.configuration & (1<<ZZ_BIT_CONFIGURATION)) != 0) *found_new_index_tmp = 1;
-        else current_ekran.index_position = number_general_function + number_mtz_function + number_zdz_function - 1;
+        else current_ekran.index_position = number_general_function + number_mtz_function + number_mtz04_function + number_zdz_function - 1;
       }
-      else if (current_ekran.index_position < (number_general_function + number_mtz_function + number_zdz_function + number_zz_function + number_tznp_function))
+      else if (current_ekran.index_position < (number_general_function + number_mtz_function + number_mtz04_function + number_zdz_function + number_zz_function + number_tznp_function))
       {
         if ((current_settings.configuration & (1<<TZNP_BIT_CONFIGURATION)) != 0) *found_new_index_tmp = 1;
-        else current_ekran.index_position = number_general_function + number_mtz_function + number_zdz_function + number_zz_function - 1;
+        else current_ekran.index_position = number_general_function + number_mtz_function + number_mtz04_function + number_zdz_function + number_zz_function - 1;
       }
-      else if (current_ekran.index_position < (number_general_function + number_mtz_function + number_zdz_function + number_zz_function + number_tznp_function + number_apv_function))
+      else if (current_ekran.index_position < (number_general_function + number_mtz_function + number_mtz04_function + number_zdz_function + number_zz_function + number_tznp_function + number_apv_function))
       {
         if ((current_settings.configuration & (1<<APV_BIT_CONFIGURATION)) != 0) *found_new_index_tmp = 1;
-        else current_ekran.index_position = number_general_function + number_mtz_function + number_zdz_function + number_zz_function + number_tznp_function - 1;
+        else current_ekran.index_position = number_general_function + number_mtz_function + number_mtz04_function + number_zdz_function + number_zz_function + number_tznp_function - 1;
       }
-      else if (current_ekran.index_position < (number_general_function + number_mtz_function + number_zdz_function + number_zz_function + number_tznp_function + number_apv_function + number_achr_chapv_function))
+      else if (current_ekran.index_position < (number_general_function + number_mtz_function + number_mtz04_function + number_zdz_function + number_zz_function + number_tznp_function + number_apv_function + number_achr_chapv_function))
       {
         if ((current_settings.configuration & (1<<ACHR_CHAPV_BIT_CONFIGURATION)) != 0) *found_new_index_tmp = 1;
-        else current_ekran.index_position = number_general_function + number_mtz_function + number_zdz_function + number_zz_function + number_tznp_function + number_apv_function + - 1;
+        else current_ekran.index_position = number_general_function + number_mtz_function + number_mtz04_function + number_zdz_function + number_zz_function + number_tznp_function + number_apv_function + - 1;
       }
-      else if (current_ekran.index_position < (number_general_function + number_mtz_function + number_zdz_function + number_zz_function + number_tznp_function + number_apv_function + number_achr_chapv_function + number_urov_function))
+      else if (current_ekran.index_position < (number_general_function + number_mtz_function + number_mtz04_function + number_zdz_function + number_zz_function + number_tznp_function + number_apv_function + number_achr_chapv_function + number_urov_function))
       {
         if ((current_settings.configuration & (1<<UROV_BIT_CONFIGURATION)) != 0) *found_new_index_tmp = 1;
-        else current_ekran.index_position = number_general_function + number_mtz_function + number_zdz_function + number_zz_function + number_tznp_function + number_apv_function + number_achr_chapv_function - 1;
+        else current_ekran.index_position = number_general_function + number_mtz_function + number_mtz04_function + number_zdz_function + number_zz_function + number_tznp_function + number_apv_function + number_achr_chapv_function - 1;
       }
-      else if (current_ekran.index_position < (number_general_function + number_mtz_function + number_zdz_function + number_zz_function + number_tznp_function + number_apv_function + number_achr_chapv_function + number_urov_function + number_zop_function))
+      else if (current_ekran.index_position < (number_general_function + number_mtz_function + number_mtz04_function + number_zdz_function + number_zz_function + number_tznp_function + number_apv_function + number_achr_chapv_function + number_urov_function + number_zop_function))
       {
         if ((current_settings.configuration & (1<<ZOP_BIT_CONFIGURATION)) != 0) *found_new_index_tmp = 1;
-        else current_ekran.index_position = number_general_function + number_mtz_function + number_zdz_function + number_zz_function + number_tznp_function + number_apv_function + number_achr_chapv_function + number_urov_function - 1;
+        else current_ekran.index_position = number_general_function + number_mtz_function + number_mtz04_function + number_zdz_function + number_zz_function + number_tznp_function + number_apv_function + number_achr_chapv_function + number_urov_function - 1;
       }
-      else if (current_ekran.index_position < (number_general_function + number_mtz_function + number_zdz_function + number_zz_function + number_tznp_function + number_apv_function + number_achr_chapv_function + number_urov_function + number_zop_function + number_Umin_function))
+      else if (current_ekran.index_position < (number_general_function + number_mtz_function + number_mtz04_function + number_zdz_function + number_zz_function + number_tznp_function + number_apv_function + number_achr_chapv_function + number_urov_function + number_zop_function + number_Umin_function))
       {
         if ((current_settings.configuration & (1<<UMIN_BIT_CONFIGURATION)) != 0) *found_new_index_tmp = 1;
-        else current_ekran.index_position = number_general_function + number_mtz_function + number_zdz_function + number_zz_function + number_tznp_function + number_apv_function + number_achr_chapv_function + number_urov_function + number_zop_function - 1;
+        else current_ekran.index_position = number_general_function + number_mtz_function + number_mtz04_function + number_zdz_function + number_zz_function + number_tznp_function + number_apv_function + number_achr_chapv_function + number_urov_function + number_zop_function - 1;
       }
-      else if (current_ekran.index_position < (number_general_function + number_mtz_function + number_zdz_function + number_zz_function + number_tznp_function + number_apv_function + number_achr_chapv_function + number_urov_function + number_zop_function + number_Umin_function + number_Umax_function))
+      else if (current_ekran.index_position < (number_general_function + number_mtz_function + number_mtz04_function + number_zdz_function + number_zz_function + number_tznp_function + number_apv_function + number_achr_chapv_function + number_urov_function + number_zop_function + number_Umin_function + number_Umax_function))
       {
         if ((current_settings.configuration & (1<<UMAX_BIT_CONFIGURATION)) != 0) *found_new_index_tmp = 1;
-        else current_ekran.index_position = number_general_function + number_mtz_function + number_zdz_function + number_zz_function + number_tznp_function + number_apv_function + number_achr_chapv_function + number_urov_function + number_zop_function + number_Umin_function - 1;
+        else current_ekran.index_position = number_general_function + number_mtz_function + number_mtz04_function + number_zdz_function + number_zz_function + number_tznp_function + number_apv_function + number_achr_chapv_function + number_urov_function + number_zop_function + number_Umin_function - 1;
       }
-      else if (current_ekran.index_position < (number_general_function + number_mtz_function + number_zdz_function + number_zz_function + number_tznp_function + number_apv_function + number_achr_chapv_function + number_urov_function + number_zop_function + number_Umin_function + number_Umax_function + number_vmp_function))
+      else if (current_ekran.index_position < (number_general_function + number_mtz_function + number_mtz04_function + number_zdz_function + number_zz_function + number_tznp_function + number_apv_function + number_achr_chapv_function + number_urov_function + number_zop_function + number_Umin_function + number_Umax_function + number_vmp_function))
       {
         if ((current_settings.configuration & (1<<VMP_BIT_CONFIGURATION)) != 0) *found_new_index_tmp = 1;
-        else current_ekran.index_position = number_general_function + number_mtz_function + number_zdz_function + number_zz_function + number_tznp_function + number_apv_function + number_achr_chapv_function + number_urov_function + number_zop_function + number_Umin_function + number_Umax_function - 1;
+        else current_ekran.index_position = number_general_function + number_mtz_function + number_mtz04_function + number_zdz_function + number_zz_function + number_tznp_function + number_apv_function + number_achr_chapv_function + number_urov_function + number_zop_function + number_Umin_function + number_Umax_function - 1;
       }
     }
 

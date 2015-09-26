@@ -11,6 +11,7 @@ void make_ekran_configuration(unsigned int configuration_edit_temp)
   {
     {
      "МТЗ       ",
+     "МТЗ 0.4кВ ",
      "ЗДЗ       ",
      "          ",
      "ТЗНП      ",
@@ -24,6 +25,7 @@ void make_ekran_configuration(unsigned int configuration_edit_temp)
     },
     {
      "МСЗ       ",
+     "МСЗ 0.4кВ ",
      "ЗДЗ       ",
      "          ",
      "СЗНП      ",
@@ -37,6 +39,7 @@ void make_ekran_configuration(unsigned int configuration_edit_temp)
     },
     {
      "OCP       ",
+     "OCP 0.4kV ",
      "ЗДЗ       ",
      "          ",
      "ТЗНП      ",
@@ -50,6 +53,7 @@ void make_ekran_configuration(unsigned int configuration_edit_temp)
     },
     {
      "МТK       ",
+     "МТK 0.4кВ ",
      "ЗДЗ       ",
      "          ",
      "ТЗНП      ",
@@ -99,9 +103,6 @@ void make_ekran_configuration(unsigned int configuration_edit_temp)
       name_string_tmp[index_1][index_2] = *(point_target + index_2);
   }
   
-  unsigned int position_temp = current_ekran.index_position;
-  unsigned int index_of_ekran;
-  
   /*******************************************************/
   //Формуємо значення
   /*******************************************************/
@@ -127,13 +128,42 @@ void make_ekran_configuration(unsigned int configuration_edit_temp)
   }
   /*******************************************************/
     
+  int additional_current = 0;
+  int position_temp = current_ekran.index_position;
+  int index_of_ekran;
+  /******************************************/
+  //Виключаємо, які вимірювання не треба відображати
+  /******************************************/
+  {
+    int delete_index;
+    if ((current_settings.control_extra_settings_1 & CTR_EXTRA_SETTINGS_1_CTRL_IB_I04) == 0)
+      delete_index = MTZ04_BIT_CONFIGURATION;
+    else
+      delete_index = TZNP_BIT_CONFIGURATION;
+    
+    int i = delete_index - additional_current;
+    if ((i+1) <= position_temp) position_temp--;
+    do
+    {
+      for(unsigned int j = 0; j < MAX_COL_LCD; j++)
+      {
+        if ((i + 1) < (MAX_ROW_FOR_EKRAN_CONFIGURATION - additional_current)) name_string_tmp[i][j] = name_string_tmp[i + 1][j];
+        else name_string_tmp[i][j] = ' ';
+      }
+      i++;
+    }
+    while (i< (MAX_ROW_FOR_EKRAN_CONFIGURATION - additional_current));
+    additional_current++;
+  }
+  /******************************************/
+
   index_of_ekran = (position_temp >> POWER_MAX_ROW_LCD) << POWER_MAX_ROW_LCD;
   
   //Копіюємо  рядки у робочий екран
   for (unsigned int i=0; i< MAX_ROW_LCD; i++)
   {
     //Наступні рядки треба перевірити, чи їх требе відображати у текучій коффігурації
-    if (index_of_ekran < MAX_ROW_FOR_EKRAN_CONFIGURATION)
+    if (index_of_ekran < (MAX_ROW_FOR_EKRAN_CONFIGURATION - additional_current))
       for (unsigned int j = 0; j<MAX_COL_LCD; j++) working_ekran[i][j] = name_string_tmp[index_of_ekran][j];
     else
       for (unsigned int j = 0; j<MAX_COL_LCD; j++) working_ekran[i][j] = ' ';

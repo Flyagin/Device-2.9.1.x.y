@@ -540,6 +540,8 @@ void main_manu_function(void)
                 
               if ((current_ekran.index_position == INDEX_ML1_MTZ) && ((current_settings.configuration & (1<<MTZ_BIT_CONFIGURATION)) == 0))
                 current_ekran.index_position++;
+              if ((current_ekran.index_position == INDEX_ML1_MTZ04) && ((current_settings.configuration & (1<<MTZ04_BIT_CONFIGURATION)) == 0))
+                current_ekran.index_position++;
               if ((current_ekran.index_position == INDEX_ML1_ZDZ) && ((current_settings.configuration & (1<<ZDZ_BIT_CONFIGURATION)) == 0))
                 current_ekran.index_position++;
               if ((current_ekran.index_position == INDEX_ML1_NZZ) && ((current_settings.configuration & (1<<ZZ_BIT_CONFIGURATION)) == 0))
@@ -760,6 +762,8 @@ void main_manu_function(void)
                   current_ekran.index_position--;
                 if ((current_ekran.index_position == INDEX_ML1_ZDZ) && ((current_settings.configuration & (1<<ZDZ_BIT_CONFIGURATION)) == 0))
                   current_ekran.index_position--;
+                if ((current_ekran.index_position == INDEX_ML1_MTZ04) && ((current_settings.configuration & (1<<MTZ04_BIT_CONFIGURATION)) == 0))
+                  current_ekran.index_position--;
                 if ((current_ekran.index_position == INDEX_ML1_MTZ) && ((current_settings.configuration & (1<<MTZ_BIT_CONFIGURATION)) == 0))
                   current_ekran.index_position--;
               }
@@ -782,6 +786,8 @@ void main_manu_function(void)
                 
 
                 if ((current_ekran.index_position == INDEX_ML1_MTZ) && ((current_settings.configuration & (1<<MTZ_BIT_CONFIGURATION)) == 0))
+                  current_ekran.index_position++;
+                if ((current_ekran.index_position == INDEX_ML1_MTZ04) && ((current_settings.configuration & (1<<MTZ04_BIT_CONFIGURATION)) == 0))
                   current_ekran.index_position++;
                 if ((current_ekran.index_position == INDEX_ML1_ZDZ) && ((current_settings.configuration & (1<<ZDZ_BIT_CONFIGURATION)) == 0))
                   current_ekran.index_position++;
@@ -1212,8 +1218,24 @@ void main_manu_function(void)
           if((new_state_keyboard & (1<<BIT_REWRITE)) !=0)
           {
             if(current_ekran.index_position >= MAX_ROW_FOR_EKRAN_CONFIGURATION) current_ekran.index_position = 0;
+            while(
+                  (
+                   ((current_settings.control_extra_settings_1 & CTR_EXTRA_SETTINGS_1_CTRL_IB_I04) == 0)
+                   &&
+                   (current_ekran.index_position == MTZ04_BIT_CONFIGURATION)
+                  )
+                  ||
+                  (
+                   ((current_settings.control_extra_settings_1 & CTR_EXTRA_SETTINGS_1_CTRL_IB_I04) != 0)
+                   &&
+                   (current_ekran.index_position == TZNP_BIT_CONFIGURATION)
+                  )   
+                 )
+            {
+              if(++current_ekran.index_position >= MAX_ROW_FOR_EKRAN_CONFIGURATION) current_ekran.index_position = 0;
+            }
+
             position_in_current_level_menu[EKRAN_COFIGURATION] = current_ekran.index_position;
-            
             //Формуємо екран конфігурації
             make_ekran_configuration(configuration_edit);
             //Очищаємо біт обновлення екрану
@@ -1307,8 +1329,24 @@ void main_manu_function(void)
               //Натиснута кнопка UP
 
               if(--current_ekran.index_position < 0 ) current_ekran.index_position = MAX_ROW_FOR_EKRAN_CONFIGURATION - 1;
-              position_in_current_level_menu[EKRAN_COFIGURATION] = current_ekran.index_position;
+              while(
+                    (
+                     ((current_settings.control_extra_settings_1 & CTR_EXTRA_SETTINGS_1_CTRL_IB_I04) == 0)
+                     &&
+                     (current_ekran.index_position == MTZ04_BIT_CONFIGURATION)
+                    )
+                    ||
+                    (
+                     ((current_settings.control_extra_settings_1 & CTR_EXTRA_SETTINGS_1_CTRL_IB_I04) != 0)
+                     &&
+                     (current_ekran.index_position == TZNP_BIT_CONFIGURATION)
+                    )   
+                   )
+              {
+                if(--current_ekran.index_position < 0 ) current_ekran.index_position = MAX_ROW_FOR_EKRAN_CONFIGURATION - 1;
+              }
 
+              position_in_current_level_menu[EKRAN_COFIGURATION] = current_ekran.index_position;
               //Формуємо екран конфігурації
               make_ekran_configuration(configuration_edit);
               //Очистити сигналізацію, що натиснута кнопка 
@@ -1319,8 +1357,24 @@ void main_manu_function(void)
               //Натиснута кнопка DOWN
 
               if(++current_ekran.index_position >= MAX_ROW_FOR_EKRAN_CONFIGURATION) current_ekran.index_position = 0;
-              position_in_current_level_menu[EKRAN_COFIGURATION] = current_ekran.index_position;
+              while(
+                    (
+                     ((current_settings.control_extra_settings_1 & CTR_EXTRA_SETTINGS_1_CTRL_IB_I04) == 0)
+                     &&
+                     (current_ekran.index_position == MTZ04_BIT_CONFIGURATION)
+                    )
+                    ||
+                    (
+                     ((current_settings.control_extra_settings_1 & CTR_EXTRA_SETTINGS_1_CTRL_IB_I04) != 0)
+                     &&
+                     (current_ekran.index_position == TZNP_BIT_CONFIGURATION)
+                    )   
+                   )
+              {
+                if(++current_ekran.index_position >= MAX_ROW_FOR_EKRAN_CONFIGURATION) current_ekran.index_position = 0;
+              }
 
+              position_in_current_level_menu[EKRAN_COFIGURATION] = current_ekran.index_position;
               //Формуємо екран конфігурації
               make_ekran_configuration(configuration_edit);
               //Очистити сигналізацію, що натиснута кнопка 
@@ -9538,6 +9592,8 @@ void main_manu_function(void)
                       changed_settings = CHANGED_ETAP_EXECUTION;
                         
                       current_settings.control_extra_settings_1 = edition_settings.control_extra_settings_1;
+                      //Обновляємо значення
+                      action_after_changing_Ib_I04(&current_settings);
                       
                       //Формуємо запис у таблиці настройок про зміну конфігурації і ініціюємо запис у EEPROM нових настройок
                       fix_change_settings(0, 1);
@@ -14839,6 +14895,7 @@ void main_manu_function(void)
                                                                      1,
                                                                      NUMBER_GENERAL_SIGNAL_FOR_RANG_INPUT,
                                                                      NUMBER_MTZ_SIGNAL_FOR_RANG_INPUT,
+                                                                     NUMBER_MTZ04_SIGNAL_FOR_RANG_INPUT,
                                                                      NUMBER_ZDZ_SIGNAL_FOR_RANG_INPUT,
                                                                      NUMBER_ZZ_SIGNAL_FOR_RANG_INPUT,
                                                                      NUMBER_TZNP_SIGNAL_FOR_RANG_INPUT,
@@ -14894,6 +14951,7 @@ void main_manu_function(void)
                                                                      1,
                                                                      NUMBER_GENERAL_SIGNAL_FOR_RANG_BUTTON,
                                                                      NUMBER_MTZ_SIGNAL_FOR_RANG_BUTTON,
+                                                                     NUMBER_MTZ04_SIGNAL_FOR_RANG_BUTTON,
                                                                      NUMBER_ZDZ_SIGNAL_FOR_RANG_BUTTON,
                                                                      NUMBER_ZZ_SIGNAL_FOR_RANG_BUTTON,
                                                                      NUMBER_TZNP_SIGNAL_FOR_RANG_BUTTON,
@@ -15105,6 +15163,7 @@ void main_manu_function(void)
                                                                      1,
                                                                      NUMBER_GENERAL_SIGNAL_FOR_RANG_OUTPUT_LED_DF_REG,
                                                                      NUMBER_MTZ_SIGNAL_FOR_RANG_OUTPUT_LED_DF_REG,
+                                                                     NUMBER_MTZ04_SIGNAL_FOR_RANG_OUTPUT_LED_DF_REG,
                                                                      NUMBER_ZDZ_SIGNAL_FOR_RANG_OUTPUT_LED_DF_REG,
                                                                      NUMBER_ZZ_SIGNAL_FOR_RANG_OUTPUT_LED_DF_REG,
                                                                      NUMBER_TZNP_SIGNAL_FOR_RANG_OUTPUT_LED_DF_REG,
@@ -16072,6 +16131,7 @@ void main_manu_function(void)
                                                                        0,
                                                                        NUMBER_GENERAL_SIGNAL_FOR_RANG_INPUT,
                                                                        NUMBER_MTZ_SIGNAL_FOR_RANG_INPUT,
+                                                                       NUMBER_MTZ04_SIGNAL_FOR_RANG_INPUT,
                                                                        NUMBER_ZDZ_SIGNAL_FOR_RANG_INPUT,
                                                                        NUMBER_ZZ_SIGNAL_FOR_RANG_INPUT,
                                                                        NUMBER_TZNP_SIGNAL_FOR_RANG_INPUT,
@@ -16131,6 +16191,7 @@ void main_manu_function(void)
                                                                        0,
                                                                        NUMBER_GENERAL_SIGNAL_FOR_RANG_BUTTON,
                                                                        NUMBER_MTZ_SIGNAL_FOR_RANG_BUTTON,
+                                                                       NUMBER_MTZ04_SIGNAL_FOR_RANG_BUTTON,
                                                                        NUMBER_ZDZ_SIGNAL_FOR_RANG_BUTTON,
                                                                        NUMBER_ZZ_SIGNAL_FOR_RANG_BUTTON,
                                                                        NUMBER_TZNP_SIGNAL_FOR_RANG_BUTTON,
@@ -16346,6 +16407,7 @@ void main_manu_function(void)
                                                                        0,
                                                                        NUMBER_GENERAL_SIGNAL_FOR_RANG_OUTPUT_LED_DF_REG,
                                                                        NUMBER_MTZ_SIGNAL_FOR_RANG_OUTPUT_LED_DF_REG,
+                                                                       NUMBER_MTZ04_SIGNAL_FOR_RANG_OUTPUT_LED_DF_REG,
                                                                        NUMBER_ZDZ_SIGNAL_FOR_RANG_OUTPUT_LED_DF_REG,
                                                                        NUMBER_ZZ_SIGNAL_FOR_RANG_OUTPUT_LED_DF_REG,
                                                                        NUMBER_TZNP_SIGNAL_FOR_RANG_OUTPUT_LED_DF_REG,
@@ -16611,6 +16673,7 @@ void main_manu_function(void)
                                                                        1,
                                                                        NUMBER_GENERAL_SIGNAL_FOR_RANG_INPUT,
                                                                        NUMBER_MTZ_SIGNAL_FOR_RANG_INPUT,
+                                                                       NUMBER_MTZ04_SIGNAL_FOR_RANG_INPUT,
                                                                        NUMBER_ZDZ_SIGNAL_FOR_RANG_INPUT,
                                                                        NUMBER_ZZ_SIGNAL_FOR_RANG_INPUT,
                                                                        NUMBER_TZNP_SIGNAL_FOR_RANG_INPUT,
@@ -16670,6 +16733,7 @@ void main_manu_function(void)
                                                                        1,
                                                                        NUMBER_GENERAL_SIGNAL_FOR_RANG_BUTTON,
                                                                        NUMBER_MTZ_SIGNAL_FOR_RANG_BUTTON,
+                                                                       NUMBER_MTZ04_SIGNAL_FOR_RANG_BUTTON,
                                                                        NUMBER_ZDZ_SIGNAL_FOR_RANG_BUTTON,
                                                                        NUMBER_ZZ_SIGNAL_FOR_RANG_BUTTON,
                                                                        NUMBER_TZNP_SIGNAL_FOR_RANG_BUTTON,
@@ -16885,6 +16949,7 @@ void main_manu_function(void)
                                                                        1,
                                                                        NUMBER_GENERAL_SIGNAL_FOR_RANG_OUTPUT_LED_DF_REG,
                                                                        NUMBER_MTZ_SIGNAL_FOR_RANG_OUTPUT_LED_DF_REG,
+                                                                       NUMBER_MTZ04_SIGNAL_FOR_RANG_OUTPUT_LED_DF_REG,
                                                                        NUMBER_ZDZ_SIGNAL_FOR_RANG_OUTPUT_LED_DF_REG,
                                                                        NUMBER_ZZ_SIGNAL_FOR_RANG_OUTPUT_LED_DF_REG,
                                                                        NUMBER_TZNP_SIGNAL_FOR_RANG_OUTPUT_LED_DF_REG,
