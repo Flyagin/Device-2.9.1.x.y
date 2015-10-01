@@ -24,8 +24,8 @@ import javax.swing.border.CompoundBorder;
 import javax.swing.border.BevelBorder;
 import javax.swing.SwingUtilities;
 
-public  class PanelScenaMODBUS extends JPanel {
-  private static JButton startButton;
+  public  class PanelScenaMODBUS extends JPanel {
+  p  rivate static JButton startButton;
   private static JButton stopButton;
   
   private JButton turboButton;
