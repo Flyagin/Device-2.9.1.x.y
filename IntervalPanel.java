@@ -1,9 +1,9 @@
 
 import javax.swing.JPanel;
-import javax.swing.JSlider;
+  im  port javax.swing.JSlider;
 import javax.swing.JCheckBox;
 import javax.swing.JLabel;
-import javax.swing.ButtonGroup;
+import j  avax.swing.ButtonGroup;
 import javax.swing.JButton;
 
 import java.util.List;
