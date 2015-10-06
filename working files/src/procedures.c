@@ -38,27 +38,27 @@ unsigned int action_after_changing_of_configuration(unsigned int new_configurati
   //Перевірка МТЗ 0.4кВ
   if ((new_configuration & ( 1<< MTZ04_BIT_CONFIGURATION )) == 0)
   {
-//    if(
-//       (current_ekran.current_level == EKRAN_CHOOSE_SETTINGS_MTZ04)
-//       || 
-//       (
-//        (current_ekran.current_level >= EKRAN_CHOOSE_SETPOINT_TIMEOUT_GROUP1_MTZ04) &&
-//        (current_ekran.current_level <= EKRAN_CHOOSE_SETPOINT_TIMEOUT_GROUP4_MTZ04) 
-//       )  
-//       ||  
-//       (
-//        (current_ekran.current_level >= EKRAN_SETPOINT_MTZ04_GROUP1) &&
-//        (current_ekran.current_level <= EKRAN_SETPOINT_MTZ04_GROUP4)
-//       )
-//       ||  
-//       (
-//        (current_ekran.current_level >= EKRAN_TIMEOUT_MTZ04_GROUP1) &&
-//        (current_ekran.current_level <= EKRAN_TIMEOUT_MTZ04_GROUP4)
-//       )
-//       ||  
-//       (current_ekran.current_level == EKRAN_CONTROL_MTZ04)
-//      )
-//      error_window |= (1 << MTZ04_BIT_CONFIGURATION );
+    if(
+       (current_ekran.current_level == EKRAN_CHOOSE_SETTINGS_MTZ04)
+       || 
+       (
+        (current_ekran.current_level >= EKRAN_CHOOSE_SETPOINT_TIMEOUT_GROUP1_MTZ04) &&
+        (current_ekran.current_level <= EKRAN_CHOOSE_SETPOINT_TIMEOUT_GROUP4_MTZ04) 
+       )  
+       ||  
+       (
+        (current_ekran.current_level >= EKRAN_SETPOINT_MTZ04_GROUP1) &&
+        (current_ekran.current_level <= EKRAN_SETPOINT_MTZ04_GROUP4)
+       )
+       ||  
+       (
+        (current_ekran.current_level >= EKRAN_TIMEOUT_MTZ04_GROUP1) &&
+        (current_ekran.current_level <= EKRAN_TIMEOUT_MTZ04_GROUP4)
+       )
+       ||  
+       (current_ekran.current_level == EKRAN_CONTROL_MTZ04)
+      )
+      error_window |= (1 << MTZ04_BIT_CONFIGURATION );
   }
   //Перевірка ЗДЗ
   if ((new_configuration & (1<<ZDZ_BIT_CONFIGURATION)) == 0)
@@ -441,9 +441,9 @@ unsigned int action_after_changing_of_configuration(unsigned int new_configurati
     //Перевіряємо, чи МТЗ 0.4кВ зараз знято з конфігурації
     if ((target_label->configuration & (1<<MTZ04_BIT_CONFIGURATION)) == 0)
     {
-//      //Виводим ступені МТЗ 0.4кВ
-//      target_label->control_mtz04 &= (unsigned int)(~(CTR_MTZ04_1 | CTR_MTZ04_2));
-//   
+      //Виводим ступені МТЗ 0.4кВ
+      target_label->control_mtz04 &= (unsigned int)(~(CTR_MTZ04_1 | CTR_MTZ04_2));
+   
 //      //Виводим ступені МТЗ 0.4кВ з АПВ
 //      target_label->control_apv &= (unsigned int)(~(CTR_APV_STARTED_FROM_MTZ04_1 | CTR_APV_STARTED_FROM_MTZ04_2));
 //

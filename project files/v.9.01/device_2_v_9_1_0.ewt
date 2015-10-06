@@ -1421,6 +1421,9 @@
           <name>$PROJ_DIR$\..\..\working files\inc\const_menu_mtz.h</name>
         </file>
         <file>
+          <name>$PROJ_DIR$\..\..\working files\inc\const_menu_mtz04.h</name>
+        </file>
+        <file>
           <name>$PROJ_DIR$\..\..\working files\inc\const_menu_outputs.h</name>
         </file>
         <file>
@@ -1620,6 +1623,9 @@
         </file>
         <file>
           <name>$PROJ_DIR$\..\..\working files\src\menu_mtz.c</name>
+        </file>
+        <file>
+          <name>$PROJ_DIR$\..\..\working files\src\menu_mtz04.c</name>
         </file>
         <file>
           <name>$PROJ_DIR$\..\..\working files\src\menu_point_time_settings.c</name>
