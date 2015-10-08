@@ -2698,10 +2698,9 @@ inline void dt_handler(unsigned int *activated_functions, unsigned int *previous
 -------------------------------------------------
 */
 /*****************************************************/
-inline int timeout_dependent_general(unsigned int i, unsigned int number_group_stp)
+inline int timeout_dependent_general(unsigned int i, unsigned int number_group_stp, int type_mtz2_tmp)
 {
   int timeout_result = 0;
-  int type_mtz2_tmp = current_settings_prt.type_mtz2;
   
   if (
       (type_mtz2_tmp >= TYPE_MTZ_DEPENDENT_A) &&
@@ -3037,9 +3036,10 @@ inline void mtz_handler(unsigned int *activated_functions, unsigned int number_g
       _OR2(tmp, 1, tmp_value, 10, tmp, 2);
       _AND2(tmp_value, 9, tmp, 2, tmp, 3);
       _INVERTOR(tmp, 3, tmp, 4);
+      _INVERTOR(tmp_value, 3, tmp, 23); /*Добавлено Тарасом у Богданову програму*/
       _AND3(tmp, 4, tmp_value, 3, tmp_value, 21, tmp, 5);
       _AND2(tmp, 3, tmp_value, 21, tmp, 6);
-      _AND2(tmp, 4, tmp_value, 21, /*tmp_value, 2, */tmp, 7);
+      _AND3(tmp, 4, tmp_value, 21, tmp, 23, tmp, 7); /*Модифіковано Тарасом у Богдановій програмі*/
       _AND2(tmp, 4, tmp_value, 22, tmp, 8);
       _AND2(tmp, 3, tmp_value, 22, tmp, 9);
       _AND2(tmp, 4, tmp_value, 23, tmp, 10);
@@ -3050,7 +3050,7 @@ inline void mtz_handler(unsigned int *activated_functions, unsigned int number_g
       unsigned int i_max = measurement[IM_IA];
       if (i_max < measurement[IM_IB]) i_max = measurement[IM_IB];
       if (i_max < measurement[IM_IC]) i_max = measurement[IM_IC];
-      _TIMER_T_0_LOCK(INDEX_TIMER_MTZ2_DEPENDENT, timeout_dependent_general(i_max, number_group_stp), tmp, 5, p_global_trigger_state_mtz2, 0);
+      _TIMER_T_0_LOCK(INDEX_TIMER_MTZ2_DEPENDENT, timeout_dependent_general(i_max, number_group_stp, current_settings_prt.type_mtz2), tmp, 5, p_global_trigger_state_mtz2, 0);
       _TIMER_T_0(INDEX_TIMER_MTZ2_PR, current_settings_prt.timeout_mtz_2_pr[number_group_stp], tmp, 6, tmp, 15);
       _TIMER_T_0(INDEX_TIMER_MTZ2, current_settings_prt.timeout_mtz_2[number_group_stp], tmp, 7, tmp, 16);
       _TIMER_T_0(INDEX_TIMER_MTZ2_N_VPERED, current_settings_prt.timeout_mtz_2_n_vpered[number_group_stp], tmp, 8, tmp, 17);
@@ -8438,6 +8438,11 @@ inline void main_protection(void)
       activated_functions[RANG_OUTPUT_LED_DF_REG_BLOCK_USK_MTZ2 >> 5] |= (_CHECK_SET_BIT(temp_value_for_activated_function_2, RANG_INPUT_BLOCK_USK_MTZ2) != 0) << (RANG_OUTPUT_LED_DF_REG_BLOCK_USK_MTZ2 & 0x1f);
       activated_functions[RANG_OUTPUT_LED_DF_REG_BLOCK_MTZ3     >> 5] |= (_CHECK_SET_BIT(temp_value_for_activated_function_2, RANG_INPUT_BLOCK_MTZ3    ) != 0) << (RANG_OUTPUT_LED_DF_REG_BLOCK_MTZ3     & 0x1f);
       activated_functions[RANG_OUTPUT_LED_DF_REG_BLOCK_MTZ4     >> 5] |= (_CHECK_SET_BIT(temp_value_for_activated_function_2, RANG_INPUT_BLOCK_MTZ4    ) != 0) << (RANG_OUTPUT_LED_DF_REG_BLOCK_MTZ4     & 0x1f);
+
+      //Блок для МТЗ 0,4кВ
+      activated_functions[RANG_OUTPUT_LED_DF_REG_BLOCK_MTZ04_1     >> 5] |= (_CHECK_SET_BIT(temp_value_for_activated_function_2, RANG_INPUT_BLOCK_MTZ04_1    ) != 0) << (RANG_OUTPUT_LED_DF_REG_BLOCK_MTZ04_1     & 0x1f);
+      activated_functions[RANG_OUTPUT_LED_DF_REG_BLOCK_MTZ04_2     >> 5] |= (_CHECK_SET_BIT(temp_value_for_activated_function_2, RANG_INPUT_BLOCK_MTZ04_2    ) != 0) << (RANG_OUTPUT_LED_DF_REG_BLOCK_MTZ04_2     & 0x1f);
+      activated_functions[RANG_OUTPUT_LED_DF_REG_BLOCK_USK_MTZ04_2 >> 5] |= (_CHECK_SET_BIT(temp_value_for_activated_function_2, RANG_INPUT_BLOCK_USK_MTZ04_2) != 0) << (RANG_OUTPUT_LED_DF_REG_BLOCK_USK_MTZ04_2 & 0x1f);
 
       //Блок для ЗДЗ
       activated_functions[RANG_OUTPUT_LED_DF_REG_PUSK_ZDZ_VID_DV >> 5] |= (_CHECK_SET_BIT(temp_value_for_activated_function_2, RANG_INPUT_PUSK_ZDZ_VID_DV) != 0) << (RANG_OUTPUT_LED_DF_REG_PUSK_ZDZ_VID_DV & 0x1f);

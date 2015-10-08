@@ -179,7 +179,7 @@ void df_handler(unsigned int*, unsigned int*);
 void dt_handler(unsigned int*, unsigned int*);
 void mtz_handler(unsigned int*, unsigned int);
 void zdz_handler(unsigned int*);
-int timeout_dependent_general(unsigned int, unsigned int);
+int timeout_dependent_general(unsigned int, unsigned int, int);
 void zz_handler(unsigned int*, unsigned int);
 void tznp_handler(unsigned int*, unsigned int);
 void zop_handler(unsigned int*, unsigned int);

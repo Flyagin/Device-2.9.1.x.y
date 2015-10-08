@@ -10298,6 +10298,13 @@ inline unsigned int Get_data_file(unsigned char* input_data, unsigned char* outp
           case (173 + NUMBER_ANALOG_CANALES):
           case (174 + NUMBER_ANALOG_CANALES):
           case (175 + NUMBER_ANALOG_CANALES):
+          case (176 + NUMBER_ANALOG_CANALES):
+          case (177 + NUMBER_ANALOG_CANALES):
+          case (178 + NUMBER_ANALOG_CANALES):
+          case (179 + NUMBER_ANALOG_CANALES):
+          case (180 + NUMBER_ANALOG_CANALES):
+          case (181 + NUMBER_ANALOG_CANALES):
+          case (182 + NUMBER_ANALOG_CANALES):
             {
               if (length <= 19)
               {
@@ -10411,6 +10418,13 @@ inline unsigned int Get_data_file(unsigned char* input_data, unsigned char* outp
                         "      ÌÒÇ4      ",
                         " ÏÎ áëîê.U ÌÒÇÍ ",
                         "    ÍÖÍ-ÌÒÇ     ",
+                        "Áëîê.ÌÒÇ 0,4êÂ 1",
+                        "Áëîê.ÌÒÇ 0,4êÂ 2",
+                        "Áë.ó.ÌÒÇ 0,4êÂ 2",
+                        " ÏÎ ÌÒÇ 0,4êÂ 1 ",
+                        "  ÌÒÇ 0,4êÂ 1   ",
+                        " ÏÎ ÌÒÇ 0,4êÂ 2 ",
+                        "  ÌÒÇ 0,4êÂ 2   ",
                         " Ïóñê ÇÄÇ îò ÄÂ ",
                         "      ÇÄÇ       ",
                         "    Áëîê.ÍÇÇ    ",
@@ -10587,6 +10601,13 @@ inline unsigned int Get_data_file(unsigned char* input_data, unsigned char* outp
                         "      ÌÑÇ4      ",
                         " ÏÎ áëîê.U ÌÑÇÍ ",
                         "    ÍÊÍ-ÌÑÇ     ",
+                        "Áëîê.ÌÑÇ 0,4êÂ 1",
+                        "Áëîê.ÌÑÇ 0,4êÂ 2",
+                        "Áë.ï.ÌÑÇ 0,4êÂ 2",
+                        " ÏÎ ÌÑÇ 0,4êÂ 1 ",
+                        "  ÌÑÇ 0,4êÂ 1   ",
+                        " ÏÎ ÌÑÇ 0,4êÂ 2 ",
+                        "  ÌÑÇ 0,4êÂ 2   ",
                         " Ïóñê ÇÄÇ â³ä ÄÂ",
                         "      ÇÄÇ       ",
                         "    Áëîê.ÍÇÇ    ",
@@ -10763,6 +10784,13 @@ inline unsigned int Get_data_file(unsigned char* input_data, unsigned char* outp
                         "      OCP4      ",
                         " ÏÎ áëîê.U ÌÒÇÍ ",
                         "    ÍÖÍ-ÌÒÇ     ",
+                        "OCP 0,4kV 1 Blc.",
+                        "OCP 0,4kV 2 Blc.",
+                        "OCP 0,4kV 2 Ac.B",
+                        " OCP 0,4kV 1 SE ",
+                        "  OCP 0,4kV 1   ",
+                        " OCP 0,4kV 2 SE ",
+                        "  OCP 0,4kV 2   ",
                         " Ïóñê ÇÄÇ îò ÄÂ ",
                         "      ÇÄÇ       ",
                         "    Áëîê.ÍÇÇ    ",
@@ -10939,6 +10967,13 @@ inline unsigned int Get_data_file(unsigned char* input_data, unsigned char* outp
                         "      ÌÒÇ4      ",
                         " ÏÎ áëîê.U ÌÒÇÍ ",
                         "    ÍÖÍ-ÌÒÇ     ",
+                        "Áëîê.ÌÒÇ 0,4êÂ 1",
+                        "Áëîê.ÌÒÇ 0,4êÂ 2",
+                        "Áë.ó.ÌÒÇ 0,4êÂ 2",
+                        " ÏÎ ÌÒÇ 0,4êÂ 1 ",
+                        "  ÌÒÇ 0,4êÂ 1   ",
+                        " ÏÎ ÌÒÇ 0,4êÂ 2 ",
+                        "  ÌÒÇ 0,4êÂ 2   ",
                         " Ïóñê ÇÄÇ îò ÄÂ ",
                         "      ÇÄÇ       ",
                         "    Áëîê.ÍÇÇ    ",
@@ -11660,6 +11695,13 @@ inline unsigned int Get_data_file(unsigned char* input_data, unsigned char* outp
           case 173:
           case 174:
           case 175:
+          case 176:
+          case 177:
+          case 178:
+          case 179:
+          case 180:
+          case 181:
+          case 182:
             {
               if (length <= 19)
               {
@@ -11773,6 +11815,13 @@ inline unsigned int Get_data_file(unsigned char* input_data, unsigned char* outp
                         "      ÌÒÇ4      ",
                         " ÏÎ áëîê.U ÌÒÇÍ ",
                         "    ÍÖÍ-ÌÒÇ     ",
+                        "Áëîê.ÌÒÇ 0,4êÂ 1",
+                        "Áëîê.ÌÒÇ 0,4êÂ 2",
+                        "Áë.ó.ÌÒÇ 0,4êÂ 2",
+                        " ÏÎ ÌÒÇ 0,4êÂ 1 ",
+                        "  ÌÒÇ 0,4êÂ 1   ",
+                        " ÏÎ ÌÒÇ 0,4êÂ 2 ",
+                        "  ÌÒÇ 0,4êÂ 2   ",
                         " Ïóñê ÇÄÇ îò ÄÂ ",
                         "      ÇÄÇ       ",
                         "    Áëîê.ÍÇÇ    ",
@@ -11949,6 +11998,13 @@ inline unsigned int Get_data_file(unsigned char* input_data, unsigned char* outp
                         "      ÌÑÇ4      ",
                         " ÏÎ áëîê.U ÌÑÇÍ ",
                         "    ÍÊÍ-ÌÑÇ     ",
+                        "Áëîê.ÌÑÇ 0,4êÂ 1",
+                        "Áëîê.ÌÑÇ 0,4êÂ 2",
+                        "Áë.ï.ÌÑÇ 0,4êÂ 2",
+                        " ÏÎ ÌÑÇ 0,4êÂ 1 ",
+                        "  ÌÑÇ 0,4êÂ 1   ",
+                        " ÏÎ ÌÑÇ 0,4êÂ 2 ",
+                        "  ÌÑÇ 0,4êÂ 2   ",
                         " Ïóñê ÇÄÇ â³ä ÄÂ",
                         "      ÇÄÇ       ",
                         "    Áëîê.ÍÇÇ    ",
@@ -12125,6 +12181,13 @@ inline unsigned int Get_data_file(unsigned char* input_data, unsigned char* outp
                         "      OCP4      ",
                         " ÏÎ áëîê.U ÌÒÇÍ ",
                         "    ÍÖÍ-ÌÒÇ     ",
+                        "OCP 0,4kV 1 Blc.",
+                        "OCP 0,4kV 2 Blc.",
+                        "OCP 0,4kV 2 Ac.B",
+                        " OCP 0,4kV 1 SE ",
+                        "  OCP 0,4kV 1   ",
+                        " OCP 0,4kV 2 SE ",
+                        "  OCP 0,4kV 2   ",
                         " Ïóñê ÇÄÇ îò ÄÂ ",
                         "      ÇÄÇ       ",
                         "    Áëîê.ÍÇÇ    ",
@@ -12301,6 +12364,13 @@ inline unsigned int Get_data_file(unsigned char* input_data, unsigned char* outp
                         "      ÌÒÇ4      ",
                         " ÏÎ áëîê.U ÌÒÇÍ ",
                         "    ÍÖÍ-ÌÒÇ     ",
+                        "Áëîê.ÌÒÇ 0,4êÂ 1",
+                        "Áëîê.ÌÒÇ 0,4êÂ 2",
+                        "Áë.ó.ÌÒÇ 0,4êÂ 2",
+                        " ÏÎ ÌÒÇ 0,4êÂ 1 ",
+                        "  ÌÒÇ 0,4êÂ 1   ",
+                        " ÏÎ ÌÒÇ 0,4êÂ 2 ",
+                        "  ÌÒÇ 0,4êÂ 2   ",
                         " Ïóñê ÇÄÇ îò ÄÂ ",
                         "      ÇÄÇ       ",
                         "    Áëîê.ÍÇÇ    ",

@@ -178,7 +178,7 @@ extern void df_handler(unsigned int*, unsigned int*);
 extern void dt_handler(unsigned int*, unsigned int*);
 extern void mtz_handler(unsigned int*, unsigned int);
 extern void zdz_handler(unsigned int*);
-extern int timeout_dependent_general(unsigned int, unsigned int);
+extern int timeout_dependent_general(unsigned int, unsigned int, int);
 extern void zz_handler(unsigned int*, unsigned int);
 extern void tznp_handler(unsigned int*, unsigned int);
 extern void zop_handler(unsigned int*, unsigned int);
