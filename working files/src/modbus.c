@@ -182,13 +182,13 @@ void convert_order_list_function_to_gmm(unsigned int* input_array, unsigned shor
   _CONVERT_SIGNAL_TO_GMM(input_array, output_array, RANG_OUTPUT_LED_DF_REG_PO_UROV         , (BIT_MA_PO_UROV          - BIT_MA_CURRENT_AF_BASE));
 
   //À×Ð/×ÀÏÂ
-  _CONVERT_SIGNAL_TO_GMM(input_array, output_array, RANG_OUTPUT_LED_DF_REG_ACHR_CHAPV_VID_DV, (BIT_MA_ACHR_CHAPV_VID_DV - BIT_MA_CURRENT_AF_BASE));
-  _CONVERT_SIGNAL_TO_GMM(input_array, output_array, RANG_OUTPUT_LED_DF_REG_BLOCK_ACHR       , (BIT_MA_BLOCK_ACHR        - BIT_MA_CURRENT_AF_BASE));
-  _CONVERT_SIGNAL_TO_GMM(input_array, output_array, RANG_OUTPUT_LED_DF_REG_BLOCK_CHAPV_VID_U, (BIT_MA_BLOCK_CHAPV_VID_U - BIT_MA_CURRENT_AF_BASE));
-  _CONVERT_SIGNAL_TO_GMM(input_array, output_array, RANG_OUTPUT_LED_DF_REG_PO_ACHR          , (BIT_MA_PO_F1_ACHR        - BIT_MA_CURRENT_AF_BASE));
-  _CONVERT_SIGNAL_TO_GMM(input_array, output_array, RANG_OUTPUT_LED_DF_REG_ACHR_CHAPV       , (BIT_MA_ACHR_CHAPV        - BIT_MA_CURRENT_AF_BASE));
-  _CONVERT_SIGNAL_TO_GMM(input_array, output_array, RANG_OUTPUT_LED_DF_REG_RAZR_CHAPV       , (BIT_MA_RAZR_CHAPV        - BIT_MA_CURRENT_AF_BASE));
-  _CONVERT_SIGNAL_TO_GMM(input_array, output_array, RANG_OUTPUT_LED_DF_REG_PO_CHAPV         , (BIT_MA_PO_F1_CHAPV       - BIT_MA_CURRENT_AF_BASE));
+  _CONVERT_SIGNAL_TO_GMM(input_array, output_array, RANG_OUTPUT_LED_DF_REG_ACHR_CHAPV_VID_DV , (BIT_MA_ACHR_CHAPV_VID_DV - BIT_MA_CURRENT_AF_BASE));
+  _CONVERT_SIGNAL_TO_GMM(input_array, output_array, RANG_OUTPUT_LED_DF_REG_BLOCK_ACHR1       , (BIT_MA_BLOCK_ACHR1        - BIT_MA_CURRENT_AF_BASE));
+  _CONVERT_SIGNAL_TO_GMM(input_array, output_array, RANG_OUTPUT_LED_DF_REG_BLOCK_CHAPV1_VID_U, (BIT_MA_BLOCK_CHAPV1_VID_U - BIT_MA_CURRENT_AF_BASE));
+  _CONVERT_SIGNAL_TO_GMM(input_array, output_array, RANG_OUTPUT_LED_DF_REG_PO_ACHR1          , (BIT_MA_PO_F1_ACHR1        - BIT_MA_CURRENT_AF_BASE));
+  _CONVERT_SIGNAL_TO_GMM(input_array, output_array, RANG_OUTPUT_LED_DF_REG_ACHR_CHAPV1       , (BIT_MA_ACHR_CHAPV1        - BIT_MA_CURRENT_AF_BASE));
+  _CONVERT_SIGNAL_TO_GMM(input_array, output_array, RANG_OUTPUT_LED_DF_REG_RAZR_CHAPV        , (BIT_MA_RAZR_CHAPV        - BIT_MA_CURRENT_AF_BASE));
+  _CONVERT_SIGNAL_TO_GMM(input_array, output_array, RANG_OUTPUT_LED_DF_REG_PO_CHAPV1         , (BIT_MA_PO_F1_CHAPV1       - BIT_MA_CURRENT_AF_BASE));
 
   //ÎÔ
   _CONVERT_SIGNAL_TO_GMM(input_array, output_array, RANG_OUTPUT_LED_DF_REG_DF1_IN , (BIT_MA_INPUT_DF1  - BIT_MA_CURRENT_AF_BASE));
@@ -637,9 +637,9 @@ unsigned int convert_order_list_inputs_to_gmm(unsigned int number, unsigned int 
         rezultat = BIT_MA_STAT_BLK_APV;
         break;
       }
-    case RANG_INPUT_BLOCK_ACHR:
+    case RANG_INPUT_BLOCK_ACHR1:
       {
-        rezultat = BIT_MA_BLOCK_ACHR;
+        rezultat = BIT_MA_BLOCK_ACHR1;
         break;
       }
     case RANG_INPUT_ACHR_CHAPV_VID_DV:
@@ -1535,9 +1535,9 @@ unsigned int convert_order_list_oldr_to_gmm(unsigned int number, unsigned int nu
         rezultat = BIT_MA_APV_WORK;
         break;
       }
-    case RANG_OUTPUT_LED_DF_REG_BLOCK_ACHR:
+    case RANG_OUTPUT_LED_DF_REG_BLOCK_ACHR1:
       {
-        rezultat = BIT_MA_BLOCK_ACHR;
+        rezultat = BIT_MA_BLOCK_ACHR1;
         break;
       }
     case RANG_OUTPUT_LED_DF_REG_RAZR_CHAPV:
@@ -1545,24 +1545,24 @@ unsigned int convert_order_list_oldr_to_gmm(unsigned int number, unsigned int nu
         rezultat = BIT_MA_RAZR_CHAPV;
         break;
       }
-    case RANG_OUTPUT_LED_DF_REG_BLOCK_CHAPV_VID_U:
+    case RANG_OUTPUT_LED_DF_REG_BLOCK_CHAPV1_VID_U:
       {
-        rezultat = BIT_MA_BLOCK_CHAPV_VID_U;
+        rezultat = BIT_MA_BLOCK_CHAPV1_VID_U;
         break;
       }
-    case RANG_OUTPUT_LED_DF_REG_PO_ACHR:
+    case RANG_OUTPUT_LED_DF_REG_PO_ACHR1:
       {
-        rezultat = BIT_MA_PO_F1_ACHR;
+        rezultat = BIT_MA_PO_F1_ACHR1;
         break;
       }
-    case RANG_OUTPUT_LED_DF_REG_ACHR_CHAPV:
+    case RANG_OUTPUT_LED_DF_REG_ACHR_CHAPV1:
       {
-        rezultat = BIT_MA_ACHR_CHAPV;
+        rezultat = BIT_MA_ACHR_CHAPV1;
         break;
       }
-    case RANG_OUTPUT_LED_DF_REG_PO_CHAPV:
+    case RANG_OUTPUT_LED_DF_REG_PO_CHAPV1:
       {
-        rezultat = BIT_MA_PO_F1_CHAPV;
+        rezultat = BIT_MA_PO_F1_CHAPV1;
         break;
       }
     case RANG_OUTPUT_LED_DF_REG_ACHR_CHAPV_VID_DV:
@@ -1865,7 +1865,7 @@ unsigned int save_new_rang_inputs_from_gmm(unsigned int number, unsigned int num
     }
     else if (
              (data == BIT_MA_ACHR_CHAPV_VID_DV) ||
-             (data == BIT_MA_BLOCK_ACHR       )
+             (data == BIT_MA_BLOCK_ACHR1      )
             )
     {
       //Çàðàç º íàìàãàííÿ çðàíæóâàòè ôóíêöþ À×Ð/×ÀÏÂ ³ íîìåð ¿¿ º äîïóñòèìèì
@@ -2178,9 +2178,9 @@ unsigned int save_new_rang_inputs_from_gmm(unsigned int number, unsigned int num
         _SET_BIT(set_array_rang, RANG_INPUT_ACHR_CHAPV_VID_DV);
         break;
       }
-    case BIT_MA_BLOCK_ACHR:
+    case BIT_MA_BLOCK_ACHR1:
       {
-        _SET_BIT(set_array_rang, RANG_INPUT_BLOCK_ACHR);
+        _SET_BIT(set_array_rang, RANG_INPUT_BLOCK_ACHR1);
         break;
       }
     case BIT_MA_PUSK_UROV_VID_DV:
@@ -2642,13 +2642,13 @@ unsigned int save_new_rang_oldr_from_gmm(unsigned int number, unsigned int numbe
       else error = ERROR_ILLEGAL_DATA_VALUE;
     }
     else if (
-             (data == BIT_MA_ACHR_CHAPV_VID_DV) ||
-             (data == BIT_MA_BLOCK_ACHR       ) ||
-             (data == BIT_MA_BLOCK_CHAPV_VID_U) ||
-             (data == BIT_MA_PO_F1_ACHR       ) ||
-             (data == BIT_MA_ACHR_CHAPV       ) ||
-             (data == BIT_MA_RAZR_CHAPV       ) ||
-             (data == BIT_MA_PO_F1_CHAPV      )
+             (data == BIT_MA_ACHR_CHAPV_VID_DV ) ||
+             (data == BIT_MA_BLOCK_ACHR1       ) ||
+             (data == BIT_MA_BLOCK_CHAPV1_VID_U) ||
+             (data == BIT_MA_PO_F1_ACHR1       ) ||
+             (data == BIT_MA_ACHR_CHAPV1       ) ||
+             (data == BIT_MA_RAZR_CHAPV        ) ||
+             (data == BIT_MA_PO_F1_CHAPV1      )
             )
     {
       //Çàðàç º íàìàãàííÿ çðàíæóâàòè ôóíêöþ À×Ð/×ÀÏÂ ³ íîìåð ¿¿ º äîïóñòèìèì
@@ -3486,24 +3486,24 @@ unsigned int save_new_rang_oldr_from_gmm(unsigned int number, unsigned int numbe
         _SET_BIT(set_array_rang, RANG_OUTPUT_LED_DF_REG_ACHR_CHAPV_VID_DV);
         break;
       }
-    case BIT_MA_BLOCK_ACHR:
+    case BIT_MA_BLOCK_ACHR1:
       {
-        _SET_BIT(set_array_rang, RANG_OUTPUT_LED_DF_REG_BLOCK_ACHR);
+        _SET_BIT(set_array_rang, RANG_OUTPUT_LED_DF_REG_BLOCK_ACHR1);
         break;
       }
-    case BIT_MA_BLOCK_CHAPV_VID_U:
+    case BIT_MA_BLOCK_CHAPV1_VID_U:
       {
-        _SET_BIT(set_array_rang, RANG_OUTPUT_LED_DF_REG_BLOCK_CHAPV_VID_U);
+        _SET_BIT(set_array_rang, RANG_OUTPUT_LED_DF_REG_BLOCK_CHAPV1_VID_U);
         break;
       }
-    case BIT_MA_PO_F1_ACHR:
+    case BIT_MA_PO_F1_ACHR1:
       {
-        _SET_BIT(set_array_rang, RANG_OUTPUT_LED_DF_REG_PO_ACHR);
+        _SET_BIT(set_array_rang, RANG_OUTPUT_LED_DF_REG_PO_ACHR1);
         break;
       }
-    case BIT_MA_ACHR_CHAPV:
+    case BIT_MA_ACHR_CHAPV1:
       {
-        _SET_BIT(set_array_rang, RANG_OUTPUT_LED_DF_REG_ACHR_CHAPV);
+        _SET_BIT(set_array_rang, RANG_OUTPUT_LED_DF_REG_ACHR_CHAPV1);
         break;
       }
     case BIT_MA_RAZR_CHAPV:
@@ -3511,9 +3511,9 @@ unsigned int save_new_rang_oldr_from_gmm(unsigned int number, unsigned int numbe
         _SET_BIT(set_array_rang, RANG_OUTPUT_LED_DF_REG_RAZR_CHAPV);
         break;
       }
-    case BIT_MA_PO_F1_CHAPV:
+    case BIT_MA_PO_F1_CHAPV1:
       {
-        _SET_BIT(set_array_rang, RANG_OUTPUT_LED_DF_REG_PO_CHAPV);
+        _SET_BIT(set_array_rang, RANG_OUTPUT_LED_DF_REG_PO_CHAPV1);
         break;
       }
     case BIT_MA_PUSK_UROV_VID_DV:
@@ -4569,19 +4569,19 @@ inline unsigned int Get_data(unsigned char *data, unsigned int address_data, uns
         temp_value = current_settings.timeout_apv_block_vid_apv4[num_gr]/10;
         break;
       }
-    case MA_STP_ACHR_F_RAB:
+    case MA_STP_ACHR1_F_RAB:
       {
-        temp_value = current_settings.setpoint_achr_f_rab[num_gr]/10;
+        temp_value = current_settings.setpoint_achr1_f_rab[num_gr]/10;
         break;
       }
-    case MA_STP_CHAPV_F_RAB:
+    case MA_STP_CHAPV1_F_RAB:
       {
-        temp_value = current_settings.setpoint_chapv_f_rab[num_gr]/10;
+        temp_value = current_settings.setpoint_chapv1_f_rab[num_gr]/10;
         break;
       }
-    case MA_STP_ACHR_CHAPV_UF1:
+    case MA_STP_ACHR_CHAPV_UF:
       {
-        temp_value = current_settings.setpoint_achr_chapv_uf1[num_gr]/100;
+        temp_value = current_settings.setpoint_achr_chapv_uf[num_gr]/100;
         break;
       }
     case MA_TO_ACHR_1:
@@ -4959,8 +4959,8 @@ inline unsigned int Get_data(unsigned char *data, unsigned int address_data, uns
       {
         int input_value = current_settings.control_achr_chapv;
         
-        temp_value = (((input_value >> INDEX_CTR_ACHR        ) & 0x1 ) << (BIT_MA_CONTROL_ACHR_STATE         - BIT_MA_CONTROL_ACHR_CHAPV_BASE)) |
-                     (((input_value >> INDEX_CTR_CHAPV       ) & 0x1 ) << (BIT_MA_CONTROL_CHAPV_STATE        - BIT_MA_CONTROL_ACHR_CHAPV_BASE)) |
+        temp_value = (((input_value >> INDEX_CTR_ACHR1        ) & 0x1 ) << (BIT_MA_CONTROL_ACHR_STATE         - BIT_MA_CONTROL_ACHR_CHAPV_BASE)) |
+                     (((input_value >> INDEX_CTR_CHAPV1       ) & 0x1 ) << (BIT_MA_CONTROL_CHAPV_STATE        - BIT_MA_CONTROL_ACHR_CHAPV_BASE)) |
                      (((input_value >> INDEX_CTR_CHAPV_VID_DV) & 0x1 ) << (BIT_MA_CONTROL_CHAPV_VID_DV_STATE - BIT_MA_CONTROL_ACHR_CHAPV_BASE));
         break;
       }
@@ -7732,34 +7732,34 @@ inline unsigned int Set_data(unsigned short int data, unsigned int address_data,
 
         break;
       }
-    case MA_STP_ACHR_F_RAB:
+    case MA_STP_ACHR1_F_RAB:
       {
         temp_value = data*10;
     
-        if ((temp_value >= SETPOINT_ACHR_F_RAB_MIN) && (temp_value <= SETPOINT_ACHR_F_RAB_MAX))
-          target_label->setpoint_achr_f_rab[num_gr] = temp_value;
+        if ((temp_value >= SETPOINT_ACHR1_F_RAB_MIN) && (temp_value <= SETPOINT_ACHR1_F_RAB_MAX))
+          target_label->setpoint_achr1_f_rab[num_gr] = temp_value;
         else
           error = ERROR_ILLEGAL_DATA_VALUE;
 
         break;
       }
-    case MA_STP_CHAPV_F_RAB:
+    case MA_STP_CHAPV1_F_RAB:
       {
         temp_value = data*10;
     
-        if ((temp_value >= SETPOINT_CHAPV_F_RAB_MIN) && (temp_value <= SETPOINT_CHAPV_F_RAB_MAX))
-          target_label->setpoint_chapv_f_rab[num_gr] = temp_value;
+        if ((temp_value >= SETPOINT_CHAPV1_F_RAB_MIN) && (temp_value <= SETPOINT_CHAPV1_F_RAB_MAX))
+          target_label->setpoint_chapv1_f_rab[num_gr] = temp_value;
         else
           error = ERROR_ILLEGAL_DATA_VALUE;
 
         break;
       }
-    case MA_STP_ACHR_CHAPV_UF1:
+    case MA_STP_ACHR_CHAPV_UF:
       {
         temp_value = data*100;
     
-        if ((temp_value >= SETPOINT_ACHR_CHAPV_UF1_MIN) && (temp_value <= SETPOINT_ACHR_CHAPV_UF1_MAX))
-          target_label->setpoint_achr_chapv_uf1[num_gr] = temp_value;
+        if ((temp_value >= SETPOINT_ACHR_CHAPV_UF_MIN) && (temp_value <= SETPOINT_ACHR_CHAPV_UF_MAX))
+          target_label->setpoint_achr_chapv_uf[num_gr] = temp_value;
         else
           error = ERROR_ILLEGAL_DATA_VALUE;
 
@@ -8654,8 +8654,8 @@ inline unsigned int Set_data(unsigned short int data, unsigned int address_data,
         {
           int output_value = 0;
 
-          output_value |= ((data >> (BIT_MA_CONTROL_ACHR_STATE         - BIT_MA_CONTROL_ACHR_CHAPV_BASE)) & 0x1) << INDEX_CTR_ACHR;
-          output_value |= ((data >> (BIT_MA_CONTROL_CHAPV_STATE        - BIT_MA_CONTROL_ACHR_CHAPV_BASE)) & 0x1) << INDEX_CTR_CHAPV;
+          output_value |= ((data >> (BIT_MA_CONTROL_ACHR_STATE         - BIT_MA_CONTROL_ACHR_CHAPV_BASE)) & 0x1) << INDEX_CTR_ACHR1;
+          output_value |= ((data >> (BIT_MA_CONTROL_CHAPV_STATE        - BIT_MA_CONTROL_ACHR_CHAPV_BASE)) & 0x1) << INDEX_CTR_CHAPV1;
           output_value |= ((data >> (BIT_MA_CONTROL_CHAPV_VID_DV_STATE - BIT_MA_CONTROL_ACHR_CHAPV_BASE)) & 0x1) << INDEX_CTR_CHAPV_VID_DV;
         
           target_label->control_achr_chapv = output_value;
@@ -10305,6 +10305,12 @@ inline unsigned int Get_data_file(unsigned char* input_data, unsigned char* outp
           case (180 + NUMBER_ANALOG_CANALES):
           case (181 + NUMBER_ANALOG_CANALES):
           case (182 + NUMBER_ANALOG_CANALES):
+          case (183 + NUMBER_ANALOG_CANALES):
+          case (184 + NUMBER_ANALOG_CANALES):
+          case (185 + NUMBER_ANALOG_CANALES):
+          case (186 + NUMBER_ANALOG_CANALES):
+          case (187 + NUMBER_ANALOG_CANALES):
+          case (188 + NUMBER_ANALOG_CANALES):
             {
               if (length <= 19)
               {
@@ -10471,13 +10477,19 @@ inline unsigned int Get_data_file(unsigned char* input_data, unsigned char* outp
                         "      ÀÏÂ3      ",
                         "      ÀÏÂ4      ",
                         "   Ðàáîòà ÀÏÂ   ",
-                        "    Áëîê.À×Ð    ",
-                        "  Äîçâ³ë ×ÀÏÂ   ",
-                        " Áëîê.×ÀÏÂ â³ä U",
-                        "     ÏÎ À×Ð     ",
-                        "    ÏÎ ×ÀÏÂ     ",
-                        "    À×Ð/×ÀÏÂ    ",
-                        " À×Ð/×ÀÏÂ â³ä ÄÂ",
+                        " À×Ð/×ÀÏÂ îò ÄÂ ",
+                        "   Áëîê.À×Ð1    ",
+                        "   Áëîê.À×Ð2    ",
+                        "   Ðàçð.×ÀÏÂ    ",
+                        " Áëîê.×ÀÏÂ1 îò U",
+                        " Áëîê.×ÀÏÂ2 îò U",
+                        " Áëîê.×ÀÏÂ îò U ",
+                        "    ÏÎ À×Ð1     ",
+                        "    ÏÎ ×ÀÏÂ1    ",
+                        "   À×Ð/×ÀÏÂ1    ",
+                        "    ÏÎ À×Ð2     ",
+                        "    ÏÎ ×ÀÏÂ2    ",
+                        "   À×Ð/×ÀÏÂ2    ",
                         " Ïóñê ÓÐÎÂ îò ÄÂ",
                         "    ÏÎ ÓÐÎÂ     ",
                         "     ÓÐÎÂ1      ",
@@ -10654,13 +10666,19 @@ inline unsigned int Get_data_file(unsigned char* input_data, unsigned char* outp
                         "      ÀÏÂ3      ",
                         "      ÀÏÂ4      ",
                         "   Ðîáîòà ÀÏÂ   ",
-                        "    Áëîê.À×Ð    ",
-                        "  Äîçâ³ë ×ÀÏÂ   ",
-                        " Áëîê.×ÀÏÂ â³ä U",
-                        "     ÏÎ À×Ð     ",
-                        "    ÏÎ ×ÀÏÂ     ",
-                        "    À×Ð/×ÀÏÂ    ",
                         " À×Ð/×ÀÏÂ â³ä ÄÂ",
+                        "   Áëîê.À×Ð1    ",
+                        "   Áëîê.À×Ð2    ",
+                        "  Äîçâ³ë ×ÀÏÂ   ",
+                        "Áëîê.×ÀÏÂ1 â³ä U",
+                        "Áëîê.×ÀÏÂ2 â³ä U",
+                        " Áëîê.×ÀÏÂ â³ä U",
+                        "    ÏÎ À×Ð1     ",
+                        "    ÏÎ ×ÀÏÂ1    ",
+                        "   À×Ð/×ÀÏÂ1    ",
+                        "    ÏÎ À×Ð2     ",
+                        "    ÏÎ ×ÀÏÂ2    ",
+                        "   À×Ð/×ÀÏÂ2    ",
                         "Ïóñê ÏÐÂÂ â³ä ÄÂ",
                         "    ÏÎ ÏÐÂÂ     ",
                         "     ÏÐÂÂ1      ",
@@ -10837,13 +10855,19 @@ inline unsigned int Get_data_file(unsigned char* input_data, unsigned char* outp
                         "      AR3       ",
                         "      AR4       ",
                         "   Ðàáîòà ÀÏÂ   ",
-                        "    Áëîê.À×Ð    ",
-                        "   Ðàçð.×ÀÏÂ    ",
-                        " Áëîê.×ÀÏÂ îò U ",
-                        "     ÏÎ À×Ð     ",
-                        "    ÏÎ ×ÀÏÂ     ",
-                        "    UFLS/FAR    ",
                         "UFLS/FAR from DI",
+                        "   Áëîê.À×Ð1    ",
+                        "   Áëîê.À×Ð2    ",
+                        "   Ðàçð.×ÀÏÂ    ",
+                        " Áëîê.×ÀÏÂ1 îò U",
+                        " Áëîê.×ÀÏÂ2 îò U",
+                        " Áëîê.×ÀÏÂ îò U ",
+                        "    ÏÎ À×Ð1     ",
+                        "   ÏÎ ×ÀÏÂ1     ",
+                        "   UFLS/FAR1    ",
+                        "    ÏÎ À×Ð2     ",
+                        "   ÏÎ ×ÀÏÂ2     ",
+                        "   UFLS/FAR2    ",
                         " CBFP Start f.DI",
                         "    CBFP SE     ",
                         "     CBFP1      ",
@@ -11020,13 +11044,19 @@ inline unsigned int Get_data_file(unsigned char* input_data, unsigned char* outp
                         "      ÀÏÂ3      ",
                         "      ÀÏÂ4      ",
                         "   Ðàáîòà ÀÏÂ   ",
-                        "    Áëîê.À×Ð    ",
-                        "  Äîçâ³ë ×ÀÏÂ   ",
-                        " Áëîê.×ÀÏÂ â³ä U",
-                        "     ÏÎ À×Ð     ",
-                        "    ÏÎ ×ÀÏÂ     ",
-                        "    À×Ð/×ÀÏÂ    ",
-                        " À×Ð/×ÀÏÂ â³ä ÄÂ",
+                        " À×Ð/×ÀÏÂ îò ÄÂ ",
+                        "   Áëîê.À×Ð1    ",
+                        "   Áëîê.À×Ð2    ",
+                        "   Ðàçð.×ÀÏÂ    ",
+                        " Áëîê.×ÀÏÂ1 îò U",
+                        " Áëîê.×ÀÏÂ2 îò U",
+                        " Áëîê.×ÀÏÂ îò U ",
+                        "    ÏÎ À×Ð1     ",
+                        "    ÏÎ ×ÀÏÂ1    ",
+                        "   À×Ð/×ÀÏÂ1    ",
+                        "    ÏÎ À×Ð2     ",
+                        "    ÏÎ ×ÀÏÂ2    ",
+                        "   À×Ð/×ÀÏÂ2    ",
                         " Ïóñê ÓÐÎÂ îò ÄÂ",
                         "    ÏÎ ÓÐÎÂ     ",
                         "     ÓÐÎÂ1      ",
@@ -11702,6 +11732,12 @@ inline unsigned int Get_data_file(unsigned char* input_data, unsigned char* outp
           case 180:
           case 181:
           case 182:
+          case 183:
+          case 184:
+          case 185:
+          case 186:
+          case 187:
+          case 188:
             {
               if (length <= 19)
               {
@@ -11868,13 +11904,19 @@ inline unsigned int Get_data_file(unsigned char* input_data, unsigned char* outp
                         "      ÀÏÂ3      ",
                         "      ÀÏÂ4      ",
                         "   Ðàáîòà ÀÏÂ   ",
-                        "    Áëîê.À×Ð    ",
-                        "  Äîçâ³ë ×ÀÏÂ   ",
-                        " Áëîê.×ÀÏÂ â³ä U",
-                        "     ÏÎ À×Ð     ",
-                        "    ÏÎ ×ÀÏÂ     ",
-                        "    À×Ð/×ÀÏÂ    ",
-                        " À×Ð/×ÀÏÂ â³ä ÄÂ",
+                        " À×Ð/×ÀÏÂ îò ÄÂ ",
+                        "   Áëîê.À×Ð1    ",
+                        "   Áëîê.À×Ð2    ",
+                        "   Ðàçð.×ÀÏÂ    ",
+                        " Áëîê.×ÀÏÂ1 îò U",
+                        " Áëîê.×ÀÏÂ2 îò U",
+                        " Áëîê.×ÀÏÂ îò U ",
+                        "    ÏÎ À×Ð1     ",
+                        "    ÏÎ ×ÀÏÂ1    ",
+                        "   À×Ð/×ÀÏÂ1    ",
+                        "    ÏÎ À×Ð2     ",
+                        "    ÏÎ ×ÀÏÂ2    ",
+                        "   À×Ð/×ÀÏÂ2    ",
                         " Ïóñê ÓÐÎÂ îò ÄÂ",
                         "    ÏÎ ÓÐÎÂ     ",
                         "     ÓÐÎÂ1      ",
@@ -12051,13 +12093,19 @@ inline unsigned int Get_data_file(unsigned char* input_data, unsigned char* outp
                         "      ÀÏÂ3      ",
                         "      ÀÏÂ4      ",
                         "   Ðîáîòà ÀÏÂ   ",
-                        "    Áëîê.À×Ð    ",
-                        "  Äîçâ³ë ×ÀÏÂ   ",
-                        " Áëîê.×ÀÏÂ â³ä U",
-                        "     ÏÎ À×Ð     ",
-                        "    ÏÎ ×ÀÏÂ     ",
-                        "    À×Ð/×ÀÏÂ    ",
                         " À×Ð/×ÀÏÂ â³ä ÄÂ",
+                        "   Áëîê.À×Ð1    ",
+                        "   Áëîê.À×Ð2    ",
+                        "  Äîçâ³ë ×ÀÏÂ   ",
+                        "Áëîê.×ÀÏÂ1 â³ä U",
+                        "Áëîê.×ÀÏÂ2 â³ä U",
+                        " Áëîê.×ÀÏÂ â³ä U",
+                        "    ÏÎ À×Ð1     ",
+                        "    ÏÎ ×ÀÏÂ1    ",
+                        "   À×Ð/×ÀÏÂ1    ",
+                        "    ÏÎ À×Ð2     ",
+                        "    ÏÎ ×ÀÏÂ2    ",
+                        "   À×Ð/×ÀÏÂ2    ",
                         "Ïóñê ÏÐÂÂ â³ä ÄÂ",
                         "    ÏÎ ÏÐÂÂ     ",
                         "     ÏÐÂÂ1      ",
@@ -12234,13 +12282,19 @@ inline unsigned int Get_data_file(unsigned char* input_data, unsigned char* outp
                         "      AR3       ",
                         "      AR4       ",
                         "   Ðàáîòà ÀÏÂ   ",
-                        "    Áëîê.À×Ð    ",
-                        "   Ðàçð.×ÀÏÂ    ",
-                        " Áëîê.×ÀÏÂ îò U ",
-                        "     ÏÎ À×Ð     ",
-                        "    ÏÎ ×ÀÏÂ     ",
-                        "    UFLS/FAR    ",
                         "UFLS/FAR from DI",
+                        "   Áëîê.À×Ð1    ",
+                        "   Áëîê.À×Ð2    ",
+                        "   Ðàçð.×ÀÏÂ    ",
+                        " Áëîê.×ÀÏÂ1 îò U",
+                        " Áëîê.×ÀÏÂ2 îò U",
+                        " Áëîê.×ÀÏÂ îò U ",
+                        "    ÏÎ À×Ð1     ",
+                        "   ÏÎ ×ÀÏÂ1     ",
+                        "   UFLS/FAR1    ",
+                        "    ÏÎ À×Ð2     ",
+                        "   ÏÎ ×ÀÏÂ2     ",
+                        "   UFLS/FAR2    ",
                         " CBFP Start f.DI",
                         "    CBFP SE     ",
                         "     CBFP1      ",
@@ -12417,13 +12471,19 @@ inline unsigned int Get_data_file(unsigned char* input_data, unsigned char* outp
                         "      ÀÏÂ3      ",
                         "      ÀÏÂ4      ",
                         "   Ðàáîòà ÀÏÂ   ",
-                        "    Áëîê.À×Ð    ",
-                        "  Äîçâ³ë ×ÀÏÂ   ",
-                        " Áëîê.×ÀÏÂ â³ä U",
-                        "     ÏÎ À×Ð     ",
-                        "    ÏÎ ×ÀÏÂ     ",
-                        "    À×Ð/×ÀÏÂ    ",
-                        " À×Ð/×ÀÏÂ â³ä ÄÂ",
+                        " À×Ð/×ÀÏÂ îò ÄÂ ",
+                        "   Áëîê.À×Ð1    ",
+                        "   Áëîê.À×Ð2    ",
+                        "   Ðàçð.×ÀÏÂ    ",
+                        " Áëîê.×ÀÏÂ1 îò U",
+                        " Áëîê.×ÀÏÂ2 îò U",
+                        " Áëîê.×ÀÏÂ îò U ",
+                        "    ÏÎ À×Ð1     ",
+                        "    ÏÎ ×ÀÏÂ1    ",
+                        "   À×Ð/×ÀÏÂ1    ",
+                        "    ÏÎ À×Ð2     ",
+                        "    ÏÎ ×ÀÏÂ2    ",
+                        "   À×Ð/×ÀÏÂ2    ",
                         " Ïóñê ÓÐÎÂ îò ÄÂ",
                         "    ÏÎ ÓÐÎÂ     ",
                         "     ÓÐÎÂ1      ",

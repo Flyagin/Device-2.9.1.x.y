@@ -210,9 +210,9 @@
 //#define MA_STP_KRATN_APV_ZMN              437
 //#define MA_TO_APV_ZMN_ZAVERSHENNJA        438
 
-#define MA_STP_ACHR_F_RAB                 439
-#define MA_STP_CHAPV_F_RAB                440
-#define MA_STP_ACHR_CHAPV_UF1             441
+#define MA_STP_ACHR1_F_RAB                439
+#define MA_STP_CHAPV1_F_RAB               440
+#define MA_STP_ACHR_CHAPV_UF              441
 //#define MA_STP_ACHR_CHAPV_UF2             442
 #define MA_TO_ACHR_1                      443
 //#define MA_TO_ACHR_2                      444
@@ -687,15 +687,15 @@
 //#define BIT_MA_PUSK_AVR                         60249
 
 #define BIT_MA_ACHR_CHAPV_VID_DV                60256
-#define BIT_MA_BLOCK_ACHR                       60257
-#define BIT_MA_BLOCK_CHAPV_VID_U                60258
-#define BIT_MA_PO_F1_ACHR                       60259
+#define BIT_MA_BLOCK_ACHR1                      60257
+#define BIT_MA_BLOCK_CHAPV1_VID_U               60258
+#define BIT_MA_PO_F1_ACHR1                      60259
 //#define BIT_MA_PO_F2_ACHR                       60260
 //#define BIT_MA_F1_ACHR_CHAPV                    60261
 //#define BIT_MA_F2_ACHR_CHAPV                    60262
-#define BIT_MA_ACHR_CHAPV                       60263
+#define BIT_MA_ACHR_CHAPV1                      60263
 #define BIT_MA_RAZR_CHAPV                       60264
-#define BIT_MA_PO_F1_CHAPV                      60265
+#define BIT_MA_PO_F1_CHAPV1                     60265
 //#define BIT_MA_PO_F2_CHAPV                      60266
 
 #define M_ADDRESS_DF                          617

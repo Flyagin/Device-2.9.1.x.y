@@ -168,8 +168,9 @@ RANG_INPUT_BLOCK_TZNP3,
 
 RANG_INPUT_STAT_BLK_APV,
 
-RANG_INPUT_BLOCK_ACHR,
 RANG_INPUT_ACHR_CHAPV_VID_DV,
+RANG_INPUT_BLOCK_ACHR1,
+RANG_INPUT_BLOCK_ACHR2,
 
 RANG_INPUT_PUSK_UROV_VID_DV,
 
@@ -191,7 +192,7 @@ RANG_INPUT_BLOCK_UMAX2
 #define NUMBER_ZZ_SIGNAL_FOR_RANG_INPUT          1
 #define NUMBER_TZNP_SIGNAL_FOR_RANG_INPUT        3
 #define NUMBER_APV_SIGNAL_FOR_RANG_INPUT         1
-#define NUMBER_ACHR_CHAPV_SIGNAL_FOR_RANG_INPUT  2
+#define NUMBER_ACHR_CHAPV_SIGNAL_FOR_RANG_INPUT  3
 #define NUMBER_UROV_SIGNAL_FOR_RANG_INPUT        1
 #define NUMBER_ZOP_SIGNAL_FOR_RANG_INPUT         1
 #define NUMBER_UMIN_SIGNAL_FOR_RANG_INPUT        4
@@ -375,13 +376,19 @@ RANG_OUTPUT_LED_DF_REG_APV3,
 RANG_OUTPUT_LED_DF_REG_APV4,
 RANG_OUTPUT_LED_DF_REG_APV_WORK,
 
-RANG_OUTPUT_LED_DF_REG_BLOCK_ACHR,
-RANG_OUTPUT_LED_DF_REG_RAZR_CHAPV,
-RANG_OUTPUT_LED_DF_REG_BLOCK_CHAPV_VID_U,
-RANG_OUTPUT_LED_DF_REG_PO_ACHR,
-RANG_OUTPUT_LED_DF_REG_PO_CHAPV,
-RANG_OUTPUT_LED_DF_REG_ACHR_CHAPV,
 RANG_OUTPUT_LED_DF_REG_ACHR_CHAPV_VID_DV,
+RANG_OUTPUT_LED_DF_REG_BLOCK_ACHR1,
+RANG_OUTPUT_LED_DF_REG_BLOCK_ACHR2,
+RANG_OUTPUT_LED_DF_REG_RAZR_CHAPV,
+RANG_OUTPUT_LED_DF_REG_BLOCK_CHAPV1_VID_U,
+RANG_OUTPUT_LED_DF_REG_BLOCK_CHAPV2_VID_U,
+RANG_OUTPUT_LED_DF_REG_BLOCK_CHAPV_VID_U,
+RANG_OUTPUT_LED_DF_REG_PO_ACHR1,
+RANG_OUTPUT_LED_DF_REG_PO_CHAPV1,
+RANG_OUTPUT_LED_DF_REG_ACHR_CHAPV1,
+RANG_OUTPUT_LED_DF_REG_PO_ACHR2,
+RANG_OUTPUT_LED_DF_REG_PO_CHAPV2,
+RANG_OUTPUT_LED_DF_REG_ACHR_CHAPV2,
 
 RANG_OUTPUT_LED_DF_REG_PUSK_UROV_VID_DV,
 RANG_OUTPUT_LED_DF_REG_PO_UROV,
@@ -420,7 +427,7 @@ RANG_OUTPUT_LED_DF_REG_UMAX2
 #define NUMBER_ZZ_SIGNAL_FOR_RANG_OUTPUT_LED_DF_REG          8
 #define NUMBER_TZNP_SIGNAL_FOR_RANG_OUTPUT_LED_DF_REG        30
 #define NUMBER_APV_SIGNAL_FOR_RANG_OUTPUT_LED_DF_REG         6
-#define NUMBER_ACHR_CHAPV_SIGNAL_FOR_RANG_OUTPUT_LED_DF_REG  7
+#define NUMBER_ACHR_CHAPV_SIGNAL_FOR_RANG_OUTPUT_LED_DF_REG  13
 #define NUMBER_UROV_SIGNAL_FOR_RANG_OUTPUT_LED_DF_REG        4
 #define NUMBER_ZOP_SIGNAL_FOR_RANG_OUTPUT_LED_DF_REG         3
 #define NUMBER_UMIN_SIGNAL_FOR_RANG_OUTPUT_LED_DF_REG        12
@@ -625,24 +632,26 @@ enum __mtz_abc_direction_const {
    | (1 << (RANG_OUTPUT_LED_DF_REG_PO_TZNP3_NAZAD - 128))               /*141*/\
    | (1 << (RANG_OUTPUT_LED_DF_REG_TZNP3 - 128))                        /*142*/\
    | (1 << (RANG_OUTPUT_LED_DF_REG_APV_WORK - 128))                     /*143*/\
-   | (1 << (RANG_OUTPUT_LED_DF_REG_PO_ACHR - 128))                      /*152*/\
-   | (1 << (RANG_OUTPUT_LED_DF_REG_ACHR_CHAPV - 128))                   /*154*/\
-   | (1 << (RANG_OUTPUT_LED_DF_REG_PO_UROV - 128))                      /*157*/\
-   | (1 << (RANG_OUTPUT_LED_DF_REG_UROV1 - 128))                        /*158*/\
-   | (1 << (RANG_OUTPUT_LED_DF_REG_UROV2 - 128))                        /*159*/\
+   | (1 << (RANG_OUTPUT_LED_DF_REG_PO_ACHR1 - 128))                     /*156*/\
+   | (1 << (RANG_OUTPUT_LED_DF_REG_ACHR_CHAPV1 - 128))                  /*158*/\
+   | (1 << (RANG_OUTPUT_LED_DF_REG_PO_ACHR2 - 128))                     /*159*/\
 )
 
 #define MASKA_SIGNALES_FOR_LOCK_GROUP_PICKUP_5         (unsigned int)(         \
-     (1 << (RANG_OUTPUT_LED_DF_REG_PO_ZOP - 160))                       /*161*/\
-   | (1 << (RANG_OUTPUT_LED_DF_REG_ZOP - 160))                          /*162*/\
-   | (1 << (RANG_OUTPUT_LED_DF_REG_PO_UMIN1 - 160))                     /*167*/\
-   | (1 << (RANG_OUTPUT_LED_DF_REG_UMIN1 - 160))                        /*170*/\
-   | (1 << (RANG_OUTPUT_LED_DF_REG_PO_UMIN2 - 160))                     /*171*/\
-   | (1 << (RANG_OUTPUT_LED_DF_REG_UMIN2 - 160))                        /*174*/\
-   | (1 << (RANG_OUTPUT_LED_DF_REG_PO_UMAX1 - 160))                     /*176*/\
-   | (1 << (RANG_OUTPUT_LED_DF_REG_UMAX1 - 160))                        /*177*/\
-   | (1 << (RANG_OUTPUT_LED_DF_REG_PO_UMAX2 - 160))                     /*178*/\
-   | (1 << (RANG_OUTPUT_LED_DF_REG_UMAX2 - 160))                        /*180*/\
+     (1 << (RANG_OUTPUT_LED_DF_REG_ACHR_CHAPV2 - 160))                  /*160*/\
+   | (1 << (RANG_OUTPUT_LED_DF_REG_PO_UROV - 160))                      /*163*/\
+   | (1 << (RANG_OUTPUT_LED_DF_REG_UROV1 - 160))                        /*164*/\
+   | (1 << (RANG_OUTPUT_LED_DF_REG_UROV2 - 160))                        /*165*/\
+   | (1 << (RANG_OUTPUT_LED_DF_REG_PO_ZOP - 160))                       /*167*/\
+   | (1 << (RANG_OUTPUT_LED_DF_REG_ZOP - 160))                          /*168*/\
+   | (1 << (RANG_OUTPUT_LED_DF_REG_PO_UMIN1 - 160))                     /*173*/\
+   | (1 << (RANG_OUTPUT_LED_DF_REG_UMIN1 - 160))                        /*176*/\
+   | (1 << (RANG_OUTPUT_LED_DF_REG_PO_UMIN2 - 160))                     /*177*/\
+   | (1 << (RANG_OUTPUT_LED_DF_REG_UMIN2 - 160))                        /*180*/\
+   | (1 << (RANG_OUTPUT_LED_DF_REG_PO_UMAX1 - 160))                     /*182*/\
+   | (1 << (RANG_OUTPUT_LED_DF_REG_UMAX1 - 160))                        /*183*/\
+   | (1 << (RANG_OUTPUT_LED_DF_REG_PO_UMAX2 - 160))                     /*184*/\
+   | (1 << (RANG_OUTPUT_LED_DF_REG_UMAX2 - 160))                        /*186*/\
 )
 /*****************************************/
 
@@ -724,19 +733,19 @@ enum __mtz_abc_direction_const {
    | (1 << (RANG_OUTPUT_LED_DF_REG_APV3 - 128))                 /*146*/  \
    | (1 << (RANG_OUTPUT_LED_DF_REG_APV4 - 128))                 /*147*/  \
    | (1 << (RANG_OUTPUT_LED_DF_REG_APV_WORK - 128))             /*148*/  \
-   | (1 << (RANG_OUTPUT_LED_DF_REG_PUSK_UROV_VID_DV - 128))     /*156*/  \
-   | (1 << (RANG_OUTPUT_LED_DF_REG_PO_UROV - 128))              /*157*/  \
-   | (1 << (RANG_OUTPUT_LED_DF_REG_UROV1 - 128))                /*158*/  \
-   | (1 << (RANG_OUTPUT_LED_DF_REG_UROV2 - 128))                /*159*/  \
 )  
 
 #define MASKA_FOR_CONTINUE_GET_DR_ACTINE_WORD_5 (unsigned int)(          \
-     (1 << (RANG_OUTPUT_LED_DF_REG_PO_ZOP - 160))               /*161*/  \
-   | (1 << (RANG_OUTPUT_LED_DF_REG_ZOP - 160))                  /*162*/  \
-   | (1 << (RANG_OUTPUT_LED_DF_REG_PO_UMAX1 - 160))             /*176*/  \
-   | (1 << (RANG_OUTPUT_LED_DF_REG_UMAX1 - 160))                /*177*/  \
-   | (1 << (RANG_OUTPUT_LED_DF_REG_PO_UMAX2 - 160))             /*179*/  \
-   | (1 << (RANG_OUTPUT_LED_DF_REG_UMAX2 - 160))                /*180*/  \
+     (1 << (RANG_OUTPUT_LED_DF_REG_PUSK_UROV_VID_DV - 160))     /*162*/  \
+   | (1 << (RANG_OUTPUT_LED_DF_REG_PO_UROV - 160))              /*163*/  \
+   | (1 << (RANG_OUTPUT_LED_DF_REG_UROV1 - 160))                /*164*/  \
+   | (1 << (RANG_OUTPUT_LED_DF_REG_UROV2 - 160))                /*165*/  \
+   | (1 << (RANG_OUTPUT_LED_DF_REG_PO_ZOP - 160))               /*167*/  \
+   | (1 << (RANG_OUTPUT_LED_DF_REG_ZOP - 160))                  /*168*/  \
+   | (1 << (RANG_OUTPUT_LED_DF_REG_PO_UMAX1 - 160))             /*182*/  \
+   | (1 << (RANG_OUTPUT_LED_DF_REG_UMAX1 - 160))                /*183*/  \
+   | (1 << (RANG_OUTPUT_LED_DF_REG_PO_UMAX2 - 160))             /*185*/  \
+   | (1 << (RANG_OUTPUT_LED_DF_REG_UMAX2 - 160))                /*186*/  \
 )  
 /*****************************************/
 
@@ -854,10 +863,10 @@ enum __mtz_abc_direction_const {
 #define MASKA_MONITOTYNG_UMIN_SIGNALES_4        0
 
 #define MASKA_MONITOTYNG_UMIN_SIGNALES_5 (unsigned int)(   \
-     (1 << (RANG_OUTPUT_LED_DF_REG_PO_UMIN1 - 160))/*167*/ \
-   | (1 << (RANG_OUTPUT_LED_DF_REG_UMIN1 - 160))   /*170*/ \
-   | (1 << (RANG_OUTPUT_LED_DF_REG_PO_UMIN2 - 160))/*171*/ \
-   | (1 << (RANG_OUTPUT_LED_DF_REG_UMIN2 - 160))   /*175*/ \
+     (1 << (RANG_OUTPUT_LED_DF_REG_PO_UMIN1 - 160))/*173*/ \
+   | (1 << (RANG_OUTPUT_LED_DF_REG_UMIN1 - 160))   /*176*/ \
+   | (1 << (RANG_OUTPUT_LED_DF_REG_PO_UMIN2 - 160))/*177*/ \
+   | (1 << (RANG_OUTPUT_LED_DF_REG_UMIN2 - 160))   /*181*/ \
 )
 /*****************************************/
 
@@ -871,10 +880,10 @@ enum __mtz_abc_direction_const {
 #define MASKA_MONITOTYNG_UMAX_SIGNALES_4        0
 
 #define MASKA_MONITOTYNG_UMAX_SIGNALES_5 (unsigned int)(   \
-     (1 << (RANG_OUTPUT_LED_DF_REG_PO_UMAX1 - 160))/*176*/ \
-   | (1 << (RANG_OUTPUT_LED_DF_REG_UMAX1 - 160))   /*177*/ \
-   | (1 << (RANG_OUTPUT_LED_DF_REG_PO_UMAX2 - 160))/*179*/ \
-   | (1 << (RANG_OUTPUT_LED_DF_REG_UMAX2 - 160))   /*180*/ \
+     (1 << (RANG_OUTPUT_LED_DF_REG_PO_UMAX1 - 160))/*182*/ \
+   | (1 << (RANG_OUTPUT_LED_DF_REG_UMAX1 - 160))   /*183*/ \
+   | (1 << (RANG_OUTPUT_LED_DF_REG_PO_UMAX2 - 160))/*185*/ \
+   | (1 << (RANG_OUTPUT_LED_DF_REG_UMAX2 - 160))   /*186*/ \
 )
 /*****************************************/
 
@@ -888,8 +897,8 @@ enum __mtz_abc_direction_const {
 #define MASKA_MONITOTYNG_ZOP_SIGNALES_4                  0
 
 #define MASKA_MONITOTYNG_ZOP_SIGNALES_5 (unsigned int)(   \
-     (1 << (RANG_OUTPUT_LED_DF_REG_PO_ZOP - 160))/*161*/  \
-   | (1 << (RANG_OUTPUT_LED_DF_REG_ZOP - 160))   /*162*/  \
+     (1 << (RANG_OUTPUT_LED_DF_REG_PO_ZOP - 160))/*167*/  \
+   | (1 << (RANG_OUTPUT_LED_DF_REG_ZOP - 160))   /*169*/  \
 )
 
 /*****************************************/
@@ -903,11 +912,14 @@ enum __mtz_abc_direction_const {
 #define MASKA_MONITOTYNG_F_MIN_ACHR_SIGNALES_3   0
 
 #define MASKA_MONITOTYNG_F_MIN_ACHR_SIGNALES_4   (unsigned int)(  \
-     (1 << (RANG_OUTPUT_LED_DF_REG_PO_ACHR - 128))    /*152*/  \
-   | (1 << (RANG_OUTPUT_LED_DF_REG_ACHR_CHAPV - 128)) /*154*/  \
+     (1 << (RANG_OUTPUT_LED_DF_REG_PO_ACHR1 - 128))    /*156*/  \
+   | (1 << (RANG_OUTPUT_LED_DF_REG_ACHR_CHAPV1 - 128)) /*158*/  \
+   | (1 << (RANG_OUTPUT_LED_DF_REG_PO_ACHR2 - 128))    /*159*/  \
 )     
 
-#define MASKA_MONITOTYNG_F_MIN_ACHR_SIGNALES_5   0
+#define MASKA_MONITOTYNG_F_MIN_ACHR_SIGNALES_5   (unsigned int)(  \
+     (1 << (RANG_OUTPUT_LED_DF_REG_ACHR_CHAPV2 - 160)) /*161*/  \
+)     
 /*****************************************/
 
 /*****************************************/
@@ -1061,9 +1073,9 @@ NUMBER_ODYNYCI_VYMIRJUVANNJA
 //×àñ êîìï³ëÿö³¿
 /*****************************************/
 
-#define YEAR_VER                                              (((__DATE__[9] - 0x30) << 4) | (__DATE__[10] - 0x30))
+#define YEAR_VER                                              ((__DATE__[9] != ' ') ? (((__DATE__[9] - 0x30) << 4) | (__DATE__[10] - 0x30)) : (__DATE__[10] - 0x30))
 #define MONTH_VER                                             str_to_int_DATE_Mmm()
-#define DAY_VER                                               (((__DATE__[4] - 0x30) << 4) | (__DATE__[5] - 0x30))
+#define DAY_VER                                               ((__DATE__[4] != ' ') ? (((__DATE__[4] - 0x30) << 4) | (__DATE__[5] - 0x30)) : (__DATE__[5] - 0x30))
 #define HOUR_VER                                              (((__TIME__[0] - 0x30) << 4) | (__TIME__[1] - 0x30))
 #define MINUTE_VER                                            (((__TIME__[3] - 0x30) << 4) | (__TIME__[4] - 0x30))
 #define SECOND_VER                                            (((__TIME__[6] - 0x30) << 4) | (__TIME__[7] - 0x30))

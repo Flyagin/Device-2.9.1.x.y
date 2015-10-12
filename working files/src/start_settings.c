@@ -1878,12 +1878,16 @@ void min_settings(__SETTINGS *target_label)
     target_label->timeout_apv_block_vid_apv4[i] = TIMEOUT_APV_BLOCK_VID_APV4_MIN;
     target_label->timeout_apv_block_vid_VV[i] = TIMEOUT_APV_BLOCK_VID_VV_MIN;
     
-    target_label->setpoint_achr_f_rab[i]  = SETPOINT_ACHR_F_RAB_MIN;
-    target_label->setpoint_chapv_f_rab[i] = MAIN_FREQUENCY*100 - 30;
-    target_label->setpoint_achr_chapv_uf1[i] = SETPOINT_ACHR_CHAPV_UF1_MIN;
+    target_label->setpoint_achr_chapv_uf[i] = SETPOINT_ACHR_CHAPV_UF_MIN;
+    target_label->setpoint_achr1_f_rab[i]  = SETPOINT_ACHR1_F_RAB_MIN;
+    target_label->setpoint_chapv1_f_rab[i] = MAIN_FREQUENCY*100 - 30;
+    target_label->setpoint_achr2_f_rab[i]  = SETPOINT_ACHR2_F_RAB_MIN;
+    target_label->setpoint_chapv2_f_rab[i] = MAIN_FREQUENCY*100 - 30;
     
     target_label->timeout_achr_1[i] = TIMEOUT_ACHR1_MIN;
     target_label->timeout_chapv_1[i] = TIMEOUT_CHAPV1_MIN;
+    target_label->timeout_achr_2[i] = TIMEOUT_ACHR2_MIN;
+    target_label->timeout_chapv_2[i] = TIMEOUT_CHAPV2_MIN;
     
     target_label->setpoint_urov[i]  = SETPOINT_UROV_MIN;
     target_label->timeout_urov_1[i] = TIMEOUT_UROV1_MIN;

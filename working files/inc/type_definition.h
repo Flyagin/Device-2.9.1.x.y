@@ -220,12 +220,16 @@ typedef struct
   unsigned int control_apv;             //Поле для управління АПВ
   
   //АЧР-ЧАПВ
-  unsigned int setpoint_achr_f_rab[NUMBER_GROUP_USTAVOK];    //уставка FРаб АЧР частоты F1
-  unsigned int setpoint_chapv_f_rab[NUMBER_GROUP_USTAVOK];   //уставка FРаб ЧАПВ частоты F1
-  unsigned int setpoint_achr_chapv_uf1[NUMBER_GROUP_USTAVOK]; //уставка АЧР ЧАПВ UF1
+  unsigned int setpoint_achr_chapv_uf[NUMBER_GROUP_USTAVOK]; //уставка АЧР ЧАПВ UF1
+  unsigned int setpoint_achr1_f_rab[NUMBER_GROUP_USTAVOK];    //уставка FРаб АЧР1 частоти F
+  unsigned int setpoint_chapv1_f_rab[NUMBER_GROUP_USTAVOK];   //уставка FРаб ЧАПВ1 частотм F
+  unsigned int setpoint_achr2_f_rab[NUMBER_GROUP_USTAVOK];    //уставка FРаб АЧР2 частотм F
+  unsigned int setpoint_chapv2_f_rab[NUMBER_GROUP_USTAVOK];   //уставка FРаб ЧАПВ2 частотм F
 
   int timeout_achr_1[NUMBER_GROUP_USTAVOK];                   //Витримка Циклу АЧР1
   int timeout_chapv_1[NUMBER_GROUP_USTAVOK];                  //Витримка Циклу ЧАПВ1
+  int timeout_achr_2[NUMBER_GROUP_USTAVOK];                   //Витримка Циклу АЧР2
+  int timeout_chapv_2[NUMBER_GROUP_USTAVOK];                  //Витримка Циклу ЧАПВ2
 
   unsigned int control_achr_chapv;      //Поле для управління АЧР-ЧАПВ
   

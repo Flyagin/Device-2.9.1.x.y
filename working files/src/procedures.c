@@ -444,12 +444,6 @@ unsigned int action_after_changing_of_configuration(unsigned int new_configurati
       //Âèâîäèì ñòóïåí³ ÌÒÇ 0.4êÂ
       target_label->control_mtz04 &= (unsigned int)(~(CTR_MTZ04_1 | CTR_MTZ04_2));
    
-//      //Âèâîäèì ñòóïåí³ ÌÒÇ 0.4êÂ ç ÀÏÂ
-//      target_label->control_apv &= (unsigned int)(~(CTR_APV_STARTED_FROM_MTZ04_1 | CTR_APV_STARTED_FROM_MTZ04_2));
-//
-//      //Âèâîäèì ñòóïåí³ ÌÒÇ 0.4êÂ ç ÇÄÇ
-//      target_label->control_zdz &= (unsigned int)(~(CTR_ZDZ_STARTED_FROM_MTZ04_1 | CTR_ZDZ_STARTED_FROM_MTZ04_2));
-//      
 //      //Âèâîäèì ñòóïåí³ ÌÒÇ 0.4êÂ ç ÓÐÎÂ
 //      target_label->control_urov &= (unsigned int)(~(CTR_UROV_STARTED_FROM_MTZ04_1 | CTR_UROV_STARTED_FROM_MTZ04_2));
       
@@ -1210,7 +1204,7 @@ unsigned int action_after_changing_of_configuration(unsigned int new_configurati
     if ((target_label->configuration & (1<<ACHR_CHAPV_BIT_CONFIGURATION)) == 0)
     {
       //Âèâîäèì À×Ð-×ÀÏÂ
-      target_label->control_achr_chapv &= (unsigned int)(~(CTR_ACHR | CTR_CHAPV));
+      target_label->control_achr_chapv &= (unsigned int)(~(CTR_ACHR1 | CTR_CHAPV1 | CTR_ACHR2 | CTR_CHAPV2));
 
       //Âèâîäèì çàõèñòè À×Ð ç ÓÐÎÂ
       target_label->control_urov &= (unsigned int)(~CTR_UROV_STARTED_FROM_ACHR);
