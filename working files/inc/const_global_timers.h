@@ -32,7 +32,18 @@
 #define INDEX_TIMER_MTZ4_N_VPERED                              (INDEX_TIMER_MTZ4 + 1)
 #define INDEX_TIMER_MTZ4_N_NAZAD                               (INDEX_TIMER_MTZ4_N_VPERED + 1)
 #define INDEX_TIMER_MTZ4_PO_NAPRUZI                            (INDEX_TIMER_MTZ4_N_NAZAD + 1)
-#define INDEX_TIMER_ZZ_3I0                                     (INDEX_TIMER_MTZ4_PO_NAPRUZI + 1)
+//123456 Таймера МТЗ04_1
+#define INDEX_TIMER_MTZ04_1                                    (INDEX_TIMER_MTZ4_PO_NAPRUZI + 1)
+//123456 Таймера МТЗ04_2
+#define INDEX_TIMER_MTZ04_2                                    (INDEX_TIMER_MTZ04_1 + 1)
+//123456 Таймера МТЗ04_3
+#define INDEX_TIMER_MTZ04_3                                    (INDEX_TIMER_MTZ04_2 + 1)
+//123456 Таймера МТЗ04_4
+#define INDEX_TIMER_MTZ04_4                                    (INDEX_TIMER_MTZ04_3 + 1)
+//123456 Таймера МТЗ04_5
+#define INDEX_TIMER_MTZ04_5                                    (INDEX_TIMER_MTZ04_4 + 1)
+#define INDEX_TIMER_ZZ_3I0                                     (INDEX_TIMER_MTZ04_5 + 1)
+
 #define INDEX_TIMER_ZZ_3U0                                     (INDEX_TIMER_ZZ_3I0 + 1)
 #define INDEX_TIMER_NZZ                                        (INDEX_TIMER_ZZ_3U0 + 1)
 #define INDEX_TIMER_TZNP1_VPERED                               (INDEX_TIMER_NZZ + 1)

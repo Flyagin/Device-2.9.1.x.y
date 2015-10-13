@@ -1547,492 +1547,10 @@ inline void clocking_global_timers(void)
   {
     if (global_timers[i] >= 0)
     {
-      int max_value = 0;
       //Першою умовою того, що таймер треба тактувати є той факт, що величина таймеру не від'ємна
-      switch (i)
-      {
-        //У цьому блоці треба величині max_value встановити значення максимального значення таймеру до якого має йти тактування
-      case (INDEX_TIMER_DF_PROLONG_SET_FOR_BUTTON_INTERFACE_START + 0):
-      case (INDEX_TIMER_DF_PROLONG_SET_FOR_BUTTON_INTERFACE_START + 1):
-      case (INDEX_TIMER_DF_PROLONG_SET_FOR_BUTTON_INTERFACE_START + 2):
-      case (INDEX_TIMER_DF_PROLONG_SET_FOR_BUTTON_INTERFACE_START + 3):
-      case (INDEX_TIMER_DF_PROLONG_SET_FOR_BUTTON_INTERFACE_START + 4):
-      case (INDEX_TIMER_DF_PROLONG_SET_FOR_BUTTON_INTERFACE_START + 5):
-      case (INDEX_TIMER_DF_PROLONG_SET_FOR_BUTTON_INTERFACE_START + 6):
-      case (INDEX_TIMER_DF_PROLONG_SET_FOR_BUTTON_INTERFACE_START + 7):
-        {
-          max_value =  current_settings_prt.timeout_pause_df[i - INDEX_TIMER_DF_PROLONG_SET_FOR_BUTTON_INTERFACE_START]/*TIMEOUT_DF_PAUSE_FOR_BUTTONS_INTERFACE*/;
-          break;
-        }
-      case (INDEX_TIMER_DF_PAUSE_START + 0):
-      case (INDEX_TIMER_DF_PAUSE_START + 1):
-      case (INDEX_TIMER_DF_PAUSE_START + 2):
-      case (INDEX_TIMER_DF_PAUSE_START + 3):
-      case (INDEX_TIMER_DF_PAUSE_START + 4):
-      case (INDEX_TIMER_DF_PAUSE_START + 5):
-      case (INDEX_TIMER_DF_PAUSE_START + 6):
-      case (INDEX_TIMER_DF_PAUSE_START + 7):
-        {
-          max_value =  current_settings_prt.timeout_pause_df[i - INDEX_TIMER_DF_PAUSE_START];
-          break;
-        }
-      case (INDEX_TIMER_DF_WORK_START + 0):
-      case (INDEX_TIMER_DF_WORK_START + 1):
-      case (INDEX_TIMER_DF_WORK_START + 2):
-      case (INDEX_TIMER_DF_WORK_START + 3):
-      case (INDEX_TIMER_DF_WORK_START + 4):
-      case (INDEX_TIMER_DF_WORK_START + 5):
-      case (INDEX_TIMER_DF_WORK_START + 6):
-      case (INDEX_TIMER_DF_WORK_START + 7):
-        {
-          max_value =  current_settings_prt.timeout_work_df[i - INDEX_TIMER_DF_WORK_START];
-          break;
-        }
-      case INDEX_TIMER_MTZ1:
-        {
-          int max_value_pare1, max_value_pare2;
-          max_value_pare1 =  (current_settings_prt.timeout_mtz_1[0] >= current_settings_prt.timeout_mtz_1[1]) ? current_settings_prt.timeout_mtz_1[0] : current_settings_prt.timeout_mtz_1[1];
-          max_value_pare2 =  (current_settings_prt.timeout_mtz_1[2] >= current_settings_prt.timeout_mtz_1[3]) ? current_settings_prt.timeout_mtz_1[2] : current_settings_prt.timeout_mtz_1[3];
-          max_value = (max_value_pare1 >= max_value_pare2) ? max_value_pare1 : max_value_pare2;
-          break;
-        }
-      case INDEX_TIMER_MTZ1_N_VPERED:
-        {
-          int max_value_pare1, max_value_pare2;
-          max_value_pare1 =  (current_settings_prt.timeout_mtz_1_n_vpered[0] >= current_settings_prt.timeout_mtz_1_n_vpered[1]) ? current_settings_prt.timeout_mtz_1_n_vpered[0] : current_settings_prt.timeout_mtz_1_n_vpered[1];
-          max_value_pare2 =  (current_settings_prt.timeout_mtz_1_n_vpered[2] >= current_settings_prt.timeout_mtz_1_n_vpered[3]) ? current_settings_prt.timeout_mtz_1_n_vpered[2] : current_settings_prt.timeout_mtz_1_n_vpered[3];
-          max_value = (max_value_pare1 >= max_value_pare2) ? max_value_pare1 : max_value_pare2;
-          break;
-        }
-      case INDEX_TIMER_MTZ1_N_NAZAD:
-        {
-          int max_value_pare1, max_value_pare2;
-          max_value_pare1 =  (current_settings_prt.timeout_mtz_1_n_nazad[0] >= current_settings_prt.timeout_mtz_1_n_nazad[1]) ? current_settings_prt.timeout_mtz_1_n_nazad[0] : current_settings_prt.timeout_mtz_1_n_nazad[1];
-          max_value_pare2 =  (current_settings_prt.timeout_mtz_1_n_nazad[2] >= current_settings_prt.timeout_mtz_1_n_nazad[3]) ? current_settings_prt.timeout_mtz_1_n_nazad[2] : current_settings_prt.timeout_mtz_1_n_nazad[3];
-          max_value = (max_value_pare1 >= max_value_pare2) ? max_value_pare1 : max_value_pare2;
-          break;
-        }
-      case INDEX_TIMER_MTZ1_PO_NAPRUZI:
-        {
-          int max_value_pare1, max_value_pare2;
-          max_value_pare1 =  (current_settings_prt.timeout_mtz_1_po_napruzi[0] >= current_settings_prt.timeout_mtz_1_po_napruzi[1]) ? current_settings_prt.timeout_mtz_1_po_napruzi[0] : current_settings_prt.timeout_mtz_1_po_napruzi[1];
-          max_value_pare2 =  (current_settings_prt.timeout_mtz_1_po_napruzi[2] >= current_settings_prt.timeout_mtz_1_po_napruzi[3]) ? current_settings_prt.timeout_mtz_1_po_napruzi[2] : current_settings_prt.timeout_mtz_1_po_napruzi[3];
-          max_value = (max_value_pare1 >= max_value_pare2) ? max_value_pare1 : max_value_pare2;
-          break;
-        }
-
-      case INDEX_TIMER_MTZ2:
-        {
-          int max_value_pare1, max_value_pare2;
-          max_value_pare1 =  (current_settings_prt.timeout_mtz_2[0] >= current_settings_prt.timeout_mtz_2[1]) ? current_settings_prt.timeout_mtz_2[0] : current_settings_prt.timeout_mtz_2[1];
-          max_value_pare2 =  (current_settings_prt.timeout_mtz_2[2] >= current_settings_prt.timeout_mtz_2[3]) ? current_settings_prt.timeout_mtz_2[2] : current_settings_prt.timeout_mtz_2[3];
-          max_value = (max_value_pare1 >= max_value_pare2) ? max_value_pare1 : max_value_pare2;
-          break;
-        }
-      case INDEX_TIMER_MTZ2_DEPENDENT:
-        {
-          max_value =  TIMEOUT_MTZ2_MAX + 1;
-          break;
-        }
-      case INDEX_TIMER_MTZ2_PR:
-        {
-          int max_value_pare1, max_value_pare2;
-          max_value_pare1 =  (current_settings_prt.timeout_mtz_2_pr[0] >= current_settings_prt.timeout_mtz_2_pr[1]) ? current_settings_prt.timeout_mtz_2_pr[0] : current_settings_prt.timeout_mtz_2_pr[1];
-          max_value_pare2 =  (current_settings_prt.timeout_mtz_2_pr[2] >= current_settings_prt.timeout_mtz_2_pr[3]) ? current_settings_prt.timeout_mtz_2_pr[2] : current_settings_prt.timeout_mtz_2_pr[3];
-          max_value = (max_value_pare1 >= max_value_pare2) ? max_value_pare1 : max_value_pare2;
-          break;
-        }
-      case INDEX_TIMER_MTZ2_N_VPERED:
-        {
-          int max_value_pare1, max_value_pare2;
-          max_value_pare1 =  (current_settings_prt.timeout_mtz_2_n_vpered[0] >= current_settings_prt.timeout_mtz_2_n_vpered[1]) ? current_settings_prt.timeout_mtz_2_n_vpered[0] : current_settings_prt.timeout_mtz_2_n_vpered[1];
-          max_value_pare2 =  (current_settings_prt.timeout_mtz_2_n_vpered[2] >= current_settings_prt.timeout_mtz_2_n_vpered[3]) ? current_settings_prt.timeout_mtz_2_n_vpered[2] : current_settings_prt.timeout_mtz_2_n_vpered[3];
-          max_value = (max_value_pare1 >= max_value_pare2) ? max_value_pare1 : max_value_pare2;
-          break;
-        }
-      case INDEX_TIMER_MTZ2_N_VPERED_PR:
-        {
-          int max_value_pare1, max_value_pare2;
-          max_value_pare1 =  (current_settings_prt.timeout_mtz_2_n_vpered_pr[0] >= current_settings_prt.timeout_mtz_2_n_vpered_pr[1]) ? current_settings_prt.timeout_mtz_2_n_vpered_pr[0] : current_settings_prt.timeout_mtz_2_n_vpered_pr[1];
-          max_value_pare2 =  (current_settings_prt.timeout_mtz_2_n_vpered_pr[2] >= current_settings_prt.timeout_mtz_2_n_vpered_pr[3]) ? current_settings_prt.timeout_mtz_2_n_vpered_pr[2] : current_settings_prt.timeout_mtz_2_n_vpered_pr[3];
-          max_value = (max_value_pare1 >= max_value_pare2) ? max_value_pare1 : max_value_pare2;
-          break;
-        }
-      case INDEX_TIMER_MTZ2_N_NAZAD:
-        {
-          int max_value_pare1, max_value_pare2;
-          max_value_pare1 =  (current_settings_prt.timeout_mtz_2_n_nazad[0] >= current_settings_prt.timeout_mtz_2_n_nazad[1]) ? current_settings_prt.timeout_mtz_2_n_nazad[0] : current_settings_prt.timeout_mtz_2_n_nazad[1];
-          max_value_pare2 =  (current_settings_prt.timeout_mtz_2_n_nazad[2] >= current_settings_prt.timeout_mtz_2_n_nazad[3]) ? current_settings_prt.timeout_mtz_2_n_nazad[2] : current_settings_prt.timeout_mtz_2_n_nazad[3];
-          max_value = (max_value_pare1 >= max_value_pare2) ? max_value_pare1 : max_value_pare2;
-          break;
-        }
-      case INDEX_TIMER_MTZ2_N_NAZAD_PR:
-        {
-          int max_value_pare1, max_value_pare2;
-          max_value_pare1 =  (current_settings_prt.timeout_mtz_2_n_nazad_pr[0] >= current_settings_prt.timeout_mtz_2_n_nazad_pr[1]) ? current_settings_prt.timeout_mtz_2_n_nazad_pr[0] : current_settings_prt.timeout_mtz_2_n_nazad_pr[1];
-          max_value_pare2 =  (current_settings_prt.timeout_mtz_2_n_nazad_pr[2] >= current_settings_prt.timeout_mtz_2_n_nazad_pr[3]) ? current_settings_prt.timeout_mtz_2_n_nazad_pr[2] : current_settings_prt.timeout_mtz_2_n_nazad_pr[3];
-          max_value = (max_value_pare1 >= max_value_pare2) ? max_value_pare1 : max_value_pare2;
-          break;
-        }
-      case INDEX_TIMER_MTZ2_PO_NAPRUZI:
-        {
-          int max_value_pare1, max_value_pare2;
-          max_value_pare1 =  (current_settings_prt.timeout_mtz_2_po_napruzi[0] >= current_settings_prt.timeout_mtz_2_po_napruzi[1]) ? current_settings_prt.timeout_mtz_2_po_napruzi[0] : current_settings_prt.timeout_mtz_2_po_napruzi[1];
-          max_value_pare2 =  (current_settings_prt.timeout_mtz_2_po_napruzi[2] >= current_settings_prt.timeout_mtz_2_po_napruzi[3]) ? current_settings_prt.timeout_mtz_2_po_napruzi[2] : current_settings_prt.timeout_mtz_2_po_napruzi[3];
-          max_value = (max_value_pare1 >= max_value_pare2) ? max_value_pare1 : max_value_pare2;
-          break;
-        }
-      case INDEX_TIMER_MTZ2_PO_NAPRUZI_PR:
-        {
-          int max_value_pare1, max_value_pare2;
-          max_value_pare1 =  (current_settings_prt.timeout_mtz_2_po_napruzi_pr[0] >= current_settings_prt.timeout_mtz_2_po_napruzi_pr[1]) ? current_settings_prt.timeout_mtz_2_po_napruzi_pr[0] : current_settings_prt.timeout_mtz_2_po_napruzi_pr[1];
-          max_value_pare2 =  (current_settings_prt.timeout_mtz_2_po_napruzi_pr[2] >= current_settings_prt.timeout_mtz_2_po_napruzi_pr[3]) ? current_settings_prt.timeout_mtz_2_po_napruzi_pr[2] : current_settings_prt.timeout_mtz_2_po_napruzi_pr[3];
-          max_value = (max_value_pare1 >= max_value_pare2) ? max_value_pare1 : max_value_pare2;
-          break;
-        }
-      case INDEX_TIMER_MTZ2_VVID_PR:
-        {
-          int max_value_pare1, max_value_pare2;
-          max_value_pare1 =  (current_settings_prt.timeout_mtz_2_vvid_pr[0] >= current_settings_prt.timeout_mtz_2_vvid_pr[1]) ? current_settings_prt.timeout_mtz_2_vvid_pr[0] : current_settings_prt.timeout_mtz_2_vvid_pr[1];
-          max_value_pare2 =  (current_settings_prt.timeout_mtz_2_vvid_pr[2] >= current_settings_prt.timeout_mtz_2_vvid_pr[3]) ? current_settings_prt.timeout_mtz_2_vvid_pr[2] : current_settings_prt.timeout_mtz_2_vvid_pr[3];
-          max_value = (max_value_pare1 >= max_value_pare2) ? max_value_pare1 : max_value_pare2;
-          break;
-        }
-      case INDEX_TIMER_MTZ3:
-        {
-          int max_value_pare1, max_value_pare2;
-          max_value_pare1 =  (current_settings_prt.timeout_mtz_3[0] >= current_settings_prt.timeout_mtz_3[1]) ? current_settings_prt.timeout_mtz_3[0] : current_settings_prt.timeout_mtz_3[1];
-          max_value_pare2 =  (current_settings_prt.timeout_mtz_3[2] >= current_settings_prt.timeout_mtz_3[3]) ? current_settings_prt.timeout_mtz_3[2] : current_settings_prt.timeout_mtz_3[3];
-          max_value = (max_value_pare1 >= max_value_pare2) ? max_value_pare1 : max_value_pare2;
-          break;
-        }
-      case INDEX_TIMER_MTZ3_N_VPERED:
-        {
-          int max_value_pare1, max_value_pare2;
-          max_value_pare1 =  (current_settings_prt.timeout_mtz_3_n_vpered[0] >= current_settings_prt.timeout_mtz_3_n_vpered[1]) ? current_settings_prt.timeout_mtz_3_n_vpered[0] : current_settings_prt.timeout_mtz_3_n_vpered[1];
-          max_value_pare2 =  (current_settings_prt.timeout_mtz_3_n_vpered[2] >= current_settings_prt.timeout_mtz_3_n_vpered[3]) ? current_settings_prt.timeout_mtz_3_n_vpered[2] : current_settings_prt.timeout_mtz_3_n_vpered[3];
-          max_value = (max_value_pare1 >= max_value_pare2) ? max_value_pare1 : max_value_pare2;
-          break;
-        }
-      case INDEX_TIMER_MTZ3_N_NAZAD:
-        {
-          int max_value_pare1, max_value_pare2;
-          max_value_pare1 =  (current_settings_prt.timeout_mtz_3_n_nazad[0] >= current_settings_prt.timeout_mtz_3_n_nazad[1]) ? current_settings_prt.timeout_mtz_3_n_nazad[0] : current_settings_prt.timeout_mtz_3_n_nazad[1];
-          max_value_pare2 =  (current_settings_prt.timeout_mtz_3_n_nazad[2] >= current_settings_prt.timeout_mtz_3_n_nazad[3]) ? current_settings_prt.timeout_mtz_3_n_nazad[2] : current_settings_prt.timeout_mtz_3_n_nazad[3];
-          max_value = (max_value_pare1 >= max_value_pare2) ? max_value_pare1 : max_value_pare2;
-          break;
-        }
-      case INDEX_TIMER_MTZ3_PO_NAPRUZI:
-        {
-          int max_value_pare1, max_value_pare2;
-          max_value_pare1 =  (current_settings_prt.timeout_mtz_3_po_napruzi[0] >= current_settings_prt.timeout_mtz_3_po_napruzi[1]) ? current_settings_prt.timeout_mtz_3_po_napruzi[0] : current_settings_prt.timeout_mtz_3_po_napruzi[1];
-          max_value_pare2 =  (current_settings_prt.timeout_mtz_3_po_napruzi[2] >= current_settings_prt.timeout_mtz_3_po_napruzi[3]) ? current_settings_prt.timeout_mtz_3_po_napruzi[2] : current_settings_prt.timeout_mtz_3_po_napruzi[3];
-          max_value = (max_value_pare1 >= max_value_pare2) ? max_value_pare1 : max_value_pare2;
-          break;
-        }
-      case INDEX_TIMER_MTZ4:
-        {
-          int max_value_pare1, max_value_pare2;
-          max_value_pare1 =  (current_settings_prt.timeout_mtz_4[0] >= current_settings_prt.timeout_mtz_4[1]) ? current_settings_prt.timeout_mtz_4[0] : current_settings_prt.timeout_mtz_4[1];
-          max_value_pare2 =  (current_settings_prt.timeout_mtz_4[2] >= current_settings_prt.timeout_mtz_4[3]) ? current_settings_prt.timeout_mtz_4[2] : current_settings_prt.timeout_mtz_4[3];
-          max_value = (max_value_pare1 >= max_value_pare2) ? max_value_pare1 : max_value_pare2;
-          break;
-        }
-      case INDEX_TIMER_MTZ4_N_VPERED:
-        {
-          int max_value_pare1, max_value_pare2;
-          max_value_pare1 =  (current_settings_prt.timeout_mtz_4_n_vpered[0] >= current_settings_prt.timeout_mtz_4_n_vpered[1]) ? current_settings_prt.timeout_mtz_4_n_vpered[0] : current_settings_prt.timeout_mtz_4_n_vpered[1];
-          max_value_pare2 =  (current_settings_prt.timeout_mtz_4_n_vpered[2] >= current_settings_prt.timeout_mtz_4_n_vpered[3]) ? current_settings_prt.timeout_mtz_4_n_vpered[2] : current_settings_prt.timeout_mtz_4_n_vpered[3];
-          max_value = (max_value_pare1 >= max_value_pare2) ? max_value_pare1 : max_value_pare2;
-          break;
-        }
-      case INDEX_TIMER_MTZ4_N_NAZAD:
-        {
-          int max_value_pare1, max_value_pare2;
-          max_value_pare1 =  (current_settings_prt.timeout_mtz_4_n_nazad[0] >= current_settings_prt.timeout_mtz_4_n_nazad[1]) ? current_settings_prt.timeout_mtz_4_n_nazad[0] : current_settings_prt.timeout_mtz_4_n_nazad[1];
-          max_value_pare2 =  (current_settings_prt.timeout_mtz_4_n_nazad[2] >= current_settings_prt.timeout_mtz_4_n_nazad[3]) ? current_settings_prt.timeout_mtz_4_n_nazad[2] : current_settings_prt.timeout_mtz_4_n_nazad[3];
-          max_value = (max_value_pare1 >= max_value_pare2) ? max_value_pare1 : max_value_pare2;
-          break;
-        }
-      case INDEX_TIMER_MTZ4_PO_NAPRUZI:
-        {
-          int max_value_pare1, max_value_pare2;
-          max_value_pare1 =  (current_settings_prt.timeout_mtz_4_po_napruzi[0] >= current_settings_prt.timeout_mtz_4_po_napruzi[1]) ? current_settings_prt.timeout_mtz_4_po_napruzi[0] : current_settings_prt.timeout_mtz_4_po_napruzi[1];
-          max_value_pare2 =  (current_settings_prt.timeout_mtz_4_po_napruzi[2] >= current_settings_prt.timeout_mtz_4_po_napruzi[3]) ? current_settings_prt.timeout_mtz_4_po_napruzi[2] : current_settings_prt.timeout_mtz_4_po_napruzi[3];
-          max_value = (max_value_pare1 >= max_value_pare2) ? max_value_pare1 : max_value_pare2;
-          break;
-        }
-      case INDEX_TIMER_ZZ_3I0:
-        {
-          int max_value_pare1, max_value_pare2;
-          max_value_pare1 =  (current_settings_prt.timeout_zz_3I0[0] >= current_settings_prt.timeout_zz_3I0[1]) ? current_settings_prt.timeout_zz_3I0[0] : current_settings_prt.timeout_zz_3I0[1];
-          max_value_pare2 =  (current_settings_prt.timeout_zz_3I0[2] >= current_settings_prt.timeout_zz_3I0[3]) ? current_settings_prt.timeout_zz_3I0[2] : current_settings_prt.timeout_zz_3I0[3];
-          max_value = (max_value_pare1 >= max_value_pare2) ? max_value_pare1 : max_value_pare2;
-          break;
-        }
-      case INDEX_TIMER_ZZ_3U0:
-        {
-          int max_value_pare1, max_value_pare2;
-          max_value_pare1 =  (current_settings_prt.timeout_zz_3U0[0] >= current_settings_prt.timeout_zz_3U0[1]) ? current_settings_prt.timeout_zz_3U0[0] : current_settings_prt.timeout_zz_3U0[1];
-          max_value_pare2 =  (current_settings_prt.timeout_zz_3U0[2] >= current_settings_prt.timeout_zz_3U0[3]) ? current_settings_prt.timeout_zz_3U0[2] : current_settings_prt.timeout_zz_3U0[3];
-          max_value = (max_value_pare1 >= max_value_pare2) ? max_value_pare1 : max_value_pare2;
-          break;
-        }
-      case INDEX_TIMER_NZZ:
-        {
-          int max_value_pare1, max_value_pare2;
-          max_value_pare1 =  (current_settings_prt.timeout_nzz[0] >= current_settings_prt.timeout_nzz[1]) ? current_settings_prt.timeout_nzz[0] : current_settings_prt.timeout_nzz[1];
-          max_value_pare2 =  (current_settings_prt.timeout_nzz[2] >= current_settings_prt.timeout_nzz[3]) ? current_settings_prt.timeout_nzz[2] : current_settings_prt.timeout_nzz[3];
-          max_value = (max_value_pare1 >= max_value_pare2) ? max_value_pare1 : max_value_pare2;
-          break;
-        }
-      case INDEX_TIMER_TZNP1_VPERED:
-        {
-          int max_value_pare1, max_value_pare2;
-          max_value_pare1 =  (current_settings_prt.timeout_tznp_1_vpered[0] >= current_settings_prt.timeout_tznp_1_vpered[1]) ? current_settings_prt.timeout_tznp_1_vpered[0] : current_settings_prt.timeout_tznp_1_vpered[1];
-          max_value_pare2 =  (current_settings_prt.timeout_tznp_1_vpered[2] >= current_settings_prt.timeout_tznp_1_vpered[3]) ? current_settings_prt.timeout_tznp_1_vpered[2] : current_settings_prt.timeout_tznp_1_vpered[3];
-          max_value = (max_value_pare1 >= max_value_pare2) ? max_value_pare1 : max_value_pare2;
-          break;
-        }
-      case INDEX_TIMER_TZNP1_NAZAD:
-        {
-          int max_value_pare1, max_value_pare2;
-          max_value_pare1 =  (current_settings_prt.timeout_tznp_1_nazad[0] >= current_settings_prt.timeout_tznp_1_nazad[1]) ? current_settings_prt.timeout_tznp_1_nazad[0] : current_settings_prt.timeout_tznp_1_nazad[1];
-          max_value_pare2 =  (current_settings_prt.timeout_tznp_1_nazad[2] >= current_settings_prt.timeout_tznp_1_nazad[3]) ? current_settings_prt.timeout_tznp_1_nazad[2] : current_settings_prt.timeout_tznp_1_nazad[3];
-          max_value = (max_value_pare1 >= max_value_pare2) ? max_value_pare1 : max_value_pare2;
-          break;
-        }
-      case INDEX_TIMER_TZNP2_VPERED:
-        {
-          int max_value_pare1, max_value_pare2;
-          max_value_pare1 =  (current_settings_prt.timeout_tznp_2_vpered[0] >= current_settings_prt.timeout_tznp_2_vpered[1]) ? current_settings_prt.timeout_tznp_2_vpered[0] : current_settings_prt.timeout_tznp_2_vpered[1];
-          max_value_pare2 =  (current_settings_prt.timeout_tznp_2_vpered[2] >= current_settings_prt.timeout_tznp_2_vpered[3]) ? current_settings_prt.timeout_tznp_2_vpered[2] : current_settings_prt.timeout_tznp_2_vpered[3];
-          max_value = (max_value_pare1 >= max_value_pare2) ? max_value_pare1 : max_value_pare2;
-          break;
-        }
-      case INDEX_TIMER_TZNP2_NAZAD:
-        {
-          int max_value_pare1, max_value_pare2;
-          max_value_pare1 =  (current_settings_prt.timeout_tznp_2_nazad[0] >= current_settings_prt.timeout_tznp_2_nazad[1]) ? current_settings_prt.timeout_tznp_2_nazad[0] : current_settings_prt.timeout_tznp_2_nazad[1];
-          max_value_pare2 =  (current_settings_prt.timeout_tznp_2_nazad[2] >= current_settings_prt.timeout_tznp_2_nazad[3]) ? current_settings_prt.timeout_tznp_2_nazad[2] : current_settings_prt.timeout_tznp_2_nazad[3];
-          max_value = (max_value_pare1 >= max_value_pare2) ? max_value_pare1 : max_value_pare2;
-          break;
-        }
-      case INDEX_TIMER_TZNP3_VPERED:
-        {
-          int max_value_pare1, max_value_pare2;
-          max_value_pare1 =  (current_settings_prt.timeout_tznp_3_vpered[0] >= current_settings_prt.timeout_tznp_3_vpered[1]) ? current_settings_prt.timeout_tznp_3_vpered[0] : current_settings_prt.timeout_tznp_3_vpered[1];
-          max_value_pare2 =  (current_settings_prt.timeout_tznp_3_vpered[2] >= current_settings_prt.timeout_tznp_3_vpered[3]) ? current_settings_prt.timeout_tznp_3_vpered[2] : current_settings_prt.timeout_tznp_3_vpered[3];
-          max_value = (max_value_pare1 >= max_value_pare2) ? max_value_pare1 : max_value_pare2;
-          break;
-        }
-      case INDEX_TIMER_TZNP3_NAZAD:
-        {
-          int max_value_pare1, max_value_pare2;
-          max_value_pare1 =  (current_settings_prt.timeout_tznp_3_nazad[0] >= current_settings_prt.timeout_tznp_3_nazad[1]) ? current_settings_prt.timeout_tznp_3_nazad[0] : current_settings_prt.timeout_tznp_3_nazad[1];
-          max_value_pare2 =  (current_settings_prt.timeout_tznp_3_nazad[2] >= current_settings_prt.timeout_tznp_3_nazad[3]) ? current_settings_prt.timeout_tznp_3_nazad[2] : current_settings_prt.timeout_tznp_3_nazad[3];
-          max_value = (max_value_pare1 >= max_value_pare2) ? max_value_pare1 : max_value_pare2;
-          break;
-        }
-      case INDEX_TIMER_ZOP:
-        {
-          int max_value_pare1, max_value_pare2;
-          max_value_pare1 =  (current_settings_prt.timeout_zop[0] >= current_settings_prt.timeout_zop[1]) ? current_settings_prt.timeout_zop[0] : current_settings_prt.timeout_zop[1];
-          max_value_pare2 =  (current_settings_prt.timeout_zop[2] >= current_settings_prt.timeout_zop[3]) ? current_settings_prt.timeout_zop[2] : current_settings_prt.timeout_zop[3];
-          max_value = (max_value_pare1 >= max_value_pare2) ? max_value_pare1 : max_value_pare2;
-          break;
-        }
-      case INDEX_TIMER_UROV1:
-        {
-          int max_value_pare1, max_value_pare2;
-          max_value_pare1 =  (current_settings_prt.timeout_urov_1[0] >= current_settings_prt.timeout_urov_1[1]) ? current_settings_prt.timeout_urov_1[0] : current_settings_prt.timeout_urov_1[1];
-          max_value_pare2 =  (current_settings_prt.timeout_urov_1[2] >= current_settings_prt.timeout_urov_1[3]) ? current_settings_prt.timeout_urov_1[2] : current_settings_prt.timeout_urov_1[3];
-          max_value = (max_value_pare1 >= max_value_pare2) ? max_value_pare1 : max_value_pare2;
-          break;
-        }
-      case INDEX_TIMER_UROV2:
-        {
-          int max_value_pare1, max_value_pare2;
-          max_value_pare1 =  (current_settings_prt.timeout_urov_2[0] >= current_settings_prt.timeout_urov_2[1]) ? current_settings_prt.timeout_urov_2[0] : current_settings_prt.timeout_urov_2[1];
-          max_value_pare2 =  (current_settings_prt.timeout_urov_2[2] >= current_settings_prt.timeout_urov_2[3]) ? current_settings_prt.timeout_urov_2[2] : current_settings_prt.timeout_urov_2[3];
-          max_value = (max_value_pare1 >= max_value_pare2) ? max_value_pare1 : max_value_pare2;
-          break;
-        }
-      case INDEX_TIMER_APV_1:
-        {
-          int max_value_pare1, max_value_pare2;
-          max_value_pare1 =  (current_settings_prt.timeout_apv_1[0] >= current_settings_prt.timeout_apv_1[1]) ? current_settings_prt.timeout_apv_1[0] : current_settings_prt.timeout_apv_1[1];
-          max_value_pare2 =  (current_settings_prt.timeout_apv_1[2] >= current_settings_prt.timeout_apv_1[3]) ? current_settings_prt.timeout_apv_1[2] : current_settings_prt.timeout_apv_1[3];
-          max_value = (max_value_pare1 >= max_value_pare2) ? max_value_pare1 : max_value_pare2;
-          break;
-        }
-      case INDEX_TIMER_APV_2:
-        {
-          int max_value_pare1, max_value_pare2;
-          max_value_pare1 =  (current_settings_prt.timeout_apv_2[0] >= current_settings_prt.timeout_apv_2[1]) ? current_settings_prt.timeout_apv_2[0] : current_settings_prt.timeout_apv_2[1];
-          max_value_pare2 =  (current_settings_prt.timeout_apv_2[2] >= current_settings_prt.timeout_apv_2[3]) ? current_settings_prt.timeout_apv_2[2] : current_settings_prt.timeout_apv_2[3];
-          max_value = (max_value_pare1 >= max_value_pare2) ? max_value_pare1 : max_value_pare2;
-          break;
-        }
-      case INDEX_TIMER_APV_3:
-        {
-          int max_value_pare1, max_value_pare2;
-          max_value_pare1 =  (current_settings_prt.timeout_apv_3[0] >= current_settings_prt.timeout_apv_3[1]) ? current_settings_prt.timeout_apv_3[0] : current_settings_prt.timeout_apv_3[1];
-          max_value_pare2 =  (current_settings_prt.timeout_apv_3[2] >= current_settings_prt.timeout_apv_3[3]) ? current_settings_prt.timeout_apv_3[2] : current_settings_prt.timeout_apv_3[3];
-          max_value = (max_value_pare1 >= max_value_pare2) ? max_value_pare1 : max_value_pare2;
-          break;
-        }
-      case INDEX_TIMER_APV_4:
-        {
-          int max_value_pare1, max_value_pare2;
-          max_value_pare1 =  (current_settings_prt.timeout_apv_4[0] >= current_settings_prt.timeout_apv_4[1]) ? current_settings_prt.timeout_apv_4[0] : current_settings_prt.timeout_apv_4[1];
-          max_value_pare2 =  (current_settings_prt.timeout_apv_4[2] >= current_settings_prt.timeout_apv_4[3]) ? current_settings_prt.timeout_apv_4[2] : current_settings_prt.timeout_apv_4[3];
-          max_value = (max_value_pare1 >= max_value_pare2) ? max_value_pare1 : max_value_pare2;
-          break;
-        }
-      case INDEX_TIMER_APV_BLOCK_VID_APV1:
-        {
-          int max_value_pare1, max_value_pare2;
-          max_value_pare1 =  (current_settings_prt.timeout_apv_block_vid_apv1[0] >= current_settings_prt.timeout_apv_block_vid_apv1[1]) ? current_settings_prt.timeout_apv_block_vid_apv1[0] : current_settings_prt.timeout_apv_block_vid_apv1[1];
-          max_value_pare2 =  (current_settings_prt.timeout_apv_block_vid_apv1[2] >= current_settings_prt.timeout_apv_block_vid_apv1[3]) ? current_settings_prt.timeout_apv_block_vid_apv1[2] : current_settings_prt.timeout_apv_block_vid_apv1[3];
-          max_value = (max_value_pare1 >= max_value_pare2) ? max_value_pare1 : max_value_pare2;
-          break;
-        }
-      case INDEX_TIMER_APV_BLOCK_VID_APV2:
-        {
-          int max_value_pare1, max_value_pare2;
-          max_value_pare1 =  (current_settings_prt.timeout_apv_block_vid_apv2[0] >= current_settings_prt.timeout_apv_block_vid_apv2[1]) ? current_settings_prt.timeout_apv_block_vid_apv2[0] : current_settings_prt.timeout_apv_block_vid_apv2[1];
-          max_value_pare2 =  (current_settings_prt.timeout_apv_block_vid_apv2[2] >= current_settings_prt.timeout_apv_block_vid_apv2[3]) ? current_settings_prt.timeout_apv_block_vid_apv2[2] : current_settings_prt.timeout_apv_block_vid_apv2[3];
-          max_value = (max_value_pare1 >= max_value_pare2) ? max_value_pare1 : max_value_pare2;
-          break;
-        }
-      case INDEX_TIMER_APV_BLOCK_VID_APV3:
-        {
-          int max_value_pare1, max_value_pare2;
-          max_value_pare1 =  (current_settings_prt.timeout_apv_block_vid_apv3[0] >= current_settings_prt.timeout_apv_block_vid_apv3[1]) ? current_settings_prt.timeout_apv_block_vid_apv3[0] : current_settings_prt.timeout_apv_block_vid_apv3[1];
-          max_value_pare2 =  (current_settings_prt.timeout_apv_block_vid_apv3[2] >= current_settings_prt.timeout_apv_block_vid_apv3[3]) ? current_settings_prt.timeout_apv_block_vid_apv3[2] : current_settings_prt.timeout_apv_block_vid_apv3[3];
-          max_value = (max_value_pare1 >= max_value_pare2) ? max_value_pare1 : max_value_pare2;
-          break;
-        }
-      case INDEX_TIMER_APV_BLOCK_VID_APV4:
-        {
-          int max_value_pare1, max_value_pare2;
-          max_value_pare1 =  (current_settings_prt.timeout_apv_block_vid_apv4[0] >= current_settings_prt.timeout_apv_block_vid_apv4[1]) ? current_settings_prt.timeout_apv_block_vid_apv4[0] : current_settings_prt.timeout_apv_block_vid_apv4[1];
-          max_value_pare2 =  (current_settings_prt.timeout_apv_block_vid_apv4[2] >= current_settings_prt.timeout_apv_block_vid_apv4[3]) ? current_settings_prt.timeout_apv_block_vid_apv4[2] : current_settings_prt.timeout_apv_block_vid_apv4[3];
-          max_value = (max_value_pare1 >= max_value_pare2) ? max_value_pare1 : max_value_pare2;
-          break;
-        }
-      case INDEX_TIMER_APV_BLOCK_VID_VV:
-        {
-          int max_value_pare1, max_value_pare2;
-          max_value_pare1 =  (current_settings_prt.timeout_apv_block_vid_VV[0] >= current_settings_prt.timeout_apv_block_vid_VV[1]) ? current_settings_prt.timeout_apv_block_vid_VV[0] : current_settings_prt.timeout_apv_block_vid_VV[1];
-          max_value_pare2 =  (current_settings_prt.timeout_apv_block_vid_VV[2] >= current_settings_prt.timeout_apv_block_vid_VV[3]) ? current_settings_prt.timeout_apv_block_vid_VV[2] : current_settings_prt.timeout_apv_block_vid_VV[3];
-          max_value = (max_value_pare1 >= max_value_pare2) ? max_value_pare1 : max_value_pare2;
-          break;
-        }
-      case INDEX_TIMER_APV_TMP1:
-        {
-          max_value =  1;  /*1 мс*/
-          break;
-        }
-      case INDEX_TIMER_ACHR_CHAPV:
-        {
-          max_value =  MAX_VALUE_TIMER_FOR_COUNT_SIGNAL_ACHR_CHAPV;
-          break;
-        }
-      case INDEX_TIMER_VIDKL_VV:
-        {
-          max_value =  current_settings_prt.timeout_swch_off;
-          break;
-        }
-      case INDEX_TIMER_BLK_VKL_VV:
-        {
-          max_value =  current_settings_prt.timeout_swch_udl_blk_on;
-          break;
-        }
-      case INDEX_TIMER_VKL_VV:
-        {
-          max_value =  current_settings_prt.timeout_swch_on;
-          break;
-        }
-      case INDEX_TIMER_PRYVOD_VV:
-        {
-          max_value =  current_settings_prt.timeout_pryvoda_VV;
-          break;
-        }
-      case INDEX_TIMER_UMIN1:
-        {
-          int max_value_pare1, max_value_pare2;
-          max_value_pare1 =  (current_settings_prt.timeout_Umin1[0] >= current_settings_prt.timeout_Umin1[1]) ? current_settings_prt.timeout_Umin1[0] : current_settings_prt.timeout_Umin1[1];
-          max_value_pare2 =  (current_settings_prt.timeout_Umin1[2] >= current_settings_prt.timeout_Umin1[3]) ? current_settings_prt.timeout_Umin1[2] : current_settings_prt.timeout_Umin1[3];
-          max_value = (max_value_pare1 >= max_value_pare2) ? max_value_pare1 : max_value_pare2;
-          break;
-        }
-      case INDEX_TIMER_UMIN2:
-        {
-          int max_value_pare1, max_value_pare2;
-          max_value_pare1 =  (current_settings_prt.timeout_Umin2[0] >= current_settings_prt.timeout_Umin2[1]) ? current_settings_prt.timeout_Umin2[0] : current_settings_prt.timeout_Umin2[1];
-          max_value_pare2 =  (current_settings_prt.timeout_Umin2[2] >= current_settings_prt.timeout_Umin2[3]) ? current_settings_prt.timeout_Umin2[2] : current_settings_prt.timeout_Umin2[3];
-          max_value = (max_value_pare1 >= max_value_pare2) ? max_value_pare1 : max_value_pare2;
-          break;
-        }
-      case INDEX_TIMER_UMAX1:
-        {
-          int max_value_pare1, max_value_pare2;
-          max_value_pare1 =  (current_settings_prt.timeout_Umax1[0] >= current_settings_prt.timeout_Umax1[1]) ? current_settings_prt.timeout_Umax1[0] : current_settings_prt.timeout_Umax1[1];
-          max_value_pare2 =  (current_settings_prt.timeout_Umax1[2] >= current_settings_prt.timeout_Umax1[3]) ? current_settings_prt.timeout_Umax1[2] : current_settings_prt.timeout_Umax1[3];
-          max_value = (max_value_pare1 >= max_value_pare2) ? max_value_pare1 : max_value_pare2;
-          break;
-        }
-      case INDEX_TIMER_UMAX2:
-        {
-          int max_value_pare1, max_value_pare2;
-          max_value_pare1 =  (current_settings_prt.timeout_Umax2[0] >= current_settings_prt.timeout_Umax2[1]) ? current_settings_prt.timeout_Umax2[0] : current_settings_prt.timeout_Umax2[1];
-          max_value_pare2 =  (current_settings_prt.timeout_Umax2[2] >= current_settings_prt.timeout_Umax2[3]) ? current_settings_prt.timeout_Umax2[2] : current_settings_prt.timeout_Umax2[3];
-          max_value = (max_value_pare1 >= max_value_pare2) ? max_value_pare1 : max_value_pare2;
-          break;
-        }
-      case INDEX_TIMER_ACHR1:
-        {
-          int max_value_pare1, max_value_pare2;
-          max_value_pare1 =  (current_settings_prt.timeout_achr_1[0] >= current_settings_prt.timeout_achr_1[1]) ? current_settings_prt.timeout_achr_1[0] : current_settings_prt.timeout_achr_1[1];
-          max_value_pare2 =  (current_settings_prt.timeout_achr_1[2] >= current_settings_prt.timeout_achr_1[3]) ? current_settings_prt.timeout_achr_1[2] : current_settings_prt.timeout_achr_1[3];
-          max_value = (max_value_pare1 >= max_value_pare2) ? max_value_pare1 : max_value_pare2;
-          break;
-        }
-      case INDEX_TIMER_ACHR_CHAPV_100MS_1:
-        {
-          max_value = TIMEOUT_ACHR_CHAPV_100MS;
-          break;
-        }
-      case INDEX_TIMER_CHAPV_1MS:
-        {
-          max_value = TIMEOUT_CHAPV_1MS;
-          break;
-        }
-      case INDEX_TIMER_BLOCK_CHAPV_5MS:
-        {
-          max_value = TIMEOUT_BLOCK_CHAPV_5MS;
-          break;
-        }
-      case INDEX_TIMER_CHAPV1:
-        {
-          int max_value_pare1, max_value_pare2;
-          max_value_pare1 =  (current_settings_prt.timeout_chapv_1[0] >= current_settings_prt.timeout_chapv_1[1]) ? current_settings_prt.timeout_chapv_1[0] : current_settings_prt.timeout_chapv_1[1];
-          max_value_pare2 =  (current_settings_prt.timeout_chapv_1[2] >= current_settings_prt.timeout_chapv_1[3]) ? current_settings_prt.timeout_chapv_1[2] : current_settings_prt.timeout_chapv_1[3];
-          max_value = (max_value_pare1 >= max_value_pare2) ? max_value_pare1 : max_value_pare2;
-          break;
-        }
-      default:
-        {
-          //Теоретично цього ніколи не мало б бути
-          total_error_sw_fixed(73);
-          break;
-        }
-      }
 
       //Перевіряємо чи треба збільшувати величину таймеру, якщо він ще не досягнув свого максимуму
-      if (global_timers[i] < max_value) global_timers[i] += DELTA_TIME_FOR_TIMERS;
+      if (global_timers[i] <= (0x7fffffff - DELTA_TIME_FOR_TIMERS)) global_timers[i] += DELTA_TIME_FOR_TIMERS;
     }
   }
   
@@ -4186,11 +3704,11 @@ void mtz04_handler(unsigned int *activated_functions, unsigned int number_group_
 //  }//if
 
  unsigned int tmp2=0;
-  _AND2(tmp_value, 4, 
+  _AND2(tmp_value, 7, 
         //УСКОРЕНИЕ МТЗ04_2
         tmp_value, 2, tmp2, 0);
 
-  _TIMER_IMPULSE(INDEX_TIMER_MTZ04_2, current_settings_prt.timeout_mtz04_vvid_2pr[number_group_stp],
+  _TIMER_IMPULSE(INDEX_TIMER_MTZ04_2, current_settings_prt.timeout_mtz04_2_vvid_pr[number_group_stp],
                  previous_states_MTZ04_vvid_pr_0, 0, tmp2, 0, tmp2, 1);
 //Ускоренная
   _OR2(tmp_value, 3, 
@@ -4215,7 +3733,9 @@ void mtz04_handler(unsigned int *activated_functions, unsigned int number_group_
 //ТИП МТЗ04
  unsigned int tmp3=0;
  //Простая
- if(current_settings_prt.type_mtz04_2==0) _SET_BIT(tmp3, 0);
+// if(current_settings_prt.type_mtz04_2==0){
+//   _SET_STATE(tmp3, 0);
+// }//if
   _AND2(tmp2, 4, 
         tmp2, 7, 
              tmp2, 10);
@@ -4375,12 +3895,15 @@ void umax2_handler(unsigned int *activated_functions, unsigned int number_group_
 /*****************************************************/
 void achr_chapv_handler(unsigned int *activated_functions, unsigned int number_group_stp)
 {
+  //пред сост ПО АЧР
   _Bool previous_state_po_f1_achr = _CHECK_SET_BIT(active_functions, RANG_OUTPUT_LED_DF_REG_PO_ACHR1);
+  //пред сост ПО ЧАПВ
   _Bool previous_state_po_f1_chapv = _CHECK_SET_BIT(active_functions, RANG_OUTPUT_LED_DF_REG_PO_CHAPV1);
-  
+ // 
   unsigned int setpoint1 = previous_state_po_achr_chapv_uaf1 ?
           current_settings_prt.setpoint_achr_chapv_uf[number_group_stp] * U_UP / 100 :
           current_settings_prt.setpoint_achr_chapv_uf[number_group_stp];
+          
   unsigned int setpoint2 = previous_state_po_achr_chapv_ubf1 ?
           current_settings_prt.setpoint_achr_chapv_uf[number_group_stp] * U_UP / 100 :
           current_settings_prt.setpoint_achr_chapv_uf[number_group_stp];
@@ -4405,6 +3928,7 @@ void achr_chapv_handler(unsigned int *activated_functions, unsigned int number_g
   _Bool timer1 = 0;
   _Bool UF1_is_larger_than_U_setpoint_F1 = 0;
   _Bool UF1_is_smaller_than_U_setpoint_F1 = 0;
+  //ПО ФАЗНЫЕ-ЛИНЕЙНЫЕ
   if (UF1_phase)
   {
     //ПО UAF1
@@ -4426,8 +3950,9 @@ void achr_chapv_handler(unsigned int *activated_functions, unsigned int number_g
     _AND3(Uab_is_larger_than_UF1, 0, Ubc_is_larger_than_UF1, 0, Uca_is_larger_than_UF1, 0, timer1, 0);
   }
   _TIMER_T_0(INDEX_TIMER_ACHR_CHAPV_100MS_1, TIMEOUT_ACHR_CHAPV_100MS, timer1, 0, UF1_is_larger_than_U_setpoint_F1, 0);
+  //L1
   UF1_is_smaller_than_U_setpoint_F1 = !UF1_is_larger_than_U_setpoint_F1;
-  
+ //L2, 3 
   int F1 = (int) (frequency * 100);
   _Bool po_f1_achr_rab = F1 <= ((int)current_settings_prt.setpoint_achr1_f_rab[number_group_stp]);
   _Bool po_f1_chapv_rab = F1 >= ((int)current_settings_prt.setpoint_chapv1_f_rab[number_group_stp]);
@@ -4435,18 +3960,21 @@ void achr_chapv_handler(unsigned int *activated_functions, unsigned int number_g
   
   //ДВ
   unsigned int tmp_value = (_CHECK_SET_BIT(activated_functions, RANG_OUTPUT_LED_DF_REG_BLOCK_ACHR1) != 0) << 0;
+  //L5
   _INVERTOR(tmp_value, 0, tmp_value, 0);
   
   //М
   tmp_value |= ((current_settings_prt.control_achr_chapv & CTR_ACHR1) != 0) << 1;
-  
+  //L4
   _AND3_INVERTOR(tmp_value, 0, tmp_value, 1, UF1_is_larger_than_U_setpoint_F1, 0, tmp_value, 3);
-  
+  //Reset канал L2
   if (!_GET_OUTPUT_STATE(tmp_value, 3))
   {
     //ПО АЧР1
     if (previous_state_po_f1_achr) 
     {
+      //отпускание АЧР
+//  _Bool po_f1_chapv_rab = F1 >= ((int)current_settings_prt.setpoint_chapv1_f_rab[number_group_stp]);
       if (!po_f1_chapv_rab) 
       {
         //после сработки 1 будет держаться до тех пор пока не сработает po_f1_chapv_rab (условие отпускания)
@@ -4456,6 +3984,9 @@ void achr_chapv_handler(unsigned int *activated_functions, unsigned int number_g
     }
     else
     {
+      //сработка
+//  _Bool po_f1_achr_rab = F1 <= ((int)current_settings_prt.setpoint_achr1_f_rab[number_group_stp]);
+      
       if (po_f1_achr_rab)
       {
         _SET_BIT(activated_functions, RANG_OUTPUT_LED_DF_REG_PO_ACHR1);
@@ -4475,6 +4006,7 @@ void achr_chapv_handler(unsigned int *activated_functions, unsigned int number_g
   _Bool tmp1 = 0;
   do 
   {
+    //L7
     _OR2(tmp_value, 3, !trigger_CHAPV1, 0, tmp_value, 30);
     
     //ПО ЧАПВ1
@@ -4487,6 +4019,7 @@ void achr_chapv_handler(unsigned int *activated_functions, unsigned int number_g
     {
       po_f1_chapv = po_f1_chapv_rab;
     }
+    //L3
     _Bool po_f1_chapv_tmp = (!_GET_OUTPUT_STATE(tmp_value, 30) && po_f1_chapv);
     if (po_f1_chapv_tmp) 
     {
@@ -4494,7 +4027,9 @@ void achr_chapv_handler(unsigned int *activated_functions, unsigned int number_g
     }
     
     _TIMER_T_0(INDEX_TIMER_CHAPV1, current_settings_prt.timeout_chapv_1[number_group_stp], po_f1_chapv_tmp, 0, tmp_value, 6);
+    //L8
     _AND2(po_f1_achr, 0, !po_f1_chapv_tmp, 0, tmp_value, 12);
+    //L9
     _OR2(tmp_value, 5, tmp_value, 6, tmp_value, 13);
 
     _D_TRIGGER(_GET_OUTPUT_STATE(tmp_value, 12), 0, _GET_OUTPUT_STATE(UF1_is_smaller_than_U_setpoint_F1, 0), previous_states_CHAPV1, 0, tmp_value, 13, trigger_CHAPV1, 0);
@@ -8946,6 +8481,23 @@ inline void main_protection(void)
     }
     /**************************/
     
+//123456
+    /**************************/
+    //МТЗ04
+    /**************************/
+    if ((current_settings_prt.configuration & (1 << MTZ04_BIT_CONFIGURATION)) != 0)
+    {
+      mtz04_handler(activated_functions, number_group_stp);
+    }//if ((current_settings_prt.configuration & (1 << MTZ04_BIT_CONFIGURATION)) != 0)
+    else
+    {
+      global_timers[INDEX_TIMER_MTZ04_1] = -1;
+      global_timers[INDEX_TIMER_MTZ04_2] = -1;
+      global_timers[INDEX_TIMER_MTZ04_3] = -1;
+      global_timers[INDEX_TIMER_MTZ04_4] = -1;
+      global_timers[INDEX_TIMER_MTZ04_5] = -1;
+    }
+
     /**************************/
     //ЗДЗ
     /**************************/
