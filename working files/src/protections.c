@@ -4109,6 +4109,154 @@ void umin2_handler(unsigned int *activated_functions, unsigned int number_group_
 /*****************************************************/
 
 /*****************************************************/
+// МТЗ04
+/*****************************************************/
+void mtz04_handler(unsigned int *activated_functions, unsigned int number_group_stp)
+{
+ //проверка предыдущего состояния ПО МТЗ04_1
+  _Bool previous_state_po_mtz04_1 = _CHECK_SET_BIT(active_functions, RANG_OUTPUT_LED_DF_REG_PO_MTZ04_1) > 0;
+  _Bool previous_state_po_mtz04_2 = _CHECK_SET_BIT(active_functions, RANG_OUTPUT_LED_DF_REG_PO_MTZ04_2) > 0;
+//пороги сраб и возв для ПО в зависимости от гр уставок
+  unsigned int setpoint1 = previous_state_po_mtz04_1 ?
+          current_settings_prt.setpoint_mtz04_1[number_group_stp] * U_UP / 100 :
+          current_settings_prt.setpoint_mtz04_1[number_group_stp];
+
+  unsigned int setpoint2 = previous_state_po_mtz04_2 ?
+          current_settings_prt.setpoint_mtz04_2[number_group_stp] * U_UP / 100 :
+          current_settings_prt.setpoint_mtz04_2[number_group_stp];
+
+//#define IM_I04         9
+  _Bool I04_is_larger_than_ust1 = measurement[IM_I04] >= setpoint1;
+  _Bool I04_is_larger_than_ust2 = measurement[IM_I04] >= setpoint2;
+  //М
+  //ВКЛ-ОТКЛ  МТЗ04_1
+  unsigned int 
+  tmp_value = ((current_settings_prt.control_mtz04 & CTR_MTZ04_1) == 0)  << 0;
+  //ВКЛ-ОТКЛ  МТЗ04_2
+  tmp_value |= ((current_settings_prt.control_mtz04 & CTR_MTZ04_2) != 0) << 1;
+  //ВКЛ-ОТКЛ  УСКОРЕНИЕ МТЗ04_2
+  tmp_value |= ((current_settings_prt.control_mtz04 & CTR_MTZ04_2_PRYSKORENNJA) != 0) << 2;
+  //ВКЛ-ОТКЛ  УСКОРЕННАЯ МТЗ04_2
+  tmp_value |= ((current_settings_prt.control_mtz04 & CTR_MTZ04_2_PRYSKORENA) != 0) << 3;
+  //ДВ блок МТЗ04_1
+  tmp_value |= (_CHECK_SET_BIT(activated_functions, RANG_OUTPUT_LED_DF_REG_BLOCK_MTZ04_1) != 0) << 4;
+  //ДВ блок МТЗ04_2
+  tmp_value |= (_CHECK_SET_BIT(activated_functions, RANG_OUTPUT_LED_DF_REG_BLOCK_MTZ04_2) != 0) << 5;
+  //ДВ блок ускорения МТЗ04_2
+  tmp_value |= (_CHECK_SET_BIT(activated_functions, RANG_OUTPUT_LED_DF_REG_BLOCK_USK_MTZ04_2) != 0) << 6;
+  //Полож ВВ
+  tmp_value |= (_CHECK_SET_BIT(activated_functions, RANG_OUTPUT_LED_DF_REG_STATE_VV) != 0)  << 7;
+/*
+//ТИП МТЗ04
+ unsigned int tmp3=0;
+ //Простая
+ if(current_settings_prt.type_mtz04_2==0) _SET_BIT(tmp3, 0);
+  unsigned int type_mtz04 = 0;
+ //Зависимая А
+ if(current_settings_prt.type_mtz04_2==3) type_mtz04 = TYPE_MTZ_DEPENDENT_A;
+ //Зависимая В
+ if(current_settings_prt.type_mtz04_2==4) type_mtz04 = TYPE_MTZ_DEPENDENT_B;
+ //Зависимая С
+ if(current_settings_prt.type_mtz04_2==5) type_mtz04 = TYPE_MTZ_DEPENDENT_C;
+*/
+//RANG_OUTPUT_LED_DF_REG_BLOCK_MTZ04_1,
+ //MTZ04_1 LOGIKA
+  _INVERTOR(tmp_value, 4, tmp_value, 8);
+        //ПО МТЗ04_1
+  _AND3(I04_is_larger_than_ust1, 0, 
+        //ВКЛ-ОТКЛ  МТЗ04_1
+        tmp_value, 0,
+        //INVERTOR
+        tmp_value, 7, tmp_value, 9);
+  //Сраб.ПО MTZ04_1
+  if (_GET_OUTPUT_STATE(tmp_value, 9)) {
+     //PO MTZ04_1
+    _SET_BIT(activated_functions, RANG_OUTPUT_LED_DF_REG_PO_MTZ04_1);
+  }
+  _TIMER_T_0(INDEX_TIMER_MTZ04_1, current_settings_prt.timeout_mtz04_1[number_group_stp], tmp_value, 9, tmp_value, 10);
+  //Сраб. MTZ04_1
+  if (_GET_OUTPUT_STATE(tmp_value, 10)) {
+     //MTZ04_1
+    _SET_BIT(activated_functions, RANG_OUTPUT_LED_DF_REG_MTZ04_1);
+  }
+//MTZ04_2
+//RANG_OUTPUT_LED_DF_REG_STATE_VV,
+//ПОЛОЖ ВВ
+//  if (_GET_OUTPUT_STATE(activated_functions, RANG_OUTPUT_LED_DF_REG_STATE_VV)) {
+//  }//if
+
+ unsigned int tmp2=0;
+  _AND2(tmp_value, 4, 
+        //УСКОРЕНИЕ МТЗ04_2
+        tmp_value, 2, tmp2, 0);
+
+  _TIMER_IMPULSE(INDEX_TIMER_MTZ04_2, current_settings_prt.timeout_mtz04_vvid_2pr[number_group_stp],
+                 previous_states_MTZ04_vvid_pr_0, 0, tmp2, 0, tmp2, 1);
+//Ускоренная
+  _OR2(tmp_value, 3, 
+        tmp2, 1, tmp2, 2);
+  _INVERTOR(tmp_value, 6, tmp2, 3);
+  _AND2(tmp2, 3, 
+        tmp2, 2, tmp2, 4);
+  _INVERTOR(tmp2, 4, tmp2, 5);
+  _INVERTOR(tmp_value, 5, tmp2, 6);
+  _AND3(I04_is_larger_than_ust2, 0, 
+        tmp_value, 1, 
+        tmp2, 6, tmp2, 7);
+  //Сраб.ПО MTZ04_2
+  if (_GET_OUTPUT_STATE(tmp2, 7)) {
+     //PO MTZ04_2
+    _SET_BIT(activated_functions, RANG_OUTPUT_LED_DF_REG_PO_MTZ04_2);
+  }
+//ускорение
+  _AND2(tmp2, 4, 
+        tmp2, 7, tmp2, 8);
+//Простая
+//ТИП МТЗ04
+ unsigned int tmp3=0;
+ //Простая
+ if(current_settings_prt.type_mtz04_2==0) _SET_BIT(tmp3, 0);
+  _AND2(tmp2, 4, 
+        tmp2, 7, 
+             tmp2, 10);
+//Зависимая А B C
+//  _INVERTOR(tmp2, 9, tmp2, 10);
+//  _AND3(tmp2, 4, 
+  //      tmp2, 7, 
+    //    tmp3, 0, tmp2, 10);
+//ускорение
+  _TIMER_T_0(INDEX_TIMER_MTZ04_3, current_settings_prt.timeout_mtz04_2_pr[number_group_stp], tmp2, 8, tmp3, 4);
+  int timout_univ=0;
+//Простая
+ switch(current_settings_prt.type_mtz04_2){
+  case 0:
+   timout_univ = current_settings_prt.timeout_mtz04_2[number_group_stp];
+  break;
+  case TYPE_MTZ_DEPENDENT_A:
+  case TYPE_MTZ_DEPENDENT_B:
+  case TYPE_MTZ_DEPENDENT_C:
+//расчет выдержки
+   timout_univ = timeout_dependent_general(measurement[IM_I04], number_group_stp, current_settings_prt.type_mtz04_2);
+  break;
+ }
+
+  _TIMER_T_0(INDEX_TIMER_MTZ04_4, timout_univ, tmp2, 10, tmp3, 6);
+  _OR2(tmp3, 4, 
+       tmp3, 6, tmp3, 7);
+  //Сраб. MTZ04_2
+  if (_GET_OUTPUT_STATE(tmp3, 7)) {
+     //MTZ04_1
+    _SET_BIT(activated_functions, RANG_OUTPUT_LED_DF_REG_MTZ04_2);
+  }
+
+//Зависимая 
+//  if (_GET_OUTPUT_STATE(tmp2, 10)) {
+  //}//if
+ // _TIMER_T_0(INDEX_TIMER_MTZ04_5, timeout_dependent_general(i_max, number_group_stp, type_mtz04), tmp2, 10, tmp3, 6);
+
+}//mtz04
+
+/*****************************************************/
 // ЗНМАКС1
 /*****************************************************/
 void umax1_handler(unsigned int *activated_functions, unsigned int number_group_stp)
