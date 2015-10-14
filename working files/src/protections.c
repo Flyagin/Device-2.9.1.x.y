@@ -4122,7 +4122,8 @@ inline void urov_handler(unsigned int *activated_functions, unsigned int number_
       ( ((current_settings_prt.control_urov & CTR_UROV_STARTED_FROM_UMIN2) != 0) && (_CHECK_SET_BIT(activated_functions, RANG_OUTPUT_LED_DF_REG_UMIN2            ) != 0)) ||
       ( ((current_settings_prt.control_urov & CTR_UROV_STARTED_FROM_UMAX1) != 0) && (_CHECK_SET_BIT(activated_functions, RANG_OUTPUT_LED_DF_REG_UMAX1            ) != 0)) ||
       ( ((current_settings_prt.control_urov & CTR_UROV_STARTED_FROM_UMAX2) != 0) && (_CHECK_SET_BIT(activated_functions, RANG_OUTPUT_LED_DF_REG_UMAX2            ) != 0)) ||
-      ( ((current_settings_prt.control_urov & CTR_UROV_STARTED_FROM_ACHR ) != 0) && (_CHECK_SET_BIT(activated_functions, RANG_OUTPUT_LED_DF_REG_ACHR_CHAPV1      ) != 0)) ||
+      ( ((current_settings_prt.control_urov & CTR_UROV_STARTED_FROM_ACHR1) != 0) && (_CHECK_SET_BIT(activated_functions, RANG_OUTPUT_LED_DF_REG_ACHR_CHAPV1      ) != 0)) ||
+      ( ((current_settings_prt.control_urov & CTR_UROV_STARTED_FROM_ACHR2) != 0) && (_CHECK_SET_BIT(activated_functions, RANG_OUTPUT_LED_DF_REG_ACHR_CHAPV2      ) != 0)) ||
       (                                                                             (_CHECK_SET_BIT(activated_functions, RANG_OUTPUT_LED_DF_REG_PUSK_UROV_VID_DV ) != 0))
      )     
     )

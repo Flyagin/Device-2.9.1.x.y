@@ -4948,6 +4948,15 @@ void main_manu_function(void)
                     ||
                     (
                      (
+                      (current_ekran.index_position == INDEX_ML_CTRUROV_STARTED_FROM_MTZ04_1) ||
+                      (current_ekran.index_position == INDEX_ML_CTRUROV_STARTED_FROM_MTZ04_2)
+                     )   
+                     &&
+                     ((current_settings.configuration & (1<<MTZ04_BIT_CONFIGURATION)) == 0)
+                    )  
+                    ||
+                    (
+                     (
                       (current_ekran.index_position == INDEX_ML_CTRUROV_STARTED_FROM_ZDZ)
                      )   
                      &&
@@ -5010,7 +5019,8 @@ void main_manu_function(void)
                     ||
                     (
                      (
-                      (current_ekran.index_position == INDEX_ML_CTRUROV_STARTED_FROM_ACHR)
+                      (current_ekran.index_position == INDEX_ML_CTRUROV_STARTED_FROM_ACHR1) ||
+                      (current_ekran.index_position == INDEX_ML_CTRUROV_STARTED_FROM_ACHR2)
                      )   
                      &&
                      ((current_settings.configuration & (1<<ACHR_CHAPV_BIT_CONFIGURATION)) == 0)
@@ -10722,6 +10732,15 @@ void main_manu_function(void)
                       )  
                       ||
                       (
+                       (
+                        (current_ekran.index_position == INDEX_ML_CTRUROV_STARTED_FROM_MTZ04_1) ||
+                        (current_ekran.index_position == INDEX_ML_CTRUROV_STARTED_FROM_MTZ04_2)
+                       )   
+                       &&
+                       ((current_settings.configuration & (1<<MTZ04_BIT_CONFIGURATION)) == 0)
+                      )  
+                      ||
+                      (
                        (  
                         (current_ekran.index_position == INDEX_ML_CTRUROV_STARTED_FROM_ZDZ)
                        )   
@@ -10785,7 +10804,8 @@ void main_manu_function(void)
                       ||
                       (
                        (
-                        (current_ekran.index_position == INDEX_ML_CTRUROV_STARTED_FROM_ACHR)
+                        (current_ekran.index_position == INDEX_ML_CTRUROV_STARTED_FROM_ACHR1) ||
+                        (current_ekran.index_position == INDEX_ML_CTRUROV_STARTED_FROM_ACHR2)
                        )   
                        &&
                        ((current_settings.configuration & (1<<ACHR_CHAPV_BIT_CONFIGURATION)) == 0)
@@ -11888,6 +11908,15 @@ void main_manu_function(void)
                       )  
                       ||
                       (
+                       (
+                        (current_ekran.index_position == INDEX_ML_CTRUROV_STARTED_FROM_MTZ04_1) ||
+                        (current_ekran.index_position == INDEX_ML_CTRUROV_STARTED_FROM_MTZ04_2)
+                       )   
+                       &&
+                       ((current_settings.configuration & (1<<MTZ04_BIT_CONFIGURATION)) == 0)
+                      )  
+                      ||
+                      (
                        (  
                         (current_ekran.index_position == INDEX_ML_CTRUROV_STARTED_FROM_ZDZ)
                        )   
@@ -11951,7 +11980,8 @@ void main_manu_function(void)
                       ||
                       (
                        (
-                        (current_ekran.index_position == INDEX_ML_CTRUROV_STARTED_FROM_ACHR)
+                        (current_ekran.index_position == INDEX_ML_CTRUROV_STARTED_FROM_ACHR1) ||
+                        (current_ekran.index_position == INDEX_ML_CTRUROV_STARTED_FROM_ACHR2)
                        )   
                        &&
                        ((current_settings.configuration & (1<<ACHR_CHAPV_BIT_CONFIGURATION)) == 0)
@@ -13452,23 +13482,26 @@ void main_manu_function(void)
           
                 //Виділяємо, який біт треба міняти
                 if (current_ekran.index_position == INDEX_ML_CTRUROV_STATE) maska = CTR_UROV_STATE;
-                else if (current_ekran.index_position == INDEX_ML_CTRUROV_STARTED_FROM_MTZ1 ) maska = CTR_UROV_STARTED_FROM_MTZ1;
-                else if (current_ekran.index_position == INDEX_ML_CTRUROV_STARTED_FROM_MTZ2 ) maska = CTR_UROV_STARTED_FROM_MTZ2;
-                else if (current_ekran.index_position == INDEX_ML_CTRUROV_STARTED_FROM_MTZ3 ) maska = CTR_UROV_STARTED_FROM_MTZ3;
-                else if (current_ekran.index_position == INDEX_ML_CTRUROV_STARTED_FROM_MTZ4 ) maska = CTR_UROV_STARTED_FROM_MTZ4;
-                else if (current_ekran.index_position == INDEX_ML_CTRUROV_STARTED_FROM_ZDZ  ) maska = CTR_UROV_STARTED_FROM_ZDZ;
-                else if (current_ekran.index_position == INDEX_ML_CTRUROV_STARTED_FROM_3I0  ) maska = CTR_UROV_STARTED_FROM_3I0;
-                else if (current_ekran.index_position == INDEX_ML_CTRUROV_STARTED_FROM_3U0  ) maska = CTR_UROV_STARTED_FROM_3U0;
-                else if (current_ekran.index_position == INDEX_ML_CTRUROV_STARTED_FROM_NZZ  ) maska = CTR_UROV_STARTED_FROM_NZZ;
-                else if (current_ekran.index_position == INDEX_ML_CTRUROV_STARTED_FROM_TZNP1) maska = CTR_UROV_STARTED_FROM_TZNP1;
-                else if (current_ekran.index_position == INDEX_ML_CTRUROV_STARTED_FROM_TZNP2) maska = CTR_UROV_STARTED_FROM_TZNP2;
-                else if (current_ekran.index_position == INDEX_ML_CTRUROV_STARTED_FROM_TZNP3) maska = CTR_UROV_STARTED_FROM_TZNP3;
-                else if (current_ekran.index_position == INDEX_ML_CTRUROV_STARTED_FROM_ZOP1 ) maska = CTR_UROV_STARTED_FROM_ZOP1;
-                else if (current_ekran.index_position == INDEX_ML_CTRUROV_STARTED_FROM_UMIN1) maska = CTR_UROV_STARTED_FROM_UMIN1;
-                else if (current_ekran.index_position == INDEX_ML_CTRUROV_STARTED_FROM_UMIN2) maska = CTR_UROV_STARTED_FROM_UMIN2;
-                else if (current_ekran.index_position == INDEX_ML_CTRUROV_STARTED_FROM_UMAX1) maska = CTR_UROV_STARTED_FROM_UMAX1;
-                else if (current_ekran.index_position == INDEX_ML_CTRUROV_STARTED_FROM_UMAX2) maska = CTR_UROV_STARTED_FROM_UMAX2;
-                else if (current_ekran.index_position == INDEX_ML_CTRUROV_STARTED_FROM_ACHR ) maska = CTR_UROV_STARTED_FROM_ACHR;
+                else if (current_ekran.index_position == INDEX_ML_CTRUROV_STARTED_FROM_MTZ1   ) maska = CTR_UROV_STARTED_FROM_MTZ1;
+                else if (current_ekran.index_position == INDEX_ML_CTRUROV_STARTED_FROM_MTZ2   ) maska = CTR_UROV_STARTED_FROM_MTZ2;
+                else if (current_ekran.index_position == INDEX_ML_CTRUROV_STARTED_FROM_MTZ3   ) maska = CTR_UROV_STARTED_FROM_MTZ3;
+                else if (current_ekran.index_position == INDEX_ML_CTRUROV_STARTED_FROM_MTZ4   ) maska = CTR_UROV_STARTED_FROM_MTZ4;
+                else if (current_ekran.index_position == INDEX_ML_CTRUROV_STARTED_FROM_MTZ04_1) maska = CTR_UROV_STARTED_FROM_MTZ04_1;
+                else if (current_ekran.index_position == INDEX_ML_CTRUROV_STARTED_FROM_MTZ04_2) maska = CTR_UROV_STARTED_FROM_MTZ04_2;
+                else if (current_ekran.index_position == INDEX_ML_CTRUROV_STARTED_FROM_ZDZ    ) maska = CTR_UROV_STARTED_FROM_ZDZ;
+                else if (current_ekran.index_position == INDEX_ML_CTRUROV_STARTED_FROM_3I0    ) maska = CTR_UROV_STARTED_FROM_3I0;
+                else if (current_ekran.index_position == INDEX_ML_CTRUROV_STARTED_FROM_3U0    ) maska = CTR_UROV_STARTED_FROM_3U0;
+                else if (current_ekran.index_position == INDEX_ML_CTRUROV_STARTED_FROM_NZZ    ) maska = CTR_UROV_STARTED_FROM_NZZ;
+                else if (current_ekran.index_position == INDEX_ML_CTRUROV_STARTED_FROM_TZNP1  ) maska = CTR_UROV_STARTED_FROM_TZNP1;
+                else if (current_ekran.index_position == INDEX_ML_CTRUROV_STARTED_FROM_TZNP2  ) maska = CTR_UROV_STARTED_FROM_TZNP2;
+                else if (current_ekran.index_position == INDEX_ML_CTRUROV_STARTED_FROM_TZNP3  ) maska = CTR_UROV_STARTED_FROM_TZNP3;
+                else if (current_ekran.index_position == INDEX_ML_CTRUROV_STARTED_FROM_ZOP1   ) maska = CTR_UROV_STARTED_FROM_ZOP1;
+                else if (current_ekran.index_position == INDEX_ML_CTRUROV_STARTED_FROM_UMIN1  ) maska = CTR_UROV_STARTED_FROM_UMIN1;
+                else if (current_ekran.index_position == INDEX_ML_CTRUROV_STARTED_FROM_UMIN2  ) maska = CTR_UROV_STARTED_FROM_UMIN2;
+                else if (current_ekran.index_position == INDEX_ML_CTRUROV_STARTED_FROM_UMAX1  ) maska = CTR_UROV_STARTED_FROM_UMAX1;
+                else if (current_ekran.index_position == INDEX_ML_CTRUROV_STARTED_FROM_UMAX2  ) maska = CTR_UROV_STARTED_FROM_UMAX2;
+                else if (current_ekran.index_position == INDEX_ML_CTRUROV_STARTED_FROM_ACHR1  ) maska = CTR_UROV_STARTED_FROM_ACHR1;
+                else if (current_ekran.index_position == INDEX_ML_CTRUROV_STARTED_FROM_ACHR2  ) maska = CTR_UROV_STARTED_FROM_ACHR2;
                 
                 //Міняємо на протилежний відповідний біт для вибраної позиції
                 edition_settings.control_urov ^= maska;
@@ -14932,23 +14965,26 @@ void main_manu_function(void)
           
                 //Виділяємо, який біт треба міняти
                 if (current_ekran.index_position == INDEX_ML_CTRUROV_STATE) maska = CTR_UROV_STATE;
-                else if (current_ekran.index_position == INDEX_ML_CTRUROV_STARTED_FROM_MTZ1 ) maska = CTR_UROV_STARTED_FROM_MTZ1;
-                else if (current_ekran.index_position == INDEX_ML_CTRUROV_STARTED_FROM_MTZ2 ) maska = CTR_UROV_STARTED_FROM_MTZ2;
-                else if (current_ekran.index_position == INDEX_ML_CTRUROV_STARTED_FROM_MTZ3 ) maska = CTR_UROV_STARTED_FROM_MTZ3;
-                else if (current_ekran.index_position == INDEX_ML_CTRUROV_STARTED_FROM_MTZ4 ) maska = CTR_UROV_STARTED_FROM_MTZ4;
-                else if (current_ekran.index_position == INDEX_ML_CTRUROV_STARTED_FROM_ZDZ  ) maska = CTR_UROV_STARTED_FROM_ZDZ;
-                else if (current_ekran.index_position == INDEX_ML_CTRUROV_STARTED_FROM_3I0  ) maska = CTR_UROV_STARTED_FROM_3I0;
-                else if (current_ekran.index_position == INDEX_ML_CTRUROV_STARTED_FROM_3U0  ) maska = CTR_UROV_STARTED_FROM_3U0;
-                else if (current_ekran.index_position == INDEX_ML_CTRUROV_STARTED_FROM_NZZ  ) maska = CTR_UROV_STARTED_FROM_NZZ;
-                else if (current_ekran.index_position == INDEX_ML_CTRUROV_STARTED_FROM_TZNP1) maska = CTR_UROV_STARTED_FROM_TZNP1;
-                else if (current_ekran.index_position == INDEX_ML_CTRUROV_STARTED_FROM_TZNP2) maska = CTR_UROV_STARTED_FROM_TZNP2;
-                else if (current_ekran.index_position == INDEX_ML_CTRUROV_STARTED_FROM_TZNP3) maska = CTR_UROV_STARTED_FROM_TZNP3;
-                else if (current_ekran.index_position == INDEX_ML_CTRUROV_STARTED_FROM_ZOP1 ) maska = CTR_UROV_STARTED_FROM_ZOP1;
-                else if (current_ekran.index_position == INDEX_ML_CTRUROV_STARTED_FROM_UMIN1) maska = CTR_UROV_STARTED_FROM_UMIN1;
-                else if (current_ekran.index_position == INDEX_ML_CTRUROV_STARTED_FROM_UMIN2) maska = CTR_UROV_STARTED_FROM_UMIN2;
-                else if (current_ekran.index_position == INDEX_ML_CTRUROV_STARTED_FROM_UMAX1) maska = CTR_UROV_STARTED_FROM_UMAX1;
-                else if (current_ekran.index_position == INDEX_ML_CTRUROV_STARTED_FROM_UMAX2) maska = CTR_UROV_STARTED_FROM_UMAX2;
-                else if (current_ekran.index_position == INDEX_ML_CTRUROV_STARTED_FROM_ACHR ) maska = CTR_UROV_STARTED_FROM_ACHR;
+                else if (current_ekran.index_position == INDEX_ML_CTRUROV_STARTED_FROM_MTZ1   ) maska = CTR_UROV_STARTED_FROM_MTZ1;
+                else if (current_ekran.index_position == INDEX_ML_CTRUROV_STARTED_FROM_MTZ2   ) maska = CTR_UROV_STARTED_FROM_MTZ2;
+                else if (current_ekran.index_position == INDEX_ML_CTRUROV_STARTED_FROM_MTZ3   ) maska = CTR_UROV_STARTED_FROM_MTZ3;
+                else if (current_ekran.index_position == INDEX_ML_CTRUROV_STARTED_FROM_MTZ4   ) maska = CTR_UROV_STARTED_FROM_MTZ4;
+                else if (current_ekran.index_position == INDEX_ML_CTRUROV_STARTED_FROM_MTZ04_1) maska = CTR_UROV_STARTED_FROM_MTZ04_1;
+                else if (current_ekran.index_position == INDEX_ML_CTRUROV_STARTED_FROM_MTZ04_2) maska = CTR_UROV_STARTED_FROM_MTZ04_2;
+                else if (current_ekran.index_position == INDEX_ML_CTRUROV_STARTED_FROM_ZDZ    ) maska = CTR_UROV_STARTED_FROM_ZDZ;
+                else if (current_ekran.index_position == INDEX_ML_CTRUROV_STARTED_FROM_3I0    ) maska = CTR_UROV_STARTED_FROM_3I0;
+                else if (current_ekran.index_position == INDEX_ML_CTRUROV_STARTED_FROM_3U0    ) maska = CTR_UROV_STARTED_FROM_3U0;
+                else if (current_ekran.index_position == INDEX_ML_CTRUROV_STARTED_FROM_NZZ    ) maska = CTR_UROV_STARTED_FROM_NZZ;
+                else if (current_ekran.index_position == INDEX_ML_CTRUROV_STARTED_FROM_TZNP1  ) maska = CTR_UROV_STARTED_FROM_TZNP1;
+                else if (current_ekran.index_position == INDEX_ML_CTRUROV_STARTED_FROM_TZNP2  ) maska = CTR_UROV_STARTED_FROM_TZNP2;
+                else if (current_ekran.index_position == INDEX_ML_CTRUROV_STARTED_FROM_TZNP3  ) maska = CTR_UROV_STARTED_FROM_TZNP3;
+                else if (current_ekran.index_position == INDEX_ML_CTRUROV_STARTED_FROM_ZOP1   ) maska = CTR_UROV_STARTED_FROM_ZOP1;
+                else if (current_ekran.index_position == INDEX_ML_CTRUROV_STARTED_FROM_UMIN1  ) maska = CTR_UROV_STARTED_FROM_UMIN1;
+                else if (current_ekran.index_position == INDEX_ML_CTRUROV_STARTED_FROM_UMIN2  ) maska = CTR_UROV_STARTED_FROM_UMIN2;
+                else if (current_ekran.index_position == INDEX_ML_CTRUROV_STARTED_FROM_UMAX1  ) maska = CTR_UROV_STARTED_FROM_UMAX1;
+                else if (current_ekran.index_position == INDEX_ML_CTRUROV_STARTED_FROM_UMAX2  ) maska = CTR_UROV_STARTED_FROM_UMAX2;
+                else if (current_ekran.index_position == INDEX_ML_CTRUROV_STARTED_FROM_ACHR1  ) maska = CTR_UROV_STARTED_FROM_ACHR1;
+                else if (current_ekran.index_position == INDEX_ML_CTRUROV_STARTED_FROM_ACHR2  ) maska = CTR_UROV_STARTED_FROM_ACHR2;
                 
                 //Міняємо на протилежний відповідний біт для вибраної позиції
                 edition_settings.control_urov ^= maska;
