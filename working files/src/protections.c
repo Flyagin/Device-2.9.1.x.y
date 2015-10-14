@@ -4279,7 +4279,7 @@ inline void apv_handler(unsigned int *activated_functions, unsigned int number_g
   //"À×Ð/×ÀÏÂ â³ä ÄÂ"
   logic_APV_0 |= (_CHECK_SET_BIT(activated_functions, RANG_OUTPUT_LED_DF_REG_ACHR_CHAPV_VID_DV) != 0) << 17;
   //Ì:"×ÀÏÂ â³ä ÄÂ"
-  logic_APV_1 |= ((current_settings_prt.control_achr_chapv & CTR_CHAPV1) != 0) << 22;
+  logic_APV_1 |= ((current_settings_prt.control_achr_chapv & CTR_CHAPV_VID_DV) != 0) << 22;
   
   _AND3(logic_APV_0, 16, logic_APV_1, 21, logic_APV_1, 20, logic_APV_1, 23);
   _AND2(logic_APV_0, 17, logic_APV_1, 22, logic_APV_1, 24);
