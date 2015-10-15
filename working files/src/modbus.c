@@ -4938,7 +4938,7 @@ inline unsigned int Get_data(unsigned char *data, unsigned int address_data, uns
         temp_value = (((input_value >> INDEX_ML_CTRUROV_STARTED_FROM_TZNP2) & 0x1 ) << (BIT_MA_CONTROL_UROV_STARTED_FROM_TZNP2  - BIT_MA_CONTROL_UROV_BASE_PART2)) |
                      (((input_value >> INDEX_ML_CTRUROV_STARTED_FROM_TZNP3) & 0x1 ) << (BIT_MA_CONTROL_UROV_STARTED_FROM_TZNP3  - BIT_MA_CONTROL_UROV_BASE_PART2)) |
                      (((input_value >> INDEX_ML_CTRUROV_STARTED_FROM_ZDZ  ) & 0x1 ) << (BIT_MA_CONTROL_UROV_STARTED_FROM_ZDZ    - BIT_MA_CONTROL_UROV_BASE_PART2)) |
-                     (((input_value >> INDEX_ML_CTRUROV_STARTED_FROM_ACHR ) & 0x1 ) << (BIT_MA_CONTROL_UROV_STARTED_FROM_ACHR   - BIT_MA_CONTROL_UROV_BASE_PART2));
+                     (((input_value >> INDEX_ML_CTRUROV_STARTED_FROM_ACHR1) & 0x1 ) << (BIT_MA_CONTROL_UROV_STARTED_FROM_ACHR   - BIT_MA_CONTROL_UROV_BASE_PART2));
         break;
       }
     case MA_CONTROL_APV:
@@ -8588,13 +8588,13 @@ inline unsigned int Set_data(unsigned short int data, unsigned int address_data,
                                              CTR_UROV_STARTED_FROM_TZNP3 |
                                              CTR_UROV_STARTED_FROM_ZDZ   |
                                              CTR_UROV_STARTED_FROM_ZDZ   |
-                                             CTR_UROV_STARTED_FROM_ACHR
+                                             CTR_UROV_STARTED_FROM_ACHR1
                                           ));
 
           output_value |= ((data >> (BIT_MA_CONTROL_UROV_STARTED_FROM_TZNP2 - BIT_MA_CONTROL_UROV_BASE_PART2)) & 0x1) << INDEX_ML_CTRUROV_STARTED_FROM_TZNP2;
           output_value |= ((data >> (BIT_MA_CONTROL_UROV_STARTED_FROM_TZNP3 - BIT_MA_CONTROL_UROV_BASE_PART2)) & 0x1) << INDEX_ML_CTRUROV_STARTED_FROM_TZNP3;
           output_value |= ((data >> (BIT_MA_CONTROL_UROV_STARTED_FROM_ZDZ   - BIT_MA_CONTROL_UROV_BASE_PART2)) & 0x1) << INDEX_ML_CTRUROV_STARTED_FROM_ZDZ;
-          output_value |= ((data >> (BIT_MA_CONTROL_UROV_STARTED_FROM_ACHR  - BIT_MA_CONTROL_UROV_BASE_PART2)) & 0x1) << INDEX_ML_CTRUROV_STARTED_FROM_ACHR;
+          output_value |= ((data >> (BIT_MA_CONTROL_UROV_STARTED_FROM_ACHR  - BIT_MA_CONTROL_UROV_BASE_PART2)) & 0x1) << INDEX_ML_CTRUROV_STARTED_FROM_ACHR1;
         
           target_label->control_urov = output_value;
         }

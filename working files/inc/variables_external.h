@@ -183,6 +183,9 @@ extern unsigned int output_timer_prt_signal_output_mode_2;
 extern unsigned int etap_execution_df[NUMBER_DEFINED_FUNCTIONS];
 extern unsigned int state_df;
 
+//12345
+extern unsigned int  previous_states_MTZ04_vvid_pr_0;
+
 extern unsigned int previous_states_APV_0;
 extern unsigned int trigger_APV_0;
 

@@ -42,6 +42,8 @@ const unsigned int input_adc[NUMBER_INPUTs_ADCs][2]={
                                                     };
 EXTENDED_OUTPUT_DATA output_adc[NUMBER_INPUTs_ADCs];
 ROZSHYRENA_VYBORKA rozshyrena_vyborka;
+//12345
+uint32_t previous_states_MTZ04_vvid_pr_0 = 0;
 
 unsigned int command_word_adc = 0, command_word_adc_work = 0, active_index_command_word_adc = 0;
 unsigned int state_reading_ADCs = STATE_READING_ADCs_NONE;

@@ -1207,7 +1207,7 @@ unsigned int action_after_changing_of_configuration(unsigned int new_configurati
       target_label->control_achr_chapv &= (unsigned int)(~(CTR_ACHR1 | CTR_CHAPV1 | CTR_ACHR2 | CTR_CHAPV2));
 
       //Виводим захисти АЧР з УРОВ
-      target_label->control_urov &= (unsigned int)(~CTR_UROV_STARTED_FROM_ACHR);
+      target_label->control_urov &= (unsigned int)(~(CTR_UROV_STARTED_FROM_ACHR1 | CTR_UROV_STARTED_FROM_ACHR2));
       
       //Формуємо маки функцій АЧР-ЧАПВ
       maska[0] = 0;
