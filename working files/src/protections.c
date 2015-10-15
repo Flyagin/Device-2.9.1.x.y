@@ -3895,11 +3895,28 @@ void umax2_handler(unsigned int *activated_functions, unsigned int number_group_
 /*****************************************************/
 void achr_chapv_handler(unsigned int *activated_functions, unsigned int number_group_stp)
 {
+//RANG_OUTPUT_LED_DF_REG_ACHR_CHAPV_VID_DV,
+/*
   //пред сост ПО АЧР
   _Bool previous_state_po_f1_achr = _CHECK_SET_BIT(active_functions, RANG_OUTPUT_LED_DF_REG_PO_ACHR1);
   //пред сост ПО ЧАПВ
   _Bool previous_state_po_f1_chapv = _CHECK_SET_BIT(active_functions, RANG_OUTPUT_LED_DF_REG_PO_CHAPV1);
  // 
+раздвоение
+*/
+  //пред сост ПО АЧР1
+  _Bool previous_state_po_f1_achr1  = _CHECK_SET_BIT(active_functions, RANG_OUTPUT_LED_DF_REG_PO_ACHR1);
+  //пред сост ПО ЧАПВ1
+  _Bool previous_state_po_f1_chapv1 = _CHECK_SET_BIT(active_functions, RANG_OUTPUT_LED_DF_REG_PO_CHAPV1);
+  //пред сост ПО АЧР2
+  _Bool previous_state_po_f1_achr2  = _CHECK_SET_BIT(active_functions, RANG_OUTPUT_LED_DF_REG_PO_ACHR2);
+  //пред сост ПО ЧАПВ2
+  _Bool previous_state_po_f1_chapv2 = _CHECK_SET_BIT(active_functions, RANG_OUTPUT_LED_DF_REG_PO_CHAPV2);
+//----------
+/*
+неизменно
+*/
+
   unsigned int setpoint1 = previous_state_po_achr_chapv_uaf1 ?
           current_settings_prt.setpoint_achr_chapv_uf[number_group_stp] * U_UP / 100 :
           current_settings_prt.setpoint_achr_chapv_uf[number_group_stp];
@@ -3954,19 +3971,54 @@ void achr_chapv_handler(unsigned int *activated_functions, unsigned int number_g
   UF1_is_smaller_than_U_setpoint_F1 = !UF1_is_larger_than_U_setpoint_F1;
  //L2, 3 
   int F1 = (int) (frequency * 100);
+/*
   _Bool po_f1_achr_rab = F1 <= ((int)current_settings_prt.setpoint_achr1_f_rab[number_group_stp]);
   _Bool po_f1_chapv_rab = F1 >= ((int)current_settings_prt.setpoint_chapv1_f_rab[number_group_stp]);
   _Bool po_f1_achr = 0;
-  
+раздвоение
+*/
+  _Bool po_f1_achr1_rab = F1 <= ((int)current_settings_prt.setpoint_achr1_f_rab[number_group_stp]);
+  _Bool po_f1_chapv1_rab = F1 >= ((int)current_settings_prt.setpoint_chapv1_f_rab[number_group_stp]);
+  _Bool po_f1_achr1 = 0;
+  _Bool po_f1_achr2_rab = F1 <= ((int)current_settings_prt.setpoint_achr1_f_rab[number_group_stp]);
+  _Bool po_f1_chapv2_rab = F1 >= ((int)current_settings_prt.setpoint_chapv1_f_rab[number_group_stp]);
+  _Bool po_f1_achr2 = 0;
+//----------
+
+/*  
   //ДВ
   unsigned int tmp_value = (_CHECK_SET_BIT(activated_functions, RANG_OUTPUT_LED_DF_REG_BLOCK_ACHR1) != 0) << 0;
   //L5
   _INVERTOR(tmp_value, 0, tmp_value, 0);
-  
+раздвоение
+*/
+  //ДВ
+  unsigned int tmp_value1 = (_CHECK_SET_BIT(activated_functions, RANG_OUTPUT_LED_DF_REG_BLOCK_ACHR1) != 0) << 0;
+  //L5.1
+  _INVERTOR(tmp_value1, 0, tmp_value1, 0);
+  //ДВ
+  unsigned int tmp_value2 = (_CHECK_SET_BIT(activated_functions, RANG_OUTPUT_LED_DF_REG_BLOCK_ACHR2) != 0) << 0;
+  //L5
+  _INVERTOR(tmp_value2, 0, tmp_value2, 0);
+//----------
+
+/*  
   //М
   tmp_value |= ((current_settings_prt.control_achr_chapv & CTR_ACHR1) != 0) << 1;
   //L4
   _AND3_INVERTOR(tmp_value, 0, tmp_value, 1, UF1_is_larger_than_U_setpoint_F1, 0, tmp_value, 3);
+раздвоение
+*/
+  //М
+  tmp_value1 |= ((current_settings_prt.control_achr_chapv & CTR_ACHR1) != 0) << 1;
+  //L4.1
+  _AND3_INVERTOR(tmp_value1, 0, tmp_value1, 1, UF1_is_larger_than_U_setpoint_F1, 0, tmp_value1, 3);
+  //М
+  tmp_value2 |= ((current_settings_prt.control_achr_chapv & CTR_ACHR2) != 0) << 1;
+  //L4.2
+  _AND3_INVERTOR(tmp_value2, 0, tmp_value2, 1, UF1_is_larger_than_U_setpoint_F1, 0, tmp_value2, 3);
+//----------
+/*
   //Reset канал L2
   if (!_GET_OUTPUT_STATE(tmp_value, 3))
   {
@@ -3993,16 +4045,83 @@ void achr_chapv_handler(unsigned int *activated_functions, unsigned int number_g
         po_f1_achr = 1;
       }
     }
-  }
-  
+  }//if
+раздвоение
+*/
+//---1----
+  //Reset канал L2
+  if (!_GET_OUTPUT_STATE(tmp_value1, 3))
+  {
+    //ПО АЧР1
+    if (previous_state_po_f1_achr1) 
+    {
+      //отпускание АЧР
+//  _Bool po_f1_chapv_rab = F1 >= ((int)current_settings_prt.setpoint_chapv1_f_rab[number_group_stp]);
+      if (!po_f1_chapv1_rab) 
+      {
+        //после сработки 1 будет держаться до тех пор пока не сработает po_f1_chapv_rab (условие отпускания)
+        _SET_BIT(activated_functions, RANG_OUTPUT_LED_DF_REG_PO_ACHR1);
+        po_f1_achr1 = 1;
+      }
+    }
+    else
+    {
+      //сработка
+//  _Bool po_f1_achr_rab = F1 <= ((int)current_settings_prt.setpoint_achr1_f_rab[number_group_stp]);
+      
+      if (po_f1_achr1_rab)
+      {
+        _SET_BIT(activated_functions, RANG_OUTPUT_LED_DF_REG_PO_ACHR1);
+        po_f1_achr1 = 1;
+      }
+    }
+  }//if
+//----2----
+  //Reset канал L2
+  if (!_GET_OUTPUT_STATE(tmp_value2, 3))
+  {
+    //ПО АЧР1
+    if (previous_state_po_f1_achr2) 
+    {
+      //отпускание АЧР
+//  _Bool po_f1_chapv_rab = F1 >= ((int)current_settings_prt.setpoint_chapv1_f_rab[number_group_stp]);
+      if (!po_f1_chapv2_rab) 
+      {
+        //после сработки 1 будет держаться до тех пор пока не сработает po_f1_chapv_rab (условие отпускания)
+        _SET_BIT(activated_functions, RANG_OUTPUT_LED_DF_REG_PO_ACHR2);
+        po_f1_achr2 = 1;
+      }
+    }
+    else
+    {
+      //сработка
+//  _Bool po_f1_achr_rab = F1 <= ((int)current_settings_prt.setpoint_achr1_f_rab[number_group_stp]);
+      
+      if (po_f1_achr2_rab)
+      {
+        _SET_BIT(activated_functions, RANG_OUTPUT_LED_DF_REG_PO_ACHR2);
+        po_f1_achr2 = 1;
+      }
+    }
+  }//if
+//--------------  
+/*
   _TIMER_T_0(INDEX_TIMER_ACHR1, current_settings_prt.timeout_achr_1[number_group_stp], po_f1_achr, 0, tmp_value, 5);
+раздвоение
+*/
+//---1---
+  _TIMER_T_0(INDEX_TIMER_ACHR1, current_settings_prt.timeout_achr_1[number_group_stp], po_f1_achr1, 0, tmp_value1, 5);
+//---2---
+  _TIMER_T_0(INDEX_TIMER_ACHR2, current_settings_prt.timeout_achr_2[number_group_stp], po_f1_achr2, 0, tmp_value2, 5);
+//-------
   
   //Разр ЧАПВ
   if (UF1_is_larger_than_U_setpoint_F1)
   {
     _SET_BIT(activated_functions, RANG_OUTPUT_LED_DF_REG_RAZR_CHAPV);
   }
-  
+
+/*  
   _Bool tmp1 = 0;
   do 
   {
@@ -4038,7 +4157,82 @@ void achr_chapv_handler(unsigned int *activated_functions, unsigned int number_g
     tmp1 = trigger_CHAPV1;
   } 
   while(1);
-  
+раздвоение
+*/
+//----1----
+  _Bool tmp1_1 = 0;
+  do 
+  {
+    //L7_1
+    _OR2(tmp_value1, 3, !trigger_CHAPV1, 0, tmp_value1, 30);
+    
+    //ПО ЧАПВ1
+    _Bool po_f1_chapv1 = 0;
+    if (previous_state_po_f1_chapv1) 
+    {
+      po_f1_chapv1 = !po_f1_achr1_rab;
+    }
+    else 
+    {
+      po_f1_chapv1 = po_f1_chapv1_rab;
+    }
+    //L3
+    _Bool po_f1_chapv1_tmp = (!_GET_OUTPUT_STATE(tmp_value1, 30) && po_f1_chapv1);
+    if (po_f1_chapv1_tmp) 
+    {
+      _SET_BIT(activated_functions, RANG_OUTPUT_LED_DF_REG_PO_CHAPV1);
+    }
+    
+    _TIMER_T_0(INDEX_TIMER_CHAPV1, current_settings_prt.timeout_chapv_1[number_group_stp], po_f1_chapv1_tmp, 0, tmp_value1, 6);
+    //L8
+    _AND2(po_f1_achr1, 0, !po_f1_chapv1_tmp, 0, tmp_value1, 12);
+    //L9
+    _OR2(tmp_value1, 5, tmp_value1, 6, tmp_value1, 13);
+
+    _D_TRIGGER(_GET_OUTPUT_STATE(tmp_value1, 12), 0, _GET_OUTPUT_STATE(UF1_is_smaller_than_U_setpoint_F1, 0), previous_states_CHAPV1, 0, tmp_value1, 13, trigger_CHAPV1, 0);
+    if (tmp1_1 == trigger_CHAPV1) break;
+    
+    tmp1_1 = trigger_CHAPV1;
+  } 
+  while(1);
+//----2----
+  _Bool tmp1_2 = 0;
+  do 
+  {
+    //L7_2
+    _OR2(tmp_value2, 3, !trigger_CHAPV2, 0, tmp_value2, 30);
+    
+    //ПО ЧАПВ2
+    _Bool po_f1_chapv2 = 0;
+    if (previous_state_po_f1_chapv2) 
+    {
+      po_f1_chapv2 = !po_f1_achr2_rab;
+    }
+    else 
+    {
+      po_f1_chapv2 = po_f1_chapv2_rab;
+    }
+    //L3_2
+    _Bool po_f1_chapv2_tmp = (!_GET_OUTPUT_STATE(tmp_value2, 30) && po_f1_chapv2);
+    if (po_f1_chapv2_tmp) 
+    {
+      _SET_BIT(activated_functions, RANG_OUTPUT_LED_DF_REG_PO_CHAPV2);
+    }
+    
+    _TIMER_T_0(INDEX_TIMER_CHAPV2, current_settings_prt.timeout_chapv_2[number_group_stp], po_f1_chapv2_tmp, 0, tmp_value2, 6);
+    //L8_2
+    _AND2(po_f1_achr2, 0, !po_f1_chapv2_tmp, 0, tmp_value2, 12);
+    //L9_2
+    _OR2(tmp_value2, 5, tmp_value2, 6, tmp_value2, 13);
+
+    _D_TRIGGER(_GET_OUTPUT_STATE(tmp_value2, 12), 0, _GET_OUTPUT_STATE(UF1_is_smaller_than_U_setpoint_F1, 0), previous_states_CHAPV2, 0, tmp_value2, 13, trigger_CHAPV2, 0);
+    if (tmp1_2 == trigger_CHAPV2) break;
+    
+    tmp1_2 = trigger_CHAPV2;
+  } 
+  while(1);
+//---------
+/*  
   //АЧР/ЧАПВ
   if (_GET_OUTPUT_STATE(trigger_CHAPV1, 0)) 
   {
@@ -4051,13 +4245,54 @@ void achr_chapv_handler(unsigned int *activated_functions, unsigned int number_g
   _INVERTOR(UF1_is_larger_than_U_setpoint_F1, 0, razr_chapv_inv, 0);
   _AND2(chapv_timer_1ms, 0, razr_chapv_inv, 0, tmp_value, 24);
   _TIMER_0_T(INDEX_TIMER_BLOCK_CHAPV_5MS, TIMEOUT_BLOCK_CHAPV_5MS, tmp_value, 24, tmp_value, 25);
+раздвоение
+*/
+//----1----
+  //АЧР/ЧАПВ
+  if (_GET_OUTPUT_STATE(trigger_CHAPV1, 0)) 
+  {
+    _SET_BIT(activated_functions, RANG_OUTPUT_LED_DF_REG_ACHR_CHAPV1);
+  }
   
+  _Bool chapv_timer_1ms1 = 0;
+ // _Bool razr_chapv_inv1 = 0;
+  _TIMER_0_T(INDEX_TIMER_CHAPV1_1MS, TIMEOUT_CHAPV_1MS, trigger_CHAPV1, 0, chapv_timer_1ms1, 0);
+ // _INVERTOR(UF1_is_larger_than_U_setpoint_F1, 0, razr_chapv_inv1, 0);
+  _AND2(chapv_timer_1ms1, 0, /*razr_chapv_inv1, 0,*/UF1_is_smaller_than_U_setpoint_F1, 0, tmp_value1, 24);
+  _TIMER_0_T(INDEX_TIMER_BLOCK_CHAPV1_5MS, TIMEOUT_BLOCK_CHAPV_5MS, tmp_value1, 24, tmp_value1, 25);
+//----2----
+  //АЧР/ЧАПВ
+  if (_GET_OUTPUT_STATE(trigger_CHAPV2, 0)) 
+  {
+    _SET_BIT(activated_functions, RANG_OUTPUT_LED_DF_REG_ACHR_CHAPV2);
+  }
+  
+  _Bool chapv_timer_1ms2 = 0;
+  //_Bool razr_chapv_inv2 = 0;
+  _TIMER_0_T(INDEX_TIMER_CHAPV2_1MS, TIMEOUT_CHAPV_1MS, trigger_CHAPV2, 0, chapv_timer_1ms2, 0);
+//  _INVERTOR(UF1_is_larger_than_U_setpoint_F1, 0, razr_chapv_inv2, 0);
+  _AND2(chapv_timer_1ms1, 0, /*razr_chapv_inv1, 0,*/UF1_is_smaller_than_U_setpoint_F1, 0, tmp_value2, 24);
+  _TIMER_0_T(INDEX_TIMER_BLOCK_CHAPV2_5MS, TIMEOUT_BLOCK_CHAPV_5MS, tmp_value2, 24, tmp_value2, 25);
+//---------
+/*  
   //Block CHAPV vid U
   if (_GET_OUTPUT_STATE(tmp_value, 25))
   {
     _SET_BIT(activated_functions, RANG_OUTPUT_LED_DF_REG_BLOCK_CHAPV_VID_U);
   }
+раздвоение
+*/
+unsigned int tmp_value3=0;
+    //L
+    _OR2(tmp_value1, 25, tmp_value2, 25, tmp_value3, 0);
+  //Block CHAPV vid U
+  if (_GET_OUTPUT_STATE(tmp_value3, 0))
+  {
+    _SET_BIT(activated_functions, RANG_OUTPUT_LED_DF_REG_BLOCK_CHAPV_VID_U);
+  }
+
 }
+
 /*****************************************************/
 
 /*****************************************************/
@@ -8599,13 +8834,17 @@ inline void main_protection(void)
       global_timers[INDEX_TIMER_ACHR1] = -1;
       global_timers[INDEX_TIMER_CHAPV1] = -1;
       global_timers[INDEX_TIMER_ACHR_CHAPV_100MS_1] = -1;
-      global_timers[INDEX_TIMER_CHAPV_1MS] = -1;
-      global_timers[INDEX_TIMER_BLOCK_CHAPV_5MS] = -1;
+      global_timers[INDEX_TIMER_CHAPV1_1MS] = -1;
+      global_timers[INDEX_TIMER_BLOCK_CHAPV1_5MS] = -1;
+      global_timers[INDEX_TIMER_CHAPV2_1MS] = -1;
+      global_timers[INDEX_TIMER_BLOCK_CHAPV2_5MS] = -1;
       previous_state_po_achr_chapv_uaf1 = 0;
       previous_state_po_achr_chapv_ubf1 = 0;
       previous_state_po_achr_chapv_ucf1 = 0;
       previous_states_CHAPV1 = 0;
       trigger_CHAPV1 = 0;
+      previous_states_CHAPV2= 0;
+      trigger_CHAPV2= 0;
     }
     
     /**************************/

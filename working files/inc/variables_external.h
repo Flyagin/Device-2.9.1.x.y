@@ -193,7 +193,9 @@ extern _Bool previous_state_po_achr_chapv_uaf1;
 extern _Bool previous_state_po_achr_chapv_ubf1;
 extern _Bool previous_state_po_achr_chapv_ucf1;
 extern _Bool previous_states_CHAPV1;
+extern _Bool previous_states_CHAPV2;
 extern _Bool trigger_CHAPV1;
+extern _Bool trigger_CHAPV2;
 
 extern _Bool previous_states_ready_tu;
 extern _Bool trigger_ready_tu;
