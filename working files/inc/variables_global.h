@@ -303,7 +303,9 @@ _Bool previous_state_po_achr_chapv_uaf1 = 0;
 _Bool previous_state_po_achr_chapv_ubf1 = 0;
 _Bool previous_state_po_achr_chapv_ucf1 = 0;
 _Bool previous_states_CHAPV1 = 0;
+_Bool previous_states_CHAPV2 = 0;
 _Bool trigger_CHAPV1 = 0;
+_Bool trigger_CHAPV2 = 0;
 
 _Bool previous_states_ready_tu = 0;
 _Bool trigger_ready_tu = 0;

@@ -75,11 +75,18 @@
 #define INDEX_TIMER_UMAX1                                      (INDEX_TIMER_UMIN2 + 1)
 #define INDEX_TIMER_UMAX2                                      (INDEX_TIMER_UMAX1 + 1)
 #define INDEX_TIMER_ACHR_CHAPV_100MS_1                         (INDEX_TIMER_UMAX2 + 1)
-#define INDEX_TIMER_CHAPV_1MS                                  (INDEX_TIMER_ACHR_CHAPV_100MS_1 + 1)
-#define INDEX_TIMER_BLOCK_CHAPV_5MS                            (INDEX_TIMER_CHAPV_1MS + 1)
-#define INDEX_TIMER_ACHR1                                      (INDEX_TIMER_BLOCK_CHAPV_5MS + 1)
+#define INDEX_TIMER_CHAPV1_1MS                                 (INDEX_TIMER_ACHR_CHAPV_100MS_1 + 1)
+#define INDEX_TIMER_BLOCK_CHAPV1_5MS                           (INDEX_TIMER_CHAPV1_1MS + 1)
+//12345
+#define INDEX_TIMER_CHAPV2_1MS                                 (INDEX_TIMER_BLOCK_CHAPV1_5MS + 1)
+#define INDEX_TIMER_BLOCK_CHAPV2_5MS                           (INDEX_TIMER_CHAPV2_1MS + 1)
+
+#define INDEX_TIMER_ACHR1                                      (INDEX_TIMER_BLOCK_CHAPV2_5MS + 1)
 #define INDEX_TIMER_CHAPV1                                     (INDEX_TIMER_ACHR1 + 1)
-#define NEXT_TIMER                                             (INDEX_TIMER_CHAPV1 + 1)
+//123456
+#define INDEX_TIMER_ACHR2                                      (INDEX_TIMER_CHAPV1 + 1)
+#define INDEX_TIMER_CHAPV2                                     (INDEX_TIMER_ACHR2 + 1)
+#define NEXT_TIMER                                             (INDEX_TIMER_CHAPV2 + 1)
 
 enum __mtz_tmr_const {
   INDEX_TIMER_MTZ = 0,
