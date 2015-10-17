@@ -36,11 +36,6 @@ void main_manu_function(void)
       //Виставляємо команду на обновлекння нового екрану, а всі попередні натискування відміняємо
       new_state_keyboard = (1<<BIT_REWRITE);
     }
-//    else
-//    {
-//      //Очищаємо інформацію про спрацювання захистів
-//      info_vidkluchennja_vymykacha = 0;
-//    }
   }
   else
   {

@@ -4881,6 +4881,30 @@ inline void on_off_handler(unsigned int *activated_functions, unsigned int *prev
             _CLEAR_BIT(temp_array_of_outputs, RANG_OUTPUT_LED_DF_REG_MTZ4);
           }
           
+          //МТЗ04 1
+          if(
+             (_CHECK_SET_BIT(temp_array_of_outputs, RANG_OUTPUT_LED_DF_REG_MTZ04_1) != 0) &&
+             (_CHECK_SET_BIT(active_functions, RANG_OUTPUT_LED_DF_REG_MTZ04_1) == 0) /*умова, що сигнал тільки активується (щоб зафіксувати час старту)*/
+            )   
+          {
+            info_vidkluchennja_vymykacha |= (1 << VYMKNENNJA_VID_MTZ04_1);
+            for(unsigned int j = 0; j < 7; j++) info_vidkluchennja_vymykachatime[VYMKNENNJA_VID_MTZ04_1][j] = *(label_to_time_array + j);
+
+            _CLEAR_BIT(temp_array_of_outputs, RANG_OUTPUT_LED_DF_REG_MTZ04_1);
+          }
+          
+          //МТЗ04 2
+          if(
+             (_CHECK_SET_BIT(temp_array_of_outputs, RANG_OUTPUT_LED_DF_REG_MTZ04_2) != 0) &&
+             (_CHECK_SET_BIT(active_functions, RANG_OUTPUT_LED_DF_REG_MTZ04_2) == 0) /*умова, що сигнал тільки активується (щоб зафіксувати час старту)*/
+            )   
+          {
+            info_vidkluchennja_vymykacha |= (1 << VYMKNENNJA_VID_MTZ04_2);
+            for(unsigned int j = 0; j < 7; j++) info_vidkluchennja_vymykachatime[VYMKNENNJA_VID_MTZ04_2][j] = *(label_to_time_array + j);
+
+            _CLEAR_BIT(temp_array_of_outputs, RANG_OUTPUT_LED_DF_REG_MTZ04_2);
+          }
+          
           //ЗДЗ
           if(
              (_CHECK_SET_BIT(temp_array_of_outputs, RANG_OUTPUT_LED_DF_REG_ZDZ) != 0) &&
@@ -4977,16 +5001,28 @@ inline void on_off_handler(unsigned int *activated_functions, unsigned int *prev
             _CLEAR_BIT(temp_array_of_outputs, RANG_OUTPUT_LED_DF_REG_ACHR_CHAPV_VID_DV);
           }
           
-          //АЧР/ЧАПВ
+          //АЧР/ЧАПВ1
           if(
              (_CHECK_SET_BIT(temp_array_of_outputs, RANG_OUTPUT_LED_DF_REG_ACHR_CHAPV1) != 0) &&
              (_CHECK_SET_BIT(active_functions, RANG_OUTPUT_LED_DF_REG_ACHR_CHAPV1) == 0) /*умова, що сигнал тільки активується (щоб зафіксувати час старту)*/
             )   
           {
-            info_vidkluchennja_vymykacha |= (1 << VYMKNENNJA_VID_ACHR_CHAPV);
-            for(unsigned int j = 0; j < 7; j++) info_vidkluchennja_vymykachatime[VYMKNENNJA_VID_ACHR_CHAPV][j] = *(label_to_time_array + j);
+            info_vidkluchennja_vymykacha |= (1 << VYMKNENNJA_VID_ACHR_CHAPV1);
+            for(unsigned int j = 0; j < 7; j++) info_vidkluchennja_vymykachatime[VYMKNENNJA_VID_ACHR_CHAPV1][j] = *(label_to_time_array + j);
 
             _CLEAR_BIT(temp_array_of_outputs, RANG_OUTPUT_LED_DF_REG_ACHR_CHAPV1);
+          }
+          
+          //АЧР/ЧАПВ2
+          if(
+             (_CHECK_SET_BIT(temp_array_of_outputs, RANG_OUTPUT_LED_DF_REG_ACHR_CHAPV2) != 0) &&
+             (_CHECK_SET_BIT(active_functions, RANG_OUTPUT_LED_DF_REG_ACHR_CHAPV2) == 0) /*умова, що сигнал тільки активується (щоб зафіксувати час старту)*/
+            )   
+          {
+            info_vidkluchennja_vymykacha |= (1 << VYMKNENNJA_VID_ACHR_CHAPV2);
+            for(unsigned int j = 0; j < 7; j++) info_vidkluchennja_vymykachatime[VYMKNENNJA_VID_ACHR_CHAPV2][j] = *(label_to_time_array + j);
+
+            _CLEAR_BIT(temp_array_of_outputs, RANG_OUTPUT_LED_DF_REG_ACHR_CHAPV2);
           }
           
           //УРОВ1
