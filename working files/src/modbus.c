@@ -9966,6 +9966,7 @@ inline unsigned int Get_data_file(unsigned char* input_data, unsigned char* outp
               if (length <= 27)
               {
                 unsigned int phase_line = header_ar_tmp.control_extra_settings_1 & CTR_EXTRA_SETTINGS_1_CTRL_PHASE_LINE;
+                unsigned int Ib_I04 = header_ar_tmp.control_extra_settings_1 & CTR_EXTRA_SETTINGS_1_CTRL_IB_I04;
                 unsigned int i = 0;
                 while (i < length)
                 {
@@ -9980,7 +9981,7 @@ inline unsigned int Get_data_file(unsigned char* input_data, unsigned char* outp
                     char idetyficator[NUMBER_ANALOG_CANALES][16] = {
                     "3I0             ",
                     "Ia              ",
-                    "Ib              ",
+                    "                ",
                     "Ic              ",
                     "                ",
                     "                ",
@@ -9988,6 +9989,15 @@ inline unsigned int Get_data_file(unsigned char* input_data, unsigned char* outp
                     "3U0             "
                     };
                     
+                    {
+                      const char idetyficator_current[2][16] = 
+                      {
+                        "Ib              ",
+                        "I 0,4kV         "
+                      };
+                      for (unsigned int k = 0; k < 16; k++) idetyficator[I_Ib_I04][k] = idetyficator_current[Ib_I04 != 0][k];
+                    }
+
                     if (phase_line == 0)
                     {
                       const char idetyficator_phase[3][16] = {
@@ -10026,7 +10036,7 @@ inline unsigned int Get_data_file(unsigned char* input_data, unsigned char* outp
                     char phase[NUMBER_ANALOG_CANALES][2] = {
                     "I0",
                     "A ",
-                    "B ",
+                    "  ",
                     "C ",
                     "  ",
                     "  ",
@@ -10034,6 +10044,15 @@ inline unsigned int Get_data_file(unsigned char* input_data, unsigned char* outp
                     "U0"
                     };
                     
+                    {
+                      const char phase_c[2][2] = 
+                      {
+                        "B ",
+                        "04"
+                      };
+                      for (unsigned int k = 0; k < 2; k++) phase[I_Ib_I04][k] = phase_c[Ib_I04 != 0][k];
+                    }
+
                     if (phase_line == 0)
                     {
                       const char phase_p[3][2] = {
@@ -10108,9 +10127,28 @@ inline unsigned int Get_data_file(unsigned char* input_data, unsigned char* outp
                   else if ( i == 24)
                   {
                     //Первинний коефіцієнт трансформації
-                    if      (number_record == (2 + I_3I0)) temp_data  = header_ar_tmp.T0;
-                    else if (number_record <= (2 + I_Ic )) temp_data  = header_ar_tmp.TCurrent;
-                    else                                   temp_data  = header_ar_tmp.TVoltage;
+                    if (number_record == (2 + I_3I0)) 
+                    {
+                      temp_data  = header_ar_tmp.T0;
+                    }
+                    else if (number_record <= (2 + I_Ic )) 
+                    {
+                      if (
+                          (number_record != (2 + I_Ib_I04 )) ||
+                          (I_Ib_I04 == 0)
+                         )
+                      {
+                        temp_data  = header_ar_tmp.TCurrent;
+                      }
+                      else
+                      {
+                        temp_data  = header_ar_tmp.TCurrent04;
+                      }
+                    }
+                    else
+                    {
+                      temp_data  = header_ar_tmp.TVoltage;
+                    }
                   }
                   else if ( i == 25)
                   {

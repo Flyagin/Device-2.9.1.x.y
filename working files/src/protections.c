@@ -7898,6 +7898,8 @@ inline void analog_registrator(unsigned int* carrent_active_functions)
           header_ar.T0 = current_settings_prt.T0;
           //Коефіцієнт трансформації TT
           header_ar.TCurrent = current_settings_prt.TCurrent;
+          //Коефіцієнт трансформації TT сторони 0,4кВ
+          header_ar.TCurrent04 = current_settings_prt.TCurrent04;
           //Коефіцієнт трансформації TН
           header_ar.TVoltage = current_settings_prt.TVoltage;
           //Додаткові налаштування при яких було запущено аналоговий реєстратор

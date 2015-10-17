@@ -577,17 +577,14 @@ void make_ekran_current(unsigned int pervynna_vtorynna)
         else 
           start_number_digit_after_point = 3;
 
-        if (pervynna_vtorynna == 0) convert_and_insert_char_for_measurement(start_number_digit_after_point, measurement_low[index], 1, 1, name_string[index_of_ekran], 7);
-        else if (index < IM_3I0_r)
+        unsigned int koef_mul = 1;
+        if (pervynna_vtorynna != 0)
         {
-          //Струми , які відповідають 3I0 і не розраховуються з фазних струмів
-          convert_and_insert_char_for_measurement(start_number_digit_after_point, measurement_low[index], current_settings.T0, 1, name_string[index_of_ekran], 7);
+          if (index < IM_3I0_r) koef_mul = current_settings.T0;
+          else if (index == IM_I04) koef_mul = current_settings.TCurrent04;
+          else  koef_mul = current_settings.TCurrent;
         }
-        else
-        {
-          //Фазні струми, 3I0-1 (розраховується з фазних струмів), струм зворотньої послідовності, струм прямої послідовності, струм I0.4
-          convert_and_insert_char_for_measurement(start_number_digit_after_point, measurement_low[index], current_settings.TCurrent, 1, name_string[index_of_ekran], 7);
-        }
+        convert_and_insert_char_for_measurement(start_number_digit_after_point, measurement_low[index], koef_mul, 1, name_string[index_of_ekran], 7);
       }
       /********************************/
 

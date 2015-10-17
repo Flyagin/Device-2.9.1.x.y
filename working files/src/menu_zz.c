@@ -464,11 +464,11 @@ void make_ekran_control_zz()
           for(unsigned int k = 0; k < MAX_COL_LCD; k++)
           {
             if ((i+1) < (MAX_ROW_FOR_CONTROL_ZZ - additional_current)) information_tmp[i][j][k] = information_tmp[i + 1][j][k];
-            else name_string_tmp[i][j] = ' ';
+            else information_tmp[i][j][k] = ' ';
           }
 
           if ((i+1) < (MAX_ROW_FOR_CONTROL_ZZ - additional_current)) cursor_x_tmp[i][j] = cursor_x_tmp[i + 1][j];
-          else name_string_tmp[i][j] = 0;
+          else cursor_x_tmp[i][j] = 0;
         }
 
         i++;

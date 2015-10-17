@@ -262,6 +262,7 @@ typedef struct
 
   unsigned int T0;                      //Коефіцієнт трансформації для трансформатора 3I0
   unsigned int TCurrent;                //Коефіцієнт трансформації для трансформатора струмів
+  unsigned int TCurrent04;              //Коефіцієнт трансформації для трансформатора струмів сторони 0,4кВ
   unsigned int TVoltage;                //Коефіцієнт трансформації для трансформатора напруг
   
   unsigned int password1;                                       //Пароль для редагування з меню
@@ -387,6 +388,7 @@ typedef struct
   unsigned char time[7]; 
   unsigned int T0;
   unsigned int TCurrent;
+  unsigned int TCurrent04;
   unsigned int TVoltage;
   unsigned int control_extra_settings_1;
   unsigned char name_of_cell[MAX_CHAR_IN_NAME_OF_CELL];
