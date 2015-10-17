@@ -784,6 +784,24 @@ enum __mtz_abc_direction_const {
 /*****************************************/
 
 /*****************************************/
+//Макска моніторингу максимального фазного струму сторони 0,4кВ для дискретного реєстратора
+/*****************************************/
+#define MASKA_MONITOTYNG_PHASE04_SIGNALES_0        0
+#define MASKA_MONITOTYNG_PHASE04_SIGNALES_1        0
+#define MASKA_MONITOTYNG_PHASE04_SIGNALES_2        0
+
+#define MASKA_MONITOTYNG_PHASE04_SIGNALES_3 (unsigned int)(        \
+     (1 << (RANG_OUTPUT_LED_DF_REG_PO_MTZ04_1 - 96))            /* 99*/\
+   | (1 << (RANG_OUTPUT_LED_DF_REG_MTZ04_1 - 96))               /*100*/\
+   | (1 << (RANG_OUTPUT_LED_DF_REG_PO_MTZ04_2 - 96))            /*101*/\
+   | (1 << (RANG_OUTPUT_LED_DF_REG_MTZ04_2 - 96))               /*102*/\
+)
+
+#define MASKA_MONITOTYNG_PHASE04_SIGNALES_4        0
+#define MASKA_MONITOTYNG_PHASE04_SIGNALES_5        0
+/*****************************************/
+
+/*****************************************/
 //Макска моніторингу максимального струму 3I0 для дискретного реєстратора
 /*****************************************/
 #define MASKA_MONITOTYNG_3I0_SIGNALES_0        0

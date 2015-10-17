@@ -5514,6 +5514,7 @@ inline unsigned int Get_data(unsigned char *data, unsigned int address_data, uns
       if (
           number_block < (
                           (*(point_to_buffer + FIRST_INDEX_NUMBER_MAX_PHASE_DR  )) + 
+                          (*(point_to_buffer + FIRST_INDEX_NUMBER_MAX_PHASE04_DR)) + 
                           (*(point_to_buffer + FIRST_INDEX_NUMBER_MAX_3I0_DR    )) + 
                           (*(point_to_buffer + FIRST_INDEX_NUMBER_MAX_3U0_DR    )) + 
                           (*(point_to_buffer + FIRST_INDEX_NUMBER_MIN_U_DR      )) + 
@@ -5723,6 +5724,11 @@ inline unsigned int Get_data(unsigned char *data, unsigned int address_data, uns
                   temp_value = BLOCK_PROTECTION_MTZ;
                   break;
                 }
+//              case IDENTIFIER_BIT_ARRAY_MAX_CURRENT_PHASE04:
+//                {
+//                  temp_value = BLOCK_PROTECTION_MTZ04;
+//                  break;
+//                }
               case IDENTIFIER_BIT_ARRAY_MAX_CURRENT_3I0:
                 {
                   temp_value = BLOCK_PROTECTION_3I0;

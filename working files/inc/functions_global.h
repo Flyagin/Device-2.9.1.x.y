@@ -201,6 +201,8 @@ unsigned int stop_regisrator(unsigned int*, unsigned int*);
 void fix_undefined_error_dr(unsigned int*);
 void start_monitoring_max_phase_current(unsigned int);
 void continue_monitoring_max_phase_current(unsigned int);
+void start_monitoring_max_phase04_current(unsigned int);
+void continue_monitoring_max_phase04_current(unsigned int);
 void start_monitoring_max_3I0(unsigned int);
 void continue_monitoring_max_3I0(unsigned int);
 void start_monitoring_max_3U0(unsigned int);
