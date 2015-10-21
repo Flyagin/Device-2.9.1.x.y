@@ -5498,7 +5498,7 @@ inline void resurs_vymykacha_handler(unsigned int *activated_functions, unsigned
   if (_CHECK_SET_BIT(activated_functions, RANG_OUTPUT_LED_DF_REG_WORK_BO) != 0)
   {
     unsigned int max_faze_current_tmp = measurement[IM_IA];
-//      if (max_faze_current_tmp < measurement[IM_IB]) max_faze_current_tmp = measurement[IM_IB];
+    if (max_faze_current_tmp < measurement[IM_IB]) max_faze_current_tmp = measurement[IM_IB];
     if (max_faze_current_tmp < measurement[IM_IC]) max_faze_current_tmp = measurement[IM_IC];
     max_faze_current_tmp = max_faze_current_tmp*current_settings_prt.TCurrent/1000;
   
