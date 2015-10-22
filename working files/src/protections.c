@@ -4312,7 +4312,7 @@ void ready_tu(unsigned int *activated_functions)
     previous_states_ready_tu = 0;
   }
   
-  _AND2(tmp_value, 2, ctrl_ready_tu, 0, tmp_value, 7);
+  _OR2(tmp_value, 2, ctrl_ready_tu, 0, tmp_value, 7);
   _D_TRIGGER(1, 0, _GET_OUTPUT_STATE(tmp_value, 7), previous_states_ready_tu, 0, tmp_value, 1, trigger_ready_tu, 0);
   
   _AND4(tmp_value, 0, tmp_value, 3, !trigger_ready_tu, 0, tmp_value, 6, tmp_value, 5);
