@@ -56,12 +56,12 @@
 #define COL_TMO_CHAPV1_END                  8
 
 #define COL_TMO_ACHR2_BEGIN                 4
-#define COL_TMO_ACHR2_COMMA                 6
-#define COL_TMO_ACHR2_END                   8
+#define COL_TMO_ACHR2_COMMA                 7
+#define COL_TMO_ACHR2_END                   9
 
 #define COL_TMO_CHAPV2_BEGIN                4
-#define COL_TMO_CHAPV2_COMMA                6
-#define COL_TMO_CHAPV2_END                  8
+#define COL_TMO_CHAPV2_COMMA                7
+#define COL_TMO_CHAPV2_END                  9
 
 #define INDEX_CTR_CHAPV_VID_DV          0
 #define CTR_CHAPV_VID_DV                (1 << INDEX_CTR_CHAPV_VID_DV)

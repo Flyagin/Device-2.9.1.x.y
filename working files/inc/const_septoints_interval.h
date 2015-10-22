@@ -303,10 +303,10 @@
 #define TIMEOUT_CHAPV1_MAX            32000
 
 #define TIMEOUT_ACHR2_MIN             0
-#define TIMEOUT_ACHR2_MAX             32000
+#define TIMEOUT_ACHR2_MAX             200000
 
 #define TIMEOUT_CHAPV2_MIN            100
-#define TIMEOUT_CHAPV2_MAX            32000
+#define TIMEOUT_CHAPV2_MAX            200000
 
 #define SETPOINT_UROV_MIN             250
 #define SETPOINT_UROV_MAX             5000
