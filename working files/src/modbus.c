@@ -4885,6 +4885,16 @@ inline unsigned int Get_data(unsigned char *data, unsigned int address_data, uns
                      (((input_value >> N_BIT_CTRMTZ_NESPR_KIL_NAPR   ) & 0x1 ) << (BIT_MA_CONTROL_MTZ_NESPR_KIL_NAPR - BIT_MA_CONTROL_MTZ_BASE) );
         break;
       }
+    case MA_CONTROL_MTZ04:
+      {
+        int input_value = current_settings.control_mtz04;
+        
+        temp_value = (((input_value >> N_BIT_CTRMTZ04_1                ) & 0x1 ) << (BIT_MA_CONTROL_MTZ04_1               - BIT_MA_CONTROL_MTZ04_BASE) ) |
+                     (((input_value >> N_BIT_CTRMTZ04_2                ) & 0x1 ) << (BIT_MA_CONTROL_MTZ04_2               - BIT_MA_CONTROL_MTZ04_BASE) ) | 
+                     (((input_value >> N_BIT_CTRMTZ04_2_PRYSKORENNJA   ) & 0x1 ) << (BIT_MA_CONTROL_MTZ04_2_PRYSKORENNJA  - BIT_MA_CONTROL_MTZ04_BASE) ) |
+                     (((input_value >> N_BIT_CTRMTZ04_2_PRYSKORENA     ) & 0x1 ) << (BIT_MA_CONTROL_MTZ04_2_PRYSKORENA    - BIT_MA_CONTROL_MTZ04_BASE) );
+        break;
+      }
     case MA_CONTROL_ZDZ:
       {
         int input_value = current_settings.control_zdz;
@@ -4957,7 +4967,8 @@ inline unsigned int Get_data(unsigned char *data, unsigned int address_data, uns
       {
         int input_value1 = current_settings.control_extra_settings_1;
         
-        temp_value = (((input_value1 >> INDEX_ML_CTREXTRA_SETTINGS_1_CTRL_PHASE_LINE ) & 0x1 ) << (BIT_MA_CONTROL_PHASE_LINE - BIT_MA_CONTROL_558_BASE));
+        temp_value = (((input_value1 >> INDEX_ML_CTREXTRA_SETTINGS_1_CTRL_PHASE_LINE ) & 0x1 ) << (BIT_MA_CONTROL_PHASE_LINE - BIT_MA_CONTROL_558_BASE)) |
+                     (((input_value1 >> INDEX_ML_CTREXTRA_SETTINGS_1_CTRL_IB_I04     ) & 0x1 ) << (BIT_MA_CONTROL_IB_I04     - BIT_MA_CONTROL_558_BASE));
         break;
       }
     case MA_CONTROL_UROV_PART1:
@@ -5179,10 +5190,10 @@ inline unsigned int Get_data(unsigned char *data, unsigned int address_data, uns
   {
     //Блок текучих активних функцій або загальних функцій
     unsigned int input_array[N_BIG], base_address;
-    unsigned short int output_array[22];
+    unsigned short int output_array[26];
     
     //Спочатку очищаємо весь вихідний масив
-    for (unsigned int i = 0; i< 22; i++ )output_array[i] = 0;
+    for (unsigned int i = 0; i< 26; i++ )output_array[i] = 0;
 
     if ((information_about_settings_changed & (1 << type_interface)) != 0)
     {
@@ -5341,6 +5352,11 @@ inline unsigned int Get_data(unsigned char *data, unsigned int address_data, uns
         temp_value = measurement_low[IM_I2] >> 2;
         break;
       }
+    case (M_ADDRESS_FIRST_MEASUREMENTS_1 + OFFSET_MEASUREMENT_I04_1):
+      {
+        temp_value = measurement_low[IM_I04] >> 2;
+        break;
+      }
     case (M_ADDRESS_FIRST_MEASUREMENTS_1 + OFFSET_ACTIVE_POWER):
       {
         temp_value = P/50;
@@ -5481,6 +5497,11 @@ inline unsigned int Get_data(unsigned char *data, unsigned int address_data, uns
     case (M_ADDRESS_FIRST_MEASUREMENTS_1 + OFFSET_ANGLE_3I0_r):
       {
         temp_value = (unsigned int)phi_angle[FULL_ORT_3I0_r];
+        break;
+      }
+    case (M_ADDRESS_FIRST_MEASUREMENTS_1 + OFFSET_ANGLE_I04_1):
+      {
+        temp_value = (unsigned int)phi_angle[FULL_ORT_I04];
         break;
       }
     default:
@@ -5773,11 +5794,11 @@ inline unsigned int Get_data(unsigned char *data, unsigned int address_data, uns
                   temp_value = BLOCK_PROTECTION_MTZ;
                   break;
                 }
-//              case IDENTIFIER_BIT_ARRAY_MAX_CURRENT_PHASE04:
-//                {
-//                  temp_value = BLOCK_PROTECTION_MTZ04;
-//                  break;
-//                }
+              case IDENTIFIER_BIT_ARRAY_MAX_CURRENT_PHASE04:
+                {
+                  temp_value = BLOCK_PROTECTION_MTZ04;
+                  break;
+                }
               case IDENTIFIER_BIT_ARRAY_MAX_CURRENT_3I0:
                 {
                   temp_value = BLOCK_PROTECTION_3I0;
@@ -8455,6 +8476,24 @@ inline unsigned int Set_data(unsigned short int data, unsigned int address_data,
 
         break;
       }
+    case MA_CONTROL_MTZ04:
+      {
+        if ((target_label->configuration & (1 << MTZ04_BIT_CONFIGURATION)) !=0 )
+        {
+          int output_value = 0;
+
+          output_value |= ((data >> (BIT_MA_CONTROL_MTZ04_1               - BIT_MA_CONTROL_MTZ04_BASE)) & 0x1) << N_BIT_CTRMTZ04_1;
+          output_value |= ((data >> (BIT_MA_CONTROL_MTZ04_2               - BIT_MA_CONTROL_MTZ04_BASE)) & 0x1) << N_BIT_CTRMTZ04_2;
+          output_value |= ((data >> (BIT_MA_CONTROL_MTZ04_2_PRYSKORENNJA  - BIT_MA_CONTROL_MTZ04_BASE)) & 0x1) << N_BIT_CTRMTZ04_2_PRYSKORENNJA;
+          output_value |= ((data >> (BIT_MA_CONTROL_MTZ04_2_PRYSKORENA    - BIT_MA_CONTROL_MTZ04_BASE)) & 0x1) << N_BIT_CTRMTZ04_2_PRYSKORENA;
+        
+          target_label->control_mtz04 = output_value;
+        }
+        else
+          error = ERROR_ILLEGAL_DATA_ADDRESS;
+
+        break;
+      }
     case MA_CONTROL_ZDZ:
       {
         if (
@@ -8616,8 +8655,11 @@ inline unsigned int Set_data(unsigned short int data, unsigned int address_data,
       }
     case MA_CONTROL_558:
       {
-        int output_value = target_label->control_extra_settings_1 & ((unsigned int)(~CTR_EXTRA_SETTINGS_1_CTRL_PHASE_LINE));
-        output_value |= ((data >> (BIT_MA_CONTROL_PHASE_LINE  - BIT_MA_CONTROL_558_BASE)) & 0x1) << INDEX_ML_CTREXTRA_SETTINGS_1_CTRL_PHASE_LINE;
+        int output_value = target_label->control_extra_settings_1 & ((unsigned int)(~(CTR_EXTRA_SETTINGS_1_CTRL_PHASE_LINE | CTR_EXTRA_SETTINGS_1_CTRL_IB_I04)));
+        
+        output_value |= ((data >> (BIT_MA_CONTROL_PHASE_LINE - BIT_MA_CONTROL_558_BASE)) & 0x1) << INDEX_ML_CTREXTRA_SETTINGS_1_CTRL_PHASE_LINE;
+        output_value |= ((data >> (BIT_MA_CONTROL_IB_I04     - BIT_MA_CONTROL_558_BASE)) & 0x1) << INDEX_ML_CTREXTRA_SETTINGS_1_CTRL_IB_I04;
+        
         target_label->control_extra_settings_1 = output_value;
 
         break;
