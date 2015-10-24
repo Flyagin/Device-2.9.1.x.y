@@ -4055,6 +4055,15 @@ inline unsigned int Get_data(unsigned char *data, unsigned int address_data, uns
         temp_value = current_settings.type_mtz4;
         break;
       }
+    case MA_TYPE_MTZ04_2:
+      {
+        unsigned int temp_input_data = current_settings.type_mtz04_2;
+        
+        if (temp_input_data == TYPE_MTZ_SIMPLE ) temp_value = temp_input_data;
+        else temp_value = temp_input_data - 2;
+
+        break;
+      }
     default:
       {
         temp_value = 0;
@@ -4317,6 +4326,36 @@ inline unsigned int Get_data(unsigned char *data, unsigned int address_data, uns
     case MA_TO_MTZ4_PO_NAPRUZI:
       {
         temp_value = current_settings.timeout_mtz_4_po_napruzi[num_gr]/10;
+        break;
+      }
+    case MA_STP_MTZ04_1:
+      {
+        temp_value = current_settings.setpoint_mtz04_1[num_gr]/10;
+        break;
+      }
+    case MA_TO_MTZ04_1:
+      {
+        temp_value = current_settings.timeout_mtz04_1[num_gr]/10;
+        break;
+      }
+    case MA_STP_MTZ04_2:
+      {
+        temp_value = current_settings.setpoint_mtz04_2[num_gr]/10;
+        break;
+      }
+    case MA_TO_MTZ04_2:
+      {
+        temp_value = current_settings.timeout_mtz04_2[num_gr]/10;
+        break;
+      }
+    case MA_TO_MTZ04_2_VVID_PR:
+      {
+        temp_value = current_settings.timeout_mtz04_2_vvid_pr[num_gr]/10;
+        break;
+      }
+    case MA_TO_MTZ04_2_PR:
+      {
+        temp_value = current_settings.timeout_mtz04_2_pr[num_gr]/10;
         break;
       }
     case MA_STP_NZZ1_3I0:
@@ -4687,6 +4726,11 @@ inline unsigned int Get_data(unsigned char *data, unsigned int address_data, uns
         temp_value = current_settings.T0;
         break;
       }
+    case MA_TT04:
+      {
+        temp_value = current_settings.TCurrent04;
+        break;
+      }
     case MA_TO_SWCH_ON:
       {
         temp_value = current_settings.timeout_swch_on/10;
@@ -4762,11 +4806,16 @@ inline unsigned int Get_data(unsigned char *data, unsigned int address_data, uns
         temp_value = ((unsigned int)(~current_settings.type_of_input)) & ((1 << NUMBER_INPUTS) - 1);
         break;
       }
-//    case MA_UVV_TYPE_OUTPUT:
-//      {
-//        temp_value = current_settings.type_of_output & ((1 << NUMBER_OUTPUTS) - 1);
-//        break;
-//      }
+    case MA_UVV_TYPE_OUTPUT:
+      {
+        temp_value = current_settings.type_of_output & ((1 << NUMBER_OUTPUTS) - 1);
+        break;
+      }
+    case MA_UVV_TYPE_OUTPUT_MODIF:
+      {
+        temp_value = current_settings.type_of_output_modif & ((1 << NUMBER_OUTPUTS) - 1);
+        break;
+      }
     case MA_TYPE_DF:
       {
         temp_value = current_settings.type_df & ((1 << NUMBER_DEFINED_FUNCTIONS) - 1);
@@ -6312,6 +6361,24 @@ inline unsigned int Set_data(unsigned short int data, unsigned int address_data,
 
         break;
       }
+    case MA_TYPE_MTZ04_2:
+      {
+        temp_value = data;
+        
+#if (TYPE_MTZ_SIMPLE != 0)          
+        if ((temp_value >= TYPE_MTZ_SIMPLE) && (temp_value <= (TYPE_MTZ_DEPENDENT_C - 2)))
+#else
+        if (temp_value <= (TYPE_MTZ_DEPENDENT_C - 2))
+#endif            
+        {
+          if (temp_value != TYPE_MTZ_SIMPLE) temp_value += 2;
+          target_label->type_mtz04_2 = temp_value;
+        }
+        else
+          error = ERROR_ILLEGAL_DATA_VALUE;
+
+        break;
+      }
     default: break;
     }
   }
@@ -7002,6 +7069,96 @@ inline unsigned int Set_data(unsigned short int data, unsigned int address_data,
 #endif            
         {
           target_label->timeout_mtz_4_po_napruzi[num_gr] = temp_value;
+        }
+        else
+          error = ERROR_ILLEGAL_DATA_VALUE;
+
+        break;
+      }
+    case MA_STP_MTZ04_1:
+      {
+        temp_value = data*10;
+    
+        if ((temp_value >= SETPOINT_MTZ04_1_MIN) && (temp_value <= SETPOINT_MTZ04_1_MAX))
+          target_label->setpoint_mtz04_1[num_gr] = temp_value;
+        else
+          error = ERROR_ILLEGAL_DATA_VALUE;
+
+        break;
+      }
+    case MA_TO_MTZ04_1:
+      {
+        temp_value = data*10;
+        
+#if (TIMEOUT_MTZ04_1_MIN != 0)          
+        if ((temp_value >= TIMEOUT_MTZ04_1_MIN) && (temp_value <= TIMEOUT_MTZ04_1_MAX))
+#else
+        if (temp_value <= TIMEOUT_MTZ04_1_MAX)
+#endif            
+        {
+          target_label->timeout_mtz04_1[num_gr] = temp_value;
+        }
+        else
+          error = ERROR_ILLEGAL_DATA_VALUE;
+
+        break;
+      }
+    case MA_STP_MTZ04_2:
+      {
+        temp_value = data*10;
+    
+        if ((temp_value >= SETPOINT_MTZ04_2_MIN) && (temp_value <= SETPOINT_MTZ04_2_MAX))
+          target_label->setpoint_mtz04_2[num_gr] = temp_value;
+        else
+          error = ERROR_ILLEGAL_DATA_VALUE;
+
+        break;
+      }
+    case MA_TO_MTZ04_2:
+      {
+        temp_value = data*10;
+        
+#if (TIMEOUT_MTZ04_2_MIN != 0)          
+        if ((temp_value >= TIMEOUT_MTZ04_2_MIN) && (temp_value <= TIMEOUT_MTZ04_2_MAX))
+#else
+        if (temp_value <= TIMEOUT_MTZ04_2_MAX)
+#endif            
+        {
+          target_label->timeout_mtz04_2[num_gr] = temp_value;
+        }
+        else
+          error = ERROR_ILLEGAL_DATA_VALUE;
+
+        break;
+      }
+    case MA_TO_MTZ04_2_VVID_PR:
+      {
+        temp_value = data*10;
+        
+#if (TIMEOUT_MTZ04_2_VVID_PR_MIN != 0)          
+        if ((temp_value >= TIMEOUT_MTZ04_2_VVID_PR_MIN) && (temp_value <= TIMEOUT_MTZ04_2_VVID_PR_MAX))
+#else
+        if (temp_value <= TIMEOUT_MTZ04_2_VVID_PR_MAX)
+#endif            
+        {
+          target_label->timeout_mtz04_2_vvid_pr[num_gr] = temp_value;
+        }
+        else
+          error = ERROR_ILLEGAL_DATA_VALUE;
+
+        break;
+      }
+    case MA_TO_MTZ04_2_PR:
+      {
+        temp_value = data*10;
+        
+#if (TIMEOUT_MTZ04_2_PR_MIN != 0)          
+        if ((temp_value >= TIMEOUT_MTZ04_2_PR_MIN) && (temp_value <= TIMEOUT_MTZ04_2_PR_MAX))
+#else
+        if (temp_value <= TIMEOUT_MTZ04_2_PR_MAX)
+#endif            
+        {
+          target_label->timeout_mtz04_2_pr[num_gr] = temp_value;
         }
         else
           error = ERROR_ILLEGAL_DATA_VALUE;
@@ -7928,6 +8085,17 @@ inline unsigned int Set_data(unsigned short int data, unsigned int address_data,
 
         break;
       }
+    case MA_TT04:
+      {
+        temp_value = data;
+    
+        if ((temp_value >= KOEF_TT04_MIN) && (temp_value <= KOEF_TT04_MAX))
+          target_label->TCurrent04 = temp_value;
+        else
+          error = ERROR_ILLEGAL_DATA_VALUE;
+
+        break;
+      }
     case MA_TO_SWCH_ON:
       {
         temp_value = data*10;
@@ -8141,15 +8309,24 @@ inline unsigned int Set_data(unsigned short int data, unsigned int address_data,
 
         break;
       }
-//    case MA_UVV_TYPE_OUTPUT:
-//      {
-//        if (data <= ((1 << NUMBER_OUTPUTS) - 1)) 
-//          target_label->type_of_output = data;
-//        else
-//          error = ERROR_ILLEGAL_DATA_VALUE;
-//
-//        break;
-//      }
+    case MA_UVV_TYPE_OUTPUT:
+      {
+        if (data <= ((1 << NUMBER_OUTPUTS) - 1)) 
+          target_label->type_of_output = data;
+        else
+          error = ERROR_ILLEGAL_DATA_VALUE;
+
+        break;
+      }
+    case MA_UVV_TYPE_OUTPUT_MODIF:
+      {
+        if (data <= ((1 << NUMBER_OUTPUTS) - 1)) 
+          target_label->type_of_output_modif = data;
+        else
+          error = ERROR_ILLEGAL_DATA_VALUE;
+
+        break;
+      }
     case MA_TYPE_DF:
       {
         if (data <= ((1 << NUMBER_DEFINED_FUNCTIONS) - 1)) 

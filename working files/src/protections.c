@@ -9339,7 +9339,7 @@ inline void main_protection(void)
          )
       {
         //Для сигнального реле виконуємо його замикання, а для командного перевіряємо чи нема спроби активувати реле при умові що на нього заведено блок включення, причому він блокований
-        if ( ( *( (&current_settings_prt.type_of_output)  + ( i >> (5-1) ) ) & (3 << (2*(i & 0xf)) ) ) != 0)
+        if ((current_settings_prt.type_of_output & (1 << i)) != 0)
         {
           //Вихід сигнальний, тому у буль якому разі замикаємо реле
           //Відмічаємо, що даний вихід - ЗАМКНУТИЙ
@@ -9370,7 +9370,7 @@ inline void main_protection(void)
       else
       {
         //Перевіряємо, чи вихід командний, чи сигнальний
-        if ( ( *( (&current_settings_prt.type_of_output)  + ( i >> (5-1) ) ) & (3 << (2*(i & 0xf)) ) ) == 0)
+        if ((current_settings_prt.type_of_output & (1 << i)) == 0)
         {
           //Вихід командний
         
@@ -9389,26 +9389,16 @@ inline void main_protection(void)
   }
   
   //Перевіряємо чи треба записувати стан сигнальних виходів у EEPROM
-  unsigned int command_signal_output = 0;
-  unsigned int mode_imp_signal_output = 0;
-  for (unsigned int i = 0; i < NUMBER_OUTPUTS; i++)
-  {
-    unsigned int index_tmp = i >> (5-1);
-    unsigned int shift_tmp = 2*(i & 0xf);
-    unsigned int output_mode = ( *( (&current_settings_prt.type_of_output)  + index_tmp ) & (3 << shift_tmp) ) >> shift_tmp;
-    if (output_mode != 0) command_signal_output |= (1 << i);
-    if (output_mode == 2) mode_imp_signal_output |= (1 << i);
-  }
   unsigned int temp_value_char_for_volatile = state_signal_outputs;
-  if((state_outputs  & command_signal_output) != temp_value_char_for_volatile)
+  if((state_outputs  & current_settings_prt.type_of_output) != temp_value_char_for_volatile)
   {
-    state_signal_outputs = state_outputs  & command_signal_output;
+    state_signal_outputs = state_outputs  & current_settings_prt.type_of_output;
     //Виставляємо повідомлення про те, що в EEPROM треба записати нові значення сигнальних виходів і тригерних світлоіндикаторів
     _SET_BIT(control_i2c_taskes, TASK_START_WRITE_STATE_LEDS_OUTPUTS_EEPROM_BIT);
   }
   
   //Стан виходу з уразуванням імпульсного режиму роботи сигнальних виходів
-  state_outputs_raw = ( state_outputs & ((unsigned int)(~mode_imp_signal_output)) ) | ((state_outputs & mode_imp_signal_output)*output_timer_prt_signal_output_mode_2);
+  state_outputs_raw = ( state_outputs & ((unsigned int)(~current_settings_prt.type_of_output_modif)) ) | ((state_outputs & current_settings_prt.type_of_output_modif)*output_timer_prt_signal_output_mode_2);
   
   //Виводимо інформацію по виходах на піни процесора (у зворотньому порядку)
   unsigned int temp_state_outputs = 0;

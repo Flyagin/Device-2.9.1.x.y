@@ -1629,6 +1629,7 @@ void min_settings(__SETTINGS *target_label)
   }
 
   target_label->type_of_output = 0x0;
+  target_label->type_of_output_modif = 0x0;
   for(unsigned int i = 0; i < NUMBER_OUTPUTS; i++)
   {
     target_label->ranguvannja_outputs[N_BIG*i  ] = 0x0;

@@ -6183,7 +6183,8 @@ void main_manu_function(void)
                 }
                 else if(current_ekran.current_level == EKRAN_TYPE_OUTPUT_UVV)
                 {
-                  edition_settings.type_of_output = current_settings.type_of_output;
+                  edition_settings.type_of_output       = current_settings.type_of_output;
+                  edition_settings.type_of_output_modif = current_settings.type_of_output_modif;
                 }
                 else if(current_ekran.current_level == EKRAN_TYPE_LED_UVV)
                 {
@@ -7032,7 +7033,10 @@ void main_manu_function(void)
                 }
                 else if(current_ekran.current_level == EKRAN_TYPE_OUTPUT_UVV)
                 {
-                  if (edition_settings.type_of_output != current_settings.type_of_output) found_changes = 1;
+                  if (
+                      (edition_settings.type_of_output       != current_settings.type_of_output      ) ||
+                      (edition_settings.type_of_output_modif != current_settings.type_of_output_modif)
+                     ) found_changes = 1;
                 }
                 else if(current_ekran.current_level == EKRAN_TYPE_LED_UVV)
                 {
@@ -9811,18 +9815,20 @@ void main_manu_function(void)
                 else if(current_ekran.current_level == EKRAN_TYPE_OUTPUT_UVV)
                 {
                   if (
-                      ( ( (2*(NUMBER_OUTPUTS & 0xf)) % sizeof(unsigned int) ) == 0 ) /*випадок, коли немає резервних бітів*/
-                      ||
-                      (( *( (&edition_settings.type_of_output)  + ( NUMBER_OUTPUTS >> (5-1) ) ) & ((unsigned int)(~( (1 << (2*(NUMBER_OUTPUTS & 0xf)) ) - 1 ))) ) == 0) /*резервні біти мають бути нульовими*/
-                     )   
-//                  if ((edition_settings.type_of_output & ((unsigned int)(~((1<<NUMBER_OUTPUTS)-1)))) == 0)
+                      ((edition_settings.type_of_output       & ((unsigned int)(~((1<<NUMBER_OUTPUTS)-1)))) == 0) &&
+                      ((edition_settings.type_of_output_modif & ((unsigned int)(~((1<<NUMBER_OUTPUTS)-1)))) == 0)
+                     )
                   {
-                    if (edition_settings.type_of_output != current_settings.type_of_output)
+                    if (
+                        (edition_settings.type_of_output       != current_settings.type_of_output      ) ||
+                        (edition_settings.type_of_output_modif != current_settings.type_of_output_modif)
+                       )   
                     {
                       //Помічаємо, що поле структури зараз буде змінене
                       changed_settings = CHANGED_ETAP_EXECUTION;
 
-                      current_settings.type_of_output = edition_settings.type_of_output;
+                      current_settings.type_of_output       = edition_settings.type_of_output;
+                      current_settings.type_of_output_modif = edition_settings.type_of_output_modif;
                       //Формуємо запис у таблиці настройок про зміну конфігурації і ініціюємо запис у EEPROM нових настройок
                       fix_change_settings(0, 1);
                     }
@@ -13959,14 +13965,24 @@ void main_manu_function(void)
               }
               else if(current_ekran.current_level == EKRAN_TYPE_OUTPUT_UVV)
               {
-                unsigned int index = current_ekran.index_position >> (5-1);
-                unsigned int shift = 2*(current_ekran.index_position & 0xf);
+                unsigned int maska = (1 << current_ekran.index_position);
                 
-                int value = ( *( (&edition_settings.type_of_output)  + index ) & (0x3 << shift ) ) >> shift;
+                int value = ((edition_settings.type_of_output & maska) != 0);
+                if (value == true) value += ((edition_settings.type_of_output_modif & maska) != 0); //тільки у випадку, коли вихід сигнальний
                 if ((++value) >= 3) value = 0;
                 
-                *( (&edition_settings.type_of_output)  + index ) &= (unsigned int)(~(0x3 << shift));
-                *( (&edition_settings.type_of_output)  + index ) |= (unsigned int)(value << shift);
+                if (value == 0)
+                {
+                  edition_settings.type_of_output       &= (unsigned int)(~maska);
+                  edition_settings.type_of_output_modif &= (unsigned int)(~maska);
+                }
+                else
+                {
+                  edition_settings.type_of_output |= maska;
+                  if (value == 1) edition_settings.type_of_output_modif &= (unsigned int)(~maska);
+                  else edition_settings.type_of_output_modif |= maska;
+                }
+
                 make_ekran_type_output_uvv();
               }
               else if(current_ekran.current_level == EKRAN_ADDRESS)
@@ -15459,14 +15475,24 @@ void main_manu_function(void)
               }
               else if(current_ekran.current_level == EKRAN_TYPE_OUTPUT_UVV)
               {
-                unsigned int index = current_ekran.index_position >> (5-1);
-                unsigned int shift = 2*(current_ekran.index_position & 0xf);
+                unsigned int maska = (1 << current_ekran.index_position);
                 
-                int value = ( *( (&edition_settings.type_of_output)  + index ) & (0x3 << shift ) ) >> shift;
+                int value = ((edition_settings.type_of_output & maska) != 0);
+                if (value == true) value += ((edition_settings.type_of_output_modif & maska) != 0); //тільки у випадку, коли вихід сигнальний
                 if ((--value) < 0) value = 2;
                 
-                *( (&edition_settings.type_of_output)  + index ) &= (unsigned int)(~(0x3 << shift));
-                *( (&edition_settings.type_of_output)  + index ) |= (unsigned int)(value << shift);
+                if (value == 0)
+                {
+                  edition_settings.type_of_output       &= (unsigned int)(~maska);
+                  edition_settings.type_of_output_modif &= (unsigned int)(~maska);
+                }
+                else
+                {
+                  edition_settings.type_of_output |= maska;
+                  if (value == 1) edition_settings.type_of_output_modif &= (unsigned int)(~maska);
+                  else edition_settings.type_of_output_modif |= maska;
+                }
+
                 make_ekran_type_output_uvv();
               }
               else if(current_ekran.current_level == EKRAN_ADDRESS)
