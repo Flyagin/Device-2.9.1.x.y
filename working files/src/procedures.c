@@ -444,8 +444,8 @@ unsigned int action_after_changing_of_configuration(unsigned int new_configurati
       //Виводим ступені МТЗ 0.4кВ
       target_label->control_mtz04 &= (unsigned int)(~(CTR_MTZ04_1 | CTR_MTZ04_2));
    
-//      //Виводим ступені МТЗ 0.4кВ з УРОВ
-//      target_label->control_urov &= (unsigned int)(~(CTR_UROV_STARTED_FROM_MTZ04_1 | CTR_UROV_STARTED_FROM_MTZ04_2));
+      //Виводим ступені МТЗ 0.4кВ з УРОВ
+      target_label->control_urov &= (unsigned int)(~(CTR_UROV_STARTED_FROM_MTZ04_1 | CTR_UROV_STARTED_FROM_MTZ04_2));
       
       //Формуємо маки функцій МТЗ 0.4кВ
       maska[0] = 0;
