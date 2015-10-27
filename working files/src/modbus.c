@@ -95,8 +95,18 @@ void convert_order_list_function_to_gmm(unsigned int* input_array, unsigned shor
   _CONVERT_SIGNAL_TO_GMM(input_array, output_array, RANG_OUTPUT_LED_DF_REG_SECTOR_NAZAD_MTZN4 , (BIT_MA_SECTOR_NAZAD_MTZN4  - BIT_MA_CURRENT_AF_BASE));
   _CONVERT_SIGNAL_TO_GMM(input_array, output_array, RANG_OUTPUT_LED_DF_REG_PO_U_MTZPN4        , (BIT_MA_PO_U_MTZPN4         - BIT_MA_CURRENT_AF_BASE));
 
-//  _CONVERT_SIGNAL_TO_GMM(input_array, output_array, RANG_OUTPUT_LED_DF_REG_PO_BLOCK_U_MTZN   , (BIT_MA_PO_BLOCK_U_MTZN1    - BIT_MA_CURRENT_AF_BASE));
+  _CONVERT_SIGNAL_TO_GMM(input_array, output_array, RANG_OUTPUT_LED_DF_REG_PO_BLOCK_U_MTZN    , (BIT_MA_PO_BLOCK_U_MTZN     - BIT_MA_CURRENT_AF_BASE));
   _CONVERT_SIGNAL_TO_GMM(input_array, output_array, RANG_OUTPUT_LED_DF_REG_NCN_MTZ            , (BIT_MA_NCN_MTZ             - BIT_MA_CURRENT_AF_BASE));
+
+  //МТЗ 0,4кВ
+  _CONVERT_SIGNAL_TO_GMM(input_array, output_array, RANG_OUTPUT_LED_DF_REG_BLOCK_MTZ04_1      , (BIT_MA_BLOCK_MTZ04_1       - BIT_MA_CURRENT_AF_BASE));
+  _CONVERT_SIGNAL_TO_GMM(input_array, output_array, RANG_OUTPUT_LED_DF_REG_MTZ04_1            , (BIT_MA_MTZ04_1             - BIT_MA_CURRENT_AF_BASE));
+  _CONVERT_SIGNAL_TO_GMM(input_array, output_array, RANG_OUTPUT_LED_DF_REG_PO_MTZ04_1         , (BIT_MA_PO_MTZ04_1          - BIT_MA_CURRENT_AF_BASE));
+
+  _CONVERT_SIGNAL_TO_GMM(input_array, output_array, RANG_OUTPUT_LED_DF_REG_BLOCK_MTZ04_2      , (BIT_MA_BLOCK_MTZ04_2       - BIT_MA_CURRENT_AF_BASE));
+  _CONVERT_SIGNAL_TO_GMM(input_array, output_array, RANG_OUTPUT_LED_DF_REG_BLOCK_USK_MTZ04_2  , (BIT_MA_BLOCK_USK_MTZ04_2   - BIT_MA_CURRENT_AF_BASE));
+  _CONVERT_SIGNAL_TO_GMM(input_array, output_array, RANG_OUTPUT_LED_DF_REG_MTZ04_2            , (BIT_MA_MTZ04_2             - BIT_MA_CURRENT_AF_BASE));
+  _CONVERT_SIGNAL_TO_GMM(input_array, output_array, RANG_OUTPUT_LED_DF_REG_PO_MTZ04_2         , (BIT_MA_PO_MTZ04_2          - BIT_MA_CURRENT_AF_BASE));
 
   //ЗЗ
   _CONVERT_SIGNAL_TO_GMM(input_array, output_array, RANG_OUTPUT_LED_DF_REG_BLOCK_NZZ , (BIT_MA_BLOCK_NZZ  - BIT_MA_CURRENT_AF_BASE));
@@ -605,6 +615,21 @@ unsigned int convert_order_list_inputs_to_gmm(unsigned int number, unsigned int 
     case RANG_INPUT_BLOCK_MTZ4:
       {
         rezultat = BIT_MA_BLOCK_MTZ4;
+        break;
+      }
+    case RANG_INPUT_BLOCK_MTZ04_1:
+      {
+        rezultat = BIT_MA_BLOCK_MTZ04_1;
+        break;
+      }
+    case RANG_INPUT_BLOCK_MTZ04_2:
+      {
+        rezultat = BIT_MA_BLOCK_MTZ04_2;
+        break;
+      }
+    case RANG_INPUT_BLOCK_USK_MTZ04_2:
+      {
+        rezultat = BIT_MA_BLOCK_USK_MTZ04_2;
         break;
       }
     case RANG_INPUT_PUSK_ZDZ_VID_DV:
@@ -1305,6 +1330,41 @@ unsigned int convert_order_list_oldr_to_gmm(unsigned int number, unsigned int nu
         rezultat = BIT_MA_NCN_MTZ;
         break;
       }
+    case RANG_OUTPUT_LED_DF_REG_BLOCK_MTZ04_1:
+      {
+        rezultat = BIT_MA_BLOCK_MTZ04_1;
+        break;
+      }
+    case RANG_OUTPUT_LED_DF_REG_BLOCK_MTZ04_2:
+      {
+        rezultat = BIT_MA_BLOCK_MTZ04_2;
+        break;
+      }
+    case RANG_OUTPUT_LED_DF_REG_BLOCK_USK_MTZ04_2:
+      {
+        rezultat = BIT_MA_BLOCK_USK_MTZ04_2;
+        break;
+      }
+    case RANG_OUTPUT_LED_DF_REG_PO_MTZ04_1:
+      {
+        rezultat = BIT_MA_PO_MTZ04_1;
+        break;
+      }
+    case RANG_OUTPUT_LED_DF_REG_MTZ04_1:
+      {
+        rezultat = BIT_MA_MTZ04_1;
+        break;
+      }
+    case RANG_OUTPUT_LED_DF_REG_PO_MTZ04_2:
+      {
+        rezultat = BIT_MA_PO_MTZ04_2;
+        break;
+      }
+    case RANG_OUTPUT_LED_DF_REG_MTZ04_2:
+      {
+        rezultat = BIT_MA_MTZ04_2;
+        break;
+      }
     case RANG_OUTPUT_LED_DF_REG_PUSK_ZDZ_VID_DV:
       {
         rezultat = BIT_MA_PUSK_ZDZ_VID_DV;
@@ -1828,6 +1888,16 @@ unsigned int save_new_rang_inputs_from_gmm(unsigned int number, unsigned int num
       else error = ERROR_ILLEGAL_DATA_VALUE;
     }
     else if (
+             (data == BIT_MA_BLOCK_MTZ04_1    ) || 
+             (data == BIT_MA_BLOCK_MTZ04_2    ) || 
+             (data == BIT_MA_BLOCK_USK_MTZ04_2)
+            )
+    {
+      //Зараз є намагання зранжувати функцю МТЗ 0,4кВ і номер її є допустимим
+      if ((target_label->configuration & (1 << MTZ04_BIT_CONFIGURATION)) !=0 ) error = 0;
+      else error = ERROR_ILLEGAL_DATA_VALUE;
+    }
+    else if (
              (data == BIT_MA_PUSK_ZDZ_VID_DV)
             )
     {
@@ -2141,6 +2211,21 @@ unsigned int save_new_rang_inputs_from_gmm(unsigned int number, unsigned int num
     case BIT_MA_BLOCK_MTZ4:
       {
         _SET_BIT(set_array_rang, RANG_INPUT_BLOCK_MTZ4);
+        break;
+      }
+    case BIT_MA_BLOCK_MTZ04_1:
+      {
+        _SET_BIT(set_array_rang, RANG_INPUT_BLOCK_MTZ04_1);
+        break;
+      }
+    case BIT_MA_BLOCK_MTZ04_2:
+      {
+        _SET_BIT(set_array_rang, RANG_INPUT_BLOCK_MTZ04_2);
+        break;
+      }
+    case BIT_MA_BLOCK_USK_MTZ04_2:
+      {
+        _SET_BIT(set_array_rang, RANG_INPUT_BLOCK_USK_MTZ04_2);
         break;
       }
     case BIT_MA_PUSK_ZDZ_VID_DV:
@@ -2551,6 +2636,20 @@ unsigned int save_new_rang_oldr_from_gmm(unsigned int number, unsigned int numbe
     {
       //Зараз є намагання зранжувати функцю МТЗ і номер її є допустимим
       if ((target_label->configuration & (1 << MTZ_BIT_CONFIGURATION)) !=0 ) error = 0;
+      else error = ERROR_ILLEGAL_DATA_VALUE;
+    }
+    else if (
+             (data == BIT_MA_BLOCK_MTZ04_1    ) || 
+             (data == BIT_MA_BLOCK_MTZ04_2    ) || 
+             (data == BIT_MA_BLOCK_USK_MTZ04_2) || 
+             (data == BIT_MA_PO_MTZ04_1       ) || 
+             (data == BIT_MA_MTZ04_1          ) ||
+             (data == BIT_MA_PO_MTZ04_2       ) || 
+             (data == BIT_MA_MTZ04_2          )
+            )
+    {
+      //Зараз є намагання зранжувати функцю МТЗ 0,4кВ і номер її є допустимим
+      if ((target_label->configuration & (1 << MTZ04_BIT_CONFIGURATION)) !=0 ) error = 0;
       else error = ERROR_ILLEGAL_DATA_VALUE;
     }
     else if (
@@ -3249,6 +3348,41 @@ unsigned int save_new_rang_oldr_from_gmm(unsigned int number, unsigned int numbe
     case BIT_MA_NCN_MTZ:
       {
         _SET_BIT(set_array_rang, RANG_OUTPUT_LED_DF_REG_NCN_MTZ);
+        break;
+      }
+    case BIT_MA_BLOCK_MTZ04_1:
+      {
+        _SET_BIT(set_array_rang, RANG_OUTPUT_LED_DF_REG_BLOCK_MTZ04_1);
+        break;
+      }
+    case BIT_MA_BLOCK_MTZ04_2:
+      {
+        _SET_BIT(set_array_rang, RANG_OUTPUT_LED_DF_REG_BLOCK_MTZ04_2);
+        break;
+      }
+    case BIT_MA_BLOCK_USK_MTZ04_2:
+      {
+        _SET_BIT(set_array_rang, RANG_OUTPUT_LED_DF_REG_BLOCK_USK_MTZ04_2);
+        break;
+      }
+    case BIT_MA_PO_MTZ04_1:
+      {
+        _SET_BIT(set_array_rang, RANG_OUTPUT_LED_DF_REG_PO_MTZ04_1);
+        break;
+      }
+    case BIT_MA_MTZ04_1:
+      {
+        _SET_BIT(set_array_rang, RANG_OUTPUT_LED_DF_REG_MTZ04_1);
+        break;
+      }
+    case BIT_MA_PO_MTZ04_2:
+      {
+        _SET_BIT(set_array_rang, RANG_OUTPUT_LED_DF_REG_PO_MTZ04_2);
+        break;
+      }
+    case BIT_MA_MTZ04_2:
+      {
+        _SET_BIT(set_array_rang, RANG_OUTPUT_LED_DF_REG_MTZ04_2);
         break;
       }
     case BIT_MA_PUSK_ZDZ_VID_DV:
