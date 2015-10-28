@@ -8,13 +8,13 @@ void make_ekran_list_registrators(void)
   const unsigned char name_string[MAX_NAMBER_LANGUAGE][MAX_ROW_FOR_LIST_REGISTRATORS][MAX_COL_LCD] = 
   {
     {
-      " Анал. регистрат",
-      " Дискр.регистрат",
+      " Дискр. рег-р   ",
+      " Аналог.рег-р   ",
       " Архив диагност."
     },
     {
-      " Анал. реєстрат.",
-      " Дискр.реєстрат.",
+      " Дискр. реєстр. ",
+      " Аналог.реєстр. ",
       " Архів діагност."
     },
     {
@@ -23,8 +23,8 @@ void make_ekran_list_registrators(void)
       " Diagn.Archive  "
     },
     {
-      " Анал. регистрат",
-      " Дискр.регистрат",
+      " Дискр. рег-р   ",
+      " Аналог.рег-р   ",
       " Архив диагност."
     }
   };

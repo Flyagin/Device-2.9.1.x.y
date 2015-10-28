@@ -8,20 +8,20 @@ void make_ekran_chose_registrators(void)
   const unsigned char name_string[MAX_NAMBER_LANGUAGE][MAX_ROW_FOR_LIST_OF_REGISTRATORS][MAX_COL_LCD] = 
   {
     {
-      " Дискр.регистрат",
-      " Анал. регистрат"
+      " Дискр. рег-р   ",
+      " Аналог.рег-р   "
     },
     {
-      " Дискр.реєстрат.",
-      " Анал. реєстрат."
+      " Дискр. реєстр. ",
+      " Аналог.реєстр. "
     },
     {
       "Digital recorder",
       " Analog recorder"
     },
     {
-      " Дискр.регистрат",
-      " Анал. регистрат"
+      " Дискр. рег-р   ",
+      " Аналог.рег-р   "
     }
   };
   int index_language = index_language_in_array(current_settings.language);
