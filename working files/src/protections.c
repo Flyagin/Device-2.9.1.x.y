@@ -4506,10 +4506,14 @@ inline void apv_handler(unsigned int *activated_functions, unsigned int number_g
   _OR4(logic_APV_0, 4, logic_APV_0, 7, logic_APV_0, 10, logic_APV_0, 13, logic_APV_0, 14);
   _TIMER_0_T(INDEX_TIMER_APV_TMP1, 1, logic_APV_0, 14, logic_APV_0, 15);
 
-  //Ì:"×ÀÏÂ"
+  //Ì:"×ÀÏÂ 1"
   logic_APV_0 |= ((current_settings_prt.control_achr_chapv & CTR_CHAPV1) != 0) << 16;
-  //"×ÀÏÂ"
+  //"À×Ð/×ÀÏÂ 1"
   logic_APV_1 |= (_CHECK_SET_BIT(activated_functions, RANG_OUTPUT_LED_DF_REG_ACHR_CHAPV1) != 0) << 21;
+  //Ì:"×ÀÏÂ 2"
+  logic_APV_1 |= ((current_settings_prt.control_achr_chapv & CTR_CHAPV2) != 0) << 27;
+  //"À×Ð/×ÀÏÂ 2"
+  logic_APV_1 |= (_CHECK_SET_BIT(activated_functions, RANG_OUTPUT_LED_DF_REG_ACHR_CHAPV2) != 0) << 28;
   //"Ðàçð ×ÀÏÂ"
   logic_APV_1 |= (_CHECK_SET_BIT(activated_functions, RANG_OUTPUT_LED_DF_REG_RAZR_CHAPV) != 0) << 20;
 
@@ -4519,8 +4523,9 @@ inline void apv_handler(unsigned int *activated_functions, unsigned int number_g
   logic_APV_1 |= ((current_settings_prt.control_achr_chapv & CTR_CHAPV_VID_DV) != 0) << 22;
   
   _AND3(logic_APV_0, 16, logic_APV_1, 21, logic_APV_1, 20, logic_APV_1, 23);
+  _AND3(logic_APV_1, 27, logic_APV_1, 28, logic_APV_1, 20, logic_APV_1, 29);
   _AND2(logic_APV_0, 17, logic_APV_1, 22, logic_APV_1, 24);
-  _OR2(logic_APV_1, 23, logic_APV_1, 24, logic_APV_0, 18)
+  _OR3(logic_APV_1, 23, logic_APV_1, 29, logic_APV_1, 24, logic_APV_0, 18)
 
   //"Áëîê.×ÀÏÂ â³ä U"
   logic_APV_1 |= (_CHECK_SET_BIT(activated_functions, RANG_OUTPUT_LED_DF_REG_BLOCK_CHAPV_VID_U) != 0) << 25;
