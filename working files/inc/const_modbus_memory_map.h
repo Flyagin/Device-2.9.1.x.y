@@ -135,8 +135,8 @@
 #define MA_TO_MTZ04_1                     353
 #define MA_STP_MTZ04_2                    354
 #define MA_TO_MTZ04_2                     355
-#define MA_TO_MTZ04_2_PR                  356
-#define MA_TO_MTZ04_2_VVID_PR             357
+#define MA_TO_MTZ04_2_VVID_PR             356
+#define MA_TO_MTZ04_2_PR                  357
 
 #define MA_STP_NZZ1_3I0                   358
 #define MA_TO_NZZ1_3I0                    359
@@ -386,9 +386,10 @@
 
 #define MA_CONTROL_ACHR_CHAPV             556
 #define BIT_MA_CONTROL_ACHR_CHAPV_BASE        55096
-#define BIT_MA_CONTROL_ACHR_STATE             55096
-#define BIT_MA_CONTROL_CHAPV_STATE            55097
-#define BIT_MA_CONTROL_CHAPV_VID_DV_STATE     55098
+#define BIT_MA_CONTROL_ACHR1_STATE            55096
+#define BIT_MA_CONTROL_ACHR2_STATE            55097
+#define BIT_MA_CONTROL_CHAPV_STATE            55098
+#define BIT_MA_CONTROL_CHAPV_VID_DV_STATE     55099
 
 #define MA_CONTROL_UMIN                   557
 #define BIT_MA_CONTROL_UMIN_BASE              55112
@@ -431,30 +432,33 @@
 #define BIT_MA_CONTROL_APV_STARTED_FROM_MTZ4  55183
 
 #define MA_CONTROL_UROV_PART1             562
-#define BIT_MA_CONTROL_UROV_BASE_PART1          55192
-#define BIT_MA_CONTROL_UROV_STATE               55192
-#define BIT_MA_CONTROL_UROV_STARTED_FROM_MTZ1   55193
-#define BIT_MA_CONTROL_UROV_STARTED_FROM_MTZ2   55194
-#define BIT_MA_CONTROL_UROV_STARTED_FROM_MTZ3   55195
-#define BIT_MA_CONTROL_UROV_STARTED_FROM_MTZ4   55196
-#define BIT_MA_CONTROL_UROV_STARTED_FROM_UMAX1  55197
-#define BIT_MA_CONTROL_UROV_STARTED_FROM_UMAX2  55198
-#define BIT_MA_CONTROL_UROV_STARTED_FROM_UMIN1  55199
-#define BIT_MA_CONTROL_UROV_STARTED_FROM_UMIN2  55200
-#define BIT_MA_CONTROL_UROV_STARTED_FROM_ZOP1   55201
+#define BIT_MA_CONTROL_UROV_BASE_PART1           55192
+#define BIT_MA_CONTROL_UROV_STATE                55192
+#define BIT_MA_CONTROL_UROV_STARTED_FROM_MTZ1    55193
+#define BIT_MA_CONTROL_UROV_STARTED_FROM_MTZ2    55194
+#define BIT_MA_CONTROL_UROV_STARTED_FROM_MTZ3    55195
+#define BIT_MA_CONTROL_UROV_STARTED_FROM_MTZ4    55196
+#define BIT_MA_CONTROL_UROV_STARTED_FROM_MTZ04_1 55197
+#define BIT_MA_CONTROL_UROV_STARTED_FROM_MTZ04_2 55198
+#define BIT_MA_CONTROL_UROV_STARTED_FROM_UMAX1   55199
+#define BIT_MA_CONTROL_UROV_STARTED_FROM_UMAX2   55200
+#define BIT_MA_CONTROL_UROV_STARTED_FROM_UMIN1   55201
+#define BIT_MA_CONTROL_UROV_STARTED_FROM_UMIN2   55202
+#define BIT_MA_CONTROL_UROV_STARTED_FROM_ZOP1    55203
 
-#define BIT_MA_CONTROL_UROV_STARTED_FROM_NZZ    55203
-#define BIT_MA_CONTROL_UROV_STARTED_FROM_3I0    55204
+#define BIT_MA_CONTROL_UROV_STARTED_FROM_NZZ     55205
+#define BIT_MA_CONTROL_UROV_STARTED_FROM_3I0     55206
 
-#define BIT_MA_CONTROL_UROV_STARTED_FROM_3U0    55206
-#define BIT_MA_CONTROL_UROV_STARTED_FROM_TZNP1  55207
 
 #define MA_CONTROL_UROV_PART2             563
 #define BIT_MA_CONTROL_UROV_BASE_PART2         55208
-#define BIT_MA_CONTROL_UROV_STARTED_FROM_TZNP2 55208
-#define BIT_MA_CONTROL_UROV_STARTED_FROM_TZNP3 55209
-#define BIT_MA_CONTROL_UROV_STARTED_FROM_ZDZ   55210
-#define BIT_MA_CONTROL_UROV_STARTED_FROM_ACHR  55211
+#define BIT_MA_CONTROL_UROV_STARTED_FROM_3U0   55208
+#define BIT_MA_CONTROL_UROV_STARTED_FROM_TZNP1 55209
+#define BIT_MA_CONTROL_UROV_STARTED_FROM_TZNP2 55210
+#define BIT_MA_CONTROL_UROV_STARTED_FROM_TZNP3 55211
+#define BIT_MA_CONTROL_UROV_STARTED_FROM_ZDZ   55212
+#define BIT_MA_CONTROL_UROV_STARTED_FROM_ACHR1 55213
+#define BIT_MA_CONTROL_UROV_STARTED_FROM_ACHR2 55214
 
 //#define MA_CONTROL_AVR                    564
 //#define BIT_MA_CONTROL_AVR_BASE               55224
@@ -479,24 +483,25 @@
 #define MA_CONFIGURATION_PART1            567
 #define BIT_MA_CONFIGURATION_BASE_PART1        55272
 #define BIT_MA_CONFIGURATION_MTZ               55272
-#define BIT_MA_CONFIGURATION_ZDZ               55273
-#define BIT_MA_CONFIGURATION_ZZ                55274
-#define BIT_MA_CONFIGURATION_TZNP              55275
-#define BIT_MA_CONFIGURATION_ZOP               55276
-#define BIT_MA_CONFIGURATION_ACHR_CHAPV        55277
-#define BIT_MA_CONFIGURATION_UMIN              55278
-#define BIT_MA_CONFIGURATION_UMAX              55279
+#define BIT_MA_CONFIGURATION_MTZ04             55273
+#define BIT_MA_CONFIGURATION_ZDZ               55274
+#define BIT_MA_CONFIGURATION_ZZ                55275
+#define BIT_MA_CONFIGURATION_TZNP              55276
+#define BIT_MA_CONFIGURATION_ZOP               55277
+#define BIT_MA_CONFIGURATION_ACHR_CHAPV        55278
+#define BIT_MA_CONFIGURATION_UMIN              55279
+#define BIT_MA_CONFIGURATION_UMAX              55280
 
-//#define BIT_MA_CONFIGURATION_APV_ZMN           55282
-//#define BIT_MA_CONFIGURATION_KROL              55283
+//#define BIT_MA_CONFIGURATION_APV_ZMN           55283
+//#define BIT_MA_CONFIGURATION_KROL              55284
 
-#define BIT_MA_CONFIGURATION_APV               55285
-#define BIT_MA_CONFIGURATION_UROV              55286
-//#define BIT_MA_CONFIGURATION_AVR               55287
+#define BIT_MA_CONFIGURATION_APV               55286
+#define BIT_MA_CONFIGURATION_UROV              55287
 
 #define MA_CONFIGURATION_PART2            568
 #define BIT_MA_CONFIGURATION_BASE_PART2        55288
-#define BIT_MA_CONFIGURATION_VMP               55288
+//#define BIT_MA_CONFIGURATION_AVR               55288
+#define BIT_MA_CONFIGURATION_VMP               55289
 
 #define MA_CONTROL_LAST                   568
 #define BIT_MA_CONTROL_LAST                   (BIT_MA_CONTROL_BASE + ((MA_CONTROL_LAST - MA_CONTROL_BASE + 1) << 4) - 1)
@@ -599,9 +604,9 @@
 #define BIT_MA_PO_MTZ04_1                       60059
 
 #define BIT_MA_BLOCK_MTZ04_2                    60060
-#define BIT_MA_BLOCK_USK_MTZ04_2                60061
-#define BIT_MA_MTZ04_2                          60062
-#define BIT_MA_PO_MTZ04_2                       60063
+#define BIT_MA_MTZ04_2                          60061
+#define BIT_MA_PO_MTZ04_2                       60062
+#define BIT_MA_BLOCK_USK_MTZ04_2                60063
 
 #define BIT_MA_NCN_MTZ                          60064
 #define BIT_MA_PO_BLOCK_U_MTZN                  60065
@@ -717,15 +722,16 @@
 
 #define BIT_MA_ACHR_CHAPV_VID_DV                60272
 #define BIT_MA_BLOCK_ACHR1                      60273
-#define BIT_MA_BLOCK_CHAPV1_VID_U               60274
-#define BIT_MA_PO_F1_ACHR1                      60275
-//#define BIT_MA_PO_F2_ACHR                       60276
-//#define BIT_MA_F1_ACHR_CHAPV                    60277
-//#define BIT_MA_F2_ACHR_CHAPV                    60278
-#define BIT_MA_ACHR_CHAPV1                      60279
-#define BIT_MA_RAZR_CHAPV                       60280
-#define BIT_MA_PO_F1_CHAPV1                     60281
-//#define BIT_MA_PO_F2_CHAPV                      60282
+#define BIT_MA_BLOCK_ACHR2                      60274
+#define BIT_MA_BLOCK_CHAPV1_VID_U               60275
+#define BIT_MA_PO_F1_ACHR1                      60276
+//#define BIT_MA_PO_F2_ACHR                       60277
+//#define BIT_MA_F1_ACHR_CHAPV                    60278
+//#define BIT_MA_F2_ACHR_CHAPV                    60279
+#define BIT_MA_ACHR_CHAPV1                      60280
+#define BIT_MA_RAZR_CHAPV                       60281
+#define BIT_MA_PO_F1_CHAPV1                     60282
+//#define BIT_MA_PO_F2_CHAPV                      60283
 
 #define M_ADDRESS_DF                          618
 #define BIT_MA_DF_BASE                          60288
@@ -865,59 +871,59 @@
 #define OFFSET_MEASUREMENT_IA_1                 3
 #define OFFSET_MEASUREMENT_IB_1                 4
 #define OFFSET_MEASUREMENT_IC_1                 5
-#define OFFSET_ACTIVE_POWER                     6
-#define OFFSET_REACTIVE_POWER                   7
-#define OFFSET_FULL_POWER                       8
-#define OFFSET_COS_PHI                          9
-#define OFFSET_MEASUREMENT_3I0                  10
-#define OFFSET_FREQUENCY_1                      11
-#define OFFSET_EA_PLUS_LWB                      12
-#define OFFSET_EA_PLUS_MWB                      13
-#define OFFSET_EA_MINUS_LWB                     14
-#define OFFSET_EA_MINUS_MWB                     15
-#define OFFSET_ER_1_LWB                         16
-#define OFFSET_ER_1_MWB                         17
-#define OFFSET_ER_2_LWB                         18
-#define OFFSET_ER_2_MWB                         19
-#define OFFSET_ER_3_LWB                         20
-#define OFFSET_ER_3_MWB                         21
-#define OFFSET_ER_4_LWB                         22
-#define OFFSET_ER_4_MWB                         23
-#define OFFSET_MEASUREMENT_UAB_1                24
-#define OFFSET_MEASUREMENT_UBC_1                25
-#define OFFSET_MEASUREMENT_UCA_1                26
-#define OFFSET_MEASUREMENT_3U0_1                27
-#define OFFSET_MEASUREMENT_3I0_r                28
-#define OFFSET_MEASUREMENT_3I0_HIGH_GARM        29
-#define OFFSET_MEASUREMENT_I1                   30
-#define OFFSET_MEASUREMENT_I2                   31
+#define OFFSET_MEASUREMENT_I04_1                6
+#define OFFSET_ACTIVE_POWER                     7
+#define OFFSET_REACTIVE_POWER                   8
+#define OFFSET_FULL_POWER                       9
+#define OFFSET_COS_PHI                          10
+#define OFFSET_MEASUREMENT_3I0                  11
+#define OFFSET_FREQUENCY_1                      12
+#define OFFSET_EA_PLUS_LWB                      13
+#define OFFSET_EA_PLUS_MWB                      14
+#define OFFSET_EA_MINUS_LWB                     15
+#define OFFSET_EA_MINUS_MWB                     16
+#define OFFSET_ER_1_LWB                         17
+#define OFFSET_ER_1_MWB                         18
+#define OFFSET_ER_2_LWB                         19
+#define OFFSET_ER_2_MWB                         20
+#define OFFSET_ER_3_LWB                         21
+#define OFFSET_ER_3_MWB                         22
+#define OFFSET_ER_4_LWB                         23
+#define OFFSET_ER_4_MWB                         24
+#define OFFSET_MEASUREMENT_UAB_1                25
+#define OFFSET_MEASUREMENT_UBC_1                26
+#define OFFSET_MEASUREMENT_UCA_1                27
+#define OFFSET_MEASUREMENT_3U0_1                28
+#define OFFSET_MEASUREMENT_3I0_r                29
+#define OFFSET_MEASUREMENT_3I0_HIGH_GARM        30
+#define OFFSET_MEASUREMENT_I1                   31
+#define OFFSET_MEASUREMENT_I2                   32
 
 
-//#define OFFSET_MEASUREMENT_UAB_2                34
-//#define OFFSET_MEASUREMENT_UBC_2                35
+//#define OFFSET_MEASUREMENT_UAB_2                35
+//#define OFFSET_MEASUREMENT_UBC_2                36
 
-//#define OFFSET_FREQUENCY_2                      38
+//#define OFFSET_FREQUENCY_2                      39
 
-#define OFFSET_BASE_CANAL_FOR_ANGLE             40
-#define OFFSET_ANGLE_UA_1                       41
-#define OFFSET_ANGLE_UB_1                       42
-#define OFFSET_ANGLE_UC_1                       43
-#define OFFSET_ANGLE_UAB_1                      44
-#define OFFSET_ANGLE_UBC_1                      45
-#define OFFSET_ANGLE_UCA_1                      46
-#define OFFSET_ANGLE_3U0_1                      47
-//#define OFFSET_ANGLE_UAB_2                      48
-//#define OFFSET_ANGLE_UBC_2                      49
-#define OFFSET_ANGLE_IA_1                       50
-#define OFFSET_ANGLE_IB_1                       51
-#define OFFSET_ANGLE_IC_1                       52
-#define OFFSET_ANGLE_3I0                        53
-#define OFFSET_ANGLE_3I0_r                      54
+#define OFFSET_BASE_CANAL_FOR_ANGLE             41
+#define OFFSET_ANGLE_UA_1                       42
+#define OFFSET_ANGLE_UB_1                       43
+#define OFFSET_ANGLE_UC_1                       44
+#define OFFSET_ANGLE_UAB_1                      45
+#define OFFSET_ANGLE_UBC_1                      46
+#define OFFSET_ANGLE_UCA_1                      47
+#define OFFSET_ANGLE_3U0_1                      48
+//#define OFFSET_ANGLE_UAB_2                      49
+//#define OFFSET_ANGLE_UBC_2                      50
+#define OFFSET_ANGLE_IA_1                       51
+#define OFFSET_ANGLE_IB_1                       52
+#define OFFSET_ANGLE_IC_1                       53
+#define OFFSET_ANGLE_I04_1                      54
+#define OFFSET_ANGLE_3I0                        55
+#define OFFSET_ANGLE_3I0_r                      56
 
-//#define OFFSET_ANGLE_3I0_3U0                    58
+//#define OFFSET_ANGLE_3I0_3U0                    60
 
-#define OFFSET_MEASUREMENT_I04_1                60
-#define OFFSET_ANGLE_I04_1                      61
 
 
 

@@ -194,6 +194,7 @@ void convert_order_list_function_to_gmm(unsigned int* input_array, unsigned shor
   //АЧР/ЧАПВ
   _CONVERT_SIGNAL_TO_GMM(input_array, output_array, RANG_OUTPUT_LED_DF_REG_ACHR_CHAPV_VID_DV , (BIT_MA_ACHR_CHAPV_VID_DV - BIT_MA_CURRENT_AF_BASE));
   _CONVERT_SIGNAL_TO_GMM(input_array, output_array, RANG_OUTPUT_LED_DF_REG_BLOCK_ACHR1       , (BIT_MA_BLOCK_ACHR1        - BIT_MA_CURRENT_AF_BASE));
+  _CONVERT_SIGNAL_TO_GMM(input_array, output_array, RANG_OUTPUT_LED_DF_REG_BLOCK_ACHR2       , (BIT_MA_BLOCK_ACHR2        - BIT_MA_CURRENT_AF_BASE));
   _CONVERT_SIGNAL_TO_GMM(input_array, output_array, RANG_OUTPUT_LED_DF_REG_BLOCK_CHAPV1_VID_U, (BIT_MA_BLOCK_CHAPV1_VID_U - BIT_MA_CURRENT_AF_BASE));
   _CONVERT_SIGNAL_TO_GMM(input_array, output_array, RANG_OUTPUT_LED_DF_REG_PO_ACHR1          , (BIT_MA_PO_F1_ACHR1        - BIT_MA_CURRENT_AF_BASE));
   _CONVERT_SIGNAL_TO_GMM(input_array, output_array, RANG_OUTPUT_LED_DF_REG_ACHR_CHAPV1       , (BIT_MA_ACHR_CHAPV1        - BIT_MA_CURRENT_AF_BASE));
@@ -665,6 +666,11 @@ unsigned int convert_order_list_inputs_to_gmm(unsigned int number, unsigned int 
     case RANG_INPUT_BLOCK_ACHR1:
       {
         rezultat = BIT_MA_BLOCK_ACHR1;
+        break;
+      }
+    case RANG_INPUT_BLOCK_ACHR2:
+      {
+        rezultat = BIT_MA_BLOCK_ACHR2;
         break;
       }
     case RANG_INPUT_ACHR_CHAPV_VID_DV:
@@ -1600,6 +1606,11 @@ unsigned int convert_order_list_oldr_to_gmm(unsigned int number, unsigned int nu
         rezultat = BIT_MA_BLOCK_ACHR1;
         break;
       }
+    case RANG_OUTPUT_LED_DF_REG_BLOCK_ACHR2:
+      {
+        rezultat = BIT_MA_BLOCK_ACHR2;
+        break;
+      }
     case RANG_OUTPUT_LED_DF_REG_RAZR_CHAPV:
       {
         rezultat = BIT_MA_RAZR_CHAPV;
@@ -1935,7 +1946,8 @@ unsigned int save_new_rang_inputs_from_gmm(unsigned int number, unsigned int num
     }
     else if (
              (data == BIT_MA_ACHR_CHAPV_VID_DV) ||
-             (data == BIT_MA_BLOCK_ACHR1      )
+             (data == BIT_MA_BLOCK_ACHR1      ) ||
+             (data == BIT_MA_BLOCK_ACHR2      )
             )
     {
       //Зараз є намагання зранжувати функцю АЧР/ЧАПВ і номер її є допустимим
@@ -2266,6 +2278,11 @@ unsigned int save_new_rang_inputs_from_gmm(unsigned int number, unsigned int num
     case BIT_MA_BLOCK_ACHR1:
       {
         _SET_BIT(set_array_rang, RANG_INPUT_BLOCK_ACHR1);
+        break;
+      }
+    case BIT_MA_BLOCK_ACHR2:
+      {
+        _SET_BIT(set_array_rang, RANG_INPUT_BLOCK_ACHR2);
         break;
       }
     case BIT_MA_PUSK_UROV_VID_DV:
@@ -2743,6 +2760,7 @@ unsigned int save_new_rang_oldr_from_gmm(unsigned int number, unsigned int numbe
     else if (
              (data == BIT_MA_ACHR_CHAPV_VID_DV ) ||
              (data == BIT_MA_BLOCK_ACHR1       ) ||
+             (data == BIT_MA_BLOCK_ACHR2       ) ||
              (data == BIT_MA_BLOCK_CHAPV1_VID_U) ||
              (data == BIT_MA_PO_F1_ACHR1       ) ||
              (data == BIT_MA_ACHR_CHAPV1       ) ||
@@ -3623,6 +3641,11 @@ unsigned int save_new_rang_oldr_from_gmm(unsigned int number, unsigned int numbe
     case BIT_MA_BLOCK_ACHR1:
       {
         _SET_BIT(set_array_rang, RANG_OUTPUT_LED_DF_REG_BLOCK_ACHR1);
+        break;
+      }
+    case BIT_MA_BLOCK_ACHR2:
+      {
+        _SET_BIT(set_array_rang, RANG_OUTPUT_LED_DF_REG_BLOCK_ACHR2);
         break;
       }
     case BIT_MA_BLOCK_CHAPV1_VID_U:
@@ -5109,30 +5132,33 @@ inline unsigned int Get_data(unsigned char *data, unsigned int address_data, uns
       {
         int input_value = current_settings.control_urov;
         
-        temp_value = (((input_value >> INDEX_ML_CTRUROV_STATE              ) & 0x1 ) << (BIT_MA_CONTROL_UROV_STATE               - BIT_MA_CONTROL_UROV_BASE_PART1)) |
-                     (((input_value >> INDEX_ML_CTRUROV_STARTED_FROM_MTZ1  ) & 0x1 ) << (BIT_MA_CONTROL_UROV_STARTED_FROM_MTZ1   - BIT_MA_CONTROL_UROV_BASE_PART1)) |
-                     (((input_value >> INDEX_ML_CTRUROV_STARTED_FROM_MTZ2  ) & 0x1 ) << (BIT_MA_CONTROL_UROV_STARTED_FROM_MTZ2   - BIT_MA_CONTROL_UROV_BASE_PART1)) |
-                     (((input_value >> INDEX_ML_CTRUROV_STARTED_FROM_MTZ3  ) & 0x1 ) << (BIT_MA_CONTROL_UROV_STARTED_FROM_MTZ3   - BIT_MA_CONTROL_UROV_BASE_PART1)) |
-                     (((input_value >> INDEX_ML_CTRUROV_STARTED_FROM_MTZ4  ) & 0x1 ) << (BIT_MA_CONTROL_UROV_STARTED_FROM_MTZ4   - BIT_MA_CONTROL_UROV_BASE_PART1)) |
-                     (((input_value >> INDEX_ML_CTRUROV_STARTED_FROM_UMAX1 ) & 0x1 ) << (BIT_MA_CONTROL_UROV_STARTED_FROM_UMAX1  - BIT_MA_CONTROL_UROV_BASE_PART1)) |
-                     (((input_value >> INDEX_ML_CTRUROV_STARTED_FROM_UMAX2 ) & 0x1 ) << (BIT_MA_CONTROL_UROV_STARTED_FROM_UMAX2  - BIT_MA_CONTROL_UROV_BASE_PART1)) |
-                     (((input_value >> INDEX_ML_CTRUROV_STARTED_FROM_UMIN1 ) & 0x1 ) << (BIT_MA_CONTROL_UROV_STARTED_FROM_UMIN1  - BIT_MA_CONTROL_UROV_BASE_PART1)) |
-                     (((input_value >> INDEX_ML_CTRUROV_STARTED_FROM_UMIN2 ) & 0x1 ) << (BIT_MA_CONTROL_UROV_STARTED_FROM_UMIN2  - BIT_MA_CONTROL_UROV_BASE_PART1)) |
-                     (((input_value >> INDEX_ML_CTRUROV_STARTED_FROM_ZOP1  ) & 0x1 ) << (BIT_MA_CONTROL_UROV_STARTED_FROM_ZOP1   - BIT_MA_CONTROL_UROV_BASE_PART1)) |
-                     (((input_value >> INDEX_ML_CTRUROV_STARTED_FROM_3I0   ) & 0x1 ) << (BIT_MA_CONTROL_UROV_STARTED_FROM_3I0    - BIT_MA_CONTROL_UROV_BASE_PART1)) |
-                     (((input_value >> INDEX_ML_CTRUROV_STARTED_FROM_3U0   ) & 0x1 ) << (BIT_MA_CONTROL_UROV_STARTED_FROM_3U0    - BIT_MA_CONTROL_UROV_BASE_PART1)) |
-                     (((input_value >> INDEX_ML_CTRUROV_STARTED_FROM_NZZ   ) & 0x1 ) << (BIT_MA_CONTROL_UROV_STARTED_FROM_NZZ    - BIT_MA_CONTROL_UROV_BASE_PART1)) |
-                     (((input_value >> INDEX_ML_CTRUROV_STARTED_FROM_TZNP1 ) & 0x1 ) << (BIT_MA_CONTROL_UROV_STARTED_FROM_TZNP1  - BIT_MA_CONTROL_UROV_BASE_PART1));
+        temp_value = (((input_value >> INDEX_ML_CTRUROV_STATE               ) & 0x1 ) << (BIT_MA_CONTROL_UROV_STATE                - BIT_MA_CONTROL_UROV_BASE_PART1)) |
+                     (((input_value >> INDEX_ML_CTRUROV_STARTED_FROM_MTZ1   ) & 0x1 ) << (BIT_MA_CONTROL_UROV_STARTED_FROM_MTZ1    - BIT_MA_CONTROL_UROV_BASE_PART1)) |
+                     (((input_value >> INDEX_ML_CTRUROV_STARTED_FROM_MTZ2   ) & 0x1 ) << (BIT_MA_CONTROL_UROV_STARTED_FROM_MTZ2    - BIT_MA_CONTROL_UROV_BASE_PART1)) |
+                     (((input_value >> INDEX_ML_CTRUROV_STARTED_FROM_MTZ3   ) & 0x1 ) << (BIT_MA_CONTROL_UROV_STARTED_FROM_MTZ3    - BIT_MA_CONTROL_UROV_BASE_PART1)) |
+                     (((input_value >> INDEX_ML_CTRUROV_STARTED_FROM_MTZ4   ) & 0x1 ) << (BIT_MA_CONTROL_UROV_STARTED_FROM_MTZ4    - BIT_MA_CONTROL_UROV_BASE_PART1)) |
+                     (((input_value >> INDEX_ML_CTRUROV_STARTED_FROM_MTZ04_1) & 0x1 ) << (BIT_MA_CONTROL_UROV_STARTED_FROM_MTZ04_1 - BIT_MA_CONTROL_UROV_BASE_PART1)) |
+                     (((input_value >> INDEX_ML_CTRUROV_STARTED_FROM_MTZ04_2) & 0x1 ) << (BIT_MA_CONTROL_UROV_STARTED_FROM_MTZ04_2 - BIT_MA_CONTROL_UROV_BASE_PART1)) |
+                     (((input_value >> INDEX_ML_CTRUROV_STARTED_FROM_UMAX1  ) & 0x1 ) << (BIT_MA_CONTROL_UROV_STARTED_FROM_UMAX1   - BIT_MA_CONTROL_UROV_BASE_PART1)) |
+                     (((input_value >> INDEX_ML_CTRUROV_STARTED_FROM_UMAX2  ) & 0x1 ) << (BIT_MA_CONTROL_UROV_STARTED_FROM_UMAX2   - BIT_MA_CONTROL_UROV_BASE_PART1)) |
+                     (((input_value >> INDEX_ML_CTRUROV_STARTED_FROM_UMIN1  ) & 0x1 ) << (BIT_MA_CONTROL_UROV_STARTED_FROM_UMIN1   - BIT_MA_CONTROL_UROV_BASE_PART1)) |
+                     (((input_value >> INDEX_ML_CTRUROV_STARTED_FROM_UMIN2  ) & 0x1 ) << (BIT_MA_CONTROL_UROV_STARTED_FROM_UMIN2   - BIT_MA_CONTROL_UROV_BASE_PART1)) |
+                     (((input_value >> INDEX_ML_CTRUROV_STARTED_FROM_ZOP1   ) & 0x1 ) << (BIT_MA_CONTROL_UROV_STARTED_FROM_ZOP1    - BIT_MA_CONTROL_UROV_BASE_PART1)) |
+                     (((input_value >> INDEX_ML_CTRUROV_STARTED_FROM_NZZ    ) & 0x1 ) << (BIT_MA_CONTROL_UROV_STARTED_FROM_NZZ     - BIT_MA_CONTROL_UROV_BASE_PART1)) |
+                     (((input_value >> INDEX_ML_CTRUROV_STARTED_FROM_3I0    ) & 0x1 ) << (BIT_MA_CONTROL_UROV_STARTED_FROM_3I0     - BIT_MA_CONTROL_UROV_BASE_PART1));
         break;
       }
     case MA_CONTROL_UROV_PART2:
       {
         int input_value = current_settings.control_urov;
         
-        temp_value = (((input_value >> INDEX_ML_CTRUROV_STARTED_FROM_TZNP2) & 0x1 ) << (BIT_MA_CONTROL_UROV_STARTED_FROM_TZNP2  - BIT_MA_CONTROL_UROV_BASE_PART2)) |
-                     (((input_value >> INDEX_ML_CTRUROV_STARTED_FROM_TZNP3) & 0x1 ) << (BIT_MA_CONTROL_UROV_STARTED_FROM_TZNP3  - BIT_MA_CONTROL_UROV_BASE_PART2)) |
-                     (((input_value >> INDEX_ML_CTRUROV_STARTED_FROM_ZDZ  ) & 0x1 ) << (BIT_MA_CONTROL_UROV_STARTED_FROM_ZDZ    - BIT_MA_CONTROL_UROV_BASE_PART2)) |
-                     (((input_value >> INDEX_ML_CTRUROV_STARTED_FROM_ACHR1) & 0x1 ) << (BIT_MA_CONTROL_UROV_STARTED_FROM_ACHR   - BIT_MA_CONTROL_UROV_BASE_PART2));
+        temp_value = (((input_value >> INDEX_ML_CTRUROV_STARTED_FROM_3U0  ) & 0x1 ) << (BIT_MA_CONTROL_UROV_STARTED_FROM_3U0   - BIT_MA_CONTROL_UROV_BASE_PART2)) |
+                     (((input_value >> INDEX_ML_CTRUROV_STARTED_FROM_TZNP1) & 0x1 ) << (BIT_MA_CONTROL_UROV_STARTED_FROM_TZNP1 - BIT_MA_CONTROL_UROV_BASE_PART2)) |
+                     (((input_value >> INDEX_ML_CTRUROV_STARTED_FROM_TZNP2) & 0x1 ) << (BIT_MA_CONTROL_UROV_STARTED_FROM_TZNP2 - BIT_MA_CONTROL_UROV_BASE_PART2)) |
+                     (((input_value >> INDEX_ML_CTRUROV_STARTED_FROM_TZNP3) & 0x1 ) << (BIT_MA_CONTROL_UROV_STARTED_FROM_TZNP3 - BIT_MA_CONTROL_UROV_BASE_PART2)) |
+                     (((input_value >> INDEX_ML_CTRUROV_STARTED_FROM_ZDZ  ) & 0x1 ) << (BIT_MA_CONTROL_UROV_STARTED_FROM_ZDZ   - BIT_MA_CONTROL_UROV_BASE_PART2)) |
+                     (((input_value >> INDEX_ML_CTRUROV_STARTED_FROM_ACHR1) & 0x1 ) << (BIT_MA_CONTROL_UROV_STARTED_FROM_ACHR1 - BIT_MA_CONTROL_UROV_BASE_PART2)) |
+                     (((input_value >> INDEX_ML_CTRUROV_STARTED_FROM_ACHR2) & 0x1 ) << (BIT_MA_CONTROL_UROV_STARTED_FROM_ACHR2 - BIT_MA_CONTROL_UROV_BASE_PART2));
         break;
       }
     case MA_CONTROL_APV:
@@ -5153,8 +5179,9 @@ inline unsigned int Get_data(unsigned char *data, unsigned int address_data, uns
       {
         int input_value = current_settings.control_achr_chapv;
         
-        temp_value = (((input_value >> INDEX_CTR_ACHR1        ) & 0x1 ) << (BIT_MA_CONTROL_ACHR_STATE         - BIT_MA_CONTROL_ACHR_CHAPV_BASE)) |
-                     (((input_value >> INDEX_CTR_CHAPV1       ) & 0x1 ) << (BIT_MA_CONTROL_CHAPV_STATE        - BIT_MA_CONTROL_ACHR_CHAPV_BASE)) |
+        temp_value = (((input_value >> INDEX_CTR_ACHR1       ) & 0x1 ) << (BIT_MA_CONTROL_ACHR1_STATE        - BIT_MA_CONTROL_ACHR_CHAPV_BASE)) |
+                     (((input_value >> INDEX_CTR_ACHR2       ) & 0x1 ) << (BIT_MA_CONTROL_ACHR2_STATE        - BIT_MA_CONTROL_ACHR_CHAPV_BASE)) |
+                     (((input_value >> INDEX_CTR_CHAPV1      ) & 0x1 ) << (BIT_MA_CONTROL_CHAPV_STATE        - BIT_MA_CONTROL_ACHR_CHAPV_BASE)) |
                      (((input_value >> INDEX_CTR_CHAPV_VID_DV) & 0x1 ) << (BIT_MA_CONTROL_CHAPV_VID_DV_STATE - BIT_MA_CONTROL_ACHR_CHAPV_BASE));
         break;
       }
@@ -5184,6 +5211,7 @@ inline unsigned int Get_data(unsigned char *data, unsigned int address_data, uns
         int input_value = current_settings.configuration;
         
         temp_value = (((input_value >> MTZ_BIT_CONFIGURATION       ) & 0x1 ) << (BIT_MA_CONFIGURATION_MTZ        - BIT_MA_CONFIGURATION_BASE_PART1)) |
+                     (((input_value >> MTZ04_BIT_CONFIGURATION     ) & 0x1 ) << (BIT_MA_CONFIGURATION_MTZ04      - BIT_MA_CONFIGURATION_BASE_PART1)) |
                      (((input_value >> ZDZ_BIT_CONFIGURATION       ) & 0x1 ) << (BIT_MA_CONFIGURATION_ZDZ        - BIT_MA_CONFIGURATION_BASE_PART1)) |
                      (((input_value >> ZZ_BIT_CONFIGURATION        ) & 0x1 ) << (BIT_MA_CONFIGURATION_ZZ         - BIT_MA_CONFIGURATION_BASE_PART1)) |
                      (((input_value >> TZNP_BIT_CONFIGURATION      ) & 0x1 ) << (BIT_MA_CONFIGURATION_TZNP       - BIT_MA_CONFIGURATION_BASE_PART1)) |
@@ -8815,11 +8843,19 @@ inline unsigned int Set_data(unsigned short int data, unsigned int address_data,
             )
             &&  
             (
+             ((target_label->configuration & (1 << MTZ04_BIT_CONFIGURATION)) != 0)
+             ||
+             (
+              (((data >> (BIT_MA_CONTROL_UROV_STARTED_FROM_MTZ04_1 - BIT_MA_CONTROL_UROV_BASE_PART1)) & 0x1) == 0) &&
+              (((data >> (BIT_MA_CONTROL_UROV_STARTED_FROM_MTZ04_2 - BIT_MA_CONTROL_UROV_BASE_PART1)) & 0x1) == 0)
+             ) 
+            )
+            &&  
+            (
              ((target_label->configuration & (1 << ZZ_BIT_CONFIGURATION)) != 0)
              ||
              (
               (((data >> (BIT_MA_CONTROL_UROV_STARTED_FROM_3I0 - BIT_MA_CONTROL_UROV_BASE_PART1)) & 0x1) == 0) &&
-              (((data >> (BIT_MA_CONTROL_UROV_STARTED_FROM_3U0 - BIT_MA_CONTROL_UROV_BASE_PART1)) & 0x1) == 0) &&
               (((data >> (BIT_MA_CONTROL_UROV_STARTED_FROM_NZZ - BIT_MA_CONTROL_UROV_BASE_PART1)) & 0x1) == 0)
              ) 
             )
@@ -8830,14 +8866,6 @@ inline unsigned int Set_data(unsigned short int data, unsigned int address_data,
              (
               (((data >> (BIT_MA_CONTROL_UROV_STARTED_FROM_NZZ - BIT_MA_CONTROL_UROV_BASE_PART1)) & 0x1) == 0)
              )   
-            )
-            &&  
-            (
-             ((target_label->configuration & (1 << TZNP_BIT_CONFIGURATION)) != 0)
-             ||
-             (
-              (((data >> (BIT_MA_CONTROL_UROV_STARTED_FROM_TZNP1 - BIT_MA_CONTROL_UROV_BASE_PART1)) & 0x1) == 0)
-             ) 
             )
             &&  
             (
@@ -8869,36 +8897,36 @@ inline unsigned int Set_data(unsigned short int data, unsigned int address_data,
         {
           int output_value = target_label->control_urov & 
                             (unsigned int)(~(
-                                             CTR_UROV_STATE              | 
-                                             CTR_UROV_STARTED_FROM_MTZ1  | 
-                                             CTR_UROV_STARTED_FROM_MTZ2  | 
-                                             CTR_UROV_STARTED_FROM_MTZ3  | 
-                                             CTR_UROV_STARTED_FROM_MTZ4  |
-                                             CTR_UROV_STARTED_FROM_UMAX1 | 
-                                             CTR_UROV_STARTED_FROM_UMAX2 | 
-                                             CTR_UROV_STARTED_FROM_UMIN1 | 
-                                             CTR_UROV_STARTED_FROM_UMIN2 |
-                                             CTR_UROV_STARTED_FROM_ZOP1  | 
-                                             CTR_UROV_STARTED_FROM_NZZ   | 
-                                             CTR_UROV_STARTED_FROM_3I0   | 
-                                             CTR_UROV_STARTED_FROM_3U0   |
-                                             CTR_UROV_STARTED_FROM_TZNP1
+                                             CTR_UROV_STATE                | 
+                                             CTR_UROV_STARTED_FROM_MTZ1    | 
+                                             CTR_UROV_STARTED_FROM_MTZ2    | 
+                                             CTR_UROV_STARTED_FROM_MTZ3    | 
+                                             CTR_UROV_STARTED_FROM_MTZ4    |
+                                             CTR_UROV_STARTED_FROM_MTZ04_1 | 
+                                             CTR_UROV_STARTED_FROM_MTZ04_2 | 
+                                             CTR_UROV_STARTED_FROM_UMAX1   | 
+                                             CTR_UROV_STARTED_FROM_UMAX2   | 
+                                             CTR_UROV_STARTED_FROM_UMIN1   | 
+                                             CTR_UROV_STARTED_FROM_UMIN2   |
+                                             CTR_UROV_STARTED_FROM_ZOP1    | 
+                                             CTR_UROV_STARTED_FROM_NZZ     | 
+                                             CTR_UROV_STARTED_FROM_3I0
                                           ));
 
-          output_value |= ((data >> (BIT_MA_CONTROL_UROV_STATE              - BIT_MA_CONTROL_UROV_BASE_PART1)) & 0x1) << INDEX_ML_CTRUROV_STATE;
-          output_value |= ((data >> (BIT_MA_CONTROL_UROV_STARTED_FROM_MTZ1  - BIT_MA_CONTROL_UROV_BASE_PART1)) & 0x1) << INDEX_ML_CTRUROV_STARTED_FROM_MTZ1;
-          output_value |= ((data >> (BIT_MA_CONTROL_UROV_STARTED_FROM_MTZ2  - BIT_MA_CONTROL_UROV_BASE_PART1)) & 0x1) << INDEX_ML_CTRUROV_STARTED_FROM_MTZ2;
-          output_value |= ((data >> (BIT_MA_CONTROL_UROV_STARTED_FROM_MTZ3  - BIT_MA_CONTROL_UROV_BASE_PART1)) & 0x1) << INDEX_ML_CTRUROV_STARTED_FROM_MTZ3;
-          output_value |= ((data >> (BIT_MA_CONTROL_UROV_STARTED_FROM_MTZ4  - BIT_MA_CONTROL_UROV_BASE_PART1)) & 0x1) << INDEX_ML_CTRUROV_STARTED_FROM_MTZ4;
-          output_value |= ((data >> (BIT_MA_CONTROL_UROV_STARTED_FROM_UMAX1 - BIT_MA_CONTROL_UROV_BASE_PART1)) & 0x1) << INDEX_ML_CTRUROV_STARTED_FROM_UMAX1;
-          output_value |= ((data >> (BIT_MA_CONTROL_UROV_STARTED_FROM_UMAX2 - BIT_MA_CONTROL_UROV_BASE_PART1)) & 0x1) << INDEX_ML_CTRUROV_STARTED_FROM_UMAX2;
-          output_value |= ((data >> (BIT_MA_CONTROL_UROV_STARTED_FROM_UMIN1 - BIT_MA_CONTROL_UROV_BASE_PART1)) & 0x1) << INDEX_ML_CTRUROV_STARTED_FROM_UMIN1;
-          output_value |= ((data >> (BIT_MA_CONTROL_UROV_STARTED_FROM_UMIN2 - BIT_MA_CONTROL_UROV_BASE_PART1)) & 0x1) << INDEX_ML_CTRUROV_STARTED_FROM_UMIN2;
-          output_value |= ((data >> (BIT_MA_CONTROL_UROV_STARTED_FROM_ZOP1  - BIT_MA_CONTROL_UROV_BASE_PART1)) & 0x1) << INDEX_ML_CTRUROV_STARTED_FROM_ZOP1;
-          output_value |= ((data >> (BIT_MA_CONTROL_UROV_STARTED_FROM_NZZ   - BIT_MA_CONTROL_UROV_BASE_PART1)) & 0x1) << INDEX_ML_CTRUROV_STARTED_FROM_NZZ;
-          output_value |= ((data >> (BIT_MA_CONTROL_UROV_STARTED_FROM_3I0   - BIT_MA_CONTROL_UROV_BASE_PART1)) & 0x1) << INDEX_ML_CTRUROV_STARTED_FROM_3I0;
-          output_value |= ((data >> (BIT_MA_CONTROL_UROV_STARTED_FROM_3U0   - BIT_MA_CONTROL_UROV_BASE_PART1)) & 0x1) << INDEX_ML_CTRUROV_STARTED_FROM_3U0;
-          output_value |= ((data >> (BIT_MA_CONTROL_UROV_STARTED_FROM_TZNP1 - BIT_MA_CONTROL_UROV_BASE_PART1)) & 0x1) << INDEX_ML_CTRUROV_STARTED_FROM_TZNP1;
+          output_value |= ((data >> (BIT_MA_CONTROL_UROV_STATE                - BIT_MA_CONTROL_UROV_BASE_PART1)) & 0x1) << INDEX_ML_CTRUROV_STATE;
+          output_value |= ((data >> (BIT_MA_CONTROL_UROV_STARTED_FROM_MTZ1    - BIT_MA_CONTROL_UROV_BASE_PART1)) & 0x1) << INDEX_ML_CTRUROV_STARTED_FROM_MTZ1;
+          output_value |= ((data >> (BIT_MA_CONTROL_UROV_STARTED_FROM_MTZ2    - BIT_MA_CONTROL_UROV_BASE_PART1)) & 0x1) << INDEX_ML_CTRUROV_STARTED_FROM_MTZ2;
+          output_value |= ((data >> (BIT_MA_CONTROL_UROV_STARTED_FROM_MTZ3    - BIT_MA_CONTROL_UROV_BASE_PART1)) & 0x1) << INDEX_ML_CTRUROV_STARTED_FROM_MTZ3;
+          output_value |= ((data >> (BIT_MA_CONTROL_UROV_STARTED_FROM_MTZ4    - BIT_MA_CONTROL_UROV_BASE_PART1)) & 0x1) << INDEX_ML_CTRUROV_STARTED_FROM_MTZ4;
+          output_value |= ((data >> (BIT_MA_CONTROL_UROV_STARTED_FROM_MTZ04_1 - BIT_MA_CONTROL_UROV_BASE_PART1)) & 0x1) << INDEX_ML_CTRUROV_STARTED_FROM_MTZ04_1;
+          output_value |= ((data >> (BIT_MA_CONTROL_UROV_STARTED_FROM_MTZ04_2 - BIT_MA_CONTROL_UROV_BASE_PART1)) & 0x1) << INDEX_ML_CTRUROV_STARTED_FROM_MTZ04_2;
+          output_value |= ((data >> (BIT_MA_CONTROL_UROV_STARTED_FROM_UMAX1   - BIT_MA_CONTROL_UROV_BASE_PART1)) & 0x1) << INDEX_ML_CTRUROV_STARTED_FROM_UMAX1;
+          output_value |= ((data >> (BIT_MA_CONTROL_UROV_STARTED_FROM_UMAX2   - BIT_MA_CONTROL_UROV_BASE_PART1)) & 0x1) << INDEX_ML_CTRUROV_STARTED_FROM_UMAX2;
+          output_value |= ((data >> (BIT_MA_CONTROL_UROV_STARTED_FROM_UMIN1   - BIT_MA_CONTROL_UROV_BASE_PART1)) & 0x1) << INDEX_ML_CTRUROV_STARTED_FROM_UMIN1;
+          output_value |= ((data >> (BIT_MA_CONTROL_UROV_STARTED_FROM_UMIN2   - BIT_MA_CONTROL_UROV_BASE_PART1)) & 0x1) << INDEX_ML_CTRUROV_STARTED_FROM_UMIN2;
+          output_value |= ((data >> (BIT_MA_CONTROL_UROV_STARTED_FROM_ZOP1    - BIT_MA_CONTROL_UROV_BASE_PART1)) & 0x1) << INDEX_ML_CTRUROV_STARTED_FROM_ZOP1;
+          output_value |= ((data >> (BIT_MA_CONTROL_UROV_STARTED_FROM_NZZ     - BIT_MA_CONTROL_UROV_BASE_PART1)) & 0x1) << INDEX_ML_CTRUROV_STARTED_FROM_NZZ;
+          output_value |= ((data >> (BIT_MA_CONTROL_UROV_STARTED_FROM_3I0     - BIT_MA_CONTROL_UROV_BASE_PART1)) & 0x1) << INDEX_ML_CTRUROV_STARTED_FROM_3I0;
         
           target_label->control_urov = output_value;
         }
@@ -8916,9 +8944,18 @@ inline unsigned int Set_data(unsigned short int data, unsigned int address_data,
             ((target_label->configuration & (1 << UROV_BIT_CONFIGURATION)) != 0)
             &&  
             (
+             ((target_label->configuration & (1 << ZZ_BIT_CONFIGURATION)) != 0)
+             ||
+             (
+              (((data >> (BIT_MA_CONTROL_UROV_STARTED_FROM_3U0 - BIT_MA_CONTROL_UROV_BASE_PART2)) & 0x1) == 0)
+             ) 
+            )
+            &&  
+            (
              ((target_label->configuration & (1 << TZNP_BIT_CONFIGURATION)) != 0)
              ||
              (
+              (((data >> (BIT_MA_CONTROL_UROV_STARTED_FROM_TZNP1 - BIT_MA_CONTROL_UROV_BASE_PART2)) & 0x1) == 0) &&
               (((data >> (BIT_MA_CONTROL_UROV_STARTED_FROM_TZNP2 - BIT_MA_CONTROL_UROV_BASE_PART2)) & 0x1) == 0) &&
               (((data >> (BIT_MA_CONTROL_UROV_STARTED_FROM_TZNP3 - BIT_MA_CONTROL_UROV_BASE_PART2)) & 0x1) == 0)
              ) 
@@ -8936,24 +8973,30 @@ inline unsigned int Set_data(unsigned short int data, unsigned int address_data,
              ((target_label->configuration & (1 << ACHR_CHAPV_BIT_CONFIGURATION)) != 0)
              ||
              (
-              (((data >> (BIT_MA_CONTROL_UROV_STARTED_FROM_ACHR - BIT_MA_CONTROL_UROV_BASE_PART2)) & 0x1) == 0)
+              (((data >> (BIT_MA_CONTROL_UROV_STARTED_FROM_ACHR1 - BIT_MA_CONTROL_UROV_BASE_PART2)) & 0x1) == 0) &&
+              (((data >> (BIT_MA_CONTROL_UROV_STARTED_FROM_ACHR2 - BIT_MA_CONTROL_UROV_BASE_PART2)) & 0x1) == 0)
              ) 
             )
            )   
         {
           int output_value = target_label->control_urov & 
                             (unsigned int)(~(
+                                             CTR_UROV_STARTED_FROM_3U0   |
+                                             CTR_UROV_STARTED_FROM_TZNP1 |
                                              CTR_UROV_STARTED_FROM_TZNP2 |
                                              CTR_UROV_STARTED_FROM_TZNP3 |
                                              CTR_UROV_STARTED_FROM_ZDZ   |
-                                             CTR_UROV_STARTED_FROM_ZDZ   |
-                                             CTR_UROV_STARTED_FROM_ACHR1
+                                             CTR_UROV_STARTED_FROM_ACHR1 |
+                                             CTR_UROV_STARTED_FROM_ACHR2
                                           ));
 
+          output_value |= ((data >> (BIT_MA_CONTROL_UROV_STARTED_FROM_3U0   - BIT_MA_CONTROL_UROV_BASE_PART2)) & 0x1) << INDEX_ML_CTRUROV_STARTED_FROM_3U0;
+          output_value |= ((data >> (BIT_MA_CONTROL_UROV_STARTED_FROM_TZNP1 - BIT_MA_CONTROL_UROV_BASE_PART2)) & 0x1) << INDEX_ML_CTRUROV_STARTED_FROM_TZNP1;
           output_value |= ((data >> (BIT_MA_CONTROL_UROV_STARTED_FROM_TZNP2 - BIT_MA_CONTROL_UROV_BASE_PART2)) & 0x1) << INDEX_ML_CTRUROV_STARTED_FROM_TZNP2;
           output_value |= ((data >> (BIT_MA_CONTROL_UROV_STARTED_FROM_TZNP3 - BIT_MA_CONTROL_UROV_BASE_PART2)) & 0x1) << INDEX_ML_CTRUROV_STARTED_FROM_TZNP3;
           output_value |= ((data >> (BIT_MA_CONTROL_UROV_STARTED_FROM_ZDZ   - BIT_MA_CONTROL_UROV_BASE_PART2)) & 0x1) << INDEX_ML_CTRUROV_STARTED_FROM_ZDZ;
-          output_value |= ((data >> (BIT_MA_CONTROL_UROV_STARTED_FROM_ACHR  - BIT_MA_CONTROL_UROV_BASE_PART2)) & 0x1) << INDEX_ML_CTRUROV_STARTED_FROM_ACHR1;
+          output_value |= ((data >> (BIT_MA_CONTROL_UROV_STARTED_FROM_ACHR1 - BIT_MA_CONTROL_UROV_BASE_PART2)) & 0x1) << INDEX_ML_CTRUROV_STARTED_FROM_ACHR1;
+          output_value |= ((data >> (BIT_MA_CONTROL_UROV_STARTED_FROM_ACHR2 - BIT_MA_CONTROL_UROV_BASE_PART2)) & 0x1) << INDEX_ML_CTRUROV_STARTED_FROM_ACHR2;
         
           target_label->control_urov = output_value;
         }
@@ -9013,7 +9056,8 @@ inline unsigned int Set_data(unsigned short int data, unsigned int address_data,
         {
           int output_value = 0;
 
-          output_value |= ((data >> (BIT_MA_CONTROL_ACHR_STATE         - BIT_MA_CONTROL_ACHR_CHAPV_BASE)) & 0x1) << INDEX_CTR_ACHR1;
+          output_value |= ((data >> (BIT_MA_CONTROL_ACHR1_STATE        - BIT_MA_CONTROL_ACHR_CHAPV_BASE)) & 0x1) << INDEX_CTR_ACHR1;
+          output_value |= ((data >> (BIT_MA_CONTROL_ACHR2_STATE        - BIT_MA_CONTROL_ACHR_CHAPV_BASE)) & 0x1) << INDEX_CTR_ACHR2;
           output_value |= ((data >> (BIT_MA_CONTROL_CHAPV_STATE        - BIT_MA_CONTROL_ACHR_CHAPV_BASE)) & 0x1) << INDEX_CTR_CHAPV1;
           output_value |= ((data >> (BIT_MA_CONTROL_CHAPV_VID_DV_STATE - BIT_MA_CONTROL_ACHR_CHAPV_BASE)) & 0x1) << INDEX_CTR_CHAPV_VID_DV;
         
@@ -9067,6 +9111,7 @@ inline unsigned int Set_data(unsigned short int data, unsigned int address_data,
         int output_value = target_label->configuration & 
                             (unsigned int)(~(
                                              (1 << MTZ_BIT_CONFIGURATION       ) | 
+                                             (1 << MTZ04_BIT_CONFIGURATION     ) | 
                                              (1 << ZDZ_BIT_CONFIGURATION       ) | 
                                              (1 << ZZ_BIT_CONFIGURATION        ) |
                                              (1 << TZNP_BIT_CONFIGURATION      ) | 
@@ -9079,6 +9124,7 @@ inline unsigned int Set_data(unsigned short int data, unsigned int address_data,
                                             ));
 
         output_value |= ((data >> (BIT_MA_CONFIGURATION_MTZ        - BIT_MA_CONFIGURATION_BASE_PART1)) & 0x1) << MTZ_BIT_CONFIGURATION;
+        output_value |= ((data >> (BIT_MA_CONFIGURATION_MTZ04      - BIT_MA_CONFIGURATION_BASE_PART1)) & 0x1) << MTZ04_BIT_CONFIGURATION;
         output_value |= ((data >> (BIT_MA_CONFIGURATION_ZDZ        - BIT_MA_CONFIGURATION_BASE_PART1)) & 0x1) << ZDZ_BIT_CONFIGURATION;
         output_value |= ((data >> (BIT_MA_CONFIGURATION_ZZ         - BIT_MA_CONFIGURATION_BASE_PART1)) & 0x1) << ZZ_BIT_CONFIGURATION;
         output_value |= ((data >> (BIT_MA_CONFIGURATION_TZNP       - BIT_MA_CONFIGURATION_BASE_PART1)) & 0x1) << TZNP_BIT_CONFIGURATION;
