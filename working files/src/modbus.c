@@ -1732,19 +1732,11 @@ void set_previous_ranguvannja(void)
   }
   
   //Повертаємо допоміжні змінні у висхідний стан
-  clear_array_rang[0] = 0;
-  clear_array_rang[1] = 0;
-  clear_array_rang[2] = 0;
-  clear_array_rang[3] = 0;
-  clear_array_rang[4] = 0;
-  clear_array_rang[5] = 0;
-  
-  set_array_rang[0]   = 0;
-  set_array_rang[1]   = 0;
-  set_array_rang[2]   = 0;
-  set_array_rang[3]   = 0;
-  set_array_rang[4]   = 0;
-  set_array_rang[5]   = 0;
+  for (unsigned int i = 0; i < N_BIG; i++)
+  {
+    clear_array_rang[i] = 0;
+    set_array_rang[i]   = 0;
+  }
   
   point_to_edited_rang = NULL;
 }
@@ -3916,42 +3908,42 @@ unsigned int save_new_rang_buttons_from_gmm(unsigned int number, unsigned int nu
       }
     case BIT_MA_DT1_SET:
       {
-        set_array_rang[0] |= ((unsigned int)(1 << RANG_BUTTON_DT1_SET));
+        _SET_BIT(set_array_rang,RANG_BUTTON_DT1_SET);
         break;
       }
     case BIT_MA_DT1_RESET:
       {
-        set_array_rang[0] |= ((unsigned int)(1 << RANG_BUTTON_DT1_RESET));
+        _SET_BIT(set_array_rang,RANG_BUTTON_DT1_RESET);
         break;
       }
     case BIT_MA_DT2_SET:
       {
-        set_array_rang[0] |= ((unsigned int)(1 << RANG_BUTTON_DT2_SET));
+        _SET_BIT(set_array_rang,RANG_BUTTON_DT2_SET);
         break;
       }
     case BIT_MA_DT2_RESET:
       {
-        set_array_rang[0] |= ((unsigned int)(1 << RANG_BUTTON_DT2_RESET));
+        _SET_BIT(set_array_rang,RANG_BUTTON_DT2_RESET);
         break;
       }
     case BIT_MA_DT3_SET:
       {
-        set_array_rang[0] |= ((unsigned int)(1 << RANG_BUTTON_DT3_SET));
+        _SET_BIT(set_array_rang,RANG_BUTTON_DT3_SET);
         break;
       }
     case BIT_MA_DT3_RESET:
       {
-        set_array_rang[0] |= ((unsigned int)(1 << RANG_BUTTON_DT3_RESET));
+        _SET_BIT(set_array_rang,RANG_BUTTON_DT3_RESET);
         break;
       }
     case BIT_MA_DT4_SET:
       {
-        set_array_rang[0] |= ((unsigned int)(1 << RANG_BUTTON_DT4_SET));
+        _SET_BIT(set_array_rang,RANG_BUTTON_DT4_SET);
         break;
       }
     case BIT_MA_DT4_RESET:
       {
-        set_array_rang[0] |= ((unsigned int)(1 << RANG_BUTTON_DT4_RESET));
+        _SET_BIT(set_array_rang,RANG_BUTTON_DT4_RESET);
         break;
       }
     case BIT_MA_RESET_LEDS:
@@ -13865,19 +13857,11 @@ void modbus_rountines(unsigned int type_interface)
                 {
                   //Враховуючи той факт, що зараз буде відбуватися ранжування, то скидаємо вказівник на редагуюче поле в 0
                   point_to_edited_rang = NULL;
-                  clear_array_rang[0] = 0;
-                  clear_array_rang[1] = 0;
-                  clear_array_rang[2] = 0;
-                  clear_array_rang[3] = 0;
-                  clear_array_rang[4] = 0;
-                  clear_array_rang[5] = 0;
-                  
-                  set_array_rang[0] = 0;
-                  set_array_rang[1] = 0;
-                  set_array_rang[2] = 0;
-                  set_array_rang[3] = 0;
-                  set_array_rang[4] = 0;
-                  set_array_rang[5] = 0;
+                  for (unsigned int i = 0; i < N_BIG; i++)
+                  {
+                    clear_array_rang[i] = 0;
+                    set_array_rang[i]   = 0;
+                  }
                 }
                 
                 //Помічаємо, що зараз, можоиво, поле структури буде змінене
@@ -14592,19 +14576,11 @@ void modbus_rountines(unsigned int type_interface)
 
                     //Враховуючи той факт, що може зараз відбуватися ранжування, то скидаємо вказівник на редагуюче поле в 0
                     point_to_edited_rang = NULL;
-                    clear_array_rang[0] = 0;
-                    clear_array_rang[1] = 0;
-                    clear_array_rang[2] = 0;
-                    clear_array_rang[3] = 0;
-                    clear_array_rang[4] = 0;
-                    clear_array_rang[5] = 0;
-                    
-                    set_array_rang[0] = 0;
-                    set_array_rang[1] = 0;
-                    set_array_rang[2] = 0;
-                    set_array_rang[3] = 0;
-                    set_array_rang[4] = 0;
-                    set_array_rang[5] = 0;
+                    for (unsigned int j = 0; j < N_BIG; j++)
+                    {
+                      clear_array_rang[j] = 0;
+                      set_array_rang[j]   = 0;
+                    }
                   }
 
                   if (

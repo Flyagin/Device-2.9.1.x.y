@@ -7094,6 +7094,8 @@ inline void digital_registrator(unsigned int* carrent_active_functions, unsigned
            ((carrent_active_functions[3] & current_settings_prt.ranguvannja_digital_registrator[3]) != 0) ||
            ((carrent_active_functions[4] & current_settings_prt.ranguvannja_digital_registrator[4]) != 0) ||
            ((carrent_active_functions[5] & current_settings_prt.ranguvannja_digital_registrator[5]) != 0) ||
+           ((carrent_active_functions[6] & current_settings_prt.ranguvannja_digital_registrator[6]) != 0) ||
+           ((carrent_active_functions[7] & current_settings_prt.ranguvannja_digital_registrator[7]) != 0) ||
            (state_dr_record == STATE_DR_FORCE_START_NEW_RECORD)
           )   
          )
@@ -7854,7 +7856,9 @@ inline void analog_registrator(unsigned int* carrent_active_functions)
        ((carrent_active_functions[2] & current_settings_prt.ranguvannja_analog_registrator[2]) == 0) &&
        ((carrent_active_functions[3] & current_settings_prt.ranguvannja_analog_registrator[3]) == 0) &&
        ((carrent_active_functions[4] & current_settings_prt.ranguvannja_analog_registrator[4]) == 0) &&
-       ((carrent_active_functions[5] & current_settings_prt.ranguvannja_analog_registrator[5]) == 0) 
+       ((carrent_active_functions[5] & current_settings_prt.ranguvannja_analog_registrator[5]) == 0) &&
+       ((carrent_active_functions[6] & current_settings_prt.ranguvannja_analog_registrator[6]) == 0) &&
+       ((carrent_active_functions[7] & current_settings_prt.ranguvannja_analog_registrator[7]) == 0) 
       ) 
     {
       //Умова розблокування можливості початку нового запису виконана
@@ -7884,7 +7888,9 @@ inline void analog_registrator(unsigned int* carrent_active_functions)
            ((carrent_active_functions[2] & current_settings_prt.ranguvannja_analog_registrator[2]) != 0) ||
            ((carrent_active_functions[3] & current_settings_prt.ranguvannja_analog_registrator[3]) != 0) ||
            ((carrent_active_functions[4] & current_settings_prt.ranguvannja_analog_registrator[4]) != 0) ||
-           ((carrent_active_functions[5] & current_settings_prt.ranguvannja_analog_registrator[5]) != 0)
+           ((carrent_active_functions[5] & current_settings_prt.ranguvannja_analog_registrator[5]) != 0) ||
+           ((carrent_active_functions[6] & current_settings_prt.ranguvannja_analog_registrator[6]) != 0) ||
+           ((carrent_active_functions[7] & current_settings_prt.ranguvannja_analog_registrator[7]) != 0)
           )
           &&  
           (continue_previous_record_ar == 0) /*при попередній роботі ан.реєстротора (якщо така була) вже всі джерела активації були зняті і зароз вони знову виникли*/ 
@@ -7998,7 +8004,9 @@ inline void analog_registrator(unsigned int* carrent_active_functions)
                 ((carrent_active_functions[2] & current_settings_prt.ranguvannja_analog_registrator[2]) != 0) ||
                 ((carrent_active_functions[3] & current_settings_prt.ranguvannja_analog_registrator[3]) != 0) ||
                 ((carrent_active_functions[4] & current_settings_prt.ranguvannja_analog_registrator[4]) != 0) ||
-                ((carrent_active_functions[5] & current_settings_prt.ranguvannja_analog_registrator[5]) != 0)
+                ((carrent_active_functions[5] & current_settings_prt.ranguvannja_analog_registrator[5]) != 0) ||
+                ((carrent_active_functions[6] & current_settings_prt.ranguvannja_analog_registrator[6]) != 0) ||
+                ((carrent_active_functions[7] & current_settings_prt.ranguvannja_analog_registrator[7]) != 0)
                ) 
             {
               //Виставляємо помилку, що тимчасово аналоговий реєстратор є занятий (черз те, що завершується попередній запис)
@@ -8119,7 +8127,9 @@ inline void analog_registrator(unsigned int* carrent_active_functions)
           ((carrent_active_functions[2] & current_settings_prt.ranguvannja_analog_registrator[2]) != 0) ||
           ((carrent_active_functions[3] & current_settings_prt.ranguvannja_analog_registrator[3]) != 0) ||
           ((carrent_active_functions[4] & current_settings_prt.ranguvannja_analog_registrator[4]) != 0) ||
-          ((carrent_active_functions[5] & current_settings_prt.ranguvannja_analog_registrator[5]) != 0)
+          ((carrent_active_functions[5] & current_settings_prt.ranguvannja_analog_registrator[5]) != 0) ||
+          ((carrent_active_functions[6] & current_settings_prt.ranguvannja_analog_registrator[6]) != 0) ||
+          ((carrent_active_functions[7] & current_settings_prt.ranguvannja_analog_registrator[7]) != 0)
          )
       {
         //Виставляємо помилку, що тимчасово аналоговий реєстратор є занятий
@@ -9180,29 +9190,12 @@ inline void main_protection(void)
   /**************************/
   copying_active_functions = 1; //Помічаємо, що зараз обновляємо значення активних функцій
   
-  active_functions[0] = activated_functions[0];
-  trigger_functions_USB[0]   |= activated_functions[0];
-  trigger_functions_RS485[0] |= activated_functions[0];
-
-  active_functions[1] = activated_functions[1];
-  trigger_functions_USB[1]   |= activated_functions[1];
-  trigger_functions_RS485[1] |= activated_functions[1];
-
-  active_functions[2] = activated_functions[2];
-  trigger_functions_USB[2]   |= activated_functions[2];
-  trigger_functions_RS485[2] |= activated_functions[2];
-
-  active_functions[3] = activated_functions[3];
-  trigger_functions_USB[3]   |= activated_functions[3];
-  trigger_functions_RS485[3] |= activated_functions[3];
-
-  active_functions[4] = activated_functions[4];
-  trigger_functions_USB[4]   |= activated_functions[4];
-  trigger_functions_RS485[4] |= activated_functions[4];
-
-  active_functions[5] = activated_functions[5];
-  trigger_functions_USB[5]   |= activated_functions[5];
-  trigger_functions_RS485[5] |= activated_functions[5];
+  for (unsigned int i = 0; i < N_BIG; i++)
+  {
+    active_functions[i] = activated_functions[i];
+    trigger_functions_USB[i]   |= activated_functions[i];
+    trigger_functions_RS485[i] |= activated_functions[i];
+  }
 
   copying_active_functions = 0; //Помічаємо, що обновлення значення активних функцій завершене
   
@@ -9211,12 +9204,7 @@ inline void main_protection(void)
   обновлятися, то можна було б іншим модулям  (зап ис у об'єднаний аналоговий
   реєстратор) взяти попереднє, але достовірне значення
   */
-  active_functions_copy[0] = active_functions[0];
-  active_functions_copy[1] = active_functions[1];
-  active_functions_copy[2] = active_functions[2];
-  active_functions_copy[3] = active_functions[3];
-  active_functions_copy[4] = active_functions[4];
-  active_functions_copy[5] = active_functions[5];
+  for (unsigned int i = 0; i < N_BIG; i++) active_functions_copy[i] = active_functions[i];
   /**************************/
 
   /**************************/
