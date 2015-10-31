@@ -1632,38 +1632,20 @@ void min_settings(__SETTINGS *target_label)
   target_label->type_of_output_modif = 0x0;
   for(unsigned int i = 0; i < NUMBER_OUTPUTS; i++)
   {
-    target_label->ranguvannja_outputs[N_BIG*i  ] = 0x0;
-    target_label->ranguvannja_outputs[N_BIG*i+1] = 0x0;
-    target_label->ranguvannja_outputs[N_BIG*i+2] = 0x0;
-    target_label->ranguvannja_outputs[N_BIG*i+3] = 0x0;
-    target_label->ranguvannja_outputs[N_BIG*i+4] = 0x0;
-    target_label->ranguvannja_outputs[N_BIG*i+5] = 0x0;
+    for (unsigned int j = 0; j < N_BIG; j++ ) target_label->ranguvannja_outputs[N_BIG*i+j] = 0x0;
   }
 
   target_label->type_of_led = 0x0;
   for(unsigned int i = 0; i < NUMBER_LEDS; i++)
   {
-    target_label->ranguvannja_leds[N_BIG*i  ] = 0x0;
-    target_label->ranguvannja_leds[N_BIG*i+1] = 0x0;
-    target_label->ranguvannja_leds[N_BIG*i+2] = 0x0;
-    target_label->ranguvannja_leds[N_BIG*i+3] = 0x0;
-    target_label->ranguvannja_leds[N_BIG*i+4] = 0x0;
-    target_label->ranguvannja_leds[N_BIG*i+5] = 0x0;
+    for (unsigned int j = 0; j < N_BIG; j++ ) target_label->ranguvannja_leds[N_BIG*i+j] = 0x0;
   }
 
-  target_label->ranguvannja_digital_registrator[0] = 0x0;
-  target_label->ranguvannja_digital_registrator[1] = 0x0;
-  target_label->ranguvannja_digital_registrator[2] = 0x0;
-  target_label->ranguvannja_digital_registrator[3] = 0x0;
-  target_label->ranguvannja_digital_registrator[4] = 0x0;
-  target_label->ranguvannja_digital_registrator[5] = 0x0;
-
-  target_label->ranguvannja_analog_registrator[0]  = 0x0;
-  target_label->ranguvannja_analog_registrator[1]  = 0x0;
-  target_label->ranguvannja_analog_registrator[2]  = 0x0;
-  target_label->ranguvannja_analog_registrator[3]  = 0x0;
-  target_label->ranguvannja_analog_registrator[4]  = 0x0;
-  target_label->ranguvannja_analog_registrator[5]  = 0x0;
+  for (unsigned int j = 0; j < N_BIG; j++ ) 
+  {
+    target_label->ranguvannja_analog_registrator[j]  = 0x0;
+    target_label->ranguvannja_digital_registrator[j] = 0x0;
+  }
 
   target_label->type_df = 0x0;
   
@@ -1672,57 +1654,23 @@ void min_settings(__SETTINGS *target_label)
     target_label->timeout_pause_df[i] = TIMEOUT_DF_PAUSE_MIN;
     target_label->timeout_work_df[i] = TIMEOUT_DF_WORK_MIN;
 
-    target_label->ranguvannja_df_source_plus[N_BIG*i  ] = 0x0;
-    target_label->ranguvannja_df_source_plus[N_BIG*i+1] = 0x0;
-    target_label->ranguvannja_df_source_plus[N_BIG*i+2] = 0x0;
-    target_label->ranguvannja_df_source_plus[N_BIG*i+3] = 0x0;
-    target_label->ranguvannja_df_source_plus[N_BIG*i+4] = 0x0;
-    target_label->ranguvannja_df_source_plus[N_BIG*i+5] = 0x0;
-
-    target_label->ranguvannja_df_source_minus[N_BIG*i  ] = 0x0;
-    target_label->ranguvannja_df_source_minus[N_BIG*i+1] = 0x0;
-    target_label->ranguvannja_df_source_minus[N_BIG*i+2] = 0x0;
-    target_label->ranguvannja_df_source_minus[N_BIG*i+3] = 0x0;
-    target_label->ranguvannja_df_source_minus[N_BIG*i+4] = 0x0;
-    target_label->ranguvannja_df_source_minus[N_BIG*i+5] = 0x0;
-
-    target_label->ranguvannja_df_source_blk[N_BIG*i  ] = 0x0;
-    target_label->ranguvannja_df_source_blk[N_BIG*i+1] = 0x0;
-    target_label->ranguvannja_df_source_blk[N_BIG*i+2] = 0x0;
-    target_label->ranguvannja_df_source_blk[N_BIG*i+3] = 0x0;
-    target_label->ranguvannja_df_source_blk[N_BIG*i+4] = 0x0;
-    target_label->ranguvannja_df_source_blk[N_BIG*i+5] = 0x0;
+    for (unsigned int j = 0; j < N_BIG; j++ ) 
+    {
+      target_label->ranguvannja_df_source_plus[N_BIG*i+j]  = 0x0;
+      target_label->ranguvannja_df_source_minus[N_BIG*i+j] = 0x0;
+      target_label->ranguvannja_df_source_blk[N_BIG*i+j]   = 0x0;
+    }
   }
   
   for(unsigned int i = 0; i < NUMBER_DEFINED_TRIGGERS; i++)
   {
-    target_label->ranguvannja_set_dt_source_plus[N_BIG*i  ] = 0x0;
-    target_label->ranguvannja_set_dt_source_plus[N_BIG*i+1] = 0x0;
-    target_label->ranguvannja_set_dt_source_plus[N_BIG*i+2] = 0x0;
-    target_label->ranguvannja_set_dt_source_plus[N_BIG*i+3] = 0x0;
-    target_label->ranguvannja_set_dt_source_plus[N_BIG*i+4] = 0x0;
-    target_label->ranguvannja_set_dt_source_plus[N_BIG*i+5] = 0x0;
-
-    target_label->ranguvannja_set_dt_source_minus[N_BIG*i  ] = 0x0;
-    target_label->ranguvannja_set_dt_source_minus[N_BIG*i+1] = 0x0;
-    target_label->ranguvannja_set_dt_source_minus[N_BIG*i+2] = 0x0;
-    target_label->ranguvannja_set_dt_source_minus[N_BIG*i+3] = 0x0;
-    target_label->ranguvannja_set_dt_source_minus[N_BIG*i+4] = 0x0;
-    target_label->ranguvannja_set_dt_source_minus[N_BIG*i+5] = 0x0;
-
-    target_label->ranguvannja_reset_dt_source_plus[N_BIG*i  ] = 0x0;
-    target_label->ranguvannja_reset_dt_source_plus[N_BIG*i+1] = 0x0;
-    target_label->ranguvannja_reset_dt_source_plus[N_BIG*i+2] = 0x0;
-    target_label->ranguvannja_reset_dt_source_plus[N_BIG*i+3] = 0x0;
-    target_label->ranguvannja_reset_dt_source_plus[N_BIG*i+4] = 0x0;
-    target_label->ranguvannja_reset_dt_source_plus[N_BIG*i+5] = 0x0;
-
-    target_label->ranguvannja_reset_dt_source_minus[N_BIG*i  ] = 0x0;
-    target_label->ranguvannja_reset_dt_source_minus[N_BIG*i+1] = 0x0;
-    target_label->ranguvannja_reset_dt_source_minus[N_BIG*i+2] = 0x0;
-    target_label->ranguvannja_reset_dt_source_minus[N_BIG*i+3] = 0x0;
-    target_label->ranguvannja_reset_dt_source_minus[N_BIG*i+4] = 0x0;
-    target_label->ranguvannja_reset_dt_source_minus[N_BIG*i+5] = 0x0;
+    for (unsigned int j = 0; j < N_BIG; j++ ) 
+    {
+      target_label->ranguvannja_set_dt_source_plus[N_BIG*i+j]    = 0x0;
+      target_label->ranguvannja_set_dt_source_minus[N_BIG*i+j]   = 0x0;
+      target_label->ranguvannja_reset_dt_source_plus[N_BIG*i+j]  = 0x0;
+      target_label->ranguvannja_reset_dt_source_minus[N_BIG*i+j] = 0x0;
+    }
   }
 
   for(unsigned int i = 0; i < NUMBER_DEFINED_BUTTONS; i++)

@@ -741,102 +741,47 @@ unsigned int convert_order_list_oldr_to_gmm(unsigned int number, unsigned int nu
   //Визначаємо значення .яке треба конвертувати у коди "універсальної карти пам'яті"
   if (source == SOURCE_OUTPUTS_RANG)
   {
-    input_value[0] = current_settings.ranguvannja_outputs[N_BIG*number    ];
-    input_value[1] = current_settings.ranguvannja_outputs[N_BIG*number + 1];
-    input_value[2] = current_settings.ranguvannja_outputs[N_BIG*number + 2];
-    input_value[3] = current_settings.ranguvannja_outputs[N_BIG*number + 3];
-    input_value[4] = current_settings.ranguvannja_outputs[N_BIG*number + 4];
-    input_value[5] = current_settings.ranguvannja_outputs[N_BIG*number + 5];
+    for (unsigned int i = 0; i < N_BIG; i++ ) input_value[i] = current_settings.ranguvannja_outputs[N_BIG*number + i];
   }
   else if (source == SOURCE_LEDS_RANG)
   {
-    input_value[0] = current_settings.ranguvannja_leds[N_BIG*number    ];
-    input_value[1] = current_settings.ranguvannja_leds[N_BIG*number + 1];
-    input_value[2] = current_settings.ranguvannja_leds[N_BIG*number + 2];
-    input_value[3] = current_settings.ranguvannja_leds[N_BIG*number + 3];
-    input_value[4] = current_settings.ranguvannja_leds[N_BIG*number + 4];
-    input_value[5] = current_settings.ranguvannja_leds[N_BIG*number + 5];
+    for (unsigned int i = 0; i < N_BIG; i++ ) input_value[i] = current_settings.ranguvannja_leds[N_BIG*number + i];
   }
   else if (source == SOURCE_DF_PLUS_RANG)
   {
-    input_value[0] = current_settings.ranguvannja_df_source_plus[N_BIG*number    ];
-    input_value[1] = current_settings.ranguvannja_df_source_plus[N_BIG*number + 1];
-    input_value[2] = current_settings.ranguvannja_df_source_plus[N_BIG*number + 2];
-    input_value[3] = current_settings.ranguvannja_df_source_plus[N_BIG*number + 3];
-    input_value[4] = current_settings.ranguvannja_df_source_plus[N_BIG*number + 4];
-    input_value[5] = current_settings.ranguvannja_df_source_plus[N_BIG*number + 5];
+    for (unsigned int i = 0; i < N_BIG; i++ ) input_value[i] = current_settings.ranguvannja_df_source_plus[N_BIG*number + i];
   }
   else if (source == SOURCE_DF_MINUS_RANG)
   {
-    input_value[0] = current_settings.ranguvannja_df_source_minus[N_BIG*number    ];
-    input_value[1] = current_settings.ranguvannja_df_source_minus[N_BIG*number + 1];
-    input_value[2] = current_settings.ranguvannja_df_source_minus[N_BIG*number + 2];
-    input_value[3] = current_settings.ranguvannja_df_source_minus[N_BIG*number + 3];
-    input_value[4] = current_settings.ranguvannja_df_source_minus[N_BIG*number + 4];
-    input_value[5] = current_settings.ranguvannja_df_source_minus[N_BIG*number + 5];
+    for (unsigned int i = 0; i < N_BIG; i++ ) input_value[i] = current_settings.ranguvannja_df_source_minus[N_BIG*number + i];
   }
   else if (source == SOURCE_DF_BLK_RANG)
   {
-    input_value[0] = current_settings.ranguvannja_df_source_blk[N_BIG*number    ];
-    input_value[1] = current_settings.ranguvannja_df_source_blk[N_BIG*number + 1];
-    input_value[2] = current_settings.ranguvannja_df_source_blk[N_BIG*number + 2];
-    input_value[3] = current_settings.ranguvannja_df_source_blk[N_BIG*number + 3];
-    input_value[4] = current_settings.ranguvannja_df_source_blk[N_BIG*number + 4];
-    input_value[5] = current_settings.ranguvannja_df_source_blk[N_BIG*number + 5];
+    for (unsigned int i = 0; i < N_BIG; i++ ) input_value[i] = current_settings.ranguvannja_df_source_blk[N_BIG*number + i];
   }
   else if (source == SOURCE_AR_RANG)
   {
-    input_value[0] = current_settings.ranguvannja_analog_registrator[0];
-    input_value[1] = current_settings.ranguvannja_analog_registrator[1];
-    input_value[2] = current_settings.ranguvannja_analog_registrator[2];
-    input_value[3] = current_settings.ranguvannja_analog_registrator[3];
-    input_value[4] = current_settings.ranguvannja_analog_registrator[4];
-    input_value[5] = current_settings.ranguvannja_analog_registrator[5];
+    for (unsigned int i = 0; i < N_BIG; i++ ) input_value[i] = current_settings.ranguvannja_analog_registrator[i];
   }
   else if (source == SOURCE_DR_RANG)
   {
-    input_value[0] = current_settings.ranguvannja_digital_registrator[0];
-    input_value[1] = current_settings.ranguvannja_digital_registrator[1];
-    input_value[2] = current_settings.ranguvannja_digital_registrator[2];
-    input_value[3] = current_settings.ranguvannja_digital_registrator[3];
-    input_value[4] = current_settings.ranguvannja_digital_registrator[4];
-    input_value[5] = current_settings.ranguvannja_digital_registrator[5];
+    for (unsigned int i = 0; i < N_BIG; i++ ) input_value[i] = current_settings.ranguvannja_digital_registrator[i];
   }
   else if (source == SOURCE_SET_DT_PLUS_RANG)
   {
-    input_value[0] = current_settings.ranguvannja_set_dt_source_plus[N_BIG*number    ];
-    input_value[1] = current_settings.ranguvannja_set_dt_source_plus[N_BIG*number + 1];
-    input_value[2] = current_settings.ranguvannja_set_dt_source_plus[N_BIG*number + 2];
-    input_value[3] = current_settings.ranguvannja_set_dt_source_plus[N_BIG*number + 3];
-    input_value[4] = current_settings.ranguvannja_set_dt_source_plus[N_BIG*number + 4];
-    input_value[5] = current_settings.ranguvannja_set_dt_source_plus[N_BIG*number + 5];
+    for (unsigned int i = 0; i < N_BIG; i++ ) input_value[i] = current_settings.ranguvannja_set_dt_source_plus[N_BIG*number + i];
   }
   else if (source == SOURCE_SET_DT_MINUS_RANG)
   {
-    input_value[0] = current_settings.ranguvannja_set_dt_source_minus[N_BIG*number    ];
-    input_value[1] = current_settings.ranguvannja_set_dt_source_minus[N_BIG*number + 1];
-    input_value[2] = current_settings.ranguvannja_set_dt_source_minus[N_BIG*number + 2];
-    input_value[3] = current_settings.ranguvannja_set_dt_source_minus[N_BIG*number + 3];
-    input_value[4] = current_settings.ranguvannja_set_dt_source_minus[N_BIG*number + 4];
-    input_value[5] = current_settings.ranguvannja_set_dt_source_minus[N_BIG*number + 5];
+    for (unsigned int i = 0; i < N_BIG; i++ ) input_value[i] = current_settings.ranguvannja_set_dt_source_minus[N_BIG*number + i];
   }
   else if (source == SOURCE_RESET_DT_PLUS_RANG)
   {
-    input_value[0] = current_settings.ranguvannja_reset_dt_source_plus[N_BIG*number    ];
-    input_value[1] = current_settings.ranguvannja_reset_dt_source_plus[N_BIG*number + 1];
-    input_value[2] = current_settings.ranguvannja_reset_dt_source_plus[N_BIG*number + 2];
-    input_value[3] = current_settings.ranguvannja_reset_dt_source_plus[N_BIG*number + 3];
-    input_value[4] = current_settings.ranguvannja_reset_dt_source_plus[N_BIG*number + 4];
-    input_value[5] = current_settings.ranguvannja_reset_dt_source_plus[N_BIG*number + 5];
+    for (unsigned int i = 0; i < N_BIG; i++ ) input_value[i] = current_settings.ranguvannja_reset_dt_source_plus[N_BIG*number + i];
   }
   else if (source == SOURCE_RESET_DT_MINUS_RANG)
   {
-    input_value[0] = current_settings.ranguvannja_reset_dt_source_minus[N_BIG*number    ];
-    input_value[1] = current_settings.ranguvannja_reset_dt_source_minus[N_BIG*number + 1];
-    input_value[2] = current_settings.ranguvannja_reset_dt_source_minus[N_BIG*number + 2];
-    input_value[3] = current_settings.ranguvannja_reset_dt_source_minus[N_BIG*number + 3];
-    input_value[4] = current_settings.ranguvannja_reset_dt_source_minus[N_BIG*number + 4];
-    input_value[5] = current_settings.ranguvannja_reset_dt_source_minus[N_BIG*number + 5];
+    for (unsigned int i = 0; i < N_BIG; i++ ) input_value[i] = current_settings.ranguvannja_reset_dt_source_minus[N_BIG*number + i];
   }
   
   //Шукаємо потрібний індекс функції у полі бітових настройок
@@ -2430,13 +2375,7 @@ unsigned int save_new_rang_oldr_from_gmm(unsigned int number, unsigned int numbe
   
   //Встановлюємо мітку на об'кт, який зараз редагується
   number_32bit_in_target = N_BIG;
-  
-  input_value[0] = *(point_to_source    );
-  input_value[1] = *(point_to_source + 1);
-  input_value[2] = *(point_to_source + 2);
-  input_value[3] = *(point_to_source + 3);
-  input_value[4] = *(point_to_source + 4);
-  input_value[5] = *(point_to_source + 5);
+  for (unsigned int i = 0; i < N_BIG; i++) input_value[i] = *(point_to_source + i);
 
   //Перевіряємо, чи таку функцію можна встановлювати
   if (data != 0)
@@ -2569,7 +2508,7 @@ unsigned int save_new_rang_oldr_from_gmm(unsigned int number, unsigned int numbe
         Треба перевірити, чи на іншому виході вони зранжовані чи ні
         Якщо зранжовані то дане ранжування є недопустимим і треба повідомити про помилку
         */
-        unsigned int maska_function[N_BIG] = {0, 0, 0, 0, 0, 0};
+        unsigned int maska_function[N_BIG] = {0, 0, 0, 0, 0, 0, 0, 0};
         if (data == BIT_MA_WORK_BO)
         {
            _SET_BIT(maska_function, RANG_OUTPUT_LED_DF_REG_WORK_BO);
@@ -2598,6 +2537,10 @@ unsigned int save_new_rang_oldr_from_gmm(unsigned int number, unsigned int numbe
                 (((*(target_label->ranguvannja_outputs + N_BIG*i + 4)) & maska_function[4]) != 0)
                 ||
                 (((*(target_label->ranguvannja_outputs + N_BIG*i + 5)) & maska_function[5]) != 0)
+                ||
+                (((*(target_label->ranguvannja_outputs + N_BIG*i + 6)) & maska_function[6]) != 0)
+                ||
+                (((*(target_label->ranguvannja_outputs + N_BIG*i + 7)) & maska_function[7]) != 0)
                ) 
               flag_fix_setting_function = 1;
           }
@@ -5366,12 +5309,7 @@ inline unsigned int Get_data(unsigned char *data, unsigned int address_data, uns
     //Копіюємо вхідну інформацію
     if ((address_data >= M_ADDRESS_FIRST_CURRENT_AF ) && (address_data <= M_ADDRESS_LAST_CURRENT_AF))
     {
-      input_array[0] = active_functions[0];
-      input_array[1] = active_functions[1];
-      input_array[2] = active_functions[2];
-      input_array[3] = active_functions[3];
-      input_array[4] = active_functions[4];
-      input_array[5] = active_functions[5];
+      for (unsigned int i = 0; i < N_BIG; i++) input_array[i] = active_functions[i];
       
       unsigned int password_set_tmp;
       if (type_interface == USB_RECUEST) password_set_tmp = password_set_USB;
@@ -5395,21 +5333,11 @@ inline unsigned int Get_data(unsigned char *data, unsigned int address_data, uns
 
       if (type_interface == USB_RECUEST)
       {
-        input_array[0] = trigger_functions_USB[0];
-        input_array[1] = trigger_functions_USB[1];
-        input_array[2] = trigger_functions_USB[2];
-        input_array[3] = trigger_functions_USB[3];
-        input_array[4] = trigger_functions_USB[4];
-        input_array[5] = trigger_functions_USB[5];
+        for (unsigned int i = 0; i < N_BIG; i++) input_array[i] = trigger_functions_USB[i];
       }
       else if (type_interface == RS485_RECUEST)
       {
-        input_array[0] = trigger_functions_RS485[0];
-        input_array[1] = trigger_functions_RS485[1];
-        input_array[2] = trigger_functions_RS485[2];
-        input_array[3] = trigger_functions_RS485[3];
-        input_array[4] = trigger_functions_RS485[4];
-        input_array[5] = trigger_functions_RS485[5];
+        for (unsigned int i = 0; i < N_BIG; i++) input_array[i] = trigger_functions_RS485[i];
       }
       else
       {
@@ -14892,19 +14820,14 @@ void modbus_rountines(unsigned int type_interface)
             
             //Перевірка на коректність ранжування функцій "Работа БО" або "Работа БВ" на дискретних входах
             unsigned int number_func_WORK_BV_into_outputs = 0, number_func_WORK_BO_into_outputs = 0;
-            unsigned int maska_func_WORK_BV[N_BIG] = {0, 0, 0, 0, 0, 0}, maska_func_WORK_BO[N_BIG] = {0, 0, 0, 0, 0, 0};
+            unsigned int maska_func_WORK_BV[N_BIG] = {0, 0, 0, 0, 0, 0, 0, 0}, maska_func_WORK_BO[N_BIG] = {0, 0, 0, 0, 0, 0, 0, 0};
 
             _SET_BIT(maska_func_WORK_BV, RANG_OUTPUT_LED_DF_REG_WORK_BV);
             _SET_BIT(maska_func_WORK_BO, RANG_OUTPUT_LED_DF_REG_WORK_BO);
             for (unsigned int k = 0; k < NUMBER_OUTPUTS; k++)
             {
               unsigned int target_sell[N_BIG];
-              target_sell[0] = edition_settings.ranguvannja_outputs[N_BIG*k    ];
-              target_sell[1] = edition_settings.ranguvannja_outputs[N_BIG*k + 1];
-              target_sell[2] = edition_settings.ranguvannja_outputs[N_BIG*k + 2];
-              target_sell[3] = edition_settings.ranguvannja_outputs[N_BIG*k + 3];
-              target_sell[4] = edition_settings.ranguvannja_outputs[N_BIG*k + 4];
-              target_sell[5] = edition_settings.ranguvannja_outputs[N_BIG*k + 5];
+              for (unsigned int l = 0; l < N_BIG; l++) target_sell[l] = edition_settings.ranguvannja_outputs[N_BIG*k + l];
 
               //Підраховуємо кількість функцій "Работа БВ" на всіх виходах
               if (
@@ -14919,6 +14842,10 @@ void modbus_rountines(unsigned int type_interface)
                   ((target_sell[4] & maska_func_WORK_BV[4]) != 0)
                   ||
                   ((target_sell[5] & maska_func_WORK_BV[5]) != 0)
+                  ||
+                  ((target_sell[6] & maska_func_WORK_BV[6]) != 0)
+                  ||
+                  ((target_sell[7] & maska_func_WORK_BV[7]) != 0)
                  ) 
                 number_func_WORK_BV_into_outputs++;
 
@@ -14935,6 +14862,10 @@ void modbus_rountines(unsigned int type_interface)
                   ((target_sell[4] & maska_func_WORK_BO[4]) != 0)
                   ||
                   ((target_sell[5] & maska_func_WORK_BO[5]) != 0)
+                  ||
+                  ((target_sell[6] & maska_func_WORK_BO[6]) != 0)
+                  ||
+                  ((target_sell[7] & maska_func_WORK_BO[7]) != 0)
                  ) 
                 number_func_WORK_BO_into_outputs++;
               

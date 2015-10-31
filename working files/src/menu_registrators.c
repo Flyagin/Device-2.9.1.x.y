@@ -1918,12 +1918,7 @@ void make_ekran_changing_signals_digital_registrator(void)
         array_old[5] = buffer_for_manu_read_record[FIRST_INDEX_FIRST_DATA_DR + 28*(1 + index_of_the_slice - 1) + 23] + (buffer_for_manu_read_record[FIRST_INDEX_FIRST_DATA_DR + 28*(1 + index_of_the_slice - 1) + 24]<<8) + (buffer_for_manu_read_record[FIRST_INDEX_FIRST_DATA_DR + 28*(1 + index_of_the_slice - 1) + 25]<<16) + (buffer_for_manu_read_record[FIRST_INDEX_FIRST_DATA_DR + 28*(1 + index_of_the_slice - 1) + 26]<<24);
         
         //Визначаємо, які сигнали змінилися
-        array_changing[0] = array_new[0] ^ array_old[0];
-        array_changing[1] = array_new[1] ^ array_old[1];
-        array_changing[2] = array_new[2] ^ array_old[2];
-        array_changing[3] = array_new[3] ^ array_old[3];
-        array_changing[4] = array_new[4] ^ array_old[4];
-        array_changing[5] = array_new[5] ^ array_old[5];
+        for (unsigned int j = 0; j < N_BIG; j++) array_changing[j] = array_new[j] ^ array_old[j];
 
         //Шукаємо функцію, яку треба зараз відобразити
         int index_of_function_in_the_slice = 0; //починаємо з першого зрізу

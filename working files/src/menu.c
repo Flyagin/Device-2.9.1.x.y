@@ -15976,39 +15976,19 @@ void main_manu_function(void)
                 
                 if ((current_ekran.current_level >= EKRAN_RANGUVANNJA_OUTPUT_1) && (current_ekran.current_level <= EKRAN_RANGUVANNJA_OUTPUT_10))
                 {
-                  temp_state[0] = current_settings.ranguvannja_outputs[N_BIG*(current_ekran.current_level - EKRAN_RANGUVANNJA_OUTPUT_1)  ];
-                  temp_state[1] = current_settings.ranguvannja_outputs[N_BIG*(current_ekran.current_level - EKRAN_RANGUVANNJA_OUTPUT_1)+1];
-                  temp_state[2] = current_settings.ranguvannja_outputs[N_BIG*(current_ekran.current_level - EKRAN_RANGUVANNJA_OUTPUT_1)+2];
-                  temp_state[3] = current_settings.ranguvannja_outputs[N_BIG*(current_ekran.current_level - EKRAN_RANGUVANNJA_OUTPUT_1)+3];
-                  temp_state[4] = current_settings.ranguvannja_outputs[N_BIG*(current_ekran.current_level - EKRAN_RANGUVANNJA_OUTPUT_1)+4];
-                  temp_state[5] = current_settings.ranguvannja_outputs[N_BIG*(current_ekran.current_level - EKRAN_RANGUVANNJA_OUTPUT_1)+5];
+                  for (unsigned int i = 0; i < N_BIG; i++ ) temp_state[i] = current_settings.ranguvannja_outputs[N_BIG*(current_ekran.current_level - EKRAN_RANGUVANNJA_OUTPUT_1)+i];
                 }
                 else if ((current_ekran.current_level >= EKRAN_RANGUVANNJA_LED_1) && (current_ekran.current_level <= EKRAN_RANGUVANNJA_LED_8))
                 {
-                  temp_state[0] = current_settings.ranguvannja_leds[N_BIG*(current_ekran.current_level - EKRAN_RANGUVANNJA_LED_1)  ];
-                  temp_state[1] = current_settings.ranguvannja_leds[N_BIG*(current_ekran.current_level - EKRAN_RANGUVANNJA_LED_1)+1];
-                  temp_state[2] = current_settings.ranguvannja_leds[N_BIG*(current_ekran.current_level - EKRAN_RANGUVANNJA_LED_1)+2];
-                  temp_state[3] = current_settings.ranguvannja_leds[N_BIG*(current_ekran.current_level - EKRAN_RANGUVANNJA_LED_1)+3];
-                  temp_state[4] = current_settings.ranguvannja_leds[N_BIG*(current_ekran.current_level - EKRAN_RANGUVANNJA_LED_1)+4];
-                  temp_state[5] = current_settings.ranguvannja_leds[N_BIG*(current_ekran.current_level - EKRAN_RANGUVANNJA_LED_1)+5];
+                  for (unsigned int i = 0; i < N_BIG; i++ ) temp_state[i] = current_settings.ranguvannja_leds[N_BIG*(current_ekran.current_level - EKRAN_RANGUVANNJA_LED_1)+i];
                 }
                 else if (current_ekran.current_level == EKRAN_RANGUVANNJA_ANALOG_REGISTRATOR)
                 {
-                  temp_state[0] = current_settings.ranguvannja_analog_registrator[0];
-                  temp_state[1] = current_settings.ranguvannja_analog_registrator[1];
-                  temp_state[2] = current_settings.ranguvannja_analog_registrator[2];
-                  temp_state[3] = current_settings.ranguvannja_analog_registrator[3];
-                  temp_state[4] = current_settings.ranguvannja_analog_registrator[4];
-                  temp_state[5] = current_settings.ranguvannja_analog_registrator[5];
+                  for (unsigned int i = 0; i < N_BIG; i++ ) temp_state[i] = current_settings.ranguvannja_analog_registrator[i];
                 }
                 else if (current_ekran.current_level == EKRAN_RANGUVANNJA_DIGITAL_REGISTRATOR)
                 {
-                  temp_state[0] = current_settings.ranguvannja_digital_registrator[0];
-                  temp_state[1] = current_settings.ranguvannja_digital_registrator[1];
-                  temp_state[2] = current_settings.ranguvannja_digital_registrator[2];
-                  temp_state[3] = current_settings.ranguvannja_digital_registrator[3];
-                  temp_state[4] = current_settings.ranguvannja_digital_registrator[4];
-                  temp_state[5] = current_settings.ranguvannja_digital_registrator[5];
+                  for (unsigned int i = 0; i < N_BIG; i++ ) temp_state[i] = current_settings.ranguvannja_digital_registrator[i];
                 }
                 else if ((current_ekran.current_level >= EKRAN_RANGUVANNJA_DF1_PLUS) && (current_ekran.current_level <= EKRAN_RANGUVANNJA_DF8_BLK ))
                 {
@@ -16018,30 +15998,15 @@ void main_manu_function(void)
     
                   if(type_source == 0)
                   {
-                    temp_state[0] = current_settings.ranguvannja_df_source_plus[N_BIG*index_of_df  ];
-                    temp_state[1] = current_settings.ranguvannja_df_source_plus[N_BIG*index_of_df+1];
-                    temp_state[2] = current_settings.ranguvannja_df_source_plus[N_BIG*index_of_df+2];
-                    temp_state[3] = current_settings.ranguvannja_df_source_plus[N_BIG*index_of_df+3];
-                    temp_state[4] = current_settings.ranguvannja_df_source_plus[N_BIG*index_of_df+4];
-                    temp_state[5] = current_settings.ranguvannja_df_source_plus[N_BIG*index_of_df+5];
+                    for (unsigned int i = 0; i < N_BIG; i++ ) temp_state[i] = current_settings.ranguvannja_df_source_plus[N_BIG*index_of_df+i];
                   }
                   else if(type_source == 1)
                   {
-                    temp_state[0] = current_settings.ranguvannja_df_source_minus[N_BIG*index_of_df  ];
-                    temp_state[1] = current_settings.ranguvannja_df_source_minus[N_BIG*index_of_df+1];
-                    temp_state[2] = current_settings.ranguvannja_df_source_minus[N_BIG*index_of_df+2];
-                    temp_state[3] = current_settings.ranguvannja_df_source_minus[N_BIG*index_of_df+3];
-                    temp_state[4] = current_settings.ranguvannja_df_source_minus[N_BIG*index_of_df+4];
-                    temp_state[5] = current_settings.ranguvannja_df_source_minus[N_BIG*index_of_df+5];
+                    for (unsigned int i = 0; i < N_BIG; i++ ) temp_state[i] = current_settings.ranguvannja_df_source_minus[N_BIG*index_of_df+i];
                   }
                   else
                   {
-                    temp_state[0] = current_settings.ranguvannja_df_source_blk[N_BIG*index_of_df  ];
-                    temp_state[1] = current_settings.ranguvannja_df_source_blk[N_BIG*index_of_df+1];
-                    temp_state[2] = current_settings.ranguvannja_df_source_blk[N_BIG*index_of_df+2];
-                    temp_state[3] = current_settings.ranguvannja_df_source_blk[N_BIG*index_of_df+3];
-                    temp_state[4] = current_settings.ranguvannja_df_source_blk[N_BIG*index_of_df+4];
-                    temp_state[5] = current_settings.ranguvannja_df_source_blk[N_BIG*index_of_df+5];
+                    for (unsigned int i = 0; i < N_BIG; i++ ) temp_state[i] = current_settings.ranguvannja_df_source_blk[N_BIG*index_of_df+i];
                   }
                 }
                 else if ((current_ekran.current_level >= EKRAN_RANGUVANNJA_SET_DT1_PLUS) && (current_ekran.current_level <= EKRAN_RANGUVANNJA_RESET_DT4_MINUS))
@@ -16055,42 +16020,22 @@ void main_manu_function(void)
                   {
                     if(type_source == INDEX_ML_LIST_TYPE_SOURCE_PLUS_DT)
                     {
-                      temp_state[0] = current_settings.ranguvannja_set_dt_source_plus[N_BIG*index_of_dt  ];
-                      temp_state[1] = current_settings.ranguvannja_set_dt_source_plus[N_BIG*index_of_dt+1];
-                      temp_state[2] = current_settings.ranguvannja_set_dt_source_plus[N_BIG*index_of_dt+2];
-                      temp_state[3] = current_settings.ranguvannja_set_dt_source_plus[N_BIG*index_of_dt+3];
-                      temp_state[4] = current_settings.ranguvannja_set_dt_source_plus[N_BIG*index_of_dt+4];
-                      temp_state[5] = current_settings.ranguvannja_set_dt_source_plus[N_BIG*index_of_dt+5];
+                      for (unsigned int i = 0; i < N_BIG; i++ ) temp_state[i] = current_settings.ranguvannja_set_dt_source_plus[N_BIG*index_of_dt+i];
                     }
                     else
                     {
-                      temp_state[0] = current_settings.ranguvannja_set_dt_source_minus[N_BIG*index_of_dt  ];
-                      temp_state[1] = current_settings.ranguvannja_set_dt_source_minus[N_BIG*index_of_dt+1];
-                      temp_state[2] = current_settings.ranguvannja_set_dt_source_minus[N_BIG*index_of_dt+2];
-                      temp_state[3] = current_settings.ranguvannja_set_dt_source_minus[N_BIG*index_of_dt+3];
-                      temp_state[4] = current_settings.ranguvannja_set_dt_source_minus[N_BIG*index_of_dt+4];
-                      temp_state[5] = current_settings.ranguvannja_set_dt_source_minus[N_BIG*index_of_dt+5];
+                      for (unsigned int i = 0; i < N_BIG; i++ ) temp_state[i] = current_settings.ranguvannja_set_dt_source_minus[N_BIG*index_of_dt+i];
                     }
                   }
                   else
                   {
                     if(type_source == INDEX_ML_LIST_TYPE_SOURCE_PLUS_DT)
                     {
-                      temp_state[0] = current_settings.ranguvannja_reset_dt_source_plus[N_BIG*index_of_dt  ];
-                      temp_state[1] = current_settings.ranguvannja_reset_dt_source_plus[N_BIG*index_of_dt+1];
-                      temp_state[2] = current_settings.ranguvannja_reset_dt_source_plus[N_BIG*index_of_dt+2];
-                      temp_state[3] = current_settings.ranguvannja_reset_dt_source_plus[N_BIG*index_of_dt+3];
-                      temp_state[4] = current_settings.ranguvannja_reset_dt_source_plus[N_BIG*index_of_dt+4];
-                      temp_state[5] = current_settings.ranguvannja_reset_dt_source_plus[N_BIG*index_of_dt+5];
+                      for (unsigned int i = 0; i < N_BIG; i++ ) temp_state[i] = current_settings.ranguvannja_reset_dt_source_plus[N_BIG*index_of_dt+i];
                     }
                     else
                     {
-                      temp_state[0] = current_settings.ranguvannja_reset_dt_source_minus[N_BIG*index_of_dt  ];
-                      temp_state[1] = current_settings.ranguvannja_reset_dt_source_minus[N_BIG*index_of_dt+1];
-                      temp_state[2] = current_settings.ranguvannja_reset_dt_source_minus[N_BIG*index_of_dt+2];
-                      temp_state[3] = current_settings.ranguvannja_reset_dt_source_minus[N_BIG*index_of_dt+3];
-                      temp_state[4] = current_settings.ranguvannja_reset_dt_source_minus[N_BIG*index_of_dt+4];
-                      temp_state[5] = current_settings.ranguvannja_reset_dt_source_minus[N_BIG*index_of_dt+5];
+                      for (unsigned int i = 0; i < N_BIG; i++ ) temp_state[i] = current_settings.ranguvannja_reset_dt_source_minus[N_BIG*index_of_dt+i];
                     }
                   }                    
                 }
@@ -16101,7 +16046,9 @@ void main_manu_function(void)
                     (temp_state[2] == 0) &&
                     (temp_state[3] == 0) &&
                     (temp_state[4] == 0) &&
-                    (temp_state[5] == 0) 
+                    (temp_state[5] == 0) &&
+                    (temp_state[6] == 0) &&
+                    (temp_state[7] == 0) 
                    ) current_ekran.index_position = 0;
                 else
                 {
@@ -16277,7 +16224,7 @@ void main_manu_function(void)
                     for (unsigned int i = 0; i < 2; i++)
                     {
                       unsigned int index_deleted_function;
-                      unsigned int maska_func[N_BIG] = {0, 0, 0, 0, 0, 0};
+                      unsigned int maska_func[N_BIG] = {0, 0, 0, 0, 0, 0, 0, 0};
                       unsigned int need_filtration = 0;
                       //Визначаємо індекс функції, яку потенційно можливо треба буде фільтрувати із сприску
                       //Першою перевіряємо функцію з меншим номером, щоб за одну операцію циклу  можна було переміститися на функцію, яку можна ранжувати
@@ -16305,7 +16252,9 @@ void main_manu_function(void)
                               ((current_settings.ranguvannja_outputs[N_BIG*index + 2] & maska_func[2]) != 0) ||
                               ((current_settings.ranguvannja_outputs[N_BIG*index + 3] & maska_func[3]) != 0) ||
                               ((current_settings.ranguvannja_outputs[N_BIG*index + 4] & maska_func[4]) != 0) ||
-                              ((current_settings.ranguvannja_outputs[N_BIG*index + 5] & maska_func[5]) != 0)
+                              ((current_settings.ranguvannja_outputs[N_BIG*index + 5] & maska_func[5]) != 0) ||
+                              ((current_settings.ranguvannja_outputs[N_BIG*index + 6] & maska_func[6]) != 0) ||
+                              ((current_settings.ranguvannja_outputs[N_BIG*index + 7] & maska_func[7]) != 0)
                              )
                           {
                             need_filtration = 1;
@@ -16375,51 +16324,33 @@ void main_manu_function(void)
                 }
                 else if((current_ekran.current_level >= EKRAN_RANGUVANNJA_OUTPUT_1) && (current_ekran.current_level <= EKRAN_RANGUVANNJA_OUTPUT_10))
                 {
-                  edition_settings.ranguvannja_outputs[N_BIG*(current_ekran.current_level - EKRAN_RANGUVANNJA_OUTPUT_1)] =
-                    current_settings.ranguvannja_outputs[N_BIG*(current_ekran.current_level - EKRAN_RANGUVANNJA_OUTPUT_1)];
-                  edition_settings.ranguvannja_outputs[N_BIG*(current_ekran.current_level - EKRAN_RANGUVANNJA_OUTPUT_1)+1] =
-                    current_settings.ranguvannja_outputs[N_BIG*(current_ekran.current_level - EKRAN_RANGUVANNJA_OUTPUT_1)+1];
-                  edition_settings.ranguvannja_outputs[N_BIG*(current_ekran.current_level - EKRAN_RANGUVANNJA_OUTPUT_1)+2] =
-                    current_settings.ranguvannja_outputs[N_BIG*(current_ekran.current_level - EKRAN_RANGUVANNJA_OUTPUT_1)+2];
-                  edition_settings.ranguvannja_outputs[N_BIG*(current_ekran.current_level - EKRAN_RANGUVANNJA_OUTPUT_1)+3] =
-                    current_settings.ranguvannja_outputs[N_BIG*(current_ekran.current_level - EKRAN_RANGUVANNJA_OUTPUT_1)+3];
-                  edition_settings.ranguvannja_outputs[N_BIG*(current_ekran.current_level - EKRAN_RANGUVANNJA_OUTPUT_1)+4] =
-                    current_settings.ranguvannja_outputs[N_BIG*(current_ekran.current_level - EKRAN_RANGUVANNJA_OUTPUT_1)+4];
-                  edition_settings.ranguvannja_outputs[N_BIG*(current_ekran.current_level - EKRAN_RANGUVANNJA_OUTPUT_1)+5] =
-                    current_settings.ranguvannja_outputs[N_BIG*(current_ekran.current_level - EKRAN_RANGUVANNJA_OUTPUT_1)+5];
+                  for (unsigned int i = 0; i < N_BIG; i++)
+                  {
+                    edition_settings.ranguvannja_outputs[N_BIG*(current_ekran.current_level - EKRAN_RANGUVANNJA_OUTPUT_1) + i] =
+                      current_settings.ranguvannja_outputs[N_BIG*(current_ekran.current_level - EKRAN_RANGUVANNJA_OUTPUT_1) + i];
+                  }
                 }
                 else if((current_ekran.current_level >= EKRAN_RANGUVANNJA_LED_1) && (current_ekran.current_level <= EKRAN_RANGUVANNJA_LED_8))
                 {
-                  edition_settings.ranguvannja_leds[N_BIG*(current_ekran.current_level - EKRAN_RANGUVANNJA_LED_1)] =
-                    current_settings.ranguvannja_leds[N_BIG*(current_ekran.current_level - EKRAN_RANGUVANNJA_LED_1)];
-                  edition_settings.ranguvannja_leds[N_BIG*(current_ekran.current_level - EKRAN_RANGUVANNJA_LED_1)+1] =
-                    current_settings.ranguvannja_leds[N_BIG*(current_ekran.current_level - EKRAN_RANGUVANNJA_LED_1)+1];
-                  edition_settings.ranguvannja_leds[N_BIG*(current_ekran.current_level - EKRAN_RANGUVANNJA_LED_1)+2] =
-                    current_settings.ranguvannja_leds[N_BIG*(current_ekran.current_level - EKRAN_RANGUVANNJA_LED_1)+2];
-                  edition_settings.ranguvannja_leds[N_BIG*(current_ekran.current_level - EKRAN_RANGUVANNJA_LED_1)+3] =
-                    current_settings.ranguvannja_leds[N_BIG*(current_ekran.current_level - EKRAN_RANGUVANNJA_LED_1)+3];
-                  edition_settings.ranguvannja_leds[N_BIG*(current_ekran.current_level - EKRAN_RANGUVANNJA_LED_1)+4] =
-                    current_settings.ranguvannja_leds[N_BIG*(current_ekran.current_level - EKRAN_RANGUVANNJA_LED_1)+4];
-                  edition_settings.ranguvannja_leds[N_BIG*(current_ekran.current_level - EKRAN_RANGUVANNJA_LED_1)+5] =
-                    current_settings.ranguvannja_leds[N_BIG*(current_ekran.current_level - EKRAN_RANGUVANNJA_LED_1)+5];
+                  for (unsigned int i = 0; i < N_BIG; i++)
+                  {
+                    edition_settings.ranguvannja_leds[N_BIG*(current_ekran.current_level - EKRAN_RANGUVANNJA_LED_1) + i] =
+                      current_settings.ranguvannja_leds[N_BIG*(current_ekran.current_level - EKRAN_RANGUVANNJA_LED_1) + i];
+                  }
                 }
                 else if(current_ekran.current_level == EKRAN_RANGUVANNJA_ANALOG_REGISTRATOR)
                 {
-                  edition_settings.ranguvannja_analog_registrator[0] = current_settings.ranguvannja_analog_registrator[0];
-                  edition_settings.ranguvannja_analog_registrator[1] = current_settings.ranguvannja_analog_registrator[1];
-                  edition_settings.ranguvannja_analog_registrator[2] = current_settings.ranguvannja_analog_registrator[2];
-                  edition_settings.ranguvannja_analog_registrator[3] = current_settings.ranguvannja_analog_registrator[3];
-                  edition_settings.ranguvannja_analog_registrator[4] = current_settings.ranguvannja_analog_registrator[4];
-                  edition_settings.ranguvannja_analog_registrator[5] = current_settings.ranguvannja_analog_registrator[5];
+                  for (unsigned int i = 0; i < N_BIG; i++)
+                  {
+                    edition_settings.ranguvannja_analog_registrator[i] = current_settings.ranguvannja_analog_registrator[i];
+                  }
                 }
                 else if(current_ekran.current_level == EKRAN_RANGUVANNJA_DIGITAL_REGISTRATOR)
                 {
-                  edition_settings.ranguvannja_digital_registrator[0] = current_settings.ranguvannja_digital_registrator[0];
-                  edition_settings.ranguvannja_digital_registrator[1] = current_settings.ranguvannja_digital_registrator[1];
-                  edition_settings.ranguvannja_digital_registrator[2] = current_settings.ranguvannja_digital_registrator[2];
-                  edition_settings.ranguvannja_digital_registrator[3] = current_settings.ranguvannja_digital_registrator[3];
-                  edition_settings.ranguvannja_digital_registrator[4] = current_settings.ranguvannja_digital_registrator[4];
-                  edition_settings.ranguvannja_digital_registrator[5] = current_settings.ranguvannja_digital_registrator[5];
+                  for (unsigned int i = 0; i < N_BIG; i++)
+                  {
+                    edition_settings.ranguvannja_digital_registrator[i] = current_settings.ranguvannja_digital_registrator[i];
+                  }
                 }
                 else if ((current_ekran.current_level >= EKRAN_RANGUVANNJA_DF1_PLUS) && (current_ekran.current_level <= EKRAN_RANGUVANNJA_DF8_BLK ))
                 {
@@ -16429,30 +16360,24 @@ void main_manu_function(void)
     
                   if(type_source == 0)
                   {
-                    edition_settings.ranguvannja_df_source_plus[N_BIG*index_of_df  ] = current_settings.ranguvannja_df_source_plus[N_BIG*index_of_df  ];
-                    edition_settings.ranguvannja_df_source_plus[N_BIG*index_of_df+1] = current_settings.ranguvannja_df_source_plus[N_BIG*index_of_df+1];
-                    edition_settings.ranguvannja_df_source_plus[N_BIG*index_of_df+2] = current_settings.ranguvannja_df_source_plus[N_BIG*index_of_df+2];
-                    edition_settings.ranguvannja_df_source_plus[N_BIG*index_of_df+3] = current_settings.ranguvannja_df_source_plus[N_BIG*index_of_df+3];
-                    edition_settings.ranguvannja_df_source_plus[N_BIG*index_of_df+4] = current_settings.ranguvannja_df_source_plus[N_BIG*index_of_df+4];
-                    edition_settings.ranguvannja_df_source_plus[N_BIG*index_of_df+5] = current_settings.ranguvannja_df_source_plus[N_BIG*index_of_df+5];
+                    for (unsigned int i = 0; i < N_BIG; i++)
+                    {
+                      edition_settings.ranguvannja_df_source_plus[N_BIG*index_of_df + i] = current_settings.ranguvannja_df_source_plus[N_BIG*index_of_df + i];
+                    }
                   }
                   else if(type_source == 1)
                   {
-                    edition_settings.ranguvannja_df_source_minus[N_BIG*index_of_df  ] = current_settings.ranguvannja_df_source_minus[N_BIG*index_of_df  ];
-                    edition_settings.ranguvannja_df_source_minus[N_BIG*index_of_df+1] = current_settings.ranguvannja_df_source_minus[N_BIG*index_of_df+1];
-                    edition_settings.ranguvannja_df_source_minus[N_BIG*index_of_df+2] = current_settings.ranguvannja_df_source_minus[N_BIG*index_of_df+2];
-                    edition_settings.ranguvannja_df_source_minus[N_BIG*index_of_df+3] = current_settings.ranguvannja_df_source_minus[N_BIG*index_of_df+3];
-                    edition_settings.ranguvannja_df_source_minus[N_BIG*index_of_df+4] = current_settings.ranguvannja_df_source_minus[N_BIG*index_of_df+4];
-                    edition_settings.ranguvannja_df_source_minus[N_BIG*index_of_df+5] = current_settings.ranguvannja_df_source_minus[N_BIG*index_of_df+5];
+                    for (unsigned int i = 0; i < N_BIG; i++)
+                    {
+                      edition_settings.ranguvannja_df_source_minus[N_BIG*index_of_df + i] = current_settings.ranguvannja_df_source_minus[N_BIG*index_of_df + i];
+                    }
                   }
                   else
                   {
-                    edition_settings.ranguvannja_df_source_blk[N_BIG*index_of_df  ] = current_settings.ranguvannja_df_source_blk[N_BIG*index_of_df  ];
-                    edition_settings.ranguvannja_df_source_blk[N_BIG*index_of_df+1] = current_settings.ranguvannja_df_source_blk[N_BIG*index_of_df+1];
-                    edition_settings.ranguvannja_df_source_blk[N_BIG*index_of_df+2] = current_settings.ranguvannja_df_source_blk[N_BIG*index_of_df+2];
-                    edition_settings.ranguvannja_df_source_blk[N_BIG*index_of_df+3] = current_settings.ranguvannja_df_source_blk[N_BIG*index_of_df+3];
-                    edition_settings.ranguvannja_df_source_blk[N_BIG*index_of_df+4] = current_settings.ranguvannja_df_source_blk[N_BIG*index_of_df+4];
-                    edition_settings.ranguvannja_df_source_blk[N_BIG*index_of_df+5] = current_settings.ranguvannja_df_source_blk[N_BIG*index_of_df+5];
+                    for (unsigned int i = 0; i < N_BIG; i++)
+                    {
+                      edition_settings.ranguvannja_df_source_blk[N_BIG*index_of_df + i] = current_settings.ranguvannja_df_source_blk[N_BIG*index_of_df + i];
+                    }
                   }
                 }
                 else if ((current_ekran.current_level >= EKRAN_RANGUVANNJA_SET_DT1_PLUS) && (current_ekran.current_level <= EKRAN_RANGUVANNJA_RESET_DT4_MINUS))
@@ -16466,42 +16391,34 @@ void main_manu_function(void)
                   {
                     if(type_source == INDEX_ML_LIST_TYPE_SOURCE_PLUS_DT)
                     {
-                      edition_settings.ranguvannja_set_dt_source_plus[N_BIG*index_of_dt  ] = current_settings.ranguvannja_set_dt_source_plus[N_BIG*index_of_dt  ];
-                      edition_settings.ranguvannja_set_dt_source_plus[N_BIG*index_of_dt+1] = current_settings.ranguvannja_set_dt_source_plus[N_BIG*index_of_dt+1];
-                      edition_settings.ranguvannja_set_dt_source_plus[N_BIG*index_of_dt+2] = current_settings.ranguvannja_set_dt_source_plus[N_BIG*index_of_dt+2];
-                      edition_settings.ranguvannja_set_dt_source_plus[N_BIG*index_of_dt+3] = current_settings.ranguvannja_set_dt_source_plus[N_BIG*index_of_dt+3];
-                      edition_settings.ranguvannja_set_dt_source_plus[N_BIG*index_of_dt+4] = current_settings.ranguvannja_set_dt_source_plus[N_BIG*index_of_dt+4];
-                      edition_settings.ranguvannja_set_dt_source_plus[N_BIG*index_of_dt+5] = current_settings.ranguvannja_set_dt_source_plus[N_BIG*index_of_dt+5];
+                      for (unsigned int i = 0; i < N_BIG; i++)
+                      {
+                        edition_settings.ranguvannja_set_dt_source_plus[N_BIG*index_of_dt + i] = current_settings.ranguvannja_set_dt_source_plus[N_BIG*index_of_dt + i];
+                      }
                     }
                     else
                     {
-                      edition_settings.ranguvannja_set_dt_source_minus[N_BIG*index_of_dt  ] = current_settings.ranguvannja_set_dt_source_minus[N_BIG*index_of_dt  ];
-                      edition_settings.ranguvannja_set_dt_source_minus[N_BIG*index_of_dt+1] = current_settings.ranguvannja_set_dt_source_minus[N_BIG*index_of_dt+1];
-                      edition_settings.ranguvannja_set_dt_source_minus[N_BIG*index_of_dt+2] = current_settings.ranguvannja_set_dt_source_minus[N_BIG*index_of_dt+2];
-                      edition_settings.ranguvannja_set_dt_source_minus[N_BIG*index_of_dt+3] = current_settings.ranguvannja_set_dt_source_minus[N_BIG*index_of_dt+3];
-                      edition_settings.ranguvannja_set_dt_source_minus[N_BIG*index_of_dt+4] = current_settings.ranguvannja_set_dt_source_minus[N_BIG*index_of_dt+4];
-                      edition_settings.ranguvannja_set_dt_source_minus[N_BIG*index_of_dt+5] = current_settings.ranguvannja_set_dt_source_minus[N_BIG*index_of_dt+5];
+                      for (unsigned int i = 0; i < N_BIG; i++)
+                      {
+                        edition_settings.ranguvannja_set_dt_source_minus[N_BIG*index_of_dt + i] = current_settings.ranguvannja_set_dt_source_minus[N_BIG*index_of_dt + i];
+                      }
                     }
                   }
                   else
                   {
                     if(type_source == INDEX_ML_LIST_TYPE_SOURCE_PLUS_DT)
                     {
-                      edition_settings.ranguvannja_reset_dt_source_plus[N_BIG*index_of_dt  ] = current_settings.ranguvannja_reset_dt_source_plus[N_BIG*index_of_dt  ];
-                      edition_settings.ranguvannja_reset_dt_source_plus[N_BIG*index_of_dt+1] = current_settings.ranguvannja_reset_dt_source_plus[N_BIG*index_of_dt+1];
-                      edition_settings.ranguvannja_reset_dt_source_plus[N_BIG*index_of_dt+2] = current_settings.ranguvannja_reset_dt_source_plus[N_BIG*index_of_dt+2];
-                      edition_settings.ranguvannja_reset_dt_source_plus[N_BIG*index_of_dt+3] = current_settings.ranguvannja_reset_dt_source_plus[N_BIG*index_of_dt+3];
-                      edition_settings.ranguvannja_reset_dt_source_plus[N_BIG*index_of_dt+4] = current_settings.ranguvannja_reset_dt_source_plus[N_BIG*index_of_dt+4];
-                      edition_settings.ranguvannja_reset_dt_source_plus[N_BIG*index_of_dt+5] = current_settings.ranguvannja_reset_dt_source_plus[N_BIG*index_of_dt+5];
+                      for (unsigned int i = 0; i < N_BIG; i++)
+                      {
+                        edition_settings.ranguvannja_reset_dt_source_plus[N_BIG*index_of_dt + i] = current_settings.ranguvannja_reset_dt_source_plus[N_BIG*index_of_dt + i];
+                      }
                     }
                     else
                     {
-                      edition_settings.ranguvannja_reset_dt_source_minus[N_BIG*index_of_dt  ] = current_settings.ranguvannja_reset_dt_source_minus[N_BIG*index_of_dt ];
-                      edition_settings.ranguvannja_reset_dt_source_minus[N_BIG*index_of_dt+1] = current_settings.ranguvannja_reset_dt_source_minus[N_BIG*index_of_dt+1];
-                      edition_settings.ranguvannja_reset_dt_source_minus[N_BIG*index_of_dt+2] = current_settings.ranguvannja_reset_dt_source_minus[N_BIG*index_of_dt+2];
-                      edition_settings.ranguvannja_reset_dt_source_minus[N_BIG*index_of_dt+3] = current_settings.ranguvannja_reset_dt_source_minus[N_BIG*index_of_dt+3];
-                      edition_settings.ranguvannja_reset_dt_source_minus[N_BIG*index_of_dt+4] = current_settings.ranguvannja_reset_dt_source_minus[N_BIG*index_of_dt+4];
-                      edition_settings.ranguvannja_reset_dt_source_minus[N_BIG*index_of_dt+5] = current_settings.ranguvannja_reset_dt_source_minus[N_BIG*index_of_dt+5];
+                      for (unsigned int i = 0; i < N_BIG; i++)
+                      {
+                        edition_settings.ranguvannja_reset_dt_source_minus[N_BIG*index_of_dt + i] = current_settings.ranguvannja_reset_dt_source_minus[N_BIG*index_of_dt + i];
+                      }
                     }
                   }
                 }
@@ -16550,7 +16467,9 @@ void main_manu_function(void)
                       (edition_settings.ranguvannja_outputs[N_BIG*(current_ekran.current_level - EKRAN_RANGUVANNJA_OUTPUT_1) + 2] == current_settings.ranguvannja_outputs[N_BIG*(current_ekran.current_level - EKRAN_RANGUVANNJA_OUTPUT_1) + 2]) &&
                       (edition_settings.ranguvannja_outputs[N_BIG*(current_ekran.current_level - EKRAN_RANGUVANNJA_OUTPUT_1) + 3] == current_settings.ranguvannja_outputs[N_BIG*(current_ekran.current_level - EKRAN_RANGUVANNJA_OUTPUT_1) + 3]) &&
                       (edition_settings.ranguvannja_outputs[N_BIG*(current_ekran.current_level - EKRAN_RANGUVANNJA_OUTPUT_1) + 4] == current_settings.ranguvannja_outputs[N_BIG*(current_ekran.current_level - EKRAN_RANGUVANNJA_OUTPUT_1) + 4]) &&
-                      (edition_settings.ranguvannja_outputs[N_BIG*(current_ekran.current_level - EKRAN_RANGUVANNJA_OUTPUT_1) + 5] == current_settings.ranguvannja_outputs[N_BIG*(current_ekran.current_level - EKRAN_RANGUVANNJA_OUTPUT_1) + 5])
+                      (edition_settings.ranguvannja_outputs[N_BIG*(current_ekran.current_level - EKRAN_RANGUVANNJA_OUTPUT_1) + 5] == current_settings.ranguvannja_outputs[N_BIG*(current_ekran.current_level - EKRAN_RANGUVANNJA_OUTPUT_1) + 5]) &&
+                      (edition_settings.ranguvannja_outputs[N_BIG*(current_ekran.current_level - EKRAN_RANGUVANNJA_OUTPUT_1) + 6] == current_settings.ranguvannja_outputs[N_BIG*(current_ekran.current_level - EKRAN_RANGUVANNJA_OUTPUT_1) + 6]) &&
+                      (edition_settings.ranguvannja_outputs[N_BIG*(current_ekran.current_level - EKRAN_RANGUVANNJA_OUTPUT_1) + 7] == current_settings.ranguvannja_outputs[N_BIG*(current_ekran.current_level - EKRAN_RANGUVANNJA_OUTPUT_1) + 7])
                      )
                     current_ekran.edition = 0;
                   else current_ekran.edition = 2;
@@ -16563,7 +16482,9 @@ void main_manu_function(void)
                       (edition_settings.ranguvannja_leds[N_BIG*(current_ekran.current_level - EKRAN_RANGUVANNJA_LED_1) + 2] == current_settings.ranguvannja_leds[N_BIG*(current_ekran.current_level - EKRAN_RANGUVANNJA_LED_1) + 2]) &&
                       (edition_settings.ranguvannja_leds[N_BIG*(current_ekran.current_level - EKRAN_RANGUVANNJA_LED_1) + 3] == current_settings.ranguvannja_leds[N_BIG*(current_ekran.current_level - EKRAN_RANGUVANNJA_LED_1) + 3]) &&
                       (edition_settings.ranguvannja_leds[N_BIG*(current_ekran.current_level - EKRAN_RANGUVANNJA_LED_1) + 4] == current_settings.ranguvannja_leds[N_BIG*(current_ekran.current_level - EKRAN_RANGUVANNJA_LED_1) + 4]) &&
-                      (edition_settings.ranguvannja_leds[N_BIG*(current_ekran.current_level - EKRAN_RANGUVANNJA_LED_1) + 5] == current_settings.ranguvannja_leds[N_BIG*(current_ekran.current_level - EKRAN_RANGUVANNJA_LED_1) + 5])
+                      (edition_settings.ranguvannja_leds[N_BIG*(current_ekran.current_level - EKRAN_RANGUVANNJA_LED_1) + 5] == current_settings.ranguvannja_leds[N_BIG*(current_ekran.current_level - EKRAN_RANGUVANNJA_LED_1) + 5]) &&
+                      (edition_settings.ranguvannja_leds[N_BIG*(current_ekran.current_level - EKRAN_RANGUVANNJA_LED_1) + 6] == current_settings.ranguvannja_leds[N_BIG*(current_ekran.current_level - EKRAN_RANGUVANNJA_LED_1) + 6]) &&
+                      (edition_settings.ranguvannja_leds[N_BIG*(current_ekran.current_level - EKRAN_RANGUVANNJA_LED_1) + 7] == current_settings.ranguvannja_leds[N_BIG*(current_ekran.current_level - EKRAN_RANGUVANNJA_LED_1) + 7])
                      )
                     current_ekran.edition = 0;
                   else current_ekran.edition = 2;
@@ -16576,7 +16497,9 @@ void main_manu_function(void)
                       (edition_settings.ranguvannja_analog_registrator[2] == current_settings.ranguvannja_analog_registrator[2]) &&
                       (edition_settings.ranguvannja_analog_registrator[3] == current_settings.ranguvannja_analog_registrator[3]) &&
                       (edition_settings.ranguvannja_analog_registrator[4] == current_settings.ranguvannja_analog_registrator[4]) &&
-                      (edition_settings.ranguvannja_analog_registrator[5] == current_settings.ranguvannja_analog_registrator[5])
+                      (edition_settings.ranguvannja_analog_registrator[5] == current_settings.ranguvannja_analog_registrator[5]) &&
+                      (edition_settings.ranguvannja_analog_registrator[6] == current_settings.ranguvannja_analog_registrator[6]) &&
+                      (edition_settings.ranguvannja_analog_registrator[7] == current_settings.ranguvannja_analog_registrator[7])
                      )
                     current_ekran.edition = 0;
                   else current_ekran.edition = 2;
@@ -16589,7 +16512,9 @@ void main_manu_function(void)
                       (edition_settings.ranguvannja_digital_registrator[2] == current_settings.ranguvannja_digital_registrator[2]) &&
                       (edition_settings.ranguvannja_digital_registrator[3] == current_settings.ranguvannja_digital_registrator[3]) &&
                       (edition_settings.ranguvannja_digital_registrator[4] == current_settings.ranguvannja_digital_registrator[4]) &&
-                      (edition_settings.ranguvannja_digital_registrator[5] == current_settings.ranguvannja_digital_registrator[5])
+                      (edition_settings.ranguvannja_digital_registrator[5] == current_settings.ranguvannja_digital_registrator[5]) &&
+                      (edition_settings.ranguvannja_digital_registrator[6] == current_settings.ranguvannja_digital_registrator[6]) &&
+                      (edition_settings.ranguvannja_digital_registrator[7] == current_settings.ranguvannja_digital_registrator[7])
                      )
                     current_ekran.edition = 0;
                   else current_ekran.edition = 2;
@@ -16608,7 +16533,9 @@ void main_manu_function(void)
                         (edition_settings.ranguvannja_df_source_plus[N_BIG*index_of_df+2] == current_settings.ranguvannja_df_source_plus[N_BIG*index_of_df+2]) &&
                         (edition_settings.ranguvannja_df_source_plus[N_BIG*index_of_df+3] == current_settings.ranguvannja_df_source_plus[N_BIG*index_of_df+3]) &&
                         (edition_settings.ranguvannja_df_source_plus[N_BIG*index_of_df+4] == current_settings.ranguvannja_df_source_plus[N_BIG*index_of_df+4]) &&
-                        (edition_settings.ranguvannja_df_source_plus[N_BIG*index_of_df+5] == current_settings.ranguvannja_df_source_plus[N_BIG*index_of_df+5])
+                        (edition_settings.ranguvannja_df_source_plus[N_BIG*index_of_df+5] == current_settings.ranguvannja_df_source_plus[N_BIG*index_of_df+5]) &&
+                        (edition_settings.ranguvannja_df_source_plus[N_BIG*index_of_df+6] == current_settings.ranguvannja_df_source_plus[N_BIG*index_of_df+6]) &&
+                        (edition_settings.ranguvannja_df_source_plus[N_BIG*index_of_df+7] == current_settings.ranguvannja_df_source_plus[N_BIG*index_of_df+7])
                        )
                       current_ekran.edition = 0;
                     else current_ekran.edition = 2;
@@ -16621,7 +16548,9 @@ void main_manu_function(void)
                         (edition_settings.ranguvannja_df_source_minus[N_BIG*index_of_df+2] == current_settings.ranguvannja_df_source_minus[N_BIG*index_of_df+2]) &&
                         (edition_settings.ranguvannja_df_source_minus[N_BIG*index_of_df+3] == current_settings.ranguvannja_df_source_minus[N_BIG*index_of_df+3]) &&
                         (edition_settings.ranguvannja_df_source_minus[N_BIG*index_of_df+4] == current_settings.ranguvannja_df_source_minus[N_BIG*index_of_df+4]) &&
-                        (edition_settings.ranguvannja_df_source_minus[N_BIG*index_of_df+5] == current_settings.ranguvannja_df_source_minus[N_BIG*index_of_df+5])
+                        (edition_settings.ranguvannja_df_source_minus[N_BIG*index_of_df+5] == current_settings.ranguvannja_df_source_minus[N_BIG*index_of_df+5]) &&
+                        (edition_settings.ranguvannja_df_source_minus[N_BIG*index_of_df+6] == current_settings.ranguvannja_df_source_minus[N_BIG*index_of_df+6]) &&
+                        (edition_settings.ranguvannja_df_source_minus[N_BIG*index_of_df+7] == current_settings.ranguvannja_df_source_minus[N_BIG*index_of_df+7])
                        )
                       current_ekran.edition = 0;
                     else current_ekran.edition = 2;
@@ -16634,7 +16563,9 @@ void main_manu_function(void)
                         (edition_settings.ranguvannja_df_source_blk[N_BIG*index_of_df+2] == current_settings.ranguvannja_df_source_blk[N_BIG*index_of_df+2]) &&
                         (edition_settings.ranguvannja_df_source_blk[N_BIG*index_of_df+3] == current_settings.ranguvannja_df_source_blk[N_BIG*index_of_df+3]) &&
                         (edition_settings.ranguvannja_df_source_blk[N_BIG*index_of_df+4] == current_settings.ranguvannja_df_source_blk[N_BIG*index_of_df+4]) &&
-                        (edition_settings.ranguvannja_df_source_blk[N_BIG*index_of_df+5] == current_settings.ranguvannja_df_source_blk[N_BIG*index_of_df+5])
+                        (edition_settings.ranguvannja_df_source_blk[N_BIG*index_of_df+5] == current_settings.ranguvannja_df_source_blk[N_BIG*index_of_df+5]) &&
+                        (edition_settings.ranguvannja_df_source_blk[N_BIG*index_of_df+6] == current_settings.ranguvannja_df_source_blk[N_BIG*index_of_df+6]) &&
+                        (edition_settings.ranguvannja_df_source_blk[N_BIG*index_of_df+7] == current_settings.ranguvannja_df_source_blk[N_BIG*index_of_df+7])
                        )
                       current_ekran.edition = 0;
                     else current_ekran.edition = 2;
@@ -16657,7 +16588,9 @@ void main_manu_function(void)
                           (edition_settings.ranguvannja_set_dt_source_plus[N_BIG*index_of_dt+2] == current_settings.ranguvannja_set_dt_source_plus[N_BIG*index_of_dt+2]) &&
                           (edition_settings.ranguvannja_set_dt_source_plus[N_BIG*index_of_dt+3] == current_settings.ranguvannja_set_dt_source_plus[N_BIG*index_of_dt+3]) &&
                           (edition_settings.ranguvannja_set_dt_source_plus[N_BIG*index_of_dt+4] == current_settings.ranguvannja_set_dt_source_plus[N_BIG*index_of_dt+4]) &&
-                          (edition_settings.ranguvannja_set_dt_source_plus[N_BIG*index_of_dt+5] == current_settings.ranguvannja_set_dt_source_plus[N_BIG*index_of_dt+5])
+                          (edition_settings.ranguvannja_set_dt_source_plus[N_BIG*index_of_dt+5] == current_settings.ranguvannja_set_dt_source_plus[N_BIG*index_of_dt+5]) &&
+                          (edition_settings.ranguvannja_set_dt_source_plus[N_BIG*index_of_dt+6] == current_settings.ranguvannja_set_dt_source_plus[N_BIG*index_of_dt+6]) &&
+                          (edition_settings.ranguvannja_set_dt_source_plus[N_BIG*index_of_dt+7] == current_settings.ranguvannja_set_dt_source_plus[N_BIG*index_of_dt+7])
                         )
                         current_ekran.edition = 0;
                       else current_ekran.edition = 2;
@@ -16670,7 +16603,9 @@ void main_manu_function(void)
                           (edition_settings.ranguvannja_set_dt_source_minus[N_BIG*index_of_dt+2] == current_settings.ranguvannja_set_dt_source_minus[N_BIG*index_of_dt+2]) &&
                           (edition_settings.ranguvannja_set_dt_source_minus[N_BIG*index_of_dt+3] == current_settings.ranguvannja_set_dt_source_minus[N_BIG*index_of_dt+3]) &&
                           (edition_settings.ranguvannja_set_dt_source_minus[N_BIG*index_of_dt+4] == current_settings.ranguvannja_set_dt_source_minus[N_BIG*index_of_dt+4]) &&
-                          (edition_settings.ranguvannja_set_dt_source_minus[N_BIG*index_of_dt+5] == current_settings.ranguvannja_set_dt_source_minus[N_BIG*index_of_dt+5])
+                          (edition_settings.ranguvannja_set_dt_source_minus[N_BIG*index_of_dt+5] == current_settings.ranguvannja_set_dt_source_minus[N_BIG*index_of_dt+5]) &&
+                          (edition_settings.ranguvannja_set_dt_source_minus[N_BIG*index_of_dt+6] == current_settings.ranguvannja_set_dt_source_minus[N_BIG*index_of_dt+6]) &&
+                          (edition_settings.ranguvannja_set_dt_source_minus[N_BIG*index_of_dt+7] == current_settings.ranguvannja_set_dt_source_minus[N_BIG*index_of_dt+7])
                         )
                         current_ekran.edition = 0;
                       else current_ekran.edition = 2;
@@ -16686,7 +16621,9 @@ void main_manu_function(void)
                           (edition_settings.ranguvannja_reset_dt_source_plus[N_BIG*index_of_dt+2] == current_settings.ranguvannja_reset_dt_source_plus[N_BIG*index_of_dt+2]) &&
                           (edition_settings.ranguvannja_reset_dt_source_plus[N_BIG*index_of_dt+3] == current_settings.ranguvannja_reset_dt_source_plus[N_BIG*index_of_dt+3]) &&
                           (edition_settings.ranguvannja_reset_dt_source_plus[N_BIG*index_of_dt+4] == current_settings.ranguvannja_reset_dt_source_plus[N_BIG*index_of_dt+4]) &&
-                          (edition_settings.ranguvannja_reset_dt_source_plus[N_BIG*index_of_dt+5] == current_settings.ranguvannja_reset_dt_source_plus[N_BIG*index_of_dt+5])
+                          (edition_settings.ranguvannja_reset_dt_source_plus[N_BIG*index_of_dt+5] == current_settings.ranguvannja_reset_dt_source_plus[N_BIG*index_of_dt+5]) &&
+                          (edition_settings.ranguvannja_reset_dt_source_plus[N_BIG*index_of_dt+6] == current_settings.ranguvannja_reset_dt_source_plus[N_BIG*index_of_dt+6]) &&
+                          (edition_settings.ranguvannja_reset_dt_source_plus[N_BIG*index_of_dt+7] == current_settings.ranguvannja_reset_dt_source_plus[N_BIG*index_of_dt+7])
                         )
                         current_ekran.edition = 0;
                       else current_ekran.edition = 2;
@@ -16699,7 +16636,9 @@ void main_manu_function(void)
                           (edition_settings.ranguvannja_reset_dt_source_minus[N_BIG*index_of_dt+2] == current_settings.ranguvannja_reset_dt_source_minus[N_BIG*index_of_dt+2]) &&
                           (edition_settings.ranguvannja_reset_dt_source_minus[N_BIG*index_of_dt+3] == current_settings.ranguvannja_reset_dt_source_minus[N_BIG*index_of_dt+3]) &&
                           (edition_settings.ranguvannja_reset_dt_source_minus[N_BIG*index_of_dt+4] == current_settings.ranguvannja_reset_dt_source_minus[N_BIG*index_of_dt+4]) &&
-                          (edition_settings.ranguvannja_reset_dt_source_minus[N_BIG*index_of_dt+5] == current_settings.ranguvannja_reset_dt_source_minus[N_BIG*index_of_dt+5])
+                          (edition_settings.ranguvannja_reset_dt_source_minus[N_BIG*index_of_dt+5] == current_settings.ranguvannja_reset_dt_source_minus[N_BIG*index_of_dt+5]) &&
+                          (edition_settings.ranguvannja_reset_dt_source_minus[N_BIG*index_of_dt+6] == current_settings.ranguvannja_reset_dt_source_minus[N_BIG*index_of_dt+6]) &&
+                          (edition_settings.ranguvannja_reset_dt_source_minus[N_BIG*index_of_dt+7] == current_settings.ranguvannja_reset_dt_source_minus[N_BIG*index_of_dt+7])
                         )
                         current_ekran.edition = 0;
                       else current_ekran.edition = 2;
@@ -16768,23 +16707,11 @@ void main_manu_function(void)
                     //Помічаємо, що поле структури зараз буде змінене
                     changed_settings = CHANGED_ETAP_EXECUTION;
 
-                    current_settings.ranguvannja_outputs[N_BIG*(current_ekran.current_level - EKRAN_RANGUVANNJA_OUTPUT_1)] = 
-                    edition_settings.ranguvannja_outputs[N_BIG*(current_ekran.current_level - EKRAN_RANGUVANNJA_OUTPUT_1)];
-
-                    current_settings.ranguvannja_outputs[N_BIG*(current_ekran.current_level - EKRAN_RANGUVANNJA_OUTPUT_1)+1] = 
-                    edition_settings.ranguvannja_outputs[N_BIG*(current_ekran.current_level - EKRAN_RANGUVANNJA_OUTPUT_1)+1];
-
-                    current_settings.ranguvannja_outputs[N_BIG*(current_ekran.current_level - EKRAN_RANGUVANNJA_OUTPUT_1)+2] = 
-                    edition_settings.ranguvannja_outputs[N_BIG*(current_ekran.current_level - EKRAN_RANGUVANNJA_OUTPUT_1)+2];
-
-                    current_settings.ranguvannja_outputs[N_BIG*(current_ekran.current_level - EKRAN_RANGUVANNJA_OUTPUT_1)+3] = 
-                    edition_settings.ranguvannja_outputs[N_BIG*(current_ekran.current_level - EKRAN_RANGUVANNJA_OUTPUT_1)+3];
-
-                    current_settings.ranguvannja_outputs[N_BIG*(current_ekran.current_level - EKRAN_RANGUVANNJA_OUTPUT_1)+4] = 
-                    edition_settings.ranguvannja_outputs[N_BIG*(current_ekran.current_level - EKRAN_RANGUVANNJA_OUTPUT_1)+4];
-
-                    current_settings.ranguvannja_outputs[N_BIG*(current_ekran.current_level - EKRAN_RANGUVANNJA_OUTPUT_1)+5] = 
-                    edition_settings.ranguvannja_outputs[N_BIG*(current_ekran.current_level - EKRAN_RANGUVANNJA_OUTPUT_1)+5];
+                    for (unsigned int i = 0; i < N_BIG; i++)
+                    {
+                      current_settings.ranguvannja_outputs[N_BIG*(current_ekran.current_level - EKRAN_RANGUVANNJA_OUTPUT_1) + i] = 
+                      edition_settings.ranguvannja_outputs[N_BIG*(current_ekran.current_level - EKRAN_RANGUVANNJA_OUTPUT_1) + i];
+                    }
 
                     //Формуємо запис у таблиці настройок про зміну конфігурації і ініціюємо запис у EEPROM нових настройок
                     fix_change_settings(1, 1);
@@ -16803,23 +16730,12 @@ void main_manu_function(void)
                     //Помічаємо, що поле структури зараз буде змінене
                     changed_settings = CHANGED_ETAP_EXECUTION;
 
-                    current_settings.ranguvannja_leds[N_BIG*(current_ekran.current_level - EKRAN_RANGUVANNJA_LED_1)] = 
-                    edition_settings.ranguvannja_leds[N_BIG*(current_ekran.current_level - EKRAN_RANGUVANNJA_LED_1)];
+                    for (unsigned int i = 0; i < N_BIG; i++)
+                    {
+                      current_settings.ranguvannja_leds[N_BIG*(current_ekran.current_level - EKRAN_RANGUVANNJA_LED_1) + i] = 
+                      edition_settings.ranguvannja_leds[N_BIG*(current_ekran.current_level - EKRAN_RANGUVANNJA_LED_1) + i];
+                    }
 
-                    current_settings.ranguvannja_leds[N_BIG*(current_ekran.current_level - EKRAN_RANGUVANNJA_LED_1)+1] = 
-                    edition_settings.ranguvannja_leds[N_BIG*(current_ekran.current_level - EKRAN_RANGUVANNJA_LED_1)+1];
-
-                    current_settings.ranguvannja_leds[N_BIG*(current_ekran.current_level - EKRAN_RANGUVANNJA_LED_1)+2] = 
-                    edition_settings.ranguvannja_leds[N_BIG*(current_ekran.current_level - EKRAN_RANGUVANNJA_LED_1)+2];
-
-                    current_settings.ranguvannja_leds[N_BIG*(current_ekran.current_level - EKRAN_RANGUVANNJA_LED_1)+3] = 
-                    edition_settings.ranguvannja_leds[N_BIG*(current_ekran.current_level - EKRAN_RANGUVANNJA_LED_1)+3];
-
-                    current_settings.ranguvannja_leds[N_BIG*(current_ekran.current_level - EKRAN_RANGUVANNJA_LED_1)+4] = 
-                    edition_settings.ranguvannja_leds[N_BIG*(current_ekran.current_level - EKRAN_RANGUVANNJA_LED_1)+4];
-
-                    current_settings.ranguvannja_leds[N_BIG*(current_ekran.current_level - EKRAN_RANGUVANNJA_LED_1)+5] = 
-                    edition_settings.ranguvannja_leds[N_BIG*(current_ekran.current_level - EKRAN_RANGUVANNJA_LED_1)+5];                    
                     //Формуємо запис у таблиці настройок про зміну конфігурації і ініціюємо запис у EEPROM нових настройок
                     fix_change_settings(1, 1);
                     //Виходимо з режиму редагування
@@ -16837,12 +16753,10 @@ void main_manu_function(void)
                     //Помічаємо, що поле структури зараз буде змінене
                     changed_settings = CHANGED_ETAP_EXECUTION;
 
-                    current_settings.ranguvannja_analog_registrator[0] = edition_settings.ranguvannja_analog_registrator[0];
-                    current_settings.ranguvannja_analog_registrator[1] = edition_settings.ranguvannja_analog_registrator[1];
-                    current_settings.ranguvannja_analog_registrator[2] = edition_settings.ranguvannja_analog_registrator[2];
-                    current_settings.ranguvannja_analog_registrator[3] = edition_settings.ranguvannja_analog_registrator[3];
-                    current_settings.ranguvannja_analog_registrator[4] = edition_settings.ranguvannja_analog_registrator[4];
-                    current_settings.ranguvannja_analog_registrator[5] = edition_settings.ranguvannja_analog_registrator[5];
+                    for (unsigned int i = 0; i < N_BIG; i++)
+                    {
+                      current_settings.ranguvannja_analog_registrator[i] = edition_settings.ranguvannja_analog_registrator[i];
+                    }
 
                     //Формуємо запис у таблиці настройок про зміну конфігурації і ініціюємо запис у EEPROM нових настройок
                     fix_change_settings(1, 1);
@@ -16861,12 +16775,10 @@ void main_manu_function(void)
                     //Помічаємо, що поле структури зараз буде змінене
                     changed_settings = CHANGED_ETAP_EXECUTION;
 
-                    current_settings.ranguvannja_digital_registrator[0] = edition_settings.ranguvannja_digital_registrator[0];
-                    current_settings.ranguvannja_digital_registrator[1] = edition_settings.ranguvannja_digital_registrator[1];
-                    current_settings.ranguvannja_digital_registrator[2] = edition_settings.ranguvannja_digital_registrator[2];
-                    current_settings.ranguvannja_digital_registrator[3] = edition_settings.ranguvannja_digital_registrator[3];
-                    current_settings.ranguvannja_digital_registrator[4] = edition_settings.ranguvannja_digital_registrator[4];
-                    current_settings.ranguvannja_digital_registrator[5] = edition_settings.ranguvannja_digital_registrator[5];
+                    for (unsigned int i = 0; i < N_BIG; i++)
+                    {
+                      current_settings.ranguvannja_digital_registrator[i] = edition_settings.ranguvannja_digital_registrator[i];
+                    }
 
                     //Формуємо запис у таблиці настройок про зміну конфігурації і ініціюємо запис у EEPROM нових настройок
                     fix_change_settings(1, 1);
@@ -16899,30 +16811,24 @@ void main_manu_function(void)
 
                     if(type_source == 0)
                     {
-                      current_settings.ranguvannja_df_source_plus[N_BIG*index_of_df  ] = edition_settings.ranguvannja_df_source_plus[N_BIG*index_of_df  ];
-                      current_settings.ranguvannja_df_source_plus[N_BIG*index_of_df+1] = edition_settings.ranguvannja_df_source_plus[N_BIG*index_of_df+1];
-                      current_settings.ranguvannja_df_source_plus[N_BIG*index_of_df+2] = edition_settings.ranguvannja_df_source_plus[N_BIG*index_of_df+2];
-                      current_settings.ranguvannja_df_source_plus[N_BIG*index_of_df+3] = edition_settings.ranguvannja_df_source_plus[N_BIG*index_of_df+3];
-                      current_settings.ranguvannja_df_source_plus[N_BIG*index_of_df+4] = edition_settings.ranguvannja_df_source_plus[N_BIG*index_of_df+4];
-                      current_settings.ranguvannja_df_source_plus[N_BIG*index_of_df+5] = edition_settings.ranguvannja_df_source_plus[N_BIG*index_of_df+5];
+                      for (unsigned int i = 0; i < N_BIG; i++)
+                      {
+                        current_settings.ranguvannja_df_source_plus[N_BIG*index_of_df + i] = edition_settings.ranguvannja_df_source_plus[N_BIG*index_of_df + i];
+                      }
                     }
                     else if(type_source == 1)
                     {
-                      current_settings.ranguvannja_df_source_minus[N_BIG*index_of_df  ] = edition_settings.ranguvannja_df_source_minus[N_BIG*index_of_df  ];
-                      current_settings.ranguvannja_df_source_minus[N_BIG*index_of_df+1] = edition_settings.ranguvannja_df_source_minus[N_BIG*index_of_df+1];
-                      current_settings.ranguvannja_df_source_minus[N_BIG*index_of_df+2] = edition_settings.ranguvannja_df_source_minus[N_BIG*index_of_df+2];
-                      current_settings.ranguvannja_df_source_minus[N_BIG*index_of_df+3] = edition_settings.ranguvannja_df_source_minus[N_BIG*index_of_df+3];
-                      current_settings.ranguvannja_df_source_minus[N_BIG*index_of_df+4] = edition_settings.ranguvannja_df_source_minus[N_BIG*index_of_df+4];
-                      current_settings.ranguvannja_df_source_minus[N_BIG*index_of_df+5] = edition_settings.ranguvannja_df_source_minus[N_BIG*index_of_df+5];
+                      for (unsigned int i = 0; i < N_BIG; i++)
+                      {
+                        current_settings.ranguvannja_df_source_minus[N_BIG*index_of_df + i] = edition_settings.ranguvannja_df_source_minus[N_BIG*index_of_df + i];
+                      }
                     }
                     else
                     {
-                      current_settings.ranguvannja_df_source_blk[N_BIG*index_of_df  ] = edition_settings.ranguvannja_df_source_blk[N_BIG*index_of_df  ];
-                      current_settings.ranguvannja_df_source_blk[N_BIG*index_of_df+1] = edition_settings.ranguvannja_df_source_blk[N_BIG*index_of_df+1];
-                      current_settings.ranguvannja_df_source_blk[N_BIG*index_of_df+2] = edition_settings.ranguvannja_df_source_blk[N_BIG*index_of_df+2];
-                      current_settings.ranguvannja_df_source_blk[N_BIG*index_of_df+3] = edition_settings.ranguvannja_df_source_blk[N_BIG*index_of_df+3];
-                      current_settings.ranguvannja_df_source_blk[N_BIG*index_of_df+4] = edition_settings.ranguvannja_df_source_blk[N_BIG*index_of_df+4];
-                      current_settings.ranguvannja_df_source_blk[N_BIG*index_of_df+5] = edition_settings.ranguvannja_df_source_blk[N_BIG*index_of_df+5];
+                      for (unsigned int i = 0; i < N_BIG; i++)
+                      {
+                        current_settings.ranguvannja_df_source_blk[N_BIG*index_of_df + i] = edition_settings.ranguvannja_df_source_blk[N_BIG*index_of_df + i];
+                      }
                     }
 
                     //Формуємо запис у таблиці настройок про зміну конфігурації і ініціюємо запис у EEPROM нових настройок
@@ -16967,42 +16873,34 @@ void main_manu_function(void)
                     {
                       if(type_source == INDEX_ML_LIST_TYPE_SOURCE_PLUS_DT)
                       {
-                        current_settings.ranguvannja_set_dt_source_plus[N_BIG*index_of_dt  ] = edition_settings.ranguvannja_set_dt_source_plus[N_BIG*index_of_dt  ];
-                        current_settings.ranguvannja_set_dt_source_plus[N_BIG*index_of_dt+1] = edition_settings.ranguvannja_set_dt_source_plus[N_BIG*index_of_dt+1];
-                        current_settings.ranguvannja_set_dt_source_plus[N_BIG*index_of_dt+2] = edition_settings.ranguvannja_set_dt_source_plus[N_BIG*index_of_dt+2];
-                        current_settings.ranguvannja_set_dt_source_plus[N_BIG*index_of_dt+3] = edition_settings.ranguvannja_set_dt_source_plus[N_BIG*index_of_dt+3];
-                        current_settings.ranguvannja_set_dt_source_plus[N_BIG*index_of_dt+4] = edition_settings.ranguvannja_set_dt_source_plus[N_BIG*index_of_dt+4];
-                        current_settings.ranguvannja_set_dt_source_plus[N_BIG*index_of_dt+5] = edition_settings.ranguvannja_set_dt_source_plus[N_BIG*index_of_dt+5];
+                        for (unsigned int i = 0; i < N_BIG; i++)
+                        {
+                          current_settings.ranguvannja_set_dt_source_plus[N_BIG*index_of_dt + i] = edition_settings.ranguvannja_set_dt_source_plus[N_BIG*index_of_dt + i];
+                        }
                       }
                       else
                       {
-                        current_settings.ranguvannja_set_dt_source_minus[N_BIG*index_of_dt  ] = edition_settings.ranguvannja_set_dt_source_minus[N_BIG*index_of_dt  ];
-                        current_settings.ranguvannja_set_dt_source_minus[N_BIG*index_of_dt+1] = edition_settings.ranguvannja_set_dt_source_minus[N_BIG*index_of_dt+1];
-                        current_settings.ranguvannja_set_dt_source_minus[N_BIG*index_of_dt+2] = edition_settings.ranguvannja_set_dt_source_minus[N_BIG*index_of_dt+2];
-                        current_settings.ranguvannja_set_dt_source_minus[N_BIG*index_of_dt+3] = edition_settings.ranguvannja_set_dt_source_minus[N_BIG*index_of_dt+3];
-                        current_settings.ranguvannja_set_dt_source_minus[N_BIG*index_of_dt+4] = edition_settings.ranguvannja_set_dt_source_minus[N_BIG*index_of_dt+4];
-                        current_settings.ranguvannja_set_dt_source_minus[N_BIG*index_of_dt+5] = edition_settings.ranguvannja_set_dt_source_minus[N_BIG*index_of_dt+5];
+                        for (unsigned int i = 0; i < N_BIG; i++)
+                        {
+                          current_settings.ranguvannja_set_dt_source_minus[N_BIG*index_of_dt + i] = edition_settings.ranguvannja_set_dt_source_minus[N_BIG*index_of_dt + i];
+                        }
                       }
                     }
                     else
                     {
                       if(type_source == INDEX_ML_LIST_TYPE_SOURCE_PLUS_DT)
                       {
-                        current_settings.ranguvannja_reset_dt_source_plus[N_BIG*index_of_dt  ] = edition_settings.ranguvannja_reset_dt_source_plus[N_BIG*index_of_dt  ];
-                        current_settings.ranguvannja_reset_dt_source_plus[N_BIG*index_of_dt+1] = edition_settings.ranguvannja_reset_dt_source_plus[N_BIG*index_of_dt+1];
-                        current_settings.ranguvannja_reset_dt_source_plus[N_BIG*index_of_dt+2] = edition_settings.ranguvannja_reset_dt_source_plus[N_BIG*index_of_dt+2];
-                        current_settings.ranguvannja_reset_dt_source_plus[N_BIG*index_of_dt+3] = edition_settings.ranguvannja_reset_dt_source_plus[N_BIG*index_of_dt+3];
-                        current_settings.ranguvannja_reset_dt_source_plus[N_BIG*index_of_dt+4] = edition_settings.ranguvannja_reset_dt_source_plus[N_BIG*index_of_dt+4];
-                        current_settings.ranguvannja_reset_dt_source_plus[N_BIG*index_of_dt+5] = edition_settings.ranguvannja_reset_dt_source_plus[N_BIG*index_of_dt+5];
+                        for (unsigned int i = 0; i < N_BIG; i++)
+                        {
+                          current_settings.ranguvannja_reset_dt_source_plus[N_BIG*index_of_dt + i] = edition_settings.ranguvannja_reset_dt_source_plus[N_BIG*index_of_dt + i];
+                        }
                       }
                       else
                       {
-                        current_settings.ranguvannja_reset_dt_source_minus[N_BIG*index_of_dt  ] = edition_settings.ranguvannja_reset_dt_source_minus[N_BIG*index_of_dt  ];
-                        current_settings.ranguvannja_reset_dt_source_minus[N_BIG*index_of_dt+1] = edition_settings.ranguvannja_reset_dt_source_minus[N_BIG*index_of_dt+1];
-                        current_settings.ranguvannja_reset_dt_source_minus[N_BIG*index_of_dt+2] = edition_settings.ranguvannja_reset_dt_source_minus[N_BIG*index_of_dt+2];
-                        current_settings.ranguvannja_reset_dt_source_minus[N_BIG*index_of_dt+3] = edition_settings.ranguvannja_reset_dt_source_minus[N_BIG*index_of_dt+3];
-                        current_settings.ranguvannja_reset_dt_source_minus[N_BIG*index_of_dt+4] = edition_settings.ranguvannja_reset_dt_source_minus[N_BIG*index_of_dt+4];
-                        current_settings.ranguvannja_reset_dt_source_minus[N_BIG*index_of_dt+5] = edition_settings.ranguvannja_reset_dt_source_minus[N_BIG*index_of_dt+5];
+                        for (unsigned int i = 0; i < N_BIG; i++)
+                        {
+                          current_settings.ranguvannja_reset_dt_source_minus[N_BIG*index_of_dt + i] = edition_settings.ranguvannja_reset_dt_source_minus[N_BIG*index_of_dt + i];
+                        }
                       }
                     }
 
@@ -17216,39 +17114,31 @@ void main_manu_function(void)
                   
                   if ((current_ekran.current_level >= EKRAN_RANGUVANNJA_OUTPUT_1) && (current_ekran.current_level <= EKRAN_RANGUVANNJA_OUTPUT_10))
                   {
-                    temp_state[0] = current_settings.ranguvannja_outputs[N_BIG*(current_ekran.current_level - EKRAN_RANGUVANNJA_OUTPUT_1)  ];
-                    temp_state[1] = current_settings.ranguvannja_outputs[N_BIG*(current_ekran.current_level - EKRAN_RANGUVANNJA_OUTPUT_1)+1];
-                    temp_state[2] = current_settings.ranguvannja_outputs[N_BIG*(current_ekran.current_level - EKRAN_RANGUVANNJA_OUTPUT_1)+2];
-                    temp_state[3] = current_settings.ranguvannja_outputs[N_BIG*(current_ekran.current_level - EKRAN_RANGUVANNJA_OUTPUT_1)+3];
-                    temp_state[4] = current_settings.ranguvannja_outputs[N_BIG*(current_ekran.current_level - EKRAN_RANGUVANNJA_OUTPUT_1)+4];
-                    temp_state[5] = current_settings.ranguvannja_outputs[N_BIG*(current_ekran.current_level - EKRAN_RANGUVANNJA_OUTPUT_1)+5];
+                    for (unsigned int i = 0; i < N_BIG; i++)
+                    {
+                      temp_state[i] = current_settings.ranguvannja_outputs[N_BIG*(current_ekran.current_level - EKRAN_RANGUVANNJA_OUTPUT_1) + i];
+                    }
                   }
                   else if ((current_ekran.current_level >= EKRAN_RANGUVANNJA_LED_1) && (current_ekran.current_level <= EKRAN_RANGUVANNJA_LED_8))
                   {
-                    temp_state[0] = current_settings.ranguvannja_leds[N_BIG*(current_ekran.current_level - EKRAN_RANGUVANNJA_LED_1)  ];
-                    temp_state[1] = current_settings.ranguvannja_leds[N_BIG*(current_ekran.current_level - EKRAN_RANGUVANNJA_LED_1)+1];
-                    temp_state[2] = current_settings.ranguvannja_leds[N_BIG*(current_ekran.current_level - EKRAN_RANGUVANNJA_LED_1)+2];
-                    temp_state[3] = current_settings.ranguvannja_leds[N_BIG*(current_ekran.current_level - EKRAN_RANGUVANNJA_LED_1)+3];
-                    temp_state[4] = current_settings.ranguvannja_leds[N_BIG*(current_ekran.current_level - EKRAN_RANGUVANNJA_LED_1)+4];
-                    temp_state[5] = current_settings.ranguvannja_leds[N_BIG*(current_ekran.current_level - EKRAN_RANGUVANNJA_LED_1)+5];
+                    for (unsigned int i = 0; i < N_BIG; i++)
+                    {
+                      temp_state[i] = current_settings.ranguvannja_leds[N_BIG*(current_ekran.current_level - EKRAN_RANGUVANNJA_LED_1) + i];
+                    }
                   }
                   else if (current_ekran.current_level == EKRAN_RANGUVANNJA_ANALOG_REGISTRATOR)
                   {
-                    temp_state[0] = current_settings.ranguvannja_analog_registrator[0];
-                    temp_state[1] = current_settings.ranguvannja_analog_registrator[1];
-                    temp_state[2] = current_settings.ranguvannja_analog_registrator[2];
-                    temp_state[3] = current_settings.ranguvannja_analog_registrator[3];
-                    temp_state[4] = current_settings.ranguvannja_analog_registrator[4];
-                    temp_state[5] = current_settings.ranguvannja_analog_registrator[5];
+                    for (unsigned int i = 0; i < N_BIG; i++)
+                    {
+                      temp_state[i] = current_settings.ranguvannja_analog_registrator[i];
+                    }
                   }
                   else if (current_ekran.current_level == EKRAN_RANGUVANNJA_DIGITAL_REGISTRATOR)
                   {
-                    temp_state[0] = current_settings.ranguvannja_digital_registrator[0];
-                    temp_state[1] = current_settings.ranguvannja_digital_registrator[1];
-                    temp_state[2] = current_settings.ranguvannja_digital_registrator[2];
-                    temp_state[3] = current_settings.ranguvannja_digital_registrator[3];
-                    temp_state[4] = current_settings.ranguvannja_digital_registrator[4];
-                    temp_state[5] = current_settings.ranguvannja_digital_registrator[5];
+                    for (unsigned int i = 0; i < N_BIG; i++)
+                    {
+                      temp_state[i] = current_settings.ranguvannja_digital_registrator[i];
+                    }
                   }
                   else if ((current_ekran.current_level >= EKRAN_RANGUVANNJA_DF1_PLUS) && (current_ekran.current_level <= EKRAN_RANGUVANNJA_DF8_BLK ))
                   {
@@ -17258,30 +17148,24 @@ void main_manu_function(void)
     
                     if(type_source == 0)
                     {
-                      temp_state[0] = current_settings.ranguvannja_df_source_plus[N_BIG*index_of_df  ];
-                      temp_state[1] = current_settings.ranguvannja_df_source_plus[N_BIG*index_of_df+1];
-                      temp_state[2] = current_settings.ranguvannja_df_source_plus[N_BIG*index_of_df+2];
-                      temp_state[3] = current_settings.ranguvannja_df_source_plus[N_BIG*index_of_df+3];
-                      temp_state[4] = current_settings.ranguvannja_df_source_plus[N_BIG*index_of_df+4];
-                      temp_state[5] = current_settings.ranguvannja_df_source_plus[N_BIG*index_of_df+5];
+                      for (unsigned int i = 0; i < N_BIG; i++)
+                      {
+                        temp_state[i] = current_settings.ranguvannja_df_source_plus[N_BIG*index_of_df + i];
+                      }
                     }
                     else if(type_source == 1)
                     {
-                      temp_state[0] = current_settings.ranguvannja_df_source_minus[N_BIG*index_of_df  ];
-                      temp_state[1] = current_settings.ranguvannja_df_source_minus[N_BIG*index_of_df+1];
-                      temp_state[2] = current_settings.ranguvannja_df_source_minus[N_BIG*index_of_df+2];
-                      temp_state[3] = current_settings.ranguvannja_df_source_minus[N_BIG*index_of_df+3];
-                      temp_state[4] = current_settings.ranguvannja_df_source_minus[N_BIG*index_of_df+4];
-                      temp_state[5] = current_settings.ranguvannja_df_source_minus[N_BIG*index_of_df+5];
+                      for (unsigned int i = 0; i < N_BIG; i++)
+                      {
+                        temp_state[i] = current_settings.ranguvannja_df_source_minus[N_BIG*index_of_df + i];
+                      }
                     }
                     else
                     {
-                      temp_state[0] = current_settings.ranguvannja_df_source_blk[N_BIG*index_of_df  ];
-                      temp_state[1] = current_settings.ranguvannja_df_source_blk[N_BIG*index_of_df+1];
-                      temp_state[2] = current_settings.ranguvannja_df_source_blk[N_BIG*index_of_df+2];
-                      temp_state[3] = current_settings.ranguvannja_df_source_blk[N_BIG*index_of_df+3];
-                      temp_state[4] = current_settings.ranguvannja_df_source_blk[N_BIG*index_of_df+4];
-                      temp_state[5] = current_settings.ranguvannja_df_source_blk[N_BIG*index_of_df+5];
+                      for (unsigned int i = 0; i < N_BIG; i++)
+                      {
+                        temp_state[i] = current_settings.ranguvannja_df_source_blk[N_BIG*index_of_df + i];
+                      }
                     }
                   }
                   else if ((current_ekran.current_level >= EKRAN_RANGUVANNJA_SET_DT1_PLUS) && (current_ekran.current_level <= EKRAN_RANGUVANNJA_RESET_DT4_MINUS))
@@ -17295,42 +17179,34 @@ void main_manu_function(void)
                     {
                       if(type_source == INDEX_ML_LIST_TYPE_SOURCE_PLUS_DT)
                       {
-                        temp_state[0] = current_settings.ranguvannja_set_dt_source_plus[N_BIG*index_of_dt  ];
-                        temp_state[1] = current_settings.ranguvannja_set_dt_source_plus[N_BIG*index_of_dt+1];
-                        temp_state[2] = current_settings.ranguvannja_set_dt_source_plus[N_BIG*index_of_dt+2];
-                        temp_state[3] = current_settings.ranguvannja_set_dt_source_plus[N_BIG*index_of_dt+3];
-                        temp_state[4] = current_settings.ranguvannja_set_dt_source_plus[N_BIG*index_of_dt+4];
-                        temp_state[5] = current_settings.ranguvannja_set_dt_source_plus[N_BIG*index_of_dt+5];
+                        for (unsigned int i = 0; i < N_BIG; i++)
+                        {
+                          temp_state[i] = current_settings.ranguvannja_set_dt_source_plus[N_BIG*index_of_dt + i];
+                        }
                       }
                       else
                       {
-                        temp_state[0] = current_settings.ranguvannja_set_dt_source_minus[N_BIG*index_of_dt  ];
-                        temp_state[1] = current_settings.ranguvannja_set_dt_source_minus[N_BIG*index_of_dt+1];
-                        temp_state[2] = current_settings.ranguvannja_set_dt_source_minus[N_BIG*index_of_dt+2];
-                        temp_state[3] = current_settings.ranguvannja_set_dt_source_minus[N_BIG*index_of_dt+3];
-                        temp_state[4] = current_settings.ranguvannja_set_dt_source_minus[N_BIG*index_of_dt+4];
-                        temp_state[5] = current_settings.ranguvannja_set_dt_source_minus[N_BIG*index_of_dt+5];
+                        for (unsigned int i = 0; i < N_BIG; i++)
+                        {
+                          temp_state[i] = current_settings.ranguvannja_set_dt_source_minus[N_BIG*index_of_dt + i];
+                        }
                       }
                     }
                     else
                     {
                       if(type_source == INDEX_ML_LIST_TYPE_SOURCE_PLUS_DT)
                       {
-                        temp_state[0] = current_settings.ranguvannja_reset_dt_source_plus[N_BIG*index_of_dt  ];
-                        temp_state[1] = current_settings.ranguvannja_reset_dt_source_plus[N_BIG*index_of_dt+1];
-                        temp_state[2] = current_settings.ranguvannja_reset_dt_source_plus[N_BIG*index_of_dt+2];
-                        temp_state[3] = current_settings.ranguvannja_reset_dt_source_plus[N_BIG*index_of_dt+3];
-                        temp_state[4] = current_settings.ranguvannja_reset_dt_source_plus[N_BIG*index_of_dt+4];
-                        temp_state[5] = current_settings.ranguvannja_reset_dt_source_plus[N_BIG*index_of_dt+5];
+                        for (unsigned int i = 0; i < N_BIG; i++)
+                        {
+                          temp_state[i] = current_settings.ranguvannja_reset_dt_source_plus[N_BIG*index_of_dt + i];
+                        }
                       }
                       else
                       {
-                        temp_state[0] = current_settings.ranguvannja_reset_dt_source_minus[N_BIG*index_of_dt  ];
-                        temp_state[1] = current_settings.ranguvannja_reset_dt_source_minus[N_BIG*index_of_dt+1];
-                        temp_state[2] = current_settings.ranguvannja_reset_dt_source_minus[N_BIG*index_of_dt+2];
-                        temp_state[3] = current_settings.ranguvannja_reset_dt_source_minus[N_BIG*index_of_dt+3];
-                        temp_state[4] = current_settings.ranguvannja_reset_dt_source_minus[N_BIG*index_of_dt+4];
-                        temp_state[5] = current_settings.ranguvannja_reset_dt_source_minus[N_BIG*index_of_dt+5];
+                        for (unsigned int i = 0; i < N_BIG; i++)
+                        {
+                          temp_state[i] = current_settings.ranguvannja_reset_dt_source_minus[N_BIG*index_of_dt + i];
+                        }
                       }
                     }
                   }
@@ -17341,7 +17217,9 @@ void main_manu_function(void)
                       (temp_state[2] == 0) &&
                       (temp_state[3] == 0) &&
                       (temp_state[4] == 0) &&
-                      (temp_state[5] == 0)
+                      (temp_state[5] == 0) &&
+                      (temp_state[6] == 0) &&
+                      (temp_state[7] == 0)
                      ) current_ekran.index_position = 0;
                   else
                   {
@@ -17520,7 +17398,7 @@ void main_manu_function(void)
                       for (unsigned int i = 0; i < 2; i++)
                       {
                         unsigned int index_deleted_function;
-                        unsigned int maska_func[N_BIG] = {0, 0, 0, 0, 0, 0};
+                        unsigned int maska_func[N_BIG] = {0, 0, 0, 0, 0, 0, 0, 0};
                         unsigned int need_filtration = 0;
                         //Визначаємо індекс функції, яку потенційно можливо треба буде фільтрувати із сприску
                         //Першою перевіряємо функцію з більшим номером, щоб за одну операцію циклу можна було переміститися на функцію, яку можна ранжувати
@@ -17548,7 +17426,9 @@ void main_manu_function(void)
                                 ((current_settings.ranguvannja_outputs[N_BIG*index + 2] & maska_func[2]) != 0) ||
                                 ((current_settings.ranguvannja_outputs[N_BIG*index + 3] & maska_func[3]) != 0) ||
                                 ((current_settings.ranguvannja_outputs[N_BIG*index + 4] & maska_func[4]) != 0) ||
-                                ((current_settings.ranguvannja_outputs[N_BIG*index + 5] & maska_func[5]) != 0)
+                                ((current_settings.ranguvannja_outputs[N_BIG*index + 5] & maska_func[5]) != 0) ||
+                                ((current_settings.ranguvannja_outputs[N_BIG*index + 6] & maska_func[6]) != 0) ||
+                                ((current_settings.ranguvannja_outputs[N_BIG*index + 7] & maska_func[7]) != 0)
                                )
                             {
                               need_filtration = 1;
@@ -17758,39 +17638,31 @@ void main_manu_function(void)
                   
                   if ((current_ekran.current_level >= EKRAN_RANGUVANNJA_OUTPUT_1) && (current_ekran.current_level <= EKRAN_RANGUVANNJA_OUTPUT_10))
                   {
-                    temp_state[0] = current_settings.ranguvannja_outputs[N_BIG*(current_ekran.current_level - EKRAN_RANGUVANNJA_OUTPUT_1)  ];
-                    temp_state[1] = current_settings.ranguvannja_outputs[N_BIG*(current_ekran.current_level - EKRAN_RANGUVANNJA_OUTPUT_1)+1];
-                    temp_state[2] = current_settings.ranguvannja_outputs[N_BIG*(current_ekran.current_level - EKRAN_RANGUVANNJA_OUTPUT_1)+2];
-                    temp_state[3] = current_settings.ranguvannja_outputs[N_BIG*(current_ekran.current_level - EKRAN_RANGUVANNJA_OUTPUT_1)+3];
-                    temp_state[4] = current_settings.ranguvannja_outputs[N_BIG*(current_ekran.current_level - EKRAN_RANGUVANNJA_OUTPUT_1)+4];
-                    temp_state[5] = current_settings.ranguvannja_outputs[N_BIG*(current_ekran.current_level - EKRAN_RANGUVANNJA_OUTPUT_1)+5];
+                    for (unsigned int i = 0; i < N_BIG; i++)
+                    {
+                      temp_state[i] = current_settings.ranguvannja_outputs[N_BIG*(current_ekran.current_level - EKRAN_RANGUVANNJA_OUTPUT_1) + i];
+                    }
                   }
                   else if ((current_ekran.current_level >= EKRAN_RANGUVANNJA_LED_1) && (current_ekran.current_level <= EKRAN_RANGUVANNJA_LED_8))
                   {
-                    temp_state[0] = current_settings.ranguvannja_leds[N_BIG*(current_ekran.current_level - EKRAN_RANGUVANNJA_LED_1)  ];
-                    temp_state[1] = current_settings.ranguvannja_leds[N_BIG*(current_ekran.current_level - EKRAN_RANGUVANNJA_LED_1)+1];
-                    temp_state[2] = current_settings.ranguvannja_leds[N_BIG*(current_ekran.current_level - EKRAN_RANGUVANNJA_LED_1)+2];
-                    temp_state[3] = current_settings.ranguvannja_leds[N_BIG*(current_ekran.current_level - EKRAN_RANGUVANNJA_LED_1)+3];
-                    temp_state[4] = current_settings.ranguvannja_leds[N_BIG*(current_ekran.current_level - EKRAN_RANGUVANNJA_LED_1)+4];
-                    temp_state[5] = current_settings.ranguvannja_leds[N_BIG*(current_ekran.current_level - EKRAN_RANGUVANNJA_LED_1)+5];
+                    for (unsigned int i = 0; i < N_BIG; i++)
+                    {
+                      temp_state[i] = current_settings.ranguvannja_leds[N_BIG*(current_ekran.current_level - EKRAN_RANGUVANNJA_LED_1) + i];
+                    }
                   }
                   else if (current_ekran.current_level == EKRAN_RANGUVANNJA_ANALOG_REGISTRATOR)
                   {
-                    temp_state[0] = current_settings.ranguvannja_analog_registrator[0];
-                    temp_state[1] = current_settings.ranguvannja_analog_registrator[1];
-                    temp_state[2] = current_settings.ranguvannja_analog_registrator[2];
-                    temp_state[3] = current_settings.ranguvannja_analog_registrator[3];
-                    temp_state[4] = current_settings.ranguvannja_analog_registrator[4];
-                    temp_state[5] = current_settings.ranguvannja_analog_registrator[5];
+                    for (unsigned int i = 0; i < N_BIG; i++)
+                    {
+                      temp_state[i] = current_settings.ranguvannja_analog_registrator[i];
+                    }
                   }
                   else if (current_ekran.current_level == EKRAN_RANGUVANNJA_DIGITAL_REGISTRATOR)
                   {
-                    temp_state[0] = current_settings.ranguvannja_digital_registrator[0];
-                    temp_state[1] = current_settings.ranguvannja_digital_registrator[1];
-                    temp_state[2] = current_settings.ranguvannja_digital_registrator[2];
-                    temp_state[3] = current_settings.ranguvannja_digital_registrator[3];
-                    temp_state[4] = current_settings.ranguvannja_digital_registrator[4];
-                    temp_state[5] = current_settings.ranguvannja_digital_registrator[5];
+                    for (unsigned int i = 0; i < N_BIG; i++)
+                    {
+                      temp_state[i] = current_settings.ranguvannja_digital_registrator[i];
+                    }
                   }
                   else if ((current_ekran.current_level >= EKRAN_RANGUVANNJA_DF1_PLUS) && (current_ekran.current_level <= EKRAN_RANGUVANNJA_DF8_BLK ))
                   {
@@ -17800,30 +17672,24 @@ void main_manu_function(void)
     
                     if(type_source == 0)
                     {
-                      temp_state[0] = current_settings.ranguvannja_df_source_plus[N_BIG*index_of_df  ];
-                      temp_state[1] = current_settings.ranguvannja_df_source_plus[N_BIG*index_of_df+1];
-                      temp_state[2] = current_settings.ranguvannja_df_source_plus[N_BIG*index_of_df+2];
-                      temp_state[3] = current_settings.ranguvannja_df_source_plus[N_BIG*index_of_df+3];
-                      temp_state[4] = current_settings.ranguvannja_df_source_plus[N_BIG*index_of_df+4];
-                      temp_state[5] = current_settings.ranguvannja_df_source_plus[N_BIG*index_of_df+5];
+                      for (unsigned int i = 0; i < N_BIG; i++)
+                      {
+                        temp_state[i] = current_settings.ranguvannja_df_source_plus[N_BIG*index_of_df + i];
+                      }
                     }
                     else if(type_source == 1)
                     {
-                      temp_state[0] = current_settings.ranguvannja_df_source_minus[N_BIG*index_of_df  ];
-                      temp_state[1] = current_settings.ranguvannja_df_source_minus[N_BIG*index_of_df+1];
-                      temp_state[2] = current_settings.ranguvannja_df_source_minus[N_BIG*index_of_df+2];
-                      temp_state[3] = current_settings.ranguvannja_df_source_minus[N_BIG*index_of_df+3];
-                      temp_state[4] = current_settings.ranguvannja_df_source_minus[N_BIG*index_of_df+4];
-                      temp_state[5] = current_settings.ranguvannja_df_source_minus[N_BIG*index_of_df+5];
+                      for (unsigned int i = 0; i < N_BIG; i++)
+                      {
+                        temp_state[i] = current_settings.ranguvannja_df_source_minus[N_BIG*index_of_df + i];
+                      }
                     }
                     else
                     {
-                      temp_state[0] = current_settings.ranguvannja_df_source_blk[N_BIG*index_of_df  ];
-                      temp_state[1] = current_settings.ranguvannja_df_source_blk[N_BIG*index_of_df+1];
-                      temp_state[2] = current_settings.ranguvannja_df_source_blk[N_BIG*index_of_df+2];
-                      temp_state[3] = current_settings.ranguvannja_df_source_blk[N_BIG*index_of_df+3];
-                      temp_state[4] = current_settings.ranguvannja_df_source_blk[N_BIG*index_of_df+4];
-                      temp_state[5] = current_settings.ranguvannja_df_source_blk[N_BIG*index_of_df+5];
+                      for (unsigned int i = 0; i < N_BIG; i++)
+                      {
+                        temp_state[i] = current_settings.ranguvannja_df_source_blk[N_BIG*index_of_df + i];
+                      }
                     }
                   }
                   else if ((current_ekran.current_level >= EKRAN_RANGUVANNJA_SET_DT1_PLUS) && (current_ekran.current_level <= EKRAN_RANGUVANNJA_RESET_DT4_MINUS))
@@ -17837,42 +17703,34 @@ void main_manu_function(void)
                     {
                       if(type_source == INDEX_ML_LIST_TYPE_SOURCE_PLUS_DT)
                       {
-                        temp_state[0] = current_settings.ranguvannja_set_dt_source_plus[N_BIG*index_of_dt  ];
-                        temp_state[1] = current_settings.ranguvannja_set_dt_source_plus[N_BIG*index_of_dt+1];
-                        temp_state[2] = current_settings.ranguvannja_set_dt_source_plus[N_BIG*index_of_dt+2];
-                        temp_state[3] = current_settings.ranguvannja_set_dt_source_plus[N_BIG*index_of_dt+3];
-                        temp_state[4] = current_settings.ranguvannja_set_dt_source_plus[N_BIG*index_of_dt+4];
-                        temp_state[5] = current_settings.ranguvannja_set_dt_source_plus[N_BIG*index_of_dt+5];
+                        for (unsigned int i = 0; i < N_BIG; i++)
+                        {
+                          temp_state[i] = current_settings.ranguvannja_set_dt_source_plus[N_BIG*index_of_dt + i];
+                        }
                       }
                       else
                       {
-                        temp_state[0] = current_settings.ranguvannja_set_dt_source_minus[N_BIG*index_of_dt  ];
-                        temp_state[1] = current_settings.ranguvannja_set_dt_source_minus[N_BIG*index_of_dt+1];
-                        temp_state[2] = current_settings.ranguvannja_set_dt_source_minus[N_BIG*index_of_dt+2];
-                        temp_state[3] = current_settings.ranguvannja_set_dt_source_minus[N_BIG*index_of_dt+3];
-                        temp_state[4] = current_settings.ranguvannja_set_dt_source_minus[N_BIG*index_of_dt+4];
-                        temp_state[5] = current_settings.ranguvannja_set_dt_source_minus[N_BIG*index_of_dt+5];
+                        for (unsigned int i = 0; i < N_BIG; i++)
+                        {
+                          temp_state[i] = current_settings.ranguvannja_set_dt_source_minus[N_BIG*index_of_dt + i];
+                        }
                       }
                     }
                     else
                     {
                       if(type_source == INDEX_ML_LIST_TYPE_SOURCE_PLUS_DT)
                       {
-                        temp_state[0] = current_settings.ranguvannja_reset_dt_source_plus[N_BIG*index_of_dt  ];
-                        temp_state[1] = current_settings.ranguvannja_reset_dt_source_plus[N_BIG*index_of_dt+1];
-                        temp_state[2] = current_settings.ranguvannja_reset_dt_source_plus[N_BIG*index_of_dt+2];
-                        temp_state[3] = current_settings.ranguvannja_reset_dt_source_plus[N_BIG*index_of_dt+3];
-                        temp_state[4] = current_settings.ranguvannja_reset_dt_source_plus[N_BIG*index_of_dt+4];
-                        temp_state[5] = current_settings.ranguvannja_reset_dt_source_plus[N_BIG*index_of_dt+5];
+                        for (unsigned int i = 0; i < N_BIG; i++)
+                        {
+                          temp_state[i] = current_settings.ranguvannja_reset_dt_source_plus[N_BIG*index_of_dt + i];
+                        }
                       }
                       else
                       {
-                        temp_state[0] = current_settings.ranguvannja_reset_dt_source_minus[N_BIG*index_of_dt  ];
-                        temp_state[1] = current_settings.ranguvannja_reset_dt_source_minus[N_BIG*index_of_dt+1];
-                        temp_state[2] = current_settings.ranguvannja_reset_dt_source_minus[N_BIG*index_of_dt+2];
-                        temp_state[3] = current_settings.ranguvannja_reset_dt_source_minus[N_BIG*index_of_dt+3];
-                        temp_state[4] = current_settings.ranguvannja_reset_dt_source_minus[N_BIG*index_of_dt+4];
-                        temp_state[5] = current_settings.ranguvannja_reset_dt_source_minus[N_BIG*index_of_dt+5];
+                        for (unsigned int i = 0; i < N_BIG; i++)
+                        {
+                          temp_state[i] = current_settings.ranguvannja_reset_dt_source_minus[N_BIG*index_of_dt + i];
+                        }
                       }
                     }
                   }
@@ -17883,7 +17741,9 @@ void main_manu_function(void)
                       (temp_state[2] == 0) &&
                       (temp_state[3] == 0) &&
                       (temp_state[4] == 0) &&
-                      (temp_state[5] == 0)
+                      (temp_state[5] == 0) &&
+                      (temp_state[6] == 0) &&
+                      (temp_state[7] == 0)
                      ) current_ekran.index_position = 0;
                   else
                   {
@@ -18063,7 +17923,7 @@ void main_manu_function(void)
                       for (unsigned int i = 0; i < 2; i++)
                       {
                         unsigned int index_deleted_function;
-                        unsigned int maska_func[N_BIG] = {0, 0, 0, 0, 0, 0};
+                        unsigned int maska_func[N_BIG] = {0, 0, 0, 0, 0, 0, 0, 0};
                         unsigned int need_filtration = 0;
                         //Визначаємо індекс функції, яку потенційно можливо треба буде фільтрувати із сприску
                         //Першою перевіряємо функцію з меншим номером, щоб за одну операцію циклу  можна було переміститися на функцію, яку можна ранжувати
@@ -18091,7 +17951,9 @@ void main_manu_function(void)
                                 ((current_settings.ranguvannja_outputs[N_BIG*index + 2] & maska_func[2]) != 0) ||
                                 ((current_settings.ranguvannja_outputs[N_BIG*index + 3] & maska_func[3]) != 0) ||
                                 ((current_settings.ranguvannja_outputs[N_BIG*index + 4] & maska_func[4]) != 0) ||
-                                ((current_settings.ranguvannja_outputs[N_BIG*index + 5] & maska_func[5]) != 0)
+                                ((current_settings.ranguvannja_outputs[N_BIG*index + 5] & maska_func[5]) != 0) ||
+                                ((current_settings.ranguvannja_outputs[N_BIG*index + 6] & maska_func[6]) != 0) ||
+                                ((current_settings.ranguvannja_outputs[N_BIG*index + 7] & maska_func[7]) != 0)
                                )
                             {
                               need_filtration = 1;

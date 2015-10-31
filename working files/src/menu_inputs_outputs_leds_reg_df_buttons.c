@@ -1869,60 +1869,48 @@ void make_ekran_set_function_in_output_led_df_dt_reg(unsigned int number_ekran, 
     {
       if(type_source == 0)
       {
-        state_viewing_input[0] = current_settings.ranguvannja_df_source_plus[N_BIG*index_of_df  ];
-        state_viewing_input[1] = current_settings.ranguvannja_df_source_plus[N_BIG*index_of_df+1];
-        state_viewing_input[2] = current_settings.ranguvannja_df_source_plus[N_BIG*index_of_df+2];
-        state_viewing_input[3] = current_settings.ranguvannja_df_source_plus[N_BIG*index_of_df+3];
-        state_viewing_input[4] = current_settings.ranguvannja_df_source_plus[N_BIG*index_of_df+4];
-        state_viewing_input[5] = current_settings.ranguvannja_df_source_plus[N_BIG*index_of_df+5];
+        for (unsigned int i = 0; i < N_BIG; i++)
+        {
+          state_viewing_input[i] = current_settings.ranguvannja_df_source_plus[N_BIG*index_of_df + i];
+        }
       }
       else if(type_source == 1)
       {
-        state_viewing_input[0] = current_settings.ranguvannja_df_source_minus[N_BIG*index_of_df  ];
-        state_viewing_input[1] = current_settings.ranguvannja_df_source_minus[N_BIG*index_of_df+1];
-        state_viewing_input[2] = current_settings.ranguvannja_df_source_minus[N_BIG*index_of_df+2];
-        state_viewing_input[3] = current_settings.ranguvannja_df_source_minus[N_BIG*index_of_df+3];
-        state_viewing_input[4] = current_settings.ranguvannja_df_source_minus[N_BIG*index_of_df+4];
-        state_viewing_input[5] = current_settings.ranguvannja_df_source_minus[N_BIG*index_of_df+5];
+        for (unsigned int i = 0; i < N_BIG; i++)
+        {
+          state_viewing_input[i] = current_settings.ranguvannja_df_source_minus[N_BIG*index_of_df + i];
+        }
       }
       else
       {
-        state_viewing_input[0] = current_settings.ranguvannja_df_source_blk[N_BIG*index_of_df  ];
-        state_viewing_input[1] = current_settings.ranguvannja_df_source_blk[N_BIG*index_of_df+1];
-        state_viewing_input[2] = current_settings.ranguvannja_df_source_blk[N_BIG*index_of_df+2];
-        state_viewing_input[3] = current_settings.ranguvannja_df_source_blk[N_BIG*index_of_df+3];
-        state_viewing_input[4] = current_settings.ranguvannja_df_source_blk[N_BIG*index_of_df+4];
-        state_viewing_input[5] = current_settings.ranguvannja_df_source_blk[N_BIG*index_of_df+5];
+        for (unsigned int i = 0; i < N_BIG; i++)
+        {
+          state_viewing_input[i] = current_settings.ranguvannja_df_source_blk[N_BIG*index_of_df + i];
+        }
       }
     }
     else
     {
       if(type_source == 0)
       {
-        state_viewing_input[0] = edition_settings.ranguvannja_df_source_plus[N_BIG*index_of_df  ];
-        state_viewing_input[1] = edition_settings.ranguvannja_df_source_plus[N_BIG*index_of_df+1];
-        state_viewing_input[2] = edition_settings.ranguvannja_df_source_plus[N_BIG*index_of_df+2];
-        state_viewing_input[3] = edition_settings.ranguvannja_df_source_plus[N_BIG*index_of_df+3];
-        state_viewing_input[4] = edition_settings.ranguvannja_df_source_plus[N_BIG*index_of_df+4];
-        state_viewing_input[5] = edition_settings.ranguvannja_df_source_plus[N_BIG*index_of_df+5];
+        for (unsigned int i = 0; i < N_BIG; i++)
+        {
+          state_viewing_input[i] = edition_settings.ranguvannja_df_source_plus[N_BIG*index_of_df + i];
+        }
       }
       else if(type_source == 1)
       {
-        state_viewing_input[0] = edition_settings.ranguvannja_df_source_minus[N_BIG*index_of_df  ];
-        state_viewing_input[1] = edition_settings.ranguvannja_df_source_minus[N_BIG*index_of_df+1];
-        state_viewing_input[2] = edition_settings.ranguvannja_df_source_minus[N_BIG*index_of_df+2];
-        state_viewing_input[3] = edition_settings.ranguvannja_df_source_minus[N_BIG*index_of_df+3];
-        state_viewing_input[4] = edition_settings.ranguvannja_df_source_minus[N_BIG*index_of_df+4];
-        state_viewing_input[5] = edition_settings.ranguvannja_df_source_minus[N_BIG*index_of_df+5];
+        for (unsigned int i = 0; i < N_BIG; i++)
+        {
+          state_viewing_input[i] = edition_settings.ranguvannja_df_source_minus[N_BIG*index_of_df + i];
+        }
       }
       else
       {
-        state_viewing_input[0] = edition_settings.ranguvannja_df_source_blk[N_BIG*index_of_df  ];
-        state_viewing_input[1] = edition_settings.ranguvannja_df_source_blk[N_BIG*index_of_df+1];
-        state_viewing_input[2] = edition_settings.ranguvannja_df_source_blk[N_BIG*index_of_df+2];
-        state_viewing_input[3] = edition_settings.ranguvannja_df_source_blk[N_BIG*index_of_df+3];
-        state_viewing_input[4] = edition_settings.ranguvannja_df_source_blk[N_BIG*index_of_df+4];
-        state_viewing_input[5] = edition_settings.ranguvannja_df_source_blk[N_BIG*index_of_df+5];
+        for (unsigned int i = 0; i < N_BIG; i++)
+        {
+          state_viewing_input[i] = edition_settings.ranguvannja_df_source_blk[N_BIG*index_of_df + i];
+        }
       }
     }
     max_row_ranguvannja = MAX_ROW_RANGUVANNJA_DF;
@@ -1940,42 +1928,34 @@ void make_ekran_set_function_in_output_led_df_dt_reg(unsigned int number_ekran, 
       {
         if(type_source == INDEX_ML_LIST_TYPE_SOURCE_PLUS_DT)
         {
-          state_viewing_input[0] = current_settings.ranguvannja_set_dt_source_plus[N_BIG*index_of_dt  ];
-          state_viewing_input[1] = current_settings.ranguvannja_set_dt_source_plus[N_BIG*index_of_dt+1];
-          state_viewing_input[2] = current_settings.ranguvannja_set_dt_source_plus[N_BIG*index_of_dt+2];
-          state_viewing_input[3] = current_settings.ranguvannja_set_dt_source_plus[N_BIG*index_of_dt+3];
-          state_viewing_input[4] = current_settings.ranguvannja_set_dt_source_plus[N_BIG*index_of_dt+4];
-          state_viewing_input[5] = current_settings.ranguvannja_set_dt_source_plus[N_BIG*index_of_dt+5];
+          for (unsigned int i = 0; i < N_BIG; i++)
+          {
+            state_viewing_input[i] = current_settings.ranguvannja_set_dt_source_plus[N_BIG*index_of_dt + i];
+          }
         }
         else
         {
-          state_viewing_input[0] = current_settings.ranguvannja_set_dt_source_minus[N_BIG*index_of_dt  ];
-          state_viewing_input[1] = current_settings.ranguvannja_set_dt_source_minus[N_BIG*index_of_dt+1];
-          state_viewing_input[2] = current_settings.ranguvannja_set_dt_source_minus[N_BIG*index_of_dt+2];
-          state_viewing_input[3] = current_settings.ranguvannja_set_dt_source_minus[N_BIG*index_of_dt+3];
-          state_viewing_input[4] = current_settings.ranguvannja_set_dt_source_minus[N_BIG*index_of_dt+4];
-          state_viewing_input[5] = current_settings.ranguvannja_set_dt_source_minus[N_BIG*index_of_dt+5];
+          for (unsigned int i = 0; i < N_BIG; i++)
+          {
+            state_viewing_input[i] = current_settings.ranguvannja_set_dt_source_minus[N_BIG*index_of_dt + i];
+          }
         }
       }
       else
       {
         if(type_source == INDEX_ML_LIST_TYPE_SOURCE_PLUS_DT)
         {
-          state_viewing_input[0] = current_settings.ranguvannja_reset_dt_source_plus[N_BIG*index_of_dt  ];
-          state_viewing_input[1] = current_settings.ranguvannja_reset_dt_source_plus[N_BIG*index_of_dt+1];
-          state_viewing_input[2] = current_settings.ranguvannja_reset_dt_source_plus[N_BIG*index_of_dt+2];
-          state_viewing_input[3] = current_settings.ranguvannja_reset_dt_source_plus[N_BIG*index_of_dt+3];
-          state_viewing_input[4] = current_settings.ranguvannja_reset_dt_source_plus[N_BIG*index_of_dt+4];
-          state_viewing_input[5] = current_settings.ranguvannja_reset_dt_source_plus[N_BIG*index_of_dt+5];
+          for (unsigned int i = 0; i < N_BIG; i++)
+          {
+            state_viewing_input[i] = current_settings.ranguvannja_reset_dt_source_plus[N_BIG*index_of_dt + i];
+          }
         }
         else
         {
-          state_viewing_input[0] = current_settings.ranguvannja_reset_dt_source_minus[N_BIG*index_of_dt  ];
-          state_viewing_input[1] = current_settings.ranguvannja_reset_dt_source_minus[N_BIG*index_of_dt+1];
-          state_viewing_input[2] = current_settings.ranguvannja_reset_dt_source_minus[N_BIG*index_of_dt+2];
-          state_viewing_input[3] = current_settings.ranguvannja_reset_dt_source_minus[N_BIG*index_of_dt+3];
-          state_viewing_input[4] = current_settings.ranguvannja_reset_dt_source_minus[N_BIG*index_of_dt+4];
-          state_viewing_input[5] = current_settings.ranguvannja_reset_dt_source_minus[N_BIG*index_of_dt+5];
+          for (unsigned int i = 0; i < N_BIG; i++)
+          {
+            state_viewing_input[i] = current_settings.ranguvannja_reset_dt_source_minus[N_BIG*index_of_dt + i];
+          }
         }
       }
     }
@@ -1985,42 +1965,34 @@ void make_ekran_set_function_in_output_led_df_dt_reg(unsigned int number_ekran, 
       {
         if(type_source == INDEX_ML_LIST_TYPE_SOURCE_PLUS_DT)
         {
-          state_viewing_input[0] = edition_settings.ranguvannja_set_dt_source_plus[N_BIG*index_of_dt  ];
-          state_viewing_input[1] = edition_settings.ranguvannja_set_dt_source_plus[N_BIG*index_of_dt+1];
-          state_viewing_input[2] = edition_settings.ranguvannja_set_dt_source_plus[N_BIG*index_of_dt+2];
-          state_viewing_input[3] = edition_settings.ranguvannja_set_dt_source_plus[N_BIG*index_of_dt+3];
-          state_viewing_input[4] = edition_settings.ranguvannja_set_dt_source_plus[N_BIG*index_of_dt+4];
-          state_viewing_input[5] = edition_settings.ranguvannja_set_dt_source_plus[N_BIG*index_of_dt+5];
+          for (unsigned int i = 0; i < N_BIG; i++)
+          {
+            state_viewing_input[i] = edition_settings.ranguvannja_set_dt_source_plus[N_BIG*index_of_dt + i];
+          }
         }
         else
         { 
-          state_viewing_input[0] = edition_settings.ranguvannja_set_dt_source_minus[N_BIG*index_of_dt  ];
-          state_viewing_input[1] = edition_settings.ranguvannja_set_dt_source_minus[N_BIG*index_of_dt+1];
-          state_viewing_input[2] = edition_settings.ranguvannja_set_dt_source_minus[N_BIG*index_of_dt+2];
-          state_viewing_input[3] = edition_settings.ranguvannja_set_dt_source_minus[N_BIG*index_of_dt+3];
-          state_viewing_input[4] = edition_settings.ranguvannja_set_dt_source_minus[N_BIG*index_of_dt+4];
-          state_viewing_input[5] = edition_settings.ranguvannja_set_dt_source_minus[N_BIG*index_of_dt+5];
+          for (unsigned int i = 0; i < N_BIG; i++)
+          {
+            state_viewing_input[i] = edition_settings.ranguvannja_set_dt_source_minus[N_BIG*index_of_dt + i];
+          }
         }
       }
       else
       {
         if(type_source == INDEX_ML_LIST_TYPE_SOURCE_PLUS_DT)
         {
-          state_viewing_input[0] = edition_settings.ranguvannja_reset_dt_source_plus[N_BIG*index_of_dt  ];
-          state_viewing_input[1] = edition_settings.ranguvannja_reset_dt_source_plus[N_BIG*index_of_dt+1];
-          state_viewing_input[2] = edition_settings.ranguvannja_reset_dt_source_plus[N_BIG*index_of_dt+2];
-          state_viewing_input[3] = edition_settings.ranguvannja_reset_dt_source_plus[N_BIG*index_of_dt+3];
-          state_viewing_input[4] = edition_settings.ranguvannja_reset_dt_source_plus[N_BIG*index_of_dt+4];
-          state_viewing_input[5] = edition_settings.ranguvannja_reset_dt_source_plus[N_BIG*index_of_dt+5];
+          for (unsigned int i = 0; i < N_BIG; i++)
+          {
+            state_viewing_input[i] = edition_settings.ranguvannja_reset_dt_source_plus[N_BIG*index_of_dt + i];
+          }
         }
         else
         { 
-          state_viewing_input[0] = edition_settings.ranguvannja_reset_dt_source_minus[N_BIG*index_of_dt  ];
-          state_viewing_input[1] = edition_settings.ranguvannja_reset_dt_source_minus[N_BIG*index_of_dt+1];
-          state_viewing_input[2] = edition_settings.ranguvannja_reset_dt_source_minus[N_BIG*index_of_dt+2];
-          state_viewing_input[3] = edition_settings.ranguvannja_reset_dt_source_minus[N_BIG*index_of_dt+3];
-          state_viewing_input[4] = edition_settings.ranguvannja_reset_dt_source_minus[N_BIG*index_of_dt+4];
-          state_viewing_input[5] = edition_settings.ranguvannja_reset_dt_source_minus[N_BIG*index_of_dt+5];
+          for (unsigned int i = 0; i < N_BIG; i++)
+          {
+            state_viewing_input[i] = edition_settings.ranguvannja_reset_dt_source_minus[N_BIG*index_of_dt + i];
+          }
         }
       }
     }
@@ -2030,21 +2002,17 @@ void make_ekran_set_function_in_output_led_df_dt_reg(unsigned int number_ekran, 
   {
     if(current_ekran.edition == 0)
     {
-      state_viewing_input[0] = current_settings.ranguvannja_outputs[N_BIG*(number_ekran - EKRAN_RANGUVANNJA_OUTPUT_1)  ];
-      state_viewing_input[1] = current_settings.ranguvannja_outputs[N_BIG*(number_ekran - EKRAN_RANGUVANNJA_OUTPUT_1)+1];
-      state_viewing_input[2] = current_settings.ranguvannja_outputs[N_BIG*(number_ekran - EKRAN_RANGUVANNJA_OUTPUT_1)+2];
-      state_viewing_input[3] = current_settings.ranguvannja_outputs[N_BIG*(number_ekran - EKRAN_RANGUVANNJA_OUTPUT_1)+3];
-      state_viewing_input[4] = current_settings.ranguvannja_outputs[N_BIG*(number_ekran - EKRAN_RANGUVANNJA_OUTPUT_1)+4];
-      state_viewing_input[5] = current_settings.ranguvannja_outputs[N_BIG*(number_ekran - EKRAN_RANGUVANNJA_OUTPUT_1)+5];
+      for (unsigned int i = 0; i < N_BIG; i++)
+      {
+        state_viewing_input[i] = current_settings.ranguvannja_outputs[N_BIG*(number_ekran - EKRAN_RANGUVANNJA_OUTPUT_1) + i];
+      }
     }
     else
     {
-      state_viewing_input[0] = edition_settings.ranguvannja_outputs[N_BIG*(number_ekran - EKRAN_RANGUVANNJA_OUTPUT_1)  ];
-      state_viewing_input[1] = edition_settings.ranguvannja_outputs[N_BIG*(number_ekran - EKRAN_RANGUVANNJA_OUTPUT_1)+1];
-      state_viewing_input[2] = edition_settings.ranguvannja_outputs[N_BIG*(number_ekran - EKRAN_RANGUVANNJA_OUTPUT_1)+2];
-      state_viewing_input[3] = edition_settings.ranguvannja_outputs[N_BIG*(number_ekran - EKRAN_RANGUVANNJA_OUTPUT_1)+3];
-      state_viewing_input[4] = edition_settings.ranguvannja_outputs[N_BIG*(number_ekran - EKRAN_RANGUVANNJA_OUTPUT_1)+4];
-      state_viewing_input[5] = edition_settings.ranguvannja_outputs[N_BIG*(number_ekran - EKRAN_RANGUVANNJA_OUTPUT_1)+5];
+      for (unsigned int i = 0; i < N_BIG; i++)
+      {
+        state_viewing_input[i] = edition_settings.ranguvannja_outputs[N_BIG*(number_ekran - EKRAN_RANGUVANNJA_OUTPUT_1) + i];
+      }
     }
     max_row_ranguvannja = MAX_ROW_RANGUVANNJA_OUTPUT;
   }
@@ -2052,21 +2020,17 @@ void make_ekran_set_function_in_output_led_df_dt_reg(unsigned int number_ekran, 
   {
     if(current_ekran.edition == 0)
     {
-      state_viewing_input[0] = current_settings.ranguvannja_leds[N_BIG*(number_ekran - EKRAN_RANGUVANNJA_LED_1)  ];
-      state_viewing_input[1] = current_settings.ranguvannja_leds[N_BIG*(number_ekran - EKRAN_RANGUVANNJA_LED_1)+1];
-      state_viewing_input[2] = current_settings.ranguvannja_leds[N_BIG*(number_ekran - EKRAN_RANGUVANNJA_LED_1)+2];
-      state_viewing_input[3] = current_settings.ranguvannja_leds[N_BIG*(number_ekran - EKRAN_RANGUVANNJA_LED_1)+3];
-      state_viewing_input[4] = current_settings.ranguvannja_leds[N_BIG*(number_ekran - EKRAN_RANGUVANNJA_LED_1)+4];
-      state_viewing_input[5] = current_settings.ranguvannja_leds[N_BIG*(number_ekran - EKRAN_RANGUVANNJA_LED_1)+5];
+      for (unsigned int i = 0; i < N_BIG; i++)
+      {
+        state_viewing_input[i] = current_settings.ranguvannja_leds[N_BIG*(number_ekran - EKRAN_RANGUVANNJA_LED_1) + i];
+      }
     }
     else
     {
-      state_viewing_input[0] = edition_settings.ranguvannja_leds[N_BIG*(number_ekran - EKRAN_RANGUVANNJA_LED_1)  ];
-      state_viewing_input[1] = edition_settings.ranguvannja_leds[N_BIG*(number_ekran - EKRAN_RANGUVANNJA_LED_1)+1];
-      state_viewing_input[2] = edition_settings.ranguvannja_leds[N_BIG*(number_ekran - EKRAN_RANGUVANNJA_LED_1)+2];
-      state_viewing_input[3] = edition_settings.ranguvannja_leds[N_BIG*(number_ekran - EKRAN_RANGUVANNJA_LED_1)+3];
-      state_viewing_input[4] = edition_settings.ranguvannja_leds[N_BIG*(number_ekran - EKRAN_RANGUVANNJA_LED_1)+4];
-      state_viewing_input[5] = edition_settings.ranguvannja_leds[N_BIG*(number_ekran - EKRAN_RANGUVANNJA_LED_1)+5];
+      for (unsigned int i = 0; i < N_BIG; i++)
+      {
+        state_viewing_input[i] = edition_settings.ranguvannja_leds[N_BIG*(number_ekran - EKRAN_RANGUVANNJA_LED_1) + i];
+      }
     }
     max_row_ranguvannja = MAX_ROW_RANGUVANNJA_LED;
   }
@@ -2074,21 +2038,17 @@ void make_ekran_set_function_in_output_led_df_dt_reg(unsigned int number_ekran, 
   {
     if(current_ekran.edition == 0)
     {
-      state_viewing_input[0] = current_settings.ranguvannja_analog_registrator[0];
-      state_viewing_input[1] = current_settings.ranguvannja_analog_registrator[1];
-      state_viewing_input[2] = current_settings.ranguvannja_analog_registrator[2];
-      state_viewing_input[3] = current_settings.ranguvannja_analog_registrator[3];
-      state_viewing_input[4] = current_settings.ranguvannja_analog_registrator[4];
-      state_viewing_input[5] = current_settings.ranguvannja_analog_registrator[5];
+      for (unsigned int i = 0; i < N_BIG; i++)
+      {
+        state_viewing_input[i] = current_settings.ranguvannja_analog_registrator[i];
+      }
     }
     else
     {
-      state_viewing_input[0] = edition_settings.ranguvannja_analog_registrator[0];
-      state_viewing_input[1] = edition_settings.ranguvannja_analog_registrator[1];
-      state_viewing_input[2] = edition_settings.ranguvannja_analog_registrator[2];
-      state_viewing_input[3] = edition_settings.ranguvannja_analog_registrator[3];
-      state_viewing_input[4] = edition_settings.ranguvannja_analog_registrator[4];
-      state_viewing_input[5] = edition_settings.ranguvannja_analog_registrator[5];
+      for (unsigned int i = 0; i < N_BIG; i++)
+      {
+        state_viewing_input[i] = edition_settings.ranguvannja_analog_registrator[i];
+      }
     }
     max_row_ranguvannja = MAX_ROW_RANGUVANNJA_ANALOG_REGISTRATOR;
   }
@@ -2096,21 +2056,17 @@ void make_ekran_set_function_in_output_led_df_dt_reg(unsigned int number_ekran, 
   {
     if(current_ekran.edition == 0)
     {
-      state_viewing_input[0] = current_settings.ranguvannja_digital_registrator[0];
-      state_viewing_input[1] = current_settings.ranguvannja_digital_registrator[1];
-      state_viewing_input[2] = current_settings.ranguvannja_digital_registrator[2];
-      state_viewing_input[3] = current_settings.ranguvannja_digital_registrator[3];
-      state_viewing_input[4] = current_settings.ranguvannja_digital_registrator[4];
-      state_viewing_input[5] = current_settings.ranguvannja_digital_registrator[5];
+      for (unsigned int i = 0; i < N_BIG; i++)
+      {
+        state_viewing_input[i] = current_settings.ranguvannja_digital_registrator[i];
+      }
     }
     else
     {
-      state_viewing_input[0] = edition_settings.ranguvannja_digital_registrator[0];
-      state_viewing_input[1] = edition_settings.ranguvannja_digital_registrator[1];
-      state_viewing_input[2] = edition_settings.ranguvannja_digital_registrator[2];
-      state_viewing_input[3] = edition_settings.ranguvannja_digital_registrator[3];
-      state_viewing_input[4] = edition_settings.ranguvannja_digital_registrator[4];
-      state_viewing_input[5] = edition_settings.ranguvannja_digital_registrator[5];
+      for (unsigned int i = 0; i < N_BIG; i++)
+      {
+        state_viewing_input[i] = edition_settings.ranguvannja_digital_registrator[i];
+      }
     }
     max_row_ranguvannja = MAX_ROW_RANGUVANNJA_DIGITAL_REGISTRATOR;
   }
@@ -2124,7 +2080,9 @@ void make_ekran_set_function_in_output_led_df_dt_reg(unsigned int number_ekran, 
         (state_viewing_input[2] == 0) &&
         (state_viewing_input[3] == 0) &&
         (state_viewing_input[4] == 0) &&
-        (state_viewing_input[5] == 0)
+        (state_viewing_input[5] == 0) &&
+        (state_viewing_input[6] == 0) &&
+        (state_viewing_input[7] == 0)
        )
     {
       //Це означає, що на даний вхід нічого не відранжовано
@@ -2309,7 +2267,7 @@ void make_ekran_set_function_in_output_led_df_dt_reg(unsigned int number_ekran, 
 
             //Відкидати імена функцій і зміщати біти треба тільки у тому випадку, якщо функції пристні у списку для ранжування для даного захисту
             //Формуємо маску біт, які не треба переміщати при переміщенні імен полів
-            unsigned int maska[N_BIG] = {0, 0, 0, 0, 0, 0};
+            unsigned int maska[N_BIG] = {0, 0, 0, 0, 0, 0, 0, 0};
             unsigned int j1;
             for (j1 = 0; j1 < (min_max_number[i][0] - offset); j1++) _SET_BIT(maska, j1);
           
@@ -2327,40 +2285,23 @@ void make_ekran_set_function_in_output_led_df_dt_reg(unsigned int number_ekran, 
                 /***/
                 unsigned int new_temp_data_1[N_BIG], new_temp_data_2[N_BIG];
 
-                new_temp_data_1[0] = state_viewing_input[0] & maska[0];
-                new_temp_data_1[1] = state_viewing_input[1] & maska[1];
-                new_temp_data_1[2] = state_viewing_input[2] & maska[2];
-                new_temp_data_1[3] = state_viewing_input[3] & maska[3];
-                new_temp_data_1[4] = state_viewing_input[4] & maska[4];
-                new_temp_data_1[5] = state_viewing_input[5] & maska[5];
+                for (unsigned int k = 0; k < N_BIG; k++)
+                {
+                  new_temp_data_1[k] = state_viewing_input[k] & maska[k];
 
-                new_temp_data_2[0] = state_viewing_input[0] & (~maska[0]);
-                new_temp_data_2[1] = state_viewing_input[1] & (~maska[1]);
-                new_temp_data_2[2] = state_viewing_input[2] & (~maska[2]);
-                new_temp_data_2[3] = state_viewing_input[3] & (~maska[3]);
-                new_temp_data_2[4] = state_viewing_input[4] & (~maska[4]);
-                new_temp_data_2[5] = state_viewing_input[5] & (~maska[5]);
+                  new_temp_data_2[k] = state_viewing_input[k] & (~maska[k]);
+                }
 
-                new_temp_data_2[0] = (new_temp_data_2[0] >>1) | ((new_temp_data_2[1] & 0x1) << 31);
-                new_temp_data_2[1] = (new_temp_data_2[1] >>1) | ((new_temp_data_2[2] & 0x1) << 31);
-                new_temp_data_2[2] = (new_temp_data_2[2] >>1) | ((new_temp_data_2[3] & 0x1) << 31);
-                new_temp_data_2[3] = (new_temp_data_2[3] >>1) | ((new_temp_data_2[4] & 0x1) << 31);
-                new_temp_data_2[4] = (new_temp_data_2[4] >>1) | ((new_temp_data_2[5] & 0x1) << 31);
-                new_temp_data_2[5] =  new_temp_data_2[5] >>1;
-
-                new_temp_data_2[0] &= (~maska[0]);
-                new_temp_data_2[1] &= (~maska[1]);
-                new_temp_data_2[2] &= (~maska[2]);
-                new_temp_data_2[3] &= (~maska[3]);
-                new_temp_data_2[4] &= (~maska[4]);
-                new_temp_data_2[5] &= (~maska[5]);
-
-                state_viewing_input[0] = new_temp_data_1[0] | new_temp_data_2[0];
-                state_viewing_input[1] = new_temp_data_1[1] | new_temp_data_2[1];
-                state_viewing_input[2] = new_temp_data_1[2] | new_temp_data_2[2];
-                state_viewing_input[3] = new_temp_data_1[3] | new_temp_data_2[3];
-                state_viewing_input[4] = new_temp_data_1[4] | new_temp_data_2[4];
-                state_viewing_input[5] = new_temp_data_1[5] | new_temp_data_2[5];
+                for (unsigned int k = 0; k < (N_BIG - 1); k++)
+                {
+                  new_temp_data_2[k] = ( (new_temp_data_2[k] >> 1) | ((new_temp_data_2[k + 1] & 0x1) << 31) ) & (~maska[k]);
+                }
+                new_temp_data_2[N_BIG - 1] =  (new_temp_data_2[N_BIG - 1] >> 1) & (~maska[N_BIG - 1]);
+                
+                for (unsigned int k = 0; k < N_BIG; k++)
+                {
+                  state_viewing_input[k] = new_temp_data_1[k] | new_temp_data_2[k];
+                }
                 /***/
                 for (unsigned int j = (index_in_list - offset); j < max_row_ranguvannja; j++)
                 {
@@ -2396,7 +2337,7 @@ void make_ekran_set_function_in_output_led_df_dt_reg(unsigned int number_ekran, 
       {
         //Відкидати імена функцій і зміщати біти треба тільки у тому випадку, якщо функції пристні у списку для ранжування для даного захисту
         //Формуємо маску біт, які не треба переміщати при переміщенні імен полів
-        unsigned int maska[N_BIG] = {0, 0, 0, 0, 0, 0};
+        unsigned int maska[N_BIG] = {0, 0, 0, 0, 0, 0, 0, 0};
         for (unsigned int j = 0; j < (min_max_number[i][0] - offset); j++) _SET_BIT(maska, j);
           
         //Відкидаємо назви функцій із списку, які є зайвими
@@ -2407,40 +2348,23 @@ void make_ekran_set_function_in_output_led_df_dt_reg(unsigned int number_ekran, 
           /***/
           unsigned int new_temp_data_1[N_BIG], new_temp_data_2[N_BIG];
 
-          new_temp_data_1[0] = state_viewing_input[0] & maska[0];
-          new_temp_data_1[1] = state_viewing_input[1] & maska[1];
-          new_temp_data_1[2] = state_viewing_input[2] & maska[2];
-          new_temp_data_1[3] = state_viewing_input[3] & maska[3];
-          new_temp_data_1[4] = state_viewing_input[4] & maska[4];
-          new_temp_data_1[5] = state_viewing_input[5] & maska[5];
+          for (unsigned int k = 0; k < N_BIG; k++)
+          {
+            new_temp_data_1[k] = state_viewing_input[k] & maska[k];
 
-          new_temp_data_2[0] = state_viewing_input[0] & (~maska[0]);
-          new_temp_data_2[1] = state_viewing_input[1] & (~maska[1]);
-          new_temp_data_2[2] = state_viewing_input[2] & (~maska[2]);
-          new_temp_data_2[3] = state_viewing_input[3] & (~maska[3]);
-          new_temp_data_2[4] = state_viewing_input[4] & (~maska[4]);
-          new_temp_data_2[5] = state_viewing_input[5] & (~maska[5]);
+            new_temp_data_2[k] = state_viewing_input[k] & (~maska[k]);
+          }
 
-          new_temp_data_2[0] = (new_temp_data_2[0] >>1) | ((new_temp_data_2[1] & 0x1) << 31);
-          new_temp_data_2[1] = (new_temp_data_2[1] >>1) | ((new_temp_data_2[2] & 0x1) << 31);
-          new_temp_data_2[2] = (new_temp_data_2[2] >>1) | ((new_temp_data_2[3] & 0x1) << 31);
-          new_temp_data_2[3] = (new_temp_data_2[3] >>1) | ((new_temp_data_2[4] & 0x1) << 31);
-          new_temp_data_2[4] = (new_temp_data_2[4] >>1) | ((new_temp_data_2[5] & 0x1) << 31);
-          new_temp_data_2[5] =  new_temp_data_2[5] >>1;
-
-          new_temp_data_2[0] &= (~maska[0]);
-          new_temp_data_2[1] &= (~maska[1]);
-          new_temp_data_2[2] &= (~maska[2]);
-          new_temp_data_2[3] &= (~maska[3]);
-          new_temp_data_2[4] &= (~maska[4]);
-          new_temp_data_2[5] &= (~maska[5]);
-
-          state_viewing_input[0] = new_temp_data_1[0] | new_temp_data_2[0];
-          state_viewing_input[1] = new_temp_data_1[1] | new_temp_data_2[1];
-          state_viewing_input[2] = new_temp_data_1[2] | new_temp_data_2[2];
-          state_viewing_input[3] = new_temp_data_1[3] | new_temp_data_2[3];
-          state_viewing_input[4] = new_temp_data_1[4] | new_temp_data_2[4];
-          state_viewing_input[5] = new_temp_data_1[5] | new_temp_data_2[5];
+          for (unsigned int k = 0; k < (N_BIG - 1); k++)
+          {
+            new_temp_data_2[k] = ( (new_temp_data_2[k] >> 1) | ((new_temp_data_2[k + 1] & 0x1) << 31) ) & (~maska[k]);
+          }
+          new_temp_data_2[N_BIG - 1] =  (new_temp_data_2[N_BIG - 1] >> 1) & (~maska[N_BIG - 1]);
+                
+          for (unsigned int k = 0; k < N_BIG; k++)
+          {
+            state_viewing_input[k] = new_temp_data_1[k] | new_temp_data_2[k];
+          }
           /***/
           for (unsigned int j = (index_in_list - offset); j < max_row_ranguvannja; j++)
           {
@@ -2484,7 +2408,7 @@ void make_ekran_set_function_in_output_led_df_dt_reg(unsigned int number_ekran, 
       /*************************************************************/
 
       //Формуємо маску біт, які не треба переміщати при переміщенні імен полів
-      unsigned int maska[N_BIG] = {0, 0, 0, 0, 0, 0};
+      unsigned int maska[N_BIG] = {0, 0, 0, 0, 0, 0, 0, 0};
       for (unsigned int j = 0; j < index_deleted_function; j++) _SET_BIT(maska, j);
           
       /***/
@@ -2492,40 +2416,23 @@ void make_ekran_set_function_in_output_led_df_dt_reg(unsigned int number_ekran, 
       /***/
       unsigned int new_temp_data_1[N_BIG], new_temp_data_2[N_BIG];
 
-      new_temp_data_1[0] = state_viewing_input[0] & maska[0];
-      new_temp_data_1[1] = state_viewing_input[1] & maska[1];
-      new_temp_data_1[2] = state_viewing_input[2] & maska[2];
-      new_temp_data_1[3] = state_viewing_input[3] & maska[3];
-      new_temp_data_1[4] = state_viewing_input[4] & maska[4];
-      new_temp_data_1[5] = state_viewing_input[5] & maska[5];
+      for (unsigned int k = 0; k < N_BIG; k++)
+      {
+        new_temp_data_1[k] = state_viewing_input[k] & maska[k];
 
-      new_temp_data_2[0] = state_viewing_input[0] & (~maska[0]);
-      new_temp_data_2[1] = state_viewing_input[1] & (~maska[1]);
-      new_temp_data_2[2] = state_viewing_input[2] & (~maska[2]);
-      new_temp_data_2[3] = state_viewing_input[3] & (~maska[3]);
-      new_temp_data_2[4] = state_viewing_input[4] & (~maska[4]);
-      new_temp_data_2[5] = state_viewing_input[5] & (~maska[5]);
+        new_temp_data_2[k] = state_viewing_input[k] & (~maska[k]);
+      }
 
-      new_temp_data_2[0] = (new_temp_data_2[0] >>1) | ((new_temp_data_2[1] & 0x1) << 31);
-      new_temp_data_2[1] = (new_temp_data_2[1] >>1) | ((new_temp_data_2[2] & 0x1) << 31);
-      new_temp_data_2[2] = (new_temp_data_2[2] >>1) | ((new_temp_data_2[3] & 0x1) << 31);
-      new_temp_data_2[3] = (new_temp_data_2[3] >>1) | ((new_temp_data_2[4] & 0x1) << 31);
-      new_temp_data_2[4] = (new_temp_data_2[4] >>1) | ((new_temp_data_2[5] & 0x1) << 31);
-      new_temp_data_2[5] =  new_temp_data_2[5] >>1;
-
-      new_temp_data_2[0] &= (~maska[0]);
-      new_temp_data_2[1] &= (~maska[1]);
-      new_temp_data_2[2] &= (~maska[2]);
-      new_temp_data_2[3] &= (~maska[3]);
-      new_temp_data_2[4] &= (~maska[4]);
-      new_temp_data_2[5] &= (~maska[5]);
-
-      state_viewing_input[0] = new_temp_data_1[0] | new_temp_data_2[0];
-      state_viewing_input[1] = new_temp_data_1[1] | new_temp_data_2[1];
-      state_viewing_input[2] = new_temp_data_1[2] | new_temp_data_2[2];
-      state_viewing_input[3] = new_temp_data_1[3] | new_temp_data_2[3];
-      state_viewing_input[4] = new_temp_data_1[4] | new_temp_data_2[4];
-      state_viewing_input[5] = new_temp_data_1[5] | new_temp_data_2[5];
+      for (unsigned int k = 0; k < (N_BIG - 1); k++)
+      {
+        new_temp_data_2[k] = ( (new_temp_data_2[k] >> 1) | ((new_temp_data_2[k + 1] & 0x1) << 31) ) & (~maska[k]);
+      }
+      new_temp_data_2[N_BIG - 1] =  (new_temp_data_2[N_BIG - 1] >> 1) & (~maska[N_BIG - 1]);
+                
+      for (unsigned int k = 0; k < N_BIG; k++)
+      {
+        state_viewing_input[k] = new_temp_data_1[k] | new_temp_data_2[k];
+      }
       /***/
       for (unsigned int j = index_deleted_function; j < max_row_ranguvannja; j++)
       {
@@ -2603,7 +2510,7 @@ void make_ekran_set_function_in_output_led_df_dt_reg(unsigned int number_ekran, 
         }
         
         //Формуємо маску біт, які не треба переміщати при переміщенні імен полів
-        unsigned int maska[N_BIG] = {0, 0, 0, 0, 0, 0};
+        unsigned int maska[N_BIG] = {0, 0, 0, 0, 0, 0, 0, 0};
         for (unsigned int j = 0; j < index_deleted_function; j++) _SET_BIT(maska, j);
           
         /***/
@@ -2611,40 +2518,23 @@ void make_ekran_set_function_in_output_led_df_dt_reg(unsigned int number_ekran, 
         /***/
         unsigned int new_temp_data_1[N_BIG], new_temp_data_2[N_BIG];
 
-        new_temp_data_1[0] = state_viewing_input[0] & maska[0];
-        new_temp_data_1[1] = state_viewing_input[1] & maska[1];
-        new_temp_data_1[2] = state_viewing_input[2] & maska[2];
-        new_temp_data_1[3] = state_viewing_input[3] & maska[3];
-        new_temp_data_1[4] = state_viewing_input[4] & maska[4];
-        new_temp_data_1[5] = state_viewing_input[5] & maska[5];
+        for (unsigned int k = 0; k < N_BIG; k++)
+        {
+          new_temp_data_1[k] = state_viewing_input[k] & maska[k];
 
-        new_temp_data_2[0] = state_viewing_input[0] & (~maska[0]);
-        new_temp_data_2[1] = state_viewing_input[1] & (~maska[1]);
-        new_temp_data_2[2] = state_viewing_input[2] & (~maska[2]);
-        new_temp_data_2[3] = state_viewing_input[3] & (~maska[3]);
-        new_temp_data_2[4] = state_viewing_input[4] & (~maska[4]);
-        new_temp_data_2[5] = state_viewing_input[5] & (~maska[5]);
+          new_temp_data_2[k] = state_viewing_input[k] & (~maska[k]);
+        }
 
-        new_temp_data_2[0] = (new_temp_data_2[0] >>1) | ((new_temp_data_2[1] & 0x1) << 31);
-        new_temp_data_2[1] = (new_temp_data_2[1] >>1) | ((new_temp_data_2[2] & 0x1) << 31);
-        new_temp_data_2[2] = (new_temp_data_2[2] >>1) | ((new_temp_data_2[3] & 0x1) << 31);
-        new_temp_data_2[3] = (new_temp_data_2[3] >>1) | ((new_temp_data_2[4] & 0x1) << 31);
-        new_temp_data_2[4] = (new_temp_data_2[4] >>1) | ((new_temp_data_2[5] & 0x1) << 31);
-        new_temp_data_2[5] =  new_temp_data_2[5] >>1;
-
-        new_temp_data_2[0] &= (~maska[0]);
-        new_temp_data_2[1] &= (~maska[1]);
-        new_temp_data_2[2] &= (~maska[2]);
-        new_temp_data_2[3] &= (~maska[3]);
-        new_temp_data_2[4] &= (~maska[4]);
-        new_temp_data_2[5] &= (~maska[5]);
-
-        state_viewing_input[0] = new_temp_data_1[0] | new_temp_data_2[0];
-        state_viewing_input[1] = new_temp_data_1[1] | new_temp_data_2[1];
-        state_viewing_input[2] = new_temp_data_1[2] | new_temp_data_2[2];
-        state_viewing_input[3] = new_temp_data_1[3] | new_temp_data_2[3];
-        state_viewing_input[4] = new_temp_data_1[4] | new_temp_data_2[4];
-        state_viewing_input[5] = new_temp_data_1[5] | new_temp_data_2[5];
+        for (unsigned int k = 0; k < (N_BIG - 1); k++)
+        {
+          new_temp_data_2[k] = ( (new_temp_data_2[k] >> 1) | ((new_temp_data_2[k + 1] & 0x1) << 31) ) & (~maska[k]);
+        }
+        new_temp_data_2[N_BIG - 1] =  (new_temp_data_2[N_BIG - 1] >> 1) & (~maska[N_BIG - 1]);
+                
+        for (unsigned int k = 0; k < N_BIG; k++)
+        {
+          state_viewing_input[k] = new_temp_data_1[k] | new_temp_data_2[k];
+        }
         /***/
         for (unsigned int j = index_deleted_function; j < max_row_ranguvannja; j++)
         {
@@ -2717,7 +2607,7 @@ void make_ekran_set_function_in_output_led_df_dt_reg(unsigned int number_ekran, 
         }
         
         //Формуємо маску біт, які не треба переміщати при переміщенні імен полів
-        unsigned int maska[N_BIG] = {0, 0, 0, 0, 0, 0};
+        unsigned int maska[N_BIG] = {0, 0, 0, 0, 0, 0, 0, 0};
         for (unsigned int j = 0; j < index_deleted_function; j++) _SET_BIT(maska, j);
           
         /***/
@@ -2725,40 +2615,23 @@ void make_ekran_set_function_in_output_led_df_dt_reg(unsigned int number_ekran, 
         /***/
         unsigned int new_temp_data_1[N_BIG], new_temp_data_2[N_BIG];
 
-        new_temp_data_1[0] = state_viewing_input[0] & maska[0];
-        new_temp_data_1[1] = state_viewing_input[1] & maska[1];
-        new_temp_data_1[2] = state_viewing_input[2] & maska[2];
-        new_temp_data_1[3] = state_viewing_input[3] & maska[3];
-        new_temp_data_1[4] = state_viewing_input[4] & maska[4];
-        new_temp_data_1[5] = state_viewing_input[5] & maska[5];
+        for (unsigned int k = 0; k < N_BIG; k++)
+        {
+          new_temp_data_1[k] = state_viewing_input[k] & maska[k];
 
-        new_temp_data_2[0] = state_viewing_input[0] & (~maska[0]);
-        new_temp_data_2[1] = state_viewing_input[1] & (~maska[1]);
-        new_temp_data_2[2] = state_viewing_input[2] & (~maska[2]);
-        new_temp_data_2[3] = state_viewing_input[3] & (~maska[3]);
-        new_temp_data_2[4] = state_viewing_input[4] & (~maska[4]);
-        new_temp_data_2[5] = state_viewing_input[5] & (~maska[5]);
+          new_temp_data_2[k] = state_viewing_input[k] & (~maska[k]);
+        }
 
-        new_temp_data_2[0] = (new_temp_data_2[0] >>1) | ((new_temp_data_2[1] & 0x1) << 31);
-        new_temp_data_2[1] = (new_temp_data_2[1] >>1) | ((new_temp_data_2[2] & 0x1) << 31);
-        new_temp_data_2[2] = (new_temp_data_2[2] >>1) | ((new_temp_data_2[3] & 0x1) << 31);
-        new_temp_data_2[3] = (new_temp_data_2[3] >>1) | ((new_temp_data_2[4] & 0x1) << 31);
-        new_temp_data_2[4] = (new_temp_data_2[4] >>1) | ((new_temp_data_2[5] & 0x1) << 31);
-        new_temp_data_2[5] =  new_temp_data_2[5] >>1;
-
-        new_temp_data_2[0] &= (~maska[0]);
-        new_temp_data_2[1] &= (~maska[1]);
-        new_temp_data_2[2] &= (~maska[2]);
-        new_temp_data_2[3] &= (~maska[3]);
-        new_temp_data_2[4] &= (~maska[4]);
-        new_temp_data_2[5] &= (~maska[5]);
-
-        state_viewing_input[0] = new_temp_data_1[0] | new_temp_data_2[0];
-        state_viewing_input[1] = new_temp_data_1[1] | new_temp_data_2[1];
-        state_viewing_input[2] = new_temp_data_1[2] | new_temp_data_2[2];
-        state_viewing_input[3] = new_temp_data_1[3] | new_temp_data_2[3];
-        state_viewing_input[4] = new_temp_data_1[4] | new_temp_data_2[4];
-        state_viewing_input[5] = new_temp_data_1[5] | new_temp_data_2[5];
+        for (unsigned int k = 0; k < (N_BIG - 1); k++)
+        {
+          new_temp_data_2[k] = ( (new_temp_data_2[k] >> 1) | ((new_temp_data_2[k + 1] & 0x1) << 31) ) & (~maska[k]);
+        }
+        new_temp_data_2[N_BIG - 1] =  (new_temp_data_2[N_BIG - 1] >> 1) & (~maska[N_BIG - 1]);
+                
+        for (unsigned int k = 0; k < N_BIG; k++)
+        {
+          state_viewing_input[k] = new_temp_data_1[k] | new_temp_data_2[k];
+        }
         /***/
         for (unsigned int j = index_deleted_function; j < max_row_ranguvannja; j++)
         {
@@ -2793,7 +2666,7 @@ void make_ekran_set_function_in_output_led_df_dt_reg(unsigned int number_ekran, 
       for (i = 0; i < 2; i++)
       {
         unsigned int index_deleted_function;
-        unsigned int maska_func[N_BIG] = {0, 0, 0, 0, 0, 0};
+        unsigned int maska_func[N_BIG] = {0, 0, 0, 0, 0, 0, 0, 0};
         unsigned int need_filtration = 0;
         //Визначаємо індекс функції, яку потенційно можливо треба буде фільтрувати із сприску
         //Першою фільтруємо функцію з більшим номером, щоб немати порблем з формуванням маски ,коли вже попердньо перша фільтрація проведена
@@ -2821,7 +2694,9 @@ void make_ekran_set_function_in_output_led_df_dt_reg(unsigned int number_ekran, 
                 ((current_settings.ranguvannja_outputs[N_BIG*index + 2] & maska_func[2]) != 0) ||
                 ((current_settings.ranguvannja_outputs[N_BIG*index + 3] & maska_func[3]) != 0) ||
                 ((current_settings.ranguvannja_outputs[N_BIG*index + 4] & maska_func[4]) != 0) ||
-                ((current_settings.ranguvannja_outputs[N_BIG*index + 5] & maska_func[5]) != 0)
+                ((current_settings.ranguvannja_outputs[N_BIG*index + 5] & maska_func[5]) != 0) ||
+                ((current_settings.ranguvannja_outputs[N_BIG*index + 6] & maska_func[6]) != 0) ||
+                ((current_settings.ranguvannja_outputs[N_BIG*index + 7] & maska_func[7]) != 0)
                )
             {
               need_filtration = 1;
@@ -2834,7 +2709,7 @@ void make_ekran_set_function_in_output_led_df_dt_reg(unsigned int number_ekran, 
         if (need_filtration != 0)
         {
           //Формуємо маску біт, які не треба переміщати при переміщенні імен полів
-          unsigned int maska[N_BIG] = {0, 0, 0, 0, 0, 0};
+          unsigned int maska[N_BIG] = {0, 0, 0, 0, 0, 0, 0, 0};
           for (unsigned int j = 0; j < index_deleted_function; j++) _SET_BIT(maska, j);
           
           /***/
@@ -2842,40 +2717,23 @@ void make_ekran_set_function_in_output_led_df_dt_reg(unsigned int number_ekran, 
           /***/
           unsigned int new_temp_data_1[N_BIG], new_temp_data_2[N_BIG];
 
-          new_temp_data_1[0] = state_viewing_input[0] & maska[0];
-          new_temp_data_1[1] = state_viewing_input[1] & maska[1];
-          new_temp_data_1[2] = state_viewing_input[2] & maska[2];
-          new_temp_data_1[3] = state_viewing_input[3] & maska[3];
-          new_temp_data_1[4] = state_viewing_input[4] & maska[4];
-          new_temp_data_1[5] = state_viewing_input[5] & maska[5];
+          for (unsigned int k = 0; k < N_BIG; k++)
+          {
+            new_temp_data_1[k] = state_viewing_input[k] & maska[k];
 
-          new_temp_data_2[0] = state_viewing_input[0] & (~maska[0]);
-          new_temp_data_2[1] = state_viewing_input[1] & (~maska[1]);
-          new_temp_data_2[2] = state_viewing_input[2] & (~maska[2]);
-          new_temp_data_2[3] = state_viewing_input[3] & (~maska[3]);
-          new_temp_data_2[4] = state_viewing_input[4] & (~maska[4]);
-          new_temp_data_2[5] = state_viewing_input[5] & (~maska[5]);
+            new_temp_data_2[k] = state_viewing_input[k] & (~maska[k]);
+          }
 
-          new_temp_data_2[0] = (new_temp_data_2[0] >>1) | ((new_temp_data_2[1] & 0x1) << 31);
-          new_temp_data_2[1] = (new_temp_data_2[1] >>1) | ((new_temp_data_2[2] & 0x1) << 31);
-          new_temp_data_2[2] = (new_temp_data_2[2] >>1) | ((new_temp_data_2[3] & 0x1) << 31);
-          new_temp_data_2[3] = (new_temp_data_2[3] >>1) | ((new_temp_data_2[4] & 0x1) << 31);
-          new_temp_data_2[4] = (new_temp_data_2[4] >>1) | ((new_temp_data_2[5] & 0x1) << 31);
-          new_temp_data_2[5] =  new_temp_data_2[5] >>1;
-
-          new_temp_data_2[0] &= (~maska[0]);
-          new_temp_data_2[1] &= (~maska[1]);
-          new_temp_data_2[2] &= (~maska[2]);
-          new_temp_data_2[3] &= (~maska[3]);
-          new_temp_data_2[4] &= (~maska[4]);
-          new_temp_data_2[5] &= (~maska[5]);
-
-          state_viewing_input[0] = new_temp_data_1[0] | new_temp_data_2[0];
-          state_viewing_input[1] = new_temp_data_1[1] | new_temp_data_2[1];
-          state_viewing_input[2] = new_temp_data_1[2] | new_temp_data_2[2];
-          state_viewing_input[3] = new_temp_data_1[3] | new_temp_data_2[3];
-          state_viewing_input[4] = new_temp_data_1[4] | new_temp_data_2[4];
-          state_viewing_input[5] = new_temp_data_1[5] | new_temp_data_2[5];
+          for (unsigned int k = 0; k < (N_BIG - 1); k++)
+          {
+            new_temp_data_2[k] = ( (new_temp_data_2[k] >> 1) | ((new_temp_data_2[k + 1] & 0x1) << 31) ) & (~maska[k]);
+          }
+          new_temp_data_2[N_BIG - 1] =  (new_temp_data_2[N_BIG - 1] >> 1) & (~maska[N_BIG - 1]);
+                
+          for (unsigned int k = 0; k < N_BIG; k++)
+          {
+            state_viewing_input[k] = new_temp_data_1[k] | new_temp_data_2[k];
+          }
           /***/
           for (unsigned int j = index_deleted_function; j < max_row_ranguvannja; j++)
           {

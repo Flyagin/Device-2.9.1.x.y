@@ -1,7 +1,7 @@
 #ifndef __CONST_GLOBAL__
 #define __CONST_GLOBAL__
 
-#define N_BIG   6
+#define N_BIG   8
 #define N_SMALL 2
 
 //Величина, яка необхідна для періодичної (період 1  мс   ) генерації переривань каналом 1 таймеру 2 з прескаллером 2000 = (1999 + 1)
@@ -502,6 +502,8 @@ enum __mtz_abc_direction_const {
 #define MASKA_FOR_DF_TRIGGERS_SIGNALS_3                  0
 #define MASKA_FOR_DF_TRIGGERS_SIGNALS_4                  0
 #define MASKA_FOR_DF_TRIGGERS_SIGNALS_5                  0
+#define MASKA_FOR_DF_TRIGGERS_SIGNALS_6                  0
+#define MASKA_FOR_DF_TRIGGERS_SIGNALS_7                  0
 
 #define MASKA_FOR_ON_OFF_SIGNALS_0                       0
 #define MASKA_FOR_ON_OFF_SIGNALS_1        (unsigned int)(                        \
@@ -513,6 +515,8 @@ enum __mtz_abc_direction_const {
 #define MASKA_FOR_ON_OFF_SIGNALS_3                       0
 #define MASKA_FOR_ON_OFF_SIGNALS_4                       0
 #define MASKA_FOR_ON_OFF_SIGNALS_5                       0
+#define MASKA_FOR_ON_OFF_SIGNALS_6                       0
+#define MASKA_FOR_ON_OFF_SIGNALS_7                       0
 
 #define MASKA_FOR_READY_TU_SIGNALS_0                     0
 #define MASKA_FOR_READY_TU_SIGNALS_1        (unsigned int)(                      \
@@ -522,6 +526,8 @@ enum __mtz_abc_direction_const {
 #define MASKA_FOR_READY_TU_SIGNALS_3                     0
 #define MASKA_FOR_READY_TU_SIGNALS_4                     0
 #define MASKA_FOR_READY_TU_SIGNALS_5                     0
+#define MASKA_FOR_READY_TU_SIGNALS_6                     0
+#define MASKA_FOR_READY_TU_SIGNALS_7                     0
 
 #define MASKA_FOR_RESURS_VV_SIGNALS_0                    0
 #define MASKA_FOR_RESURS_VV_SIGNALS_1     (unsigned int)(                        \
@@ -533,6 +539,8 @@ enum __mtz_abc_direction_const {
 #define MASKA_FOR_RESURS_VV_SIGNALS_3                    0
 #define MASKA_FOR_RESURS_VV_SIGNALS_4                    0
 #define MASKA_FOR_RESURS_VV_SIGNALS_5                    0
+#define MASKA_FOR_RESURS_VV_SIGNALS_6                    0
+#define MASKA_FOR_RESURS_VV_SIGNALS_7                    0
 
 #define MASKA_FOR_REJESTRATORS_AND_DEFECT_SIGNALS_0      0
 #define MASKA_FOR_REJESTRATORS_AND_DEFECT_SIGNALS_1     (unsigned int)(          \
@@ -544,6 +552,8 @@ enum __mtz_abc_direction_const {
 #define MASKA_FOR_REJESTRATORS_AND_DEFECT_SIGNALS_3      0
 #define MASKA_FOR_REJESTRATORS_AND_DEFECT_SIGNALS_4      0
 #define MASKA_FOR_REJESTRATORS_AND_DEFECT_SIGNALS_5      0
+#define MASKA_FOR_REJESTRATORS_AND_DEFECT_SIGNALS_6      0
+#define MASKA_FOR_REJESTRATORS_AND_DEFECT_SIGNALS_7      0
 /*****************************************/
 
 /*****************************************/
@@ -561,6 +571,8 @@ enum __mtz_abc_direction_const {
 #define MASKA_TRIGGER_SIGNALES_3                  0
 #define MASKA_TRIGGER_SIGNALES_4                  0
 #define MASKA_TRIGGER_SIGNALES_5                  0
+#define MASKA_TRIGGER_SIGNALES_6                  0
+#define MASKA_TRIGGER_SIGNALES_7                  0
 /*****************************************/
 
 /*****************************************/
@@ -653,6 +665,10 @@ enum __mtz_abc_direction_const {
    | (1 << (RANG_OUTPUT_LED_DF_REG_PO_UMAX2 - 160))                     /*184*/\
    | (1 << (RANG_OUTPUT_LED_DF_REG_UMAX2 - 160))                        /*186*/\
 )
+
+#define MASKA_SIGNALES_FOR_LOCK_GROUP_PICKUP_6  0
+#define MASKA_SIGNALES_FOR_LOCK_GROUP_PICKUP_7  0
+
 /*****************************************/
 
 /*****************************************/
@@ -671,6 +687,8 @@ enum __mtz_abc_direction_const {
 #define MASKA_INFO_SIGNALES_3                  0
 #define MASKA_INFO_SIGNALES_4                  0
 #define MASKA_INFO_SIGNALES_5                  0
+#define MASKA_INFO_SIGNALES_6                  0
+#define MASKA_INFO_SIGNALES_7                  0
 /*****************************************/
 
 /*****************************************/
@@ -746,7 +764,10 @@ enum __mtz_abc_direction_const {
    | (1 << (RANG_OUTPUT_LED_DF_REG_UMAX1 - 160))                /*183*/  \
    | (1 << (RANG_OUTPUT_LED_DF_REG_PO_UMAX2 - 160))             /*185*/  \
    | (1 << (RANG_OUTPUT_LED_DF_REG_UMAX2 - 160))                /*186*/  \
-)  
+)
+
+#define MASKA_FOR_CONTINUE_GET_DR_ACTINE_WORD_6        0
+#define MASKA_FOR_CONTINUE_GET_DR_ACTINE_WORD_7        0
 /*****************************************/
 
 /*****************************************/
@@ -781,6 +802,8 @@ enum __mtz_abc_direction_const {
 #define MASKA_MONITOTYNG_PHASE_SIGNALES_3        0
 #define MASKA_MONITOTYNG_PHASE_SIGNALES_4        0
 #define MASKA_MONITOTYNG_PHASE_SIGNALES_5        0
+#define MASKA_MONITOTYNG_PHASE_SIGNALES_6        0
+#define MASKA_MONITOTYNG_PHASE_SIGNALES_7        0
 /*****************************************/
 
 /*****************************************/
@@ -799,6 +822,8 @@ enum __mtz_abc_direction_const {
 
 #define MASKA_MONITOTYNG_PHASE04_SIGNALES_4        0
 #define MASKA_MONITOTYNG_PHASE04_SIGNALES_5        0
+#define MASKA_MONITOTYNG_PHASE04_SIGNALES_6        0
+#define MASKA_MONITOTYNG_PHASE04_SIGNALES_7        0
 /*****************************************/
 
 /*****************************************/
@@ -834,6 +859,8 @@ enum __mtz_abc_direction_const {
 )            
 
 #define MASKA_MONITOTYNG_3I0_SIGNALES_5        0
+#define MASKA_MONITOTYNG_3I0_SIGNALES_6        0
+#define MASKA_MONITOTYNG_3I0_SIGNALES_7        0
 /*****************************************/
 
 /*****************************************/
@@ -869,6 +896,8 @@ enum __mtz_abc_direction_const {
 )            
 
 #define MASKA_MONITOTYNG_3U0_SIGNALES_5        0
+#define MASKA_MONITOTYNG_3U0_SIGNALES_6        0
+#define MASKA_MONITOTYNG_3U0_SIGNALES_7        0
 /*****************************************/
 
 /*****************************************/
@@ -886,6 +915,9 @@ enum __mtz_abc_direction_const {
    | (1 << (RANG_OUTPUT_LED_DF_REG_PO_UMIN2 - 160))/*177*/ \
    | (1 << (RANG_OUTPUT_LED_DF_REG_UMIN2 - 160))   /*181*/ \
 )
+
+#define MASKA_MONITOTYNG_UMIN_SIGNALES_6        0
+#define MASKA_MONITOTYNG_UMIN_SIGNALES_7        0
 /*****************************************/
 
 /*****************************************/
@@ -903,6 +935,9 @@ enum __mtz_abc_direction_const {
    | (1 << (RANG_OUTPUT_LED_DF_REG_PO_UMAX2 - 160))/*185*/ \
    | (1 << (RANG_OUTPUT_LED_DF_REG_UMAX2 - 160))   /*186*/ \
 )
+
+#define MASKA_MONITOTYNG_UMAX_SIGNALES_6        0
+#define MASKA_MONITOTYNG_UMAX_SIGNALES_7        0
 /*****************************************/
 
 /*****************************************/
@@ -919,6 +954,8 @@ enum __mtz_abc_direction_const {
    | (1 << (RANG_OUTPUT_LED_DF_REG_ZOP - 160))   /*169*/  \
 )
 
+#define MASKA_MONITOTYNG_ZOP_SIGNALES_6                  0
+#define MASKA_MONITOTYNG_ZOP_SIGNALES_7                  0
 /*****************************************/
 
 /*****************************************/
@@ -938,6 +975,9 @@ enum __mtz_abc_direction_const {
 #define MASKA_MONITOTYNG_F_MIN_ACHR_SIGNALES_5   (unsigned int)(  \
      (1 << (RANG_OUTPUT_LED_DF_REG_ACHR_CHAPV2 - 160)) /*161*/  \
 )     
+
+#define MASKA_MONITOTYNG_F_MIN_ACHR_SIGNALES_6   0
+#define MASKA_MONITOTYNG_F_MIN_ACHR_SIGNALES_7   0
 /*****************************************/
 
 /*****************************************/
@@ -968,6 +1008,8 @@ enum __mtz_abc_direction_const {
 #define MASKA_MONITOTYNG_PHASE_SIGNALES_KZ_3        0
 #define MASKA_MONITOTYNG_PHASE_SIGNALES_KZ_4        0
 #define MASKA_MONITOTYNG_PHASE_SIGNALES_KZ_5        0
+#define MASKA_MONITOTYNG_PHASE_SIGNALES_KZ_6        0
+#define MASKA_MONITOTYNG_PHASE_SIGNALES_KZ_7        0
 /*****************************************/
 
 

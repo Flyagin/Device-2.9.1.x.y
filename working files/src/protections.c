@@ -1571,7 +1571,7 @@ inline void df_handler(unsigned int *activated_functions, unsigned int *previous
   Джерела активації формуємо в source_activation_df
   Формуємо маску вже активних функцій у maska_active_df
   */
-  unsigned int source_activation_df = 0, maska_active_df[N_BIG] = {0, 0, 0, 0, 0, 0};
+  unsigned int source_activation_df = 0, maska_active_df[N_BIG] = {0, 0, 0, 0, 0, 0, 0, 0};
   for (unsigned int i = 0; i < NUMBER_DEFINED_FUNCTIONS; i++)
   {
     unsigned int number_byte_in, number_bit_in, number_byte_out, number_bit_out;
@@ -1703,7 +1703,9 @@ inline void df_handler(unsigned int *activated_functions, unsigned int *previous
         (current_settings_prt.ranguvannja_df_source_plus[N_BIG*i + 2] !=0) ||
         (current_settings_prt.ranguvannja_df_source_plus[N_BIG*i + 3] !=0) ||
         (current_settings_prt.ranguvannja_df_source_plus[N_BIG*i + 4] !=0) ||
-        (current_settings_prt.ranguvannja_df_source_plus[N_BIG*i + 5] !=0)
+        (current_settings_prt.ranguvannja_df_source_plus[N_BIG*i + 5] !=0) ||
+        (current_settings_prt.ranguvannja_df_source_plus[N_BIG*i + 6] !=0) ||
+        (current_settings_prt.ranguvannja_df_source_plus[N_BIG*i + 7] !=0)
        )
     {
       //Випадок, якщо функції зранжовані на джерело прямих функцій
@@ -1713,7 +1715,9 @@ inline void df_handler(unsigned int *activated_functions, unsigned int *previous
          ( ( current_settings_prt.ranguvannja_df_source_plus[N_BIG*i + 2] & (activated_functions[2] | previous_stats_signals[2] | maska_active_df[2]) ) != 0) ||
          ( ( current_settings_prt.ranguvannja_df_source_plus[N_BIG*i + 3] & (activated_functions[3] | previous_stats_signals[3] | maska_active_df[3]) ) != 0) ||
          ( ( current_settings_prt.ranguvannja_df_source_plus[N_BIG*i + 4] & (activated_functions[4] | previous_stats_signals[4] | maska_active_df[4]) ) != 0) ||
-         ( ( current_settings_prt.ranguvannja_df_source_plus[N_BIG*i + 5] & (activated_functions[5] | previous_stats_signals[5] | maska_active_df[5]) ) != 0) 
+         ( ( current_settings_prt.ranguvannja_df_source_plus[N_BIG*i + 5] & (activated_functions[5] | previous_stats_signals[5] | maska_active_df[5]) ) != 0) ||
+         ( ( current_settings_prt.ranguvannja_df_source_plus[N_BIG*i + 6] & (activated_functions[6] | previous_stats_signals[6] | maska_active_df[6]) ) != 0) ||
+         ( ( current_settings_prt.ranguvannja_df_source_plus[N_BIG*i + 7] & (activated_functions[7] | previous_stats_signals[7] | maska_active_df[7]) ) != 0) 
         )
       {
         source_activation_df |= (1 << i);
@@ -1726,7 +1730,9 @@ inline void df_handler(unsigned int *activated_functions, unsigned int *previous
         (current_settings_prt.ranguvannja_df_source_minus[N_BIG*i + 2] !=0) ||
         (current_settings_prt.ranguvannja_df_source_minus[N_BIG*i + 3] !=0) ||
         (current_settings_prt.ranguvannja_df_source_minus[N_BIG*i + 4] !=0) ||
-        (current_settings_prt.ranguvannja_df_source_minus[N_BIG*i + 5] !=0)
+        (current_settings_prt.ranguvannja_df_source_minus[N_BIG*i + 5] !=0) ||
+        (current_settings_prt.ranguvannja_df_source_minus[N_BIG*i + 6] !=0) ||
+        (current_settings_prt.ranguvannja_df_source_minus[N_BIG*i + 7] !=0)
        )
     {
       //Випадок, якщо функції зранжовані на джерело інверсних функцій
@@ -1736,7 +1742,9 @@ inline void df_handler(unsigned int *activated_functions, unsigned int *previous
          ( ( current_settings_prt.ranguvannja_df_source_minus[N_BIG*i + 2] & ((unsigned int)(~(activated_functions[2] | previous_stats_signals[2] | maska_active_df[2]))) ) != 0 ) ||
          ( ( current_settings_prt.ranguvannja_df_source_minus[N_BIG*i + 3] & ((unsigned int)(~(activated_functions[3] | previous_stats_signals[3] | maska_active_df[3]))) ) != 0 ) ||
          ( ( current_settings_prt.ranguvannja_df_source_minus[N_BIG*i + 4] & ((unsigned int)(~(activated_functions[4] | previous_stats_signals[4] | maska_active_df[4]))) ) != 0 ) ||
-         ( ( current_settings_prt.ranguvannja_df_source_minus[N_BIG*i + 5] & ((unsigned int)(~(activated_functions[5] | previous_stats_signals[5] | maska_active_df[5]))) ) != 0 )
+         ( ( current_settings_prt.ranguvannja_df_source_minus[N_BIG*i + 5] & ((unsigned int)(~(activated_functions[5] | previous_stats_signals[5] | maska_active_df[5]))) ) != 0 ) ||
+         ( ( current_settings_prt.ranguvannja_df_source_minus[N_BIG*i + 6] & ((unsigned int)(~(activated_functions[6] | previous_stats_signals[6] | maska_active_df[6]))) ) != 0 ) ||
+         ( ( current_settings_prt.ranguvannja_df_source_minus[N_BIG*i + 7] & ((unsigned int)(~(activated_functions[7] | previous_stats_signals[7] | maska_active_df[7]))) ) != 0 )
         )
       {
         source_activation_df |= (1<< i);
@@ -1749,7 +1757,9 @@ inline void df_handler(unsigned int *activated_functions, unsigned int *previous
         (current_settings_prt.ranguvannja_df_source_blk[N_BIG*i + 2] !=0) ||
         (current_settings_prt.ranguvannja_df_source_blk[N_BIG*i + 3] !=0) ||
         (current_settings_prt.ranguvannja_df_source_blk[N_BIG*i + 4] !=0) ||
-        (current_settings_prt.ranguvannja_df_source_blk[N_BIG*i + 5] !=0)
+        (current_settings_prt.ranguvannja_df_source_blk[N_BIG*i + 5] !=0) ||
+        (current_settings_prt.ranguvannja_df_source_blk[N_BIG*i + 6] !=0) ||
+        (current_settings_prt.ranguvannja_df_source_blk[N_BIG*i + 7] !=0)
        )
     {
       //Випадок, якщо функції зранжовані насправді на джерело блокування
@@ -1759,7 +1769,9 @@ inline void df_handler(unsigned int *activated_functions, unsigned int *previous
          ( ( current_settings_prt.ranguvannja_df_source_blk[N_BIG*i + 2] & (activated_functions[2] | previous_stats_signals[2] | maska_active_df[2]) ) != 0 ) ||
          ( ( current_settings_prt.ranguvannja_df_source_blk[N_BIG*i + 3] & (activated_functions[3] | previous_stats_signals[3] | maska_active_df[3]) ) != 0 ) ||
          ( ( current_settings_prt.ranguvannja_df_source_blk[N_BIG*i + 4] & (activated_functions[4] | previous_stats_signals[4] | maska_active_df[4]) ) != 0 ) ||
-         ( ( current_settings_prt.ranguvannja_df_source_blk[N_BIG*i + 5] & (activated_functions[5] | previous_stats_signals[5] | maska_active_df[5]) ) != 0 )
+         ( ( current_settings_prt.ranguvannja_df_source_blk[N_BIG*i + 5] & (activated_functions[5] | previous_stats_signals[5] | maska_active_df[5]) ) != 0 ) ||
+         ( ( current_settings_prt.ranguvannja_df_source_blk[N_BIG*i + 6] & (activated_functions[6] | previous_stats_signals[6] | maska_active_df[6]) ) != 0 ) ||
+         ( ( current_settings_prt.ranguvannja_df_source_blk[N_BIG*i + 7] & (activated_functions[7] | previous_stats_signals[7] | maska_active_df[7]) ) != 0 )
         )
       {
         source_blk_df |= (1<< i);
@@ -1981,7 +1993,7 @@ inline void dt_handler(unsigned int *activated_functions, unsigned int *previous
   Джерела скидання формуємо в source_reset_dt
   Формуємо маску вже активних функцій у maska_active_dt
   */
-  unsigned int state_defined_triggers = 0, source_set_dt = 0, source_reset_dt = 0, maska_active_dt[N_BIG] = {0, 0, 0, 0, 0, 0};
+  unsigned int state_defined_triggers = 0, source_set_dt = 0, source_reset_dt = 0, maska_active_dt[N_BIG] = {0, 0, 0, 0, 0, 0, 0, 0};
   for (unsigned int i = 0; i < NUMBER_DEFINED_TRIGGERS; i++)
   {
     unsigned int number_byte_set, number_bit_set, number_byte_reset, number_bit_reset;
@@ -2068,7 +2080,9 @@ inline void dt_handler(unsigned int *activated_functions, unsigned int *previous
         (current_settings_prt.ranguvannja_set_dt_source_plus[N_BIG*i + 2] !=0) ||
         (current_settings_prt.ranguvannja_set_dt_source_plus[N_BIG*i + 3] !=0) ||
         (current_settings_prt.ranguvannja_set_dt_source_plus[N_BIG*i + 4] !=0) ||
-        (current_settings_prt.ranguvannja_set_dt_source_plus[N_BIG*i + 5] !=0)
+        (current_settings_prt.ranguvannja_set_dt_source_plus[N_BIG*i + 5] !=0) ||
+        (current_settings_prt.ranguvannja_set_dt_source_plus[N_BIG*i + 6] !=0) ||
+        (current_settings_prt.ranguvannja_set_dt_source_plus[N_BIG*i + 7] !=0)
        )
     {
       //Випадок, якщо функції зранжовані на джерело прямих функцій
@@ -2078,7 +2092,9 @@ inline void dt_handler(unsigned int *activated_functions, unsigned int *previous
          (( current_settings_prt.ranguvannja_set_dt_source_plus[N_BIG*i + 2] & (activated_functions[2] | previous_stats_signals[2] | maska_active_dt[2])) != 0) ||
          (( current_settings_prt.ranguvannja_set_dt_source_plus[N_BIG*i + 3] & (activated_functions[3] | previous_stats_signals[3] | maska_active_dt[3])) != 0) ||
          (( current_settings_prt.ranguvannja_set_dt_source_plus[N_BIG*i + 4] & (activated_functions[4] | previous_stats_signals[4] | maska_active_dt[4])) != 0) ||
-         (( current_settings_prt.ranguvannja_set_dt_source_plus[N_BIG*i + 5] & (activated_functions[5] | previous_stats_signals[5] | maska_active_dt[5])) != 0)
+         (( current_settings_prt.ranguvannja_set_dt_source_plus[N_BIG*i + 5] & (activated_functions[5] | previous_stats_signals[5] | maska_active_dt[5])) != 0) ||
+         (( current_settings_prt.ranguvannja_set_dt_source_plus[N_BIG*i + 6] & (activated_functions[6] | previous_stats_signals[6] | maska_active_dt[6])) != 0) ||
+         (( current_settings_prt.ranguvannja_set_dt_source_plus[N_BIG*i + 7] & (activated_functions[7] | previous_stats_signals[7] | maska_active_dt[7])) != 0)
         )
       {
         source_set_dt |= (1 << i);
@@ -2091,7 +2107,9 @@ inline void dt_handler(unsigned int *activated_functions, unsigned int *previous
         (current_settings_prt.ranguvannja_set_dt_source_minus[N_BIG*i + 2] !=0) ||
         (current_settings_prt.ranguvannja_set_dt_source_minus[N_BIG*i + 3] !=0) ||
         (current_settings_prt.ranguvannja_set_dt_source_minus[N_BIG*i + 4] !=0) ||
-        (current_settings_prt.ranguvannja_set_dt_source_minus[N_BIG*i + 5] !=0)
+        (current_settings_prt.ranguvannja_set_dt_source_minus[N_BIG*i + 5] !=0) ||
+        (current_settings_prt.ranguvannja_set_dt_source_minus[N_BIG*i + 6] !=0) ||
+        (current_settings_prt.ranguvannja_set_dt_source_minus[N_BIG*i + 7] !=0)
        )
     {
       //Випадок, якщо функції зранжовані на джерело інверсних функцій
@@ -2101,7 +2119,9 @@ inline void dt_handler(unsigned int *activated_functions, unsigned int *previous
          ( ( current_settings_prt.ranguvannja_set_dt_source_minus[N_BIG*i + 2] & ((unsigned int)(~(activated_functions[2] | previous_stats_signals[2] | maska_active_dt[2]))) ) != 0 ) ||
          ( ( current_settings_prt.ranguvannja_set_dt_source_minus[N_BIG*i + 3] & ((unsigned int)(~(activated_functions[3] | previous_stats_signals[3] | maska_active_dt[3]))) ) != 0 ) ||
          ( ( current_settings_prt.ranguvannja_set_dt_source_minus[N_BIG*i + 4] & ((unsigned int)(~(activated_functions[4] | previous_stats_signals[4] | maska_active_dt[4]))) ) != 0 ) ||
-         ( ( current_settings_prt.ranguvannja_set_dt_source_minus[N_BIG*i + 5] & ((unsigned int)(~(activated_functions[5] | previous_stats_signals[5] | maska_active_dt[5]))) ) != 0 )
+         ( ( current_settings_prt.ranguvannja_set_dt_source_minus[N_BIG*i + 5] & ((unsigned int)(~(activated_functions[5] | previous_stats_signals[5] | maska_active_dt[5]))) ) != 0 ) ||
+         ( ( current_settings_prt.ranguvannja_set_dt_source_minus[N_BIG*i + 6] & ((unsigned int)(~(activated_functions[6] | previous_stats_signals[6] | maska_active_dt[6]))) ) != 0 ) ||
+         ( ( current_settings_prt.ranguvannja_set_dt_source_minus[N_BIG*i + 7] & ((unsigned int)(~(activated_functions[7] | previous_stats_signals[7] | maska_active_dt[7]))) ) != 0 )
         )
       {
         source_set_dt |= (1<< i);
@@ -2114,7 +2134,9 @@ inline void dt_handler(unsigned int *activated_functions, unsigned int *previous
         (current_settings_prt.ranguvannja_reset_dt_source_plus[N_BIG*i + 2] !=0) ||
         (current_settings_prt.ranguvannja_reset_dt_source_plus[N_BIG*i + 3] !=0) ||
         (current_settings_prt.ranguvannja_reset_dt_source_plus[N_BIG*i + 4] !=0) ||
-        (current_settings_prt.ranguvannja_reset_dt_source_plus[N_BIG*i + 5] !=0)
+        (current_settings_prt.ranguvannja_reset_dt_source_plus[N_BIG*i + 5] !=0) ||
+        (current_settings_prt.ranguvannja_reset_dt_source_plus[N_BIG*i + 6] !=0) ||
+        (current_settings_prt.ranguvannja_reset_dt_source_plus[N_BIG*i + 7] !=0)
        )
     {
       //Випадок, якщо функції зранжовані на джерело прямих функцій
@@ -2124,7 +2146,9 @@ inline void dt_handler(unsigned int *activated_functions, unsigned int *previous
          (( current_settings_prt.ranguvannja_reset_dt_source_plus[N_BIG*i + 2] & (activated_functions[2] | previous_stats_signals[2] | maska_active_dt[2])) != 0) ||
          (( current_settings_prt.ranguvannja_reset_dt_source_plus[N_BIG*i + 3] & (activated_functions[3] | previous_stats_signals[3] | maska_active_dt[3])) != 0) ||
          (( current_settings_prt.ranguvannja_reset_dt_source_plus[N_BIG*i + 4] & (activated_functions[4] | previous_stats_signals[4] | maska_active_dt[4])) != 0) ||
-         (( current_settings_prt.ranguvannja_reset_dt_source_plus[N_BIG*i + 5] & (activated_functions[5] | previous_stats_signals[5] | maska_active_dt[5])) != 0)
+         (( current_settings_prt.ranguvannja_reset_dt_source_plus[N_BIG*i + 5] & (activated_functions[5] | previous_stats_signals[5] | maska_active_dt[5])) != 0) ||
+         (( current_settings_prt.ranguvannja_reset_dt_source_plus[N_BIG*i + 6] & (activated_functions[6] | previous_stats_signals[6] | maska_active_dt[6])) != 0) ||
+         (( current_settings_prt.ranguvannja_reset_dt_source_plus[N_BIG*i + 7] & (activated_functions[7] | previous_stats_signals[7] | maska_active_dt[7])) != 0)
         )
       {
         source_reset_dt |= (1 << i);
@@ -2137,7 +2161,9 @@ inline void dt_handler(unsigned int *activated_functions, unsigned int *previous
         (current_settings_prt.ranguvannja_reset_dt_source_minus[N_BIG*i + 2] !=0) ||
         (current_settings_prt.ranguvannja_reset_dt_source_minus[N_BIG*i + 3] !=0) ||
         (current_settings_prt.ranguvannja_reset_dt_source_minus[N_BIG*i + 4] !=0) ||
-        (current_settings_prt.ranguvannja_reset_dt_source_minus[N_BIG*i + 5] !=0)
+        (current_settings_prt.ranguvannja_reset_dt_source_minus[N_BIG*i + 5] !=0) ||
+        (current_settings_prt.ranguvannja_reset_dt_source_minus[N_BIG*i + 6] !=0) ||
+        (current_settings_prt.ranguvannja_reset_dt_source_minus[N_BIG*i + 7] !=0)
        )
     {
       //Випадок, якщо функції зранжовані на джерело інверсних функцій
@@ -2147,7 +2173,9 @@ inline void dt_handler(unsigned int *activated_functions, unsigned int *previous
          ( ( current_settings_prt.ranguvannja_reset_dt_source_minus[N_BIG*i + 2] & ((unsigned int)(~(activated_functions[2] | previous_stats_signals[2] | maska_active_dt[2]))) ) != 0 ) ||
          ( ( current_settings_prt.ranguvannja_reset_dt_source_minus[N_BIG*i + 3] & ((unsigned int)(~(activated_functions[3] | previous_stats_signals[3] | maska_active_dt[3]))) ) != 0 ) ||
          ( ( current_settings_prt.ranguvannja_reset_dt_source_minus[N_BIG*i + 4] & ((unsigned int)(~(activated_functions[4] | previous_stats_signals[4] | maska_active_dt[4]))) ) != 0 ) ||
-         ( ( current_settings_prt.ranguvannja_reset_dt_source_minus[N_BIG*i + 5] & ((unsigned int)(~(activated_functions[5] | previous_stats_signals[5] | maska_active_dt[5]))) ) != 0 )
+         ( ( current_settings_prt.ranguvannja_reset_dt_source_minus[N_BIG*i + 5] & ((unsigned int)(~(activated_functions[5] | previous_stats_signals[5] | maska_active_dt[5]))) ) != 0 ) ||
+         ( ( current_settings_prt.ranguvannja_reset_dt_source_minus[N_BIG*i + 6] & ((unsigned int)(~(activated_functions[6] | previous_stats_signals[6] | maska_active_dt[6]))) ) != 0 ) ||
+         ( ( current_settings_prt.ranguvannja_reset_dt_source_minus[N_BIG*i + 7] & ((unsigned int)(~(activated_functions[7] | previous_stats_signals[7] | maska_active_dt[7]))) ) != 0 )
         )
       {
         source_reset_dt |= (1<< i);
@@ -2828,15 +2856,10 @@ inline void zz_handler(unsigned int *activated_functions, unsigned int number_gr
     
       //Копіюємо попередні значення сигналів ЗЗ/3U0 у тимчавовий масив, щоб потім мати можливість їх скидати або встановлювати
       //Це потрібно для того, щоб коли є умова, що сигнал не має ні встановлюватися ні скидатися - щоб він приймав своє попереднє значення  
-      unsigned int maska[N_BIG] = {0, 0, 0, 0, 0, 0};
+      unsigned int maska[N_BIG] = {0, 0, 0, 0, 0, 0, 0, 0};
       _SET_BIT(maska, RANG_OUTPUT_LED_DF_REG_PO_NZZ);
       _SET_BIT(maska, RANG_OUTPUT_LED_DF_REG_NZZ);
-      activated_functions[0] |= active_functions[0] & maska[0];
-      activated_functions[1] |= active_functions[1] & maska[1];
-      activated_functions[2] |= active_functions[2] & maska[2];
-      activated_functions[3] |= active_functions[3] & maska[3];
-      activated_functions[4] |= active_functions[4] & maska[4];
-      activated_functions[5] |= active_functions[5] & maska[5];
+      for (unsigned int i = 0; i < N_BIG; i++) activated_functions[i] |= active_functions[i] & maska[i];
     
       unsigned int previous_state_po_nzz = _CHECK_SET_BIT(active_functions, RANG_OUTPUT_LED_DF_REG_PO_NZZ);
     
@@ -2898,15 +2921,10 @@ inline void zz_handler(unsigned int *activated_functions, unsigned int number_gr
     
       //Копіюємо попередні значення сигналів ЗЗ/3U0 у тимчавовий масив, щоб потім мати можливість їх скидати або встановлювати
       //Це потрібно для того, щоб коли є умова, що сигнал не має ні встановлюватися ні скидатися - щоб він приймав своє попереднє значення  
-      unsigned int maska[N_BIG] = {0, 0, 0, 0, 0, 0};
+      unsigned int maska[N_BIG] = {0, 0, 0, 0, 0, 0, 0, 0};
       _SET_BIT(maska, RANG_OUTPUT_LED_DF_REG_PO_3U0);
       _SET_BIT(maska, RANG_OUTPUT_LED_DF_REG_3U0);
-      activated_functions[0] |= active_functions[0] & maska[0];
-      activated_functions[1] |= active_functions[1] & maska[1];
-      activated_functions[2] |= active_functions[2] & maska[2];
-      activated_functions[3] |= active_functions[3] & maska[3];
-      activated_functions[4] |= active_functions[4] & maska[4];
-      activated_functions[5] |= active_functions[5] & maska[5];
+      for (unsigned int i = 0; i < N_BIG; i++) activated_functions[i] |= active_functions[i] & maska[i];
     
       unsigned int previous_state_po_3U0 = _CHECK_SET_BIT(active_functions, RANG_OUTPUT_LED_DF_REG_PO_3U0);
     
@@ -2964,15 +2982,10 @@ inline void zz_handler(unsigned int *activated_functions, unsigned int number_gr
     
       //Копіюємо попередні значення сигналів ЗЗ/3I0 у тимчавовий масив, щоб потім мати можливість їх скидати або встановлювати
       //Це потрібно для того, щоб коли є умова, що сигнал не має ні встановлюватися ні скидатися - щоб він приймав своє попереднє значення  
-      unsigned int maska[N_BIG] = {0, 0, 0, 0, 0, 0};
+      unsigned int maska[N_BIG] = {0, 0, 0, 0, 0, 0, 0, 0};
       _SET_BIT(maska, RANG_OUTPUT_LED_DF_REG_PO_3I0);
       _SET_BIT(maska, RANG_OUTPUT_LED_DF_REG_3I0);
-      activated_functions[0] |= active_functions[0] & maska[0];
-      activated_functions[1] |= active_functions[1] & maska[1];
-      activated_functions[2] |= active_functions[2] & maska[2];
-      activated_functions[3] |= active_functions[3] & maska[3];
-      activated_functions[4] |= active_functions[4] & maska[4];
-      activated_functions[5] |= active_functions[5] & maska[5];
+      for (unsigned int i = 0; i < N_BIG; i++) activated_functions[i] |= active_functions[i] & maska[i];
     
       unsigned int previous_state_po_3I0 = _CHECK_SET_BIT(active_functions, RANG_OUTPUT_LED_DF_REG_PO_3I0);
     
@@ -3324,15 +3337,10 @@ inline void zop_handler(unsigned int *activated_functions, unsigned int number_g
     
     //Копіюємо попередні значення сигналів ЗОП(КОФ) у тимчавовий масив, щоб потім мати можливість їх скидати або встановлювати
     //Це потрібно для того, щоб коли є умова, що сигнал не має ні встановлюватися ні скидатися - щоб він приймав своє попереднє значення  
-    unsigned int maska[N_BIG] = {0, 0, 0, 0, 0, 0};
+    unsigned int maska[N_BIG] = {0, 0, 0, 0, 0, 0, 0, 0};
     _SET_BIT(maska, RANG_OUTPUT_LED_DF_REG_PO_ZOP);
     _SET_BIT(maska, RANG_OUTPUT_LED_DF_REG_ZOP);
-    activated_functions[0] |= active_functions[0] & maska[0];
-    activated_functions[1] |= active_functions[1] & maska[1];
-    activated_functions[2] |= active_functions[2] & maska[2];
-    activated_functions[3] |= active_functions[3] & maska[3];
-    activated_functions[4] |= active_functions[4] & maska[4];
-    activated_functions[5] |= active_functions[5] & maska[5];
+   for (unsigned int i = 0; i < N_BIG; i++) activated_functions[i] |= active_functions[i] & maska[i];
     
     //Якщо ПО ЗОП(КОФ) ще не активне, то треба працювати по устаці спацювання - уставці, яка вводиться як основна з системи меню чи верхнього рівня
     //Якщо ПО ЗОП(КОФ) вже спрацювало, то треба працювати по уставці відпускання - береться процент від основної утанки по коефіцієнту повернення
@@ -4372,16 +4380,11 @@ inline void urov_handler(unsigned int *activated_functions, unsigned int number_
     
     //Копіюємо попередні значення сигналів УРОВ у тимчавовий масив, щоб потім мати можливість їх скидати або встановлювати
     //Це потрібно для того, щоб коли є умова, що сигнал не має ні встановлюватися ні скидатися - щоб він приймав своє попереднє значення  
-    unsigned int maska[N_BIG] = {0, 0, 0, 0, 0, 0};
+    unsigned int maska[N_BIG] = {0, 0, 0, 0, 0, 0, 0, 0};
     _SET_BIT(maska, RANG_OUTPUT_LED_DF_REG_PO_UROV);
     _SET_BIT(maska, RANG_OUTPUT_LED_DF_REG_UROV1);
     _SET_BIT(maska, RANG_OUTPUT_LED_DF_REG_UROV2);
-    activated_functions[0] |= active_functions[0] & maska[0];
-    activated_functions[1] |= active_functions[1] & maska[1];
-    activated_functions[2] |= active_functions[2] & maska[2];
-    activated_functions[3] |= active_functions[3] & maska[3];
-    activated_functions[4] |= active_functions[4] & maska[4];
-    activated_functions[5] |= active_functions[5] & maska[5];
+    for (unsigned int i = 0; i < N_BIG; i++) activated_functions[i] |= active_functions[i] & maska[i];
     
     //Якщо ПО УРОВ ще не активне, то треба працювати по устаці спацювання - уставці, яка вводиться як основна з системи меню чи верхнього рівня
     //Якщо ПО УРОВ вже спрацювало, то треба працювати по уставці відпускання - береться процент від основної утанки по коефіцієнту повернення
@@ -4673,15 +4676,10 @@ inline void on_off_handler(unsigned int *activated_functions, unsigned int *prev
 {
   //Копіюємо попередні значення сигналів "Робота БО" і "Робота БВ" у тимчавовий масив, щоб потім мати можливість їх скидати або встановлювати
   //Це потрібно для того, щоб коли є умова, що сигнал не має ні встановлюватися ні скидатися - щоб він приймав своє попереднє значення  
-  unsigned int maska[N_BIG] = {0, 0, 0, 0, 0, 0};
+  unsigned int maska[N_BIG] = {0, 0, 0, 0, 0, 0, 0, 0};
   _SET_BIT(maska, RANG_OUTPUT_LED_DF_REG_WORK_BO);
   _SET_BIT(maska, RANG_OUTPUT_LED_DF_REG_WORK_BV);
-  activated_functions[0] |= active_functions[0] & maska[0];
-  activated_functions[1] |= active_functions[1] & maska[1];
-  activated_functions[2] |= active_functions[2] & maska[2];
-  activated_functions[3] |= active_functions[3] & maska[3];
-  activated_functions[4] |= active_functions[4] & maska[4];
-  activated_functions[5] |= active_functions[5] & maska[5];
+  for (unsigned int i = 0; i < N_BIG; i++) activated_functions[i] |= active_functions[i] & maska[i];
 
   /*********************/
   //Спочатку опрацьовуємо таймери
@@ -4743,12 +4741,7 @@ inline void on_off_handler(unsigned int *activated_functions, unsigned int *prev
   //Першим розглядається блок відключення, бо він може блокувати включення вимикача
   /*********************/
   //Формуємо маску з сигналом "Робота БО", щоб не розглядати цей сигнал як джерело активації БО (щоб він сам себе не генерував, бо інакше, як тільки раз запуститься постійно буде себе генерувати)
-  maska[0] = 0;
-  maska[1] = 0;
-  maska[2] = 0;
-  maska[3] = 0;
-  maska[4] = 0;
-  maska[5] = 0;
+  for (unsigned int j = 0; j < N_BIG; j++ )  maska[j] = 0;
   _SET_BIT(maska, RANG_OUTPUT_LED_DF_REG_WORK_BO);
 
   //Перевіряємо, чи немає умови запуску БО
@@ -4763,30 +4756,22 @@ inline void on_off_handler(unsigned int *activated_functions, unsigned int *prev
       
     //У тимчасовий масив копіюємо ранжування виходу, який індексується інедексом "i"
     unsigned int temp_array_of_outputs[N_BIG];
-    temp_array_of_outputs[0] = current_settings_prt.ranguvannja_outputs[N_BIG*i    ];
-    temp_array_of_outputs[1] = current_settings_prt.ranguvannja_outputs[N_BIG*i + 1];
-    temp_array_of_outputs[2] = current_settings_prt.ranguvannja_outputs[N_BIG*i + 2];
-    temp_array_of_outputs[3] = current_settings_prt.ranguvannja_outputs[N_BIG*i + 3];
-    temp_array_of_outputs[4] = current_settings_prt.ranguvannja_outputs[N_BIG*i + 4];
-    temp_array_of_outputs[5] = current_settings_prt.ranguvannja_outputs[N_BIG*i + 5];
+    for (unsigned int j = 0; j < N_BIG; j++) temp_array_of_outputs[j] = current_settings_prt.ranguvannja_outputs[N_BIG*i + j];
       
     //Перевіряємо чи на вихід, який індексується інедексом "i", зранжована робота БО
     if(_CHECK_SET_BIT(temp_array_of_outputs, RANG_OUTPUT_LED_DF_REG_WORK_BO) !=0)
     {
       //Перевіряємо, чи є зараз умова активації виходу (будь-яка активна функція крім функції "Робота БО")
-      temp_array_of_outputs[0] &= ( (activated_functions[0] | previous_stats_signals[0]) & (~maska[0]) );
-      temp_array_of_outputs[1] &= ( (activated_functions[1] | previous_stats_signals[1]) & (~maska[1]) );
-      temp_array_of_outputs[2] &= ( (activated_functions[2] | previous_stats_signals[2]) & (~maska[2]) );
-      temp_array_of_outputs[3] &= ( (activated_functions[3] | previous_stats_signals[3]) & (~maska[3]) );
-      temp_array_of_outputs[4] &= ( (activated_functions[4] | previous_stats_signals[4]) & (~maska[4]) );
-      temp_array_of_outputs[5] &= ( (activated_functions[5] | previous_stats_signals[5]) & (~maska[5]) );
+      for (unsigned int j = 0; j < N_BIG; j++) temp_array_of_outputs[j] &= ( (activated_functions[j] | previous_stats_signals[j]) & (~maska[j]) );
       if (
           (temp_array_of_outputs[0] != 0) ||
           (temp_array_of_outputs[1] != 0) ||
           (temp_array_of_outputs[2] != 0) ||
           (temp_array_of_outputs[3] != 0) ||
           (temp_array_of_outputs[4] != 0) ||
-          (temp_array_of_outputs[5] != 0)
+          (temp_array_of_outputs[5] != 0) ||
+          (temp_array_of_outputs[6] != 0) ||
+          (temp_array_of_outputs[7] != 0)
          )
       {
         //На даному виході зараз активовується якась функція, яка є одночасно і джерелом БО
@@ -4807,28 +4792,20 @@ inline void on_off_handler(unsigned int *activated_functions, unsigned int *prev
         Формуємо сигнал "Відключення від захистів" (він рівний наявності умови команди
         активації команди "Робота БО" будь-якою командою за виключенняв "Вимкн. ВВ")
         */
-        maska[0] = 0;
-        maska[1] = 0;
-        maska[2] = 0;
-        maska[3] = 0;
-        maska[4] = 0;
-        maska[5] = 0;
+        for (unsigned int j = 0; j < N_BIG; j++ )  maska[j] = 0;
         _SET_BIT(maska, RANG_OUTPUT_LED_DF_REG_OTKL_VV);
 
         //Перевіряємо, чи "Робота БО" активувалася командою "Вимк.ВВ" чи іншими фунціями захистів
-        temp_array_of_outputs[0] &= (~maska[0]);
-        temp_array_of_outputs[1] &= (~maska[1]);
-        temp_array_of_outputs[2] &= (~maska[2]);
-        temp_array_of_outputs[3] &= (~maska[3]);
-        temp_array_of_outputs[4] &= (~maska[4]);
-        temp_array_of_outputs[5] &= (~maska[5]);
+        for (unsigned int j = 0; j < N_BIG; j++) temp_array_of_outputs[j] &= (~maska[j]);
         if (
             (temp_array_of_outputs[0] != 0) ||
             (temp_array_of_outputs[1] != 0) ||
             (temp_array_of_outputs[2] != 0) ||
             (temp_array_of_outputs[3] != 0) ||
             (temp_array_of_outputs[4] != 0) ||
-            (temp_array_of_outputs[5] != 0)
+            (temp_array_of_outputs[5] != 0) ||
+            (temp_array_of_outputs[6] != 0) ||
+            (temp_array_of_outputs[7] != 0)
           )
         {
           _SET_BIT(activated_functions, RANG_OUTPUT_LED_DF_REG_VIDKL_VID_ZAKHYSTIV);
@@ -5136,7 +5113,9 @@ inline void on_off_handler(unsigned int *activated_functions, unsigned int *prev
               (temp_array_of_outputs[2] != 0) ||
               (temp_array_of_outputs[3] != 0) ||
               (temp_array_of_outputs[4] != 0) ||
-              (temp_array_of_outputs[5] != 0)
+              (temp_array_of_outputs[5] != 0) ||
+              (temp_array_of_outputs[6] != 0) ||
+              (temp_array_of_outputs[7] != 0)
              )
              &&
              (
@@ -5145,7 +5124,9 @@ inline void on_off_handler(unsigned int *activated_functions, unsigned int *prev
               ((active_functions[2] & temp_array_of_outputs[2])!= temp_array_of_outputs[2]) ||
               ((active_functions[3] & temp_array_of_outputs[3])!= temp_array_of_outputs[3]) ||
               ((active_functions[4] & temp_array_of_outputs[4])!= temp_array_of_outputs[4]) ||
-              ((active_functions[5] & temp_array_of_outputs[5])!= temp_array_of_outputs[5])
+              ((active_functions[5] & temp_array_of_outputs[5])!= temp_array_of_outputs[5]) ||
+              ((active_functions[6] & temp_array_of_outputs[6])!= temp_array_of_outputs[6]) ||
+              ((active_functions[7] & temp_array_of_outputs[7])!= temp_array_of_outputs[7])
              ) 
             )   
           {
@@ -5174,12 +5155,7 @@ inline void on_off_handler(unsigned int *activated_functions, unsigned int *prev
     //тому перевіряємо, чи немає умови запуску БВ
 
     //Формуємо маску з сигналом "Робота БВ", щоб не розглядати цей сигнал як джерело активації БВ (щоб він сам себе не генерував, бо інакше, як тільки раз запуститься постійно буде себе генерувати)
-    maska[0] = 0;
-    maska[1] = 0;
-    maska[2] = 0;
-    maska[3] = 0;
-    maska[4] = 0;
-    maska[5] = 0;
+    for (unsigned int j = 0; j < N_BIG; j++ )  maska[j] = 0;
     _SET_BIT(maska, RANG_OUTPUT_LED_DF_REG_WORK_BV);
     
     i = 0;
@@ -5193,30 +5169,22 @@ inline void on_off_handler(unsigned int *activated_functions, unsigned int *prev
 
       //У тимчасовий масив копіюємо ранжування виходу, який індексується інедексом "i"
       unsigned int temp_array_of_outputs[N_BIG];
-      temp_array_of_outputs[0] = current_settings_prt.ranguvannja_outputs[N_BIG*i    ];
-      temp_array_of_outputs[1] = current_settings_prt.ranguvannja_outputs[N_BIG*i + 1];
-      temp_array_of_outputs[2] = current_settings_prt.ranguvannja_outputs[N_BIG*i + 2];
-      temp_array_of_outputs[3] = current_settings_prt.ranguvannja_outputs[N_BIG*i + 3];
-      temp_array_of_outputs[4] = current_settings_prt.ranguvannja_outputs[N_BIG*i + 4];
-      temp_array_of_outputs[5] = current_settings_prt.ranguvannja_outputs[N_BIG*i + 5];
+      for (unsigned int j = 0; j < N_BIG; j++) temp_array_of_outputs[j] = current_settings_prt.ranguvannja_outputs[N_BIG*i + j];
       
       //Перевіряємо чи на вихід, який індексується інедексом "i", зранжована робота БВ
       if(_CHECK_SET_BIT(temp_array_of_outputs, RANG_OUTPUT_LED_DF_REG_WORK_BV) !=0)
       {
         //Перевіряємо, чи є зараз умова активації виходу (будь-яка активна функція крім функції "Робота БО")
-        temp_array_of_outputs[0] &= ( (activated_functions[0] | previous_stats_signals[0]) & (~maska[0]) );
-        temp_array_of_outputs[1] &= ( (activated_functions[1] | previous_stats_signals[1]) & (~maska[1]) );
-        temp_array_of_outputs[2] &= ( (activated_functions[2] | previous_stats_signals[2]) & (~maska[2]) );
-        temp_array_of_outputs[3] &= ( (activated_functions[3] | previous_stats_signals[3]) & (~maska[3]) );
-        temp_array_of_outputs[4] &= ( (activated_functions[4] | previous_stats_signals[4]) & (~maska[4]) );
-        temp_array_of_outputs[5] &= ( (activated_functions[5] | previous_stats_signals[5]) & (~maska[5]) );
+        for (unsigned int j = 0; j < N_BIG; j++) temp_array_of_outputs[j] &= ( (activated_functions[j] | previous_stats_signals[j]) & (~maska[j]) );
         if (
             (temp_array_of_outputs[0] != 0) ||
             (temp_array_of_outputs[1] != 0) ||
             (temp_array_of_outputs[2] != 0) ||
             (temp_array_of_outputs[3] != 0) ||
             (temp_array_of_outputs[4] != 0) ||
-            (temp_array_of_outputs[5] != 0)
+            (temp_array_of_outputs[5] != 0) ||
+            (temp_array_of_outputs[6] != 0) ||
+            (temp_array_of_outputs[7] != 0)
            )
         {
           //На даному виході зараз активовується якась функція, яка є одночасно і джерелом БВ
@@ -8176,7 +8144,7 @@ inline void analog_registrator(unsigned int* carrent_active_functions)
 /*****************************************************/
 inline void main_protection(void)
 {
-  unsigned int activated_functions[N_BIG] = {0, 0, 0, 0, 0, 0};
+  unsigned int activated_functions[N_BIG] = {0, 0, 0, 0, 0, 0, 0, 0};
   
   /**************************/
   //Перевірка, чи треба очистити трігерні функції
@@ -8185,12 +8153,7 @@ inline void main_protection(void)
   {
     if ((reset_trigger_function_from_interface & (1 << USB_RECUEST)) != 0)
     {
-      trigger_functions_USB[0] = 0;
-      trigger_functions_USB[1] = 0;
-      trigger_functions_USB[2] = 0;
-      trigger_functions_USB[3] = 0;
-      trigger_functions_USB[4] = 0;
-      trigger_functions_USB[5] = 0;
+      for (unsigned int i = 0; i < N_BIG; i++) trigger_functions_USB[i] = 0;
       
       information_about_settings_changed &= (unsigned int)(~(1 << USB_RECUEST));
       information_about_restart_counter  &= (unsigned int)(~(1 << USB_RECUEST));
@@ -8198,12 +8161,7 @@ inline void main_protection(void)
     }
     if ((reset_trigger_function_from_interface & (1 << RS485_RECUEST)) != 0)
     {
-      trigger_functions_RS485[0] = 0;
-      trigger_functions_RS485[1] = 0;
-      trigger_functions_RS485[2] = 0;
-      trigger_functions_RS485[3] = 0;
-      trigger_functions_RS485[4] = 0;
-      trigger_functions_RS485[5] = 0;
+      for (unsigned int i = 0; i < N_BIG; i++) trigger_functions_RS485[i] = 0;
       
       information_about_settings_changed &= (unsigned int)(~(1 << RS485_RECUEST));
       information_about_restart_counter  &= (unsigned int)(~(1 << RS485_RECUEST));
@@ -8607,8 +8565,8 @@ inline void main_protection(void)
   //Виконуємо фільтрацію переднього фронту для тих сигналів, які мають активуватися тільки по передньому фронтові
   /**************************/
   //Формуємо маску сигналів, які треба позначити, як активні тільки в момент переходу з "0" в "1"
-  unsigned int temp_maska_filter_function[N_BIG] = {0, 0, 0, 0, 0, 0};
-  unsigned int temp_activated_functions[N_BIG] = {0, 0, 0, 0, 0, 0};
+  unsigned int temp_maska_filter_function[N_BIG] = {0, 0, 0, 0, 0, 0, 0, 0};
+  unsigned int temp_activated_functions[N_BIG] = {0, 0, 0, 0, 0, 0, 0, 0};
   
   //Сигнал "Сблос индикации"
   _SET_BIT(temp_maska_filter_function, RANG_OUTPUT_LED_DF_REG_RESET_LEDS);
@@ -8625,50 +8583,28 @@ inline void main_protection(void)
   //Сигнал "Скидання блокування готовності до ТУ"
   _SET_BIT(temp_maska_filter_function, RANG_OUTPUT_LED_DF_REG_RESET_BLOCK_READY_TU_VID_ZAHYSTIV);
   
-  //З масиву попередніх станів виділяємо тільки ті функції, якиї нас цікавить фронт змін і поміщаємо їх у тимчасовий масив
-  temp_activated_functions[0] = previous_activated_functions[0] & temp_maska_filter_function[0];
-  temp_activated_functions[1] = previous_activated_functions[1] & temp_maska_filter_function[1];
-  temp_activated_functions[2] = previous_activated_functions[2] & temp_maska_filter_function[2];
-  temp_activated_functions[3] = previous_activated_functions[3] & temp_maska_filter_function[3];
-  temp_activated_functions[4] = previous_activated_functions[4] & temp_maska_filter_function[4];
-  temp_activated_functions[5] = previous_activated_functions[5] & temp_maska_filter_function[5];
+  for (unsigned int i = 0; i < N_BIG; i++)
+  {
+    //З масиву попередніх станів виділяємо тільки ті функції, якиї нас цікавить фронт змін і поміщаємо їх у тимчасовий масив
+    temp_activated_functions[i] = previous_activated_functions[i] & temp_maska_filter_function[i];
   
-  //У тимчасовому масиві виділяємо тільки ті функції, у яких зафіксовано або передній, або задній фронти
-  temp_activated_functions[0] ^= (activated_functions[0] & temp_maska_filter_function[0]);
-  temp_activated_functions[1] ^= (activated_functions[1] & temp_maska_filter_function[1]);
-  temp_activated_functions[2] ^= (activated_functions[2] & temp_maska_filter_function[2]);
-  temp_activated_functions[3] ^= (activated_functions[3] & temp_maska_filter_function[3]);
-  temp_activated_functions[4] ^= (activated_functions[4] & temp_maska_filter_function[4]);
-  temp_activated_functions[5] ^= (activated_functions[5] & temp_maska_filter_function[5]);
+    //У тимчасовому масиві виділяємо тільки ті функції, у яких зафіксовано або передній, або задній фронти
+    temp_activated_functions[i] ^= (activated_functions[i] & temp_maska_filter_function[i]);
   
-  //Тепер виділяємо у тимчасовому масиві тільки ті функції у яких зараз значення стоять рівні "1" (тобто відбувся перехід з "0" в "1")
-  temp_activated_functions[0] &= activated_functions[0];
-  temp_activated_functions[1] &= activated_functions[1];
-  temp_activated_functions[2] &= activated_functions[2];
-  temp_activated_functions[3] &= activated_functions[3];
-  temp_activated_functions[4] &= activated_functions[4];
-  temp_activated_functions[5] &= activated_functions[5];
-  
-  /*
-  Перед тим, як виділити ті функції, які у цьому циклі будуть відмічені як активні 
-  з урахуванням того, що деякі функції активоються по передньому фронті
-  копіюємо статичний стан функцій (без врахування фронтів) у тимчасовий масив
-  щоб при наступному аналізі мати попередній статичний стан активних функцій
-  */ 
-  previous_activated_functions[0] = activated_functions[0];
-  previous_activated_functions[1] = activated_functions[1];
-  previous_activated_functions[2] = activated_functions[2];
-  previous_activated_functions[3] = activated_functions[3];
-  previous_activated_functions[4] = activated_functions[4];
-  previous_activated_functions[5] = activated_functions[5];
+    //Тепер виділяємо у тимчасовому масиві тільки ті функції у яких зараз значення стоять рівні "1" (тобто відбувся перехід з "0" в "1")
+    temp_activated_functions[i] &= activated_functions[i];
 
-  //Обновляємо масив функцій, які зараз активуються з врахуванням того, що серед виділених функцій маскою активними мають юути тільки ті, у яких перехід був з "0" в "1"
-  activated_functions[0] = (activated_functions[0] & (~temp_maska_filter_function[0])) | temp_activated_functions[0];
-  activated_functions[1] = (activated_functions[1] & (~temp_maska_filter_function[1])) | temp_activated_functions[1];
-  activated_functions[2] = (activated_functions[2] & (~temp_maska_filter_function[2])) | temp_activated_functions[2];
-  activated_functions[3] = (activated_functions[3] & (~temp_maska_filter_function[3])) | temp_activated_functions[3];
-  activated_functions[4] = (activated_functions[4] & (~temp_maska_filter_function[4])) | temp_activated_functions[4];
-  activated_functions[5] = (activated_functions[5] & (~temp_maska_filter_function[5])) | temp_activated_functions[5];
+    /*
+    Перед тим, як виділити ті функції, які у цьому циклі будуть відмічені як активні 
+    з урахуванням того, що деякі функції активоються по передньому фронті
+    копіюємо статичний стан функцій (без врахування фронтів) у тимчасовий масив
+    щоб при наступному аналізі мати попередній статичний стан активних функцій
+    */ 
+    previous_activated_functions[i] = activated_functions[i];
+
+    //Обновляємо масив функцій, які зараз активуються з врахуванням того, що серед виділених функцій маскою активними мають юути тільки ті, у яких перехід був з "0" в "1"
+    activated_functions[i] = (activated_functions[i] & (~temp_maska_filter_function[i])) | temp_activated_functions[i];
+  }
   /**************************/
   
   /**************************/
@@ -8685,7 +8621,9 @@ inline void main_protection(void)
       ((active_functions[2] & MASKA_SIGNALES_FOR_LOCK_GROUP_PICKUP_2) != 0) ||
       ((active_functions[3] & MASKA_SIGNALES_FOR_LOCK_GROUP_PICKUP_3) != 0) ||
       ((active_functions[4] & MASKA_SIGNALES_FOR_LOCK_GROUP_PICKUP_4) != 0) ||
-      ((active_functions[5] & MASKA_SIGNALES_FOR_LOCK_GROUP_PICKUP_5) != 0)
+      ((active_functions[5] & MASKA_SIGNALES_FOR_LOCK_GROUP_PICKUP_5) != 0) ||
+      ((active_functions[6] & MASKA_SIGNALES_FOR_LOCK_GROUP_PICKUP_6) != 0) ||
+      ((active_functions[7] & MASKA_SIGNALES_FOR_LOCK_GROUP_PICKUP_7) != 0)
     )
   {
     //Іде блокування груп уставок - група уставок залишається тою, яка вибрана попередньо
@@ -9099,6 +9037,8 @@ inline void main_protection(void)
     previous_stats_signals[3] = active_functions[3] & (MASKA_FOR_DF_TRIGGERS_SIGNALS_3 | MASKA_FOR_ON_OFF_SIGNALS_3 | MASKA_FOR_READY_TU_SIGNALS_3 | MASKA_FOR_RESURS_VV_SIGNALS_3 | MASKA_FOR_REJESTRATORS_AND_DEFECT_SIGNALS_3);
     previous_stats_signals[4] = active_functions[4] & (MASKA_FOR_DF_TRIGGERS_SIGNALS_4 | MASKA_FOR_ON_OFF_SIGNALS_4 | MASKA_FOR_READY_TU_SIGNALS_4 | MASKA_FOR_RESURS_VV_SIGNALS_4 | MASKA_FOR_REJESTRATORS_AND_DEFECT_SIGNALS_4);
     previous_stats_signals[5] = active_functions[5] & (MASKA_FOR_DF_TRIGGERS_SIGNALS_5 | MASKA_FOR_ON_OFF_SIGNALS_5 | MASKA_FOR_READY_TU_SIGNALS_5 | MASKA_FOR_RESURS_VV_SIGNALS_5 | MASKA_FOR_REJESTRATORS_AND_DEFECT_SIGNALS_5);
+    previous_stats_signals[6] = active_functions[6] & (MASKA_FOR_DF_TRIGGERS_SIGNALS_6 | MASKA_FOR_ON_OFF_SIGNALS_6 | MASKA_FOR_READY_TU_SIGNALS_6 | MASKA_FOR_RESURS_VV_SIGNALS_6 | MASKA_FOR_REJESTRATORS_AND_DEFECT_SIGNALS_6);
+    previous_stats_signals[7] = active_functions[7] & (MASKA_FOR_DF_TRIGGERS_SIGNALS_7 | MASKA_FOR_ON_OFF_SIGNALS_7 | MASKA_FOR_READY_TU_SIGNALS_7 | MASKA_FOR_RESURS_VV_SIGNALS_7 | MASKA_FOR_REJESTRATORS_AND_DEFECT_SIGNALS_7);
     df_handler(activated_functions, previous_stats_signals);
     /**************************/
 
@@ -9111,6 +9051,8 @@ inline void main_protection(void)
     previous_stats_signals[3] = active_functions[3] & (MASKA_FOR_ON_OFF_SIGNALS_3 | MASKA_FOR_READY_TU_SIGNALS_3 | MASKA_FOR_RESURS_VV_SIGNALS_3 | MASKA_FOR_REJESTRATORS_AND_DEFECT_SIGNALS_3);
     previous_stats_signals[4] = active_functions[4] & (MASKA_FOR_ON_OFF_SIGNALS_4 | MASKA_FOR_READY_TU_SIGNALS_4 | MASKA_FOR_RESURS_VV_SIGNALS_4 | MASKA_FOR_REJESTRATORS_AND_DEFECT_SIGNALS_4);
     previous_stats_signals[5] = active_functions[5] & (MASKA_FOR_ON_OFF_SIGNALS_5 | MASKA_FOR_READY_TU_SIGNALS_5 | MASKA_FOR_RESURS_VV_SIGNALS_5 | MASKA_FOR_REJESTRATORS_AND_DEFECT_SIGNALS_5);
+    previous_stats_signals[6] = active_functions[6] & (MASKA_FOR_ON_OFF_SIGNALS_6 | MASKA_FOR_READY_TU_SIGNALS_6 | MASKA_FOR_RESURS_VV_SIGNALS_6 | MASKA_FOR_REJESTRATORS_AND_DEFECT_SIGNALS_6);
+    previous_stats_signals[7] = active_functions[7] & (MASKA_FOR_ON_OFF_SIGNALS_7 | MASKA_FOR_READY_TU_SIGNALS_7 | MASKA_FOR_RESURS_VV_SIGNALS_7 | MASKA_FOR_REJESTRATORS_AND_DEFECT_SIGNALS_7);
     dt_handler(activated_functions, previous_stats_signals);
     /**************************/
 
@@ -9123,6 +9065,8 @@ inline void main_protection(void)
     previous_stats_signals[3] = active_functions[3] & (MASKA_FOR_READY_TU_SIGNALS_3 | MASKA_FOR_RESURS_VV_SIGNALS_3 | MASKA_FOR_REJESTRATORS_AND_DEFECT_SIGNALS_3);
     previous_stats_signals[4] = active_functions[4] & (MASKA_FOR_READY_TU_SIGNALS_4 | MASKA_FOR_RESURS_VV_SIGNALS_4 | MASKA_FOR_REJESTRATORS_AND_DEFECT_SIGNALS_4);
     previous_stats_signals[5] = active_functions[5] & (MASKA_FOR_READY_TU_SIGNALS_5 | MASKA_FOR_RESURS_VV_SIGNALS_5 | MASKA_FOR_REJESTRATORS_AND_DEFECT_SIGNALS_5);
+    previous_stats_signals[6] = active_functions[6] & (MASKA_FOR_READY_TU_SIGNALS_6 | MASKA_FOR_RESURS_VV_SIGNALS_6 | MASKA_FOR_REJESTRATORS_AND_DEFECT_SIGNALS_6);
+    previous_stats_signals[7] = active_functions[7] & (MASKA_FOR_READY_TU_SIGNALS_7 | MASKA_FOR_RESURS_VV_SIGNALS_7 | MASKA_FOR_REJESTRATORS_AND_DEFECT_SIGNALS_7);
     on_off_handler(activated_functions, previous_stats_signals);
     /**************************/
     
@@ -9155,6 +9099,8 @@ inline void main_protection(void)
     activated_functions[3] &= MASKA_INFO_SIGNALES_3;
     activated_functions[4] &= MASKA_INFO_SIGNALES_4;
     activated_functions[5] &= MASKA_INFO_SIGNALES_5;
+    activated_functions[6] &= MASKA_INFO_SIGNALES_6;
+    activated_functions[7] &= MASKA_INFO_SIGNALES_7;
     
     //Деактивовуємо всі реле
     state_outputs = 0;
@@ -9292,12 +9238,7 @@ inline void main_protection(void)
       //У тимчасовий масив поміщаємо ЛОГІЧНЕ І ранжування виходу, який індексується інедексом "i" і функцій, які зараз є активними
       unsigned int temp_array_of_outputs[N_BIG];
     
-      temp_array_of_outputs[0] = current_settings_prt.ranguvannja_outputs[N_BIG*i    ] & active_functions[0];
-      temp_array_of_outputs[1] = current_settings_prt.ranguvannja_outputs[N_BIG*i + 1] & active_functions[1];
-      temp_array_of_outputs[2] = current_settings_prt.ranguvannja_outputs[N_BIG*i + 2] & active_functions[2];
-      temp_array_of_outputs[3] = current_settings_prt.ranguvannja_outputs[N_BIG*i + 3] & active_functions[3];
-      temp_array_of_outputs[4] = current_settings_prt.ranguvannja_outputs[N_BIG*i + 4] & active_functions[4];
-      temp_array_of_outputs[5] = current_settings_prt.ranguvannja_outputs[N_BIG*i + 5] & active_functions[5];
+      for (unsigned int j = 0; j < N_BIG; j++) temp_array_of_outputs[j] = current_settings_prt.ranguvannja_outputs[N_BIG*i + j] & active_functions[j];
 
       //Сигнал "Аварійна несправність" працює у інверсному режимі: замикає реле на якому зранжована у випадку, коли даний сигнал не активинй
       if(_CHECK_SET_BIT((current_settings_prt.ranguvannja_outputs + N_BIG*i), RANG_OUTPUT_LED_DF_REG_AVAR_DEFECT) !=0)
@@ -9342,7 +9283,9 @@ inline void main_protection(void)
           (temp_array_of_outputs[2] != 0) ||
           (temp_array_of_outputs[3] != 0) ||
           (temp_array_of_outputs[4] != 0) ||
-          (temp_array_of_outputs[5] != 0)
+          (temp_array_of_outputs[5] != 0) ||
+          (temp_array_of_outputs[6] != 0) ||
+          (temp_array_of_outputs[7] != 0)
          )
       {
         //Для сигнального реле виконуємо його замикання, а для командного перевіряємо чи нема спроби активувати реле при умові що на нього заведено блок включення, причому він блокований
@@ -9441,12 +9384,7 @@ inline void main_protection(void)
     unsigned int temp_array_of_leds[N_BIG];
     
     //Перевіряємо, чи є співпадіння між ранжованими функціями на цьому світлоіндикаторі і функціями, які зараз є активними - умова активації виходу
-    temp_array_of_leds[0] = current_settings_prt.ranguvannja_leds[N_BIG*i    ] & active_functions[0];
-    temp_array_of_leds[1] = current_settings_prt.ranguvannja_leds[N_BIG*i + 1] & active_functions[1];
-    temp_array_of_leds[2] = current_settings_prt.ranguvannja_leds[N_BIG*i + 2] & active_functions[2];
-    temp_array_of_leds[3] = current_settings_prt.ranguvannja_leds[N_BIG*i + 3] & active_functions[3];
-    temp_array_of_leds[4] = current_settings_prt.ranguvannja_leds[N_BIG*i + 4] & active_functions[4];
-    temp_array_of_leds[5] = current_settings_prt.ranguvannja_leds[N_BIG*i + 5] & active_functions[5];
+    for (unsigned int j = 0; j < N_BIG; j++ ) temp_array_of_leds[j] = current_settings_prt.ranguvannja_leds[N_BIG*i + j] & active_functions[j];
 
     if (
         (temp_array_of_leds[0] != 0) ||
@@ -9454,7 +9392,9 @@ inline void main_protection(void)
         (temp_array_of_leds[2] != 0) ||
         (temp_array_of_leds[3] != 0) ||
         (temp_array_of_leds[4] != 0) ||
-        (temp_array_of_leds[5] != 0)
+        (temp_array_of_leds[5] != 0) ||
+        (temp_array_of_leds[6] != 0) ||
+        (temp_array_of_leds[7] != 0)
        )
     {
       //Відмічаємо, що даний світлоіндикатор - ГОРИТЬ
