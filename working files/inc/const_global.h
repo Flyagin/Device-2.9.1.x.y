@@ -1121,8 +1121,8 @@ NUMBER_ODYNYCI_VYMIRJUVANNJA
 //#define ADJUSTMENT_3I0_IA_IB_IC                             1
 //#define ADJUSTMENT_3I0_IA_IC_3U0                            2
 //#define ADJUSTMENT_3I0_IA_IB_IC_UA_UB_UC_UABTN2             3
-#define ADJUSTMENT_3I0_IA_IB_IC_UA_UB_UC                    4
-#define ADJUSTMENT_ID                                       ADJUSTMENT_3I0_IA_IB_IC_UA_UB_UC
+#define ADJUSTMENT_3I0_IA_IB_IC_UA_UB_UC_3U0                  4
+#define ADJUSTMENT_ID                                         ADJUSTMENT_3I0_IA_IB_IC_UA_UB_UC_3U0
 /*****************************************/
 
 /*****************************************/
