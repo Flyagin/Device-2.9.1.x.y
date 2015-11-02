@@ -2776,7 +2776,9 @@ unsigned int save_new_rang_oldr_from_gmm(unsigned int number, unsigned int numbe
       (input_value[2] != 0) ||
       (input_value[3] != 0) ||
       (input_value[4] != 0) ||
-      (input_value[5] != 0)
+      (input_value[5] != 0) ||
+      (input_value[6] != 0) ||
+      (input_value[7] != 0)
      )
   {
     //Якщо ця величина не нульова, то це означає, що якісь функції зранжовані

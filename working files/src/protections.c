@@ -4369,7 +4369,7 @@ inline void urov_handler(unsigned int *activated_functions, unsigned int number_
       ( ((current_settings_prt.control_urov & CTR_UROV_STARTED_FROM_UMAX2  ) != 0) && (_CHECK_SET_BIT(activated_functions, RANG_OUTPUT_LED_DF_REG_UMAX2            ) != 0)) ||
       ( ((current_settings_prt.control_urov & CTR_UROV_STARTED_FROM_ACHR1  ) != 0) && (_CHECK_SET_BIT(activated_functions, RANG_OUTPUT_LED_DF_REG_ACHR_CHAPV1      ) != 0)) ||
       ( ((current_settings_prt.control_urov & CTR_UROV_STARTED_FROM_ACHR2  ) != 0) && (_CHECK_SET_BIT(activated_functions, RANG_OUTPUT_LED_DF_REG_ACHR_CHAPV2      ) != 0)) ||
-      (                                                                             (_CHECK_SET_BIT(activated_functions, RANG_OUTPUT_LED_DF_REG_PUSK_UROV_VID_DV ) != 0))
+      (                                                                               (_CHECK_SET_BIT(activated_functions, RANG_OUTPUT_LED_DF_REG_PUSK_UROV_VID_DV ) != 0))
      )     
     )
   {
@@ -5231,7 +5231,9 @@ inline void vmp_handler(unsigned int activated_functions[])
      ((activated_functions[2] & MASKA_MONITOTYNG_PHASE_SIGNALES_KZ_2) != 0) ||
      ((activated_functions[3] & MASKA_MONITOTYNG_PHASE_SIGNALES_KZ_3) != 0) ||
      ((activated_functions[4] & MASKA_MONITOTYNG_PHASE_SIGNALES_KZ_4) != 0) ||
-     ((activated_functions[5] & MASKA_MONITOTYNG_PHASE_SIGNALES_KZ_5) != 0)
+     ((activated_functions[5] & MASKA_MONITOTYNG_PHASE_SIGNALES_KZ_5) != 0) ||
+     ((activated_functions[6] & MASKA_MONITOTYNG_PHASE_SIGNALES_KZ_6) != 0) ||
+     ((activated_functions[7] & MASKA_MONITOTYNG_PHASE_SIGNALES_KZ_7) != 0)
     )
   {
     //Є фазне КЗ
@@ -5566,7 +5568,9 @@ inline unsigned int stop_regisrator(unsigned int* carrent_active_functions, unsi
         ((carrent_active_functions[2] & ranguvannja_registrator[2]) == 0) &&
         ((carrent_active_functions[3] & ranguvannja_registrator[3]) == 0) &&
         ((carrent_active_functions[4] & ranguvannja_registrator[4]) == 0) &&
-        ((carrent_active_functions[5] & ranguvannja_registrator[5]) == 0)
+        ((carrent_active_functions[5] & ranguvannja_registrator[5]) == 0) &&
+        ((carrent_active_functions[6] & ranguvannja_registrator[6]) == 0) &&
+        ((carrent_active_functions[7] & ranguvannja_registrator[7]) == 0)
       )
     {
       //Зафіксовано, що ні одне джерело активації реєстратора зараз не активне
@@ -5577,7 +5581,9 @@ inline unsigned int stop_regisrator(unsigned int* carrent_active_functions, unsi
           ((carrent_active_functions[2] & MASKA_FOR_CONTINUE_GET_DR_ACTINE_WORD_2) == 0) &&
           ((carrent_active_functions[3] & MASKA_FOR_CONTINUE_GET_DR_ACTINE_WORD_3) == 0) &&
           ((carrent_active_functions[4] & MASKA_FOR_CONTINUE_GET_DR_ACTINE_WORD_4) == 0) &&
-          ((carrent_active_functions[5] & MASKA_FOR_CONTINUE_GET_DR_ACTINE_WORD_5) == 0)
+          ((carrent_active_functions[5] & MASKA_FOR_CONTINUE_GET_DR_ACTINE_WORD_5) == 0) &&
+          ((carrent_active_functions[6] & MASKA_FOR_CONTINUE_GET_DR_ACTINE_WORD_6) == 0) &&
+          ((carrent_active_functions[7] & MASKA_FOR_CONTINUE_GET_DR_ACTINE_WORD_7) == 0)
         )
       {
         //Зафіксовано, що всі функції, які можуть утримувати реєстратор активним зараз скинуті
@@ -6818,7 +6824,9 @@ inline void digital_registrator(unsigned int* carrent_active_functions, unsigned
          ((carrent_active_functions[2] & MASKA_MONITOTYNG_PHASE_SIGNALES_2) != 0) ||
          ((carrent_active_functions[3] & MASKA_MONITOTYNG_PHASE_SIGNALES_3) != 0) ||
          ((carrent_active_functions[4] & MASKA_MONITOTYNG_PHASE_SIGNALES_4) != 0) ||
-         ((carrent_active_functions[5] & MASKA_MONITOTYNG_PHASE_SIGNALES_5) != 0)
+         ((carrent_active_functions[5] & MASKA_MONITOTYNG_PHASE_SIGNALES_5) != 0) ||
+         ((carrent_active_functions[6] & MASKA_MONITOTYNG_PHASE_SIGNALES_6) != 0) ||
+         ((carrent_active_functions[7] & MASKA_MONITOTYNG_PHASE_SIGNALES_7) != 0)
         )
       {
         if((state_current_monitoring & (1<<IDENTIFIER_BIT_ARRAY_MAX_CURRENT_PHASE)) == 0)
@@ -6835,7 +6843,9 @@ inline void digital_registrator(unsigned int* carrent_active_functions, unsigned
          ((carrent_active_functions[2] & MASKA_MONITOTYNG_PHASE04_SIGNALES_2) != 0) ||
          ((carrent_active_functions[3] & MASKA_MONITOTYNG_PHASE04_SIGNALES_3) != 0) ||
          ((carrent_active_functions[4] & MASKA_MONITOTYNG_PHASE04_SIGNALES_4) != 0) ||
-         ((carrent_active_functions[5] & MASKA_MONITOTYNG_PHASE04_SIGNALES_5) != 0)
+         ((carrent_active_functions[5] & MASKA_MONITOTYNG_PHASE04_SIGNALES_5) != 0) ||
+         ((carrent_active_functions[6] & MASKA_MONITOTYNG_PHASE04_SIGNALES_6) != 0) ||
+         ((carrent_active_functions[7] & MASKA_MONITOTYNG_PHASE04_SIGNALES_7) != 0)
         )
       {
         if((state_current_monitoring & (1<<IDENTIFIER_BIT_ARRAY_MAX_CURRENT_PHASE04)) == 0)
@@ -6852,7 +6862,9 @@ inline void digital_registrator(unsigned int* carrent_active_functions, unsigned
          ((carrent_active_functions[2] & MASKA_MONITOTYNG_3I0_SIGNALES_2) != 0) ||
          ((carrent_active_functions[3] & MASKA_MONITOTYNG_3I0_SIGNALES_3) != 0) ||
          ((carrent_active_functions[4] & MASKA_MONITOTYNG_3I0_SIGNALES_4) != 0) ||
-         ((carrent_active_functions[5] & MASKA_MONITOTYNG_3I0_SIGNALES_5) != 0)
+         ((carrent_active_functions[5] & MASKA_MONITOTYNG_3I0_SIGNALES_5) != 0) ||
+         ((carrent_active_functions[6] & MASKA_MONITOTYNG_3I0_SIGNALES_6) != 0) ||
+         ((carrent_active_functions[7] & MASKA_MONITOTYNG_3I0_SIGNALES_7) != 0)
       )
       {
         if((state_current_monitoring & (1<<IDENTIFIER_BIT_ARRAY_MAX_CURRENT_3I0)) == 0)
@@ -6869,7 +6881,9 @@ inline void digital_registrator(unsigned int* carrent_active_functions, unsigned
          ((carrent_active_functions[2] & MASKA_MONITOTYNG_3U0_SIGNALES_2) != 0) ||
          ((carrent_active_functions[3] & MASKA_MONITOTYNG_3U0_SIGNALES_3) != 0) ||
          ((carrent_active_functions[4] & MASKA_MONITOTYNG_3U0_SIGNALES_4) != 0) ||
-         ((carrent_active_functions[5] & MASKA_MONITOTYNG_3U0_SIGNALES_5) != 0)
+         ((carrent_active_functions[5] & MASKA_MONITOTYNG_3U0_SIGNALES_5) != 0) ||
+         ((carrent_active_functions[6] & MASKA_MONITOTYNG_3U0_SIGNALES_6) != 0) ||
+         ((carrent_active_functions[7] & MASKA_MONITOTYNG_3U0_SIGNALES_7) != 0)
       )
       {
         if((state_current_monitoring & (1<<IDENTIFIER_BIT_ARRAY_MAX_VOLTAGE_3U0)) == 0)
@@ -6891,7 +6905,9 @@ inline void digital_registrator(unsigned int* carrent_active_functions, unsigned
            ((carrent_active_functions[2] & MASKA_MONITOTYNG_UMIN_SIGNALES_2) != 0) ||
            ((carrent_active_functions[3] & MASKA_MONITOTYNG_UMIN_SIGNALES_3) != 0) ||
            ((carrent_active_functions[4] & MASKA_MONITOTYNG_UMIN_SIGNALES_4) != 0) ||
-           ((carrent_active_functions[5] & MASKA_MONITOTYNG_UMIN_SIGNALES_5) != 0)
+           ((carrent_active_functions[5] & MASKA_MONITOTYNG_UMIN_SIGNALES_5) != 0) ||
+           ((carrent_active_functions[6] & MASKA_MONITOTYNG_UMIN_SIGNALES_6) != 0) ||
+           ((carrent_active_functions[7] & MASKA_MONITOTYNG_UMIN_SIGNALES_7) != 0)
           )
         {
           if((state_current_monitoring & (1<<IDENTIFIER_BIT_ARRAY_MIN_VOLTAGE)) == 0)
@@ -6909,7 +6925,9 @@ inline void digital_registrator(unsigned int* carrent_active_functions, unsigned
          ((carrent_active_functions[2] & MASKA_MONITOTYNG_UMAX_SIGNALES_2) != 0) ||
          ((carrent_active_functions[3] & MASKA_MONITOTYNG_UMAX_SIGNALES_3) != 0) ||
          ((carrent_active_functions[4] & MASKA_MONITOTYNG_UMAX_SIGNALES_4) != 0) ||
-         ((carrent_active_functions[5] & MASKA_MONITOTYNG_UMAX_SIGNALES_5) != 0)
+         ((carrent_active_functions[5] & MASKA_MONITOTYNG_UMAX_SIGNALES_5) != 0) ||
+         ((carrent_active_functions[6] & MASKA_MONITOTYNG_UMAX_SIGNALES_6) != 0) ||
+         ((carrent_active_functions[7] & MASKA_MONITOTYNG_UMAX_SIGNALES_7) != 0)
       )
       {
         if((state_current_monitoring & (1<<IDENTIFIER_BIT_ARRAY_MAX_VOLTAGE)) == 0)
@@ -6926,7 +6944,9 @@ inline void digital_registrator(unsigned int* carrent_active_functions, unsigned
          ((carrent_active_functions[2] & MASKA_MONITOTYNG_ZOP_SIGNALES_2) != 0) ||
          ((carrent_active_functions[3] & MASKA_MONITOTYNG_ZOP_SIGNALES_3) != 0) ||
          ((carrent_active_functions[4] & MASKA_MONITOTYNG_ZOP_SIGNALES_4) != 0) ||
-         ((carrent_active_functions[5] & MASKA_MONITOTYNG_ZOP_SIGNALES_5) != 0)
+         ((carrent_active_functions[5] & MASKA_MONITOTYNG_ZOP_SIGNALES_5) != 0) ||
+         ((carrent_active_functions[6] & MASKA_MONITOTYNG_ZOP_SIGNALES_6) != 0) ||
+         ((carrent_active_functions[7] & MASKA_MONITOTYNG_ZOP_SIGNALES_7) != 0)
         )
       {
         if((state_current_monitoring & (1<<IDENTIFIER_BIT_ARRAY_MAX_CURRENT_ZOP)) == 0)
@@ -6943,7 +6963,9 @@ inline void digital_registrator(unsigned int* carrent_active_functions, unsigned
          ((carrent_active_functions[2] & MASKA_MONITOTYNG_F_MIN_ACHR_SIGNALES_2) != 0) ||
          ((carrent_active_functions[3] & MASKA_MONITOTYNG_F_MIN_ACHR_SIGNALES_3) != 0) ||
          ((carrent_active_functions[4] & MASKA_MONITOTYNG_F_MIN_ACHR_SIGNALES_4) != 0) ||
-         ((carrent_active_functions[5] & MASKA_MONITOTYNG_F_MIN_ACHR_SIGNALES_5) != 0)
+         ((carrent_active_functions[5] & MASKA_MONITOTYNG_F_MIN_ACHR_SIGNALES_5) != 0) ||
+         ((carrent_active_functions[6] & MASKA_MONITOTYNG_F_MIN_ACHR_SIGNALES_6) != 0) ||
+         ((carrent_active_functions[7] & MASKA_MONITOTYNG_F_MIN_ACHR_SIGNALES_7) != 0)
       )
       {
         if((state_current_monitoring & (1<<IDENTIFIER_BIT_ARRAY_MIN_FREQUENCY_ACHR)) == 0)
@@ -7155,7 +7177,9 @@ inline void digital_registrator(unsigned int* carrent_active_functions, unsigned
              ((carrent_active_functions[2] & MASKA_MONITOTYNG_PHASE_SIGNALES_2) != 0) ||
              ((carrent_active_functions[3] & MASKA_MONITOTYNG_PHASE_SIGNALES_3) != 0) ||
              ((carrent_active_functions[4] & MASKA_MONITOTYNG_PHASE_SIGNALES_4) != 0) ||
-             ((carrent_active_functions[5] & MASKA_MONITOTYNG_PHASE_SIGNALES_5) != 0)
+             ((carrent_active_functions[5] & MASKA_MONITOTYNG_PHASE_SIGNALES_5) != 0) ||
+             ((carrent_active_functions[6] & MASKA_MONITOTYNG_PHASE_SIGNALES_6) != 0) ||
+             ((carrent_active_functions[7] & MASKA_MONITOTYNG_PHASE_SIGNALES_7) != 0)
             )
           {
             start_monitoring_max_phase_current(time_from_start_record_dr);
@@ -7168,7 +7192,9 @@ inline void digital_registrator(unsigned int* carrent_active_functions, unsigned
              ((carrent_active_functions[2] & MASKA_MONITOTYNG_PHASE04_SIGNALES_2) != 0) ||
              ((carrent_active_functions[3] & MASKA_MONITOTYNG_PHASE04_SIGNALES_3) != 0) ||
              ((carrent_active_functions[4] & MASKA_MONITOTYNG_PHASE04_SIGNALES_4) != 0) ||
-             ((carrent_active_functions[5] & MASKA_MONITOTYNG_PHASE04_SIGNALES_5) != 0)
+             ((carrent_active_functions[5] & MASKA_MONITOTYNG_PHASE04_SIGNALES_5) != 0) ||
+             ((carrent_active_functions[6] & MASKA_MONITOTYNG_PHASE04_SIGNALES_6) != 0) ||
+             ((carrent_active_functions[7] & MASKA_MONITOTYNG_PHASE04_SIGNALES_7) != 0)
             )
           {
             start_monitoring_max_phase04_current(time_from_start_record_dr);
@@ -7181,7 +7207,9 @@ inline void digital_registrator(unsigned int* carrent_active_functions, unsigned
              ((carrent_active_functions[2] & MASKA_MONITOTYNG_3I0_SIGNALES_2) != 0) ||
              ((carrent_active_functions[3] & MASKA_MONITOTYNG_3I0_SIGNALES_3) != 0) ||
              ((carrent_active_functions[4] & MASKA_MONITOTYNG_3I0_SIGNALES_4) != 0) ||
-             ((carrent_active_functions[5] & MASKA_MONITOTYNG_3I0_SIGNALES_5) != 0)
+             ((carrent_active_functions[5] & MASKA_MONITOTYNG_3I0_SIGNALES_5) != 0) ||
+             ((carrent_active_functions[6] & MASKA_MONITOTYNG_3I0_SIGNALES_6) != 0) ||
+             ((carrent_active_functions[7] & MASKA_MONITOTYNG_3I0_SIGNALES_7) != 0)
             )
           {
             start_monitoring_max_3I0(time_from_start_record_dr);
@@ -7194,7 +7222,9 @@ inline void digital_registrator(unsigned int* carrent_active_functions, unsigned
              ((carrent_active_functions[2] & MASKA_MONITOTYNG_3U0_SIGNALES_2) != 0) ||
              ((carrent_active_functions[3] & MASKA_MONITOTYNG_3U0_SIGNALES_3) != 0) ||
              ((carrent_active_functions[4] & MASKA_MONITOTYNG_3U0_SIGNALES_4) != 0) ||
-             ((carrent_active_functions[5] & MASKA_MONITOTYNG_3U0_SIGNALES_5) != 0)
+             ((carrent_active_functions[5] & MASKA_MONITOTYNG_3U0_SIGNALES_5) != 0) ||
+             ((carrent_active_functions[6] & MASKA_MONITOTYNG_3U0_SIGNALES_6) != 0) ||
+             ((carrent_active_functions[7] & MASKA_MONITOTYNG_3U0_SIGNALES_7) != 0)
             )
           {
             start_monitoring_max_3U0(time_from_start_record_dr);
@@ -7209,7 +7239,9 @@ inline void digital_registrator(unsigned int* carrent_active_functions, unsigned
              ((carrent_active_functions[2] & MASKA_MONITOTYNG_UMIN_SIGNALES_2) != 0) ||
              ((carrent_active_functions[3] & MASKA_MONITOTYNG_UMIN_SIGNALES_3) != 0) ||
              ((carrent_active_functions[4] & MASKA_MONITOTYNG_UMIN_SIGNALES_4) != 0) ||
-             ((carrent_active_functions[5] & MASKA_MONITOTYNG_UMIN_SIGNALES_5) != 0)
+             ((carrent_active_functions[5] & MASKA_MONITOTYNG_UMIN_SIGNALES_5) != 0) ||
+             ((carrent_active_functions[6] & MASKA_MONITOTYNG_UMIN_SIGNALES_6) != 0) ||
+             ((carrent_active_functions[7] & MASKA_MONITOTYNG_UMIN_SIGNALES_7) != 0)
             )
           {
             start_monitoring_min_U(time_from_start_record_dr);
@@ -7231,7 +7263,9 @@ inline void digital_registrator(unsigned int* carrent_active_functions, unsigned
              ((carrent_active_functions[2] & MASKA_MONITOTYNG_UMAX_SIGNALES_2) != 0) ||
              ((carrent_active_functions[3] & MASKA_MONITOTYNG_UMAX_SIGNALES_3) != 0) ||
              ((carrent_active_functions[4] & MASKA_MONITOTYNG_UMAX_SIGNALES_4) != 0) ||
-             ((carrent_active_functions[5] & MASKA_MONITOTYNG_UMAX_SIGNALES_5) != 0)
+             ((carrent_active_functions[5] & MASKA_MONITOTYNG_UMAX_SIGNALES_5) != 0) ||
+             ((carrent_active_functions[6] & MASKA_MONITOTYNG_UMAX_SIGNALES_6) != 0) ||
+             ((carrent_active_functions[7] & MASKA_MONITOTYNG_UMAX_SIGNALES_7) != 0)
             )
           {
             start_monitoring_max_U(time_from_start_record_dr);
@@ -7244,7 +7278,9 @@ inline void digital_registrator(unsigned int* carrent_active_functions, unsigned
              ((carrent_active_functions[2] & MASKA_MONITOTYNG_ZOP_SIGNALES_2) != 0) ||
              ((carrent_active_functions[3] & MASKA_MONITOTYNG_ZOP_SIGNALES_3) != 0) ||
              ((carrent_active_functions[4] & MASKA_MONITOTYNG_ZOP_SIGNALES_4) != 0) ||
-             ((carrent_active_functions[5] & MASKA_MONITOTYNG_ZOP_SIGNALES_5) != 0)
+             ((carrent_active_functions[5] & MASKA_MONITOTYNG_ZOP_SIGNALES_5) != 0) ||
+             ((carrent_active_functions[6] & MASKA_MONITOTYNG_ZOP_SIGNALES_6) != 0) ||
+             ((carrent_active_functions[7] & MASKA_MONITOTYNG_ZOP_SIGNALES_7) != 0)
             )
           {
             start_monitoring_max_ZOP(time_from_start_record_dr);
@@ -7257,7 +7293,9 @@ inline void digital_registrator(unsigned int* carrent_active_functions, unsigned
              ((carrent_active_functions[2] & MASKA_MONITOTYNG_F_MIN_ACHR_SIGNALES_2) != 0) ||
              ((carrent_active_functions[3] & MASKA_MONITOTYNG_F_MIN_ACHR_SIGNALES_3) != 0) ||
              ((carrent_active_functions[4] & MASKA_MONITOTYNG_F_MIN_ACHR_SIGNALES_4) != 0) ||
-             ((carrent_active_functions[5] & MASKA_MONITOTYNG_F_MIN_ACHR_SIGNALES_5) != 0)
+             ((carrent_active_functions[5] & MASKA_MONITOTYNG_F_MIN_ACHR_SIGNALES_5) != 0) ||
+             ((carrent_active_functions[6] & MASKA_MONITOTYNG_F_MIN_ACHR_SIGNALES_6) != 0) ||
+             ((carrent_active_functions[7] & MASKA_MONITOTYNG_F_MIN_ACHR_SIGNALES_7) != 0)
             )
           {
             start_monitoring_min_f(time_from_start_record_dr);
@@ -7378,7 +7416,9 @@ inline void digital_registrator(unsigned int* carrent_active_functions, unsigned
          ((carrent_active_functions[2] & MASKA_MONITOTYNG_PHASE_SIGNALES_2) != 0) ||
          ((carrent_active_functions[3] & MASKA_MONITOTYNG_PHASE_SIGNALES_3) != 0) ||
          ((carrent_active_functions[4] & MASKA_MONITOTYNG_PHASE_SIGNALES_4) != 0) ||
-         ((carrent_active_functions[5] & MASKA_MONITOTYNG_PHASE_SIGNALES_5) != 0)
+         ((carrent_active_functions[5] & MASKA_MONITOTYNG_PHASE_SIGNALES_5) != 0) ||
+         ((carrent_active_functions[6] & MASKA_MONITOTYNG_PHASE_SIGNALES_6) != 0) ||
+         ((carrent_active_functions[7] & MASKA_MONITOTYNG_PHASE_SIGNALES_7) != 0)
         )
       {
         if((state_current_monitoring & (1<<IDENTIFIER_BIT_ARRAY_MAX_CURRENT_PHASE)) != 0)
@@ -7399,7 +7439,9 @@ inline void digital_registrator(unsigned int* carrent_active_functions, unsigned
          ((carrent_active_functions[2] & MASKA_MONITOTYNG_PHASE04_SIGNALES_2) != 0) ||
          ((carrent_active_functions[3] & MASKA_MONITOTYNG_PHASE04_SIGNALES_3) != 0) ||
          ((carrent_active_functions[4] & MASKA_MONITOTYNG_PHASE04_SIGNALES_4) != 0) ||
-         ((carrent_active_functions[5] & MASKA_MONITOTYNG_PHASE04_SIGNALES_5) != 0)
+         ((carrent_active_functions[5] & MASKA_MONITOTYNG_PHASE04_SIGNALES_5) != 0) ||
+         ((carrent_active_functions[6] & MASKA_MONITOTYNG_PHASE04_SIGNALES_6) != 0) ||
+         ((carrent_active_functions[7] & MASKA_MONITOTYNG_PHASE04_SIGNALES_7) != 0)
         )
       {
         if((state_current_monitoring & (1<<IDENTIFIER_BIT_ARRAY_MAX_CURRENT_PHASE04)) != 0)
@@ -7420,7 +7462,9 @@ inline void digital_registrator(unsigned int* carrent_active_functions, unsigned
          ((carrent_active_functions[2] & MASKA_MONITOTYNG_3I0_SIGNALES_2) != 0) ||
          ((carrent_active_functions[3] & MASKA_MONITOTYNG_3I0_SIGNALES_3) != 0) ||
          ((carrent_active_functions[4] & MASKA_MONITOTYNG_3I0_SIGNALES_4) != 0) ||
-         ((carrent_active_functions[5] & MASKA_MONITOTYNG_3I0_SIGNALES_5) != 0)
+         ((carrent_active_functions[5] & MASKA_MONITOTYNG_3I0_SIGNALES_5) != 0) ||
+         ((carrent_active_functions[6] & MASKA_MONITOTYNG_3I0_SIGNALES_6) != 0) ||
+         ((carrent_active_functions[7] & MASKA_MONITOTYNG_3I0_SIGNALES_7) != 0)
         )
       {
         if((state_current_monitoring & (1<<IDENTIFIER_BIT_ARRAY_MAX_CURRENT_3I0)) != 0)
@@ -7441,7 +7485,9 @@ inline void digital_registrator(unsigned int* carrent_active_functions, unsigned
          ((carrent_active_functions[2] & MASKA_MONITOTYNG_3U0_SIGNALES_2) != 0) ||
          ((carrent_active_functions[3] & MASKA_MONITOTYNG_3U0_SIGNALES_3) != 0) ||
          ((carrent_active_functions[4] & MASKA_MONITOTYNG_3U0_SIGNALES_4) != 0) ||
-         ((carrent_active_functions[5] & MASKA_MONITOTYNG_3U0_SIGNALES_5) != 0)
+         ((carrent_active_functions[5] & MASKA_MONITOTYNG_3U0_SIGNALES_5) != 0) ||
+         ((carrent_active_functions[6] & MASKA_MONITOTYNG_3U0_SIGNALES_6) != 0) ||
+         ((carrent_active_functions[7] & MASKA_MONITOTYNG_3U0_SIGNALES_7) != 0)
         )
       {
         if((state_current_monitoring & (1<<IDENTIFIER_BIT_ARRAY_MAX_VOLTAGE_3U0)) != 0)
@@ -7470,7 +7516,9 @@ inline void digital_registrator(unsigned int* carrent_active_functions, unsigned
            ((carrent_active_functions[2] & MASKA_MONITOTYNG_UMIN_SIGNALES_2) != 0) ||
            ((carrent_active_functions[3] & MASKA_MONITOTYNG_UMIN_SIGNALES_3) != 0) ||
            ((carrent_active_functions[4] & MASKA_MONITOTYNG_UMIN_SIGNALES_4) != 0) ||
-           ((carrent_active_functions[5] & MASKA_MONITOTYNG_UMIN_SIGNALES_5) != 0)
+           ((carrent_active_functions[5] & MASKA_MONITOTYNG_UMIN_SIGNALES_5) != 0) ||
+           ((carrent_active_functions[6] & MASKA_MONITOTYNG_UMIN_SIGNALES_6) != 0) ||
+           ((carrent_active_functions[7] & MASKA_MONITOTYNG_UMIN_SIGNALES_7) != 0)
           )
         {
           if((state_current_monitoring & (1<<IDENTIFIER_BIT_ARRAY_MIN_VOLTAGE)) != 0)
@@ -7501,7 +7549,9 @@ inline void digital_registrator(unsigned int* carrent_active_functions, unsigned
          ((carrent_active_functions[2] & MASKA_MONITOTYNG_UMAX_SIGNALES_2) != 0) ||
          ((carrent_active_functions[3] & MASKA_MONITOTYNG_UMAX_SIGNALES_3) != 0) ||
          ((carrent_active_functions[4] & MASKA_MONITOTYNG_UMAX_SIGNALES_4) != 0) ||
-         ((carrent_active_functions[5] & MASKA_MONITOTYNG_UMAX_SIGNALES_5) != 0)
+         ((carrent_active_functions[5] & MASKA_MONITOTYNG_UMAX_SIGNALES_5) != 0) ||
+         ((carrent_active_functions[6] & MASKA_MONITOTYNG_UMAX_SIGNALES_6) != 0) ||
+         ((carrent_active_functions[7] & MASKA_MONITOTYNG_UMAX_SIGNALES_7) != 0)
         )
       {
         if((state_current_monitoring & (1<<IDENTIFIER_BIT_ARRAY_MAX_VOLTAGE)) != 0)
@@ -7522,7 +7572,9 @@ inline void digital_registrator(unsigned int* carrent_active_functions, unsigned
          ((carrent_active_functions[2] & MASKA_MONITOTYNG_ZOP_SIGNALES_2) != 0) ||
          ((carrent_active_functions[3] & MASKA_MONITOTYNG_ZOP_SIGNALES_3) != 0) ||
          ((carrent_active_functions[4] & MASKA_MONITOTYNG_ZOP_SIGNALES_4) != 0) ||
-         ((carrent_active_functions[5] & MASKA_MONITOTYNG_ZOP_SIGNALES_5) != 0)
+         ((carrent_active_functions[5] & MASKA_MONITOTYNG_ZOP_SIGNALES_5) != 0) ||
+         ((carrent_active_functions[6] & MASKA_MONITOTYNG_ZOP_SIGNALES_6) != 0) ||
+         ((carrent_active_functions[7] & MASKA_MONITOTYNG_ZOP_SIGNALES_7) != 0)
         )
       {
         if((state_current_monitoring & (1<<IDENTIFIER_BIT_ARRAY_MAX_CURRENT_ZOP)) != 0)
@@ -7543,7 +7595,9 @@ inline void digital_registrator(unsigned int* carrent_active_functions, unsigned
          ((carrent_active_functions[2] & MASKA_MONITOTYNG_F_MIN_ACHR_SIGNALES_2) != 0) ||
          ((carrent_active_functions[3] & MASKA_MONITOTYNG_F_MIN_ACHR_SIGNALES_3) != 0) ||
          ((carrent_active_functions[4] & MASKA_MONITOTYNG_F_MIN_ACHR_SIGNALES_4) != 0) ||
-         ((carrent_active_functions[5] & MASKA_MONITOTYNG_F_MIN_ACHR_SIGNALES_5) != 0)
+         ((carrent_active_functions[5] & MASKA_MONITOTYNG_F_MIN_ACHR_SIGNALES_5) != 0) ||
+         ((carrent_active_functions[6] & MASKA_MONITOTYNG_F_MIN_ACHR_SIGNALES_6) != 0) ||
+         ((carrent_active_functions[7] & MASKA_MONITOTYNG_F_MIN_ACHR_SIGNALES_7) != 0)
         )
       {
         if((state_current_monitoring & (1<<IDENTIFIER_BIT_ARRAY_MIN_FREQUENCY_ACHR)) != 0)
@@ -7650,7 +7704,9 @@ inline void digital_registrator(unsigned int* carrent_active_functions, unsigned
             ((carrent_active_functions[2] != previous_active_functions[2])) ||
             ((carrent_active_functions[3] != previous_active_functions[3])) ||
             ((carrent_active_functions[4] != previous_active_functions[4])) ||
-            ((carrent_active_functions[5] != previous_active_functions[5])) 
+            ((carrent_active_functions[5] != previous_active_functions[5])) ||
+            ((carrent_active_functions[6] != previous_active_functions[6])) ||
+            ((carrent_active_functions[7] != previous_active_functions[7])) 
            )
         {
           //Теперішній стан сигналів не співпадає з попереднім станом сигналів
