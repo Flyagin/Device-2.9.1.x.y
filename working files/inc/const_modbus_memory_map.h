@@ -224,9 +224,9 @@
 #define MA_STP_ACHR_CHAPV_UF              447
 //#define MA_STP_ACHR_CHAPV_UF2             448
 #define MA_TO_ACHR_1                      449
-//#define MA_TO_ACHR_2                      450
+#define MA_TO_ACHR_2                      450
 #define MA_TO_CHAPV_1                     451
-//#define MA_TO_CHAPV_2                     452
+#define MA_TO_CHAPV_2                     452
 
 #define M_ADDRESS_LAST_SETPOINTS_ZACHYSTIV 452
 
@@ -724,14 +724,14 @@
 #define BIT_MA_BLOCK_ACHR1                      60273
 #define BIT_MA_BLOCK_ACHR2                      60274
 #define BIT_MA_BLOCK_CHAPV1_VID_U               60275
-#define BIT_MA_PO_F1_ACHR1                      60276
-//#define BIT_MA_PO_F2_ACHR                       60277
-//#define BIT_MA_F1_ACHR_CHAPV                    60278
-//#define BIT_MA_F2_ACHR_CHAPV                    60279
-#define BIT_MA_ACHR_CHAPV1                      60280
+#define BIT_MA_PO_ACHR1                         60276
+#define BIT_MA_PO_ACHR2                         60277
+#define BIT_MA_ACHR_CHAPV1                      60278
+#define BIT_MA_ACHR_CHAPV2                      60279
+//#define BIT_MA_ACHR_CHAPV                       60280
 #define BIT_MA_RAZR_CHAPV                       60281
-#define BIT_MA_PO_F1_CHAPV1                     60282
-//#define BIT_MA_PO_F2_CHAPV                      60283
+#define BIT_MA_PO_CHAPV1                        60282
+#define BIT_MA_PO_CHAPV2                        60283
 
 #define M_ADDRESS_DF                          618
 #define BIT_MA_DF_BASE                          60288

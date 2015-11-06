@@ -196,10 +196,13 @@ void convert_order_list_function_to_gmm(unsigned int* input_array, unsigned shor
   _CONVERT_SIGNAL_TO_GMM(input_array, output_array, RANG_OUTPUT_LED_DF_REG_BLOCK_ACHR1       , (BIT_MA_BLOCK_ACHR1        - BIT_MA_CURRENT_AF_BASE));
   _CONVERT_SIGNAL_TO_GMM(input_array, output_array, RANG_OUTPUT_LED_DF_REG_BLOCK_ACHR2       , (BIT_MA_BLOCK_ACHR2        - BIT_MA_CURRENT_AF_BASE));
   _CONVERT_SIGNAL_TO_GMM(input_array, output_array, RANG_OUTPUT_LED_DF_REG_BLOCK_CHAPV1_VID_U, (BIT_MA_BLOCK_CHAPV1_VID_U - BIT_MA_CURRENT_AF_BASE));
-  _CONVERT_SIGNAL_TO_GMM(input_array, output_array, RANG_OUTPUT_LED_DF_REG_PO_ACHR1          , (BIT_MA_PO_F1_ACHR1        - BIT_MA_CURRENT_AF_BASE));
+  _CONVERT_SIGNAL_TO_GMM(input_array, output_array, RANG_OUTPUT_LED_DF_REG_PO_ACHR1          , (BIT_MA_PO_ACHR1           - BIT_MA_CURRENT_AF_BASE));
+  _CONVERT_SIGNAL_TO_GMM(input_array, output_array, RANG_OUTPUT_LED_DF_REG_PO_ACHR2          , (BIT_MA_PO_ACHR2           - BIT_MA_CURRENT_AF_BASE));
   _CONVERT_SIGNAL_TO_GMM(input_array, output_array, RANG_OUTPUT_LED_DF_REG_ACHR_CHAPV1       , (BIT_MA_ACHR_CHAPV1        - BIT_MA_CURRENT_AF_BASE));
-  _CONVERT_SIGNAL_TO_GMM(input_array, output_array, RANG_OUTPUT_LED_DF_REG_RAZR_CHAPV        , (BIT_MA_RAZR_CHAPV        - BIT_MA_CURRENT_AF_BASE));
-  _CONVERT_SIGNAL_TO_GMM(input_array, output_array, RANG_OUTPUT_LED_DF_REG_PO_CHAPV1         , (BIT_MA_PO_F1_CHAPV1       - BIT_MA_CURRENT_AF_BASE));
+  _CONVERT_SIGNAL_TO_GMM(input_array, output_array, RANG_OUTPUT_LED_DF_REG_ACHR_CHAPV2       , (BIT_MA_ACHR_CHAPV2        - BIT_MA_CURRENT_AF_BASE));
+  _CONVERT_SIGNAL_TO_GMM(input_array, output_array, RANG_OUTPUT_LED_DF_REG_RAZR_CHAPV        , (BIT_MA_RAZR_CHAPV         - BIT_MA_CURRENT_AF_BASE));
+  _CONVERT_SIGNAL_TO_GMM(input_array, output_array, RANG_OUTPUT_LED_DF_REG_PO_CHAPV1         , (BIT_MA_PO_CHAPV1          - BIT_MA_CURRENT_AF_BASE));
+  _CONVERT_SIGNAL_TO_GMM(input_array, output_array, RANG_OUTPUT_LED_DF_REG_PO_CHAPV2         , (BIT_MA_PO_CHAPV2          - BIT_MA_CURRENT_AF_BASE));
 
   //ОФ
   _CONVERT_SIGNAL_TO_GMM(input_array, output_array, RANG_OUTPUT_LED_DF_REG_DF1_IN , (BIT_MA_INPUT_DF1  - BIT_MA_CURRENT_AF_BASE));
@@ -1568,7 +1571,12 @@ unsigned int convert_order_list_oldr_to_gmm(unsigned int number, unsigned int nu
       }
     case RANG_OUTPUT_LED_DF_REG_PO_ACHR1:
       {
-        rezultat = BIT_MA_PO_F1_ACHR1;
+        rezultat = BIT_MA_PO_ACHR1;
+        break;
+      }
+    case RANG_OUTPUT_LED_DF_REG_PO_ACHR2:
+      {
+        rezultat = BIT_MA_PO_ACHR2;
         break;
       }
     case RANG_OUTPUT_LED_DF_REG_ACHR_CHAPV1:
@@ -1576,9 +1584,19 @@ unsigned int convert_order_list_oldr_to_gmm(unsigned int number, unsigned int nu
         rezultat = BIT_MA_ACHR_CHAPV1;
         break;
       }
+    case RANG_OUTPUT_LED_DF_REG_ACHR_CHAPV2:
+      {
+        rezultat = BIT_MA_ACHR_CHAPV2;
+        break;
+      }
     case RANG_OUTPUT_LED_DF_REG_PO_CHAPV1:
       {
-        rezultat = BIT_MA_PO_F1_CHAPV1;
+        rezultat = BIT_MA_PO_CHAPV1;
+        break;
+      }
+    case RANG_OUTPUT_LED_DF_REG_PO_CHAPV2:
+      {
+        rezultat = BIT_MA_PO_CHAPV2;
         break;
       }
     case RANG_OUTPUT_LED_DF_REG_ACHR_CHAPV_VID_DV:
@@ -2697,10 +2715,13 @@ unsigned int save_new_rang_oldr_from_gmm(unsigned int number, unsigned int numbe
              (data == BIT_MA_BLOCK_ACHR1       ) ||
              (data == BIT_MA_BLOCK_ACHR2       ) ||
              (data == BIT_MA_BLOCK_CHAPV1_VID_U) ||
-             (data == BIT_MA_PO_F1_ACHR1       ) ||
+             (data == BIT_MA_PO_ACHR1          ) ||
+             (data == BIT_MA_PO_ACHR2          ) ||
              (data == BIT_MA_ACHR_CHAPV1       ) ||
+             (data == BIT_MA_ACHR_CHAPV2       ) ||
              (data == BIT_MA_RAZR_CHAPV        ) ||
-             (data == BIT_MA_PO_F1_CHAPV1      )
+             (data == BIT_MA_PO_CHAPV1         ) ||
+             (data == BIT_MA_PO_CHAPV2         )
             )
     {
       //Зараз є намагання зранжувати функцю АЧР/ЧАПВ і номер її є допустимим
@@ -3590,9 +3611,14 @@ unsigned int save_new_rang_oldr_from_gmm(unsigned int number, unsigned int numbe
         _SET_BIT(set_array_rang, RANG_OUTPUT_LED_DF_REG_BLOCK_CHAPV1_VID_U);
         break;
       }
-    case BIT_MA_PO_F1_ACHR1:
+    case BIT_MA_PO_ACHR1:
       {
         _SET_BIT(set_array_rang, RANG_OUTPUT_LED_DF_REG_PO_ACHR1);
+        break;
+      }
+    case BIT_MA_PO_ACHR2:
+      {
+        _SET_BIT(set_array_rang, RANG_OUTPUT_LED_DF_REG_PO_ACHR2);
         break;
       }
     case BIT_MA_ACHR_CHAPV1:
@@ -3600,14 +3626,24 @@ unsigned int save_new_rang_oldr_from_gmm(unsigned int number, unsigned int numbe
         _SET_BIT(set_array_rang, RANG_OUTPUT_LED_DF_REG_ACHR_CHAPV1);
         break;
       }
+    case BIT_MA_ACHR_CHAPV2:
+      {
+        _SET_BIT(set_array_rang, RANG_OUTPUT_LED_DF_REG_ACHR_CHAPV2);
+        break;
+      }
     case BIT_MA_RAZR_CHAPV:
       {
         _SET_BIT(set_array_rang, RANG_OUTPUT_LED_DF_REG_RAZR_CHAPV);
         break;
       }
-    case BIT_MA_PO_F1_CHAPV1:
+    case BIT_MA_PO_CHAPV1:
       {
         _SET_BIT(set_array_rang, RANG_OUTPUT_LED_DF_REG_PO_CHAPV1);
+        break;
+      }
+    case BIT_MA_PO_CHAPV2:
+      {
+        _SET_BIT(set_array_rang, RANG_OUTPUT_LED_DF_REG_PO_CHAPV2);
         break;
       }
     case BIT_MA_PUSK_UROV_VID_DV:
@@ -4722,9 +4758,19 @@ inline unsigned int Get_data(unsigned char *data, unsigned int address_data, uns
         temp_value = current_settings.timeout_achr_1[num_gr]/10;
         break;
       }
+    case MA_TO_ACHR_2:
+      {
+        temp_value = current_settings.timeout_achr_2[num_gr]/10;
+        break;
+      }
     case MA_TO_CHAPV_1:
       {
         temp_value = current_settings.timeout_chapv_1[num_gr]/10;
+        break;
+      }
+    case MA_TO_CHAPV_2:
+      {
+        temp_value = current_settings.timeout_chapv_2[num_gr]/10;
         break;
       }
     default:
@@ -8050,6 +8096,23 @@ inline unsigned int Set_data(unsigned short int data, unsigned int address_data,
 
         break;
       }
+    case MA_TO_ACHR_2:
+      {
+        temp_value = data*10;
+
+#if (TIMEOUT_ACHR2_MIN != 0)          
+        if ((temp_value >= TIMEOUT_ACHR2_MIN) && (temp_value <= TIMEOUT_ACHR2_MAX))
+#else
+        if (temp_value <= TIMEOUT_ACHR2_MAX)
+#endif            
+        {
+          target_label->timeout_achr_2[num_gr] = temp_value;
+        }
+        else
+          error = ERROR_ILLEGAL_DATA_VALUE;
+
+        break;
+      }
     case MA_TO_CHAPV_1:
       {
         temp_value = data*10;
@@ -8061,6 +8124,23 @@ inline unsigned int Set_data(unsigned short int data, unsigned int address_data,
 #endif            
         {
           target_label->timeout_chapv_1[num_gr] = temp_value;
+        }
+        else
+          error = ERROR_ILLEGAL_DATA_VALUE;
+
+        break;
+      }
+    case MA_TO_CHAPV_2:
+      {
+        temp_value = data*10;
+
+#if (TIMEOUT_CHAPV2_MIN != 0)          
+        if ((temp_value >= TIMEOUT_CHAPV2_MIN) && (temp_value <= TIMEOUT_CHAPV2_MAX))
+#else
+        if (temp_value <= TIMEOUT_CHAPV2_MAX)
+#endif            
+        {
+          target_label->timeout_chapv_2[num_gr] = temp_value;
         }
         else
           error = ERROR_ILLEGAL_DATA_VALUE;
