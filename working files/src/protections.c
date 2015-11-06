@@ -2355,9 +2355,10 @@ inline void mtz_handler(unsigned int *activated_functions, unsigned int number_g
   ctr_mtz_nespr_kil_napr = ctr_mtz_nespr_kil_napr && previous_state_mtz_po_incn && previous_state_mtz_po_uncn; //Неисправность цепей напряжения (_AND3)
   
   //Неисправность цепей напряжения
-  if (ctr_mtz_nespr_kil_napr) {
+  if (ctr_mtz_nespr_kil_napr)
     _SET_BIT(activated_functions, RANG_OUTPUT_LED_DF_REG_NCN_MTZ);
-  }
+  else
+    _CLEAR_BIT(activated_functions, RANG_OUTPUT_LED_DF_REG_NCN_MTZ);
   /******Неисправность цепей напряжения для 4-х ступеней*******/
   
   for (int mtz_level = 0; mtz_level < NUMBER_LEVEL_MTZ; mtz_level++) {
@@ -2411,9 +2412,10 @@ inline void mtz_handler(unsigned int *activated_functions, unsigned int number_g
     _OR3(direction_ABC_tmp, 0, direction_ABC_tmp, 1, direction_ABC_tmp, 2, direction_ABC_tmp, 3);
     
     //Сектор МТЗНх Вперед
-    if (_GET_OUTPUT_STATE(direction_ABC_tmp, 3)) {
+    if (_GET_OUTPUT_STATE(direction_ABC_tmp, 3))
       _SET_BIT(activated_functions, mtz_settings_prt[mtz_level][RANG_OUTPUT_LED_DF_REG_SECTOR_VPERED_MTZN]);
-    }
+    else
+      _CLEAR_BIT(activated_functions, mtz_settings_prt[mtz_level][RANG_OUTPUT_LED_DF_REG_SECTOR_VPERED_MTZN]);
     
     direction_ABC_tmp |= (sector_directional_mtz[mtz_level][PHASE_A_INDEX] == MTZ_NAZAD) << 4; //Проверка направленности фазы А назад
     direction_ABC_tmp |= (sector_directional_mtz[mtz_level][PHASE_B_INDEX] == MTZ_NAZAD) << 5; //Проверка направленности фазы B назад
@@ -2422,9 +2424,10 @@ inline void mtz_handler(unsigned int *activated_functions, unsigned int number_g
     _OR3(direction_ABC_tmp, 4, direction_ABC_tmp, 5, direction_ABC_tmp, 6, direction_ABC_tmp, 7);
     
     //Сектор МТЗНх Назад
-    if (_GET_OUTPUT_STATE(direction_ABC_tmp, 7)) {
+    if (_GET_OUTPUT_STATE(direction_ABC_tmp, 7))
       _SET_BIT(activated_functions, mtz_settings_prt[mtz_level][RANG_OUTPUT_LED_DF_REG_SECTOR_NAZAD_MTZN]);
-    }
+    else
+      _CLEAR_BIT(activated_functions, mtz_settings_prt[mtz_level][RANG_OUTPUT_LED_DF_REG_SECTOR_NAZAD_MTZN]);
     
     //Уставка ПО МТЗН1 прям. с учетом гистерезиса
     po_mtzn_x_vpered_setpoint = (_CHECK_SET_BIT(active_functions, mtz_settings_prt[mtz_level][RANG_OUTPUT_LED_DF_REG_PO_MTZN_VPERED]) != 0) ?
@@ -2467,9 +2470,10 @@ inline void mtz_handler(unsigned int *activated_functions, unsigned int number_g
                   (measurement[IM_UCA] <= po_block_u_mtzn_x_setpoint)) << 14; //ПО U блок. МТЗНх
     
     //ПО U блок. МТЗНх
-    if (_GET_OUTPUT_STATE(tmp_value, 14)) {
+    if (_GET_OUTPUT_STATE(tmp_value, 14))
       _SET_BIT(activated_functions, RANG_OUTPUT_LED_DF_REG_PO_BLOCK_U_MTZN);
-    }
+    else
+      _CLEAR_BIT(activated_functions, RANG_OUTPUT_LED_DF_REG_PO_BLOCK_U_MTZN);
     /******ПО U блок. МТЗНх***********************/
     
     //Неисправность цепей напряжения для ступени МТЗх
@@ -2491,9 +2495,10 @@ inline void mtz_handler(unsigned int *activated_functions, unsigned int number_g
                   (measurement[IM_UCA] <= po_u_mtzpn_x_setpoint)) << 16; //ПО U МТЗПНх
     
     //ПО U МТЗПНх
-    if (_GET_OUTPUT_STATE(tmp_value, 16)) {
+    if (_GET_OUTPUT_STATE(tmp_value, 16))
       _SET_BIT(activated_functions, mtz_settings_prt[mtz_level][RANG_OUTPUT_LED_DF_REG_PO_U_MTZPN]);
-    }
+    else
+      _CLEAR_BIT(activated_functions, mtz_settings_prt[mtz_level][RANG_OUTPUT_LED_DF_REG_PO_U_MTZPN]);
     /******ПО U МТЗПНх***********************/
     
     /******ПО МТЗПНх***********************/
@@ -2523,21 +2528,33 @@ inline void mtz_handler(unsigned int *activated_functions, unsigned int number_g
     
     _OR2_INVERTOR(tmp_value, 14, tmp_value, 15, tmp_value, 14);
     
-    if (_CHECK_SET_BIT(active_functions, mtz_settings_prt[mtz_level][RANG_OUTPUT_LED_DF_REG_PO_MTZ]) != 0) {
+    if (_CHECK_SET_BIT(active_functions, mtz_settings_prt[mtz_level][RANG_OUTPUT_LED_DF_REG_PO_MTZ]) != 0) 
+    {
       _SET_STATE(tmp_value, 19);
-    } else {
-      if (mtz_level == 1) {
+    } 
+    else 
+    {
+      if (mtz_level == 1)
+      {
         //только для 2-ой ступени при формировании 19-го сигнала будет учитываться
         //сигнал "Зависимая" (tmp_value 3)
-        if (_GET_OUTPUT_STATE(tmp_value, 14)) {
+        if (_GET_OUTPUT_STATE(tmp_value, 14)) 
+        {
           _OR3(tmp_value, 2, tmp_value, 3, tmp_value, 15, tmp_value, 19);
-        } else {
+        }
+        else 
+        {
           _OR4(tmp_value, 0, tmp_value, 2, tmp_value, 3, tmp_value, 15, tmp_value, 19);
         }
-      } else {
-        if (_GET_OUTPUT_STATE(tmp_value, 14)) {
+      }
+      else 
+      {
+        if (_GET_OUTPUT_STATE(tmp_value, 14))
+        {
           _OR2(tmp_value, 2, tmp_value, 15, tmp_value, 19);
-        } else {
+        } 
+        else
+        {
           _OR3(tmp_value, 0, tmp_value, 2, tmp_value, 15, tmp_value, 19);
         }
       }
@@ -2547,27 +2564,31 @@ inline void mtz_handler(unsigned int *activated_functions, unsigned int number_g
     
     //ПО МТЗх
     _AND3(tmp_value, 19, tmp_value, 4, tmp_value, 20, tmp_value, 21);
-    if (_GET_OUTPUT_STATE(tmp_value, 21)) {
+    if (_GET_OUTPUT_STATE(tmp_value, 21))
       _SET_BIT(activated_functions, mtz_settings_prt[mtz_level][RANG_OUTPUT_LED_DF_REG_PO_MTZ]);
-    }
+    else
+      _CLEAR_BIT(activated_functions, mtz_settings_prt[mtz_level][RANG_OUTPUT_LED_DF_REG_PO_MTZ]);
     
     //ПО МТЗНх вперед
     _AND5(tmp_value, 0, tmp_value, 20, tmp_value, 7, tmp_value, 12, tmp_value, 14, tmp_value, 22);
-    if (_GET_OUTPUT_STATE(tmp_value, 22)) {
+    if (_GET_OUTPUT_STATE(tmp_value, 22))
       _SET_BIT(activated_functions, mtz_settings_prt[mtz_level][RANG_OUTPUT_LED_DF_REG_PO_MTZN_VPERED]);
-    }
+    else
+      _CLEAR_BIT(activated_functions, mtz_settings_prt[mtz_level][RANG_OUTPUT_LED_DF_REG_PO_MTZN_VPERED]);
     
     //ПО МТЗНх назад
     _AND5(tmp_value, 0, tmp_value, 20, tmp_value, 8, tmp_value, 13, tmp_value, 14, tmp_value, 23);
-    if (_GET_OUTPUT_STATE(tmp_value, 23)) {
+    if (_GET_OUTPUT_STATE(tmp_value, 23)) 
       _SET_BIT(activated_functions, mtz_settings_prt[mtz_level][RANG_OUTPUT_LED_DF_REG_PO_MTZN_NAZAD]);
-    }
+    else
+      _CLEAR_BIT(activated_functions, mtz_settings_prt[mtz_level][RANG_OUTPUT_LED_DF_REG_PO_MTZN_NAZAD]);
     
     //ПО МТЗПНх
     _AND4(tmp_value, 1, tmp_value, 20, tmp_value, 16, tmp_value, 17, tmp_value, 24);
-    if (_GET_OUTPUT_STATE(tmp_value, 24)) {
+    if (_GET_OUTPUT_STATE(tmp_value, 24))
       _SET_BIT(activated_functions, mtz_settings_prt[mtz_level][RANG_OUTPUT_LED_DF_REG_PO_MTZPN]);
-    }
+    else
+      _CLEAR_BIT(activated_functions, mtz_settings_prt[mtz_level][RANG_OUTPUT_LED_DF_REG_PO_MTZPN]);
     
     if (mtz_level != 1) { //для всех ступеней кроме 2-ой
       _TIMER_T_0(mtz_tmr_const[mtz_level][INDEX_TIMER_MTZ], *(timeout_mtz[mtz_level] + number_group_stp), tmp_value, 21, tmp_value, 25);
@@ -2612,9 +2633,10 @@ inline void mtz_handler(unsigned int *activated_functions, unsigned int number_g
     }
     
     //Сраб.МТЗх
-    if (_GET_OUTPUT_STATE(tmp_value, 31)) {
+    if (_GET_OUTPUT_STATE(tmp_value, 31))
       _SET_BIT(activated_functions, mtz_settings_prt[mtz_level][RANG_OUTPUT_LED_DF_REG_MTZ]);
-    }
+    else
+      _CLEAR_BIT(activated_functions, mtz_settings_prt[mtz_level][RANG_OUTPUT_LED_DF_REG_MTZ]);
   }
 }
 /*****************************************************/
@@ -4326,9 +4348,10 @@ void ready_tu(unsigned int *activated_functions)
   _AND4(tmp_value, 0, tmp_value, 3, !trigger_ready_tu, 0, tmp_value, 6, tmp_value, 5);
   
   //Готовность к ТУ
-  if (_GET_OUTPUT_STATE(tmp_value, 5)) {
+  if (_GET_OUTPUT_STATE(tmp_value, 5))
     _SET_BIT(activated_functions, RANG_OUTPUT_LED_DF_REG_READY_TU);
-  }
+  else
+    _CLEAR_BIT(activated_functions, RANG_OUTPUT_LED_DF_REG_READY_TU);
 }
 /*****************************************************/
 
@@ -4740,6 +4763,12 @@ inline void on_off_handler(unsigned int *activated_functions, unsigned int *prev
   /*********************/
   //Першим розглядається блок відключення, бо він може блокувати включення вимикача
   /*********************/
+  /*
+  Цей сигнал встановлюється тільки у певних випадках, тому по замовчуванню його треба скинута,
+  а коли буде потрібно - він встановиться
+  */
+  _CLEAR_BIT(activated_functions, RANG_OUTPUT_LED_DF_REG_VIDKL_VID_ZAKHYSTIV);
+
   //Формуємо маску з сигналом "Робота БО", щоб не розглядати цей сигнал як джерело активації БО (щоб він сам себе не генерував, бо інакше, як тільки раз запуститься постійно буде себе генерувати)
   for (unsigned int j = 0; j < N_BIG; j++ )  maska[j] = 0;
   _SET_BIT(maska, RANG_OUTPUT_LED_DF_REG_WORK_BO);
@@ -5421,7 +5450,10 @@ void control_VV(unsigned int *activated_functions)
   
   _AND2(logic_control_VV_0, 3, logic_control_VV_0, 4, logic_control_VV_0, 5);
   
-  activated_functions[RANG_OUTPUT_LED_DF_REG_PRYVID_VV >> 5] |= (_GET_OUTPUT_STATE(logic_control_VV_0, 5) << (RANG_OUTPUT_LED_DF_REG_PRYVID_VV & 0x1f));
+  if (_GET_OUTPUT_STATE(logic_control_VV_0, 5))
+    activated_functions[RANG_OUTPUT_LED_DF_REG_PRYVID_VV >> 5] |= (1 << (RANG_OUTPUT_LED_DF_REG_PRYVID_VV & 0x1f));
+  else
+    activated_functions[RANG_OUTPUT_LED_DF_REG_PRYVID_VV >> 5] &= (unsigned int)(~(1 << (RANG_OUTPUT_LED_DF_REG_PRYVID_VV & 0x1f)));
 }
 /*****************************************************/
 
@@ -5494,6 +5526,10 @@ inline void resurs_vymykacha_handler(unsigned int *activated_functions, unsigned
     {
       _SET_BIT(activated_functions, RANG_OUTPUT_LED_DF_REG_PEREVYSHCHENNJA_Inom_VYMK);
     }
+    else
+    {
+      _CLEAR_BIT(activated_functions, RANG_OUTPUT_LED_DF_REG_PEREVYSHCHENNJA_Inom_VYMK);
+    }
   }
   /*******************************/
   
@@ -5527,7 +5563,6 @@ inline void resurs_vymykacha_handler(unsigned int *activated_functions, unsigned
     }
     
     if (resurs_vymykacha <= N) {
-//      _SET_BIT(activated_functions, RANG_OUTPUT_LED_DF_REG_VYCHERPANYJ_RESURS_VYMYKACHA);
       resurs_vymykacha = 0;
     } else {
       resurs_vymykacha -= N;
@@ -5544,13 +5579,24 @@ inline void resurs_vymykacha_handler(unsigned int *activated_functions, unsigned
     _SET_BIT(control_i2c_taskes, TASK_START_WRITE_RESURS_EEPROM_BIT);
   }
   
-  if (resurs_vymykacha <= current_settings_prt.setpoint_krytychnyj_resurs) {
+  if (resurs_vymykacha <= current_settings_prt.setpoint_krytychnyj_resurs) 
+  {
     _SET_BIT(activated_functions, RANG_OUTPUT_LED_DF_REG_KRYTYCHNYJ_RESURS_VYMYKACHA);
   }
+  else
+  {
+    _CLEAR_BIT(activated_functions, RANG_OUTPUT_LED_DF_REG_KRYTYCHNYJ_RESURS_VYMYKACHA);
+  }
 
-  if (resurs_vymykacha == 0) {
+  if (resurs_vymykacha == 0) 
+  {
     _SET_BIT(activated_functions, RANG_OUTPUT_LED_DF_REG_VYCHERPANYJ_RESURS_VYMYKACHA);
   }
+  else
+  {
+    _CLEAR_BIT(activated_functions, RANG_OUTPUT_LED_DF_REG_VYCHERPANYJ_RESURS_VYMYKACHA);
+  }
+    
 }
 /*****************************************************/
 
@@ -8241,7 +8287,13 @@ inline void analog_registrator(unsigned int* carrent_active_functions)
 /*****************************************************/
 inline void main_protection(void)
 {
-  unsigned int activated_functions[N_BIG] = {0, 0, 0, 0, 0, 0, 0, 0};
+  unsigned int activated_functions[N_BIG];
+  const unsigned int maska_input_signals[N_BIG] = {MASKA_FOR_INPUT_SIGNALS_0, MASKA_FOR_INPUT_SIGNALS_1, MASKA_FOR_INPUT_SIGNALS_2, MASKA_FOR_INPUT_SIGNALS_3, MASKA_FOR_INPUT_SIGNALS_4, MASKA_FOR_INPUT_SIGNALS_5, MASKA_FOR_INPUT_SIGNALS_6, MASKA_FOR_INPUT_SIGNALS_7};
+  for (unsigned int i = 0; i < N_BIG; i++) 
+  {
+    activated_functions[i] = active_functions[i] &  (unsigned int)(~maska_input_signals[i]);
+  }
+  
   
   /**************************/
   //Перевірка, чи треба очистити трігерні функції
@@ -8760,6 +8812,7 @@ inline void main_protection(void)
   else
   {
     //Можна вибирати групу уставок - захисти цю операцію не блокують
+    _CLEAR_BIT(activated_functions, RANG_OUTPUT_LED_DF_REG_BLK_GRUP_USTAVOK_VID_ZACHYSTIV);
     setpoints_selecting(activated_functions, active_inputs_grupa_ustavok);
   }
 
@@ -8929,6 +8982,8 @@ inline void main_protection(void)
     }
     else
     {
+      for (unsigned int i = RANG_OUTPUT_LED_DF_REG_BLOCK_MTZ1; i <= RANG_OUTPUT_LED_DF_REG_NCN_MTZ; i++) _CLEAR_BIT(activated_functions, i);
+      
       global_timers[INDEX_TIMER_MTZ1] = -1;
       global_timers[INDEX_TIMER_MTZ1_N_VPERED] = -1;
       global_timers[INDEX_TIMER_MTZ1_N_NAZAD] = -1;
@@ -9888,6 +9943,10 @@ void setpoints_selecting(unsigned int *activated_functions, unsigned int act_inp
   }
   
   _OR4_INVERTOR(act_inp_gr_ustavok, 0, act_inp_gr_ustavok, 1, act_inp_gr_ustavok, 2, act_inp_gr_ustavok, 3, act_inp_gr_ustavok, 4);
+  if (_GET_OUTPUT_STATE(act_inp_gr_ustavok, 4)) 
+    _SET_BIT(activated_functions, RANG_OUTPUT_LED_DF_REG_INVERS_DV_GRUPA_USTAVOK);
+  else
+    _CLEAR_BIT(activated_functions, RANG_OUTPUT_LED_DF_REG_INVERS_DV_GRUPA_USTAVOK);
   
   _AND2(grupa_ustavok, 0, act_inp_gr_ustavok, 4, grupa_ustavok, 4);
   _AND2(grupa_ustavok, 1, act_inp_gr_ustavok, 4, grupa_ustavok, 5);
@@ -9918,18 +9977,25 @@ void setpoints_selecting(unsigned int *activated_functions, unsigned int act_inp
   _OR2(grupa_ustavok, 6, act_inp_gr_ustavok, 7, grupa_ustavok, 10);
   _OR2(grupa_ustavok, 7, act_inp_gr_ustavok, 8, grupa_ustavok, 11);
   
-  if (_GET_OUTPUT_STATE(grupa_ustavok, 8)) {
+  if (_GET_OUTPUT_STATE(grupa_ustavok, 8)) 
     _SET_BIT(activated_functions, RANG_OUTPUT_LED_DF_REG_1_GRUPA_USTAVOK);
-  }
-  if (_GET_OUTPUT_STATE(grupa_ustavok, 9)) {
+  else
+    _CLEAR_BIT(activated_functions, RANG_OUTPUT_LED_DF_REG_1_GRUPA_USTAVOK);
+
+  if (_GET_OUTPUT_STATE(grupa_ustavok, 9))
     _SET_BIT(activated_functions, RANG_OUTPUT_LED_DF_REG_2_GRUPA_USTAVOK);
-  }
-  if (_GET_OUTPUT_STATE(grupa_ustavok, 10)) {
-    _SET_BIT(activated_functions, RANG_OUTPUT_LED_DF_REG_3_GRUPA_USTAVOK);
-  }
-  if (_GET_OUTPUT_STATE(grupa_ustavok, 11)) {
-    _SET_BIT(activated_functions, RANG_OUTPUT_LED_DF_REG_4_GRUPA_USTAVOK);
-  }
+  else
+    _CLEAR_BIT(activated_functions, RANG_OUTPUT_LED_DF_REG_2_GRUPA_USTAVOK);
+
+  if (_GET_OUTPUT_STATE(grupa_ustavok, 10))
+      _SET_BIT(activated_functions, RANG_OUTPUT_LED_DF_REG_3_GRUPA_USTAVOK);
+  else
+    _CLEAR_BIT(activated_functions, RANG_OUTPUT_LED_DF_REG_3_GRUPA_USTAVOK);
+
+  if (_GET_OUTPUT_STATE(grupa_ustavok, 11))
+      _SET_BIT(activated_functions, RANG_OUTPUT_LED_DF_REG_4_GRUPA_USTAVOK);
+  else
+    _CLEAR_BIT(activated_functions, RANG_OUTPUT_LED_DF_REG_4_GRUPA_USTAVOK);
 }
 /*****************************************************/
 

@@ -489,6 +489,86 @@ enum __mtz_abc_direction_const {
 };
 
 /*****************************************/
+//Макски сигналів, які активовуються або з д.входів, або з інтирфейсів чи функціональних кнопок
+/*****************************************/
+#define MASKA_FOR_INPUT_SIGNALS_0        (unsigned int)(                                \
+    (1 << RANG_OUTPUT_LED_DF_REG_DF1_IN)                                        /*0*/   \
+  | (1 << RANG_OUTPUT_LED_DF_REG_DF2_IN)                                        /*2*/   \
+  | (1 << RANG_OUTPUT_LED_DF_REG_DF3_IN)                                        /*4*/   \
+  | (1 << RANG_OUTPUT_LED_DF_REG_DF4_IN)                                        /*6*/   \
+  | (1 << RANG_OUTPUT_LED_DF_REG_DF5_IN)                                        /*8*/   \
+  | (1 << RANG_OUTPUT_LED_DF_REG_DF6_IN)                                        /*10*/  \
+  | (1 << RANG_OUTPUT_LED_DF_REG_DF7_IN)                                        /*12*/  \
+  | (1 << RANG_OUTPUT_LED_DF_REG_DF8_IN)                                        /*14*/  \
+  | (1 << RANG_OUTPUT_LED_DF_REG_DT1_SET)                                       /*16*/  \
+  | (1 << RANG_OUTPUT_LED_DF_REG_DT1_RESET)                                     /*17*/  \
+  | (1 << RANG_OUTPUT_LED_DF_REG_DT2_SET)                                       /*19*/  \
+  | (1 << RANG_OUTPUT_LED_DF_REG_DT2_RESET)                                     /*20*/  \
+  | (1 << RANG_OUTPUT_LED_DF_REG_DT3_SET)                                       /*22*/  \
+  | (1 << RANG_OUTPUT_LED_DF_REG_DT3_RESET)                                     /*23*/  \
+  | (1 << RANG_OUTPUT_LED_DF_REG_DT4_SET)                                       /*25*/  \
+  | (1 << RANG_OUTPUT_LED_DF_REG_DT4_RESET)                                     /*26*/  \
+  | (1 << RANG_OUTPUT_LED_DF_REG_BLOCK_VKL_VV)                                  /*28*/  \
+  | (1 << RANG_OUTPUT_LED_DF_REG_RESET_LEDS)                                    /*29*/  \
+  | (1 << RANG_OUTPUT_LED_DF_REG_RESET_RELES)                                   /*30*/  \
+  | (1 << RANG_OUTPUT_LED_DF_REG_MISCEVE_DYSTANCIJNE)                           /*31*/  \
+)
+
+#define MASKA_FOR_INPUT_SIGNALS_1        (unsigned int)(                                \
+    (1 << (RANG_OUTPUT_LED_DF_REG_STATE_VV - 32))                               /*32*/  \
+  | (1 << (RANG_OUTPUT_LED_DF_REG_OTKL_VID_ZOVN_ZAHYSTIV - 32))                 /*33*/  \
+  | (1 << (RANG_OUTPUT_LED_DF_REG_VKL_VV - 32))                                 /*34*/  \
+  | (1 << (RANG_OUTPUT_LED_DF_REG_CTRL_VKL - 32))                               /*35*/  \
+  | (1 << (RANG_OUTPUT_LED_DF_REG_OTKL_VV - 32))                                /*36*/  \
+  | (1 << (RANG_OUTPUT_LED_DF_REG_CTRL_OTKL - 32))                              /*37*/  \
+  | (1 << (RANG_OUTPUT_LED_DF_REG_1_GRUPA_USTAVOK - 32))                        /*49*/  \
+  | (1 << (RANG_OUTPUT_LED_DF_REG_2_GRUPA_USTAVOK - 32))                        /*50*/  \
+  | (1 << (RANG_OUTPUT_LED_DF_REG_3_GRUPA_USTAVOK - 32))                        /*51*/  \
+  | (1 << (RANG_OUTPUT_LED_DF_REG_4_GRUPA_USTAVOK - 32))                        /*52*/  \
+  | (1 << (RANG_OUTPUT_LED_DF_REG_RESET_BLOCK_READY_TU_VID_ZAHYSTIV - 32))      /*55*/  \
+  | (1 << (RANG_OUTPUT_LED_DF_REG_BLOCK_MTZ1 - 32))                             /*57*/  \
+  | (1 << (RANG_OUTPUT_LED_DF_REG_BLOCK_MTZ2 - 32))                             /*58*/  \
+  | (1 << (RANG_OUTPUT_LED_DF_REG_BLOCK_USK_MTZ2 - 32))                         /*59*/  \
+  | (1 << (RANG_OUTPUT_LED_DF_REG_BLOCK_MTZ3 - 32))                             /*60*/  \
+  | (1 << (RANG_OUTPUT_LED_DF_REG_BLOCK_MTZ4 - 32))                             /*61*/  \
+)
+
+#define MASKA_FOR_INPUT_SIGNALS_2                  0
+    
+#define MASKA_FOR_INPUT_SIGNALS_3        (unsigned int)(                                \
+    (1 << (RANG_OUTPUT_LED_DF_REG_BLOCK_MTZ04_1 - 96))                          /*96*/  \
+  | (1 << (RANG_OUTPUT_LED_DF_REG_BLOCK_MTZ04_2 - 96))                          /*97*/  \
+  | (1 << (RANG_OUTPUT_LED_DF_REG_BLOCK_USK_MTZ04_2 - 96))                      /*98*/  \
+  | (1 << (RANG_OUTPUT_LED_DF_REG_PUSK_ZDZ_VID_DV - 96))                        /*103*/ \
+  | (1 << (RANG_OUTPUT_LED_DF_REG_BLOCK_NZZ - 96))                              /*105*/ \
+  | (1 << (RANG_OUTPUT_LED_DF_REG_BLOCK_TZNP1 - 96))                            /*113*/ \
+  | (1 << (RANG_OUTPUT_LED_DF_REG_BLOCK_TZNP2 - 96))                            /*123*/ \
+)
+
+#define MASKA_FOR_INPUT_SIGNALS_4        (unsigned int)(                                \
+    (1 << (RANG_OUTPUT_LED_DF_REG_BLOCK_TZNP3 - 128))                           /*133*/ \
+  | (1 << (RANG_OUTPUT_LED_DF_REG_STAT_BLK_APV - 128))                          /*143*/ \
+  | (1 << (RANG_OUTPUT_LED_DF_REG_ACHR_CHAPV_VID_DV - 128))                     /*149*/ \
+  | (1 << (RANG_OUTPUT_LED_DF_REG_BLOCK_ACHR1 - 128))                           /*150*/ \
+  | (1 << (RANG_OUTPUT_LED_DF_REG_BLOCK_ACHR2 - 128))                           /*151*/ \
+)
+    
+#define MASKA_FOR_INPUT_SIGNALS_5        (unsigned int)(                                \
+    (1 << (RANG_OUTPUT_LED_DF_REG_PUSK_UROV_VID_DV - 160))                      /*161*/ \
+  | (1 << (RANG_OUTPUT_LED_DF_REG_BLOCK_ZOP - 160))                             /*165*/ \
+  | (1 << (RANG_OUTPUT_LED_DF_REG_BLOCK_UMIN1 - 160))                           /*168*/ \
+  | (1 << (RANG_OUTPUT_LED_DF_REG_START_UMIN1 - 160))                           /*169*/ \
+  | (1 << (RANG_OUTPUT_LED_DF_REG_BLOCK_UMIN2 - 160))                           /*170*/ \
+  | (1 << (RANG_OUTPUT_LED_DF_REG_START_UMIN2 - 160))                           /*171*/ \
+  | (1 << (RANG_OUTPUT_LED_DF_REG_BLOCK_UMAX1 - 160))                           /*180*/ \
+  | (1 << (RANG_OUTPUT_LED_DF_REG_BLOCK_UMAX2 - 160))                           /*183*/ \
+)
+    
+#define MASKA_FOR_INPUT_SIGNALS_6                  0
+#define MASKA_FOR_INPUT_SIGNALS_7                  0
+/*****************************************/
+
+/*****************************************/
 //Макски деяких сигналів сигналів яких треба брати попередній стан
 /*****************************************/
 #define MASKA_FOR_DF_TRIGGERS_SIGNALS_0        (unsigned int)(                   \
