@@ -2685,9 +2685,10 @@ inline void zdz_handler(unsigned int *activated_functions)
   _OR2(tmp_value2, 0, tmp_value2, 2, tmp_value2, 3);
   
   //Сраб. ЗДЗ
-  if (_GET_OUTPUT_STATE(tmp_value2, 3)) {
+  if (_GET_OUTPUT_STATE(tmp_value2, 3))
     _SET_BIT(activated_functions, RANG_OUTPUT_LED_DF_REG_ZDZ);
-  }
+  else
+    _CLEAR_BIT(activated_functions, RANG_OUTPUT_LED_DF_REG_ZDZ);
 }
 /*****************************************************/
 
@@ -2769,12 +2770,15 @@ inline void zz_handler(unsigned int *activated_functions, unsigned int number_gr
         sector_NZZ = 0;
       }
     }
-  
-    //Встановлюємо сигнал "Сектор НЗЗ",якщо він потрібний - у іншому випадку він скинутий
-    if (sector_NZZ != 0)
-      _SET_BIT(activated_functions, RANG_OUTPUT_LED_DF_REG_SECTOR_NZZ);
   }
   else sector_NZZ = 0;
+
+  
+  //Встановлюємо сигнал "Сектор НЗЗ",якщо він потрібний - у іншому випадку він скинутий
+  if (sector_NZZ != 0)
+    _SET_BIT(activated_functions, RANG_OUTPUT_LED_DF_REG_SECTOR_NZZ);
+  else
+    _CLEAR_BIT(activated_functions, RANG_OUTPUT_LED_DF_REG_SECTOR_NZZ);
   /*******************************/
 
   /*******************************/
@@ -3059,7 +3063,7 @@ inline void zz_handler(unsigned int *activated_functions, unsigned int number_gr
   else
   {
     //Захисти ЗЗ/НЗЗ блокується з дискретного входу, то треба скинути всі таймери і сигнали, які за них відповідають
-    _CLEAR_BIT(activated_functions, RANG_OUTPUT_LED_DF_REG_NZZ);
+    _CLEAR_BIT(activated_functions, RANG_OUTPUT_LED_DF_REG_PO_NZZ);
     _CLEAR_BIT(activated_functions, RANG_OUTPUT_LED_DF_REG_NZZ);
     _CLEAR_BIT(activated_functions, RANG_OUTPUT_LED_DF_REG_PO_3I0);
     _CLEAR_BIT(activated_functions, RANG_OUTPUT_LED_DF_REG_3I0);
@@ -3189,6 +3193,7 @@ inline void tznp_handler(unsigned int *activated_functions, unsigned int number_
       logic_TZNP_0 |= 1 << 0;
       _SET_BIT(activated_functions, (shift_to_base_rang_index + RANG_SECTOR_TZNP_VPERED));
     }
+    else _CLEAR_BIT(activated_functions, (shift_to_base_rang_index + RANG_SECTOR_TZNP_VPERED));
     /***/
     
     /***
@@ -3199,6 +3204,7 @@ inline void tznp_handler(unsigned int *activated_functions, unsigned int number_
       logic_TZNP_0 |= 1 << 1;
       _SET_BIT(activated_functions, (shift_to_base_rang_index + RANG_SECTOR_TZNP_NAZAD));
     }
+    else _CLEAR_BIT(activated_functions, (shift_to_base_rang_index + RANG_SECTOR_TZNP_NAZAD));
     /***/
     
     /***
@@ -3219,6 +3225,7 @@ inline void tznp_handler(unsigned int *activated_functions, unsigned int number_
       logic_TZNP_0 |=  1 << 3;
       _SET_BIT(activated_functions, (shift_to_base_rang_index + RANG_PO_3I0_TZNP_VPERED));
     }
+    else _CLEAR_BIT(activated_functions, (shift_to_base_rang_index + RANG_PO_3I0_TZNP_VPERED));
     /***/
     
     /***
@@ -3239,6 +3246,7 @@ inline void tznp_handler(unsigned int *activated_functions, unsigned int number_
       logic_TZNP_0 |=  1 << 4;
       _SET_BIT(activated_functions, (shift_to_base_rang_index + RANG_PO_3U0_TZNP_VPERED));
     }
+    else _CLEAR_BIT(activated_functions, (shift_to_base_rang_index + RANG_PO_3U0_TZNP_VPERED));
     /***/
     
     /***
@@ -3259,6 +3267,7 @@ inline void tznp_handler(unsigned int *activated_functions, unsigned int number_
       logic_TZNP_0 |=  1 << 5;
       _SET_BIT(activated_functions, (shift_to_base_rang_index + RANG_PO_3I0_TZNP_NAZAD));
     }
+    else _CLEAR_BIT(activated_functions, (shift_to_base_rang_index + RANG_PO_3I0_TZNP_NAZAD));
     /***/
     
     /***
@@ -3279,6 +3288,7 @@ inline void tznp_handler(unsigned int *activated_functions, unsigned int number_
       logic_TZNP_0 |=  1 << 6;
       _SET_BIT(activated_functions, (shift_to_base_rang_index + RANG_PO_3U0_TZNP_NAZAD));
     }
+    else _CLEAR_BIT(activated_functions, (shift_to_base_rang_index + RANG_PO_3U0_TZNP_NAZAD));
     /***/
     
     //Стан ступеню захисту
@@ -3298,10 +3308,12 @@ inline void tznp_handler(unsigned int *activated_functions, unsigned int number_
     //ПО ТЗНП вперед
     _AND5(logic_TZNP_0, 9, logic_TZNP_0, 10, logic_TZNP_0, 3, logic_TZNP_0, 4, logic_TZNP_0, 0, logic_TZNP_0, 12);
     if (_GET_OUTPUT_STATE(logic_TZNP_0, 12)) _SET_BIT(activated_functions, (shift_to_base_rang_index + RANG_PO_TZNP_VPERED));
+    else _CLEAR_BIT(activated_functions, (shift_to_base_rang_index + RANG_PO_TZNP_VPERED));
       
     //ПО ТЗНП назад
     _AND5(logic_TZNP_0, 9, logic_TZNP_0, 11, logic_TZNP_0, 5, logic_TZNP_0, 6, logic_TZNP_0, 1, logic_TZNP_0, 13);
     if (_GET_OUTPUT_STATE(logic_TZNP_0, 13)) _SET_BIT(activated_functions, (shift_to_base_rang_index + RANG_PO_TZNP_NAZAD));
+    else _CLEAR_BIT(activated_functions, (shift_to_base_rang_index + RANG_PO_TZNP_NAZAD));
 
     _TIMER_T_0(index_timer_vpered, timeout_tznp_vpered, logic_TZNP_0, 12, logic_TZNP_0, 14);
     _TIMER_T_0(index_timer_nazad,  timeout_tznp_nazad,  logic_TZNP_0, 13, logic_TZNP_0, 15);
@@ -3309,6 +3321,7 @@ inline void tznp_handler(unsigned int *activated_functions, unsigned int number_
     //ТЗНП
     _OR2(logic_TZNP_0, 14, logic_TZNP_0, 15, logic_TZNP_0, 16);
     if (_GET_OUTPUT_STATE(logic_TZNP_0, 16)) _SET_BIT(activated_functions, (shift_to_base_rang_index + RANG_TZNP));
+    else _CLEAR_BIT(activated_functions, (shift_to_base_rang_index + RANG_TZNP));
   }
 
 #undef CTR_TZNP
@@ -3497,7 +3510,8 @@ void umin1_handler(unsigned int *activated_functions, unsigned int number_group_
   
 //  _AND2(tmp_value, 0, tmp_value, 1, tmp_value, 8);
   
-  if (_GET_OUTPUT_STATE(tmp_value, 0)) {
+  if (_GET_OUTPUT_STATE(tmp_value, 0)) 
+  {
     //Фазные
     _AND4(Ua_is_smaller_than_Umin1, 0, Ub_is_smaller_than_Umin1, 0, Uc_is_smaller_than_Umin1, 0, tmp_value, 3, tmp_value, 9);
     _OR3(Ua_is_smaller_than_Umin1, 0, Ub_is_smaller_than_Umin1, 0, Uc_is_smaller_than_Umin1, 0, tmp_value, 10);
@@ -3508,11 +3522,13 @@ void umin1_handler(unsigned int *activated_functions, unsigned int number_group_
     _AND3(Ua_or_Ub_or_Uc_is_smaller_than_250mV, 0, tmp_value, 4, tmp_value, 5, tmp_value, 13);
     
     //ПО Uблк. Umin1
-    if (Ua_or_Ub_or_Uc_is_smaller_than_250mV) {
+    if (Ua_or_Ub_or_Uc_is_smaller_than_250mV)
       _SET_BIT(activated_functions, RANG_OUTPUT_LED_DF_REG_PO_UBLK_UMIN1);
-    }
-    
-  } else {
+    else
+      _CLEAR_BIT(activated_functions, RANG_OUTPUT_LED_DF_REG_PO_UBLK_UMIN1);
+  } 
+  else 
+  {
     //Линейные
     _AND4(Uab_is_smaller_than_Umin1, 0, Ubc_is_smaller_than_Umin1, 0, Uca_is_smaller_than_Umin1, 0, tmp_value, 3, tmp_value, 9);
     _OR3(Uab_is_smaller_than_Umin1, 0, Ubc_is_smaller_than_Umin1, 0, Uca_is_smaller_than_Umin1, 0, tmp_value, 10);
@@ -3523,9 +3539,10 @@ void umin1_handler(unsigned int *activated_functions, unsigned int number_group_
     _AND3(Uab_or_Ubc_or_Uca_is_smaller_than_250mV, 0, tmp_value, 4, tmp_value, 5, tmp_value, 13);
     
     //ПО Uблк. Umin1
-    if (Uab_or_Ubc_or_Uca_is_smaller_than_250mV) {
+    if (Uab_or_Ubc_or_Uca_is_smaller_than_250mV)
       _SET_BIT(activated_functions, RANG_OUTPUT_LED_DF_REG_PO_UBLK_UMIN1);
-    }
+    else
+      _CLEAR_BIT(activated_functions, RANG_OUTPUT_LED_DF_REG_PO_UBLK_UMIN1);
   }
   _INVERTOR(tmp_value, 12, tmp_value, 12);
   _INVERTOR(tmp_value, 13, tmp_value, 13);
@@ -3534,21 +3551,24 @@ void umin1_handler(unsigned int *activated_functions, unsigned int number_group_
   _AND5(tmp_value, 6, tmp_value, 2, tmp_value, 14, tmp_value, 13, tmp_value, 12, tmp_value, 15);
   
   //ПО Iблк. Umin1
-  if (Ia_or_Ic_is_larger_than_Iust) {
+  if (Ia_or_Ic_is_larger_than_Iust)
     _SET_BIT(activated_functions, RANG_OUTPUT_LED_DF_REG_PO_IBLK_UMIN1);
-  }
+  else
+    _CLEAR_BIT(activated_functions, RANG_OUTPUT_LED_DF_REG_PO_IBLK_UMIN1);
   
   //ПО Umin1
-  if (_GET_OUTPUT_STATE(tmp_value, 15)) {
+  if (_GET_OUTPUT_STATE(tmp_value, 15))
     _SET_BIT(activated_functions, RANG_OUTPUT_LED_DF_REG_PO_UMIN1);
-  }
+  else
+    _CLEAR_BIT(activated_functions, RANG_OUTPUT_LED_DF_REG_PO_UMIN1);
   
   _TIMER_T_0(INDEX_TIMER_UMIN1, current_settings_prt.timeout_Umin1[number_group_stp], tmp_value, 15, tmp_value, 16);
   
   //Сраб. Umin1
-  if (_GET_OUTPUT_STATE(tmp_value, 16)) {
+  if (_GET_OUTPUT_STATE(tmp_value, 16))
     _SET_BIT(activated_functions, RANG_OUTPUT_LED_DF_REG_UMIN1);
-  }
+  else
+    _CLEAR_BIT(activated_functions, RANG_OUTPUT_LED_DF_REG_UMIN1);
 }
 /*****************************************************/
 
@@ -3601,7 +3621,8 @@ void umin2_handler(unsigned int *activated_functions, unsigned int number_group_
   
 //  _AND2(tmp_value, 0, tmp_value, 1, tmp_value, 8);
   
-  if (_GET_OUTPUT_STATE(tmp_value, 0)) {
+  if (_GET_OUTPUT_STATE(tmp_value, 0))
+  {
     //Фазные
     _AND4(Ua_is_smaller_than_Umin2, 0, Ub_is_smaller_than_Umin2, 0, Uc_is_smaller_than_Umin2, 0, tmp_value, 3, tmp_value, 9);
     _OR3(Ua_is_smaller_than_Umin2, 0, Ub_is_smaller_than_Umin2, 0, Uc_is_smaller_than_Umin2, 0, tmp_value, 10);
@@ -3612,11 +3633,14 @@ void umin2_handler(unsigned int *activated_functions, unsigned int number_group_
     _AND3(Ua_or_Ub_or_Uc_is_smaller_than_250mV, 0, tmp_value, 4, tmp_value, 5, tmp_value, 13);
     
     //ПО Uблк. Umin2
-    if (Ua_or_Ub_or_Uc_is_smaller_than_250mV) {
+    if (Ua_or_Ub_or_Uc_is_smaller_than_250mV)
       _SET_BIT(activated_functions, RANG_OUTPUT_LED_DF_REG_PO_UBLK_UMIN2);
-    }
+    else
+      _CLEAR_BIT(activated_functions, RANG_OUTPUT_LED_DF_REG_PO_UBLK_UMIN2);
     
-  } else {
+  } 
+  else 
+  {
     //Линейные
     _AND4(Uab_is_smaller_than_Umin2, 0, Ubc_is_smaller_than_Umin2, 0, Uca_is_smaller_than_Umin2, 0, tmp_value, 3, tmp_value, 9);
     _OR3(Uab_is_smaller_than_Umin2, 0, Ubc_is_smaller_than_Umin2, 0, Uca_is_smaller_than_Umin2, 0, tmp_value, 10);
@@ -3627,9 +3651,10 @@ void umin2_handler(unsigned int *activated_functions, unsigned int number_group_
     _AND3(Uab_or_Ubc_or_Uca_is_smaller_than_250mV, 0, tmp_value, 4, tmp_value, 5, tmp_value, 13);
     
     //ПО Uблк. Umin2
-    if (Uab_or_Ubc_or_Uca_is_smaller_than_250mV) {
+    if (Uab_or_Ubc_or_Uca_is_smaller_than_250mV)
       _SET_BIT(activated_functions, RANG_OUTPUT_LED_DF_REG_PO_UBLK_UMIN2);
-    }
+    else
+      _CLEAR_BIT(activated_functions, RANG_OUTPUT_LED_DF_REG_PO_UBLK_UMIN2);
   }
   _INVERTOR(tmp_value, 12, tmp_value, 12);
   _INVERTOR(tmp_value, 13, tmp_value, 13);
@@ -3638,21 +3663,24 @@ void umin2_handler(unsigned int *activated_functions, unsigned int number_group_
   _AND5(tmp_value, 6, tmp_value, 2, tmp_value, 14, tmp_value, 13, tmp_value, 12, tmp_value, 15);
   
   //ПО Iблк. Umin2
-  if (Ia_or_Ic_is_larger_than_Iust) {
+  if (Ia_or_Ic_is_larger_than_Iust)
     _SET_BIT(activated_functions, RANG_OUTPUT_LED_DF_REG_PO_IBLK_UMIN2);
-  }
+  else
+    _CLEAR_BIT(activated_functions, RANG_OUTPUT_LED_DF_REG_PO_IBLK_UMIN2);
   
   //ПО Umin2
-  if (_GET_OUTPUT_STATE(tmp_value, 15)) {
+  if (_GET_OUTPUT_STATE(tmp_value, 15))
     _SET_BIT(activated_functions, RANG_OUTPUT_LED_DF_REG_PO_UMIN2);
-  }
+  else
+    _CLEAR_BIT(activated_functions, RANG_OUTPUT_LED_DF_REG_PO_UMIN2);
   
   _TIMER_T_0(INDEX_TIMER_UMIN2, current_settings_prt.timeout_Umin2[number_group_stp], tmp_value, 15, tmp_value, 16);
   
   //Сраб. Umin2
-  if (_GET_OUTPUT_STATE(tmp_value, 16)) {
+  if (_GET_OUTPUT_STATE(tmp_value, 16))
     _SET_BIT(activated_functions, RANG_OUTPUT_LED_DF_REG_UMIN2);
-  }
+  else
+    _CLEAR_BIT(activated_functions, RANG_OUTPUT_LED_DF_REG_UMIN2);
 }
 /*****************************************************/
 
@@ -3717,16 +3745,22 @@ void mtz04_handler(unsigned int *activated_functions, unsigned int number_group_
         //INVERTOR
         tmp_value, 7, tmp_value, 9);
   //Сраб.ПО MTZ04_1
-  if (_GET_OUTPUT_STATE(tmp_value, 9)) {
+  if (_GET_OUTPUT_STATE(tmp_value, 9)) 
+  {
      //PO MTZ04_1
     _SET_BIT(activated_functions, RANG_OUTPUT_LED_DF_REG_PO_MTZ04_1);
   }
-  _TIMER_T_0(INDEX_TIMER_MTZ04_1, current_settings_prt.timeout_mtz04_1[number_group_stp], tmp_value, 9, tmp_value, 10);
+  else _CLEAR_BIT(activated_functions, RANG_OUTPUT_LED_DF_REG_PO_MTZ04_1);
+
+    _TIMER_T_0(INDEX_TIMER_MTZ04_1, current_settings_prt.timeout_mtz04_1[number_group_stp], tmp_value, 9, tmp_value, 10);
   //Сраб. MTZ04_1
-  if (_GET_OUTPUT_STATE(tmp_value, 10)) {
+  if (_GET_OUTPUT_STATE(tmp_value, 10)) 
+  {
      //MTZ04_1
     _SET_BIT(activated_functions, RANG_OUTPUT_LED_DF_REG_MTZ04_1);
   }
+  else _CLEAR_BIT(activated_functions, RANG_OUTPUT_LED_DF_REG_MTZ04_1);
+    
 //MTZ04_2
 //RANG_OUTPUT_LED_DF_REG_STATE_VV,
 //ПОЛОЖ ВВ
@@ -3752,10 +3786,13 @@ void mtz04_handler(unsigned int *activated_functions, unsigned int number_group_
         tmp_value, 1, 
         tmp2, 6, tmp2, 7);
   //Сраб.ПО MTZ04_2
-  if (_GET_OUTPUT_STATE(tmp2, 7)) {
+  if (_GET_OUTPUT_STATE(tmp2, 7)) 
+  {
      //PO MTZ04_2
     _SET_BIT(activated_functions, RANG_OUTPUT_LED_DF_REG_PO_MTZ04_2);
   }
+  else _CLEAR_BIT(activated_functions, RANG_OUTPUT_LED_DF_REG_PO_MTZ04_2);
+    
 //ускорение
   _AND2(tmp2, 4, 
         tmp2, 7, tmp2, 8);
@@ -3794,10 +3831,12 @@ void mtz04_handler(unsigned int *activated_functions, unsigned int number_group_
   _OR2(tmp3, 4, 
        tmp3, 6, tmp3, 7);
   //Сраб. MTZ04_2
-  if (_GET_OUTPUT_STATE(tmp3, 7)) {
+  if (_GET_OUTPUT_STATE(tmp3, 7))
+  {
      //MTZ04_1
     _SET_BIT(activated_functions, RANG_OUTPUT_LED_DF_REG_MTZ04_2);
   }
+  else _CLEAR_BIT(activated_functions, RANG_OUTPUT_LED_DF_REG_MTZ04_2);
 
 //Зависимая 
 //  if (_GET_OUTPUT_STATE(tmp2, 10)) {
@@ -3850,16 +3889,18 @@ void umax1_handler(unsigned int *activated_functions, unsigned int number_group_
   _AND3(tmp_value, 8, tmp_value, 4, tmp_value, 3, tmp_value, 9);
   
   //ПО Umax1
-  if (_GET_OUTPUT_STATE(tmp_value, 9)) {
+  if (_GET_OUTPUT_STATE(tmp_value, 9))
     _SET_BIT(activated_functions, RANG_OUTPUT_LED_DF_REG_PO_UMAX1);
-  }
+  else
+    _CLEAR_BIT(activated_functions, RANG_OUTPUT_LED_DF_REG_PO_UMAX1);
   
   _TIMER_T_0(INDEX_TIMER_UMAX1, current_settings_prt.timeout_Umax1[number_group_stp], tmp_value, 9, tmp_value, 10);
   
   //Сраб. Umax1
-  if (_GET_OUTPUT_STATE(tmp_value, 10)) {
+  if (_GET_OUTPUT_STATE(tmp_value, 10))
     _SET_BIT(activated_functions, RANG_OUTPUT_LED_DF_REG_UMAX1);
-  }
+  else
+    _CLEAR_BIT(activated_functions, RANG_OUTPUT_LED_DF_REG_UMAX1);
 }
 /*****************************************************/
 
@@ -3907,16 +3948,18 @@ void umax2_handler(unsigned int *activated_functions, unsigned int number_group_
   _AND3(tmp_value, 8, tmp_value, 4, tmp_value, 3, tmp_value, 9);
   
   //ПО Umax1
-  if (_GET_OUTPUT_STATE(tmp_value, 9)) {
+  if (_GET_OUTPUT_STATE(tmp_value, 9))
     _SET_BIT(activated_functions, RANG_OUTPUT_LED_DF_REG_PO_UMAX2);
-  }
+  else
+    _CLEAR_BIT(activated_functions, RANG_OUTPUT_LED_DF_REG_PO_UMAX2);
   
   _TIMER_T_0(INDEX_TIMER_UMAX2, current_settings_prt.timeout_Umax2[number_group_stp], tmp_value, 9, tmp_value, 10);
   
   //Сраб. Umax1
-  if (_GET_OUTPUT_STATE(tmp_value, 10)) {
+  if (_GET_OUTPUT_STATE(tmp_value, 10))
     _SET_BIT(activated_functions, RANG_OUTPUT_LED_DF_REG_UMAX2);
-  }
+  else
+    _CLEAR_BIT(activated_functions, RANG_OUTPUT_LED_DF_REG_UMAX2);
 }
 /*****************************************************/
 
@@ -4093,6 +4136,7 @@ void achr_chapv_handler(unsigned int *activated_functions, unsigned int number_g
         _SET_BIT(activated_functions, RANG_OUTPUT_LED_DF_REG_PO_ACHR1);
         po_f1_achr1 = 1;
       }
+      else _CLEAR_BIT(activated_functions, RANG_OUTPUT_LED_DF_REG_PO_ACHR1);
     }
     else
     {
@@ -4104,8 +4148,13 @@ void achr_chapv_handler(unsigned int *activated_functions, unsigned int number_g
         _SET_BIT(activated_functions, RANG_OUTPUT_LED_DF_REG_PO_ACHR1);
         po_f1_achr1 = 1;
       }
+      else _CLEAR_BIT(activated_functions, RANG_OUTPUT_LED_DF_REG_PO_ACHR1);
     }
   }//if
+  else
+  {
+    _CLEAR_BIT(activated_functions, RANG_OUTPUT_LED_DF_REG_PO_ACHR1);
+  }
 //----2----
   //Reset канал L2
   if (!_GET_OUTPUT_STATE(tmp_value2, 3))
@@ -4121,6 +4170,7 @@ void achr_chapv_handler(unsigned int *activated_functions, unsigned int number_g
         _SET_BIT(activated_functions, RANG_OUTPUT_LED_DF_REG_PO_ACHR2);
         po_f1_achr2 = 1;
       }
+      else _CLEAR_BIT(activated_functions, RANG_OUTPUT_LED_DF_REG_PO_ACHR2);
     }
     else
     {
@@ -4132,8 +4182,13 @@ void achr_chapv_handler(unsigned int *activated_functions, unsigned int number_g
         _SET_BIT(activated_functions, RANG_OUTPUT_LED_DF_REG_PO_ACHR2);
         po_f1_achr2 = 1;
       }
+      else _CLEAR_BIT(activated_functions, RANG_OUTPUT_LED_DF_REG_PO_ACHR2);
     }
   }//if
+  else
+  {
+    _SET_BIT(activated_functions, RANG_OUTPUT_LED_DF_REG_PO_ACHR2);
+  }
 //--------------  
 /*
   _TIMER_T_0(INDEX_TIMER_ACHR1, current_settings_prt.timeout_achr_1[number_group_stp], po_f1_achr, 0, tmp_value, 5);
@@ -4147,9 +4202,9 @@ void achr_chapv_handler(unsigned int *activated_functions, unsigned int number_g
   
   //Разр ЧАПВ
   if (UF1_is_larger_than_U_setpoint_F1)
-  {
     _SET_BIT(activated_functions, RANG_OUTPUT_LED_DF_REG_RAZR_CHAPV);
-  }
+  else
+    _CLEAR_BIT(activated_functions, RANG_OUTPUT_LED_DF_REG_RAZR_CHAPV);
 
 /*  
   _Bool tmp1 = 0;
@@ -4209,9 +4264,9 @@ void achr_chapv_handler(unsigned int *activated_functions, unsigned int number_g
     //L3
     _Bool po_f1_chapv1_tmp = (!_GET_OUTPUT_STATE(tmp_value1, 30) && po_f1_chapv1);
     if (po_f1_chapv1_tmp) 
-    {
       _SET_BIT(activated_functions, RANG_OUTPUT_LED_DF_REG_PO_CHAPV1);
-    }
+    else
+      _CLEAR_BIT(activated_functions, RANG_OUTPUT_LED_DF_REG_PO_CHAPV1);
     
     _TIMER_T_0(INDEX_TIMER_CHAPV1, current_settings_prt.timeout_chapv_1[number_group_stp], po_f1_chapv1_tmp, 0, tmp_value1, 6);
     //L8
@@ -4245,9 +4300,9 @@ void achr_chapv_handler(unsigned int *activated_functions, unsigned int number_g
     //L3_2
     _Bool po_f1_chapv2_tmp = (!_GET_OUTPUT_STATE(tmp_value2, 30) && po_f1_chapv2);
     if (po_f1_chapv2_tmp) 
-    {
       _SET_BIT(activated_functions, RANG_OUTPUT_LED_DF_REG_PO_CHAPV2);
-    }
+    else
+      _CLEAR_BIT(activated_functions, RANG_OUTPUT_LED_DF_REG_PO_CHAPV2);
     
     _TIMER_T_0(INDEX_TIMER_CHAPV2, current_settings_prt.timeout_chapv_2[number_group_stp], po_f1_chapv2_tmp, 0, tmp_value2, 6);
     //L8_2
@@ -4280,9 +4335,9 @@ void achr_chapv_handler(unsigned int *activated_functions, unsigned int number_g
 //----1----
   //АЧР/ЧАПВ
   if (_GET_OUTPUT_STATE(trigger_CHAPV1, 0)) 
-  {
     _SET_BIT(activated_functions, RANG_OUTPUT_LED_DF_REG_ACHR_CHAPV1);
-  }
+  else
+    _CLEAR_BIT(activated_functions, RANG_OUTPUT_LED_DF_REG_ACHR_CHAPV1);
   
   _Bool chapv_timer_1ms1 = 0;
  // _Bool razr_chapv_inv1 = 0;
@@ -4290,12 +4345,17 @@ void achr_chapv_handler(unsigned int *activated_functions, unsigned int number_g
  // _INVERTOR(UF1_is_larger_than_U_setpoint_F1, 0, razr_chapv_inv1, 0);
   _AND2(chapv_timer_1ms1, 0, /*razr_chapv_inv1, 0,*/UF1_is_smaller_than_U_setpoint_F1, 0, tmp_value1, 24);
   _TIMER_0_T(INDEX_TIMER_BLOCK_CHAPV1_5MS, TIMEOUT_BLOCK_CHAPV_5MS, tmp_value1, 24, tmp_value1, 25);
+  if (_GET_OUTPUT_STATE(tmp_value1, 25))
+      _SET_BIT(activated_functions, RANG_OUTPUT_LED_DF_REG_BLOCK_CHAPV1_VID_U);
+  else
+      _CLEAR_BIT(activated_functions, RANG_OUTPUT_LED_DF_REG_BLOCK_CHAPV1_VID_U);
+  
 //----2----
   //АЧР/ЧАПВ
   if (_GET_OUTPUT_STATE(trigger_CHAPV2, 0)) 
-  {
     _SET_BIT(activated_functions, RANG_OUTPUT_LED_DF_REG_ACHR_CHAPV2);
-  }
+  else
+    _CLEAR_BIT(activated_functions, RANG_OUTPUT_LED_DF_REG_ACHR_CHAPV2);
   
   _Bool chapv_timer_1ms2 = 0;
   //_Bool razr_chapv_inv2 = 0;
@@ -4303,6 +4363,10 @@ void achr_chapv_handler(unsigned int *activated_functions, unsigned int number_g
 //  _INVERTOR(UF1_is_larger_than_U_setpoint_F1, 0, razr_chapv_inv2, 0);
   _AND2(chapv_timer_1ms1, 0, /*razr_chapv_inv1, 0,*/UF1_is_smaller_than_U_setpoint_F1, 0, tmp_value2, 24);
   _TIMER_0_T(INDEX_TIMER_BLOCK_CHAPV2_5MS, TIMEOUT_BLOCK_CHAPV_5MS, tmp_value2, 24, tmp_value2, 25);
+  if (_GET_OUTPUT_STATE(tmp_value2, 25))
+      _SET_BIT(activated_functions, RANG_OUTPUT_LED_DF_REG_BLOCK_CHAPV2_VID_U);
+  else
+      _CLEAR_BIT(activated_functions, RANG_OUTPUT_LED_DF_REG_BLOCK_CHAPV2_VID_U);
 //---------
 /*  
   //Block CHAPV vid U
@@ -4317,10 +4381,9 @@ unsigned int tmp_value3=0;
     _OR2(tmp_value1, 25, tmp_value2, 25, tmp_value3, 0);
   //Block CHAPV vid U
   if (_GET_OUTPUT_STATE(tmp_value3, 0))
-  {
     _SET_BIT(activated_functions, RANG_OUTPUT_LED_DF_REG_BLOCK_CHAPV_VID_U);
-  }
-
+  else
+    _CLEAR_BIT(activated_functions, RANG_OUTPUT_LED_DF_REG_BLOCK_CHAPV_VID_U);
 }
 
 /*****************************************************/
@@ -4622,7 +4685,10 @@ inline void apv_handler(unsigned int *activated_functions, unsigned int number_g
     після встановлення "1" не мало б зняти цей сигнал і ми його маємо зафіксувати до 
     наступної роботи системи захистів.
     */
-    activated_functions[RANG_OUTPUT_LED_DF_REG_APV1 >> 5] |= (_GET_OUTPUT_STATE(logic_APV_1, 9) << (RANG_OUTPUT_LED_DF_REG_APV1 & 0x1f));
+    if (_GET_OUTPUT_STATE(logic_APV_1, 9))
+       _SET_BIT(activated_functions, RANG_OUTPUT_LED_DF_REG_APV1);
+    else
+       _CLEAR_BIT(activated_functions, RANG_OUTPUT_LED_DF_REG_APV1);
     _TIMER_0_T(INDEX_TIMER_APV_BLOCK_VID_APV1, current_settings_prt.timeout_apv_block_vid_apv1[number_group_stp], logic_APV_1, 9, logic_APV_0, 31);
 
     //АПВ2
@@ -4638,8 +4704,10 @@ inline void apv_handler(unsigned int *activated_functions, unsigned int number_g
     після встановлення "1" не мало б зняти цей сигнал і ми його маємо зафіксувати до 
     наступної роботи системи захистів.
     */
-    activated_functions[RANG_OUTPUT_LED_DF_REG_APV2 >> 5] |= (_GET_OUTPUT_STATE(logic_APV_1, 12) << (RANG_OUTPUT_LED_DF_REG_APV2 & 0x1f));
-    _TIMER_0_T(INDEX_TIMER_APV_BLOCK_VID_APV2, current_settings_prt.timeout_apv_block_vid_apv2[number_group_stp], logic_APV_1, 12, logic_APV_1, 0);
+    if (_GET_OUTPUT_STATE(logic_APV_1, 12))
+       _SET_BIT(activated_functions, RANG_OUTPUT_LED_DF_REG_APV2);
+    else
+       _CLEAR_BIT(activated_functions, RANG_OUTPUT_LED_DF_REG_APV2);
 
     //АПВ3
     _AND2_INVERTOR(logic_APV_1, 0, logic_APV_0, 15, logic_APV_1, 13);
@@ -4654,7 +4722,10 @@ inline void apv_handler(unsigned int *activated_functions, unsigned int number_g
     після встановлення "1" не мало б зняти цей сигнал і ми його маємо зафіксувати до 
     наступної роботи системи захистів.
     */
-    activated_functions[RANG_OUTPUT_LED_DF_REG_APV3 >> 5] |= (_GET_OUTPUT_STATE(logic_APV_1, 15) << (RANG_OUTPUT_LED_DF_REG_APV3 & 0x1f));
+    if (_GET_OUTPUT_STATE(logic_APV_1, 15))
+       _SET_BIT(activated_functions, RANG_OUTPUT_LED_DF_REG_APV3);
+    else
+       _CLEAR_BIT(activated_functions, RANG_OUTPUT_LED_DF_REG_APV3);
     _TIMER_0_T(INDEX_TIMER_APV_BLOCK_VID_APV3, current_settings_prt.timeout_apv_block_vid_apv3[number_group_stp], logic_APV_1, 15, logic_APV_1, 1);
 
     //АПВ4
@@ -4670,7 +4741,10 @@ inline void apv_handler(unsigned int *activated_functions, unsigned int number_g
     після встановлення "1" не мало б зняти цей сигнал і ми його маємо зафіксувати до 
     наступної роботи системи захистів.
     */
-    activated_functions[RANG_OUTPUT_LED_DF_REG_APV4 >> 5] |= (_GET_OUTPUT_STATE(logic_APV_1, 18) << (RANG_OUTPUT_LED_DF_REG_APV4 & 0x1f));
+    if (_GET_OUTPUT_STATE(logic_APV_1, 18))
+       _SET_BIT(activated_functions, RANG_OUTPUT_LED_DF_REG_APV4);
+    else
+       _CLEAR_BIT(activated_functions, RANG_OUTPUT_LED_DF_REG_APV4);
     _TIMER_0_T(INDEX_TIMER_APV_BLOCK_VID_APV4, current_settings_prt.timeout_apv_block_vid_apv4[number_group_stp], logic_APV_1, 18, logic_APV_1, 2);
   }
   while (
@@ -4685,9 +4759,8 @@ inline void apv_handler(unsigned int *activated_functions, unsigned int number_g
   _OR4(trigger_APV_0, 0, trigger_APV_0, 1, trigger_APV_0, 2, trigger_APV_0, 3, work_apv, 0);
   
   //Работа АПВ
-  if (work_apv) {
-    _SET_BIT(activated_functions, RANG_OUTPUT_LED_DF_REG_APV_WORK);
-  }
+  if (work_apv) _SET_BIT(activated_functions, RANG_OUTPUT_LED_DF_REG_APV_WORK);
+  else  _CLEAR_BIT(activated_functions, RANG_OUTPUT_LED_DF_REG_APV_WORK);
   
 }
 /*****************************************************/
