@@ -8982,7 +8982,19 @@ inline void main_protection(void)
     }
     else
     {
-      for (unsigned int i = RANG_OUTPUT_LED_DF_REG_BLOCK_MTZ1; i <= RANG_OUTPUT_LED_DF_REG_NCN_MTZ; i++) _CLEAR_BIT(activated_functions, i);
+      //Очищуємо сигнали, які не можуть бути у даній конфігурації
+      const unsigned int maska_mtz_signals[N_BIG] = 
+      {
+        MASKA_MTZ_SIGNALS_0,
+        MASKA_MTZ_SIGNALS_1,
+        MASKA_MTZ_SIGNALS_2, 
+        MASKA_MTZ_SIGNALS_3, 
+        MASKA_MTZ_SIGNALS_4, 
+        MASKA_MTZ_SIGNALS_5,
+        MASKA_MTZ_SIGNALS_6, 
+        MASKA_MTZ_SIGNALS_7
+      };
+      for (unsigned int i = 0; i < N_BIG; i++) activated_functions[i] &= (unsigned int)(~maska_mtz_signals[i]);
       
       global_timers[INDEX_TIMER_MTZ1] = -1;
       global_timers[INDEX_TIMER_MTZ1_N_VPERED] = -1;
@@ -9016,9 +9028,23 @@ inline void main_protection(void)
     if ((current_settings_prt.configuration & (1 << MTZ04_BIT_CONFIGURATION)) != 0)
     {
       mtz04_handler(activated_functions, number_group_stp);
-    }//if ((current_settings_prt.configuration & (1 << MTZ04_BIT_CONFIGURATION)) != 0)
+    }
     else
     {
+      //Очищуємо сигнали, які не можуть бути у даній конфігурації
+      const unsigned int maska_mtz04_signals[N_BIG] = 
+      {
+        MASKA_MTZ04_SIGNALS_0, 
+        MASKA_MTZ04_SIGNALS_1, 
+        MASKA_MTZ04_SIGNALS_2,
+        MASKA_MTZ04_SIGNALS_3, 
+        MASKA_MTZ04_SIGNALS_4, 
+        MASKA_MTZ04_SIGNALS_5, 
+        MASKA_MTZ04_SIGNALS_6, 
+        MASKA_MTZ04_SIGNALS_7
+      };
+      for (unsigned int i = 0; i < N_BIG; i++) activated_functions[i] &= (unsigned int)(~maska_mtz04_signals[i]);
+      
       global_timers[INDEX_TIMER_MTZ04_1] = -1;
       global_timers[INDEX_TIMER_MTZ04_2] = -1;
       global_timers[INDEX_TIMER_MTZ04_3] = -1;
@@ -9033,6 +9059,22 @@ inline void main_protection(void)
     {
       zdz_handler(activated_functions);
     }
+    else
+    {
+      //Очищуємо сигнали, які не можуть бути у даній конфігурації
+      const unsigned int maska_zdz_signals[N_BIG] = 
+      {
+        MASKA_ZDZ_SIGNALS_0, 
+        MASKA_ZDZ_SIGNALS_1, 
+        MASKA_ZDZ_SIGNALS_2,
+        MASKA_ZDZ_SIGNALS_3, 
+        MASKA_ZDZ_SIGNALS_4, 
+        MASKA_ZDZ_SIGNALS_5, 
+        MASKA_ZDZ_SIGNALS_6, 
+        MASKA_ZDZ_SIGNALS_7
+      };
+      for (unsigned int i = 0; i < N_BIG; i++) activated_functions[i] &= (unsigned int)(~maska_zdz_signals[i]);
+    }
     /**************************/
 
     /**************************/
@@ -9044,6 +9086,20 @@ inline void main_protection(void)
     }
     else
     {
+      //Очищуємо сигнали, які не можуть бути у даній конфігурації
+      const unsigned int maska_nzz_signals[N_BIG] = 
+      {
+        MASKA_NZZ_SIGNALS_0, 
+        MASKA_NZZ_SIGNALS_1, 
+        MASKA_NZZ_SIGNALS_2,
+        MASKA_NZZ_SIGNALS_3, 
+        MASKA_NZZ_SIGNALS_4, 
+        MASKA_NZZ_SIGNALS_5, 
+        MASKA_NZZ_SIGNALS_6, 
+        MASKA_NZZ_SIGNALS_7
+      };
+      for (unsigned int i = 0; i < N_BIG; i++) activated_functions[i] &= (unsigned int)(~maska_nzz_signals[i]);
+
       global_timers[INDEX_TIMER_ZZ_3I0] = -1;
       global_timers[INDEX_TIMER_ZZ_3U0] = -1;
       global_timers[INDEX_TIMER_NZZ] = -1;
@@ -9059,6 +9115,20 @@ inline void main_protection(void)
     }
     else
     {
+      //Очищуємо сигнали, які не можуть бути у даній конфігурації
+      const unsigned int maska_tznp_signals[N_BIG] = 
+      {
+        MASKA_TZNP_SIGNALS_0, 
+        MASKA_TZNP_SIGNALS_1, 
+        MASKA_TZNP_SIGNALS_2,
+        MASKA_TZNP_SIGNALS_3, 
+        MASKA_TZNP_SIGNALS_4, 
+        MASKA_TZNP_SIGNALS_5, 
+        MASKA_TZNP_SIGNALS_6, 
+        MASKA_TZNP_SIGNALS_7
+      };
+      for (unsigned int i = 0; i < N_BIG; i++) activated_functions[i] &= (unsigned int)(~maska_tznp_signals[i]);
+
       global_timers[INDEX_TIMER_TZNP1_VPERED] = -1;
       global_timers[INDEX_TIMER_TZNP1_NAZAD] = -1;
       global_timers[INDEX_TIMER_TZNP2_VPERED] = -1;
@@ -9077,6 +9147,19 @@ inline void main_protection(void)
     }
     else
     {
+      //Очищуємо сигнали, які не можуть бути у даній конфігурації
+      const unsigned int maska_zop_signals[N_BIG] = 
+      {
+        MASKA_ZOP_SIGNALS_0, 
+        MASKA_ZOP_SIGNALS_1, 
+        MASKA_ZOP_SIGNALS_2,
+        MASKA_ZOP_SIGNALS_3, 
+        MASKA_ZOP_SIGNALS_4, 
+        MASKA_ZOP_SIGNALS_5, 
+        MASKA_ZOP_SIGNALS_6, 
+        MASKA_ZOP_SIGNALS_7
+      };
+      for (unsigned int i = 0; i < N_BIG; i++) activated_functions[i] &= (unsigned int)(~maska_zop_signals[i]);
       global_timers[INDEX_TIMER_ZOP] = -1;
     }
     /**************************/
@@ -9093,7 +9176,23 @@ inline void main_protection(void)
       /**************************/
       umin2_handler(activated_functions, number_group_stp);
       /**************************/
-    } else {
+    } 
+    else 
+    {
+      //Очищуємо сигнали, які не можуть бути у даній конфігурації
+      const unsigned int maska_umin_signals[N_BIG] = 
+      {
+        MASKA_UMIN_SIGNALS_0, 
+        MASKA_UMIN_SIGNALS_1, 
+        MASKA_UMIN_SIGNALS_2,
+        MASKA_UMIN_SIGNALS_3, 
+        MASKA_UMIN_SIGNALS_4, 
+        MASKA_UMIN_SIGNALS_5, 
+        MASKA_UMIN_SIGNALS_6, 
+        MASKA_UMIN_SIGNALS_7
+      };
+      for (unsigned int i = 0; i < N_BIG; i++) activated_functions[i] &= (unsigned int)(~maska_umin_signals[i]);
+
       global_timers[INDEX_TIMER_UMIN1] = -1;
       global_timers[INDEX_TIMER_UMIN2] = -1;
     }
@@ -9110,7 +9209,23 @@ inline void main_protection(void)
       /**************************/
       umax2_handler(activated_functions, number_group_stp);
       /**************************/
-    } else {
+    } 
+    else 
+    {
+      //Очищуємо сигнали, які не можуть бути у даній конфігурації
+      const unsigned int maska_umax_signals[N_BIG] = 
+      {
+        MASKA_UMAX_SIGNALS_0, 
+        MASKA_UMAX_SIGNALS_1, 
+        MASKA_UMAX_SIGNALS_2,
+        MASKA_UMAX_SIGNALS_3, 
+        MASKA_UMAX_SIGNALS_4, 
+        MASKA_UMAX_SIGNALS_5, 
+        MASKA_UMAX_SIGNALS_6, 
+        MASKA_UMAX_SIGNALS_7
+      };
+      for (unsigned int i = 0; i < N_BIG; i++) activated_functions[i] &= (unsigned int)(~maska_umax_signals[i]);
+
       global_timers[INDEX_TIMER_UMAX1] = -1;
       global_timers[INDEX_TIMER_UMAX2] = -1;
     }
@@ -9121,7 +9236,23 @@ inline void main_protection(void)
       /**************************/
       achr_chapv_handler(activated_functions, number_group_stp);
       /**************************/
-    } else {
+    } 
+    else 
+    {
+      //Очищуємо сигнали, які не можуть бути у даній конфігурації
+      const unsigned int maska_achr_chapv_signals[N_BIG] = 
+      {
+        MASKA_ACHR_CHAPV_SIGNALS_0, 
+        MASKA_ACHR_CHAPV_SIGNALS_1, 
+        MASKA_ACHR_CHAPV_SIGNALS_2,
+        MASKA_ACHR_CHAPV_SIGNALS_3, 
+        MASKA_ACHR_CHAPV_SIGNALS_4, 
+        MASKA_ACHR_CHAPV_SIGNALS_5, 
+        MASKA_ACHR_CHAPV_SIGNALS_6, 
+        MASKA_ACHR_CHAPV_SIGNALS_7
+      };
+      for (unsigned int i = 0; i < N_BIG; i++) activated_functions[i] &= (unsigned int)(~maska_achr_chapv_signals[i]);
+
       global_timers[INDEX_TIMER_ACHR_CHAPV_100MS_1] = -1;
       global_timers[INDEX_TIMER_ACHR1] = -1;
       global_timers[INDEX_TIMER_CHAPV1] = -1;
@@ -9148,6 +9279,20 @@ inline void main_protection(void)
     }
     else
     {
+      //Очищуємо сигнали, які не можуть бути у даній конфігурації
+      const unsigned int maska_urov_signals[N_BIG] = 
+      {
+        MASKA_UROV_SIGNALS_0, 
+        MASKA_UROV_SIGNALS_1, 
+        MASKA_UROV_SIGNALS_2,
+        MASKA_UROV_SIGNALS_3, 
+        MASKA_UROV_SIGNALS_4, 
+        MASKA_UROV_SIGNALS_5, 
+        MASKA_UROV_SIGNALS_6, 
+        MASKA_UROV_SIGNALS_7
+      };
+      for (unsigned int i = 0; i < N_BIG; i++) activated_functions[i] &= (unsigned int)(~maska_urov_signals[i]);
+
       global_timers[INDEX_TIMER_UROV1] = -1;
       global_timers[INDEX_TIMER_UROV2] = -1;
     }
@@ -9162,6 +9307,20 @@ inline void main_protection(void)
     }
     else
     {
+      //Очищуємо сигнали, які не можуть бути у даній конфігурації
+      const unsigned int maska_apv_signals[N_BIG] = 
+      {
+        MASKA_APV_SIGNALS_0, 
+        MASKA_APV_SIGNALS_1, 
+        MASKA_APV_SIGNALS_2,
+        MASKA_APV_SIGNALS_3, 
+        MASKA_APV_SIGNALS_4, 
+        MASKA_APV_SIGNALS_5, 
+        MASKA_APV_SIGNALS_6, 
+        MASKA_APV_SIGNALS_7
+      };
+      for (unsigned int i = 0; i < N_BIG; i++) activated_functions[i] &= (unsigned int)(~maska_apv_signals[i]);
+
       global_timers[INDEX_TIMER_APV_1] = -1;
       global_timers[INDEX_TIMER_APV_2] = -1;
       global_timers[INDEX_TIMER_APV_3] = -1;
