@@ -294,7 +294,7 @@ int global_timers[MAX_NUMBER_GLOBAL_TIMERS]; //Масив глобальних таймерів
 unsigned int timer_prt_signal_output_mode_2 = 0;
 unsigned int output_timer_prt_signal_output_mode_2 = false;
 unsigned int etap_execution_df[NUMBER_DEFINED_FUNCTIONS]; //Етап виконання опреділюваної функції
-unsigned int state_df = 0; //Текучий стан опреділюваних функцій
+//unsigned int state_df = 0; //Текучий стан опреділюваних функцій
 
 unsigned int previous_states_APV_0 = 0;
 unsigned int trigger_APV_0 = 0;

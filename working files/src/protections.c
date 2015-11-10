@@ -1565,13 +1565,14 @@ inline void clocking_global_timers(void)
 /*****************************************************/
 //Опрацювання Ориділювальних функцій - має запускатися після відкрпацювання блоків всіх захистів
 /*****************************************************/
-inline void df_handler(unsigned int *activated_functions, unsigned int *previous_stats_signals)
+inline void df_handler(unsigned int *p_active_functions)
 {
   /*
   Джерела активації формуємо в source_activation_df
   Формуємо маску вже активних функцій у maska_active_df
   */
-  unsigned int source_activation_df = 0, maska_active_df[N_BIG] = {0, 0, 0, 0, 0, 0, 0, 0};
+  unsigned int source_activation_df = 0;
+  unsigned int state_df = 0;
   for (unsigned int i = 0; i < NUMBER_DEFINED_FUNCTIONS; i++)
   {
     unsigned int number_byte_in, number_bit_in, number_byte_out, number_bit_out;
@@ -1668,7 +1669,7 @@ inline void df_handler(unsigned int *activated_functions, unsigned int *previous
     /***
     Джерело активації ОФ-ії
     ***/
-    source_activation_df |= ((activated_functions[number_byte_in] & (1 << number_bit_in) ) >> number_bit_in ) << i;
+    source_activation_df |= ((p_active_functions[number_byte_in] & (1 << number_bit_in) ) >> number_bit_in ) << i;
     //Перевіряємо ще, чи не іде утимування активним джерела ОФ через таймер-утримування (для активації через кнопки або інтерфейс)
     if (global_timers[INDEX_TIMER_DF_PROLONG_SET_FOR_BUTTON_INTERFACE_START + i] >= 0)
     {
@@ -1678,7 +1679,7 @@ inline void df_handler(unsigned int *activated_functions, unsigned int *previous
       source_activation_df |= (1 << i);
       
       //Відмічаємо, джерело активації утримуємться у активному стані у масиві активуючих функцій
-      activated_functions[number_byte_in] |= (1 << number_bit_in);
+      p_active_functions[number_byte_in] |= (1 << number_bit_in);
       
       //У випадку, якщо таймер дійшов до свого макисального значення, то скидаємо роботу цього таймеру
       if (global_timers[INDEX_TIMER_DF_PROLONG_SET_FOR_BUTTON_INTERFACE_START + i] >= ((int)current_settings_prt.timeout_pause_df[i]))
@@ -1689,7 +1690,7 @@ inline void df_handler(unsigned int *activated_functions, unsigned int *previous
     /***
     Формування маски до цього часу активних ОФ-ій
     ***/
-    maska_active_df[number_byte_out] |= ((state_df & (1 << i)) >> i) << number_bit_out;
+    state_df |= ((p_active_functions[number_byte_out] & ((unsigned int)(1 << number_bit_out))) != 0) << i;
     /***/
   }
   
@@ -1710,14 +1711,14 @@ inline void df_handler(unsigned int *activated_functions, unsigned int *previous
     {
       //Випадок, якщо функції зранжовані на джерело прямих функцій
       if(
-         ( ( current_settings_prt.ranguvannja_df_source_plus[N_BIG*i    ] & (activated_functions[0] | previous_stats_signals[0] | maska_active_df[0]) ) != 0) ||
-         ( ( current_settings_prt.ranguvannja_df_source_plus[N_BIG*i + 1] & (activated_functions[1] | previous_stats_signals[1] | maska_active_df[1]) ) != 0) ||
-         ( ( current_settings_prt.ranguvannja_df_source_plus[N_BIG*i + 2] & (activated_functions[2] | previous_stats_signals[2] | maska_active_df[2]) ) != 0) ||
-         ( ( current_settings_prt.ranguvannja_df_source_plus[N_BIG*i + 3] & (activated_functions[3] | previous_stats_signals[3] | maska_active_df[3]) ) != 0) ||
-         ( ( current_settings_prt.ranguvannja_df_source_plus[N_BIG*i + 4] & (activated_functions[4] | previous_stats_signals[4] | maska_active_df[4]) ) != 0) ||
-         ( ( current_settings_prt.ranguvannja_df_source_plus[N_BIG*i + 5] & (activated_functions[5] | previous_stats_signals[5] | maska_active_df[5]) ) != 0) ||
-         ( ( current_settings_prt.ranguvannja_df_source_plus[N_BIG*i + 6] & (activated_functions[6] | previous_stats_signals[6] | maska_active_df[6]) ) != 0) ||
-         ( ( current_settings_prt.ranguvannja_df_source_plus[N_BIG*i + 7] & (activated_functions[7] | previous_stats_signals[7] | maska_active_df[7]) ) != 0) 
+         ( ( current_settings_prt.ranguvannja_df_source_plus[N_BIG*i    ] & p_active_functions[0] ) != 0) ||
+         ( ( current_settings_prt.ranguvannja_df_source_plus[N_BIG*i + 1] & p_active_functions[1] ) != 0) ||
+         ( ( current_settings_prt.ranguvannja_df_source_plus[N_BIG*i + 2] & p_active_functions[2] ) != 0) ||
+         ( ( current_settings_prt.ranguvannja_df_source_plus[N_BIG*i + 3] & p_active_functions[3] ) != 0) ||
+         ( ( current_settings_prt.ranguvannja_df_source_plus[N_BIG*i + 4] & p_active_functions[4] ) != 0) ||
+         ( ( current_settings_prt.ranguvannja_df_source_plus[N_BIG*i + 5] & p_active_functions[5] ) != 0) ||
+         ( ( current_settings_prt.ranguvannja_df_source_plus[N_BIG*i + 6] & p_active_functions[6] ) != 0) ||
+         ( ( current_settings_prt.ranguvannja_df_source_plus[N_BIG*i + 7] & p_active_functions[7] ) != 0) 
         )
       {
         source_activation_df |= (1 << i);
@@ -1737,14 +1738,14 @@ inline void df_handler(unsigned int *activated_functions, unsigned int *previous
     {
       //Випадок, якщо функції зранжовані на джерело інверсних функцій
       if(
-         ( ( current_settings_prt.ranguvannja_df_source_minus[N_BIG*i    ] & ((unsigned int)(~(activated_functions[0] | previous_stats_signals[0] | maska_active_df[0]))) ) != 0 ) ||
-         ( ( current_settings_prt.ranguvannja_df_source_minus[N_BIG*i + 1] & ((unsigned int)(~(activated_functions[1] | previous_stats_signals[1] | maska_active_df[1]))) ) != 0 ) ||
-         ( ( current_settings_prt.ranguvannja_df_source_minus[N_BIG*i + 2] & ((unsigned int)(~(activated_functions[2] | previous_stats_signals[2] | maska_active_df[2]))) ) != 0 ) ||
-         ( ( current_settings_prt.ranguvannja_df_source_minus[N_BIG*i + 3] & ((unsigned int)(~(activated_functions[3] | previous_stats_signals[3] | maska_active_df[3]))) ) != 0 ) ||
-         ( ( current_settings_prt.ranguvannja_df_source_minus[N_BIG*i + 4] & ((unsigned int)(~(activated_functions[4] | previous_stats_signals[4] | maska_active_df[4]))) ) != 0 ) ||
-         ( ( current_settings_prt.ranguvannja_df_source_minus[N_BIG*i + 5] & ((unsigned int)(~(activated_functions[5] | previous_stats_signals[5] | maska_active_df[5]))) ) != 0 ) ||
-         ( ( current_settings_prt.ranguvannja_df_source_minus[N_BIG*i + 6] & ((unsigned int)(~(activated_functions[6] | previous_stats_signals[6] | maska_active_df[6]))) ) != 0 ) ||
-         ( ( current_settings_prt.ranguvannja_df_source_minus[N_BIG*i + 7] & ((unsigned int)(~(activated_functions[7] | previous_stats_signals[7] | maska_active_df[7]))) ) != 0 )
+         ( ( current_settings_prt.ranguvannja_df_source_minus[N_BIG*i    ] & ((unsigned int)(~p_active_functions[0])) ) != 0 ) ||
+         ( ( current_settings_prt.ranguvannja_df_source_minus[N_BIG*i + 1] & ((unsigned int)(~p_active_functions[1])) ) != 0 ) ||
+         ( ( current_settings_prt.ranguvannja_df_source_minus[N_BIG*i + 2] & ((unsigned int)(~p_active_functions[2])) ) != 0 ) ||
+         ( ( current_settings_prt.ranguvannja_df_source_minus[N_BIG*i + 3] & ((unsigned int)(~p_active_functions[3])) ) != 0 ) ||
+         ( ( current_settings_prt.ranguvannja_df_source_minus[N_BIG*i + 4] & ((unsigned int)(~p_active_functions[4])) ) != 0 ) ||
+         ( ( current_settings_prt.ranguvannja_df_source_minus[N_BIG*i + 5] & ((unsigned int)(~p_active_functions[5])) ) != 0 ) ||
+         ( ( current_settings_prt.ranguvannja_df_source_minus[N_BIG*i + 6] & ((unsigned int)(~p_active_functions[6])) ) != 0 ) ||
+         ( ( current_settings_prt.ranguvannja_df_source_minus[N_BIG*i + 7] & ((unsigned int)(~p_active_functions[7])) ) != 0 )
         )
       {
         source_activation_df |= (1<< i);
@@ -1764,14 +1765,14 @@ inline void df_handler(unsigned int *activated_functions, unsigned int *previous
     {
       //Випадок, якщо функції зранжовані насправді на джерело блокування
       if(
-         ( ( current_settings_prt.ranguvannja_df_source_blk[N_BIG*i    ] & (activated_functions[0] | previous_stats_signals[0] | maska_active_df[0]) ) != 0 ) ||
-         ( ( current_settings_prt.ranguvannja_df_source_blk[N_BIG*i + 1] & (activated_functions[1] | previous_stats_signals[1] | maska_active_df[1]) ) != 0 ) ||
-         ( ( current_settings_prt.ranguvannja_df_source_blk[N_BIG*i + 2] & (activated_functions[2] | previous_stats_signals[2] | maska_active_df[2]) ) != 0 ) ||
-         ( ( current_settings_prt.ranguvannja_df_source_blk[N_BIG*i + 3] & (activated_functions[3] | previous_stats_signals[3] | maska_active_df[3]) ) != 0 ) ||
-         ( ( current_settings_prt.ranguvannja_df_source_blk[N_BIG*i + 4] & (activated_functions[4] | previous_stats_signals[4] | maska_active_df[4]) ) != 0 ) ||
-         ( ( current_settings_prt.ranguvannja_df_source_blk[N_BIG*i + 5] & (activated_functions[5] | previous_stats_signals[5] | maska_active_df[5]) ) != 0 ) ||
-         ( ( current_settings_prt.ranguvannja_df_source_blk[N_BIG*i + 6] & (activated_functions[6] | previous_stats_signals[6] | maska_active_df[6]) ) != 0 ) ||
-         ( ( current_settings_prt.ranguvannja_df_source_blk[N_BIG*i + 7] & (activated_functions[7] | previous_stats_signals[7] | maska_active_df[7]) ) != 0 )
+         ( ( current_settings_prt.ranguvannja_df_source_blk[N_BIG*i    ] & p_active_functions[0] ) != 0 ) ||
+         ( ( current_settings_prt.ranguvannja_df_source_blk[N_BIG*i + 1] & p_active_functions[1] ) != 0 ) ||
+         ( ( current_settings_prt.ranguvannja_df_source_blk[N_BIG*i + 2] & p_active_functions[2] ) != 0 ) ||
+         ( ( current_settings_prt.ranguvannja_df_source_blk[N_BIG*i + 3] & p_active_functions[3] ) != 0 ) ||
+         ( ( current_settings_prt.ranguvannja_df_source_blk[N_BIG*i + 4] & p_active_functions[4] ) != 0 ) ||
+         ( ( current_settings_prt.ranguvannja_df_source_blk[N_BIG*i + 5] & p_active_functions[5] ) != 0 ) ||
+         ( ( current_settings_prt.ranguvannja_df_source_blk[N_BIG*i + 6] & p_active_functions[6] ) != 0 ) ||
+         ( ( current_settings_prt.ranguvannja_df_source_blk[N_BIG*i + 7] & p_active_functions[7] ) != 0 )
         )
       {
         source_blk_df |= (1<< i);
@@ -1904,10 +1905,10 @@ inline void df_handler(unsigned int *activated_functions, unsigned int *previous
   //Установлюємо, або скидаємо ОФ у масиві функцій, які зараз будуть активовуватися
   /*
   Цей цикл і попередній не об'єднаі в один, а навпаки розєднані, бо у першому ми використовуємо
-  масив activated_functions у якому ще не встановлені виходи ОФ-ій, тому що інші ОФ-ії
+  масив p_active_functions у якому ще не встановлені виходи ОФ-ій, тому що інші ОФ-ії
   можуть бути джерелом активації, але джерелом активації може буте попереднє значення ОФ, а не те,
   що зараз встановлюється. А оскілдьки у другому масиві ми встановлюємо значення у масиві
-  activated_functions, які набувають зараз тільки ваги, то щоб не вийшло об'єднання попереднього значення
+  p_active_functions, які набувають зараз тільки ваги, то щоб не вийшло об'єднання попереднього значення
   і теперішнього то цикли роз'єднані (цикл аналізу джерел і логіки з циклом активації/деактивації)
   */
   for (unsigned int i = 0; i < NUMBER_DEFINED_FUNCTIONS; i++)
@@ -1971,12 +1972,12 @@ inline void df_handler(unsigned int *activated_functions, unsigned int *previous
       але перед тим, як виставити реальний стан цієї функції на даний момент часу - 
       перевіряєио, чи не йде блокування її 
       */     
-      if ((source_blk_df & (1<< i)) == 0 ) _SET_BIT(activated_functions, index_df);
-      else _CLEAR_BIT(activated_functions, index_df);
+      if ((source_blk_df & (1<< i)) == 0 ) _SET_BIT(p_active_functions, index_df);
+      else _CLEAR_BIT(p_active_functions, index_df);
     }
     else
     {
-      _CLEAR_BIT(activated_functions, index_df);
+      _CLEAR_BIT(p_active_functions, index_df);
     }
   }
 }
@@ -9415,15 +9416,7 @@ inline void main_protection(void)
     /**************************/
     //Опрцювання опреділюваних функцій
     /**************************/
-    previous_stats_signals[0] = active_functions[0] & (MASKA_FOR_DF_TRIGGERS_SIGNALS_0 | MASKA_FOR_ON_OFF_SIGNALS_0 | MASKA_FOR_READY_TU_SIGNALS_0 | MASKA_FOR_RESURS_VV_SIGNALS_0 | MASKA_FOR_REJESTRATORS_AND_DEFECT_SIGNALS_0);
-    previous_stats_signals[1] = active_functions[1] & (MASKA_FOR_DF_TRIGGERS_SIGNALS_1 | MASKA_FOR_ON_OFF_SIGNALS_1 | MASKA_FOR_READY_TU_SIGNALS_1 | MASKA_FOR_RESURS_VV_SIGNALS_1 | MASKA_FOR_REJESTRATORS_AND_DEFECT_SIGNALS_1);
-    previous_stats_signals[2] = active_functions[2] & (MASKA_FOR_DF_TRIGGERS_SIGNALS_2 | MASKA_FOR_ON_OFF_SIGNALS_2 | MASKA_FOR_READY_TU_SIGNALS_2 | MASKA_FOR_RESURS_VV_SIGNALS_2 | MASKA_FOR_REJESTRATORS_AND_DEFECT_SIGNALS_2);
-    previous_stats_signals[3] = active_functions[3] & (MASKA_FOR_DF_TRIGGERS_SIGNALS_3 | MASKA_FOR_ON_OFF_SIGNALS_3 | MASKA_FOR_READY_TU_SIGNALS_3 | MASKA_FOR_RESURS_VV_SIGNALS_3 | MASKA_FOR_REJESTRATORS_AND_DEFECT_SIGNALS_3);
-    previous_stats_signals[4] = active_functions[4] & (MASKA_FOR_DF_TRIGGERS_SIGNALS_4 | MASKA_FOR_ON_OFF_SIGNALS_4 | MASKA_FOR_READY_TU_SIGNALS_4 | MASKA_FOR_RESURS_VV_SIGNALS_4 | MASKA_FOR_REJESTRATORS_AND_DEFECT_SIGNALS_4);
-    previous_stats_signals[5] = active_functions[5] & (MASKA_FOR_DF_TRIGGERS_SIGNALS_5 | MASKA_FOR_ON_OFF_SIGNALS_5 | MASKA_FOR_READY_TU_SIGNALS_5 | MASKA_FOR_RESURS_VV_SIGNALS_5 | MASKA_FOR_REJESTRATORS_AND_DEFECT_SIGNALS_5);
-    previous_stats_signals[6] = active_functions[6] & (MASKA_FOR_DF_TRIGGERS_SIGNALS_6 | MASKA_FOR_ON_OFF_SIGNALS_6 | MASKA_FOR_READY_TU_SIGNALS_6 | MASKA_FOR_RESURS_VV_SIGNALS_6 | MASKA_FOR_REJESTRATORS_AND_DEFECT_SIGNALS_6);
-    previous_stats_signals[7] = active_functions[7] & (MASKA_FOR_DF_TRIGGERS_SIGNALS_7 | MASKA_FOR_ON_OFF_SIGNALS_7 | MASKA_FOR_READY_TU_SIGNALS_7 | MASKA_FOR_RESURS_VV_SIGNALS_7 | MASKA_FOR_REJESTRATORS_AND_DEFECT_SIGNALS_7);
-    df_handler(activated_functions, previous_stats_signals);
+    df_handler(activated_functions);
     /**************************/
 
     /**************************/
@@ -9504,8 +9497,8 @@ inline void main_protection(void)
     for(unsigned int i = INDEX_TIMER_DF_PROLONG_SET_FOR_BUTTON_INTERFACE_START; i < MAX_NUMBER_GLOBAL_TIMERS; i++)
       global_timers[i] = -1;
     
-    //Стан всіх ОФ переводимо у пасивний
-    state_df = 0;
+//    //Стан всіх ОФ переводимо у пасивний
+//    state_df = 0;
     
     //Стан виконання ОФ переводимо у початковий
     for(unsigned int i = 0; i < NUMBER_DEFINED_FUNCTIONS; i++)
