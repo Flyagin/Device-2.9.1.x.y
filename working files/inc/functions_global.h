@@ -176,7 +176,7 @@ void input_scan(void);
 void clocking_global_timers(void);
 void main_protection(void);
 void df_handler(unsigned int*);
-void dt_handler(unsigned int*, unsigned int*);
+void dt_handler(unsigned int*);
 void mtz_handler(unsigned int*, unsigned int);
 void mtz04_handler(unsigned int*, unsigned int);
 void zdz_handler(unsigned int*);

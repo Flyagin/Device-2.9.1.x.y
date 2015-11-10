@@ -1986,15 +1986,14 @@ inline void df_handler(unsigned int *p_active_functions)
 /*****************************************************/
 //Опрацювання Ориділювальних триґерів - має запускатися після відкрпацювання опреділювальних функцій
 /*****************************************************/
-inline void dt_handler(unsigned int *activated_functions, unsigned int *previous_stats_signals)
+inline void dt_handler(unsigned int *p_active_functions)
 {
   /*
   Попередній стан визначуваних триґерів формуємо у state_defined_triggers
   Джерела встановлення формуємо в source_set_dt
   Джерела скидання формуємо в source_reset_dt
-  Формуємо маску вже активних функцій у maska_active_dt
   */
-  unsigned int state_defined_triggers = 0, source_set_dt = 0, source_reset_dt = 0, maska_active_dt[N_BIG] = {0, 0, 0, 0, 0, 0, 0, 0};
+  unsigned int state_defined_triggers = 0, source_set_dt = 0, source_reset_dt = 0;
   for (unsigned int i = 0; i < NUMBER_DEFINED_TRIGGERS; i++)
   {
     unsigned int number_byte_set, number_bit_set, number_byte_reset, number_bit_reset;
@@ -2057,18 +2056,12 @@ inline void dt_handler(unsigned int *activated_functions, unsigned int *previous
       }
     }
 
-    state_defined_triggers |= ( (active_functions[index_dt >> 5] & ( 1 << (index_dt & 0x1f) ) ) >> (index_dt & 0x1f) ) << i;
+    state_defined_triggers |= ( (p_active_functions[index_dt >> 5] & ( 1 << (index_dt & 0x1f) ) ) >> (index_dt & 0x1f) ) << i;
     /***
     Джерела встановлення і скидання ОТ
     ***/
-    source_set_dt   |= ((activated_functions[number_byte_set  ] & (1 << number_bit_set  ) ) >> number_bit_set   ) << i;
-    source_reset_dt |= ((activated_functions[number_byte_reset] & (1 << number_bit_reset) ) >> number_bit_reset ) << i;
-    /***/
-
-    /***
-    Формування маски до цього часу активних ОТ-ів
-    ***/
-    _SET_BIT(maska_active_dt, index_dt);
+    source_set_dt   |= ((p_active_functions[number_byte_set  ] & (1 << number_bit_set  ) ) >> number_bit_set   ) << i;
+    source_reset_dt |= ((p_active_functions[number_byte_reset] & (1 << number_bit_reset) ) >> number_bit_reset ) << i;
     /***/
   }
   
@@ -2088,14 +2081,14 @@ inline void dt_handler(unsigned int *activated_functions, unsigned int *previous
     {
       //Випадок, якщо функції зранжовані на джерело прямих функцій
       if(
-         (( current_settings_prt.ranguvannja_set_dt_source_plus[N_BIG*i    ] & (activated_functions[0] | previous_stats_signals[0] | maska_active_dt[0])) != 0) ||
-         (( current_settings_prt.ranguvannja_set_dt_source_plus[N_BIG*i + 1] & (activated_functions[1] | previous_stats_signals[1] | maska_active_dt[1])) != 0) ||
-         (( current_settings_prt.ranguvannja_set_dt_source_plus[N_BIG*i + 2] & (activated_functions[2] | previous_stats_signals[2] | maska_active_dt[2])) != 0) ||
-         (( current_settings_prt.ranguvannja_set_dt_source_plus[N_BIG*i + 3] & (activated_functions[3] | previous_stats_signals[3] | maska_active_dt[3])) != 0) ||
-         (( current_settings_prt.ranguvannja_set_dt_source_plus[N_BIG*i + 4] & (activated_functions[4] | previous_stats_signals[4] | maska_active_dt[4])) != 0) ||
-         (( current_settings_prt.ranguvannja_set_dt_source_plus[N_BIG*i + 5] & (activated_functions[5] | previous_stats_signals[5] | maska_active_dt[5])) != 0) ||
-         (( current_settings_prt.ranguvannja_set_dt_source_plus[N_BIG*i + 6] & (activated_functions[6] | previous_stats_signals[6] | maska_active_dt[6])) != 0) ||
-         (( current_settings_prt.ranguvannja_set_dt_source_plus[N_BIG*i + 7] & (activated_functions[7] | previous_stats_signals[7] | maska_active_dt[7])) != 0)
+         (( current_settings_prt.ranguvannja_set_dt_source_plus[N_BIG*i    ] & p_active_functions[0]) != 0) ||
+         (( current_settings_prt.ranguvannja_set_dt_source_plus[N_BIG*i + 1] & p_active_functions[1]) != 0) ||
+         (( current_settings_prt.ranguvannja_set_dt_source_plus[N_BIG*i + 2] & p_active_functions[2]) != 0) ||
+         (( current_settings_prt.ranguvannja_set_dt_source_plus[N_BIG*i + 3] & p_active_functions[3]) != 0) ||
+         (( current_settings_prt.ranguvannja_set_dt_source_plus[N_BIG*i + 4] & p_active_functions[4]) != 0) ||
+         (( current_settings_prt.ranguvannja_set_dt_source_plus[N_BIG*i + 5] & p_active_functions[5]) != 0) ||
+         (( current_settings_prt.ranguvannja_set_dt_source_plus[N_BIG*i + 6] & p_active_functions[6]) != 0) ||
+         (( current_settings_prt.ranguvannja_set_dt_source_plus[N_BIG*i + 7] & p_active_functions[7]) != 0)
         )
       {
         source_set_dt |= (1 << i);
@@ -2115,14 +2108,14 @@ inline void dt_handler(unsigned int *activated_functions, unsigned int *previous
     {
       //Випадок, якщо функції зранжовані на джерело інверсних функцій
       if(
-         ( ( current_settings_prt.ranguvannja_set_dt_source_minus[N_BIG*i    ] & ((unsigned int)(~(activated_functions[0] | previous_stats_signals[0] | maska_active_dt[0]))) ) != 0 ) ||
-         ( ( current_settings_prt.ranguvannja_set_dt_source_minus[N_BIG*i + 1] & ((unsigned int)(~(activated_functions[1] | previous_stats_signals[1] | maska_active_dt[1]))) ) != 0 ) ||
-         ( ( current_settings_prt.ranguvannja_set_dt_source_minus[N_BIG*i + 2] & ((unsigned int)(~(activated_functions[2] | previous_stats_signals[2] | maska_active_dt[2]))) ) != 0 ) ||
-         ( ( current_settings_prt.ranguvannja_set_dt_source_minus[N_BIG*i + 3] & ((unsigned int)(~(activated_functions[3] | previous_stats_signals[3] | maska_active_dt[3]))) ) != 0 ) ||
-         ( ( current_settings_prt.ranguvannja_set_dt_source_minus[N_BIG*i + 4] & ((unsigned int)(~(activated_functions[4] | previous_stats_signals[4] | maska_active_dt[4]))) ) != 0 ) ||
-         ( ( current_settings_prt.ranguvannja_set_dt_source_minus[N_BIG*i + 5] & ((unsigned int)(~(activated_functions[5] | previous_stats_signals[5] | maska_active_dt[5]))) ) != 0 ) ||
-         ( ( current_settings_prt.ranguvannja_set_dt_source_minus[N_BIG*i + 6] & ((unsigned int)(~(activated_functions[6] | previous_stats_signals[6] | maska_active_dt[6]))) ) != 0 ) ||
-         ( ( current_settings_prt.ranguvannja_set_dt_source_minus[N_BIG*i + 7] & ((unsigned int)(~(activated_functions[7] | previous_stats_signals[7] | maska_active_dt[7]))) ) != 0 )
+         ( ( current_settings_prt.ranguvannja_set_dt_source_minus[N_BIG*i    ] & ((unsigned int)(~p_active_functions[0])) ) != 0 ) ||
+         ( ( current_settings_prt.ranguvannja_set_dt_source_minus[N_BIG*i + 1] & ((unsigned int)(~p_active_functions[1])) ) != 0 ) ||
+         ( ( current_settings_prt.ranguvannja_set_dt_source_minus[N_BIG*i + 2] & ((unsigned int)(~p_active_functions[2])) ) != 0 ) ||
+         ( ( current_settings_prt.ranguvannja_set_dt_source_minus[N_BIG*i + 3] & ((unsigned int)(~p_active_functions[3])) ) != 0 ) ||
+         ( ( current_settings_prt.ranguvannja_set_dt_source_minus[N_BIG*i + 4] & ((unsigned int)(~p_active_functions[4])) ) != 0 ) ||
+         ( ( current_settings_prt.ranguvannja_set_dt_source_minus[N_BIG*i + 5] & ((unsigned int)(~p_active_functions[5])) ) != 0 ) ||
+         ( ( current_settings_prt.ranguvannja_set_dt_source_minus[N_BIG*i + 6] & ((unsigned int)(~p_active_functions[6])) ) != 0 ) ||
+         ( ( current_settings_prt.ranguvannja_set_dt_source_minus[N_BIG*i + 7] & ((unsigned int)(~p_active_functions[7])) ) != 0 )
         )
       {
         source_set_dt |= (1<< i);
@@ -2142,14 +2135,14 @@ inline void dt_handler(unsigned int *activated_functions, unsigned int *previous
     {
       //Випадок, якщо функції зранжовані на джерело прямих функцій
       if(
-         (( current_settings_prt.ranguvannja_reset_dt_source_plus[N_BIG*i    ] & (activated_functions[0] | previous_stats_signals[0] | maska_active_dt[0])) != 0) ||
-         (( current_settings_prt.ranguvannja_reset_dt_source_plus[N_BIG*i + 1] & (activated_functions[1] | previous_stats_signals[1] | maska_active_dt[1])) != 0) ||
-         (( current_settings_prt.ranguvannja_reset_dt_source_plus[N_BIG*i + 2] & (activated_functions[2] | previous_stats_signals[2] | maska_active_dt[2])) != 0) ||
-         (( current_settings_prt.ranguvannja_reset_dt_source_plus[N_BIG*i + 3] & (activated_functions[3] | previous_stats_signals[3] | maska_active_dt[3])) != 0) ||
-         (( current_settings_prt.ranguvannja_reset_dt_source_plus[N_BIG*i + 4] & (activated_functions[4] | previous_stats_signals[4] | maska_active_dt[4])) != 0) ||
-         (( current_settings_prt.ranguvannja_reset_dt_source_plus[N_BIG*i + 5] & (activated_functions[5] | previous_stats_signals[5] | maska_active_dt[5])) != 0) ||
-         (( current_settings_prt.ranguvannja_reset_dt_source_plus[N_BIG*i + 6] & (activated_functions[6] | previous_stats_signals[6] | maska_active_dt[6])) != 0) ||
-         (( current_settings_prt.ranguvannja_reset_dt_source_plus[N_BIG*i + 7] & (activated_functions[7] | previous_stats_signals[7] | maska_active_dt[7])) != 0)
+         (( current_settings_prt.ranguvannja_reset_dt_source_plus[N_BIG*i    ] & p_active_functions[0]) != 0) ||
+         (( current_settings_prt.ranguvannja_reset_dt_source_plus[N_BIG*i + 1] & p_active_functions[1]) != 0) ||
+         (( current_settings_prt.ranguvannja_reset_dt_source_plus[N_BIG*i + 2] & p_active_functions[2]) != 0) ||
+         (( current_settings_prt.ranguvannja_reset_dt_source_plus[N_BIG*i + 3] & p_active_functions[3]) != 0) ||
+         (( current_settings_prt.ranguvannja_reset_dt_source_plus[N_BIG*i + 4] & p_active_functions[4]) != 0) ||
+         (( current_settings_prt.ranguvannja_reset_dt_source_plus[N_BIG*i + 5] & p_active_functions[5]) != 0) ||
+         (( current_settings_prt.ranguvannja_reset_dt_source_plus[N_BIG*i + 6] & p_active_functions[6]) != 0) ||
+         (( current_settings_prt.ranguvannja_reset_dt_source_plus[N_BIG*i + 7] & p_active_functions[7]) != 0)
         )
       {
         source_reset_dt |= (1 << i);
@@ -2169,14 +2162,14 @@ inline void dt_handler(unsigned int *activated_functions, unsigned int *previous
     {
       //Випадок, якщо функції зранжовані на джерело інверсних функцій
       if(
-         ( ( current_settings_prt.ranguvannja_reset_dt_source_minus[N_BIG*i    ] & ((unsigned int)(~(activated_functions[0] | previous_stats_signals[0] | maska_active_dt[0]))) ) != 0 ) ||
-         ( ( current_settings_prt.ranguvannja_reset_dt_source_minus[N_BIG*i + 1] & ((unsigned int)(~(activated_functions[1] | previous_stats_signals[1] | maska_active_dt[1]))) ) != 0 ) ||
-         ( ( current_settings_prt.ranguvannja_reset_dt_source_minus[N_BIG*i + 2] & ((unsigned int)(~(activated_functions[2] | previous_stats_signals[2] | maska_active_dt[2]))) ) != 0 ) ||
-         ( ( current_settings_prt.ranguvannja_reset_dt_source_minus[N_BIG*i + 3] & ((unsigned int)(~(activated_functions[3] | previous_stats_signals[3] | maska_active_dt[3]))) ) != 0 ) ||
-         ( ( current_settings_prt.ranguvannja_reset_dt_source_minus[N_BIG*i + 4] & ((unsigned int)(~(activated_functions[4] | previous_stats_signals[4] | maska_active_dt[4]))) ) != 0 ) ||
-         ( ( current_settings_prt.ranguvannja_reset_dt_source_minus[N_BIG*i + 5] & ((unsigned int)(~(activated_functions[5] | previous_stats_signals[5] | maska_active_dt[5]))) ) != 0 ) ||
-         ( ( current_settings_prt.ranguvannja_reset_dt_source_minus[N_BIG*i + 6] & ((unsigned int)(~(activated_functions[6] | previous_stats_signals[6] | maska_active_dt[6]))) ) != 0 ) ||
-         ( ( current_settings_prt.ranguvannja_reset_dt_source_minus[N_BIG*i + 7] & ((unsigned int)(~(activated_functions[7] | previous_stats_signals[7] | maska_active_dt[7]))) ) != 0 )
+         ( ( current_settings_prt.ranguvannja_reset_dt_source_minus[N_BIG*i    ] & ((unsigned int)(~p_active_functions[0])) ) != 0 ) ||
+         ( ( current_settings_prt.ranguvannja_reset_dt_source_minus[N_BIG*i + 1] & ((unsigned int)(~p_active_functions[1])) ) != 0 ) ||
+         ( ( current_settings_prt.ranguvannja_reset_dt_source_minus[N_BIG*i + 2] & ((unsigned int)(~p_active_functions[2])) ) != 0 ) ||
+         ( ( current_settings_prt.ranguvannja_reset_dt_source_minus[N_BIG*i + 3] & ((unsigned int)(~p_active_functions[3])) ) != 0 ) ||
+         ( ( current_settings_prt.ranguvannja_reset_dt_source_minus[N_BIG*i + 4] & ((unsigned int)(~p_active_functions[4])) ) != 0 ) ||
+         ( ( current_settings_prt.ranguvannja_reset_dt_source_minus[N_BIG*i + 5] & ((unsigned int)(~p_active_functions[5])) ) != 0 ) ||
+         ( ( current_settings_prt.ranguvannja_reset_dt_source_minus[N_BIG*i + 6] & ((unsigned int)(~p_active_functions[6])) ) != 0 ) ||
+         ( ( current_settings_prt.ranguvannja_reset_dt_source_minus[N_BIG*i + 7] & ((unsigned int)(~p_active_functions[7])) ) != 0 )
         )
       {
         source_reset_dt |= (1<< i);
@@ -2191,10 +2184,10 @@ inline void dt_handler(unsigned int *activated_functions, unsigned int *previous
   //Установлюємо, або скидаємо ОТ у масиві функцій, які зараз будуть активовуватися
   /*
   Цей цикл і попередній не об'єднаі в один, а навпаки розєднані, бо у першому ми використовуємо
-  масив activated_functions у якому ще не встановлені виходи ОТ-ій, тому що інші ОТ-ії
+  масив p_active_functions у якому ще не встановлені нові значення виходыв ОТ-ів, тому що інші ОТ-и
   можуть бути джерелом встановлення/скидання, але джерелом встановлення/скидання може буте попереднє значення ОТ, а не те,
-  що зараз встановлюється. А оскілдьки у другому масиві ми встановлюємо значення у масиві
-  activated_functions, які набувають зараз тільки ваги, то щоб не вийшло об'єднання попереднього значення
+  що зараз встановлюється. А оскілдьки у ми встановлюємо значення у масиві
+  p_active_functions, які набувають зараз тільки ваги, то щоб не вийшло об'єднання попереднього значення
   і теперішнього то цикли роз'єднані (цикл аналізу джерел і логіки з циклом встановлення/скидання)
   */
   for (unsigned int i = 0; i < NUMBER_DEFINED_TRIGGERS; i++)
@@ -2231,8 +2224,8 @@ inline void dt_handler(unsigned int *activated_functions, unsigned int *previous
       }
     }
       
-    if ((state_defined_triggers & (1 << i)) != 0 ) _SET_BIT(activated_functions, index_dt);
-    else _CLEAR_BIT(activated_functions, index_dt);
+    if ((state_defined_triggers & (1 << i)) != 0 ) _SET_BIT(p_active_functions, index_dt);
+    else _CLEAR_BIT(p_active_functions, index_dt);
   }
 }
 /*****************************************************/
@@ -2318,7 +2311,7 @@ inline int timeout_dependent_general(unsigned int i, unsigned int number_group_s
 /*****************************************************/
 // МТЗ
 /*****************************************************/
-inline void mtz_handler(unsigned int *activated_functions, unsigned int number_group_stp)
+inline void mtz_handler(unsigned int *p_active_functions, unsigned int number_group_stp)
 {
   unsigned int tmp_value;
   
@@ -2357,9 +2350,9 @@ inline void mtz_handler(unsigned int *activated_functions, unsigned int number_g
   
   //Неисправность цепей напряжения
   if (ctr_mtz_nespr_kil_napr)
-    _SET_BIT(activated_functions, RANG_OUTPUT_LED_DF_REG_NCN_MTZ);
+    _SET_BIT(p_active_functions, RANG_OUTPUT_LED_DF_REG_NCN_MTZ);
   else
-    _CLEAR_BIT(activated_functions, RANG_OUTPUT_LED_DF_REG_NCN_MTZ);
+    _CLEAR_BIT(p_active_functions, RANG_OUTPUT_LED_DF_REG_NCN_MTZ);
   /******Неисправность цепей напряжения для 4-х ступеней*******/
   
   for (int mtz_level = 0; mtz_level < NUMBER_LEVEL_MTZ; mtz_level++) {
@@ -2387,7 +2380,7 @@ inline void mtz_handler(unsigned int *activated_functions, unsigned int number_g
     
     /******ПО МТЗх***********************/
     //Уставка ПО МТЗх с учетом гистерезиса
-    po_mtz_x = (_CHECK_SET_BIT(active_functions, mtz_settings_prt[mtz_level][RANG_OUTPUT_LED_DF_REG_PO_MTZ]) != 0) ?
+    po_mtz_x = (_CHECK_SET_BIT(p_active_functions, mtz_settings_prt[mtz_level][RANG_OUTPUT_LED_DF_REG_PO_MTZ]) != 0) ?
             *(setpoint_mtz[mtz_level] + number_group_stp) * KOEF_POVERNENNJA_MTZ_I_UP / 100 :
             *(setpoint_mtz[mtz_level] + number_group_stp);
     
@@ -2399,7 +2392,7 @@ inline void mtz_handler(unsigned int *activated_functions, unsigned int number_g
     //М
     tmp_value |= ((current_settings_prt.control_mtz & mtz_const_menu_settings_prt[mtz_level][CTR_MTZ]) != 0) << 5; //МТЗх Вкл.
     //ДВ
-    tmp_value |= (_CHECK_SET_BIT(activated_functions, mtz_settings_prt[mtz_level][RANG_OUTPUT_LED_DF_REG_BLOCK_MTZ]) == 0) << 6; //Блокировка МТЗх
+    tmp_value |= (_CHECK_SET_BIT(p_active_functions, mtz_settings_prt[mtz_level][RANG_OUTPUT_LED_DF_REG_BLOCK_MTZ]) == 0) << 6; //Блокировка МТЗх
     //М
     tmp_value |= ((current_settings_prt.control_mtz & mtz_const_menu_settings_prt[mtz_level][CTR_MTZ_VPERED]) != 0) << 7; //МТЗНх: Вкл. прям
     tmp_value |= ((current_settings_prt.control_mtz & mtz_const_menu_settings_prt[mtz_level][CTR_MTZ_NAZAD]) != 0) << 8; //МТЗНх: Вкл. обр
@@ -2414,9 +2407,9 @@ inline void mtz_handler(unsigned int *activated_functions, unsigned int number_g
     
     //Сектор МТЗНх Вперед
     if (_GET_OUTPUT_STATE(direction_ABC_tmp, 3))
-      _SET_BIT(activated_functions, mtz_settings_prt[mtz_level][RANG_OUTPUT_LED_DF_REG_SECTOR_VPERED_MTZN]);
+      _SET_BIT(p_active_functions, mtz_settings_prt[mtz_level][RANG_OUTPUT_LED_DF_REG_SECTOR_VPERED_MTZN]);
     else
-      _CLEAR_BIT(activated_functions, mtz_settings_prt[mtz_level][RANG_OUTPUT_LED_DF_REG_SECTOR_VPERED_MTZN]);
+      _CLEAR_BIT(p_active_functions, mtz_settings_prt[mtz_level][RANG_OUTPUT_LED_DF_REG_SECTOR_VPERED_MTZN]);
     
     direction_ABC_tmp |= (sector_directional_mtz[mtz_level][PHASE_A_INDEX] == MTZ_NAZAD) << 4; //Проверка направленности фазы А назад
     direction_ABC_tmp |= (sector_directional_mtz[mtz_level][PHASE_B_INDEX] == MTZ_NAZAD) << 5; //Проверка направленности фазы B назад
@@ -2426,12 +2419,12 @@ inline void mtz_handler(unsigned int *activated_functions, unsigned int number_g
     
     //Сектор МТЗНх Назад
     if (_GET_OUTPUT_STATE(direction_ABC_tmp, 7))
-      _SET_BIT(activated_functions, mtz_settings_prt[mtz_level][RANG_OUTPUT_LED_DF_REG_SECTOR_NAZAD_MTZN]);
+      _SET_BIT(p_active_functions, mtz_settings_prt[mtz_level][RANG_OUTPUT_LED_DF_REG_SECTOR_NAZAD_MTZN]);
     else
-      _CLEAR_BIT(activated_functions, mtz_settings_prt[mtz_level][RANG_OUTPUT_LED_DF_REG_SECTOR_NAZAD_MTZN]);
+      _CLEAR_BIT(p_active_functions, mtz_settings_prt[mtz_level][RANG_OUTPUT_LED_DF_REG_SECTOR_NAZAD_MTZN]);
     
     //Уставка ПО МТЗН1 прям. с учетом гистерезиса
-    po_mtzn_x_vpered_setpoint = (_CHECK_SET_BIT(active_functions, mtz_settings_prt[mtz_level][RANG_OUTPUT_LED_DF_REG_PO_MTZN_VPERED]) != 0) ?
+    po_mtzn_x_vpered_setpoint = (_CHECK_SET_BIT(p_active_functions, mtz_settings_prt[mtz_level][RANG_OUTPUT_LED_DF_REG_PO_MTZN_VPERED]) != 0) ?
             *(setpoint_mtz_n_vpered[mtz_level] + number_group_stp) * KOEF_POVERNENNJA_MTZ_I_UP / 100 :
             *(setpoint_mtz_n_vpered[mtz_level] + number_group_stp);
     
@@ -2440,7 +2433,7 @@ inline void mtz_handler(unsigned int *activated_functions, unsigned int number_g
     direction_ABC_tmp |= (measurement[IM_IC] >= po_mtzn_x_vpered_setpoint) << 10; //Сравниваем с уставкой тока по фазе C (вперед)
     
     //Уставка ПО МТЗН1 прям. с учетом гистерезиса
-    po_mtzn_x_nazad_setpoint = (_CHECK_SET_BIT(active_functions, mtz_settings_prt[mtz_level][RANG_OUTPUT_LED_DF_REG_PO_MTZN_NAZAD]) != 0) ?
+    po_mtzn_x_nazad_setpoint = (_CHECK_SET_BIT(p_active_functions, mtz_settings_prt[mtz_level][RANG_OUTPUT_LED_DF_REG_PO_MTZN_NAZAD]) != 0) ?
             *(setpoint_mtz_n_nazad[mtz_level] + number_group_stp) * KOEF_POVERNENNJA_MTZ_I_UP / 100 :
             *(setpoint_mtz_n_nazad[mtz_level] + number_group_stp);
     
@@ -2462,7 +2455,7 @@ inline void mtz_handler(unsigned int *activated_functions, unsigned int number_g
     
     /******ПО U блок. МТЗНх***********************/
     //Уставка ПО U блок. МТЗНх с учетом гистерезиса
-    po_block_u_mtzn_x_setpoint = (_CHECK_SET_BIT(active_functions, RANG_OUTPUT_LED_DF_REG_PO_BLOCK_U_MTZN) != 0) ?
+    po_block_u_mtzn_x_setpoint = (_CHECK_SET_BIT(p_active_functions, RANG_OUTPUT_LED_DF_REG_PO_BLOCK_U_MTZN) != 0) ?
            PORIG_CHUTLYVOSTI_VOLTAGE :
            PORIG_CHUTLYVOSTI_VOLTAGE * U_DOWN / 100;
     
@@ -2472,22 +2465,22 @@ inline void mtz_handler(unsigned int *activated_functions, unsigned int number_g
     
     //ПО U блок. МТЗНх
     if (_GET_OUTPUT_STATE(tmp_value, 14))
-      _SET_BIT(activated_functions, RANG_OUTPUT_LED_DF_REG_PO_BLOCK_U_MTZN);
+      _SET_BIT(p_active_functions, RANG_OUTPUT_LED_DF_REG_PO_BLOCK_U_MTZN);
     else
-      _CLEAR_BIT(activated_functions, RANG_OUTPUT_LED_DF_REG_PO_BLOCK_U_MTZN);
+      _CLEAR_BIT(p_active_functions, RANG_OUTPUT_LED_DF_REG_PO_BLOCK_U_MTZN);
     /******ПО U блок. МТЗНх***********************/
     
     //Неисправность цепей напряжения для ступени МТЗх
     tmp_value |= (
-                   !(_CHECK_SET_BIT(active_functions, mtz_settings_prt[mtz_level][RANG_OUTPUT_LED_DF_REG_PO_MTZN_VPERED]) != 0 ||
-                     _CHECK_SET_BIT(active_functions, mtz_settings_prt[mtz_level][RANG_OUTPUT_LED_DF_REG_PO_MTZN_NAZAD])  != 0 ||
-                     _CHECK_SET_BIT(active_functions, mtz_settings_prt[mtz_level][RANG_OUTPUT_LED_DF_REG_PO_MTZPN])     != 0)
+                   !(_CHECK_SET_BIT(p_active_functions, mtz_settings_prt[mtz_level][RANG_OUTPUT_LED_DF_REG_PO_MTZN_VPERED]) != 0 ||
+                     _CHECK_SET_BIT(p_active_functions, mtz_settings_prt[mtz_level][RANG_OUTPUT_LED_DF_REG_PO_MTZN_NAZAD])  != 0 ||
+                     _CHECK_SET_BIT(p_active_functions, mtz_settings_prt[mtz_level][RANG_OUTPUT_LED_DF_REG_PO_MTZPN])     != 0)
                    &&
                    ctr_mtz_nespr_kil_napr
                  ) << 15;
     
     /******ПО U МТЗПНх***********************/
-    po_u_mtzpn_x_setpoint = (_CHECK_SET_BIT(active_functions, mtz_settings_prt[mtz_level][RANG_OUTPUT_LED_DF_REG_PO_U_MTZPN]) != 0) ?
+    po_u_mtzpn_x_setpoint = (_CHECK_SET_BIT(p_active_functions, mtz_settings_prt[mtz_level][RANG_OUTPUT_LED_DF_REG_PO_U_MTZPN]) != 0) ?
             *(setpoint_mtz_U[mtz_level] + number_group_stp) * U_DOWN / 100:
             *(setpoint_mtz_U[mtz_level] + number_group_stp) ;
     
@@ -2497,13 +2490,13 @@ inline void mtz_handler(unsigned int *activated_functions, unsigned int number_g
     
     //ПО U МТЗПНх
     if (_GET_OUTPUT_STATE(tmp_value, 16))
-      _SET_BIT(activated_functions, mtz_settings_prt[mtz_level][RANG_OUTPUT_LED_DF_REG_PO_U_MTZPN]);
+      _SET_BIT(p_active_functions, mtz_settings_prt[mtz_level][RANG_OUTPUT_LED_DF_REG_PO_U_MTZPN]);
     else
-      _CLEAR_BIT(activated_functions, mtz_settings_prt[mtz_level][RANG_OUTPUT_LED_DF_REG_PO_U_MTZPN]);
+      _CLEAR_BIT(p_active_functions, mtz_settings_prt[mtz_level][RANG_OUTPUT_LED_DF_REG_PO_U_MTZPN]);
     /******ПО U МТЗПНх***********************/
     
     /******ПО МТЗПНх***********************/
-    po_mtzpn_x_setpoint = (_CHECK_SET_BIT(active_functions, mtz_settings_prt[mtz_level][RANG_OUTPUT_LED_DF_REG_PO_MTZPN]) != 0) ?
+    po_mtzpn_x_setpoint = (_CHECK_SET_BIT(p_active_functions, mtz_settings_prt[mtz_level][RANG_OUTPUT_LED_DF_REG_PO_MTZPN]) != 0) ?
             *(setpoint_mtz_po_napruzi[mtz_level] + number_group_stp) * KOEF_POVERNENNJA_MTZ_I_UP / 100:
             *(setpoint_mtz_po_napruzi[mtz_level] + number_group_stp);
     
@@ -2514,11 +2507,11 @@ inline void mtz_handler(unsigned int *activated_functions, unsigned int number_g
     
     if (mtz_level == 1) { //только для 2-ой ступени
       //ДВ
-      tmp_value |= (_CHECK_SET_BIT(activated_functions, mtz_settings_prt[mtz_level][RANG_OUTPUT_LED_DF_REG_BLOCK_USK_MTZ]) == 0) << 9; //Блокировка ускорения МТЗ 2
+      tmp_value |= (_CHECK_SET_BIT(p_active_functions, mtz_settings_prt[mtz_level][RANG_OUTPUT_LED_DF_REG_BLOCK_USK_MTZ]) == 0) << 9; //Блокировка ускорения МТЗ 2
       //М
       tmp_value |= ((current_settings_prt.control_mtz & CTR_MTZ_2_PRYSKORENA) != 0) << 10; //МТЗ2 Ускоренная
       //ДВ
-      tmp_value |= (_CHECK_SET_BIT(activated_functions, RANG_OUTPUT_LED_DF_REG_STATE_VV) != 0) << 18; //Положение ВВ
+      tmp_value |= (_CHECK_SET_BIT(p_active_functions, RANG_OUTPUT_LED_DF_REG_STATE_VV) != 0) << 18; //Положение ВВ
       //M
       tmp_value |= ((current_settings_prt.control_mtz & CTR_MTZ_2_PRYSKORENNJA) != 0) << 11; //Ускорение МТЗ2 вкл.
     }
@@ -2529,7 +2522,7 @@ inline void mtz_handler(unsigned int *activated_functions, unsigned int number_g
     
     _OR2_INVERTOR(tmp_value, 14, tmp_value, 15, tmp_value, 14);
     
-    if (_CHECK_SET_BIT(active_functions, mtz_settings_prt[mtz_level][RANG_OUTPUT_LED_DF_REG_PO_MTZ]) != 0) 
+    if (_CHECK_SET_BIT(p_active_functions, mtz_settings_prt[mtz_level][RANG_OUTPUT_LED_DF_REG_PO_MTZ]) != 0) 
     {
       _SET_STATE(tmp_value, 19);
     } 
@@ -2566,30 +2559,30 @@ inline void mtz_handler(unsigned int *activated_functions, unsigned int number_g
     //ПО МТЗх
     _AND3(tmp_value, 19, tmp_value, 4, tmp_value, 20, tmp_value, 21);
     if (_GET_OUTPUT_STATE(tmp_value, 21))
-      _SET_BIT(activated_functions, mtz_settings_prt[mtz_level][RANG_OUTPUT_LED_DF_REG_PO_MTZ]);
+      _SET_BIT(p_active_functions, mtz_settings_prt[mtz_level][RANG_OUTPUT_LED_DF_REG_PO_MTZ]);
     else
-      _CLEAR_BIT(activated_functions, mtz_settings_prt[mtz_level][RANG_OUTPUT_LED_DF_REG_PO_MTZ]);
+      _CLEAR_BIT(p_active_functions, mtz_settings_prt[mtz_level][RANG_OUTPUT_LED_DF_REG_PO_MTZ]);
     
     //ПО МТЗНх вперед
     _AND5(tmp_value, 0, tmp_value, 20, tmp_value, 7, tmp_value, 12, tmp_value, 14, tmp_value, 22);
     if (_GET_OUTPUT_STATE(tmp_value, 22))
-      _SET_BIT(activated_functions, mtz_settings_prt[mtz_level][RANG_OUTPUT_LED_DF_REG_PO_MTZN_VPERED]);
+      _SET_BIT(p_active_functions, mtz_settings_prt[mtz_level][RANG_OUTPUT_LED_DF_REG_PO_MTZN_VPERED]);
     else
-      _CLEAR_BIT(activated_functions, mtz_settings_prt[mtz_level][RANG_OUTPUT_LED_DF_REG_PO_MTZN_VPERED]);
+      _CLEAR_BIT(p_active_functions, mtz_settings_prt[mtz_level][RANG_OUTPUT_LED_DF_REG_PO_MTZN_VPERED]);
     
     //ПО МТЗНх назад
     _AND5(tmp_value, 0, tmp_value, 20, tmp_value, 8, tmp_value, 13, tmp_value, 14, tmp_value, 23);
     if (_GET_OUTPUT_STATE(tmp_value, 23)) 
-      _SET_BIT(activated_functions, mtz_settings_prt[mtz_level][RANG_OUTPUT_LED_DF_REG_PO_MTZN_NAZAD]);
+      _SET_BIT(p_active_functions, mtz_settings_prt[mtz_level][RANG_OUTPUT_LED_DF_REG_PO_MTZN_NAZAD]);
     else
-      _CLEAR_BIT(activated_functions, mtz_settings_prt[mtz_level][RANG_OUTPUT_LED_DF_REG_PO_MTZN_NAZAD]);
+      _CLEAR_BIT(p_active_functions, mtz_settings_prt[mtz_level][RANG_OUTPUT_LED_DF_REG_PO_MTZN_NAZAD]);
     
     //ПО МТЗПНх
     _AND4(tmp_value, 1, tmp_value, 20, tmp_value, 16, tmp_value, 17, tmp_value, 24);
     if (_GET_OUTPUT_STATE(tmp_value, 24))
-      _SET_BIT(activated_functions, mtz_settings_prt[mtz_level][RANG_OUTPUT_LED_DF_REG_PO_MTZPN]);
+      _SET_BIT(p_active_functions, mtz_settings_prt[mtz_level][RANG_OUTPUT_LED_DF_REG_PO_MTZPN]);
     else
-      _CLEAR_BIT(activated_functions, mtz_settings_prt[mtz_level][RANG_OUTPUT_LED_DF_REG_PO_MTZPN]);
+      _CLEAR_BIT(p_active_functions, mtz_settings_prt[mtz_level][RANG_OUTPUT_LED_DF_REG_PO_MTZPN]);
     
     if (mtz_level != 1) { //для всех ступеней кроме 2-ой
       _TIMER_T_0(mtz_tmr_const[mtz_level][INDEX_TIMER_MTZ], *(timeout_mtz[mtz_level] + number_group_stp), tmp_value, 21, tmp_value, 25);
@@ -2635,9 +2628,9 @@ inline void mtz_handler(unsigned int *activated_functions, unsigned int number_g
     
     //Сраб.МТЗх
     if (_GET_OUTPUT_STATE(tmp_value, 31))
-      _SET_BIT(activated_functions, mtz_settings_prt[mtz_level][RANG_OUTPUT_LED_DF_REG_MTZ]);
+      _SET_BIT(p_active_functions, mtz_settings_prt[mtz_level][RANG_OUTPUT_LED_DF_REG_MTZ]);
     else
-      _CLEAR_BIT(activated_functions, mtz_settings_prt[mtz_level][RANG_OUTPUT_LED_DF_REG_MTZ]);
+      _CLEAR_BIT(p_active_functions, mtz_settings_prt[mtz_level][RANG_OUTPUT_LED_DF_REG_MTZ]);
   }
 }
 /*****************************************************/
@@ -2645,7 +2638,7 @@ inline void mtz_handler(unsigned int *activated_functions, unsigned int number_g
 /*****************************************************/
 // ЗДЗ
 /*****************************************************/
-inline void zdz_handler(unsigned int *activated_functions)
+inline void zdz_handler(unsigned int *p_active_functions)
 {
   unsigned int tmp_value;
   //M
@@ -2656,15 +2649,15 @@ inline void zdz_handler(unsigned int *activated_functions)
   
   for (int mtz_level = 0; mtz_level < NUMBER_LEVEL_MTZ; mtz_level++) {
     //берем не из active потому что сигналы сформировались на предыдущем шаге mtz_handler()
-    tmp_value |= (_CHECK_SET_BIT(activated_functions, mtz_settings_prt[mtz_level][RANG_OUTPUT_LED_DF_REG_PO_MTZ]) != 0) << (4 + mtz_level); //ПО МТЗx
-    tmp_value |= (_CHECK_SET_BIT(activated_functions, mtz_settings_prt[mtz_level][RANG_OUTPUT_LED_DF_REG_PO_MTZN_VPERED]) != 0) << (8 + mtz_level); //ПО МТЗНх вперед
-    tmp_value |= (_CHECK_SET_BIT(activated_functions, mtz_settings_prt[mtz_level][RANG_OUTPUT_LED_DF_REG_PO_MTZN_NAZAD]) != 0) << (12 + mtz_level);  //ПО МТЗНх назад
-    tmp_value |= (_CHECK_SET_BIT(activated_functions, mtz_settings_prt[mtz_level][RANG_OUTPUT_LED_DF_REG_PO_MTZPN]) != 0) << (16 + mtz_level); //ПО МТЗПНх
+    tmp_value |= (_CHECK_SET_BIT(p_active_functions, mtz_settings_prt[mtz_level][RANG_OUTPUT_LED_DF_REG_PO_MTZ]) != 0) << (4 + mtz_level); //ПО МТЗx
+    tmp_value |= (_CHECK_SET_BIT(p_active_functions, mtz_settings_prt[mtz_level][RANG_OUTPUT_LED_DF_REG_PO_MTZN_VPERED]) != 0) << (8 + mtz_level); //ПО МТЗНх вперед
+    tmp_value |= (_CHECK_SET_BIT(p_active_functions, mtz_settings_prt[mtz_level][RANG_OUTPUT_LED_DF_REG_PO_MTZN_NAZAD]) != 0) << (12 + mtz_level);  //ПО МТЗНх назад
+    tmp_value |= (_CHECK_SET_BIT(p_active_functions, mtz_settings_prt[mtz_level][RANG_OUTPUT_LED_DF_REG_PO_MTZPN]) != 0) << (16 + mtz_level); //ПО МТЗПНх
   }
   //М
   tmp_value |= ((current_settings_prt.control_zdz & CTR_ZDZ_STATE) != 0) << 20;
   //ДВ
-  tmp_value |= (_CHECK_SET_BIT(activated_functions, RANG_OUTPUT_LED_DF_REG_PUSK_ZDZ_VID_DV) != 0) << 21; //Пуск ЗДЗ от ДВ
+  tmp_value |= (_CHECK_SET_BIT(p_active_functions, RANG_OUTPUT_LED_DF_REG_PUSK_ZDZ_VID_DV) != 0) << 21; //Пуск ЗДЗ от ДВ
   
   _OR4(tmp_value, 4, tmp_value, 8, tmp_value, 12, tmp_value, 16, tmp_value, 22);
   _OR4(tmp_value, 5, tmp_value, 9, tmp_value, 13, tmp_value, 17, tmp_value, 23);
@@ -2687,16 +2680,16 @@ inline void zdz_handler(unsigned int *activated_functions)
   
   //Сраб. ЗДЗ
   if (_GET_OUTPUT_STATE(tmp_value2, 3))
-    _SET_BIT(activated_functions, RANG_OUTPUT_LED_DF_REG_ZDZ);
+    _SET_BIT(p_active_functions, RANG_OUTPUT_LED_DF_REG_ZDZ);
   else
-    _CLEAR_BIT(activated_functions, RANG_OUTPUT_LED_DF_REG_ZDZ);
+    _CLEAR_BIT(p_active_functions, RANG_OUTPUT_LED_DF_REG_ZDZ);
 }
 /*****************************************************/
 
 /*****************************************************/
 // ЗЗ
 /*****************************************************/
-inline void zz_handler(unsigned int *activated_functions, unsigned int number_group_stp)
+inline void zz_handler(unsigned int *p_active_functions, unsigned int number_group_stp)
 {
   /********************************
   Сектор НЗЗ
@@ -2777,9 +2770,9 @@ inline void zz_handler(unsigned int *activated_functions, unsigned int number_gr
   
   //Встановлюємо сигнал "Сектор НЗЗ",якщо він потрібний - у іншому випадку він скинутий
   if (sector_NZZ != 0)
-    _SET_BIT(activated_functions, RANG_OUTPUT_LED_DF_REG_SECTOR_NZZ);
+    _SET_BIT(p_active_functions, RANG_OUTPUT_LED_DF_REG_SECTOR_NZZ);
   else
-    _CLEAR_BIT(activated_functions, RANG_OUTPUT_LED_DF_REG_SECTOR_NZZ);
+    _CLEAR_BIT(p_active_functions, RANG_OUTPUT_LED_DF_REG_SECTOR_NZZ);
   /*******************************/
 
   /*******************************/
@@ -2868,7 +2861,7 @@ inline void zz_handler(unsigned int *activated_functions, unsigned int number_gr
   }
   /*******************************/
   
-  if (_CHECK_SET_BIT(activated_functions, RANG_OUTPUT_LED_DF_REG_BLOCK_NZZ) == 0)
+  if (_CHECK_SET_BIT(p_active_functions, RANG_OUTPUT_LED_DF_REG_BLOCK_NZZ) == 0)
   {
     //НЗЗ, ЗЗ/3I0 і ЗЗ/3U0 не блокується з дискретного входу
     /*******************************/
@@ -2881,14 +2874,7 @@ inline void zz_handler(unsigned int *activated_functions, unsigned int number_gr
     {
       //1 ступінь ЗЗ/3U0 включена, дозволена і не блокується
     
-      //Копіюємо попередні значення сигналів ЗЗ/3U0 у тимчавовий масив, щоб потім мати можливість їх скидати або встановлювати
-      //Це потрібно для того, щоб коли є умова, що сигнал не має ні встановлюватися ні скидатися - щоб він приймав своє попереднє значення  
-      unsigned int maska[N_BIG] = {0, 0, 0, 0, 0, 0, 0, 0};
-      _SET_BIT(maska, RANG_OUTPUT_LED_DF_REG_PO_NZZ);
-      _SET_BIT(maska, RANG_OUTPUT_LED_DF_REG_NZZ);
-      for (unsigned int i = 0; i < N_BIG; i++) activated_functions[i] |= active_functions[i] & maska[i];
-    
-      unsigned int previous_state_po_nzz = _CHECK_SET_BIT(active_functions, RANG_OUTPUT_LED_DF_REG_PO_NZZ);
+      unsigned int previous_state_po_nzz = _CHECK_SET_BIT(p_active_functions, RANG_OUTPUT_LED_DF_REG_PO_NZZ);
     
       //Виставляємо, або скидаємо сигнал "ПО NZZ"
       if (
@@ -2901,7 +2887,7 @@ inline void zz_handler(unsigned int *activated_functions, unsigned int number_gr
         if(previous_state_po_nzz == 0)
         {
           //Встановлюємо сигнал "ПО NZZ"
-          _SET_BIT(activated_functions, RANG_OUTPUT_LED_DF_REG_PO_NZZ);
+          _SET_BIT(p_active_functions, RANG_OUTPUT_LED_DF_REG_PO_NZZ);
       
           //Запускаємо таймер НЗЗ, якщо він ще не запущений
           global_timers[INDEX_TIMER_NZZ] = 0;
@@ -2913,9 +2899,9 @@ inline void zz_handler(unsigned int *activated_functions, unsigned int number_gr
         if(previous_state_po_nzz != 0)
         {
           //Скидаємо сигнал "ПО НЗЗ"
-          _CLEAR_BIT(activated_functions, RANG_OUTPUT_LED_DF_REG_PO_NZZ);
+          _CLEAR_BIT(p_active_functions, RANG_OUTPUT_LED_DF_REG_PO_NZZ);
           //Це є умовою також скидання сигналу "Сраб. НЗЗ"
-          _CLEAR_BIT(activated_functions, RANG_OUTPUT_LED_DF_REG_NZZ);
+          _CLEAR_BIT(p_active_functions, RANG_OUTPUT_LED_DF_REG_NZZ);
           //Якщо таймер ще не скинутий, то скидаємо його
           if ( global_timers[INDEX_TIMER_NZZ] >=0) global_timers[INDEX_TIMER_NZZ] = -1;
         }
@@ -2924,7 +2910,7 @@ inline void zz_handler(unsigned int *activated_functions, unsigned int number_gr
       if(global_timers[INDEX_TIMER_NZZ] >= current_settings_prt.timeout_nzz[number_group_stp])
       {
         //Якщо витримана "Витримка НЗЗ" то встановлюємо сигнал "Сраб. НЗЗ"
-        _SET_BIT(activated_functions, RANG_OUTPUT_LED_DF_REG_NZZ);
+        _SET_BIT(p_active_functions, RANG_OUTPUT_LED_DF_REG_NZZ);
 
         //Скидаємо таймер ПО НЗЗ
         global_timers[INDEX_TIMER_NZZ] = -1;
@@ -2933,8 +2919,8 @@ inline void zz_handler(unsigned int *activated_functions, unsigned int number_gr
     else
     {
       //Якщо НЗЗ не встановлена, то треба скинути всі таймери і сигнали, які за неї відповідають
-      _CLEAR_BIT(activated_functions, RANG_OUTPUT_LED_DF_REG_PO_NZZ);
-      _CLEAR_BIT(activated_functions, RANG_OUTPUT_LED_DF_REG_NZZ);
+      _CLEAR_BIT(p_active_functions, RANG_OUTPUT_LED_DF_REG_PO_NZZ);
+      _CLEAR_BIT(p_active_functions, RANG_OUTPUT_LED_DF_REG_NZZ);
       global_timers[INDEX_TIMER_NZZ] = -1;
     }  
     /*******************************/
@@ -2946,14 +2932,7 @@ inline void zz_handler(unsigned int *activated_functions, unsigned int number_gr
     {
       //1 ступінь ЗЗ/3U0 включена і не блокується
     
-      //Копіюємо попередні значення сигналів ЗЗ/3U0 у тимчавовий масив, щоб потім мати можливість їх скидати або встановлювати
-      //Це потрібно для того, щоб коли є умова, що сигнал не має ні встановлюватися ні скидатися - щоб він приймав своє попереднє значення  
-      unsigned int maska[N_BIG] = {0, 0, 0, 0, 0, 0, 0, 0};
-      _SET_BIT(maska, RANG_OUTPUT_LED_DF_REG_PO_3U0);
-      _SET_BIT(maska, RANG_OUTPUT_LED_DF_REG_3U0);
-      for (unsigned int i = 0; i < N_BIG; i++) activated_functions[i] |= active_functions[i] & maska[i];
-    
-      unsigned int previous_state_po_3U0 = _CHECK_SET_BIT(active_functions, RANG_OUTPUT_LED_DF_REG_PO_3U0);
+      unsigned int previous_state_po_3U0 = _CHECK_SET_BIT(p_active_functions, RANG_OUTPUT_LED_DF_REG_PO_3U0);
     
       //Виставляємо, або скидаємо сигнал "ПО ЗЗ/3U0"
       if (po_3U0 != 0)
@@ -2962,7 +2941,7 @@ inline void zz_handler(unsigned int *activated_functions, unsigned int number_gr
         if(previous_state_po_3U0 == 0)
         {
           //Встановлюємо сигнал "ПО ЗЗ/3U0"
-          _SET_BIT(activated_functions, RANG_OUTPUT_LED_DF_REG_PO_3U0);
+          _SET_BIT(p_active_functions, RANG_OUTPUT_LED_DF_REG_PO_3U0);
         
           //Запускаємо таймер ЗЗ/3U0, якщо він ще не запущений
           global_timers[INDEX_TIMER_ZZ_3U0] = 0;
@@ -2974,9 +2953,9 @@ inline void zz_handler(unsigned int *activated_functions, unsigned int number_gr
         if(previous_state_po_3U0 != 0)
         {
           //Скидаємо сигнал "ПО ЗЗ/3U0"
-          _CLEAR_BIT(activated_functions, RANG_OUTPUT_LED_DF_REG_PO_3U0);
+          _CLEAR_BIT(p_active_functions, RANG_OUTPUT_LED_DF_REG_PO_3U0);
           //Це є умовою також скидання сигналу "Сраб. ЗЗ/3U0"
-          _CLEAR_BIT(activated_functions, RANG_OUTPUT_LED_DF_REG_3U0);
+          _CLEAR_BIT(p_active_functions, RANG_OUTPUT_LED_DF_REG_3U0);
           //Якщо таймер ще не скинутий, то скидаємо його
           if ( global_timers[INDEX_TIMER_ZZ_3U0] >=0) global_timers[INDEX_TIMER_ZZ_3U0] = -1;
         }
@@ -2985,7 +2964,7 @@ inline void zz_handler(unsigned int *activated_functions, unsigned int number_gr
       if(global_timers[INDEX_TIMER_ZZ_3U0] >= current_settings_prt.timeout_zz_3U0[number_group_stp])
       {
         //Якщо витримана "Витримка ЗЗ/3U0" то встановлюємо сигнал "Сраб. ЗЗ/3U0"
-        _SET_BIT(activated_functions, RANG_OUTPUT_LED_DF_REG_3U0);
+        _SET_BIT(p_active_functions, RANG_OUTPUT_LED_DF_REG_3U0);
 
         //Скидаємо таймер ПО ЗЗ/3U0
         global_timers[INDEX_TIMER_ZZ_3U0] = -1;
@@ -2994,8 +2973,8 @@ inline void zz_handler(unsigned int *activated_functions, unsigned int number_gr
     else
     {
       //Якщо 1 ступінь ЗЗ/3U0 не встановлена, то треба скинути всі таймери і сигнали, які за неї відповідають
-      _CLEAR_BIT(activated_functions, RANG_OUTPUT_LED_DF_REG_PO_3U0);
-      _CLEAR_BIT(activated_functions, RANG_OUTPUT_LED_DF_REG_3U0);
+      _CLEAR_BIT(p_active_functions, RANG_OUTPUT_LED_DF_REG_PO_3U0);
+      _CLEAR_BIT(p_active_functions, RANG_OUTPUT_LED_DF_REG_3U0);
       global_timers[INDEX_TIMER_ZZ_3U0] = -1;
     }    
     /*******************************/
@@ -3007,14 +2986,7 @@ inline void zz_handler(unsigned int *activated_functions, unsigned int number_gr
     {
       //1 ступінь ЗЗ/3I0 включена і не блокується
     
-      //Копіюємо попередні значення сигналів ЗЗ/3I0 у тимчавовий масив, щоб потім мати можливість їх скидати або встановлювати
-      //Це потрібно для того, щоб коли є умова, що сигнал не має ні встановлюватися ні скидатися - щоб він приймав своє попереднє значення  
-      unsigned int maska[N_BIG] = {0, 0, 0, 0, 0, 0, 0, 0};
-      _SET_BIT(maska, RANG_OUTPUT_LED_DF_REG_PO_3I0);
-      _SET_BIT(maska, RANG_OUTPUT_LED_DF_REG_3I0);
-      for (unsigned int i = 0; i < N_BIG; i++) activated_functions[i] |= active_functions[i] & maska[i];
-    
-      unsigned int previous_state_po_3I0 = _CHECK_SET_BIT(active_functions, RANG_OUTPUT_LED_DF_REG_PO_3I0);
+      unsigned int previous_state_po_3I0 = _CHECK_SET_BIT(p_active_functions, RANG_OUTPUT_LED_DF_REG_PO_3I0);
     
       //Виставляємо, або скидаємо сигнал "ПО ЗЗ/3I0"
       if (po_3I0 != 0)
@@ -3023,7 +2995,7 @@ inline void zz_handler(unsigned int *activated_functions, unsigned int number_gr
         if(previous_state_po_3I0 == 0)
         {
           //Встановлюємо сигнал "ПО ЗЗ/3I0"
-          _SET_BIT(activated_functions, RANG_OUTPUT_LED_DF_REG_PO_3I0);
+          _SET_BIT(p_active_functions, RANG_OUTPUT_LED_DF_REG_PO_3I0);
       
           //Запускаємо таймер ЗЗ/3I0, якщо він ще не запущений
           global_timers[INDEX_TIMER_ZZ_3I0] = 0;
@@ -3035,9 +3007,9 @@ inline void zz_handler(unsigned int *activated_functions, unsigned int number_gr
         if(previous_state_po_3I0 != 0)
         {
           //Скидаємо сигнал "ПО ЗЗ/3I0"
-          _CLEAR_BIT(activated_functions, RANG_OUTPUT_LED_DF_REG_PO_3I0);
+          _CLEAR_BIT(p_active_functions, RANG_OUTPUT_LED_DF_REG_PO_3I0);
           //Це є умовою також скидання сигналу "Сраб. ЗЗ/3I0"
-          _CLEAR_BIT(activated_functions, RANG_OUTPUT_LED_DF_REG_3I0);
+          _CLEAR_BIT(p_active_functions, RANG_OUTPUT_LED_DF_REG_3I0);
           //Якщо таймер ще не скинутий, то скидаємо його
           if ( global_timers[INDEX_TIMER_ZZ_3I0] >=0) global_timers[INDEX_TIMER_ZZ_3I0] = -1;
         }
@@ -3046,7 +3018,7 @@ inline void zz_handler(unsigned int *activated_functions, unsigned int number_gr
       if(global_timers[INDEX_TIMER_ZZ_3I0] >= current_settings_prt.timeout_zz_3I0[number_group_stp])
       {
         //Якщо витримана "Витримка ЗЗ/3I0" то встановлюємо сигнал "Сраб. ЗЗ"
-        _SET_BIT(activated_functions, RANG_OUTPUT_LED_DF_REG_3I0);
+        _SET_BIT(p_active_functions, RANG_OUTPUT_LED_DF_REG_3I0);
 
         //Скидаємо таймер ПО ЗЗ/3I0
         global_timers[INDEX_TIMER_ZZ_3I0] = -1;
@@ -3055,8 +3027,8 @@ inline void zz_handler(unsigned int *activated_functions, unsigned int number_gr
     else
     {
       //Якщо 1 ступінь ЗЗ/3I0 не встановлена, то треба скинути всі таймери і сигнали, які за неї відповідають
-      _CLEAR_BIT(activated_functions, RANG_OUTPUT_LED_DF_REG_PO_3I0);
-      _CLEAR_BIT(activated_functions, RANG_OUTPUT_LED_DF_REG_3I0);
+      _CLEAR_BIT(p_active_functions, RANG_OUTPUT_LED_DF_REG_PO_3I0);
+      _CLEAR_BIT(p_active_functions, RANG_OUTPUT_LED_DF_REG_3I0);
       global_timers[INDEX_TIMER_ZZ_3I0] = -1;
     }  
     /*******************************/
@@ -3064,12 +3036,12 @@ inline void zz_handler(unsigned int *activated_functions, unsigned int number_gr
   else
   {
     //Захисти ЗЗ/НЗЗ блокується з дискретного входу, то треба скинути всі таймери і сигнали, які за них відповідають
-    _CLEAR_BIT(activated_functions, RANG_OUTPUT_LED_DF_REG_PO_NZZ);
-    _CLEAR_BIT(activated_functions, RANG_OUTPUT_LED_DF_REG_NZZ);
-    _CLEAR_BIT(activated_functions, RANG_OUTPUT_LED_DF_REG_PO_3I0);
-    _CLEAR_BIT(activated_functions, RANG_OUTPUT_LED_DF_REG_3I0);
-    _CLEAR_BIT(activated_functions, RANG_OUTPUT_LED_DF_REG_PO_3U0);
-    _CLEAR_BIT(activated_functions, RANG_OUTPUT_LED_DF_REG_3U0);
+    _CLEAR_BIT(p_active_functions, RANG_OUTPUT_LED_DF_REG_PO_NZZ);
+    _CLEAR_BIT(p_active_functions, RANG_OUTPUT_LED_DF_REG_NZZ);
+    _CLEAR_BIT(p_active_functions, RANG_OUTPUT_LED_DF_REG_PO_3I0);
+    _CLEAR_BIT(p_active_functions, RANG_OUTPUT_LED_DF_REG_3I0);
+    _CLEAR_BIT(p_active_functions, RANG_OUTPUT_LED_DF_REG_PO_3U0);
+    _CLEAR_BIT(p_active_functions, RANG_OUTPUT_LED_DF_REG_3U0);
 
     global_timers[INDEX_TIMER_NZZ   ] = -1;
     global_timers[INDEX_TIMER_ZZ_3U0] = -1;
@@ -3081,7 +3053,7 @@ inline void zz_handler(unsigned int *activated_functions, unsigned int number_gr
 /*****************************************************/
 //ТЗНП
 /*****************************************************/
-inline void tznp_handler(unsigned int *activated_functions, unsigned int number_group_stp)
+inline void tznp_handler(unsigned int *p_active_functions, unsigned int number_group_stp)
 {
 #define CTR_TZNP                CTR_TZNP1      
 #define CTR_TZNP_VPERED         CTR_TZNP1_VPERED      
@@ -3192,9 +3164,9 @@ inline void tznp_handler(unsigned int *activated_functions, unsigned int number_
     if(sector_directional_tznp[tznp] == 1)
     {
       logic_TZNP_0 |= 1 << 0;
-      _SET_BIT(activated_functions, (shift_to_base_rang_index + RANG_SECTOR_TZNP_VPERED));
+      _SET_BIT(p_active_functions, (shift_to_base_rang_index + RANG_SECTOR_TZNP_VPERED));
     }
-    else _CLEAR_BIT(activated_functions, (shift_to_base_rang_index + RANG_SECTOR_TZNP_VPERED));
+    else _CLEAR_BIT(p_active_functions, (shift_to_base_rang_index + RANG_SECTOR_TZNP_VPERED));
     /***/
     
     /***
@@ -3203,15 +3175,15 @@ inline void tznp_handler(unsigned int *activated_functions, unsigned int number_
     if(sector_directional_tznp[tznp] == 2)
     {
       logic_TZNP_0 |= 1 << 1;
-      _SET_BIT(activated_functions, (shift_to_base_rang_index + RANG_SECTOR_TZNP_NAZAD));
+      _SET_BIT(p_active_functions, (shift_to_base_rang_index + RANG_SECTOR_TZNP_NAZAD));
     }
-    else _CLEAR_BIT(activated_functions, (shift_to_base_rang_index + RANG_SECTOR_TZNP_NAZAD));
+    else _CLEAR_BIT(p_active_functions, (shift_to_base_rang_index + RANG_SECTOR_TZNP_NAZAD));
     /***/
     
     /***
     ПО 3I0 ВПЕРЕД
     ***/
-    if (_CHECK_SET_BIT(active_functions, (shift_to_base_rang_index + RANG_PO_3I0_TZNP_VPERED)) == 0)
+    if (_CHECK_SET_BIT(p_active_functions, (shift_to_base_rang_index + RANG_PO_3I0_TZNP_VPERED)) == 0)
     {
       //Працюємо по уставці спрацювання
       setpoint = setpoint_tznp_3I0_vpered;
@@ -3224,15 +3196,15 @@ inline void tznp_handler(unsigned int *activated_functions, unsigned int number_
     if (measurement[IM_3I0_r] >= setpoint)
     {
       logic_TZNP_0 |=  1 << 3;
-      _SET_BIT(activated_functions, (shift_to_base_rang_index + RANG_PO_3I0_TZNP_VPERED));
+      _SET_BIT(p_active_functions, (shift_to_base_rang_index + RANG_PO_3I0_TZNP_VPERED));
     }
-    else _CLEAR_BIT(activated_functions, (shift_to_base_rang_index + RANG_PO_3I0_TZNP_VPERED));
+    else _CLEAR_BIT(p_active_functions, (shift_to_base_rang_index + RANG_PO_3I0_TZNP_VPERED));
     /***/
     
     /***
     ПО 3U0 ВПЕРЕД
     ***/
-    if (_CHECK_SET_BIT(active_functions, (shift_to_base_rang_index + RANG_PO_3U0_TZNP_VPERED)) == 0)
+    if (_CHECK_SET_BIT(p_active_functions, (shift_to_base_rang_index + RANG_PO_3U0_TZNP_VPERED)) == 0)
     {
       //Працюємо по уставці спрацювання
       setpoint = setpoint_tznp_3U0_vpered;
@@ -3245,15 +3217,15 @@ inline void tznp_handler(unsigned int *activated_functions, unsigned int number_
     if (measurement[IM_3U0] >= setpoint)
     {
       logic_TZNP_0 |=  1 << 4;
-      _SET_BIT(activated_functions, (shift_to_base_rang_index + RANG_PO_3U0_TZNP_VPERED));
+      _SET_BIT(p_active_functions, (shift_to_base_rang_index + RANG_PO_3U0_TZNP_VPERED));
     }
-    else _CLEAR_BIT(activated_functions, (shift_to_base_rang_index + RANG_PO_3U0_TZNP_VPERED));
+    else _CLEAR_BIT(p_active_functions, (shift_to_base_rang_index + RANG_PO_3U0_TZNP_VPERED));
     /***/
     
     /***
     ПО 3I0 НАЗАД
     ***/
-    if (_CHECK_SET_BIT(active_functions, (shift_to_base_rang_index + RANG_PO_3I0_TZNP_NAZAD)) == 0)
+    if (_CHECK_SET_BIT(p_active_functions, (shift_to_base_rang_index + RANG_PO_3I0_TZNP_NAZAD)) == 0)
     {
       //Працюємо по уставці спрацювання
       setpoint = setpoint_tznp_3I0_nazad;
@@ -3266,15 +3238,15 @@ inline void tznp_handler(unsigned int *activated_functions, unsigned int number_
     if (measurement[IM_3I0_r] >= setpoint)
     {
       logic_TZNP_0 |=  1 << 5;
-      _SET_BIT(activated_functions, (shift_to_base_rang_index + RANG_PO_3I0_TZNP_NAZAD));
+      _SET_BIT(p_active_functions, (shift_to_base_rang_index + RANG_PO_3I0_TZNP_NAZAD));
     }
-    else _CLEAR_BIT(activated_functions, (shift_to_base_rang_index + RANG_PO_3I0_TZNP_NAZAD));
+    else _CLEAR_BIT(p_active_functions, (shift_to_base_rang_index + RANG_PO_3I0_TZNP_NAZAD));
     /***/
     
     /***
     ПО 3U0 НАЗАД
     ***/
-    if (_CHECK_SET_BIT(active_functions, (shift_to_base_rang_index + RANG_PO_3U0_TZNP_NAZAD)) == 0)
+    if (_CHECK_SET_BIT(p_active_functions, (shift_to_base_rang_index + RANG_PO_3U0_TZNP_NAZAD)) == 0)
     {
       //Працюємо по уставці спрацювання
       setpoint = setpoint_tznp_3U0_nazad;
@@ -3287,16 +3259,16 @@ inline void tznp_handler(unsigned int *activated_functions, unsigned int number_
     if (measurement[IM_3U0] >= setpoint)
     {
       logic_TZNP_0 |=  1 << 6;
-      _SET_BIT(activated_functions, (shift_to_base_rang_index + RANG_PO_3U0_TZNP_NAZAD));
+      _SET_BIT(p_active_functions, (shift_to_base_rang_index + RANG_PO_3U0_TZNP_NAZAD));
     }
-    else _CLEAR_BIT(activated_functions, (shift_to_base_rang_index + RANG_PO_3U0_TZNP_NAZAD));
+    else _CLEAR_BIT(p_active_functions, (shift_to_base_rang_index + RANG_PO_3U0_TZNP_NAZAD));
     /***/
     
     //Стан ступеню захисту
     logic_TZNP_0 |= ((control_tznp & CTR_TZNP) != 0) << 7;
     
     //Стан блокування захисту
-    logic_TZNP_0 |= (_CHECK_SET_BIT(activated_functions, (shift_to_base_rang_index + RANG_BLOCK_TZNP)) == 0) << 8;
+    logic_TZNP_0 |= (_CHECK_SET_BIT(p_active_functions, (shift_to_base_rang_index + RANG_BLOCK_TZNP)) == 0) << 8;
     
     //Стан напрямку ВПЕРЕД
     logic_TZNP_0 |= ((control_tznp & CTR_TZNP_VPERED) != 0) << 10;
@@ -3308,21 +3280,21 @@ inline void tznp_handler(unsigned int *activated_functions, unsigned int number_
 
     //ПО ТЗНП вперед
     _AND5(logic_TZNP_0, 9, logic_TZNP_0, 10, logic_TZNP_0, 3, logic_TZNP_0, 4, logic_TZNP_0, 0, logic_TZNP_0, 12);
-    if (_GET_OUTPUT_STATE(logic_TZNP_0, 12)) _SET_BIT(activated_functions, (shift_to_base_rang_index + RANG_PO_TZNP_VPERED));
-    else _CLEAR_BIT(activated_functions, (shift_to_base_rang_index + RANG_PO_TZNP_VPERED));
+    if (_GET_OUTPUT_STATE(logic_TZNP_0, 12)) _SET_BIT(p_active_functions, (shift_to_base_rang_index + RANG_PO_TZNP_VPERED));
+    else _CLEAR_BIT(p_active_functions, (shift_to_base_rang_index + RANG_PO_TZNP_VPERED));
       
     //ПО ТЗНП назад
     _AND5(logic_TZNP_0, 9, logic_TZNP_0, 11, logic_TZNP_0, 5, logic_TZNP_0, 6, logic_TZNP_0, 1, logic_TZNP_0, 13);
-    if (_GET_OUTPUT_STATE(logic_TZNP_0, 13)) _SET_BIT(activated_functions, (shift_to_base_rang_index + RANG_PO_TZNP_NAZAD));
-    else _CLEAR_BIT(activated_functions, (shift_to_base_rang_index + RANG_PO_TZNP_NAZAD));
+    if (_GET_OUTPUT_STATE(logic_TZNP_0, 13)) _SET_BIT(p_active_functions, (shift_to_base_rang_index + RANG_PO_TZNP_NAZAD));
+    else _CLEAR_BIT(p_active_functions, (shift_to_base_rang_index + RANG_PO_TZNP_NAZAD));
 
     _TIMER_T_0(index_timer_vpered, timeout_tznp_vpered, logic_TZNP_0, 12, logic_TZNP_0, 14);
     _TIMER_T_0(index_timer_nazad,  timeout_tznp_nazad,  logic_TZNP_0, 13, logic_TZNP_0, 15);
     
     //ТЗНП
     _OR2(logic_TZNP_0, 14, logic_TZNP_0, 15, logic_TZNP_0, 16);
-    if (_GET_OUTPUT_STATE(logic_TZNP_0, 16)) _SET_BIT(activated_functions, (shift_to_base_rang_index + RANG_TZNP));
-    else _CLEAR_BIT(activated_functions, (shift_to_base_rang_index + RANG_TZNP));
+    if (_GET_OUTPUT_STATE(logic_TZNP_0, 16)) _SET_BIT(p_active_functions, (shift_to_base_rang_index + RANG_TZNP));
+    else _CLEAR_BIT(p_active_functions, (shift_to_base_rang_index + RANG_TZNP));
   }
 
 #undef CTR_TZNP
@@ -3345,7 +3317,7 @@ inline void tznp_handler(unsigned int *activated_functions, unsigned int number_
 /*****************************************************/
 // ЗОП(КОФ)
 /*****************************************************/
-inline void zop_handler(unsigned int *activated_functions, unsigned int number_group_stp)
+inline void zop_handler(unsigned int *p_active_functions, unsigned int number_group_stp)
 {
   /*******************************/
   //Фуксуємо у локальній змінній текучі струми зворотньої послідовності і прямоїпослідовності
@@ -3371,16 +3343,9 @@ inline void zop_handler(unsigned int *activated_functions, unsigned int number_g
     else setpoint_i2 = MIN_LIMIT_FOR_I1_AND_I2;
     unsigned int i2_bilshe_porogu_tmp = i2_bilshe_porogu = (i2_current >= setpoint_i2);
     
-    //Копіюємо попередні значення сигналів ЗОП(КОФ) у тимчавовий масив, щоб потім мати можливість їх скидати або встановлювати
-    //Це потрібно для того, щоб коли є умова, що сигнал не має ні встановлюватися ні скидатися - щоб він приймав своє попереднє значення  
-    unsigned int maska[N_BIG] = {0, 0, 0, 0, 0, 0, 0, 0};
-    _SET_BIT(maska, RANG_OUTPUT_LED_DF_REG_PO_ZOP);
-    _SET_BIT(maska, RANG_OUTPUT_LED_DF_REG_ZOP);
-   for (unsigned int i = 0; i < N_BIG; i++) activated_functions[i] |= active_functions[i] & maska[i];
-    
     //Якщо ПО ЗОП(КОФ) ще не активне, то треба працювати по устаці спацювання - уставці, яка вводиться як основна з системи меню чи верхнього рівня
     //Якщо ПО ЗОП(КОФ) вже спрацювало, то треба працювати по уставці відпускання - береться процент від основної утанки по коефіцієнту повернення
-    if(( previous_state_po_zop1 = _CHECK_SET_BIT(active_functions, RANG_OUTPUT_LED_DF_REG_PO_ZOP) ) == 0 )
+    if(( previous_state_po_zop1 = _CHECK_SET_BIT(p_active_functions, RANG_OUTPUT_LED_DF_REG_PO_ZOP) ) == 0 )
     {
       //Працюємо по утавці спрацювання
       setpoint = current_settings_prt.setpoint_zop[number_group_stp];
@@ -3413,14 +3378,14 @@ inline void zop_handler(unsigned int *activated_functions, unsigned int number_g
         (i1_bilshe_porogu_tmp != 0) &&
         (i2_bilshe_porogu_tmp != 0) &&
         ((i2_current*1000) >= (i1_current*setpoint))                            && 
-        (_CHECK_SET_BIT(activated_functions, RANG_OUTPUT_LED_DF_REG_BLOCK_ZOP) == 0)
+        (_CHECK_SET_BIT(p_active_functions, RANG_OUTPUT_LED_DF_REG_BLOCK_ZOP) == 0)
        )
     {
       //Існує умова активного пускового органу зворотньої послідовності
       if(previous_state_po_zop1 == 0)
       {
         //Встановлюємо сигнал "ПО КОФ"
-        _SET_BIT(activated_functions, RANG_OUTPUT_LED_DF_REG_PO_ZOP);
+        _SET_BIT(p_active_functions, RANG_OUTPUT_LED_DF_REG_PO_ZOP);
       
         //Запускаємо таймер ЗОП(КОФ), якщо він ще не запущений
         global_timers[INDEX_TIMER_ZOP] = 0;
@@ -3432,9 +3397,9 @@ inline void zop_handler(unsigned int *activated_functions, unsigned int number_g
       if(previous_state_po_zop1 != 0)
       {
         //Скидаємо сигнал "ПО КОФ"
-        _CLEAR_BIT(activated_functions, RANG_OUTPUT_LED_DF_REG_PO_ZOP);
+        _CLEAR_BIT(p_active_functions, RANG_OUTPUT_LED_DF_REG_PO_ZOP);
         //Це є умовою також скидання сигналу "Сраб. КОФ"
-        _CLEAR_BIT(activated_functions, RANG_OUTPUT_LED_DF_REG_ZOP);
+        _CLEAR_BIT(p_active_functions, RANG_OUTPUT_LED_DF_REG_ZOP);
         //Якщо таймер ще не скинутий? то скидаємо його
         if ( global_timers[INDEX_TIMER_ZOP] >=0) global_timers[INDEX_TIMER_ZOP] = -1;
       }
@@ -3443,7 +3408,7 @@ inline void zop_handler(unsigned int *activated_functions, unsigned int number_g
     if(global_timers[INDEX_TIMER_ZOP] >= current_settings_prt.timeout_zop[number_group_stp])
     {
       //Якщо витримана Витримка ЗОП(КОФ) то встановлюємо сигнал "Сраб. КОФ"
-      _SET_BIT(activated_functions, RANG_OUTPUT_LED_DF_REG_ZOP);
+      _SET_BIT(p_active_functions, RANG_OUTPUT_LED_DF_REG_ZOP);
 
       //Скидаємо таймер ЗОП(КОФ)
       global_timers[INDEX_TIMER_ZOP] = -1;
@@ -3451,13 +3416,11 @@ inline void zop_handler(unsigned int *activated_functions, unsigned int number_g
   }
   else
   {
-    //Якщо 1 ступінь ЗОП(КОФ) не встановлена, то треба скинути всі таймери і сигнали, які за неї відповідають
-    if(( _CHECK_SET_BIT(active_functions, RANG_OUTPUT_LED_DF_REG_PO_ZOP) ) !=0 )
-    {
-      _CLEAR_BIT(activated_functions, RANG_OUTPUT_LED_DF_REG_PO_ZOP);
-      global_timers[INDEX_TIMER_ZOP] = -1;
-    }
-    _CLEAR_BIT(activated_functions, RANG_OUTPUT_LED_DF_REG_ZOP);
+    //Треба скинути всі таймери і сигнали, які за 1 ступінь ЗОП(КОФ) відповідають
+    _CLEAR_BIT(p_active_functions, RANG_OUTPUT_LED_DF_REG_PO_ZOP);
+    _CLEAR_BIT(p_active_functions, RANG_OUTPUT_LED_DF_REG_ZOP);
+    global_timers[INDEX_TIMER_ZOP] = -1;
+
   }  
 }
 /*****************************************************/
@@ -3465,11 +3428,11 @@ inline void zop_handler(unsigned int *activated_functions, unsigned int number_g
 /*****************************************************/
 // ЗНМИН1
 /*****************************************************/
-void umin1_handler(unsigned int *activated_functions, unsigned int number_group_stp)
+void umin1_handler(unsigned int *p_active_functions, unsigned int number_group_stp)
 {
-  _Bool previous_state_po_umin1 = _CHECK_SET_BIT(active_functions, RANG_OUTPUT_LED_DF_REG_PO_UMIN1) > 0;
-  _Bool previous_state_po_ublk_umin1 = _CHECK_SET_BIT(active_functions, RANG_OUTPUT_LED_DF_REG_PO_UBLK_UMIN1) > 0;
-  _Bool previous_state_po_iblk_umin1 = _CHECK_SET_BIT(active_functions, RANG_OUTPUT_LED_DF_REG_PO_IBLK_UMIN1) > 0;
+  _Bool previous_state_po_umin1 = _CHECK_SET_BIT(p_active_functions, RANG_OUTPUT_LED_DF_REG_PO_UMIN1) > 0;
+  _Bool previous_state_po_ublk_umin1 = _CHECK_SET_BIT(p_active_functions, RANG_OUTPUT_LED_DF_REG_PO_UBLK_UMIN1) > 0;
+  _Bool previous_state_po_iblk_umin1 = _CHECK_SET_BIT(p_active_functions, RANG_OUTPUT_LED_DF_REG_PO_IBLK_UMIN1) > 0;
   
   unsigned int setpoint1 = previous_state_po_umin1 ?
           current_settings_prt.setpoint_Umin1[number_group_stp] * U_DOWN / 100 :
@@ -3505,9 +3468,9 @@ void umin1_handler(unsigned int *activated_functions, unsigned int number_group_
   tmp_value |= ((current_settings_prt.control_Umin & CTR_UMIN1_IBLK) != 0)                                                       << 5;
   
   //ДВ
-  tmp_value |= (_CHECK_SET_BIT(activated_functions, RANG_OUTPUT_LED_DF_REG_BLOCK_UMIN1) != 0)                                    << 6;
+  tmp_value |= (_CHECK_SET_BIT(p_active_functions, RANG_OUTPUT_LED_DF_REG_BLOCK_UMIN1) != 0)                                     << 6;
   _INVERTOR(tmp_value, 6, tmp_value, 6);
-  tmp_value |= (_CHECK_SET_BIT(activated_functions, RANG_OUTPUT_LED_DF_REG_START_UMIN1) != 0)                                    << 7;
+  tmp_value |= (_CHECK_SET_BIT(p_active_functions, RANG_OUTPUT_LED_DF_REG_START_UMIN1) != 0)                                     << 7;
   
 //  _AND2(tmp_value, 0, tmp_value, 1, tmp_value, 8);
   
@@ -3524,9 +3487,9 @@ void umin1_handler(unsigned int *activated_functions, unsigned int number_group_
     
     //ПО Uблк. Umin1
     if (Ua_or_Ub_or_Uc_is_smaller_than_250mV)
-      _SET_BIT(activated_functions, RANG_OUTPUT_LED_DF_REG_PO_UBLK_UMIN1);
+      _SET_BIT(p_active_functions, RANG_OUTPUT_LED_DF_REG_PO_UBLK_UMIN1);
     else
-      _CLEAR_BIT(activated_functions, RANG_OUTPUT_LED_DF_REG_PO_UBLK_UMIN1);
+      _CLEAR_BIT(p_active_functions, RANG_OUTPUT_LED_DF_REG_PO_UBLK_UMIN1);
   } 
   else 
   {
@@ -3541,9 +3504,9 @@ void umin1_handler(unsigned int *activated_functions, unsigned int number_group_
     
     //ПО Uблк. Umin1
     if (Uab_or_Ubc_or_Uca_is_smaller_than_250mV)
-      _SET_BIT(activated_functions, RANG_OUTPUT_LED_DF_REG_PO_UBLK_UMIN1);
+      _SET_BIT(p_active_functions, RANG_OUTPUT_LED_DF_REG_PO_UBLK_UMIN1);
     else
-      _CLEAR_BIT(activated_functions, RANG_OUTPUT_LED_DF_REG_PO_UBLK_UMIN1);
+      _CLEAR_BIT(p_active_functions, RANG_OUTPUT_LED_DF_REG_PO_UBLK_UMIN1);
   }
   _INVERTOR(tmp_value, 12, tmp_value, 12);
   _INVERTOR(tmp_value, 13, tmp_value, 13);
@@ -3553,34 +3516,34 @@ void umin1_handler(unsigned int *activated_functions, unsigned int number_group_
   
   //ПО Iблк. Umin1
   if (Ia_or_Ic_is_larger_than_Iust)
-    _SET_BIT(activated_functions, RANG_OUTPUT_LED_DF_REG_PO_IBLK_UMIN1);
+    _SET_BIT(p_active_functions, RANG_OUTPUT_LED_DF_REG_PO_IBLK_UMIN1);
   else
-    _CLEAR_BIT(activated_functions, RANG_OUTPUT_LED_DF_REG_PO_IBLK_UMIN1);
+    _CLEAR_BIT(p_active_functions, RANG_OUTPUT_LED_DF_REG_PO_IBLK_UMIN1);
   
   //ПО Umin1
   if (_GET_OUTPUT_STATE(tmp_value, 15))
-    _SET_BIT(activated_functions, RANG_OUTPUT_LED_DF_REG_PO_UMIN1);
+    _SET_BIT(p_active_functions, RANG_OUTPUT_LED_DF_REG_PO_UMIN1);
   else
-    _CLEAR_BIT(activated_functions, RANG_OUTPUT_LED_DF_REG_PO_UMIN1);
+    _CLEAR_BIT(p_active_functions, RANG_OUTPUT_LED_DF_REG_PO_UMIN1);
   
   _TIMER_T_0(INDEX_TIMER_UMIN1, current_settings_prt.timeout_Umin1[number_group_stp], tmp_value, 15, tmp_value, 16);
   
   //Сраб. Umin1
   if (_GET_OUTPUT_STATE(tmp_value, 16))
-    _SET_BIT(activated_functions, RANG_OUTPUT_LED_DF_REG_UMIN1);
+    _SET_BIT(p_active_functions, RANG_OUTPUT_LED_DF_REG_UMIN1);
   else
-    _CLEAR_BIT(activated_functions, RANG_OUTPUT_LED_DF_REG_UMIN1);
+    _CLEAR_BIT(p_active_functions, RANG_OUTPUT_LED_DF_REG_UMIN1);
 }
 /*****************************************************/
 
 /*****************************************************/
 // ЗНМИН2
 /*****************************************************/
-void umin2_handler(unsigned int *activated_functions, unsigned int number_group_stp)
+void umin2_handler(unsigned int *p_active_functions, unsigned int number_group_stp)
 {
-  _Bool previous_state_po_umin2 = _CHECK_SET_BIT(active_functions, RANG_OUTPUT_LED_DF_REG_PO_UMIN2) > 0;
-  _Bool previous_state_po_ublk_umin2 = _CHECK_SET_BIT(active_functions, RANG_OUTPUT_LED_DF_REG_PO_UBLK_UMIN2) > 0;
-  _Bool previous_state_po_iblk_umin2 = _CHECK_SET_BIT(active_functions, RANG_OUTPUT_LED_DF_REG_PO_IBLK_UMIN2) > 0;
+  _Bool previous_state_po_umin2 = _CHECK_SET_BIT(p_active_functions, RANG_OUTPUT_LED_DF_REG_PO_UMIN2) > 0;
+  _Bool previous_state_po_ublk_umin2 = _CHECK_SET_BIT(p_active_functions, RANG_OUTPUT_LED_DF_REG_PO_UBLK_UMIN2) > 0;
+  _Bool previous_state_po_iblk_umin2 = _CHECK_SET_BIT(p_active_functions, RANG_OUTPUT_LED_DF_REG_PO_IBLK_UMIN2) > 0;
   
   unsigned int setpoint1 = previous_state_po_umin2 ?
           current_settings_prt.setpoint_Umin2[number_group_stp] * U_DOWN / 100 :
@@ -3616,9 +3579,9 @@ void umin2_handler(unsigned int *activated_functions, unsigned int number_group_
   tmp_value |= ((current_settings_prt.control_Umin & CTR_UMIN2_IBLK) != 0)                                                       << 5;
   
   //ДВ
-  tmp_value |= (_CHECK_SET_BIT(activated_functions, RANG_OUTPUT_LED_DF_REG_BLOCK_UMIN2) != 0)                                    << 6;
+  tmp_value |= (_CHECK_SET_BIT(p_active_functions, RANG_OUTPUT_LED_DF_REG_BLOCK_UMIN2) != 0)                                    << 6;
   _INVERTOR(tmp_value, 6, tmp_value, 6);
-  tmp_value |= (_CHECK_SET_BIT(activated_functions, RANG_OUTPUT_LED_DF_REG_START_UMIN2) != 0)                                    << 7;
+  tmp_value |= (_CHECK_SET_BIT(p_active_functions, RANG_OUTPUT_LED_DF_REG_START_UMIN2) != 0)                                    << 7;
   
 //  _AND2(tmp_value, 0, tmp_value, 1, tmp_value, 8);
   
@@ -3635,9 +3598,9 @@ void umin2_handler(unsigned int *activated_functions, unsigned int number_group_
     
     //ПО Uблк. Umin2
     if (Ua_or_Ub_or_Uc_is_smaller_than_250mV)
-      _SET_BIT(activated_functions, RANG_OUTPUT_LED_DF_REG_PO_UBLK_UMIN2);
+      _SET_BIT(p_active_functions, RANG_OUTPUT_LED_DF_REG_PO_UBLK_UMIN2);
     else
-      _CLEAR_BIT(activated_functions, RANG_OUTPUT_LED_DF_REG_PO_UBLK_UMIN2);
+      _CLEAR_BIT(p_active_functions, RANG_OUTPUT_LED_DF_REG_PO_UBLK_UMIN2);
     
   } 
   else 
@@ -3653,9 +3616,9 @@ void umin2_handler(unsigned int *activated_functions, unsigned int number_group_
     
     //ПО Uблк. Umin2
     if (Uab_or_Ubc_or_Uca_is_smaller_than_250mV)
-      _SET_BIT(activated_functions, RANG_OUTPUT_LED_DF_REG_PO_UBLK_UMIN2);
+      _SET_BIT(p_active_functions, RANG_OUTPUT_LED_DF_REG_PO_UBLK_UMIN2);
     else
-      _CLEAR_BIT(activated_functions, RANG_OUTPUT_LED_DF_REG_PO_UBLK_UMIN2);
+      _CLEAR_BIT(p_active_functions, RANG_OUTPUT_LED_DF_REG_PO_UBLK_UMIN2);
   }
   _INVERTOR(tmp_value, 12, tmp_value, 12);
   _INVERTOR(tmp_value, 13, tmp_value, 13);
@@ -3665,34 +3628,34 @@ void umin2_handler(unsigned int *activated_functions, unsigned int number_group_
   
   //ПО Iблк. Umin2
   if (Ia_or_Ic_is_larger_than_Iust)
-    _SET_BIT(activated_functions, RANG_OUTPUT_LED_DF_REG_PO_IBLK_UMIN2);
+    _SET_BIT(p_active_functions, RANG_OUTPUT_LED_DF_REG_PO_IBLK_UMIN2);
   else
-    _CLEAR_BIT(activated_functions, RANG_OUTPUT_LED_DF_REG_PO_IBLK_UMIN2);
+    _CLEAR_BIT(p_active_functions, RANG_OUTPUT_LED_DF_REG_PO_IBLK_UMIN2);
   
   //ПО Umin2
   if (_GET_OUTPUT_STATE(tmp_value, 15))
-    _SET_BIT(activated_functions, RANG_OUTPUT_LED_DF_REG_PO_UMIN2);
+    _SET_BIT(p_active_functions, RANG_OUTPUT_LED_DF_REG_PO_UMIN2);
   else
-    _CLEAR_BIT(activated_functions, RANG_OUTPUT_LED_DF_REG_PO_UMIN2);
+    _CLEAR_BIT(p_active_functions, RANG_OUTPUT_LED_DF_REG_PO_UMIN2);
   
   _TIMER_T_0(INDEX_TIMER_UMIN2, current_settings_prt.timeout_Umin2[number_group_stp], tmp_value, 15, tmp_value, 16);
   
   //Сраб. Umin2
   if (_GET_OUTPUT_STATE(tmp_value, 16))
-    _SET_BIT(activated_functions, RANG_OUTPUT_LED_DF_REG_UMIN2);
+    _SET_BIT(p_active_functions, RANG_OUTPUT_LED_DF_REG_UMIN2);
   else
-    _CLEAR_BIT(activated_functions, RANG_OUTPUT_LED_DF_REG_UMIN2);
+    _CLEAR_BIT(p_active_functions, RANG_OUTPUT_LED_DF_REG_UMIN2);
 }
 /*****************************************************/
 
 /*****************************************************/
 // МТЗ04
 /*****************************************************/
-void mtz04_handler(unsigned int *activated_functions, unsigned int number_group_stp)
+void mtz04_handler(unsigned int *p_active_functions, unsigned int number_group_stp)
 {
  //проверка предыдущего состояния ПО МТЗ04_1
-  _Bool previous_state_po_mtz04_1 = _CHECK_SET_BIT(active_functions, RANG_OUTPUT_LED_DF_REG_PO_MTZ04_1) > 0;
-  _Bool previous_state_po_mtz04_2 = _CHECK_SET_BIT(active_functions, RANG_OUTPUT_LED_DF_REG_PO_MTZ04_2) > 0;
+  _Bool previous_state_po_mtz04_1 = _CHECK_SET_BIT(p_active_functions, RANG_OUTPUT_LED_DF_REG_PO_MTZ04_1) > 0;
+  _Bool previous_state_po_mtz04_2 = _CHECK_SET_BIT(p_active_functions, RANG_OUTPUT_LED_DF_REG_PO_MTZ04_2) > 0;
 //пороги сраб и возв для ПО в зависимости от гр уставок
   unsigned int setpoint1 = previous_state_po_mtz04_1 ?
           current_settings_prt.setpoint_mtz04_1[number_group_stp] * U_UP / 100 :
@@ -3716,13 +3679,13 @@ void mtz04_handler(unsigned int *activated_functions, unsigned int number_group_
   //ВКЛ-ОТКЛ  УСКОРЕННАЯ МТЗ04_2
   tmp_value |= ((current_settings_prt.control_mtz04 & CTR_MTZ04_2_PRYSKORENA) != 0) << 3;
   //ДВ блок МТЗ04_1
-  tmp_value |= (_CHECK_SET_BIT(activated_functions, RANG_OUTPUT_LED_DF_REG_BLOCK_MTZ04_1) != 0) << 4;
+  tmp_value |= (_CHECK_SET_BIT(p_active_functions, RANG_OUTPUT_LED_DF_REG_BLOCK_MTZ04_1) != 0) << 4;
   //ДВ блок МТЗ04_2
-  tmp_value |= (_CHECK_SET_BIT(activated_functions, RANG_OUTPUT_LED_DF_REG_BLOCK_MTZ04_2) != 0) << 5;
+  tmp_value |= (_CHECK_SET_BIT(p_active_functions, RANG_OUTPUT_LED_DF_REG_BLOCK_MTZ04_2) != 0) << 5;
   //ДВ блок ускорения МТЗ04_2
-  tmp_value |= (_CHECK_SET_BIT(activated_functions, RANG_OUTPUT_LED_DF_REG_BLOCK_USK_MTZ04_2) != 0) << 6;
+  tmp_value |= (_CHECK_SET_BIT(p_active_functions, RANG_OUTPUT_LED_DF_REG_BLOCK_USK_MTZ04_2) != 0) << 6;
   //Полож ВВ
-  tmp_value |= (_CHECK_SET_BIT(activated_functions, RANG_OUTPUT_LED_DF_REG_STATE_VV) != 0)  << 7;
+  tmp_value |= (_CHECK_SET_BIT(p_active_functions, RANG_OUTPUT_LED_DF_REG_STATE_VV) != 0)  << 7;
 /*
 //ТИП МТЗ04
  unsigned int tmp3=0;
@@ -3749,23 +3712,23 @@ void mtz04_handler(unsigned int *activated_functions, unsigned int number_group_
   if (_GET_OUTPUT_STATE(tmp_value, 9)) 
   {
      //PO MTZ04_1
-    _SET_BIT(activated_functions, RANG_OUTPUT_LED_DF_REG_PO_MTZ04_1);
+    _SET_BIT(p_active_functions, RANG_OUTPUT_LED_DF_REG_PO_MTZ04_1);
   }
-  else _CLEAR_BIT(activated_functions, RANG_OUTPUT_LED_DF_REG_PO_MTZ04_1);
+  else _CLEAR_BIT(p_active_functions, RANG_OUTPUT_LED_DF_REG_PO_MTZ04_1);
 
     _TIMER_T_0(INDEX_TIMER_MTZ04_1, current_settings_prt.timeout_mtz04_1[number_group_stp], tmp_value, 9, tmp_value, 10);
   //Сраб. MTZ04_1
   if (_GET_OUTPUT_STATE(tmp_value, 10)) 
   {
      //MTZ04_1
-    _SET_BIT(activated_functions, RANG_OUTPUT_LED_DF_REG_MTZ04_1);
+    _SET_BIT(p_active_functions, RANG_OUTPUT_LED_DF_REG_MTZ04_1);
   }
-  else _CLEAR_BIT(activated_functions, RANG_OUTPUT_LED_DF_REG_MTZ04_1);
+  else _CLEAR_BIT(p_active_functions, RANG_OUTPUT_LED_DF_REG_MTZ04_1);
     
 //MTZ04_2
 //RANG_OUTPUT_LED_DF_REG_STATE_VV,
 //ПОЛОЖ ВВ
-//  if (_GET_OUTPUT_STATE(activated_functions, RANG_OUTPUT_LED_DF_REG_STATE_VV)) {
+//  if (_GET_OUTPUT_STATE(p_active_functions, RANG_OUTPUT_LED_DF_REG_STATE_VV)) {
 //  }//if
 
  unsigned int tmp2=0;
@@ -3790,9 +3753,9 @@ void mtz04_handler(unsigned int *activated_functions, unsigned int number_group_
   if (_GET_OUTPUT_STATE(tmp2, 7)) 
   {
      //PO MTZ04_2
-    _SET_BIT(activated_functions, RANG_OUTPUT_LED_DF_REG_PO_MTZ04_2);
+    _SET_BIT(p_active_functions, RANG_OUTPUT_LED_DF_REG_PO_MTZ04_2);
   }
-  else _CLEAR_BIT(activated_functions, RANG_OUTPUT_LED_DF_REG_PO_MTZ04_2);
+  else _CLEAR_BIT(p_active_functions, RANG_OUTPUT_LED_DF_REG_PO_MTZ04_2);
     
 //ускорение
   _AND2(tmp2, 4, 
@@ -3835,9 +3798,9 @@ void mtz04_handler(unsigned int *activated_functions, unsigned int number_group_
   if (_GET_OUTPUT_STATE(tmp3, 7))
   {
      //MTZ04_1
-    _SET_BIT(activated_functions, RANG_OUTPUT_LED_DF_REG_MTZ04_2);
+    _SET_BIT(p_active_functions, RANG_OUTPUT_LED_DF_REG_MTZ04_2);
   }
-  else _CLEAR_BIT(activated_functions, RANG_OUTPUT_LED_DF_REG_MTZ04_2);
+  else _CLEAR_BIT(p_active_functions, RANG_OUTPUT_LED_DF_REG_MTZ04_2);
 
 //Зависимая 
 //  if (_GET_OUTPUT_STATE(tmp2, 10)) {
@@ -3849,9 +3812,9 @@ void mtz04_handler(unsigned int *activated_functions, unsigned int number_group_
 /*****************************************************/
 // ЗНМАКС1
 /*****************************************************/
-void umax1_handler(unsigned int *activated_functions, unsigned int number_group_stp)
+void umax1_handler(unsigned int *p_active_functions, unsigned int number_group_stp)
 {
-  _Bool previous_state_po_umax1 = _CHECK_SET_BIT(active_functions, RANG_OUTPUT_LED_DF_REG_PO_UMAX1) > 0;
+  _Bool previous_state_po_umax1 = _CHECK_SET_BIT(p_active_functions, RANG_OUTPUT_LED_DF_REG_PO_UMAX1) > 0;
   
   unsigned int setpoint1 = previous_state_po_umax1 ?
           current_settings_prt.setpoint_Umax1[number_group_stp] * U_UP / 100 :
@@ -3873,7 +3836,7 @@ void umax1_handler(unsigned int *activated_functions, unsigned int number_group_
   tmp_value |= ((current_settings_prt.control_Umax & CTR_UMAX1) != 0)                                                            << 3;
   
   //ДВ
-  tmp_value |= (_CHECK_SET_BIT(activated_functions, RANG_OUTPUT_LED_DF_REG_BLOCK_UMAX1) != 0)                                    << 4;
+  tmp_value |= (_CHECK_SET_BIT(p_active_functions, RANG_OUTPUT_LED_DF_REG_BLOCK_UMAX1) != 0)                                    << 4;
   
   if (_GET_OUTPUT_STATE(tmp_value, 0)) {
     _AND4(Ua_is_larger_than_Umax1, 0, Ub_is_larger_than_Umax1, 0, Uc_is_larger_than_Umax1, 0, tmp_value, 2, tmp_value, 5);
@@ -3891,26 +3854,26 @@ void umax1_handler(unsigned int *activated_functions, unsigned int number_group_
   
   //ПО Umax1
   if (_GET_OUTPUT_STATE(tmp_value, 9))
-    _SET_BIT(activated_functions, RANG_OUTPUT_LED_DF_REG_PO_UMAX1);
+    _SET_BIT(p_active_functions, RANG_OUTPUT_LED_DF_REG_PO_UMAX1);
   else
-    _CLEAR_BIT(activated_functions, RANG_OUTPUT_LED_DF_REG_PO_UMAX1);
+    _CLEAR_BIT(p_active_functions, RANG_OUTPUT_LED_DF_REG_PO_UMAX1);
   
   _TIMER_T_0(INDEX_TIMER_UMAX1, current_settings_prt.timeout_Umax1[number_group_stp], tmp_value, 9, tmp_value, 10);
   
   //Сраб. Umax1
   if (_GET_OUTPUT_STATE(tmp_value, 10))
-    _SET_BIT(activated_functions, RANG_OUTPUT_LED_DF_REG_UMAX1);
+    _SET_BIT(p_active_functions, RANG_OUTPUT_LED_DF_REG_UMAX1);
   else
-    _CLEAR_BIT(activated_functions, RANG_OUTPUT_LED_DF_REG_UMAX1);
+    _CLEAR_BIT(p_active_functions, RANG_OUTPUT_LED_DF_REG_UMAX1);
 }
 /*****************************************************/
 
 /*****************************************************/
 // ЗНМАКС2
 /*****************************************************/
-void umax2_handler(unsigned int *activated_functions, unsigned int number_group_stp)
+void umax2_handler(unsigned int *p_active_functions, unsigned int number_group_stp)
 {
-  _Bool previous_state_po_umax2 = _CHECK_SET_BIT(active_functions, RANG_OUTPUT_LED_DF_REG_PO_UMAX2) > 0;
+  _Bool previous_state_po_umax2 = _CHECK_SET_BIT(p_active_functions, RANG_OUTPUT_LED_DF_REG_PO_UMAX2) > 0;
   
   unsigned int setpoint1 = previous_state_po_umax2 ?
           current_settings_prt.setpoint_Umax2[number_group_stp] * U_UP / 100 :
@@ -3932,7 +3895,7 @@ void umax2_handler(unsigned int *activated_functions, unsigned int number_group_
   tmp_value |= ((current_settings_prt.control_Umax & CTR_UMAX2) != 0)                                                            << 3;
   
   //ДВ
-  tmp_value |= (_CHECK_SET_BIT(activated_functions, RANG_OUTPUT_LED_DF_REG_BLOCK_UMAX2) != 0)                                    << 4;
+  tmp_value |= (_CHECK_SET_BIT(p_active_functions, RANG_OUTPUT_LED_DF_REG_BLOCK_UMAX2) != 0)                                    << 4;
   
   if (_GET_OUTPUT_STATE(tmp_value, 0)) {
     _AND4(Ua_is_larger_than_Umax2, 0, Ub_is_larger_than_Umax2, 0, Uc_is_larger_than_Umax2, 0, tmp_value, 2, tmp_value, 5);
@@ -3950,42 +3913,42 @@ void umax2_handler(unsigned int *activated_functions, unsigned int number_group_
   
   //ПО Umax1
   if (_GET_OUTPUT_STATE(tmp_value, 9))
-    _SET_BIT(activated_functions, RANG_OUTPUT_LED_DF_REG_PO_UMAX2);
+    _SET_BIT(p_active_functions, RANG_OUTPUT_LED_DF_REG_PO_UMAX2);
   else
-    _CLEAR_BIT(activated_functions, RANG_OUTPUT_LED_DF_REG_PO_UMAX2);
+    _CLEAR_BIT(p_active_functions, RANG_OUTPUT_LED_DF_REG_PO_UMAX2);
   
   _TIMER_T_0(INDEX_TIMER_UMAX2, current_settings_prt.timeout_Umax2[number_group_stp], tmp_value, 9, tmp_value, 10);
   
   //Сраб. Umax1
   if (_GET_OUTPUT_STATE(tmp_value, 10))
-    _SET_BIT(activated_functions, RANG_OUTPUT_LED_DF_REG_UMAX2);
+    _SET_BIT(p_active_functions, RANG_OUTPUT_LED_DF_REG_UMAX2);
   else
-    _CLEAR_BIT(activated_functions, RANG_OUTPUT_LED_DF_REG_UMAX2);
+    _CLEAR_BIT(p_active_functions, RANG_OUTPUT_LED_DF_REG_UMAX2);
 }
 /*****************************************************/
 
 /*****************************************************/
 // АЧР ЧАПВ
 /*****************************************************/
-void achr_chapv_handler(unsigned int *activated_functions, unsigned int number_group_stp)
+void achr_chapv_handler(unsigned int *p_active_functions, unsigned int number_group_stp)
 {
 //RANG_OUTPUT_LED_DF_REG_ACHR_CHAPV_VID_DV,
 /*
   //пред сост ПО АЧР
-  _Bool previous_state_po_f1_achr = _CHECK_SET_BIT(active_functions, RANG_OUTPUT_LED_DF_REG_PO_ACHR1);
+  _Bool previous_state_po_f1_achr = _CHECK_SET_BIT(p_active_functions, RANG_OUTPUT_LED_DF_REG_PO_ACHR1);
   //пред сост ПО ЧАПВ
-  _Bool previous_state_po_f1_chapv = _CHECK_SET_BIT(active_functions, RANG_OUTPUT_LED_DF_REG_PO_CHAPV1);
+  _Bool previous_state_po_f1_chapv = _CHECK_SET_BIT(p_active_functions, RANG_OUTPUT_LED_DF_REG_PO_CHAPV1);
  // 
 раздвоение
 */
   //пред сост ПО АЧР1
-  _Bool previous_state_po_f1_achr1  = _CHECK_SET_BIT(active_functions, RANG_OUTPUT_LED_DF_REG_PO_ACHR1);
+  _Bool previous_state_po_f1_achr1  = _CHECK_SET_BIT(p_active_functions, RANG_OUTPUT_LED_DF_REG_PO_ACHR1);
   //пред сост ПО ЧАПВ1
-  _Bool previous_state_po_f1_chapv1 = _CHECK_SET_BIT(active_functions, RANG_OUTPUT_LED_DF_REG_PO_CHAPV1);
+  _Bool previous_state_po_f1_chapv1 = _CHECK_SET_BIT(p_active_functions, RANG_OUTPUT_LED_DF_REG_PO_CHAPV1);
   //пред сост ПО АЧР2
-  _Bool previous_state_po_f1_achr2  = _CHECK_SET_BIT(active_functions, RANG_OUTPUT_LED_DF_REG_PO_ACHR2);
+  _Bool previous_state_po_f1_achr2  = _CHECK_SET_BIT(p_active_functions, RANG_OUTPUT_LED_DF_REG_PO_ACHR2);
   //пред сост ПО ЧАПВ2
-  _Bool previous_state_po_f1_chapv2 = _CHECK_SET_BIT(active_functions, RANG_OUTPUT_LED_DF_REG_PO_CHAPV2);
+  _Bool previous_state_po_f1_chapv2 = _CHECK_SET_BIT(p_active_functions, RANG_OUTPUT_LED_DF_REG_PO_CHAPV2);
 //----------
 /*
 неизменно
@@ -4061,17 +4024,17 @@ void achr_chapv_handler(unsigned int *activated_functions, unsigned int number_g
 
 /*  
   //ДВ
-  unsigned int tmp_value = (_CHECK_SET_BIT(activated_functions, RANG_OUTPUT_LED_DF_REG_BLOCK_ACHR1) != 0) << 0;
+  unsigned int tmp_value = (_CHECK_SET_BIT(p_active_functions, RANG_OUTPUT_LED_DF_REG_BLOCK_ACHR1) != 0) << 0;
   //L5
   _INVERTOR(tmp_value, 0, tmp_value, 0);
 раздвоение
 */
   //ДВ
-  unsigned int tmp_value1 = (_CHECK_SET_BIT(activated_functions, RANG_OUTPUT_LED_DF_REG_BLOCK_ACHR1) != 0) << 0;
+  unsigned int tmp_value1 = (_CHECK_SET_BIT(p_active_functions, RANG_OUTPUT_LED_DF_REG_BLOCK_ACHR1) != 0) << 0;
   //L5.1
   _INVERTOR(tmp_value1, 0, tmp_value1, 0);
   //ДВ
-  unsigned int tmp_value2 = (_CHECK_SET_BIT(activated_functions, RANG_OUTPUT_LED_DF_REG_BLOCK_ACHR2) != 0) << 0;
+  unsigned int tmp_value2 = (_CHECK_SET_BIT(p_active_functions, RANG_OUTPUT_LED_DF_REG_BLOCK_ACHR2) != 0) << 0;
   //L5
   _INVERTOR(tmp_value2, 0, tmp_value2, 0);
 //----------
@@ -4104,7 +4067,7 @@ void achr_chapv_handler(unsigned int *activated_functions, unsigned int number_g
       if (!po_f1_chapv_rab) 
       {
         //после сработки 1 будет держаться до тех пор пока не сработает po_f1_chapv_rab (условие отпускания)
-        _SET_BIT(activated_functions, RANG_OUTPUT_LED_DF_REG_PO_ACHR1);
+        _SET_BIT(p_active_functions, RANG_OUTPUT_LED_DF_REG_PO_ACHR1);
         po_f1_achr = 1;
       }
     }
@@ -4115,7 +4078,7 @@ void achr_chapv_handler(unsigned int *activated_functions, unsigned int number_g
       
       if (po_f1_achr_rab)
       {
-        _SET_BIT(activated_functions, RANG_OUTPUT_LED_DF_REG_PO_ACHR1);
+        _SET_BIT(p_active_functions, RANG_OUTPUT_LED_DF_REG_PO_ACHR1);
         po_f1_achr = 1;
       }
     }
@@ -4134,10 +4097,10 @@ void achr_chapv_handler(unsigned int *activated_functions, unsigned int number_g
       if (!po_f1_chapv1_rab) 
       {
         //после сработки 1 будет держаться до тех пор пока не сработает po_f1_chapv_rab (условие отпускания)
-        _SET_BIT(activated_functions, RANG_OUTPUT_LED_DF_REG_PO_ACHR1);
+        _SET_BIT(p_active_functions, RANG_OUTPUT_LED_DF_REG_PO_ACHR1);
         po_f1_achr1 = 1;
       }
-      else _CLEAR_BIT(activated_functions, RANG_OUTPUT_LED_DF_REG_PO_ACHR1);
+      else _CLEAR_BIT(p_active_functions, RANG_OUTPUT_LED_DF_REG_PO_ACHR1);
     }
     else
     {
@@ -4146,15 +4109,15 @@ void achr_chapv_handler(unsigned int *activated_functions, unsigned int number_g
       
       if (po_f1_achr1_rab)
       {
-        _SET_BIT(activated_functions, RANG_OUTPUT_LED_DF_REG_PO_ACHR1);
+        _SET_BIT(p_active_functions, RANG_OUTPUT_LED_DF_REG_PO_ACHR1);
         po_f1_achr1 = 1;
       }
-      else _CLEAR_BIT(activated_functions, RANG_OUTPUT_LED_DF_REG_PO_ACHR1);
+      else _CLEAR_BIT(p_active_functions, RANG_OUTPUT_LED_DF_REG_PO_ACHR1);
     }
   }//if
   else
   {
-    _CLEAR_BIT(activated_functions, RANG_OUTPUT_LED_DF_REG_PO_ACHR1);
+    _CLEAR_BIT(p_active_functions, RANG_OUTPUT_LED_DF_REG_PO_ACHR1);
   }
 //----2----
   //Reset канал L2
@@ -4168,10 +4131,10 @@ void achr_chapv_handler(unsigned int *activated_functions, unsigned int number_g
       if (!po_f1_chapv2_rab) 
       {
         //после сработки 1 будет держаться до тех пор пока не сработает po_f1_chapv_rab (условие отпускания)
-        _SET_BIT(activated_functions, RANG_OUTPUT_LED_DF_REG_PO_ACHR2);
+        _SET_BIT(p_active_functions, RANG_OUTPUT_LED_DF_REG_PO_ACHR2);
         po_f1_achr2 = 1;
       }
-      else _CLEAR_BIT(activated_functions, RANG_OUTPUT_LED_DF_REG_PO_ACHR2);
+      else _CLEAR_BIT(p_active_functions, RANG_OUTPUT_LED_DF_REG_PO_ACHR2);
     }
     else
     {
@@ -4180,15 +4143,15 @@ void achr_chapv_handler(unsigned int *activated_functions, unsigned int number_g
       
       if (po_f1_achr2_rab)
       {
-        _SET_BIT(activated_functions, RANG_OUTPUT_LED_DF_REG_PO_ACHR2);
+        _SET_BIT(p_active_functions, RANG_OUTPUT_LED_DF_REG_PO_ACHR2);
         po_f1_achr2 = 1;
       }
-      else _CLEAR_BIT(activated_functions, RANG_OUTPUT_LED_DF_REG_PO_ACHR2);
+      else _CLEAR_BIT(p_active_functions, RANG_OUTPUT_LED_DF_REG_PO_ACHR2);
     }
   }//if
   else
   {
-    _SET_BIT(activated_functions, RANG_OUTPUT_LED_DF_REG_PO_ACHR2);
+    _SET_BIT(p_active_functions, RANG_OUTPUT_LED_DF_REG_PO_ACHR2);
   }
 //--------------  
 /*
@@ -4203,9 +4166,9 @@ void achr_chapv_handler(unsigned int *activated_functions, unsigned int number_g
   
   //Разр ЧАПВ
   if (UF1_is_larger_than_U_setpoint_F1)
-    _SET_BIT(activated_functions, RANG_OUTPUT_LED_DF_REG_RAZR_CHAPV);
+    _SET_BIT(p_active_functions, RANG_OUTPUT_LED_DF_REG_RAZR_CHAPV);
   else
-    _CLEAR_BIT(activated_functions, RANG_OUTPUT_LED_DF_REG_RAZR_CHAPV);
+    _CLEAR_BIT(p_active_functions, RANG_OUTPUT_LED_DF_REG_RAZR_CHAPV);
 
 /*  
   _Bool tmp1 = 0;
@@ -4228,7 +4191,7 @@ void achr_chapv_handler(unsigned int *activated_functions, unsigned int number_g
     _Bool po_f1_chapv_tmp = (!_GET_OUTPUT_STATE(tmp_value, 30) && po_f1_chapv);
     if (po_f1_chapv_tmp) 
     {
-      _SET_BIT(activated_functions, RANG_OUTPUT_LED_DF_REG_PO_CHAPV1);
+      _SET_BIT(p_active_functions, RANG_OUTPUT_LED_DF_REG_PO_CHAPV1);
     }
     
     _TIMER_T_0(INDEX_TIMER_CHAPV1, current_settings_prt.timeout_chapv_1[number_group_stp], po_f1_chapv_tmp, 0, tmp_value, 6);
@@ -4265,9 +4228,9 @@ void achr_chapv_handler(unsigned int *activated_functions, unsigned int number_g
     //L3
     _Bool po_f1_chapv1_tmp = (!_GET_OUTPUT_STATE(tmp_value1, 30) && po_f1_chapv1);
     if (po_f1_chapv1_tmp) 
-      _SET_BIT(activated_functions, RANG_OUTPUT_LED_DF_REG_PO_CHAPV1);
+      _SET_BIT(p_active_functions, RANG_OUTPUT_LED_DF_REG_PO_CHAPV1);
     else
-      _CLEAR_BIT(activated_functions, RANG_OUTPUT_LED_DF_REG_PO_CHAPV1);
+      _CLEAR_BIT(p_active_functions, RANG_OUTPUT_LED_DF_REG_PO_CHAPV1);
     
     _TIMER_T_0(INDEX_TIMER_CHAPV1, current_settings_prt.timeout_chapv_1[number_group_stp], po_f1_chapv1_tmp, 0, tmp_value1, 6);
     //L8
@@ -4301,9 +4264,9 @@ void achr_chapv_handler(unsigned int *activated_functions, unsigned int number_g
     //L3_2
     _Bool po_f1_chapv2_tmp = (!_GET_OUTPUT_STATE(tmp_value2, 30) && po_f1_chapv2);
     if (po_f1_chapv2_tmp) 
-      _SET_BIT(activated_functions, RANG_OUTPUT_LED_DF_REG_PO_CHAPV2);
+      _SET_BIT(p_active_functions, RANG_OUTPUT_LED_DF_REG_PO_CHAPV2);
     else
-      _CLEAR_BIT(activated_functions, RANG_OUTPUT_LED_DF_REG_PO_CHAPV2);
+      _CLEAR_BIT(p_active_functions, RANG_OUTPUT_LED_DF_REG_PO_CHAPV2);
     
     _TIMER_T_0(INDEX_TIMER_CHAPV2, current_settings_prt.timeout_chapv_2[number_group_stp], po_f1_chapv2_tmp, 0, tmp_value2, 6);
     //L8_2
@@ -4322,7 +4285,7 @@ void achr_chapv_handler(unsigned int *activated_functions, unsigned int number_g
   //АЧР/ЧАПВ
   if (_GET_OUTPUT_STATE(trigger_CHAPV1, 0)) 
   {
-    _SET_BIT(activated_functions, RANG_OUTPUT_LED_DF_REG_ACHR_CHAPV1);
+    _SET_BIT(p_active_functions, RANG_OUTPUT_LED_DF_REG_ACHR_CHAPV1);
   }
   
   _Bool chapv_timer_1ms = 0;
@@ -4336,9 +4299,9 @@ void achr_chapv_handler(unsigned int *activated_functions, unsigned int number_g
 //----1----
   //АЧР/ЧАПВ
   if (_GET_OUTPUT_STATE(trigger_CHAPV1, 0)) 
-    _SET_BIT(activated_functions, RANG_OUTPUT_LED_DF_REG_ACHR_CHAPV1);
+    _SET_BIT(p_active_functions, RANG_OUTPUT_LED_DF_REG_ACHR_CHAPV1);
   else
-    _CLEAR_BIT(activated_functions, RANG_OUTPUT_LED_DF_REG_ACHR_CHAPV1);
+    _CLEAR_BIT(p_active_functions, RANG_OUTPUT_LED_DF_REG_ACHR_CHAPV1);
   
   _Bool chapv_timer_1ms1 = 0;
  // _Bool razr_chapv_inv1 = 0;
@@ -4347,16 +4310,16 @@ void achr_chapv_handler(unsigned int *activated_functions, unsigned int number_g
   _AND2(chapv_timer_1ms1, 0, /*razr_chapv_inv1, 0,*/UF1_is_smaller_than_U_setpoint_F1, 0, tmp_value1, 24);
   _TIMER_0_T(INDEX_TIMER_BLOCK_CHAPV1_5MS, TIMEOUT_BLOCK_CHAPV_5MS, tmp_value1, 24, tmp_value1, 25);
   if (_GET_OUTPUT_STATE(tmp_value1, 25))
-      _SET_BIT(activated_functions, RANG_OUTPUT_LED_DF_REG_BLOCK_CHAPV1_VID_U);
+      _SET_BIT(p_active_functions, RANG_OUTPUT_LED_DF_REG_BLOCK_CHAPV1_VID_U);
   else
-      _CLEAR_BIT(activated_functions, RANG_OUTPUT_LED_DF_REG_BLOCK_CHAPV1_VID_U);
+      _CLEAR_BIT(p_active_functions, RANG_OUTPUT_LED_DF_REG_BLOCK_CHAPV1_VID_U);
   
 //----2----
   //АЧР/ЧАПВ
   if (_GET_OUTPUT_STATE(trigger_CHAPV2, 0)) 
-    _SET_BIT(activated_functions, RANG_OUTPUT_LED_DF_REG_ACHR_CHAPV2);
+    _SET_BIT(p_active_functions, RANG_OUTPUT_LED_DF_REG_ACHR_CHAPV2);
   else
-    _CLEAR_BIT(activated_functions, RANG_OUTPUT_LED_DF_REG_ACHR_CHAPV2);
+    _CLEAR_BIT(p_active_functions, RANG_OUTPUT_LED_DF_REG_ACHR_CHAPV2);
   
   _Bool chapv_timer_1ms2 = 0;
   //_Bool razr_chapv_inv2 = 0;
@@ -4365,15 +4328,15 @@ void achr_chapv_handler(unsigned int *activated_functions, unsigned int number_g
   _AND2(chapv_timer_1ms1, 0, /*razr_chapv_inv1, 0,*/UF1_is_smaller_than_U_setpoint_F1, 0, tmp_value2, 24);
   _TIMER_0_T(INDEX_TIMER_BLOCK_CHAPV2_5MS, TIMEOUT_BLOCK_CHAPV_5MS, tmp_value2, 24, tmp_value2, 25);
   if (_GET_OUTPUT_STATE(tmp_value2, 25))
-      _SET_BIT(activated_functions, RANG_OUTPUT_LED_DF_REG_BLOCK_CHAPV2_VID_U);
+      _SET_BIT(p_active_functions, RANG_OUTPUT_LED_DF_REG_BLOCK_CHAPV2_VID_U);
   else
-      _CLEAR_BIT(activated_functions, RANG_OUTPUT_LED_DF_REG_BLOCK_CHAPV2_VID_U);
+      _CLEAR_BIT(p_active_functions, RANG_OUTPUT_LED_DF_REG_BLOCK_CHAPV2_VID_U);
 //---------
 /*  
   //Block CHAPV vid U
   if (_GET_OUTPUT_STATE(tmp_value, 25))
   {
-    _SET_BIT(activated_functions, RANG_OUTPUT_LED_DF_REG_BLOCK_CHAPV_VID_U);
+    _SET_BIT(p_active_functions, RANG_OUTPUT_LED_DF_REG_BLOCK_CHAPV_VID_U);
   }
 раздвоение
 */
@@ -4382,9 +4345,9 @@ unsigned int tmp_value3=0;
     _OR2(tmp_value1, 25, tmp_value2, 25, tmp_value3, 0);
   //Block CHAPV vid U
   if (_GET_OUTPUT_STATE(tmp_value3, 0))
-    _SET_BIT(activated_functions, RANG_OUTPUT_LED_DF_REG_BLOCK_CHAPV_VID_U);
+    _SET_BIT(p_active_functions, RANG_OUTPUT_LED_DF_REG_BLOCK_CHAPV_VID_U);
   else
-    _CLEAR_BIT(activated_functions, RANG_OUTPUT_LED_DF_REG_BLOCK_CHAPV_VID_U);
+    _CLEAR_BIT(p_active_functions, RANG_OUTPUT_LED_DF_REG_BLOCK_CHAPV_VID_U);
 }
 
 /*****************************************************/
@@ -4392,13 +4355,13 @@ unsigned int tmp_value3=0;
 /*****************************************************/
 // Готовность к ТУ
 /*****************************************************/
-void ready_tu(unsigned int *activated_functions)
+void ready_tu(unsigned int *p_active_functions)
 {
-  unsigned int tmp_value = (_CHECK_SET_BIT(activated_functions, RANG_OUTPUT_LED_DF_REG_PRYVID_VV) == 0)                  << 0;
-  tmp_value |= (_CHECK_SET_BIT(activated_functions, RANG_OUTPUT_LED_DF_REG_VIDKL_VID_ZAKHYSTIV) != 0)                    << 1;
-  tmp_value |= (_CHECK_SET_BIT(activated_functions, RANG_OUTPUT_LED_DF_REG_RESET_BLOCK_READY_TU_VID_ZAHYSTIV) != 0)      << 2;
-  tmp_value |= (_CHECK_SET_BIT(activated_functions, RANG_OUTPUT_LED_DF_REG_AVAR_DEFECT) == 0)                            << 3;
-  tmp_value |= (_CHECK_SET_BIT(activated_functions, RANG_OUTPUT_LED_DF_REG_MISCEVE_DYSTANCIJNE) == 0)                    << 6;
+  unsigned int tmp_value = (_CHECK_SET_BIT(p_active_functions, RANG_OUTPUT_LED_DF_REG_PRYVID_VV) == 0)                  << 0;
+  tmp_value |= (_CHECK_SET_BIT(p_active_functions, RANG_OUTPUT_LED_DF_REG_VIDKL_VID_ZAKHYSTIV) != 0)                    << 1;
+  tmp_value |= (_CHECK_SET_BIT(p_active_functions, RANG_OUTPUT_LED_DF_REG_RESET_BLOCK_READY_TU_VID_ZAHYSTIV) != 0)      << 2;
+  tmp_value |= (_CHECK_SET_BIT(p_active_functions, RANG_OUTPUT_LED_DF_REG_AVAR_DEFECT) == 0)                            << 3;
+  tmp_value |= (_CHECK_SET_BIT(p_active_functions, RANG_OUTPUT_LED_DF_REG_MISCEVE_DYSTANCIJNE) == 0)                    << 6;
   
   _Bool ctrl_ready_tu = ((current_settings_prt.control_extra_settings_1 & CTR_EXTRA_SETTINGS_1_CTRL_READY_TU) == 0);
   
@@ -4413,16 +4376,16 @@ void ready_tu(unsigned int *activated_functions)
   
   //Готовность к ТУ
   if (_GET_OUTPUT_STATE(tmp_value, 5))
-    _SET_BIT(activated_functions, RANG_OUTPUT_LED_DF_REG_READY_TU);
+    _SET_BIT(p_active_functions, RANG_OUTPUT_LED_DF_REG_READY_TU);
   else
-    _CLEAR_BIT(activated_functions, RANG_OUTPUT_LED_DF_REG_READY_TU);
+    _CLEAR_BIT(p_active_functions, RANG_OUTPUT_LED_DF_REG_READY_TU);
 }
 /*****************************************************/
 
 /*****************************************************/
 // УРОВ
 /*****************************************************/
-inline void urov_handler(unsigned int *activated_functions, unsigned int number_group_stp)
+inline void urov_handler(unsigned int *p_active_functions, unsigned int number_group_stp)
 {
   /*******************************/
   //Визначаємо максимальний фазовий струм для УРОВ
@@ -4436,27 +4399,27 @@ inline void urov_handler(unsigned int *activated_functions, unsigned int number_
   if(
      (( current_settings_prt.control_urov & CTR_UROV_STATE) != 0) &&
      (
-      ( ((current_settings_prt.control_urov & CTR_UROV_STARTED_FROM_MTZ1   ) != 0) && (_CHECK_SET_BIT(activated_functions, RANG_OUTPUT_LED_DF_REG_MTZ1             ) != 0)) ||
-      ( ((current_settings_prt.control_urov & CTR_UROV_STARTED_FROM_MTZ2   ) != 0) && (_CHECK_SET_BIT(activated_functions, RANG_OUTPUT_LED_DF_REG_MTZ2             ) != 0)) ||
-      ( ((current_settings_prt.control_urov & CTR_UROV_STARTED_FROM_MTZ3   ) != 0) && (_CHECK_SET_BIT(activated_functions, RANG_OUTPUT_LED_DF_REG_MTZ3             ) != 0)) ||
-      ( ((current_settings_prt.control_urov & CTR_UROV_STARTED_FROM_MTZ4   ) != 0) && (_CHECK_SET_BIT(activated_functions, RANG_OUTPUT_LED_DF_REG_MTZ4             ) != 0)) ||
-      ( ((current_settings_prt.control_urov & CTR_UROV_STARTED_FROM_MTZ04_1) != 0) && (_CHECK_SET_BIT(activated_functions, RANG_OUTPUT_LED_DF_REG_MTZ04_1          ) != 0)) ||
-      ( ((current_settings_prt.control_urov & CTR_UROV_STARTED_FROM_MTZ04_2) != 0) && (_CHECK_SET_BIT(activated_functions, RANG_OUTPUT_LED_DF_REG_MTZ04_2          ) != 0)) ||
-      ( ((current_settings_prt.control_urov & CTR_UROV_STARTED_FROM_ZDZ    ) != 0) && (_CHECK_SET_BIT(activated_functions, RANG_OUTPUT_LED_DF_REG_ZDZ              ) != 0)) ||
-      ( ((current_settings_prt.control_urov & CTR_UROV_STARTED_FROM_3I0    ) != 0) && (_CHECK_SET_BIT(activated_functions, RANG_OUTPUT_LED_DF_REG_3I0              ) != 0)) ||
-      ( ((current_settings_prt.control_urov & CTR_UROV_STARTED_FROM_3U0    ) != 0) && (_CHECK_SET_BIT(activated_functions, RANG_OUTPUT_LED_DF_REG_3U0              ) != 0)) ||
-      ( ((current_settings_prt.control_urov & CTR_UROV_STARTED_FROM_NZZ    ) != 0) && (_CHECK_SET_BIT(activated_functions, RANG_OUTPUT_LED_DF_REG_NZZ              ) != 0)) ||
-      ( ((current_settings_prt.control_urov & CTR_UROV_STARTED_FROM_TZNP1  ) != 0) && (_CHECK_SET_BIT(activated_functions, RANG_OUTPUT_LED_DF_REG_TZNP1            ) != 0)) ||
-      ( ((current_settings_prt.control_urov & CTR_UROV_STARTED_FROM_TZNP2  ) != 0) && (_CHECK_SET_BIT(activated_functions, RANG_OUTPUT_LED_DF_REG_TZNP2            ) != 0)) ||
-      ( ((current_settings_prt.control_urov & CTR_UROV_STARTED_FROM_TZNP3  ) != 0) && (_CHECK_SET_BIT(activated_functions, RANG_OUTPUT_LED_DF_REG_TZNP3            ) != 0)) ||
-      ( ((current_settings_prt.control_urov & CTR_UROV_STARTED_FROM_ZOP1   ) != 0) && (_CHECK_SET_BIT(activated_functions, RANG_OUTPUT_LED_DF_REG_ZOP              ) != 0)) ||
-      ( ((current_settings_prt.control_urov & CTR_UROV_STARTED_FROM_UMIN1  ) != 0) && (_CHECK_SET_BIT(activated_functions, RANG_OUTPUT_LED_DF_REG_UMIN1            ) != 0)) ||
-      ( ((current_settings_prt.control_urov & CTR_UROV_STARTED_FROM_UMIN2  ) != 0) && (_CHECK_SET_BIT(activated_functions, RANG_OUTPUT_LED_DF_REG_UMIN2            ) != 0)) ||
-      ( ((current_settings_prt.control_urov & CTR_UROV_STARTED_FROM_UMAX1  ) != 0) && (_CHECK_SET_BIT(activated_functions, RANG_OUTPUT_LED_DF_REG_UMAX1            ) != 0)) ||
-      ( ((current_settings_prt.control_urov & CTR_UROV_STARTED_FROM_UMAX2  ) != 0) && (_CHECK_SET_BIT(activated_functions, RANG_OUTPUT_LED_DF_REG_UMAX2            ) != 0)) ||
-      ( ((current_settings_prt.control_urov & CTR_UROV_STARTED_FROM_ACHR1  ) != 0) && (_CHECK_SET_BIT(activated_functions, RANG_OUTPUT_LED_DF_REG_ACHR_CHAPV1      ) != 0)) ||
-      ( ((current_settings_prt.control_urov & CTR_UROV_STARTED_FROM_ACHR2  ) != 0) && (_CHECK_SET_BIT(activated_functions, RANG_OUTPUT_LED_DF_REG_ACHR_CHAPV2      ) != 0)) ||
-      (                                                                               (_CHECK_SET_BIT(activated_functions, RANG_OUTPUT_LED_DF_REG_PUSK_UROV_VID_DV ) != 0))
+      ( ((current_settings_prt.control_urov & CTR_UROV_STARTED_FROM_MTZ1   ) != 0) && (_CHECK_SET_BIT(p_active_functions, RANG_OUTPUT_LED_DF_REG_MTZ1             ) != 0)) ||
+      ( ((current_settings_prt.control_urov & CTR_UROV_STARTED_FROM_MTZ2   ) != 0) && (_CHECK_SET_BIT(p_active_functions, RANG_OUTPUT_LED_DF_REG_MTZ2             ) != 0)) ||
+      ( ((current_settings_prt.control_urov & CTR_UROV_STARTED_FROM_MTZ3   ) != 0) && (_CHECK_SET_BIT(p_active_functions, RANG_OUTPUT_LED_DF_REG_MTZ3             ) != 0)) ||
+      ( ((current_settings_prt.control_urov & CTR_UROV_STARTED_FROM_MTZ4   ) != 0) && (_CHECK_SET_BIT(p_active_functions, RANG_OUTPUT_LED_DF_REG_MTZ4             ) != 0)) ||
+      ( ((current_settings_prt.control_urov & CTR_UROV_STARTED_FROM_MTZ04_1) != 0) && (_CHECK_SET_BIT(p_active_functions, RANG_OUTPUT_LED_DF_REG_MTZ04_1          ) != 0)) ||
+      ( ((current_settings_prt.control_urov & CTR_UROV_STARTED_FROM_MTZ04_2) != 0) && (_CHECK_SET_BIT(p_active_functions, RANG_OUTPUT_LED_DF_REG_MTZ04_2          ) != 0)) ||
+      ( ((current_settings_prt.control_urov & CTR_UROV_STARTED_FROM_ZDZ    ) != 0) && (_CHECK_SET_BIT(p_active_functions, RANG_OUTPUT_LED_DF_REG_ZDZ              ) != 0)) ||
+      ( ((current_settings_prt.control_urov & CTR_UROV_STARTED_FROM_3I0    ) != 0) && (_CHECK_SET_BIT(p_active_functions, RANG_OUTPUT_LED_DF_REG_3I0              ) != 0)) ||
+      ( ((current_settings_prt.control_urov & CTR_UROV_STARTED_FROM_3U0    ) != 0) && (_CHECK_SET_BIT(p_active_functions, RANG_OUTPUT_LED_DF_REG_3U0              ) != 0)) ||
+      ( ((current_settings_prt.control_urov & CTR_UROV_STARTED_FROM_NZZ    ) != 0) && (_CHECK_SET_BIT(p_active_functions, RANG_OUTPUT_LED_DF_REG_NZZ              ) != 0)) ||
+      ( ((current_settings_prt.control_urov & CTR_UROV_STARTED_FROM_TZNP1  ) != 0) && (_CHECK_SET_BIT(p_active_functions, RANG_OUTPUT_LED_DF_REG_TZNP1            ) != 0)) ||
+      ( ((current_settings_prt.control_urov & CTR_UROV_STARTED_FROM_TZNP2  ) != 0) && (_CHECK_SET_BIT(p_active_functions, RANG_OUTPUT_LED_DF_REG_TZNP2            ) != 0)) ||
+      ( ((current_settings_prt.control_urov & CTR_UROV_STARTED_FROM_TZNP3  ) != 0) && (_CHECK_SET_BIT(p_active_functions, RANG_OUTPUT_LED_DF_REG_TZNP3            ) != 0)) ||
+      ( ((current_settings_prt.control_urov & CTR_UROV_STARTED_FROM_ZOP1   ) != 0) && (_CHECK_SET_BIT(p_active_functions, RANG_OUTPUT_LED_DF_REG_ZOP              ) != 0)) ||
+      ( ((current_settings_prt.control_urov & CTR_UROV_STARTED_FROM_UMIN1  ) != 0) && (_CHECK_SET_BIT(p_active_functions, RANG_OUTPUT_LED_DF_REG_UMIN1            ) != 0)) ||
+      ( ((current_settings_prt.control_urov & CTR_UROV_STARTED_FROM_UMIN2  ) != 0) && (_CHECK_SET_BIT(p_active_functions, RANG_OUTPUT_LED_DF_REG_UMIN2            ) != 0)) ||
+      ( ((current_settings_prt.control_urov & CTR_UROV_STARTED_FROM_UMAX1  ) != 0) && (_CHECK_SET_BIT(p_active_functions, RANG_OUTPUT_LED_DF_REG_UMAX1            ) != 0)) ||
+      ( ((current_settings_prt.control_urov & CTR_UROV_STARTED_FROM_UMAX2  ) != 0) && (_CHECK_SET_BIT(p_active_functions, RANG_OUTPUT_LED_DF_REG_UMAX2            ) != 0)) ||
+      ( ((current_settings_prt.control_urov & CTR_UROV_STARTED_FROM_ACHR1  ) != 0) && (_CHECK_SET_BIT(p_active_functions, RANG_OUTPUT_LED_DF_REG_ACHR_CHAPV1      ) != 0)) ||
+      ( ((current_settings_prt.control_urov & CTR_UROV_STARTED_FROM_ACHR2  ) != 0) && (_CHECK_SET_BIT(p_active_functions, RANG_OUTPUT_LED_DF_REG_ACHR_CHAPV2      ) != 0)) ||
+      (                                                                               (_CHECK_SET_BIT(p_active_functions, RANG_OUTPUT_LED_DF_REG_PUSK_UROV_VID_DV ) != 0))
      )     
     )
   {
@@ -4465,17 +4428,9 @@ inline void urov_handler(unsigned int *activated_functions, unsigned int number_
     unsigned int setpoint; //уставка - з якою зрівнюється вимірювальна величина
     unsigned int previous_state_po_urov;
     
-    //Копіюємо попередні значення сигналів УРОВ у тимчавовий масив, щоб потім мати можливість їх скидати або встановлювати
-    //Це потрібно для того, щоб коли є умова, що сигнал не має ні встановлюватися ні скидатися - щоб він приймав своє попереднє значення  
-    unsigned int maska[N_BIG] = {0, 0, 0, 0, 0, 0, 0, 0};
-    _SET_BIT(maska, RANG_OUTPUT_LED_DF_REG_PO_UROV);
-    _SET_BIT(maska, RANG_OUTPUT_LED_DF_REG_UROV1);
-    _SET_BIT(maska, RANG_OUTPUT_LED_DF_REG_UROV2);
-    for (unsigned int i = 0; i < N_BIG; i++) activated_functions[i] |= active_functions[i] & maska[i];
-    
     //Якщо ПО УРОВ ще не активне, то треба працювати по устаці спацювання - уставці, яка вводиться як основна з системи меню чи верхнього рівня
     //Якщо ПО УРОВ вже спрацювало, то треба працювати по уставці відпускання - береться процент від основної утанки по коефіцієнту повернення
-    if(( previous_state_po_urov = _CHECK_SET_BIT(active_functions, RANG_OUTPUT_LED_DF_REG_PO_UROV) ) ==0 )
+    if(( previous_state_po_urov = _CHECK_SET_BIT(p_active_functions, RANG_OUTPUT_LED_DF_REG_PO_UROV) ) ==0 )
     {
       //Працюємо по утавці спрацювання
       setpoint = current_settings_prt.setpoint_urov[number_group_stp];
@@ -4493,7 +4448,7 @@ inline void urov_handler(unsigned int *activated_functions, unsigned int number_
       if(previous_state_po_urov == 0)
       {
         //Встановлюємо сигнал "ПО УРОВ"
-        _SET_BIT(activated_functions, RANG_OUTPUT_LED_DF_REG_PO_UROV);
+        _SET_BIT(p_active_functions, RANG_OUTPUT_LED_DF_REG_PO_UROV);
       
         //Запускаємо таймери УРОВ1 і УРОВ2, якщо вони ще не запущені
         global_timers[INDEX_TIMER_UROV1] = 0;
@@ -4506,10 +4461,10 @@ inline void urov_handler(unsigned int *activated_functions, unsigned int number_
       if(previous_state_po_urov != 0)
       {
         //Скидаємо сигнал "ПО УРОВ"
-        _CLEAR_BIT(activated_functions, RANG_OUTPUT_LED_DF_REG_PO_UROV);
+        _CLEAR_BIT(p_active_functions, RANG_OUTPUT_LED_DF_REG_PO_UROV);
         //Це є умовою також скидання сигналів "Сраб. УРОВ1" і "Сраб. УРОВ2"
-        _CLEAR_BIT(activated_functions, RANG_OUTPUT_LED_DF_REG_UROV1);
-        _CLEAR_BIT(activated_functions, RANG_OUTPUT_LED_DF_REG_UROV2);
+        _CLEAR_BIT(p_active_functions, RANG_OUTPUT_LED_DF_REG_UROV1);
+        _CLEAR_BIT(p_active_functions, RANG_OUTPUT_LED_DF_REG_UROV2);
         //Якщо таймери ще не скинуті, то скидаємо їх
         if ( global_timers[INDEX_TIMER_UROV1] >=0) global_timers[INDEX_TIMER_UROV1] = -1;
         if ( global_timers[INDEX_TIMER_UROV2] >=0) global_timers[INDEX_TIMER_UROV2] = -1;
@@ -4520,7 +4475,7 @@ inline void urov_handler(unsigned int *activated_functions, unsigned int number_
     if(global_timers[INDEX_TIMER_UROV1] >= current_settings_prt.timeout_urov_1[number_group_stp])
     {
       //Якщо витримана Витримка УРОВ1 то встановлюємо сигнал "Сраб. УРОВ1"
-      _SET_BIT(activated_functions, RANG_OUTPUT_LED_DF_REG_UROV1);
+      _SET_BIT(p_active_functions, RANG_OUTPUT_LED_DF_REG_UROV1);
 
       //Скидаємо таймер УРОВ1
       global_timers[INDEX_TIMER_UROV1] = -1;
@@ -4530,7 +4485,7 @@ inline void urov_handler(unsigned int *activated_functions, unsigned int number_
     if(global_timers[INDEX_TIMER_UROV2] >= current_settings_prt.timeout_urov_2[number_group_stp])
     {
       //Якщо витримана Витримка УРОВ2 то встановлюємо сигнал "Сраб. УРОВ2"
-      _SET_BIT(activated_functions, RANG_OUTPUT_LED_DF_REG_UROV2);
+      _SET_BIT(p_active_functions, RANG_OUTPUT_LED_DF_REG_UROV2);
 
       //Скидаємо таймер УРОВ2
       global_timers[INDEX_TIMER_UROV2] = -1;
@@ -4538,15 +4493,12 @@ inline void urov_handler(unsigned int *activated_functions, unsigned int number_
   }
   else
   {
-    //Якщо 1 ступінь УРОВ не встановлена, то треба скинути всі таймери і сигнали, які за неї відповідають
-    if(( _CHECK_SET_BIT(active_functions, RANG_OUTPUT_LED_DF_REG_PO_UROV) ) !=0 )
-    {
-      _CLEAR_BIT(activated_functions, RANG_OUTPUT_LED_DF_REG_PO_UROV);
-      global_timers[INDEX_TIMER_UROV1] = -1;
-      global_timers[INDEX_TIMER_UROV2] = -1;
-    }
-    _CLEAR_BIT(activated_functions, RANG_OUTPUT_LED_DF_REG_UROV1);
-    _CLEAR_BIT(activated_functions, RANG_OUTPUT_LED_DF_REG_UROV2);
+    //Треба скинути всі таймери і сигнали, які за УРОВ відповідають
+    _CLEAR_BIT(p_active_functions, RANG_OUTPUT_LED_DF_REG_PO_UROV);
+    _CLEAR_BIT(p_active_functions, RANG_OUTPUT_LED_DF_REG_UROV1);
+    _CLEAR_BIT(p_active_functions, RANG_OUTPUT_LED_DF_REG_UROV2);
+    global_timers[INDEX_TIMER_UROV1] = -1;
+    global_timers[INDEX_TIMER_UROV2] = -1;
   }  
 }
   /*******************************/
@@ -4555,7 +4507,7 @@ inline void urov_handler(unsigned int *activated_functions, unsigned int number_
 /*****************************************************/
 //АПВ
 /*****************************************************/
-inline void apv_handler(unsigned int *activated_functions, unsigned int number_group_stp)
+inline void apv_handler(unsigned int *p_active_functions, unsigned int number_group_stp)
 {
   unsigned int logic_APV_0 = 0;
   unsigned int logic_APV_1 = 0;
@@ -4566,31 +4518,31 @@ inline void apv_handler(unsigned int *activated_functions, unsigned int number_g
   start_restart = 0;
 
   //"Статичне блокування"
-  logic_APV_0 |= (_CHECK_SET_BIT(activated_functions, RANG_OUTPUT_LED_DF_REG_STAT_BLK_APV) != 0) << 0;
+  logic_APV_0 |= (_CHECK_SET_BIT(p_active_functions, RANG_OUTPUT_LED_DF_REG_STAT_BLK_APV) != 0) << 0;
   _INVERTOR(logic_APV_0, 0, logic_APV_0, 1);
 
   //М:"Пуск від МТЗ1"
   logic_APV_0 |= ((current_settings_prt.control_apv & CTR_APV_STARTED_FROM_MTZ1) != 0) << 2;
   //"МТЗ1"
-  logic_APV_0 |= (_CHECK_SET_BIT(activated_functions, RANG_OUTPUT_LED_DF_REG_MTZ1) != 0) << 3;
+  logic_APV_0 |= (_CHECK_SET_BIT(p_active_functions, RANG_OUTPUT_LED_DF_REG_MTZ1) != 0) << 3;
   _AND2(logic_APV_0, 2, logic_APV_0, 3, logic_APV_0, 4);
 
   //М:"Пуск від МТЗ2"
   logic_APV_0 |= ((current_settings_prt.control_apv & CTR_APV_STARTED_FROM_MTZ2) != 0) << 5;
   //"МТЗ2"
-  logic_APV_0 |= (_CHECK_SET_BIT(activated_functions, RANG_OUTPUT_LED_DF_REG_MTZ2) != 0) << 6;
+  logic_APV_0 |= (_CHECK_SET_BIT(p_active_functions, RANG_OUTPUT_LED_DF_REG_MTZ2) != 0) << 6;
   _AND2(logic_APV_0, 5, logic_APV_0, 6, logic_APV_0, 7);
 
   //М:"Пуск від МТЗ3"
   logic_APV_0 |= ((current_settings_prt.control_apv & CTR_APV_STARTED_FROM_MTZ3) != 0) << 8;
   //"МТЗ3"
-  logic_APV_0 |= (_CHECK_SET_BIT(activated_functions, RANG_OUTPUT_LED_DF_REG_MTZ3) != 0) << 9;
+  logic_APV_0 |= (_CHECK_SET_BIT(p_active_functions, RANG_OUTPUT_LED_DF_REG_MTZ3) != 0) << 9;
   _AND2(logic_APV_0, 8, logic_APV_0, 9, logic_APV_0, 10);
 
   //М:"Пуск від МТЗ4"
   logic_APV_0 |= ((current_settings_prt.control_apv & CTR_APV_STARTED_FROM_MTZ4) != 0) << 11;
   //"МТЗ4"
-  logic_APV_0 |= (_CHECK_SET_BIT(activated_functions, RANG_OUTPUT_LED_DF_REG_MTZ4) != 0) << 12;
+  logic_APV_0 |= (_CHECK_SET_BIT(p_active_functions, RANG_OUTPUT_LED_DF_REG_MTZ4) != 0) << 12;
   _AND2(logic_APV_0, 11, logic_APV_0, 12, logic_APV_0, 13);
   
   _OR4(logic_APV_0, 4, logic_APV_0, 7, logic_APV_0, 10, logic_APV_0, 13, logic_APV_0, 14);
@@ -4599,16 +4551,16 @@ inline void apv_handler(unsigned int *activated_functions, unsigned int number_g
   //М:"ЧАПВ 1"
   logic_APV_0 |= ((current_settings_prt.control_achr_chapv & CTR_CHAPV1) != 0) << 16;
   //"АЧР/ЧАПВ 1"
-  logic_APV_1 |= (_CHECK_SET_BIT(activated_functions, RANG_OUTPUT_LED_DF_REG_ACHR_CHAPV1) != 0) << 21;
+  logic_APV_1 |= (_CHECK_SET_BIT(p_active_functions, RANG_OUTPUT_LED_DF_REG_ACHR_CHAPV1) != 0) << 21;
   //М:"ЧАПВ 2"
   logic_APV_1 |= ((current_settings_prt.control_achr_chapv & CTR_CHAPV2) != 0) << 27;
   //"АЧР/ЧАПВ 2"
-  logic_APV_1 |= (_CHECK_SET_BIT(activated_functions, RANG_OUTPUT_LED_DF_REG_ACHR_CHAPV2) != 0) << 28;
+  logic_APV_1 |= (_CHECK_SET_BIT(p_active_functions, RANG_OUTPUT_LED_DF_REG_ACHR_CHAPV2) != 0) << 28;
   //"Разр ЧАПВ"
-  logic_APV_1 |= (_CHECK_SET_BIT(activated_functions, RANG_OUTPUT_LED_DF_REG_RAZR_CHAPV) != 0) << 20;
+  logic_APV_1 |= (_CHECK_SET_BIT(p_active_functions, RANG_OUTPUT_LED_DF_REG_RAZR_CHAPV) != 0) << 20;
 
   //"АЧР/ЧАПВ від ДВ"
-  logic_APV_0 |= (_CHECK_SET_BIT(activated_functions, RANG_OUTPUT_LED_DF_REG_ACHR_CHAPV_VID_DV) != 0) << 17;
+  logic_APV_0 |= (_CHECK_SET_BIT(p_active_functions, RANG_OUTPUT_LED_DF_REG_ACHR_CHAPV_VID_DV) != 0) << 17;
   //М:"ЧАПВ від ДВ"
   logic_APV_1 |= ((current_settings_prt.control_achr_chapv & CTR_CHAPV_VID_DV) != 0) << 22;
   
@@ -4618,7 +4570,7 @@ inline void apv_handler(unsigned int *activated_functions, unsigned int number_g
   _OR3(logic_APV_1, 23, logic_APV_1, 29, logic_APV_1, 24, logic_APV_0, 18)
 
   //"Блок.ЧАПВ від U"
-  logic_APV_1 |= (_CHECK_SET_BIT(activated_functions, RANG_OUTPUT_LED_DF_REG_BLOCK_CHAPV_VID_U) != 0) << 25;
+  logic_APV_1 |= (_CHECK_SET_BIT(p_active_functions, RANG_OUTPUT_LED_DF_REG_BLOCK_CHAPV_VID_U) != 0) << 25;
   _OR2(logic_APV_0, 18, logic_APV_1, 25, logic_APV_1, 26);
     
   _TIMER_0_T(INDEX_TIMER_ACHR_CHAPV, MAX_VALUE_TIMER_FOR_COUNT_SIGNAL_ACHR_CHAPV, logic_APV_0, 18, logic_APV_0, 19);
@@ -4626,7 +4578,7 @@ inline void apv_handler(unsigned int *activated_functions, unsigned int number_g
   _OR2_INVERTOR(logic_APV_0, 15, logic_APV_0, 19, logic_APV_0, 20);
 
   //"Стан вимикача"
-  logic_APV_0 |= (_CHECK_SET_BIT(activated_functions, RANG_OUTPUT_LED_DF_REG_STATE_VV) != 0) << 21;
+  logic_APV_0 |= (_CHECK_SET_BIT(p_active_functions, RANG_OUTPUT_LED_DF_REG_STATE_VV) != 0) << 21;
   _TIMER_IMPULSE(INDEX_TIMER_APV_BLOCK_VID_VV, current_settings_prt.timeout_apv_block_vid_VV[number_group_stp], previous_states_APV_0, 0, logic_APV_0, 21, logic_APV_0, 22);
 
   //М:"АПВ"
@@ -4653,6 +4605,17 @@ inline void apv_handler(unsigned int *activated_functions, unsigned int number_g
   
   unsigned int previous_trigger_APV_0;
   
+  /*
+  Скидаємо спочатку ці сигнали, бо у циклі do-while будемо їх виставляти,
+  але після виставлення їх піде сигнал на очищення триґера, який і, фактично, буде
+  означати очищення цих сигналів.
+  Щоб зафіксувати спрацювання цих сигналів, ми їх очищуємо всіх перед циклом, а
+  у циклі будемо тільки виставляти
+  */
+  _CLEAR_BIT(p_active_functions, RANG_OUTPUT_LED_DF_REG_APV1);
+  _CLEAR_BIT(p_active_functions, RANG_OUTPUT_LED_DF_REG_APV2);
+  _CLEAR_BIT(p_active_functions, RANG_OUTPUT_LED_DF_REG_APV3);
+  _CLEAR_BIT(p_active_functions, RANG_OUTPUT_LED_DF_REG_APV4);
   do
   {
     /***
@@ -4680,16 +4643,14 @@ inline void apv_handler(unsigned int *activated_functions, unsigned int number_g
     _D_TRIGGER(_GET_OUTPUT_STATE(logic_APV_0, 1),  0, _GET_OUTPUT_STATE(logic_APV_1, 8), previous_states_APV_0, 5, logic_APV_0, 20, trigger_APV_0, 0);                 
     _TIMER_T_0(INDEX_TIMER_APV_1, current_settings_prt.timeout_apv_1[number_group_stp], trigger_APV_0, 0, logic_APV_1, 9);
     /*
-    Цей сигнал встановлюмо в масив activated_functions в циклі з післяумовою
+    Цей сигнал встановлюмо в масив p_active_functions в циклі з післяумовою
     do-while, бо нас цікавить зафіксувати цей сигнал, а коли він виставиться, то
     піде сигнал на очистку триґера і цей сигнал очиститься. Але встановлення по АБО "0"
     після встановлення "1" не мало б зняти цей сигнал і ми його маємо зафіксувати до 
-    наступної роботи системи захистів.
+    наступної роботи системи захистів (скидання цих сигналів здійснюється перед
+    циклом do-while).
     */
-    if (_GET_OUTPUT_STATE(logic_APV_1, 9))
-       _SET_BIT(activated_functions, RANG_OUTPUT_LED_DF_REG_APV1);
-    else
-       _CLEAR_BIT(activated_functions, RANG_OUTPUT_LED_DF_REG_APV1);
+    if (_GET_OUTPUT_STATE(logic_APV_1, 9)) _SET_BIT(p_active_functions, RANG_OUTPUT_LED_DF_REG_APV1);
     _TIMER_0_T(INDEX_TIMER_APV_BLOCK_VID_APV1, current_settings_prt.timeout_apv_block_vid_apv1[number_group_stp], logic_APV_1, 9, logic_APV_0, 31);
 
     //АПВ2
@@ -4703,12 +4664,11 @@ inline void apv_handler(unsigned int *activated_functions, unsigned int number_g
     do-while, бо нас цікавить зафіксувати цей сигнал, а коли він виставиться, то
     піде сигнал на очистку триґера і цей сигнал очиститься. Але встановлення по АБО "0"
     після встановлення "1" не мало б зняти цей сигнал і ми його маємо зафіксувати до 
-    наступної роботи системи захистів.
+    наступної роботи системи захистів (скидання цих сигналів здійснюється перед
+    циклом do-while).
     */
-    if (_GET_OUTPUT_STATE(logic_APV_1, 12))
-       _SET_BIT(activated_functions, RANG_OUTPUT_LED_DF_REG_APV2);
-    else
-       _CLEAR_BIT(activated_functions, RANG_OUTPUT_LED_DF_REG_APV2);
+    if (_GET_OUTPUT_STATE(logic_APV_1, 12)) _SET_BIT(p_active_functions, RANG_OUTPUT_LED_DF_REG_APV2);
+    _TIMER_0_T(INDEX_TIMER_APV_BLOCK_VID_APV2, current_settings_prt.timeout_apv_block_vid_apv2[number_group_stp], logic_APV_1, 12, logic_APV_1, 0);
 
     //АПВ3
     _AND2_INVERTOR(logic_APV_1, 0, logic_APV_0, 15, logic_APV_1, 13);
@@ -4721,12 +4681,10 @@ inline void apv_handler(unsigned int *activated_functions, unsigned int number_g
     do-while, бо нас цікавить зафіксувати цей сигнал, а коли він виставиться, то
     піде сигнал на очистку триґера і цей сигнал очиститься. Але встановлення по АБО "0"
     після встановлення "1" не мало б зняти цей сигнал і ми його маємо зафіксувати до 
-    наступної роботи системи захистів.
+    наступної роботи системи захистів (скидання цих сигналів здійснюється перед
+    циклом do-while).
     */
-    if (_GET_OUTPUT_STATE(logic_APV_1, 15))
-       _SET_BIT(activated_functions, RANG_OUTPUT_LED_DF_REG_APV3);
-    else
-       _CLEAR_BIT(activated_functions, RANG_OUTPUT_LED_DF_REG_APV3);
+    if (_GET_OUTPUT_STATE(logic_APV_1, 15)) _SET_BIT(p_active_functions, RANG_OUTPUT_LED_DF_REG_APV3);
     _TIMER_0_T(INDEX_TIMER_APV_BLOCK_VID_APV3, current_settings_prt.timeout_apv_block_vid_apv3[number_group_stp], logic_APV_1, 15, logic_APV_1, 1);
 
     //АПВ4
@@ -4740,12 +4698,10 @@ inline void apv_handler(unsigned int *activated_functions, unsigned int number_g
     do-while, бо нас цікавить зафіксувати цей сигнал, а коли він виставиться, то
     піде сигнал на очистку триґера і цей сигнал очиститься. Але встановлення по АБО "0"
     після встановлення "1" не мало б зняти цей сигнал і ми його маємо зафіксувати до 
-    наступної роботи системи захистів.
+    наступної роботи системи захистів (скидання цих сигналів здійснюється перед
+    циклом do-while).
     */
-    if (_GET_OUTPUT_STATE(logic_APV_1, 18))
-       _SET_BIT(activated_functions, RANG_OUTPUT_LED_DF_REG_APV4);
-    else
-       _CLEAR_BIT(activated_functions, RANG_OUTPUT_LED_DF_REG_APV4);
+    if (_GET_OUTPUT_STATE(logic_APV_1, 18)) _SET_BIT(p_active_functions, RANG_OUTPUT_LED_DF_REG_APV4);
     _TIMER_0_T(INDEX_TIMER_APV_BLOCK_VID_APV4, current_settings_prt.timeout_apv_block_vid_apv4[number_group_stp], logic_APV_1, 18, logic_APV_1, 2);
   }
   while (
@@ -4760,8 +4716,8 @@ inline void apv_handler(unsigned int *activated_functions, unsigned int number_g
   _OR4(trigger_APV_0, 0, trigger_APV_0, 1, trigger_APV_0, 2, trigger_APV_0, 3, work_apv, 0);
   
   //Работа АПВ
-  if (work_apv) _SET_BIT(activated_functions, RANG_OUTPUT_LED_DF_REG_APV_WORK);
-  else  _CLEAR_BIT(activated_functions, RANG_OUTPUT_LED_DF_REG_APV_WORK);
+  if (work_apv) _SET_BIT(p_active_functions, RANG_OUTPUT_LED_DF_REG_APV_WORK);
+  else  _CLEAR_BIT(p_active_functions, RANG_OUTPUT_LED_DF_REG_APV_WORK);
   
 }
 /*****************************************************/
@@ -9422,15 +9378,7 @@ inline void main_protection(void)
     /**************************/
     //Опрцювання опреділюваних триґерів
     /**************************/
-    previous_stats_signals[0] = active_functions[0] & (MASKA_FOR_ON_OFF_SIGNALS_0 | MASKA_FOR_READY_TU_SIGNALS_0 | MASKA_FOR_RESURS_VV_SIGNALS_0 | MASKA_FOR_REJESTRATORS_AND_DEFECT_SIGNALS_0);
-    previous_stats_signals[1] = active_functions[1] & (MASKA_FOR_ON_OFF_SIGNALS_1 | MASKA_FOR_READY_TU_SIGNALS_1 | MASKA_FOR_RESURS_VV_SIGNALS_1 | MASKA_FOR_REJESTRATORS_AND_DEFECT_SIGNALS_1);
-    previous_stats_signals[2] = active_functions[2] & (MASKA_FOR_ON_OFF_SIGNALS_2 | MASKA_FOR_READY_TU_SIGNALS_2 | MASKA_FOR_RESURS_VV_SIGNALS_2 | MASKA_FOR_REJESTRATORS_AND_DEFECT_SIGNALS_2);
-    previous_stats_signals[3] = active_functions[3] & (MASKA_FOR_ON_OFF_SIGNALS_3 | MASKA_FOR_READY_TU_SIGNALS_3 | MASKA_FOR_RESURS_VV_SIGNALS_3 | MASKA_FOR_REJESTRATORS_AND_DEFECT_SIGNALS_3);
-    previous_stats_signals[4] = active_functions[4] & (MASKA_FOR_ON_OFF_SIGNALS_4 | MASKA_FOR_READY_TU_SIGNALS_4 | MASKA_FOR_RESURS_VV_SIGNALS_4 | MASKA_FOR_REJESTRATORS_AND_DEFECT_SIGNALS_4);
-    previous_stats_signals[5] = active_functions[5] & (MASKA_FOR_ON_OFF_SIGNALS_5 | MASKA_FOR_READY_TU_SIGNALS_5 | MASKA_FOR_RESURS_VV_SIGNALS_5 | MASKA_FOR_REJESTRATORS_AND_DEFECT_SIGNALS_5);
-    previous_stats_signals[6] = active_functions[6] & (MASKA_FOR_ON_OFF_SIGNALS_6 | MASKA_FOR_READY_TU_SIGNALS_6 | MASKA_FOR_RESURS_VV_SIGNALS_6 | MASKA_FOR_REJESTRATORS_AND_DEFECT_SIGNALS_6);
-    previous_stats_signals[7] = active_functions[7] & (MASKA_FOR_ON_OFF_SIGNALS_7 | MASKA_FOR_READY_TU_SIGNALS_7 | MASKA_FOR_RESURS_VV_SIGNALS_7 | MASKA_FOR_REJESTRATORS_AND_DEFECT_SIGNALS_7);
-    dt_handler(activated_functions, previous_stats_signals);
+    dt_handler(activated_functions);
     /**************************/
 
     /**************************/
