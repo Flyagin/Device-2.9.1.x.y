@@ -4660,7 +4660,7 @@ inline void apv_handler(unsigned int *p_active_functions, unsigned int number_gr
     _D_TRIGGER(1,  0, _GET_OUTPUT_STATE(logic_APV_1, 11), previous_states_APV_0, 6, logic_APV_1, 10, trigger_APV_0, 1);    
     _TIMER_T_0(INDEX_TIMER_APV_2, current_settings_prt.timeout_apv_2[number_group_stp], trigger_APV_0, 1, logic_APV_1, 12);
     /*
-    Цей сигнал встановлюмо в масив activated_functions в циклі з післяумовою
+    Цей сигнал встановлюмо в масив p_active_functions в циклі з післяумовою
     do-while, бо нас цікавить зафіксувати цей сигнал, а коли він виставиться, то
     піде сигнал на очистку триґера і цей сигнал очиститься. Але встановлення по АБО "0"
     після встановлення "1" не мало б зняти цей сигнал і ми його маємо зафіксувати до 
@@ -4677,7 +4677,7 @@ inline void apv_handler(unsigned int *p_active_functions, unsigned int number_gr
     _D_TRIGGER(1,  0, _GET_OUTPUT_STATE(logic_APV_1, 14), previous_states_APV_0, 7, logic_APV_1, 13, trigger_APV_0, 2);                 
     _TIMER_T_0(INDEX_TIMER_APV_3, current_settings_prt.timeout_apv_3[number_group_stp], trigger_APV_0, 2, logic_APV_1, 15);
     /*
-    Цей сигнал встановлюмо в масив activated_functions в циклі з післяумовою
+    Цей сигнал встановлюмо в масив p_active_functions в циклі з післяумовою
     do-while, бо нас цікавить зафіксувати цей сигнал, а коли він виставиться, то
     піде сигнал на очистку триґера і цей сигнал очиститься. Але встановлення по АБО "0"
     після встановлення "1" не мало б зняти цей сигнал і ми його маємо зафіксувати до 
@@ -4694,7 +4694,7 @@ inline void apv_handler(unsigned int *p_active_functions, unsigned int number_gr
     _D_TRIGGER(1,  0, _GET_OUTPUT_STATE(logic_APV_1, 17), previous_states_APV_0, 8, logic_APV_1, 16, trigger_APV_0, 3);                 
     _TIMER_T_0(INDEX_TIMER_APV_4, current_settings_prt.timeout_apv_4[number_group_stp], trigger_APV_0, 3, logic_APV_1, 18);
     /*
-    Цей сигнал встановлюмо в масив activated_functions в циклі з післяумовою
+    Цей сигнал встановлюмо в масив p_active_functions в циклі з післяумовою
     do-while, бо нас цікавить зафіксувати цей сигнал, а коли він виставиться, то
     піде сигнал на очистку триґера і цей сигнал очиститься. Але встановлення по АБО "0"
     після встановлення "1" не мало б зняти цей сигнал і ми його маємо зафіксувати до 
@@ -4725,14 +4725,10 @@ inline void apv_handler(unsigned int *p_active_functions, unsigned int number_gr
 /*****************************************************/
 //Функція управління блоками включення і відключення
 /*****************************************************/
-inline void on_off_handler(unsigned int *activated_functions, unsigned int *previous_stats_signals)
+inline void on_off_handler(unsigned int *p_active_functions)
 {
-  //Копіюємо попередні значення сигналів "Робота БО" і "Робота БВ" у тимчавовий масив, щоб потім мати можливість їх скидати або встановлювати
-  //Це потрібно для того, щоб коли є умова, що сигнал не має ні встановлюватися ні скидатися - щоб він приймав своє попереднє значення  
+  static unsigned int previous_active_functions[N_BIG];
   unsigned int maska[N_BIG] = {0, 0, 0, 0, 0, 0, 0, 0};
-  _SET_BIT(maska, RANG_OUTPUT_LED_DF_REG_WORK_BO);
-  _SET_BIT(maska, RANG_OUTPUT_LED_DF_REG_WORK_BV);
-  for (unsigned int i = 0; i < N_BIG; i++) activated_functions[i] |= active_functions[i] & maska[i];
 
   /*********************/
   //Спочатку опрацьовуємо таймери
@@ -4746,7 +4742,7 @@ inline void on_off_handler(unsigned int *activated_functions, unsigned int *prev
       //Таймер досягнув свого максимального значення
       global_timers[INDEX_TIMER_VIDKL_VV] = -1;
       //Відмічаємо у масиві функцій, які зараз активуються, що блок БО має бути деативованим
-      _CLEAR_BIT(activated_functions, RANG_OUTPUT_LED_DF_REG_WORK_BO);
+      _CLEAR_BIT(p_active_functions, RANG_OUTPUT_LED_DF_REG_WORK_BO);
     }
     //Незавершена робота блоку БО означає, що таймер блокування БВ має бути запущений і знаходитися у свому початковому значенні,
     //щоб як тільки блок БО відпрацює, щоб блокування включення почалося на весь час з моменту закінчення роботи блоку БО
@@ -4774,7 +4770,7 @@ inline void on_off_handler(unsigned int *activated_functions, unsigned int *prev
     {
       global_timers[INDEX_TIMER_VKL_VV] = -1;
       //Відмічаємо у масиві функцій, які зараз активуються, що блок БB має бути деативованим
-      _CLEAR_BIT(activated_functions, RANG_OUTPUT_LED_DF_REG_WORK_BV);
+      _CLEAR_BIT(p_active_functions, RANG_OUTPUT_LED_DF_REG_WORK_BV);
     }
     else
     {
@@ -4784,7 +4780,7 @@ inline void on_off_handler(unsigned int *activated_functions, unsigned int *prev
         //Таймер досягнув свого максимального значення
         global_timers[INDEX_TIMER_VKL_VV] = -1;
         //Відмічаємо у масиві функцій, які зараз активуються, що блок БB має бути деативованим
-        _CLEAR_BIT(activated_functions, RANG_OUTPUT_LED_DF_REG_WORK_BV);
+        _CLEAR_BIT(p_active_functions, RANG_OUTPUT_LED_DF_REG_WORK_BV);
       }
     }
   }
@@ -4797,7 +4793,7 @@ inline void on_off_handler(unsigned int *activated_functions, unsigned int *prev
   Цей сигнал встановлюється тільки у певних випадках, тому по замовчуванню його треба скинута,
   а коли буде потрібно - він встановиться
   */
-  _CLEAR_BIT(activated_functions, RANG_OUTPUT_LED_DF_REG_VIDKL_VID_ZAKHYSTIV);
+  _CLEAR_BIT(p_active_functions, RANG_OUTPUT_LED_DF_REG_VIDKL_VID_ZAKHYSTIV);
 
   //Формуємо маску з сигналом "Робота БО", щоб не розглядати цей сигнал як джерело активації БО (щоб він сам себе не генерував, бо інакше, як тільки раз запуститься постійно буде себе генерувати)
   for (unsigned int j = 0; j < N_BIG; j++ )  maska[j] = 0;
@@ -4821,7 +4817,7 @@ inline void on_off_handler(unsigned int *activated_functions, unsigned int *prev
     if(_CHECK_SET_BIT(temp_array_of_outputs, RANG_OUTPUT_LED_DF_REG_WORK_BO) !=0)
     {
       //Перевіряємо, чи є зараз умова активації виходу (будь-яка активна функція крім функції "Робота БО")
-      for (unsigned int j = 0; j < N_BIG; j++) temp_array_of_outputs[j] &= ( (activated_functions[j] | previous_stats_signals[j]) & (~maska[j]) );
+      for (unsigned int j = 0; j < N_BIG; j++) temp_array_of_outputs[j] &= ( p_active_functions[j] & (~maska[j]) );
       if (
           (temp_array_of_outputs[0] != 0) ||
           (temp_array_of_outputs[1] != 0) ||
@@ -4836,14 +4832,14 @@ inline void on_off_handler(unsigned int *activated_functions, unsigned int *prev
         //На даному виході зараз активовується якась функція, яка є одночасно і джерелом БО
           
         //Відмічаємо у масиві функцій, які зараз активуються, що ще треба активувати блок БО (якщо він ще не активний)
-        _SET_BIT(activated_functions, RANG_OUTPUT_LED_DF_REG_WORK_BO);
+        _SET_BIT(p_active_functions, RANG_OUTPUT_LED_DF_REG_WORK_BO);
 
         //Запускаємо (або продовжуємо утримувати у 0, поки не пропаде сигнал активації БО) таймери: блоку БО, блокуванння БВ.
         global_timers[INDEX_TIMER_VIDKL_VV  ] = 0;
         global_timers[INDEX_TIMER_BLK_VKL_VV] = 0;
 
         //Скидаємо активацію БВ
-        _CLEAR_BIT(activated_functions, RANG_OUTPUT_LED_DF_REG_WORK_BV);
+        _CLEAR_BIT(p_active_functions, RANG_OUTPUT_LED_DF_REG_WORK_BV);
         //Скидаємо таймер БВ
         global_timers[INDEX_TIMER_VKL_VV] = -1;  
 
@@ -4867,7 +4863,7 @@ inline void on_off_handler(unsigned int *activated_functions, unsigned int *prev
             (temp_array_of_outputs[7] != 0)
           )
         {
-          _SET_BIT(activated_functions, RANG_OUTPUT_LED_DF_REG_VIDKL_VID_ZAKHYSTIV);
+          _SET_BIT(p_active_functions, RANG_OUTPUT_LED_DF_REG_VIDKL_VID_ZAKHYSTIV);
           
           /*****************************************************
           Формуванні інформації про причину відключення для меню
@@ -4879,7 +4875,7 @@ inline void on_off_handler(unsigned int *activated_functions, unsigned int *prev
           //МТЗ1
           if(
              (_CHECK_SET_BIT(temp_array_of_outputs, RANG_OUTPUT_LED_DF_REG_MTZ1) != 0) &&
-             (_CHECK_SET_BIT(active_functions, RANG_OUTPUT_LED_DF_REG_MTZ1) == 0) /*умова, що сигнал тільки активується (щоб зафіксувати час старту)*/
+             (_CHECK_SET_BIT(previous_active_functions, RANG_OUTPUT_LED_DF_REG_MTZ1) == 0) /*умова, що сигнал тільки активується (щоб зафіксувати час старту)*/
             )   
           {
             info_vidkluchennja_vymykacha |= (1 << VYMKNENNJA_VID_MTZ1);
@@ -4891,7 +4887,7 @@ inline void on_off_handler(unsigned int *activated_functions, unsigned int *prev
           //МТЗ2
           if(
              (_CHECK_SET_BIT(temp_array_of_outputs, RANG_OUTPUT_LED_DF_REG_MTZ2) != 0) &&
-             (_CHECK_SET_BIT(active_functions, RANG_OUTPUT_LED_DF_REG_MTZ2) == 0) /*умова, що сигнал тільки активується (щоб зафіксувати час старту)*/
+             (_CHECK_SET_BIT(previous_active_functions, RANG_OUTPUT_LED_DF_REG_MTZ2) == 0) /*умова, що сигнал тільки активується (щоб зафіксувати час старту)*/
             )   
           {
             info_vidkluchennja_vymykacha |= (1 << VYMKNENNJA_VID_MTZ2);
@@ -4903,7 +4899,7 @@ inline void on_off_handler(unsigned int *activated_functions, unsigned int *prev
           //МТЗ3
           if(
              (_CHECK_SET_BIT(temp_array_of_outputs, RANG_OUTPUT_LED_DF_REG_MTZ3) != 0) &&
-             (_CHECK_SET_BIT(active_functions, RANG_OUTPUT_LED_DF_REG_MTZ3) == 0) /*умова, що сигнал тільки активується (щоб зафіксувати час старту)*/
+             (_CHECK_SET_BIT(previous_active_functions, RANG_OUTPUT_LED_DF_REG_MTZ3) == 0) /*умова, що сигнал тільки активується (щоб зафіксувати час старту)*/
             )   
           {
             info_vidkluchennja_vymykacha |= (1 << VYMKNENNJA_VID_MTZ3);
@@ -4915,7 +4911,7 @@ inline void on_off_handler(unsigned int *activated_functions, unsigned int *prev
           //МТЗ4
           if(
              (_CHECK_SET_BIT(temp_array_of_outputs, RANG_OUTPUT_LED_DF_REG_MTZ4) != 0) &&
-             (_CHECK_SET_BIT(active_functions, RANG_OUTPUT_LED_DF_REG_MTZ4) == 0) /*умова, що сигнал тільки активується (щоб зафіксувати час старту)*/
+             (_CHECK_SET_BIT(previous_active_functions, RANG_OUTPUT_LED_DF_REG_MTZ4) == 0) /*умова, що сигнал тільки активується (щоб зафіксувати час старту)*/
             )   
           {
             info_vidkluchennja_vymykacha |= (1 << VYMKNENNJA_VID_MTZ4);
@@ -4927,7 +4923,7 @@ inline void on_off_handler(unsigned int *activated_functions, unsigned int *prev
           //МТЗ04 1
           if(
              (_CHECK_SET_BIT(temp_array_of_outputs, RANG_OUTPUT_LED_DF_REG_MTZ04_1) != 0) &&
-             (_CHECK_SET_BIT(active_functions, RANG_OUTPUT_LED_DF_REG_MTZ04_1) == 0) /*умова, що сигнал тільки активується (щоб зафіксувати час старту)*/
+             (_CHECK_SET_BIT(previous_active_functions, RANG_OUTPUT_LED_DF_REG_MTZ04_1) == 0) /*умова, що сигнал тільки активується (щоб зафіксувати час старту)*/
             )   
           {
             info_vidkluchennja_vymykacha |= (1 << VYMKNENNJA_VID_MTZ04_1);
@@ -4939,7 +4935,7 @@ inline void on_off_handler(unsigned int *activated_functions, unsigned int *prev
           //МТЗ04 2
           if(
              (_CHECK_SET_BIT(temp_array_of_outputs, RANG_OUTPUT_LED_DF_REG_MTZ04_2) != 0) &&
-             (_CHECK_SET_BIT(active_functions, RANG_OUTPUT_LED_DF_REG_MTZ04_2) == 0) /*умова, що сигнал тільки активується (щоб зафіксувати час старту)*/
+             (_CHECK_SET_BIT(previous_active_functions, RANG_OUTPUT_LED_DF_REG_MTZ04_2) == 0) /*умова, що сигнал тільки активується (щоб зафіксувати час старту)*/
             )   
           {
             info_vidkluchennja_vymykacha |= (1 << VYMKNENNJA_VID_MTZ04_2);
@@ -4951,7 +4947,7 @@ inline void on_off_handler(unsigned int *activated_functions, unsigned int *prev
           //ЗДЗ
           if(
              (_CHECK_SET_BIT(temp_array_of_outputs, RANG_OUTPUT_LED_DF_REG_ZDZ) != 0) &&
-             (_CHECK_SET_BIT(active_functions, RANG_OUTPUT_LED_DF_REG_ZDZ) == 0) /*умова, що сигнал тільки активується (щоб зафіксувати час старту)*/
+             (_CHECK_SET_BIT(previous_active_functions, RANG_OUTPUT_LED_DF_REG_ZDZ) == 0) /*умова, що сигнал тільки активується (щоб зафіксувати час старту)*/
             )   
           {
             info_vidkluchennja_vymykacha |= (1 << VYMKNENNJA_VID_ZDZ);
@@ -4963,7 +4959,7 @@ inline void on_off_handler(unsigned int *activated_functions, unsigned int *prev
           //ЗЗ/3I0
           if(
              (_CHECK_SET_BIT(temp_array_of_outputs, RANG_OUTPUT_LED_DF_REG_3I0) != 0) &&
-             (_CHECK_SET_BIT(active_functions, RANG_OUTPUT_LED_DF_REG_3I0) == 0) /*умова, що сигнал тільки активується (щоб зафіксувати час старту)*/
+             (_CHECK_SET_BIT(previous_active_functions, RANG_OUTPUT_LED_DF_REG_3I0) == 0) /*умова, що сигнал тільки активується (щоб зафіксувати час старту)*/
             )   
           {
             info_vidkluchennja_vymykacha |= (1 << VYMKNENNJA_VID_3I0);
@@ -4975,7 +4971,7 @@ inline void on_off_handler(unsigned int *activated_functions, unsigned int *prev
           //ЗЗ/3U0
           if(
              (_CHECK_SET_BIT(temp_array_of_outputs, RANG_OUTPUT_LED_DF_REG_3U0) != 0) &&
-             (_CHECK_SET_BIT(active_functions, RANG_OUTPUT_LED_DF_REG_3U0) == 0) /*умова, що сигнал тільки активується (щоб зафіксувати час старту)*/
+             (_CHECK_SET_BIT(previous_active_functions, RANG_OUTPUT_LED_DF_REG_3U0) == 0) /*умова, що сигнал тільки активується (щоб зафіксувати час старту)*/
             )   
           {
             info_vidkluchennja_vymykacha |= (1 << VYMKNENNJA_VID_3U0);
@@ -4987,7 +4983,7 @@ inline void on_off_handler(unsigned int *activated_functions, unsigned int *prev
           //НЗЗ
           if(
              (_CHECK_SET_BIT(temp_array_of_outputs, RANG_OUTPUT_LED_DF_REG_NZZ) != 0) &&
-             (_CHECK_SET_BIT(active_functions, RANG_OUTPUT_LED_DF_REG_NZZ) == 0) /*умова, що сигнал тільки активується (щоб зафіксувати час старту)*/
+             (_CHECK_SET_BIT(previous_active_functions, RANG_OUTPUT_LED_DF_REG_NZZ) == 0) /*умова, що сигнал тільки активується (щоб зафіксувати час старту)*/
             )   
           {
             info_vidkluchennja_vymykacha |= (1 << VYMKNENNJA_VID_NZZ);
@@ -4999,7 +4995,7 @@ inline void on_off_handler(unsigned int *activated_functions, unsigned int *prev
           //ТЗНП1
           if(
              (_CHECK_SET_BIT(temp_array_of_outputs, RANG_OUTPUT_LED_DF_REG_TZNP1) != 0) &&
-             (_CHECK_SET_BIT(active_functions, RANG_OUTPUT_LED_DF_REG_TZNP1) == 0) /*умова, що сигнал тільки активується (щоб зафіксувати час старту)*/
+             (_CHECK_SET_BIT(previous_active_functions, RANG_OUTPUT_LED_DF_REG_TZNP1) == 0) /*умова, що сигнал тільки активується (щоб зафіксувати час старту)*/
             )   
           {
             info_vidkluchennja_vymykacha |= (1 << VYMKNENNJA_VID_TZNP1);
@@ -5011,7 +5007,7 @@ inline void on_off_handler(unsigned int *activated_functions, unsigned int *prev
           //ТЗНП2
           if(
              (_CHECK_SET_BIT(temp_array_of_outputs, RANG_OUTPUT_LED_DF_REG_TZNP2) != 0) &&
-             (_CHECK_SET_BIT(active_functions, RANG_OUTPUT_LED_DF_REG_TZNP2) == 0) /*умова, що сигнал тільки активується (щоб зафіксувати час старту)*/
+             (_CHECK_SET_BIT(previous_active_functions, RANG_OUTPUT_LED_DF_REG_TZNP2) == 0) /*умова, що сигнал тільки активується (щоб зафіксувати час старту)*/
             )   
           {
             info_vidkluchennja_vymykacha |= (1 << VYMKNENNJA_VID_TZNP2);
@@ -5023,7 +5019,7 @@ inline void on_off_handler(unsigned int *activated_functions, unsigned int *prev
           //ТЗНП3
           if(
              (_CHECK_SET_BIT(temp_array_of_outputs, RANG_OUTPUT_LED_DF_REG_TZNP3) != 0) &&
-             (_CHECK_SET_BIT(active_functions, RANG_OUTPUT_LED_DF_REG_TZNP3) == 0) /*умова, що сигнал тільки активується (щоб зафіксувати час старту)*/
+             (_CHECK_SET_BIT(previous_active_functions, RANG_OUTPUT_LED_DF_REG_TZNP3) == 0) /*умова, що сигнал тільки активується (щоб зафіксувати час старту)*/
             )   
           {
             info_vidkluchennja_vymykacha |= (1 << VYMKNENNJA_VID_TZNP3);
@@ -5035,7 +5031,7 @@ inline void on_off_handler(unsigned int *activated_functions, unsigned int *prev
           //АЧР/ЧАПВ від ДВ
           if(
              (_CHECK_SET_BIT(temp_array_of_outputs, RANG_OUTPUT_LED_DF_REG_ACHR_CHAPV_VID_DV) != 0) &&
-             (_CHECK_SET_BIT(active_functions, RANG_OUTPUT_LED_DF_REG_ACHR_CHAPV_VID_DV) == 0) /*умова, що сигнал тільки активується (щоб зафіксувати час старту)*/
+             (_CHECK_SET_BIT(previous_active_functions, RANG_OUTPUT_LED_DF_REG_ACHR_CHAPV_VID_DV) == 0) /*умова, що сигнал тільки активується (щоб зафіксувати час старту)*/
             )   
           {
             info_vidkluchennja_vymykacha |= (1 << VYMKNENNJA_VID_ACHR_CHAPV_VID_DV);
@@ -5047,7 +5043,7 @@ inline void on_off_handler(unsigned int *activated_functions, unsigned int *prev
           //АЧР/ЧАПВ1
           if(
              (_CHECK_SET_BIT(temp_array_of_outputs, RANG_OUTPUT_LED_DF_REG_ACHR_CHAPV1) != 0) &&
-             (_CHECK_SET_BIT(active_functions, RANG_OUTPUT_LED_DF_REG_ACHR_CHAPV1) == 0) /*умова, що сигнал тільки активується (щоб зафіксувати час старту)*/
+             (_CHECK_SET_BIT(previous_active_functions, RANG_OUTPUT_LED_DF_REG_ACHR_CHAPV1) == 0) /*умова, що сигнал тільки активується (щоб зафіксувати час старту)*/
             )   
           {
             info_vidkluchennja_vymykacha |= (1 << VYMKNENNJA_VID_ACHR_CHAPV1);
@@ -5059,7 +5055,7 @@ inline void on_off_handler(unsigned int *activated_functions, unsigned int *prev
           //АЧР/ЧАПВ2
           if(
              (_CHECK_SET_BIT(temp_array_of_outputs, RANG_OUTPUT_LED_DF_REG_ACHR_CHAPV2) != 0) &&
-             (_CHECK_SET_BIT(active_functions, RANG_OUTPUT_LED_DF_REG_ACHR_CHAPV2) == 0) /*умова, що сигнал тільки активується (щоб зафіксувати час старту)*/
+             (_CHECK_SET_BIT(previous_active_functions, RANG_OUTPUT_LED_DF_REG_ACHR_CHAPV2) == 0) /*умова, що сигнал тільки активується (щоб зафіксувати час старту)*/
             )   
           {
             info_vidkluchennja_vymykacha |= (1 << VYMKNENNJA_VID_ACHR_CHAPV2);
@@ -5071,7 +5067,7 @@ inline void on_off_handler(unsigned int *activated_functions, unsigned int *prev
           //УРОВ1
           if(
              (_CHECK_SET_BIT(temp_array_of_outputs, RANG_OUTPUT_LED_DF_REG_UROV1) != 0) &&
-             (_CHECK_SET_BIT(active_functions, RANG_OUTPUT_LED_DF_REG_UROV1) == 0) /*умова, що сигнал тільки активується (щоб зафіксувати час старту)*/
+             (_CHECK_SET_BIT(previous_active_functions, RANG_OUTPUT_LED_DF_REG_UROV1) == 0) /*умова, що сигнал тільки активується (щоб зафіксувати час старту)*/
             )   
           {
             info_vidkluchennja_vymykacha |= (1 << VYMKNENNJA_VID_UROV1);
@@ -5083,7 +5079,7 @@ inline void on_off_handler(unsigned int *activated_functions, unsigned int *prev
           //УРОВ2
           if(
              (_CHECK_SET_BIT(temp_array_of_outputs, RANG_OUTPUT_LED_DF_REG_UROV2) != 0) &&
-             (_CHECK_SET_BIT(active_functions, RANG_OUTPUT_LED_DF_REG_UROV2) == 0) /*умова, що сигнал тільки активується (щоб зафіксувати час старту)*/
+             (_CHECK_SET_BIT(previous_active_functions, RANG_OUTPUT_LED_DF_REG_UROV2) == 0) /*умова, що сигнал тільки активується (щоб зафіксувати час старту)*/
             )   
           {
             info_vidkluchennja_vymykacha |= (1 << VYMKNENNJA_VID_UROV2);
@@ -5095,7 +5091,7 @@ inline void on_off_handler(unsigned int *activated_functions, unsigned int *prev
           //ЗОП
           if(
              (_CHECK_SET_BIT(temp_array_of_outputs, RANG_OUTPUT_LED_DF_REG_ZOP) != 0) &&
-             (_CHECK_SET_BIT(active_functions, RANG_OUTPUT_LED_DF_REG_ZOP) == 0) /*умова, що сигнал тільки активується (щоб зафіксувати час старту)*/
+             (_CHECK_SET_BIT(previous_active_functions, RANG_OUTPUT_LED_DF_REG_ZOP) == 0) /*умова, що сигнал тільки активується (щоб зафіксувати час старту)*/
             )   
           {
             info_vidkluchennja_vymykacha |= (1 << VYMKNENNJA_VID_ZOP);
@@ -5107,7 +5103,7 @@ inline void on_off_handler(unsigned int *activated_functions, unsigned int *prev
           //Umin1
           if(
              (_CHECK_SET_BIT(temp_array_of_outputs, RANG_OUTPUT_LED_DF_REG_UMIN1) != 0) &&
-             (_CHECK_SET_BIT(active_functions, RANG_OUTPUT_LED_DF_REG_UMIN1) == 0) /*умова, що сигнал тільки активується (щоб зафіксувати час старту)*/
+             (_CHECK_SET_BIT(previous_active_functions, RANG_OUTPUT_LED_DF_REG_UMIN1) == 0) /*умова, що сигнал тільки активується (щоб зафіксувати час старту)*/
             )   
           {
             info_vidkluchennja_vymykacha |= (1 << VYMKNENNJA_VID_UMIN1);
@@ -5119,7 +5115,7 @@ inline void on_off_handler(unsigned int *activated_functions, unsigned int *prev
           //Umin2
           if(
              (_CHECK_SET_BIT(temp_array_of_outputs, RANG_OUTPUT_LED_DF_REG_UMIN2) != 0) &&
-             (_CHECK_SET_BIT(active_functions, RANG_OUTPUT_LED_DF_REG_UMIN2) == 0) /*умова, що сигнал тільки активується (щоб зафіксувати час старту)*/
+             (_CHECK_SET_BIT(previous_active_functions, RANG_OUTPUT_LED_DF_REG_UMIN2) == 0) /*умова, що сигнал тільки активується (щоб зафіксувати час старту)*/
             )   
           {
             info_vidkluchennja_vymykacha |= (1 << VYMKNENNJA_VID_UMIN2);
@@ -5131,7 +5127,7 @@ inline void on_off_handler(unsigned int *activated_functions, unsigned int *prev
           //Umax1
           if(
              (_CHECK_SET_BIT(temp_array_of_outputs, RANG_OUTPUT_LED_DF_REG_UMAX1) != 0) &&
-             (_CHECK_SET_BIT(active_functions, RANG_OUTPUT_LED_DF_REG_UMAX1) == 0) /*умова, що сигнал тільки активується (щоб зафіксувати час старту)*/
+             (_CHECK_SET_BIT(previous_active_functions, RANG_OUTPUT_LED_DF_REG_UMAX1) == 0) /*умова, що сигнал тільки активується (щоб зафіксувати час старту)*/
             )   
           {
             info_vidkluchennja_vymykacha |= (1 << VYMKNENNJA_VID_UMAX1);
@@ -5143,7 +5139,7 @@ inline void on_off_handler(unsigned int *activated_functions, unsigned int *prev
           //Umax2
           if(
              (_CHECK_SET_BIT(temp_array_of_outputs, RANG_OUTPUT_LED_DF_REG_UMAX2) != 0) &&
-             (_CHECK_SET_BIT(active_functions, RANG_OUTPUT_LED_DF_REG_UMAX2) == 0) /*умова, що сигнал тільки активується (щоб зафіксувати час старту)*/
+             (_CHECK_SET_BIT(previous_active_functions, RANG_OUTPUT_LED_DF_REG_UMAX2) == 0) /*умова, що сигнал тільки активується (щоб зафіксувати час старту)*/
             )   
           {
             info_vidkluchennja_vymykacha |= (1 << VYMKNENNJA_VID_UMAX2);
@@ -5155,7 +5151,7 @@ inline void on_off_handler(unsigned int *activated_functions, unsigned int *prev
           //Відключення від зовнішніх захистів
           if(
              (_CHECK_SET_BIT(temp_array_of_outputs, RANG_OUTPUT_LED_DF_REG_OTKL_VID_ZOVN_ZAHYSTIV) != 0) &&
-             (_CHECK_SET_BIT(active_functions, RANG_OUTPUT_LED_DF_REG_OTKL_VID_ZOVN_ZAHYSTIV) == 0) /*умова, що сигнал тільки активується (щоб зафіксувати час старту)*/
+             (_CHECK_SET_BIT(previous_active_functions, RANG_OUTPUT_LED_DF_REG_OTKL_VID_ZOVN_ZAHYSTIV) == 0) /*умова, що сигнал тільки активується (щоб зафіксувати час старту)*/
             )   
           {
             info_vidkluchennja_vymykacha |= (1 << VYMKNENNJA_VID_ZOVNISHNIKH_ZAKHYSTIV);
@@ -5178,14 +5174,14 @@ inline void on_off_handler(unsigned int *activated_functions, unsigned int *prev
              )
              &&
              (
-              ((active_functions[0] & temp_array_of_outputs[0])!= temp_array_of_outputs[0]) ||
-              ((active_functions[1] & temp_array_of_outputs[1])!= temp_array_of_outputs[1]) ||
-              ((active_functions[2] & temp_array_of_outputs[2])!= temp_array_of_outputs[2]) ||
-              ((active_functions[3] & temp_array_of_outputs[3])!= temp_array_of_outputs[3]) ||
-              ((active_functions[4] & temp_array_of_outputs[4])!= temp_array_of_outputs[4]) ||
-              ((active_functions[5] & temp_array_of_outputs[5])!= temp_array_of_outputs[5]) ||
-              ((active_functions[6] & temp_array_of_outputs[6])!= temp_array_of_outputs[6]) ||
-              ((active_functions[7] & temp_array_of_outputs[7])!= temp_array_of_outputs[7])
+              ((previous_active_functions[0] & temp_array_of_outputs[0])!= temp_array_of_outputs[0]) ||
+              ((previous_active_functions[1] & temp_array_of_outputs[1])!= temp_array_of_outputs[1]) ||
+              ((previous_active_functions[2] & temp_array_of_outputs[2])!= temp_array_of_outputs[2]) ||
+              ((previous_active_functions[3] & temp_array_of_outputs[3])!= temp_array_of_outputs[3]) ||
+              ((previous_active_functions[4] & temp_array_of_outputs[4])!= temp_array_of_outputs[4]) ||
+              ((previous_active_functions[5] & temp_array_of_outputs[5])!= temp_array_of_outputs[5]) ||
+              ((previous_active_functions[6] & temp_array_of_outputs[6])!= temp_array_of_outputs[6]) ||
+              ((previous_active_functions[7] & temp_array_of_outputs[7])!= temp_array_of_outputs[7])
              ) 
             )   
           {
@@ -5207,7 +5203,7 @@ inline void on_off_handler(unsigned int *activated_functions, unsigned int *prev
   if (
       (global_timers[INDEX_TIMER_VIDKL_VV  ] < 0) && 
       (global_timers[INDEX_TIMER_BLK_VKL_VV] < 0) &&
-      (_CHECK_SET_BIT(activated_functions, RANG_OUTPUT_LED_DF_REG_BLOCK_VKL_VV) == 0)
+      (_CHECK_SET_BIT(p_active_functions, RANG_OUTPUT_LED_DF_REG_BLOCK_VKL_VV) == 0)
      )
   {
     //Оскільки не працюють таймери БО і блокування включення БВ, а також немає сигналу блокування включення ВВ
@@ -5233,8 +5229,8 @@ inline void on_off_handler(unsigned int *activated_functions, unsigned int *prev
       //Перевіряємо чи на вихід, який індексується інедексом "i", зранжована робота БВ
       if(_CHECK_SET_BIT(temp_array_of_outputs, RANG_OUTPUT_LED_DF_REG_WORK_BV) !=0)
       {
-        //Перевіряємо, чи є зараз умова активації виходу (будь-яка активна функція крім функції "Робота БО")
-        for (unsigned int j = 0; j < N_BIG; j++) temp_array_of_outputs[j] &= ( (activated_functions[j] | previous_stats_signals[j]) & (~maska[j]) );
+        //Перевіряємо, чи є зараз умова активації виходу (будь-яка активна функція крім функції "Робота БВ")
+        for (unsigned int j = 0; j < N_BIG; j++) temp_array_of_outputs[j] &= ( p_active_functions[j] & (~maska[j]) );
         if (
             (temp_array_of_outputs[0] != 0) ||
             (temp_array_of_outputs[1] != 0) ||
@@ -5252,7 +5248,7 @@ inline void on_off_handler(unsigned int *activated_functions, unsigned int *prev
           if ((global_timers[INDEX_TIMER_VIDKL_VV] < 0) && (global_timers[INDEX_TIMER_BLK_VKL_VV] < 0))
           {
             //Відмічаємо у масиві функцій, які зараз активуються, що ще треба активувати блок БВ (якщо він ще не активний)
-            _SET_BIT(activated_functions, RANG_OUTPUT_LED_DF_REG_WORK_BV);
+            _SET_BIT(p_active_functions, RANG_OUTPUT_LED_DF_REG_WORK_BV);
 
             //Запускаємо (або продовжуємо утримувати у 0, поки не пропаде сигнал активації БВ) таймер роботи БВ
             global_timers[INDEX_TIMER_VKL_VV] = 0;
@@ -5261,7 +5257,7 @@ inline void on_off_handler(unsigned int *activated_functions, unsigned int *prev
           {
             //Теоретично, сюди програма ніколи б не мала прийти
             global_timers[INDEX_TIMER_VKL_VV] = -1;
-            _CLEAR_BIT(activated_functions, RANG_OUTPUT_LED_DF_REG_WORK_BV);
+            _CLEAR_BIT(p_active_functions, RANG_OUTPUT_LED_DF_REG_WORK_BV);
           }
         }
       }
@@ -5272,8 +5268,14 @@ inline void on_off_handler(unsigned int *activated_functions, unsigned int *prev
   {
     //На даний момент існує одна або більше умов блокування БВ
     global_timers[INDEX_TIMER_VKL_VV] = -1;
-    _CLEAR_BIT(activated_functions, RANG_OUTPUT_LED_DF_REG_WORK_BV);
+    _CLEAR_BIT(p_active_functions, RANG_OUTPUT_LED_DF_REG_WORK_BV);
   }
+  /*********************/
+
+  /*********************/
+  //Формуємо попереденій стан сигналів для функції ввімкнення/вимкнення
+  /*********************/
+  for (i = 0; i < N_BIG; i++) previous_active_functions[i] = p_active_functions[i];
   /*********************/
 }
 /*****************************************************/
@@ -9367,8 +9369,6 @@ inline void main_protection(void)
     }
     /**************************/
 
-    unsigned int previous_stats_signals[N_BIG];
-
     /**************************/
     //Опрцювання опреділюваних функцій
     /**************************/
@@ -9384,15 +9384,7 @@ inline void main_protection(void)
     /**************************/
     //Включення-Відключення
     /**************************/
-    previous_stats_signals[0] = active_functions[0] & (MASKA_FOR_READY_TU_SIGNALS_0 | MASKA_FOR_RESURS_VV_SIGNALS_0 | MASKA_FOR_REJESTRATORS_AND_DEFECT_SIGNALS_0);
-    previous_stats_signals[1] = active_functions[1] & (MASKA_FOR_READY_TU_SIGNALS_1 | MASKA_FOR_RESURS_VV_SIGNALS_1 | MASKA_FOR_REJESTRATORS_AND_DEFECT_SIGNALS_1);
-    previous_stats_signals[2] = active_functions[2] & (MASKA_FOR_READY_TU_SIGNALS_2 | MASKA_FOR_RESURS_VV_SIGNALS_2 | MASKA_FOR_REJESTRATORS_AND_DEFECT_SIGNALS_2);
-    previous_stats_signals[3] = active_functions[3] & (MASKA_FOR_READY_TU_SIGNALS_3 | MASKA_FOR_RESURS_VV_SIGNALS_3 | MASKA_FOR_REJESTRATORS_AND_DEFECT_SIGNALS_3);
-    previous_stats_signals[4] = active_functions[4] & (MASKA_FOR_READY_TU_SIGNALS_4 | MASKA_FOR_RESURS_VV_SIGNALS_4 | MASKA_FOR_REJESTRATORS_AND_DEFECT_SIGNALS_4);
-    previous_stats_signals[5] = active_functions[5] & (MASKA_FOR_READY_TU_SIGNALS_5 | MASKA_FOR_RESURS_VV_SIGNALS_5 | MASKA_FOR_REJESTRATORS_AND_DEFECT_SIGNALS_5);
-    previous_stats_signals[6] = active_functions[6] & (MASKA_FOR_READY_TU_SIGNALS_6 | MASKA_FOR_RESURS_VV_SIGNALS_6 | MASKA_FOR_REJESTRATORS_AND_DEFECT_SIGNALS_6);
-    previous_stats_signals[7] = active_functions[7] & (MASKA_FOR_READY_TU_SIGNALS_7 | MASKA_FOR_RESURS_VV_SIGNALS_7 | MASKA_FOR_REJESTRATORS_AND_DEFECT_SIGNALS_7);
-    on_off_handler(activated_functions, previous_stats_signals);
+    on_off_handler(activated_functions);
     /**************************/
     
     /**************************/

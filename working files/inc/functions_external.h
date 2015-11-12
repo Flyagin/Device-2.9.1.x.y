@@ -191,7 +191,7 @@ extern void achr_chapv_handler(unsigned int*, unsigned int);
 extern void ready_tu(unsigned int*);
 extern void urov_handler(unsigned int*, unsigned int);
 extern void apv_handler(unsigned int*, unsigned int);
-extern void on_off_handler(unsigned int*, unsigned int*);
+extern void on_off_handler(unsigned int*);
 extern void vmp_handler(unsigned int*);
 extern void control_VV(unsigned int*);
 extern void make_koef_for_resurs(void);
