@@ -521,10 +521,6 @@ enum __mtz_abc_direction_const {
   | (1 << (RANG_OUTPUT_LED_DF_REG_CTRL_VKL - 32))                               /*35*/  \
   | (1 << (RANG_OUTPUT_LED_DF_REG_OTKL_VV - 32))                                /*36*/  \
   | (1 << (RANG_OUTPUT_LED_DF_REG_CTRL_OTKL - 32))                              /*37*/  \
-  | (1 << (RANG_OUTPUT_LED_DF_REG_1_GRUPA_USTAVOK - 32))                        /*49*/  \
-  | (1 << (RANG_OUTPUT_LED_DF_REG_2_GRUPA_USTAVOK - 32))                        /*50*/  \
-  | (1 << (RANG_OUTPUT_LED_DF_REG_3_GRUPA_USTAVOK - 32))                        /*51*/  \
-  | (1 << (RANG_OUTPUT_LED_DF_REG_4_GRUPA_USTAVOK - 32))                        /*52*/  \
   | (1 << (RANG_OUTPUT_LED_DF_REG_RESET_BLOCK_READY_TU_VID_ZAHYSTIV - 32))      /*55*/  \
   | (1 << (RANG_OUTPUT_LED_DF_REG_BLOCK_MTZ1 - 32))                             /*57*/  \
   | (1 << (RANG_OUTPUT_LED_DF_REG_BLOCK_MTZ2 - 32))                             /*58*/  \

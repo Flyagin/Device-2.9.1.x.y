@@ -272,13 +272,11 @@ volatile unsigned int state_signal_outputs = 0;
 volatile unsigned int state_leds = 0;
 volatile unsigned int state_trigger_leds = 0;
 volatile unsigned int active_functions[N_BIG]  = {0, 0, 0, 0, 0, 0, 0, 0};
-const unsigned int maska_trg_func_array[N_BIG] = {MASKA_TRIGGER_SIGNALES_0, MASKA_TRIGGER_SIGNALES_1, MASKA_TRIGGER_SIGNALES_2, MASKA_TRIGGER_SIGNALES_3, MASKA_TRIGGER_SIGNALES_4, MASKA_TRIGGER_SIGNALES_5, MASKA_TRIGGER_SIGNALES_6, MASKA_TRIGGER_SIGNALES_7};
 unsigned int misceve_dystancijne = 0, misceve_dystancijne_ctrl;
 unsigned int trigger_active_functions[N_BIG]  = {0, 0, 0, 0, 0, 0, 0, 0}, trigger_active_functions_ctrl[N_BIG];
 unsigned char crc_trg_func, crc_trg_func_ctrl;
 volatile unsigned int trigger_functions_USB[N_BIG] = {0, 0, 0, 0, 0, 0, 0, 0};
 volatile unsigned int trigger_functions_RS485[N_BIG] = {0, 0, 0, 0, 0, 0, 0, 0};
-volatile unsigned int previous_activated_functions[N_BIG] = {0, 0, 0, 0, 0, 0, 0, 0}; //Масив, у якому фіксується попередні функції, які активовуввалися кнопками+входами і який допомагає виділити передній фронт цієї активації
 unsigned int copying_active_functions = 0;
 volatile unsigned int active_functions_copy[N_BIG]  = {0, 0, 0, 0, 0, 0, 0, 0};
 volatile unsigned int active_functions_trg[N_BIG]  = {0, 0, 0, 0, 0, 0, 0, 0};
