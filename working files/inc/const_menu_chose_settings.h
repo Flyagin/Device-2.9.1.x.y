@@ -3,7 +3,7 @@
 
 #define EKRAN_CHOSE_SETTINGS        (EKRAN_STATE_OUTPUTS + 1)
 
-#define MAX_ROW_FOR_CHOSE_SETTINGS  16
+#define MAX_ROW_FOR_CHOSE_SETTINGS  20
 
 #define INDEX_OF_INFO                     0
 #define INDEX_OF_SETTINGS_POINT           1
@@ -17,9 +17,13 @@
 #define INDEX_OF_REGISTRATORS             9
 #define INDEX_OF_DEFINED_FUNCTIONS        10
 #define INDEX_OF_DEFINED_TRIGGERS         11
-#define INDEX_OF_DEFINED_BUTTONS          12
-#define INDEX_OF_GRUPA_USTAVOK            13
-#define INDEX_OF_EXTRA_SETTINGS           14
-#define INDEX_OF_LIST_PASSWORDS           15
+#define INDEX_OF_DEFINED_AND              12
+#define INDEX_OF_DEFINED_OR               13
+#define INDEX_OF_DEFINED_XOR              14
+#define INDEX_OF_DEFINED_NOT              15
+#define INDEX_OF_DEFINED_BUTTONS          16
+#define INDEX_OF_GRUPA_USTAVOK            17
+#define INDEX_OF_EXTRA_SETTINGS           18
+#define INDEX_OF_LIST_PASSWORDS           19
 
 #endif

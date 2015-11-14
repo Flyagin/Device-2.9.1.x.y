@@ -1499,6 +1499,15 @@ void main_manu_function(void)
     case EKRAN_RESET_DT3:
     case EKRAN_SET_DT4:
     case EKRAN_RESET_DT4:
+    case EKRAN_LIST_D_AND:
+    case EKRAN_IN_D_AND1:
+    case EKRAN_IN_D_AND2:
+    case EKRAN_IN_D_AND3:
+    case EKRAN_IN_D_AND4:
+    case EKRAN_IN_D_AND5:
+    case EKRAN_IN_D_AND6:
+    case EKRAN_IN_D_AND7:
+    case EKRAN_IN_D_AND8:
     case EKRAN_LIST_BUTTONS_FOR_RANGUVANNJA:
     case EKRAN_INFO:
     case EKRAN_DATE_TIME_PZ:
@@ -1897,6 +1906,20 @@ void main_manu_function(void)
               position_in_current_level_menu[current_ekran.current_level] = current_ekran.index_position;
               //Формуємо екран заголовків типів джерел опреділювальних триґерів
               make_ekran_list_type_source_dt();
+            }
+            else if (current_ekran.current_level == EKRAN_LIST_D_AND)
+            {
+              if(current_ekran.index_position >= MAX_ROW_FOR_LIST_D_AND) current_ekran.index_position = 0;
+              position_in_current_level_menu[EKRAN_LIST_D_AND] = current_ekran.index_position;
+              //Формуємо екран заголовків визначуваних "І"
+              make_ekran_chose_of_inputs_outputs_leds_df_buttons_for_ranguvannja(6);
+            }
+            else if ((current_ekran.current_level >= EKRAN_IN_D_AND1) && (current_ekran.current_level <= EKRAN_IN_D_AND8))
+            {
+              if(current_ekran.index_position >= MAX_ROW_FOR_LIST_IN_DT) current_ekran.index_position = 0;
+              position_in_current_level_menu[current_ekran.current_level] = current_ekran.index_position;
+              //Формуємо екран заголовків входів визначуваних "І"
+              make_ekran_inputs_d_logic(NUMBER_IN_AND);
             }
             else if (current_ekran.current_level == EKRAN_LIST_BUTTONS_FOR_RANGUVANNJA)
             {
@@ -2776,6 +2799,12 @@ void main_manu_function(void)
                   //Переходимо на меню відображення списку опреділювальних триґерів
                   current_ekran.current_level = EKRAN_LIST_DT;
                 }
+                else if(current_ekran.index_position == INDEX_OF_DEFINED_AND)
+                {
+                  //Запам'ятовуємо поперердній екран
+                  //Переходимо на меню відображення списку визначуваних "І"
+                  current_ekran.current_level = EKRAN_LIST_D_AND;
+                }
                 else if(current_ekran.index_position == INDEX_OF_DEFINED_BUTTONS)
                 {
                   //Запам'ятовуємо поперердній екран
@@ -3058,6 +3087,24 @@ void main_manu_function(void)
                 //Запам'ятовуємо поперердній екран
                 //Переходимо на меню відображення списку ранжованих функцій
                 current_ekran.current_level = EKRAN_RANGUVANNJA_SET_DT1_PLUS + 2*(current_ekran.current_level - EKRAN_SET_DT1) + current_ekran.index_position;
+                //Для того, щоб при першому входженні завжди список починався із першої ранжованої функції обнуляємо цю позицію
+                position_in_current_level_menu[current_ekran.current_level] = 0;
+                current_ekran.index_position = position_in_current_level_menu[current_ekran.current_level];
+                current_ekran.edition = 0;
+              }
+              else if (current_ekran.current_level == EKRAN_LIST_D_AND)
+              {
+                //Запам'ятовуємо поперердній екран
+                //Переходимо на меню відображення заголовків входів визначуваних "І"
+                current_ekran.current_level = EKRAN_IN_D_AND1 + current_ekran.index_position;
+                current_ekran.index_position = position_in_current_level_menu[current_ekran.current_level];
+                current_ekran.edition = 0;
+              }
+              else if ((current_ekran.current_level >= EKRAN_IN_D_AND1) && (current_ekran.current_level <= EKRAN_IN_D_AND8))
+              {
+                //Запам'ятовуємо поперердній екран
+                //Переходимо на меню відображення списку ранжованих функцій
+                current_ekran.current_level = EKRAN_RANGUVANNJA_IN1_D_AND1 + NUMBER_IN_AND*(current_ekran.current_level - EKRAN_IN_D_AND1) + current_ekran.index_position;
                 //Для того, щоб при першому входженні завжди список починався із першої ранжованої функції обнуляємо цю позицію
                 position_in_current_level_menu[current_ekran.current_level] = 0;
                 current_ekran.index_position = position_in_current_level_menu[current_ekran.current_level];
@@ -3709,6 +3756,20 @@ void main_manu_function(void)
                 //Формуємо екран заголовків типів джерел опреділювальних триґерів
                 make_ekran_list_type_source_dt();
               }
+              else if (current_ekran.current_level == EKRAN_LIST_D_AND)
+              {
+                if(--current_ekran.index_position < 0) current_ekran.index_position =  MAX_ROW_FOR_LIST_D_AND - 1;
+                position_in_current_level_menu[EKRAN_LIST_D_AND] = current_ekran.index_position;
+                //Формуємо екран заголовків визначуваних "І"
+                make_ekran_chose_of_inputs_outputs_leds_df_buttons_for_ranguvannja(6);
+              }
+              else if ((current_ekran.current_level >= EKRAN_IN_D_AND1) && (current_ekran.current_level <= EKRAN_IN_D_AND8))
+              {
+                if(--current_ekran.index_position < 0) current_ekran.index_position = MAX_ROW_FOR_LIST_IN_DT - 1;
+                position_in_current_level_menu[current_ekran.current_level] = current_ekran.index_position;
+                //Формуємо екран заголовків входів визначуваних "І"
+                make_ekran_inputs_d_logic(NUMBER_IN_AND);
+            }
               else if (current_ekran.current_level == EKRAN_LIST_BUTTONS_FOR_RANGUVANNJA)
               {
                 if(--current_ekran.index_position < 0) current_ekran.index_position =  MAX_ROW_LIST_BUTTONS_FOR_RANGUVANNJA - 1;
@@ -4307,6 +4368,20 @@ void main_manu_function(void)
                 position_in_current_level_menu[current_ekran.current_level] = current_ekran.index_position;
                 //Формуємо екран заголовків типів джерел опреділювальних триґерів
                 make_ekran_list_type_source_dt();
+              }
+              else if (current_ekran.current_level == EKRAN_LIST_D_AND)
+              {
+                if(++current_ekran.index_position >= MAX_ROW_FOR_LIST_D_AND) current_ekran.index_position = 0;
+                position_in_current_level_menu[EKRAN_LIST_D_AND] = current_ekran.index_position;
+                //Формуємо екран заголовків визначуваних "І"
+                make_ekran_chose_of_inputs_outputs_leds_df_buttons_for_ranguvannja(6);
+              }
+              else if ((current_ekran.current_level >= EKRAN_IN_D_AND1) && (current_ekran.current_level <= EKRAN_IN_D_AND8))
+              {
+                if(++current_ekran.index_position >= MAX_ROW_FOR_LIST_IN_DT) current_ekran.index_position = 0;
+                position_in_current_level_menu[current_ekran.current_level] = current_ekran.index_position;
+                //Формуємо екран заголовків входів визначуваних "І"
+                make_ekran_inputs_d_logic(NUMBER_IN_AND);
               }
               else if (current_ekran.current_level == EKRAN_LIST_BUTTONS_FOR_RANGUVANNJA)
               {

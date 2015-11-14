@@ -4088,6 +4088,9 @@
           <name>$PROJ_DIR$\..\..\working files\inc\const_menu_configuration.h</name>
         </file>
         <file>
+          <name>$PROJ_DIR$\..\..\working files\inc\const_menu_d_and.h</name>
+        </file>
+        <file>
           <name>$PROJ_DIR$\..\..\working files\inc\const_menu_df.h</name>
         </file>
         <file>
@@ -4302,6 +4305,9 @@
         </file>
         <file>
           <name>$PROJ_DIR$\..\..\working files\src\menu_diagnostyka.c</name>
+        </file>
+        <file>
+          <name>$PROJ_DIR$\..\..\working files\src\menu_dlogic.c</name>
         </file>
         <file>
           <name>$PROJ_DIR$\..\..\working files\src\menu_dt.c</name>

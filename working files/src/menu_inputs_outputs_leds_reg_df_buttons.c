@@ -11,35 +11,37 @@
 3 - опреділювальні функції
 4 - функціональні кнопки
 5 - опреділювальні триґери
+6 - визначувані "І"
 -------------------------------------------------------
 */
 /*****************************************************/
 void make_ekran_chose_of_inputs_outputs_leds_df_buttons_for_ranguvannja(unsigned int type_of_window)
 {
-  const unsigned char information[MAX_NAMBER_LANGUAGE][6][MAX_COL_LCD] = 
+  const unsigned char information[MAX_NAMBER_LANGUAGE][7][MAX_COL_LCD] = 
   {
-    {" Двх            ", " Двых           ", " Св             ", " О-функция      ", " F              ", " О-триггер      "},
-    {" Двх            ", " Двих           ", " Св             ", " В-функція      ", " F              ", " В-триґер       "},
-    {" DI             ", " DO             ", " LED            ", " UD Function    ", " F              ", " UD Flip-Flop   "},
-    {" Двх            ", " Двых           ", " Св             ", " О-функция      ", " F              ", " О-триггер      "}
+    {" Двх            ", " Двых           ", " Св             ", " О-функция      ", " F              ", " О-триггер      ", " О-И            "},
+    {" Двх            ", " Двих           ", " Св             ", " В-функція      ", " F              ", " В-триґер       ", " В-І            "},
+    {" DI             ", " DO             ", " LED            ", " UD Function    ", " F              ", " UD Flip-Flop   ", " UD AND         "},
+    {" Двх            ", " Двых           ", " Св             ", " О-функция      ", " F              ", " О-триггер      ", " О-И            "}
   };
 
-  const unsigned int first_index_number[MAX_NAMBER_LANGUAGE][6] = 
+  const unsigned int first_index_number[MAX_NAMBER_LANGUAGE][7] = 
   {
-    {4, 5, 3, 10, 2, 10},
-    {4, 5, 3, 10, 2,  9},
-    {3, 3, 4, 12, 2, 13},
-    {4, 5, 3, 10, 2, 10}
+    {4, 5, 3, 10, 2, 10, 4},
+    {4, 5, 3, 10, 2,  9, 4},
+    {3, 3, 4, 12, 2, 13, 7},
+    {4, 5, 3, 10, 2, 10, 4}
   };
   
-  const unsigned int max_row[6] =
+  const unsigned int max_row[7] =
   {
     MAX_ROW_LIST_INPUTS_FOR_RANGUVANNJA,
     MAX_ROW_LIST_OUTPUTS_FOR_RANGUVANNJA,
     MAX_ROW_LIST_LEDS_FOR_RANGUVANNJA,
     MAX_ROW_FOR_LIST_DF,
     MAX_ROW_LIST_BUTTONS_FOR_RANGUVANNJA,
-    MAX_ROW_FOR_LIST_DT
+    MAX_ROW_FOR_LIST_DT,
+    MAX_ROW_FOR_LIST_D_AND
   };
   int index_language = index_language_in_array(current_settings.language);
   unsigned int first_index_number_1 = first_index_number[index_language][type_of_window];

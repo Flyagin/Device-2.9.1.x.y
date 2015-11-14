@@ -1681,7 +1681,48 @@ void min_settings(__SETTINGS *target_label)
       target_label->ranguvannja_reset_dt_source_minus[N_BIG*i+j] = 0x0;
     }
   }
-
+  
+  for (unsigned int i = 0; i < NUMBER_IN_AND; i++)
+  {
+    for(unsigned int j = 0; j < NUMBER_DEFINED_AND; j++)
+    {
+      for (unsigned int k = 0; k < N_BIG; k++ ) 
+      {
+        target_label->ranguvannja_d_and[i][N_BIG*j+k] = 0x0;
+      }
+    }
+  }
+  
+  for (unsigned int i = 0; i < NUMBER_IN_OR; i++)
+  {
+    for(unsigned int j = 0; j < NUMBER_DEFINED_OR; j++)
+    {
+      for (unsigned int k = 0; k < N_BIG; k++ ) 
+      {
+        target_label->ranguvannja_d_or[i][N_BIG*j+k] = 0x0;
+      }
+    }
+  }
+  
+  for (unsigned int i = 0; i < 2; i++)
+  {
+    for(unsigned int j = 0; j < NUMBER_DEFINED_XOR; j++)
+    {
+      for (unsigned int k = 0; k < N_BIG; k++ ) 
+      {
+        target_label->ranguvannja_d_xor[i][N_BIG*j+k] = 0x0;
+      }
+    }
+  }
+  
+  for(unsigned int i = 0; i < NUMBER_DEFINED_NOT; i++)
+  {
+    for (unsigned int j = 0; j < N_BIG; j++ ) 
+    {
+      target_label->ranguvannja_d_not[N_BIG*i+j] = 0x0;
+    }
+  }
+  
   for(unsigned int i = 0; i < NUMBER_DEFINED_BUTTONS; i++)
   {
     target_label->ranguvannja_buttons[i] = 0x0;

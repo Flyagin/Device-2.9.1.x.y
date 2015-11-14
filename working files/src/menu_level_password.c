@@ -122,8 +122,8 @@ void make_ekran_chose_passwords(void)
   //Копіюємо  рядки у робочий екран
   for (unsigned int i=0; i< MAX_ROW_LCD; i++)
   {
-    //Наступні рядки треба перевірити, чи їх требе відображати у текучій коффігурації
-    if (index_of_ekran < MAX_ROW_FOR_CHOSE_SETTINGS)
+    //Наступні рядки треба перевірити, чи їх требе відображати у текучій кофігурації
+    if (index_of_ekran < MAX_ROW_FOR_CHOOSE_PASSWORDS)
     {
       unsigned int password;
       if (index_of_ekran == INDEX_OF_PASSWORD1)

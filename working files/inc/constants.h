@@ -35,6 +35,7 @@
 #include "const_menu_chose_settings_registrators.h"
 #include "const_menu_df.h"
 #include "const_menu_dt.h"
+#include "const_menu_d_and.h"
 #include "const_menu_buttons.h"
 #include "const_menu_info.h"
 #include "const_menu_point_time_settings.h"

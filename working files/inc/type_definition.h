@@ -80,8 +80,13 @@ typedef struct
   unsigned int ranguvannja_set_dt_source_minus[N_BIG*NUMBER_DEFINED_TRIGGERS];  //Ранжування інверсних команд встановлення опреділювальних триґерів
   unsigned int ranguvannja_reset_dt_source_plus[N_BIG*NUMBER_DEFINED_TRIGGERS]; //Ранжування прямих команд скидання опреділювальних триґерів
   unsigned int ranguvannja_reset_dt_source_minus[N_BIG*NUMBER_DEFINED_TRIGGERS];//Ранжування інверсних команд скидання опреділювальних триґерів
+
+  unsigned int ranguvannja_d_and[NUMBER_IN_AND][N_BIG*NUMBER_DEFINED_AND];      //Ранжування команд джерел визначуваних "І"
+  unsigned int ranguvannja_d_or[NUMBER_IN_OR][N_BIG*NUMBER_DEFINED_OR];         //Ранжування команд джерел визначуваних "АБО"
+  unsigned int ranguvannja_d_xor[2][N_BIG*NUMBER_DEFINED_XOR];                  //Ранжування команд джерел визначуваних "Викл.АБО"
+  unsigned int ranguvannja_d_not[N_BIG*NUMBER_DEFINED_NOT];                     //Ранжування команд джерел визначуваних "НЕ"
   
-  unsigned int ranguvannja_buttons[NUMBER_DEFINED_BUTTONS];             //Ранжування опреділюваних кнопок
+  unsigned int ranguvannja_buttons[NUMBER_DEFINED_BUTTONS];                     //Ранжування опреділюваних кнопок
   
   unsigned int configuration;         //Конфігурація приладу
   

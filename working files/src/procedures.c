@@ -379,8 +379,53 @@ unsigned int action_after_changing_of_configuration(unsigned int new_configurati
           target_label->ranguvannja_reset_dt_source_minus[N_BIG*i+j] &= ~maska_1[j];
         }
       }
-    }
   
+      //Знімаємо всі функції для ранжування визначуваних "І"
+      for (unsigned int i = 0; i < NUMBER_IN_AND; i++)
+      {
+        for(unsigned int j = 0; j < NUMBER_DEFINED_AND; j++)
+        {
+          for (unsigned int k = 0; k < N_BIG; k++ ) 
+          {
+            target_label->ranguvannja_d_and[i][N_BIG*j+k] &= ~maska_1[j];
+          }
+        }
+      }
+  
+      //Знімаємо всі функції для ранжування визначуваних "АБО"
+      for (unsigned int i = 0; i < NUMBER_IN_OR; i++)
+      {
+        for(unsigned int j = 0; j < NUMBER_DEFINED_OR; j++)
+        {
+          for (unsigned int k = 0; k < N_BIG; k++ ) 
+          {
+            target_label->ranguvannja_d_or[i][N_BIG*j+k] &= ~maska_1[j];
+          }
+        }
+      }
+  
+      //Знімаємо всі функції для ранжування визначуваних "Викл.АБО"
+      for (unsigned int i = 0; i < 2; i++)
+      {
+        for(unsigned int j = 0; j < NUMBER_DEFINED_XOR; j++)
+        {
+          for (unsigned int k = 0; k < N_BIG; k++ ) 
+          {
+            target_label->ranguvannja_d_xor[i][N_BIG*j+k] &= ~maska_1[j];
+          }
+        }
+      }
+  
+      //Знімаємо всі функції для ранжування визначуваних "НЕ"
+      for(unsigned int i = 0; i < NUMBER_DEFINED_NOT; i++)
+      {
+        for (unsigned int j = 0; j < N_BIG; j++ ) 
+        {
+          target_label->ranguvannja_d_not[N_BIG*i+j] &= ~maska_1[j];
+        }
+      }
+    }
+
     //Перевіряємо, чи МТЗ 0.4кВ зараз знято з конфігурації
     if ((target_label->configuration & (1<<MTZ04_BIT_CONFIGURATION)) == 0)
     {
@@ -467,6 +512,51 @@ unsigned int action_after_changing_of_configuration(unsigned int new_configurati
           target_label->ranguvannja_set_dt_source_minus[N_BIG*i+j]   &= ~maska_1[j];
           target_label->ranguvannja_reset_dt_source_plus[N_BIG*i+j]  &= ~maska_1[j];
           target_label->ranguvannja_reset_dt_source_minus[N_BIG*i+j] &= ~maska_1[j];
+        }
+      }
+  
+      //Знімаємо всі функції для ранжування визначуваних "І"
+      for (unsigned int i = 0; i < NUMBER_IN_AND; i++)
+      {
+        for(unsigned int j = 0; j < NUMBER_DEFINED_AND; j++)
+        {
+          for (unsigned int k = 0; k < N_BIG; k++ ) 
+          {
+            target_label->ranguvannja_d_and[i][N_BIG*j+k] &= ~maska_1[j];
+          }
+        }
+      }
+  
+      //Знімаємо всі функції для ранжування визначуваних "АБО"
+      for (unsigned int i = 0; i < NUMBER_IN_OR; i++)
+      {
+        for(unsigned int j = 0; j < NUMBER_DEFINED_OR; j++)
+        {
+          for (unsigned int k = 0; k < N_BIG; k++ ) 
+          {
+            target_label->ranguvannja_d_or[i][N_BIG*j+k] &= ~maska_1[j];
+          }
+        }
+      }
+  
+      //Знімаємо всі функції для ранжування визначуваних "Викл.АБО"
+      for (unsigned int i = 0; i < 2; i++)
+      {
+        for(unsigned int j = 0; j < NUMBER_DEFINED_XOR; j++)
+        {
+          for (unsigned int k = 0; k < N_BIG; k++ ) 
+          {
+            target_label->ranguvannja_d_xor[i][N_BIG*j+k] &= ~maska_1[j];
+          }
+        }
+      }
+  
+      //Знімаємо всі функції для ранжування визначуваних "НЕ"
+      for(unsigned int i = 0; i < NUMBER_DEFINED_NOT; i++)
+      {
+        for (unsigned int j = 0; j < N_BIG; j++ ) 
+        {
+          target_label->ranguvannja_d_not[N_BIG*i+j] &= ~maska_1[j];
         }
       }
     }
@@ -563,6 +653,51 @@ unsigned int action_after_changing_of_configuration(unsigned int new_configurati
           target_label->ranguvannja_reset_dt_source_minus[N_BIG*i+j] &= ~maska_1[j];
         }
       }
+  
+      //Знімаємо всі функції для ранжування визначуваних "І"
+      for (unsigned int i = 0; i < NUMBER_IN_AND; i++)
+      {
+        for(unsigned int j = 0; j < NUMBER_DEFINED_AND; j++)
+        {
+          for (unsigned int k = 0; k < N_BIG; k++ ) 
+          {
+            target_label->ranguvannja_d_and[i][N_BIG*j+k] &= ~maska_1[j];
+          }
+        }
+      }
+  
+      //Знімаємо всі функції для ранжування визначуваних "АБО"
+      for (unsigned int i = 0; i < NUMBER_IN_OR; i++)
+      {
+        for(unsigned int j = 0; j < NUMBER_DEFINED_OR; j++)
+        {
+          for (unsigned int k = 0; k < N_BIG; k++ ) 
+          {
+            target_label->ranguvannja_d_or[i][N_BIG*j+k] &= ~maska_1[j];
+          }
+        }
+      }
+  
+      //Знімаємо всі функції для ранжування визначуваних "Викл.АБО"
+      for (unsigned int i = 0; i < 2; i++)
+      {
+        for(unsigned int j = 0; j < NUMBER_DEFINED_XOR; j++)
+        {
+          for (unsigned int k = 0; k < N_BIG; k++ ) 
+          {
+            target_label->ranguvannja_d_xor[i][N_BIG*j+k] &= ~maska_1[j];
+          }
+        }
+      }
+  
+      //Знімаємо всі функції для ранжування визначуваних "НЕ"
+      for(unsigned int i = 0; i < NUMBER_DEFINED_NOT; i++)
+      {
+        for (unsigned int j = 0; j < N_BIG; j++ ) 
+        {
+          target_label->ranguvannja_d_not[N_BIG*i+j] &= ~maska_1[j];
+        }
+      }
     }
 
     //Перевіряємо, чи ЗЗ зараз знято з конфігурації
@@ -657,6 +792,51 @@ unsigned int action_after_changing_of_configuration(unsigned int new_configurati
           target_label->ranguvannja_set_dt_source_minus[N_BIG*i+j]   &= ~maska_1[j];
           target_label->ranguvannja_reset_dt_source_plus[N_BIG*i+j]  &= ~maska_1[j];
           target_label->ranguvannja_reset_dt_source_minus[N_BIG*i+j] &= ~maska_1[j];
+        }
+      }
+  
+      //Знімаємо всі функції для ранжування визначуваних "І"
+      for (unsigned int i = 0; i < NUMBER_IN_AND; i++)
+      {
+        for(unsigned int j = 0; j < NUMBER_DEFINED_AND; j++)
+        {
+          for (unsigned int k = 0; k < N_BIG; k++ ) 
+          {
+            target_label->ranguvannja_d_and[i][N_BIG*j+k] &= ~maska_1[j];
+          }
+        }
+      }
+  
+      //Знімаємо всі функції для ранжування визначуваних "АБО"
+      for (unsigned int i = 0; i < NUMBER_IN_OR; i++)
+      {
+        for(unsigned int j = 0; j < NUMBER_DEFINED_OR; j++)
+        {
+          for (unsigned int k = 0; k < N_BIG; k++ ) 
+          {
+            target_label->ranguvannja_d_or[i][N_BIG*j+k] &= ~maska_1[j];
+          }
+        }
+      }
+  
+      //Знімаємо всі функції для ранжування визначуваних "Викл.АБО"
+      for (unsigned int i = 0; i < 2; i++)
+      {
+        for(unsigned int j = 0; j < NUMBER_DEFINED_XOR; j++)
+        {
+          for (unsigned int k = 0; k < N_BIG; k++ ) 
+          {
+            target_label->ranguvannja_d_xor[i][N_BIG*j+k] &= ~maska_1[j];
+          }
+        }
+      }
+  
+      //Знімаємо всі функції для ранжування визначуваних "НЕ"
+      for(unsigned int i = 0; i < NUMBER_DEFINED_NOT; i++)
+      {
+        for (unsigned int j = 0; j < N_BIG; j++ ) 
+        {
+          target_label->ranguvannja_d_not[N_BIG*i+j] &= ~maska_1[j];
         }
       }
     }
@@ -758,6 +938,51 @@ unsigned int action_after_changing_of_configuration(unsigned int new_configurati
           target_label->ranguvannja_reset_dt_source_minus[N_BIG*i+j] &= ~maska_1[j];
         }
       }
+  
+      //Знімаємо всі функції для ранжування визначуваних "І"
+      for (unsigned int i = 0; i < NUMBER_IN_AND; i++)
+      {
+        for(unsigned int j = 0; j < NUMBER_DEFINED_AND; j++)
+        {
+          for (unsigned int k = 0; k < N_BIG; k++ ) 
+          {
+            target_label->ranguvannja_d_and[i][N_BIG*j+k] &= ~maska_1[j];
+          }
+        }
+      }
+  
+      //Знімаємо всі функції для ранжування визначуваних "АБО"
+      for (unsigned int i = 0; i < NUMBER_IN_OR; i++)
+      {
+        for(unsigned int j = 0; j < NUMBER_DEFINED_OR; j++)
+        {
+          for (unsigned int k = 0; k < N_BIG; k++ ) 
+          {
+            target_label->ranguvannja_d_or[i][N_BIG*j+k] &= ~maska_1[j];
+          }
+        }
+      }
+  
+      //Знімаємо всі функції для ранжування визначуваних "Викл.АБО"
+      for (unsigned int i = 0; i < 2; i++)
+      {
+        for(unsigned int j = 0; j < NUMBER_DEFINED_XOR; j++)
+        {
+          for (unsigned int k = 0; k < N_BIG; k++ ) 
+          {
+            target_label->ranguvannja_d_xor[i][N_BIG*j+k] &= ~maska_1[j];
+          }
+        }
+      }
+  
+      //Знімаємо всі функції для ранжування визначуваних "НЕ"
+      for(unsigned int i = 0; i < NUMBER_DEFINED_NOT; i++)
+      {
+        for (unsigned int j = 0; j < N_BIG; j++ ) 
+        {
+          target_label->ranguvannja_d_not[N_BIG*i+j] &= ~maska_1[j];
+        }
+      }
     }
 
     //Перевіряємо, чи АПВ зараз знято з конфігурації
@@ -855,6 +1080,51 @@ unsigned int action_after_changing_of_configuration(unsigned int new_configurati
           target_label->ranguvannja_set_dt_source_minus[N_BIG*i+j]   &= ~maska_1[j];
           target_label->ranguvannja_reset_dt_source_plus[N_BIG*i+j]  &= ~maska_1[j];
           target_label->ranguvannja_reset_dt_source_minus[N_BIG*i+j] &= ~maska_1[j];
+        }
+      }
+  
+      //Знімаємо всі функції для ранжування визначуваних "І"
+      for (unsigned int i = 0; i < NUMBER_IN_AND; i++)
+      {
+        for(unsigned int j = 0; j < NUMBER_DEFINED_AND; j++)
+        {
+          for (unsigned int k = 0; k < N_BIG; k++ ) 
+          {
+            target_label->ranguvannja_d_and[i][N_BIG*j+k] &= ~maska_1[j];
+          }
+        }
+      }
+  
+      //Знімаємо всі функції для ранжування визначуваних "АБО"
+      for (unsigned int i = 0; i < NUMBER_IN_OR; i++)
+      {
+        for(unsigned int j = 0; j < NUMBER_DEFINED_OR; j++)
+        {
+          for (unsigned int k = 0; k < N_BIG; k++ ) 
+          {
+            target_label->ranguvannja_d_or[i][N_BIG*j+k] &= ~maska_1[j];
+          }
+        }
+      }
+  
+      //Знімаємо всі функції для ранжування визначуваних "Викл.АБО"
+      for (unsigned int i = 0; i < 2; i++)
+      {
+        for(unsigned int j = 0; j < NUMBER_DEFINED_XOR; j++)
+        {
+          for (unsigned int k = 0; k < N_BIG; k++ ) 
+          {
+            target_label->ranguvannja_d_xor[i][N_BIG*j+k] &= ~maska_1[j];
+          }
+        }
+      }
+  
+      //Знімаємо всі функції для ранжування визначуваних "НЕ"
+      for(unsigned int i = 0; i < NUMBER_DEFINED_NOT; i++)
+      {
+        for (unsigned int j = 0; j < N_BIG; j++ ) 
+        {
+          target_label->ranguvannja_d_not[N_BIG*i+j] &= ~maska_1[j];
         }
       }
     }
@@ -962,6 +1232,51 @@ unsigned int action_after_changing_of_configuration(unsigned int new_configurati
           target_label->ranguvannja_reset_dt_source_minus[N_BIG*i+j] &= ~maska_1[j];
         }
       }
+  
+      //Знімаємо всі функції для ранжування визначуваних "І"
+      for (unsigned int i = 0; i < NUMBER_IN_AND; i++)
+      {
+        for(unsigned int j = 0; j < NUMBER_DEFINED_AND; j++)
+        {
+          for (unsigned int k = 0; k < N_BIG; k++ ) 
+          {
+            target_label->ranguvannja_d_and[i][N_BIG*j+k] &= ~maska_1[j];
+          }
+        }
+      }
+  
+      //Знімаємо всі функції для ранжування визначуваних "АБО"
+      for (unsigned int i = 0; i < NUMBER_IN_OR; i++)
+      {
+        for(unsigned int j = 0; j < NUMBER_DEFINED_OR; j++)
+        {
+          for (unsigned int k = 0; k < N_BIG; k++ ) 
+          {
+            target_label->ranguvannja_d_or[i][N_BIG*j+k] &= ~maska_1[j];
+          }
+        }
+      }
+  
+      //Знімаємо всі функції для ранжування визначуваних "Викл.АБО"
+      for (unsigned int i = 0; i < 2; i++)
+      {
+        for(unsigned int j = 0; j < NUMBER_DEFINED_XOR; j++)
+        {
+          for (unsigned int k = 0; k < N_BIG; k++ ) 
+          {
+            target_label->ranguvannja_d_xor[i][N_BIG*j+k] &= ~maska_1[j];
+          }
+        }
+      }
+  
+      //Знімаємо всі функції для ранжування визначуваних "НЕ"
+      for(unsigned int i = 0; i < NUMBER_DEFINED_NOT; i++)
+      {
+        for (unsigned int j = 0; j < N_BIG; j++ ) 
+        {
+          target_label->ranguvannja_d_not[N_BIG*i+j] &= ~maska_1[j];
+        }
+      }
     }
 
     //Перевіряємо, чи УРОВ зараз знято з конфігурації
@@ -1065,6 +1380,51 @@ unsigned int action_after_changing_of_configuration(unsigned int new_configurati
           target_label->ranguvannja_set_dt_source_minus[N_BIG*i+j]   &= ~maska_1[j];
           target_label->ranguvannja_reset_dt_source_plus[N_BIG*i+j]  &= ~maska_1[j];
           target_label->ranguvannja_reset_dt_source_minus[N_BIG*i+j] &= ~maska_1[j];
+        }
+      }
+  
+      //Знімаємо всі функції для ранжування визначуваних "І"
+      for (unsigned int i = 0; i < NUMBER_IN_AND; i++)
+      {
+        for(unsigned int j = 0; j < NUMBER_DEFINED_AND; j++)
+        {
+          for (unsigned int k = 0; k < N_BIG; k++ ) 
+          {
+            target_label->ranguvannja_d_and[i][N_BIG*j+k] &= ~maska_1[j];
+          }
+        }
+      }
+  
+      //Знімаємо всі функції для ранжування визначуваних "АБО"
+      for (unsigned int i = 0; i < NUMBER_IN_OR; i++)
+      {
+        for(unsigned int j = 0; j < NUMBER_DEFINED_OR; j++)
+        {
+          for (unsigned int k = 0; k < N_BIG; k++ ) 
+          {
+            target_label->ranguvannja_d_or[i][N_BIG*j+k] &= ~maska_1[j];
+          }
+        }
+      }
+  
+      //Знімаємо всі функції для ранжування визначуваних "Викл.АБО"
+      for (unsigned int i = 0; i < 2; i++)
+      {
+        for(unsigned int j = 0; j < NUMBER_DEFINED_XOR; j++)
+        {
+          for (unsigned int k = 0; k < N_BIG; k++ ) 
+          {
+            target_label->ranguvannja_d_xor[i][N_BIG*j+k] &= ~maska_1[j];
+          }
+        }
+      }
+  
+      //Знімаємо всі функції для ранжування визначуваних "НЕ"
+      for(unsigned int i = 0; i < NUMBER_DEFINED_NOT; i++)
+      {
+        for (unsigned int j = 0; j < N_BIG; j++ ) 
+        {
+          target_label->ranguvannja_d_not[N_BIG*i+j] &= ~maska_1[j];
         }
       }
     }
@@ -1176,6 +1536,51 @@ unsigned int action_after_changing_of_configuration(unsigned int new_configurati
           target_label->ranguvannja_set_dt_source_minus[N_BIG*i+j]   &= ~maska_1[j];
           target_label->ranguvannja_reset_dt_source_plus[N_BIG*i+j]  &= ~maska_1[j];
           target_label->ranguvannja_reset_dt_source_minus[N_BIG*i+j] &= ~maska_1[j];
+        }
+      }
+  
+      //Знімаємо всі функції для ранжування визначуваних "І"
+      for (unsigned int i = 0; i < NUMBER_IN_AND; i++)
+      {
+        for(unsigned int j = 0; j < NUMBER_DEFINED_AND; j++)
+        {
+          for (unsigned int k = 0; k < N_BIG; k++ ) 
+          {
+            target_label->ranguvannja_d_and[i][N_BIG*j+k] &= ~maska_1[j];
+          }
+        }
+      }
+  
+      //Знімаємо всі функції для ранжування визначуваних "АБО"
+      for (unsigned int i = 0; i < NUMBER_IN_OR; i++)
+      {
+        for(unsigned int j = 0; j < NUMBER_DEFINED_OR; j++)
+        {
+          for (unsigned int k = 0; k < N_BIG; k++ ) 
+          {
+            target_label->ranguvannja_d_or[i][N_BIG*j+k] &= ~maska_1[j];
+          }
+        }
+      }
+  
+      //Знімаємо всі функції для ранжування визначуваних "Викл.АБО"
+      for (unsigned int i = 0; i < 2; i++)
+      {
+        for(unsigned int j = 0; j < NUMBER_DEFINED_XOR; j++)
+        {
+          for (unsigned int k = 0; k < N_BIG; k++ ) 
+          {
+            target_label->ranguvannja_d_xor[i][N_BIG*j+k] &= ~maska_1[j];
+          }
+        }
+      }
+  
+      //Знімаємо всі функції для ранжування визначуваних "НЕ"
+      for(unsigned int i = 0; i < NUMBER_DEFINED_NOT; i++)
+      {
+        for (unsigned int j = 0; j < N_BIG; j++ ) 
+        {
+          target_label->ranguvannja_d_not[N_BIG*i+j] &= ~maska_1[j];
         }
       }
     }
@@ -1290,6 +1695,51 @@ unsigned int action_after_changing_of_configuration(unsigned int new_configurati
           target_label->ranguvannja_set_dt_source_minus[N_BIG*i+j]   &= ~maska_1[j];
           target_label->ranguvannja_reset_dt_source_plus[N_BIG*i+j]  &= ~maska_1[j];
           target_label->ranguvannja_reset_dt_source_minus[N_BIG*i+j] &= ~maska_1[j];
+        }
+      }
+  
+      //Знімаємо всі функції для ранжування визначуваних "І"
+      for (unsigned int i = 0; i < NUMBER_IN_AND; i++)
+      {
+        for(unsigned int j = 0; j < NUMBER_DEFINED_AND; j++)
+        {
+          for (unsigned int k = 0; k < N_BIG; k++ ) 
+          {
+            target_label->ranguvannja_d_and[i][N_BIG*j+k] &= ~maska_1[j];
+          }
+        }
+      }
+  
+      //Знімаємо всі функції для ранжування визначуваних "АБО"
+      for (unsigned int i = 0; i < NUMBER_IN_OR; i++)
+      {
+        for(unsigned int j = 0; j < NUMBER_DEFINED_OR; j++)
+        {
+          for (unsigned int k = 0; k < N_BIG; k++ ) 
+          {
+            target_label->ranguvannja_d_or[i][N_BIG*j+k] &= ~maska_1[j];
+          }
+        }
+      }
+  
+      //Знімаємо всі функції для ранжування визначуваних "Викл.АБО"
+      for (unsigned int i = 0; i < 2; i++)
+      {
+        for(unsigned int j = 0; j < NUMBER_DEFINED_XOR; j++)
+        {
+          for (unsigned int k = 0; k < N_BIG; k++ ) 
+          {
+            target_label->ranguvannja_d_xor[i][N_BIG*j+k] &= ~maska_1[j];
+          }
+        }
+      }
+  
+      //Знімаємо всі функції для ранжування визначуваних "НЕ"
+      for(unsigned int i = 0; i < NUMBER_DEFINED_NOT; i++)
+      {
+        for (unsigned int j = 0; j < N_BIG; j++ ) 
+        {
+          target_label->ranguvannja_d_not[N_BIG*i+j] &= ~maska_1[j];
         }
       }
     }
@@ -1410,6 +1860,51 @@ unsigned int action_after_changing_of_configuration(unsigned int new_configurati
           target_label->ranguvannja_reset_dt_source_minus[N_BIG*i+j] &= ~maska_1[j];
         }
       }
+  
+      //Знімаємо всі функції для ранжування визначуваних "І"
+      for (unsigned int i = 0; i < NUMBER_IN_AND; i++)
+      {
+        for(unsigned int j = 0; j < NUMBER_DEFINED_AND; j++)
+        {
+          for (unsigned int k = 0; k < N_BIG; k++ ) 
+          {
+            target_label->ranguvannja_d_and[i][N_BIG*j+k] &= ~maska_1[j];
+          }
+        }
+      }
+  
+      //Знімаємо всі функції для ранжування визначуваних "АБО"
+      for (unsigned int i = 0; i < NUMBER_IN_OR; i++)
+      {
+        for(unsigned int j = 0; j < NUMBER_DEFINED_OR; j++)
+        {
+          for (unsigned int k = 0; k < N_BIG; k++ ) 
+          {
+            target_label->ranguvannja_d_or[i][N_BIG*j+k] &= ~maska_1[j];
+          }
+        }
+      }
+  
+      //Знімаємо всі функції для ранжування визначуваних "Викл.АБО"
+      for (unsigned int i = 0; i < 2; i++)
+      {
+        for(unsigned int j = 0; j < NUMBER_DEFINED_XOR; j++)
+        {
+          for (unsigned int k = 0; k < N_BIG; k++ ) 
+          {
+            target_label->ranguvannja_d_xor[i][N_BIG*j+k] &= ~maska_1[j];
+          }
+        }
+      }
+  
+      //Знімаємо всі функції для ранжування визначуваних "НЕ"
+      for(unsigned int i = 0; i < NUMBER_DEFINED_NOT; i++)
+      {
+        for (unsigned int j = 0; j < N_BIG; j++ ) 
+        {
+          target_label->ranguvannja_d_not[N_BIG*i+j] &= ~maska_1[j];
+        }
+      }
     }
 
     //Перевіряємо, чи "Визначення місця пошкодження" зараз знято з конфігурації
@@ -1509,6 +2004,51 @@ void action_after_changing_zz1_type(__SETTINGS *target_label)
         target_label->ranguvannja_set_dt_source_minus[N_BIG*i+j]   &= ~maska_1[j];
         target_label->ranguvannja_reset_dt_source_plus[N_BIG*i+j]  &= ~maska_1[j];
         target_label->ranguvannja_reset_dt_source_minus[N_BIG*i+j] &= ~maska_1[j];
+      }
+    }
+  
+    //Знімаємо всі функції для ранжування визначуваних "І"
+    for (unsigned int i = 0; i < NUMBER_IN_AND; i++)
+    {
+      for(unsigned int j = 0; j < NUMBER_DEFINED_AND; j++)
+      {
+        for (unsigned int k = 0; k < N_BIG; k++ ) 
+        {
+          target_label->ranguvannja_d_and[i][N_BIG*j+k] &= ~maska_1[j];
+        }
+      }
+    }
+  
+    //Знімаємо всі функції для ранжування визначуваних "АБО"
+    for (unsigned int i = 0; i < NUMBER_IN_OR; i++)
+    {
+      for(unsigned int j = 0; j < NUMBER_DEFINED_OR; j++)
+      {
+        for (unsigned int k = 0; k < N_BIG; k++ ) 
+        {
+          target_label->ranguvannja_d_or[i][N_BIG*j+k] &= ~maska_1[j];
+        }
+      }
+    }
+  
+    //Знімаємо всі функції для ранжування визначуваних "Викл.АБО"
+    for (unsigned int i = 0; i < 2; i++)
+    {
+      for(unsigned int j = 0; j < NUMBER_DEFINED_XOR; j++)
+      {
+        for (unsigned int k = 0; k < N_BIG; k++ ) 
+        {
+          target_label->ranguvannja_d_xor[i][N_BIG*j+k] &= ~maska_1[j];
+        }
+      }
+    }
+  
+    //Знімаємо всі функції для ранжування визначуваних "НЕ"
+    for(unsigned int i = 0; i < NUMBER_DEFINED_NOT; i++)
+    {
+      for (unsigned int j = 0; j < N_BIG; j++ ) 
+      {
+        target_label->ranguvannja_d_not[N_BIG*i+j] &= ~maska_1[j];
       }
     }
   }
