@@ -729,7 +729,7 @@ void Configure_I2C(I2C_TypeDef* I2Cx)
   I2C_InitStructure.I2C_OwnAddress1 = EEPROM_ADDRESS;
   I2C_InitStructure.I2C_Ack = I2C_Ack_Enable;
   I2C_InitStructure.I2C_AcknowledgedAddress = I2C_AcknowledgedAddress_7bit;
-  I2C_InitStructure.I2C_ClockSpeed = CLOCKSPEED;
+  I2C_InitStructure.I2C_ClockSpeed = (low_speed_i2c == 0 ) ? CLOCKSPEED_1MBIT : CLOCKSPEED;
   I2C_Init(I2Cx, &I2C_InitStructure);
 
   /* Дозволяємо для I2C генерацію переривань по помилках */
@@ -1481,6 +1481,8 @@ void start_settings_peripherals(void)
   }
   /**********************/
   
+  low_speed_i2c = 0xff;
+
   /**********************/
   //Настроювання TIM2 на генерацію переривань кожні 1 мс для системи захистів
   /**********************/

@@ -411,6 +411,7 @@ unsigned int time_delta_watchdog_output_max = 0;
 unsigned char Temporaty_I2C_Buffer[SIZE_PAGE_EEPROM + 2];
 unsigned int number_busy_state = 0;
 unsigned int type_error_of_exchanging_via_i2c = 0;
+unsigned int low_speed_i2c = 0;
 __DRIVER_I2C driver_i2c;
 unsigned int control_i2c_taskes[2]  = {0,0};
 unsigned int comparison_writing = 0; /*очищений біт означає, що іде зчитування у робочий об'єкт, встановлений біт означає що іде порівняння записаної інформації після операції запису*/
