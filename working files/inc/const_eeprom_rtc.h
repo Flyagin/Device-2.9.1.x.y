@@ -9,6 +9,7 @@
 #define ERROR_UNEXPECTED_BIT      1
 #define ERROR_FIX_ERRORS_BIT      2
 
+#define CLOCKSPEED_1MBIT      1000000
 #define CLOCKSPEED            400000
 #define SIZE_PAGE_EEPROM      64
 #define EEPROM_ADDRESS        0xA2

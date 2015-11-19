@@ -361,20 +361,20 @@ inline void periodical_operations(void)
 *******************************************************************************/
 int main(void)
 {
-  /************************************************************/
-  //Перевірка контрольної суми програми
-  /************************************************************/
-  {
-    unsigned short sum = 0;
-    unsigned char *point = ((unsigned char *)&__checksum_begin);
-    for (unsigned int i = ((unsigned int)&__checksum_end -(unsigned int)&__checksum_begin +1); i > 0; i--)
-      sum += *point++;
-    if (sum != (unsigned short)__checksum)
-    {
-      while(1);
-    }
-  }
-  /************************************************************/
+//  /************************************************************/
+//  //Перевірка контрольної суми програми
+//  /************************************************************/
+//  {
+//    unsigned short sum = 0;
+//    unsigned char *point = ((unsigned char *)&__checksum_begin);
+//    for (unsigned int i = ((unsigned int)&__checksum_end -(unsigned int)&__checksum_begin +1); i > 0; i--)
+//      sum += *point++;
+//    if (sum != (unsigned short)__checksum)
+//    {
+//      while(1);
+//    }
+//  }
+//  /************************************************************/
   
   /************************************************************/
   //Стартова ініціалізація

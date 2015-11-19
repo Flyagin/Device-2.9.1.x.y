@@ -293,6 +293,7 @@ extern unsigned int time_delta_watchdog_output_max;
 extern unsigned char Temporaty_I2C_Buffer[SIZE_PAGE_EEPROM + 2];
 extern unsigned int number_busy_state;
 extern unsigned int type_error_of_exchanging_via_i2c;
+extern unsigned int low_speed_i2c;
 extern __DRIVER_I2C driver_i2c;
 extern unsigned int control_i2c_taskes[2];
 extern unsigned int comparison_writing;
