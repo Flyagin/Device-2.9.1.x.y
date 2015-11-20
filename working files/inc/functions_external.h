@@ -137,7 +137,6 @@ extern void make_ekran_timeout_df(unsigned int);
 extern void make_ekran_list_type_source_df(void);
 extern void make_ekran_set_reset_trigger(void);
 extern void make_ekran_list_type_source_dt(void);
-extern void make_ekran_inputs_d_logic(unsigned int);
 extern void make_ekran_set_function_in_button(unsigned int);
 extern void make_ekran_info(void);
 extern void make_ekran_date_time_pz(void);

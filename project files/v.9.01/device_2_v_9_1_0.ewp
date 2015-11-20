@@ -4307,9 +4307,6 @@
           <name>$PROJ_DIR$\..\..\working files\src\menu_diagnostyka.c</name>
         </file>
         <file>
-          <name>$PROJ_DIR$\..\..\working files\src\menu_dlogic.c</name>
-        </file>
-        <file>
           <name>$PROJ_DIR$\..\..\working files\src\menu_dt.c</name>
         </file>
         <file>

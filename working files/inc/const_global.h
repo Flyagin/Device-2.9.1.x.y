@@ -1448,6 +1448,7 @@ typedef enum __vymknennja_vid_zakhystiv__
 #define VAGA_MAX_FUNCTIONS_IN_DF                4
 #define MAX_FUNCTIONS_IN_DF                     (1 << VAGA_MAX_FUNCTIONS_IN_DF)
 #define MAX_FUNCTIONS_IN_DT                     6
+#define MAX_FUNCTIONS_IN_D_AND                  NUMBER_IN_AND
 #define VAGA_MAX_FUNCTIONS_IN_DB                3
 #define MAX_FUNCTIONS_IN_DB                     (1 << VAGA_MAX_FUNCTIONS_IN_DB)
 #define VAGA_MAX_FUNCTIONS_IN_AREG              5

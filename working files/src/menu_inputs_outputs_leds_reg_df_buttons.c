@@ -2160,6 +2160,24 @@ void make_ekran_set_function_in_output_led_df_dt_reg(unsigned int number_ekran, 
     }
     max_row_ranguvannja = MAX_ROW_RANGUVANNJA_DT;
   }
+  else if(type_ekran == INDEX_VIEWING_D_AND)
+  {
+    if(current_ekran.edition == 0)
+    {
+      for (unsigned int i = 0; i < N_BIG; i++)
+      {
+        state_viewing_input[i] = current_settings.ranguvannja_d_and[N_BIG*(number_ekran - EKRAN_RANGUVANNJA_D_AND1) + i];
+      }
+    }
+    else
+    {
+      for (unsigned int i = 0; i < N_BIG; i++)
+      {
+        state_viewing_input[i] = edition_settings.ranguvannja_d_and[N_BIG*(number_ekran - EKRAN_RANGUVANNJA_D_AND1) + i];
+      }
+    }
+    max_row_ranguvannja = MAX_ROW_RANGUVANNJA_D_AND;
+  }
   else if(type_ekran == INDEX_VIEWING_OUTPUT)
   {
     if(current_ekran.edition == 0)
@@ -2811,6 +2829,65 @@ void make_ekran_set_function_in_output_led_df_dt_reg(unsigned int number_ekran, 
         if (current_ekran.index_position >= ((int)index_deleted_function)) position_temp--;
         /*************************************************************/
       }
+      /*************************************************************/
+    }
+    else if(type_ekran == INDEX_VIEWING_D_AND)
+    {
+      /*************************************************************/
+      //У випадку, якщо відображення здійснюється вікна опреділюваних "І", то відкидаємо ті функції, які не можуть бути джерелати
+      /*************************************************************/
+      unsigned int index_of_d_and = number_ekran - EKRAN_RANGUVANNJA_D_AND1;
+      
+      /*************************************************************/
+      //Відкидаємо ім'я даних функцій і зміщаємо біти
+      /*************************************************************/
+      //Визначаємо індекс функції, яку треба буде фільтрувати із сприску
+      //Першою фільтруємо функцію з більшим номером, щоб не мати порблем з формуванням маски, коли вже попердньо перша фільтрація проведена
+      unsigned int index_deleted_function = RANG_OUTPUT_LED_DF_REG_D_AND1 + index_of_d_and;
+      
+      //Формуємо маску біт, які не треба переміщати при переміщенні імен полів
+      unsigned int maska[N_BIG] = {0, 0, 0, 0, 0, 0, 0, 0};
+      for (unsigned int j = 0; j < index_deleted_function; j++) _SET_BIT(maska, j);
+          
+      /***/
+      //Зміщуємо біти стану реанжування функцій разом із їх назвами
+      /***/
+      unsigned int new_temp_data_1[N_BIG], new_temp_data_2[N_BIG];
+
+      for (unsigned int k = 0; k < N_BIG; k++)
+      {
+        new_temp_data_1[k] = state_viewing_input[k] & maska[k];
+
+        new_temp_data_2[k] = state_viewing_input[k] & (~maska[k]);
+      }
+
+      for (unsigned int k = 0; k < (N_BIG - 1); k++)
+      {
+        new_temp_data_2[k] = ( (new_temp_data_2[k] >> 1) | ((new_temp_data_2[k + 1] & 0x1) << 31) ) & (~maska[k]);
+      }
+      new_temp_data_2[N_BIG - 1] =  (new_temp_data_2[N_BIG - 1] >> 1) & (~maska[N_BIG - 1]);
+                
+      for (unsigned int k = 0; k < N_BIG; k++)
+      {
+        state_viewing_input[k] = new_temp_data_1[k] | new_temp_data_2[k];
+      }
+      /***/
+      for (unsigned int j = index_deleted_function; j < max_row_ranguvannja; j++)
+      {
+        if ((j + 1) < max_row_ranguvannja)
+        {
+          for (unsigned int k = 0; k<MAX_COL_LCD; k++)
+            name_string_tmp[j + NUMBER_ROW_FOR_NOTHING_INFORMATION][k] = name_string_tmp[j + NUMBER_ROW_FOR_NOTHING_INFORMATION + 1][k];
+        }
+        else 
+        {
+          for (unsigned int k = 0; k<MAX_COL_LCD; k++)
+            name_string_tmp[j + NUMBER_ROW_FOR_NOTHING_INFORMATION][k] = ' ';
+        }
+      }
+      if (current_ekran.index_position >= ((int)index_deleted_function)) position_temp--;
+      /*************************************************************/
+      
       /*************************************************************/
     }
     else if(type_ekran == INDEX_VIEWING_OUTPUT)
