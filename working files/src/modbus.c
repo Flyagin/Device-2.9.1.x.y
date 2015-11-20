@@ -10756,6 +10756,46 @@ inline unsigned int Get_data_file(unsigned char* input_data, unsigned char* outp
           case (186 + NUMBER_ANALOG_CANALES):
           case (187 + NUMBER_ANALOG_CANALES):
           case (188 + NUMBER_ANALOG_CANALES):
+          case (189 + NUMBER_ANALOG_CANALES):
+          case (190 + NUMBER_ANALOG_CANALES):
+          case (191 + NUMBER_ANALOG_CANALES):
+          case (192 + NUMBER_ANALOG_CANALES):
+          case (193 + NUMBER_ANALOG_CANALES):
+          case (194 + NUMBER_ANALOG_CANALES):
+          case (195 + NUMBER_ANALOG_CANALES):
+          case (196 + NUMBER_ANALOG_CANALES):
+          case (197 + NUMBER_ANALOG_CANALES):
+          case (198 + NUMBER_ANALOG_CANALES):
+          case (199 + NUMBER_ANALOG_CANALES):
+          case (200 + NUMBER_ANALOG_CANALES):
+          case (201 + NUMBER_ANALOG_CANALES):
+          case (202 + NUMBER_ANALOG_CANALES):
+          case (203 + NUMBER_ANALOG_CANALES):
+          case (204 + NUMBER_ANALOG_CANALES):
+          case (205 + NUMBER_ANALOG_CANALES):
+          case (206 + NUMBER_ANALOG_CANALES):
+          case (207 + NUMBER_ANALOG_CANALES):
+          case (208 + NUMBER_ANALOG_CANALES):
+          case (209 + NUMBER_ANALOG_CANALES):
+          case (210 + NUMBER_ANALOG_CANALES):
+          case (211 + NUMBER_ANALOG_CANALES):
+          case (212 + NUMBER_ANALOG_CANALES):
+          case (213 + NUMBER_ANALOG_CANALES):
+          case (214 + NUMBER_ANALOG_CANALES):
+          case (215 + NUMBER_ANALOG_CANALES):
+          case (216 + NUMBER_ANALOG_CANALES):
+          case (217 + NUMBER_ANALOG_CANALES):
+          case (218 + NUMBER_ANALOG_CANALES):
+          case (219 + NUMBER_ANALOG_CANALES):
+          case (220 + NUMBER_ANALOG_CANALES):
+          case (221 + NUMBER_ANALOG_CANALES):
+          case (222 + NUMBER_ANALOG_CANALES):
+          case (223 + NUMBER_ANALOG_CANALES):
+          case (224 + NUMBER_ANALOG_CANALES):
+          case (225 + NUMBER_ANALOG_CANALES):
+          case (226 + NUMBER_ANALOG_CANALES):
+          case (227 + NUMBER_ANALOG_CANALES):
+          case (228 + NUMBER_ANALOG_CANALES):
             {
               if (length <= 19)
               {
@@ -10801,6 +10841,46 @@ inline unsigned int Get_data_file(unsigned char* input_data, unsigned char* outp
                         " Óñò.Î-òðèããåðà4",
                         " Ñáð.Î-òðèããåðà4",
                         " Âûõ.Î-òðèããåðà4",
+                        "      Î-È1      ",
+                        "      Î-È2      ",
+                        "      Î-È3      ",
+                        "      Î-È4      ",
+                        "      Î-È5      ",
+                        "      Î-È6      ",
+                        "      Î-È7      ",
+                        "      Î-È8      ",
+                        "     Î-ÈËÈ1     ",
+                        "     Î-ÈËÈ2     ",
+                        "     Î-ÈËÈ3     ",
+                        "     Î-ÈËÈ4     ",
+                        "     Î-ÈËÈ5     ",
+                        "     Î-ÈËÈ6     ",
+                        "     Î-ÈËÈ7     ",
+                        "     Î-ÈËÈ8     ",
+                        "  Î-Èñêë.ÈËÈ1   ",
+                        "  Î-Èñêë.ÈËÈ2   ",
+                        "  Î-Èñêë.ÈËÈ3   ",
+                        "  Î-Èñêë.ÈËÈ4   ",
+                        "  Î-Èñêë.ÈËÈ5   ",
+                        "  Î-Èñêë.ÈËÈ6   ",
+                        "  Î-Èñêë.ÈËÈ7   ",
+                        "  Î-Èñêë.ÈËÈ8   ",
+                        "     Î-ÍÅ1      ",
+                        "     Î-ÍÅ2      ",
+                        "     Î-ÍÅ3      ",
+                        "     Î-ÍÅ4      ",
+                        "     Î-ÍÅ5      ",
+                        "     Î-ÍÅ6      ",
+                        "     Î-ÍÅ7      ",
+                        "     Î-ÍÅ8      ",
+                        "     Î-ÍÅ9      ",
+                        "     Î-ÍÅ10     ",
+                        "     Î-ÍÅ11     ",
+                        "     Î-ÍÅ12     ",
+                        "     Î-ÍÅ13     ",
+                        "     Î-ÍÅ14     ",
+                        "     Î-ÍÅ15     ",
+                        "     Î-ÍÅ16     ",
                         "  Áëîê.âêë.ÂÂ   ",
                         " Ñáðîñ èíäèêàöèè",
                         "   Ñáðîñ ðåëå   ",
@@ -10990,6 +11070,46 @@ inline unsigned int Get_data_file(unsigned char* input_data, unsigned char* outp
                         " Âñò.Â-òðè´åðà4 ",
                         " Ñê.Â-òðè´åðà4  ",
                         " Âèõ.Â-òðè´åðà4 ",
+                        "      Â-²1      ",
+                        "      Â-²2      ",
+                        "      Â-²3      ",
+                        "      Â-²4      ",
+                        "      Â-²5      ",
+                        "      Â-²6      ",
+                        "      Â-²7      ",
+                        "      Â-²8      ",
+                        "     Â-ÀÁÎ1     ",
+                        "     Â-ÀÁÎ2     ",
+                        "     Â-ÀÁÎ3     ",
+                        "     Â-ÀÁÎ4     ",
+                        "     Â-ÀÁÎ5     ",
+                        "     Â-ÀÁÎ6     ",
+                        "     Â-ÀÁÎ7     ",
+                        "     Â-ÀÁÎ8     ",
+                        "  Â-Âèêë.ÀÁÎ1   ",
+                        "  Â-Âèêë.ÀÁÎ2   ",
+                        "  Â-Âèêë.ÀÁÎ3   ",
+                        "  Â-Âèêë.ÀÁÎ4   ",
+                        "  Â-Âèêë.ÀÁÎ5   ",
+                        "  Â-Âèêë.ÀÁÎ6   ",
+                        "  Â-Âèêë.ÀÁÎ7   ",
+                        "  Â-Âèêë.ÀÁÎ8   ",
+                        "     Â-Í²1      ",
+                        "     Â-Í²2      ",
+                        "     Â-Í²3      ",
+                        "     Â-Í²4      ",
+                        "     Â-Í²5      ",
+                        "     Â-Í²6      ",
+                        "     Â-Í²7      ",
+                        "     Â-Í²8      ",
+                        "     Â-Í²9      ",
+                        "     Â-Í²10     ",
+                        "     Â-Í²11     ",
+                        "     Â-Í²12     ",
+                        "     Â-Í²13     ",
+                        "     Â-Í²14     ",
+                        "     Â-Í²15     ",
+                        "     Â-Í²16     ",
                         " Áëîê.ââ³ìêí.ÂÂ ",
                         " Ñêèä.³íäèêàö³¿ ",
                         "   Ñêèä.ðåëå    ",
@@ -11179,6 +11299,46 @@ inline unsigned int Get_data_file(unsigned char* input_data, unsigned char* outp
                         "UD Flip-Flop4 S.",
                         "UD Flip-Flop4 R.",
                         "UD Flip-Flop4 O.",
+                        "    UD AND1     ",
+                        "    UD AND2     ",
+                        "    UD AND3     ",
+                        "    UD AND4     ",
+                        "    UD AND5     ",
+                        "    UD AND6     ",
+                        "    UD AND7     ",
+                        "    UD AND8     ",
+                        "     UD OR1     ",
+                        "     UD OR2     ",
+                        "     UD OR3     ",
+                        "     UD OR4     ",
+                        "     UD OR5     ",
+                        "     UD OR6     ",
+                        "     UD OR7     ",
+                        "     UD OR8     ",
+                        "    UD XOR1     ",
+                        "    UD XOR2     ",
+                        "    UD XOR3     ",
+                        "    UD XOR4     ",
+                        "    UD XOR5     ",
+                        "    UDXOR6      ",
+                        "    UD XOR7     ",
+                        "    UD XOR8     ",
+                        "    UD NOT1     ",
+                        "    UD NOT2     ",
+                        "    UD NOT3     ",
+                        "    UD NOT4     ",
+                        "    UD NOT5     ",
+                        "    UD NOT6     ",
+                        "    UD NOT7     ",
+                        "    UD NOT8     ",
+                        "    UD NOT9     ",
+                        "    UD NOT10    ",
+                        "    UD NOT11    ",
+                        "    UD NOT12    ",
+                        "    UD NOT13    ",
+                        "    UD NOT14    ",
+                        "    UD NOT15    ",
+                        "    UD NOT16    ",
                         " ON CB Blocking ",
                         "Indication Reset",
                         "  Relay Reset   ",
@@ -11368,6 +11528,46 @@ inline unsigned int Get_data_file(unsigned char* input_data, unsigned char* outp
                         " Óñò.Î-òðèããåðà4",
                         " Ñáð.Î-òðèããåðà4",
                         " Âûõ.Î-òðèããåðà4",
+                        "      Î-È1      ",
+                        "      Î-È2      ",
+                        "      Î-È3      ",
+                        "      Î-È4      ",
+                        "      Î-È5      ",
+                        "      Î-È6      ",
+                        "      Î-È7      ",
+                        "      Î-È8      ",
+                        "     Î-ÈËÈ1     ",
+                        "     Î-ÈËÈ2     ",
+                        "     Î-ÈËÈ3     ",
+                        "     Î-ÈËÈ4     ",
+                        "     Î-ÈËÈ5     ",
+                        "     Î-ÈËÈ6     ",
+                        "     Î-ÈËÈ7     ",
+                        "     Î-ÈËÈ8     ",
+                        "  Î-Èñêë.ÈËÈ1   ",
+                        "  Î-Èñêë.ÈËÈ2   ",
+                        "  Î-Èñêë.ÈËÈ3   ",
+                        "  Î-Èñêë.ÈËÈ4   ",
+                        "  Î-Èñêë.ÈËÈ5   ",
+                        "  Î-Èñêë.ÈËÈ6   ",
+                        "  Î-Èñêë.ÈËÈ7   ",
+                        "  Î-Èñêë.ÈËÈ8   ",
+                        "     Î-ÍÅ1      ",
+                        "     Î-ÍÅ2      ",
+                        "     Î-ÍÅ3      ",
+                        "     Î-ÍÅ4      ",
+                        "     Î-ÍÅ5      ",
+                        "     Î-ÍÅ6      ",
+                        "     Î-ÍÅ7      ",
+                        "     Î-ÍÅ8      ",
+                        "     Î-ÍÅ9      ",
+                        "     Î-ÍÅ10     ",
+                        "     Î-ÍÅ11     ",
+                        "     Î-ÍÅ12     ",
+                        "     Î-ÍÅ13     ",
+                        "     Î-ÍÅ14     ",
+                        "     Î-ÍÅ15     ",
+                        "     Î-ÍÅ16     ",
                         "  Áëîê.âêë.ÂÂ   ",
                         " Ñáðîñ èíäèêàöèè",
                         "   Ñáðîñ ðåëå   ",
@@ -12183,6 +12383,46 @@ inline unsigned int Get_data_file(unsigned char* input_data, unsigned char* outp
           case 186:
           case 187:
           case 188:
+          case 189:
+          case 190:
+          case 191:
+          case 192:
+          case 193:
+          case 194:
+          case 195:
+          case 196:
+          case 197:
+          case 198:
+          case 199:
+          case 200:
+          case 201:
+          case 202:
+          case 203:
+          case 204:
+          case 205:
+          case 206:
+          case 207:
+          case 208:
+          case 209:
+          case 210:
+          case 211:
+          case 212:
+          case 213:
+          case 214:
+          case 215:
+          case 216:
+          case 217:
+          case 218:
+          case 219:
+          case 220:
+          case 221:
+          case 222:
+          case 223:
+          case 224:
+          case 225:
+          case 226:
+          case 227:
+          case 228:
             {
               if (length <= 19)
               {
@@ -12228,6 +12468,46 @@ inline unsigned int Get_data_file(unsigned char* input_data, unsigned char* outp
                         " Óñò.Î-òðèããåðà4",
                         " Ñáð.Î-òðèããåðà4",
                         " Âûõ.Î-òðèããåðà4",
+                        "      Î-È1      ",
+                        "      Î-È2      ",
+                        "      Î-È3      ",
+                        "      Î-È4      ",
+                        "      Î-È5      ",
+                        "      Î-È6      ",
+                        "      Î-È7      ",
+                        "      Î-È8      ",
+                        "     Î-ÈËÈ1     ",
+                        "     Î-ÈËÈ2     ",
+                        "     Î-ÈËÈ3     ",
+                        "     Î-ÈËÈ4     ",
+                        "     Î-ÈËÈ5     ",
+                        "     Î-ÈËÈ6     ",
+                        "     Î-ÈËÈ7     ",
+                        "     Î-ÈËÈ8     ",
+                        "  Î-Èñêë.ÈËÈ1   ",
+                        "  Î-Èñêë.ÈËÈ2   ",
+                        "  Î-Èñêë.ÈËÈ3   ",
+                        "  Î-Èñêë.ÈËÈ4   ",
+                        "  Î-Èñêë.ÈËÈ5   ",
+                        "  Î-Èñêë.ÈËÈ6   ",
+                        "  Î-Èñêë.ÈËÈ7   ",
+                        "  Î-Èñêë.ÈËÈ8   ",
+                        "     Î-ÍÅ1      ",
+                        "     Î-ÍÅ2      ",
+                        "     Î-ÍÅ3      ",
+                        "     Î-ÍÅ4      ",
+                        "     Î-ÍÅ5      ",
+                        "     Î-ÍÅ6      ",
+                        "     Î-ÍÅ7      ",
+                        "     Î-ÍÅ8      ",
+                        "     Î-ÍÅ9      ",
+                        "     Î-ÍÅ10     ",
+                        "     Î-ÍÅ11     ",
+                        "     Î-ÍÅ12     ",
+                        "     Î-ÍÅ13     ",
+                        "     Î-ÍÅ14     ",
+                        "     Î-ÍÅ15     ",
+                        "     Î-ÍÅ16     ",
                         "  Áëîê.âêë.ÂÂ   ",
                         " Ñáðîñ èíäèêàöèè",
                         "   Ñáðîñ ðåëå   ",
@@ -12417,6 +12697,46 @@ inline unsigned int Get_data_file(unsigned char* input_data, unsigned char* outp
                         " Âñò.Â-òðè´åðà4 ",
                         " Ñê.Â-òðè´åðà4  ",
                         " Âèõ.Â-òðè´åðà4 ",
+                        "      Â-²1      ",
+                        "      Â-²2      ",
+                        "      Â-²3      ",
+                        "      Â-²4      ",
+                        "      Â-²5      ",
+                        "      Â-²6      ",
+                        "      Â-²7      ",
+                        "      Â-²8      ",
+                        "     Â-ÀÁÎ1     ",
+                        "     Â-ÀÁÎ2     ",
+                        "     Â-ÀÁÎ3     ",
+                        "     Â-ÀÁÎ4     ",
+                        "     Â-ÀÁÎ5     ",
+                        "     Â-ÀÁÎ6     ",
+                        "     Â-ÀÁÎ7     ",
+                        "     Â-ÀÁÎ8     ",
+                        "  Â-Âèêë.ÀÁÎ1   ",
+                        "  Â-Âèêë.ÀÁÎ2   ",
+                        "  Â-Âèêë.ÀÁÎ3   ",
+                        "  Â-Âèêë.ÀÁÎ4   ",
+                        "  Â-Âèêë.ÀÁÎ5   ",
+                        "  Â-Âèêë.ÀÁÎ6   ",
+                        "  Â-Âèêë.ÀÁÎ7   ",
+                        "  Â-Âèêë.ÀÁÎ8   ",
+                        "     Â-Í²1      ",
+                        "     Â-Í²2      ",
+                        "     Â-Í²3      ",
+                        "     Â-Í²4      ",
+                        "     Â-Í²5      ",
+                        "     Â-Í²6      ",
+                        "     Â-Í²7      ",
+                        "     Â-Í²8      ",
+                        "     Â-Í²9      ",
+                        "     Â-Í²10     ",
+                        "     Â-Í²11     ",
+                        "     Â-Í²12     ",
+                        "     Â-Í²13     ",
+                        "     Â-Í²14     ",
+                        "     Â-Í²15     ",
+                        "     Â-Í²16     ",
                         " Áëîê.ââ³ìêí.ÂÂ ",
                         " Ñêèä.³íäèêàö³¿ ",
                         "   Ñêèä.ðåëå    ",
@@ -12606,6 +12926,46 @@ inline unsigned int Get_data_file(unsigned char* input_data, unsigned char* outp
                         "UD Flip-Flop4 S.",
                         "UD Flip-Flop4 R.",
                         "UD Flip-Flop4 O.",
+                        "    UD AND1     ",
+                        "    UD AND2     ",
+                        "    UD AND3     ",
+                        "    UD AND4     ",
+                        "    UD AND5     ",
+                        "    UD AND6     ",
+                        "    UD AND7     ",
+                        "    UD AND8     ",
+                        "     UD OR1     ",
+                        "     UD OR2     ",
+                        "     UD OR3     ",
+                        "     UD OR4     ",
+                        "     UD OR5     ",
+                        "     UD OR6     ",
+                        "     UD OR7     ",
+                        "     UD OR8     ",
+                        "    UD XOR1     ",
+                        "    UD XOR2     ",
+                        "    UD XOR3     ",
+                        "    UD XOR4     ",
+                        "    UD XOR5     ",
+                        "    UDXOR6      ",
+                        "    UD XOR7     ",
+                        "    UD XOR8     ",
+                        "    UD NOT1     ",
+                        "    UD NOT2     ",
+                        "    UD NOT3     ",
+                        "    UD NOT4     ",
+                        "    UD NOT5     ",
+                        "    UD NOT6     ",
+                        "    UD NOT7     ",
+                        "    UD NOT8     ",
+                        "    UD NOT9     ",
+                        "    UD NOT10    ",
+                        "    UD NOT11    ",
+                        "    UD NOT12    ",
+                        "    UD NOT13    ",
+                        "    UD NOT14    ",
+                        "    UD NOT15    ",
+                        "    UD NOT16    ",
                         " ON CB Blocking ",
                         "Indication Reset",
                         "  Relay Reset   ",
@@ -12795,6 +13155,46 @@ inline unsigned int Get_data_file(unsigned char* input_data, unsigned char* outp
                         " Óñò.Î-òðèããåðà4",
                         " Ñáð.Î-òðèããåðà4",
                         " Âûõ.Î-òðèããåðà4",
+                        "      Î-È1      ",
+                        "      Î-È2      ",
+                        "      Î-È3      ",
+                        "      Î-È4      ",
+                        "      Î-È5      ",
+                        "      Î-È6      ",
+                        "      Î-È7      ",
+                        "      Î-È8      ",
+                        "     Î-ÈËÈ1     ",
+                        "     Î-ÈËÈ2     ",
+                        "     Î-ÈËÈ3     ",
+                        "     Î-ÈËÈ4     ",
+                        "     Î-ÈËÈ5     ",
+                        "     Î-ÈËÈ6     ",
+                        "     Î-ÈËÈ7     ",
+                        "     Î-ÈËÈ8     ",
+                        "  Î-Èñêë.ÈËÈ1   ",
+                        "  Î-Èñêë.ÈËÈ2   ",
+                        "  Î-Èñêë.ÈËÈ3   ",
+                        "  Î-Èñêë.ÈËÈ4   ",
+                        "  Î-Èñêë.ÈËÈ5   ",
+                        "  Î-Èñêë.ÈËÈ6   ",
+                        "  Î-Èñêë.ÈËÈ7   ",
+                        "  Î-Èñêë.ÈËÈ8   ",
+                        "     Î-ÍÅ1      ",
+                        "     Î-ÍÅ2      ",
+                        "     Î-ÍÅ3      ",
+                        "     Î-ÍÅ4      ",
+                        "     Î-ÍÅ5      ",
+                        "     Î-ÍÅ6      ",
+                        "     Î-ÍÅ7      ",
+                        "     Î-ÍÅ8      ",
+                        "     Î-ÍÅ9      ",
+                        "     Î-ÍÅ10     ",
+                        "     Î-ÍÅ11     ",
+                        "     Î-ÍÅ12     ",
+                        "     Î-ÍÅ13     ",
+                        "     Î-ÍÅ14     ",
+                        "     Î-ÍÅ15     ",
+                        "     Î-ÍÅ16     ",
                         "  Áëîê.âêë.ÂÂ   ",
                         " Ñáðîñ èíäèêàöèè",
                         "   Ñáðîñ ðåëå   ",

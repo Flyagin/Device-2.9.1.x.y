@@ -8338,7 +8338,17 @@ inline void main_protection(void)
   copying_active_functions = 1; //Помічаємо, що зараз обновляємо значення активних функцій
   
   //Скижаємо тісигнали, які відповідають за входи, фкнопки і активацію з інтерфейсу
-  const unsigned int maska_input_signals[N_BIG] = {MASKA_FOR_INPUT_SIGNALS_0, MASKA_FOR_INPUT_SIGNALS_1, MASKA_FOR_INPUT_SIGNALS_2, MASKA_FOR_INPUT_SIGNALS_3, MASKA_FOR_INPUT_SIGNALS_4, MASKA_FOR_INPUT_SIGNALS_5, MASKA_FOR_INPUT_SIGNALS_6, MASKA_FOR_INPUT_SIGNALS_7};
+  const unsigned int maska_input_signals[N_BIG] = 
+  {
+    MASKA_FOR_INPUT_SIGNALS_0, 
+    MASKA_FOR_INPUT_SIGNALS_1, 
+    MASKA_FOR_INPUT_SIGNALS_2, 
+    MASKA_FOR_INPUT_SIGNALS_3, 
+    MASKA_FOR_INPUT_SIGNALS_4, 
+    MASKA_FOR_INPUT_SIGNALS_5, 
+    MASKA_FOR_INPUT_SIGNALS_6, 
+    MASKA_FOR_INPUT_SIGNALS_7
+  };
   for (unsigned int i = 0; i < N_BIG; i++) active_functions[i] &= (unsigned int)(~maska_input_signals[i]);
   
   /**************************/
