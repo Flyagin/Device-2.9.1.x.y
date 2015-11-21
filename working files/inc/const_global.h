@@ -1449,6 +1449,9 @@ typedef enum __vymknennja_vid_zakhystiv__
 #define MAX_FUNCTIONS_IN_DF                     (1 << VAGA_MAX_FUNCTIONS_IN_DF)
 #define MAX_FUNCTIONS_IN_DT                     6
 #define MAX_FUNCTIONS_IN_D_AND                  NUMBER_IN_AND
+#define MAX_FUNCTIONS_IN_D_OR                   NUMBER_IN_OR
+#define MAX_FUNCTIONS_IN_D_XOR                  2
+#define MAX_FUNCTIONS_IN_D_NOT                  1
 #define VAGA_MAX_FUNCTIONS_IN_DB                3
 #define MAX_FUNCTIONS_IN_DB                     (1 << VAGA_MAX_FUNCTIONS_IN_DB)
 #define VAGA_MAX_FUNCTIONS_IN_AREG              5

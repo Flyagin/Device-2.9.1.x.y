@@ -4091,6 +4091,15 @@
           <name>$PROJ_DIR$\..\..\working files\inc\const_menu_d_and.h</name>
         </file>
         <file>
+          <name>$PROJ_DIR$\..\..\working files\inc\const_menu_d_not.h</name>
+        </file>
+        <file>
+          <name>$PROJ_DIR$\..\..\working files\inc\const_menu_d_or.h</name>
+        </file>
+        <file>
+          <name>$PROJ_DIR$\..\..\working files\inc\const_menu_d_xor.h</name>
+        </file>
+        <file>
           <name>$PROJ_DIR$\..\..\working files\inc\const_menu_df.h</name>
         </file>
         <file>
