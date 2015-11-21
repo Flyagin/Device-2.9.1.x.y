@@ -16272,7 +16272,7 @@ void main_manu_function(void)
                   }
                   else if ((current_ekran.current_level >= EKRAN_RANGUVANNJA_D_AND1) && (current_ekran.current_level <= EKRAN_RANGUVANNJA_D_AND8))
                   {
-                    unsigned int index_of_d_and = current_ekran.current_level - EKRAN_RANGUVANNJA_SET_DT1_PLUS;
+                    unsigned int index_of_d_and = current_ekran.current_level - EKRAN_RANGUVANNJA_D_AND1;
 
                     //Першою перевіряємо функцію з меншим номером, щоб за одну операцію циклу  можна було переміститися на функцію, яку можна ранжувати
                     unsigned int index_deleted_function = RANG_OUTPUT_LED_DF_REG_D_AND1 + index_of_d_and;
@@ -17517,7 +17517,7 @@ void main_manu_function(void)
                     }
                     else if ((current_ekran.current_level >= EKRAN_RANGUVANNJA_D_AND1) && (current_ekran.current_level <= EKRAN_RANGUVANNJA_D_AND8))
                     {
-                      unsigned int index_of_d_and = current_ekran.current_level - EKRAN_RANGUVANNJA_SET_DT1_PLUS;
+                      unsigned int index_of_d_and = current_ekran.current_level - EKRAN_RANGUVANNJA_D_AND1;
 
                       //Першою перевіряємо функцію з меншим номером, щоб за одну операцію циклу  можна було переміститися на функцію, яку можна ранжувати
                       unsigned int index_deleted_function = RANG_OUTPUT_LED_DF_REG_D_AND1 + index_of_d_and;
@@ -18067,7 +18067,7 @@ void main_manu_function(void)
                     }
                     else if ((current_ekran.current_level >= EKRAN_RANGUVANNJA_D_AND1) && (current_ekran.current_level <= EKRAN_RANGUVANNJA_D_AND8))
                     {
-                      unsigned int index_of_d_and = current_ekran.current_level - EKRAN_RANGUVANNJA_SET_DT1_PLUS;
+                      unsigned int index_of_d_and = current_ekran.current_level - EKRAN_RANGUVANNJA_D_AND1;
 
                       //Першою перевіряємо функцію з меншим номером, щоб за одну операцію циклу  можна було переміститися на функцію, яку можна ранжувати
                       unsigned int index_deleted_function = RANG_OUTPUT_LED_DF_REG_D_AND1 + index_of_d_and;
