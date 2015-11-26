@@ -8,13 +8,13 @@ void make_ekran_list_registrators(void)
   const unsigned char name_string[MAX_NAMBER_LANGUAGE][MAX_ROW_FOR_LIST_REGISTRATORS][MAX_COL_LCD] = 
   {
     {
-      " Дискр. рег-р   ",
       " Аналог.рег-р   ",
+      " Дискр. рег-р   ",
       " Архив диагност."
     },
     {
-      " Дискр. реєстр. ",
       " Аналог.реєстр. ",
+      " Дискр. реєстр. ",
       " Архів діагност."
     },
     {
@@ -23,8 +23,8 @@ void make_ekran_list_registrators(void)
       " Diagn.Archive  "
     },
     {
-      " Дискр. рег-р   ",
       " Аналог.рег-р   ",
+      " Дискр. рег-р   ",
       " Архив диагност."
     }
   };
@@ -239,7 +239,7 @@ void make_ekran_list_titles_for_record_of_digital_registrator(void)
         " Изм.при 3U0-max",
         " Изм.при U-min  ",
         " Изм.при U-max  ",
-        " Изм.при ТОП-max",
+        " Изм.при I2-max ",
         " Изм.при f-min  ",
         " Изм.при f-ЧАПВ "
       },
@@ -252,7 +252,7 @@ void make_ekran_list_titles_for_record_of_digital_registrator(void)
         " Вим.при 3U0-max",
         " Вим.при U-min  ",
         " Вим.при U-max  ",
-        " Вим.при СЗП-max",
+        " Вим.при I2-max ",
         " Вим.при f-min  ",
         " Вим.при f-ЧАПВ "
       },
@@ -265,7 +265,7 @@ void make_ekran_list_titles_for_record_of_digital_registrator(void)
         " Изм.при 3U0-max",
         " Изм.при U-min  ",
         " Изм.при U-max  ",
-        "M.at Max.NPS Cur",
+        " M.at Max.I2 Cur",
         " Изм.при f-min  ",
         " Изм.при f-ЧАПВ "
       },
@@ -278,7 +278,7 @@ void make_ekran_list_titles_for_record_of_digital_registrator(void)
         " Изм.при 3U0-max",
         " Изм.при U-min  ",
         " Изм.при U-max  ",
-        " Изм.при ТОП-max",
+        " Изм.при I2-max ",
         " Изм.при f-min  ",
         " Изм.при f-ЧАПВ "
       }

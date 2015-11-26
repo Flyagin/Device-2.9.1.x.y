@@ -40,9 +40,14 @@ void make_ekran_energy(unsigned int pervynna_vtorynna)
       "  Er4 (êÂÀð*÷)  "
     }
   };
-  const unsigned int energy_k_M[MAX_ROW_FOR_EKRAN_ENERGY] = {8, 8, 7, 7, 7, 7};
+  const unsigned int energy_k_M[MAX_NAMBER_LANGUAGE][MAX_ROW_FOR_EKRAN_ENERGY] = 
+  {
+    {8, 8, 7, 7, 7, 7},
+    {7, 7, 6, 6, 6, 6},
+    {8, 8, 7, 7, 7, 7},
+    {8, 8, 7, 7, 7, 7}
+  };
   int index_language = index_language_in_array(current_settings.language);
-  unsigned int energy_k_M_tmp = energy_k_M[current_settings.language];
   
   unsigned int position_temp = current_ekran.index_position;
   unsigned int index_of_ekran;
@@ -62,7 +67,7 @@ void make_ekran_energy(unsigned int pervynna_vtorynna)
         {
           if (
               (pervynna_vtorynna == 0) ||
-              (j != energy_k_M_tmp)  
+              (j != energy_k_M[index_language][index_of_ekran>>1])  
              )
           {
             working_ekran[i][j] = name_string[index_language][index_of_ekran>>1][j];
