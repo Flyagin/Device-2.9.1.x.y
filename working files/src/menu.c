@@ -1475,6 +1475,7 @@ void main_manu_function(void)
     case EKRAN_CHOSE_SETTING_RS485:
     case EKRAN_VIEW_LIST_OF_REGISTRATORS:
     case EKRAN_VIEW_SETTINGS_OF_ANALOG_REGISTRATORS:
+    case EKRAN_EXTENDED_LIGIC:
     case EKRAN_LIST_SETTINGS_FOR_DF:
     case EKRAN_LIST_DF_FOR_RANGUVANNJA:
     case EKRAN_LIST_DF_FOR_TIMEOUT_SETTINGS:
@@ -1779,6 +1780,15 @@ void main_manu_function(void)
             else if (current_ekran.current_level == EKRAN_CHOSE_SETTINGS)
             {
               if(current_ekran.index_position >= MAX_ROW_FOR_CHOSE_SETTINGS) current_ekran.index_position = 0;
+              while(
+                    ((current_settings.configuration & (1 << EL_BIT_CONFIGURATION)) == 0)
+                    &&
+                    (current_ekran.index_position == INDEX_OF_EXTENDED_LOGIC)
+                   )
+              {
+                if(++current_ekran.index_position >= MAX_ROW_FOR_CHOSE_SETTINGS) current_ekran.index_position = 0;
+              }
+
               position_in_current_level_menu[EKRAN_CHOSE_SETTINGS] = current_ekran.index_position;
             
               //Формуємо екран заголовків настроювання
@@ -1857,6 +1867,13 @@ void main_manu_function(void)
               position_in_current_level_menu[EKRAN_VIEW_SETTINGS_OF_ANALOG_REGISTRATORS] = current_ekran.index_position;
               //Формуємо екран вибору ностройок аналогового реєстратора
               make_ekran_settings_analog_registrators();
+            }
+            else if (current_ekran.current_level == EKRAN_EXTENDED_LIGIC)
+            {
+              if(current_ekran.index_position >= MAX_ROW_FOR_EXTENDED_LIGIC) current_ekran.index_position = 0;
+              position_in_current_level_menu[EKRAN_EXTENDED_LIGIC] = current_ekran.index_position;
+              //Формуємо екран вибору налаштувань розширеної логіки
+              make_ekran_extended_logic();
             }
             else if (current_ekran.current_level == EKRAN_LIST_SETTINGS_FOR_DF)
             {
@@ -2796,41 +2813,11 @@ void main_manu_function(void)
                   //Переходимо на меню відображення списку наявних реєстраторів
                   current_ekran.current_level = EKRAN_VIEW_LIST_OF_REGISTRATORS;
                 }
-                else if(current_ekran.index_position == INDEX_OF_DEFINED_FUNCTIONS)
+                else if(current_ekran.index_position == INDEX_OF_EXTENDED_LOGIC)
                 {
                   //Запам'ятовуємо поперердній екран
-                  //Переходимо на меню відображення списку настроювання опреділювальних функцій
-                  current_ekran.current_level = EKRAN_LIST_SETTINGS_FOR_DF;
-                }
-                else if(current_ekran.index_position == INDEX_OF_DEFINED_TRIGGERS)
-                {
-                  //Запам'ятовуємо поперердній екран
-                  //Переходимо на меню відображення списку опреділювальних триґерів
-                  current_ekran.current_level = EKRAN_LIST_DT;
-                }
-                else if(current_ekran.index_position == INDEX_OF_DEFINED_AND)
-                {
-                  //Запам'ятовуємо поперердній екран
-                  //Переходимо на меню відображення списку визначуваних "І"
-                  current_ekran.current_level = EKRAN_LIST_D_AND;
-                }
-                else if(current_ekran.index_position == INDEX_OF_DEFINED_OR)
-                {
-                  //Запам'ятовуємо поперердній екран
-                  //Переходимо на меню відображення списку визначуваних "АБО"
-                  current_ekran.current_level = EKRAN_LIST_D_OR;
-                }
-                else if(current_ekran.index_position == INDEX_OF_DEFINED_XOR)
-                {
-                  //Запам'ятовуємо поперердній екран
-                  //Переходимо на меню відображення списку визначуваних "Викл.АБО"
-                  current_ekran.current_level = EKRAN_LIST_D_XOR;
-                }
-                else if(current_ekran.index_position == INDEX_OF_DEFINED_NOT)
-                {
-                  //Запам'ятовуємо поперердній екран
-                  //Переходимо на меню відображення списку визначуваних "НЕ"
-                  current_ekran.current_level = EKRAN_LIST_D_NOT;
+                  //Переходимо на меню відображення списку розширеної логіки
+                  current_ekran.current_level = EKRAN_EXTENDED_LIGIC;
                 }
                 else if(current_ekran.index_position == INDEX_OF_DEFINED_BUTTONS)
                 {
@@ -3039,6 +3026,47 @@ void main_manu_function(void)
                   //Запам'ятовуємо поперердній екран
                   //Переходимо на меню відображення витримок для аналогового реєстратора
                   current_ekran.current_level = EKRAN_TIMEOUT_ANALOG_REGISTRATOR;
+                }
+                current_ekran.index_position = position_in_current_level_menu[current_ekran.current_level];
+                current_ekran.edition = 0;
+              }
+              else if (current_ekran.current_level == EKRAN_EXTENDED_LIGIC)
+              {
+                if(current_ekran.index_position == INDEX_OF_DEFINED_FUNCTIONS)
+                {
+                  //Запам'ятовуємо поперердній екран
+                  //Переходимо на меню відображення списку настроювання опреділювальних функцій
+                  current_ekran.current_level = EKRAN_LIST_SETTINGS_FOR_DF;
+                }
+                else if(current_ekran.index_position == INDEX_OF_DEFINED_TRIGGERS)
+                {
+                  //Запам'ятовуємо поперердній екран
+                  //Переходимо на меню відображення списку опреділювальних триґерів
+                  current_ekran.current_level = EKRAN_LIST_DT;
+                }
+                else if(current_ekran.index_position == INDEX_OF_DEFINED_AND)
+                {
+                  //Запам'ятовуємо поперердній екран
+                  //Переходимо на меню відображення списку визначуваних "І"
+                  current_ekran.current_level = EKRAN_LIST_D_AND;
+                }
+                else if(current_ekran.index_position == INDEX_OF_DEFINED_OR)
+                {
+                  //Запам'ятовуємо поперердній екран
+                  //Переходимо на меню відображення списку визначуваних "АБО"
+                  current_ekran.current_level = EKRAN_LIST_D_OR;
+                }
+                else if(current_ekran.index_position == INDEX_OF_DEFINED_XOR)
+                {
+                  //Запам'ятовуємо поперердній екран
+                  //Переходимо на меню відображення списку визначуваних "Викл.АБО"
+                  current_ekran.current_level = EKRAN_LIST_D_XOR;
+                }
+                else if(current_ekran.index_position == INDEX_OF_DEFINED_NOT)
+                {
+                  //Запам'ятовуємо поперердній екран
+                  //Переходимо на меню відображення списку визначуваних "НЕ"
+                  current_ekran.current_level = EKRAN_LIST_D_NOT;
                 }
                 current_ekran.index_position = position_in_current_level_menu[current_ekran.current_level];
                 current_ekran.edition = 0;
@@ -3688,6 +3716,15 @@ void main_manu_function(void)
               else if (current_ekran.current_level == EKRAN_CHOSE_SETTINGS)
               {
                 if(--current_ekran.index_position < 0) current_ekran.index_position = MAX_ROW_FOR_CHOSE_SETTINGS - 1;
+                while(
+                      ((current_settings.configuration & (1 << EL_BIT_CONFIGURATION)) == 0)
+                      &&
+                      (current_ekran.index_position == INDEX_OF_EXTENDED_LOGIC)
+                    )
+                {
+                  if(--current_ekran.index_position < 0) current_ekran.index_position = MAX_ROW_FOR_CHOSE_SETTINGS - 1;
+                }
+                
                 position_in_current_level_menu[EKRAN_CHOSE_SETTINGS] = current_ekran.index_position;
                 //Формуємо екран заголовків настроювання
                 make_ekran_chose_settings();
@@ -3762,6 +3799,13 @@ void main_manu_function(void)
                 position_in_current_level_menu[EKRAN_VIEW_SETTINGS_OF_ANALOG_REGISTRATORS] = current_ekran.index_position;
                 //Формуємо екран вибору настройок аналогового реєстратора
                 make_ekran_settings_analog_registrators();
+              }
+              else if (current_ekran.current_level == EKRAN_EXTENDED_LIGIC)
+              {
+                if(--current_ekran.index_position < 0) current_ekran.index_position = MAX_ROW_FOR_EXTENDED_LIGIC - 1;
+                position_in_current_level_menu[EKRAN_EXTENDED_LIGIC] = current_ekran.index_position;
+                //Формуємо екран вибору налаштувань розширеної логіки
+                make_ekran_extended_logic();
               }
               else if (current_ekran.current_level == EKRAN_LIST_SETTINGS_FOR_DF)
               {
@@ -4307,6 +4351,15 @@ void main_manu_function(void)
               {
                 //Натиснута кнопка DOWN
                 if(++current_ekran.index_position >= MAX_ROW_FOR_CHOSE_SETTINGS) current_ekran.index_position = 0;
+                while(
+                      ((current_settings.configuration & (1 << EL_BIT_CONFIGURATION)) == 0)
+                      &&
+                      (current_ekran.index_position == INDEX_OF_EXTENDED_LOGIC)
+                    )
+                {
+                  if(++current_ekran.index_position >= MAX_ROW_FOR_CHOSE_SETTINGS) current_ekran.index_position = 0;
+                }
+                
                 position_in_current_level_menu[EKRAN_CHOSE_SETTINGS] = current_ekran.index_position;
             
                 //Формуємо екран заголовків настроювання
@@ -4387,6 +4440,13 @@ void main_manu_function(void)
                 position_in_current_level_menu[EKRAN_VIEW_SETTINGS_OF_ANALOG_REGISTRATORS] = current_ekran.index_position;
                 //Формуємо екран вибору настройок аналогового реєстратора
                 make_ekran_settings_analog_registrators();
+              }
+              else if (current_ekran.current_level == EKRAN_EXTENDED_LIGIC)
+              {
+                if(++current_ekran.index_position >= MAX_ROW_FOR_EXTENDED_LIGIC) current_ekran.index_position = 0;
+                position_in_current_level_menu[EKRAN_EXTENDED_LIGIC] = current_ekran.index_position;
+                //Формуємо екран вибору налаштувань розширеної логіки
+                make_ekran_extended_logic();
               }
               else if (current_ekran.current_level == EKRAN_LIST_SETTINGS_FOR_DF)
               {

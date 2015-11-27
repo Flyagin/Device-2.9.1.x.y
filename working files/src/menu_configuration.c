@@ -21,7 +21,8 @@ void make_ekran_configuration(unsigned int configuration_edit_temp)
      "ЗОП(КОФ)  ",
      "ЗНмин     ",
      "ЗНмакс    ",
-     "ОМП       "
+     "ОМП       ",
+     "Расш.лог. "
     },
     {
      "МСЗ       ",
@@ -35,7 +36,8 @@ void make_ekran_configuration(unsigned int configuration_edit_temp)
      "ЗЗП(КОФ)  ",
      "ЗНмін     ",
      "ЗНмакс    ",
-     "ВМП       "
+     "ВМП       ",
+     "Розш.лог. "
     },
     {
      "OCP       ",
@@ -49,7 +51,8 @@ void make_ekran_configuration(unsigned int configuration_edit_temp)
      "NPSP      ",
      "Umin      ",
      "Umax      ",
-     "ОМП       "
+     "ОМП       ",
+     "Ext.logic "
     },
     {
      "МТK       ",
@@ -63,7 +66,8 @@ void make_ekran_configuration(unsigned int configuration_edit_temp)
      "КKK       ",
      "ЗНмин     ",
      "ЗНмакс    ",
-     "ОМП       "
+     "ОМП       ",
+     "Расш.лог. "
     }
   };
   const unsigned char name_nzz[MAX_NAMBER_LANGUAGE][2][MAX_COL_LCD_PART1] = 

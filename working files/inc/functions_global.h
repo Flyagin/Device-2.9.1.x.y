@@ -134,6 +134,7 @@ void make_ekran_timeout_interface(void);
 void make_ekran_chose_registrators(void);
 void make_ekran_settings_analog_registrators(void);
 void make_ekran_timeout_analog_registrator(void);
+void make_ekran_extended_logic(void);
 void make_ekran_chose_settings_df(void);
 void make_ekran_type_df(void);
 void make_ekran_timeout_df(unsigned int);

@@ -279,6 +279,15 @@ unsigned int action_after_changing_of_configuration(unsigned int new_configurati
       )
       error_window |= (1 << VMP_BIT_CONFIGURATION );
   }
+  //Перевірка "Розширеної логіки"
+  if ((new_configuration & (1<<EL_BIT_CONFIGURATION)) == 0)
+  {
+    if(
+       (current_ekran.current_level >= EKRAN_EXTENDED_LIGIC) &&
+       (current_ekran.current_level <= EKRAN_RANGUVANNJA_D_NOT16)  
+      )
+      error_window |= (1 << EL_BIT_CONFIGURATION );
+  }
   /************************/
   
   if (error_window == 0)
@@ -1544,6 +1553,142 @@ unsigned int action_after_changing_of_configuration(unsigned int new_configurati
       target_label->control_urov &= (unsigned int)(~(CTR_UROV_STARTED_FROM_UMAX1 | CTR_UROV_STARTED_FROM_UMAX2));
    
       //Формуємо маски функцій Umax
+      maska[0] = 0;
+      maska[1] = 0;
+      for (int i = 0; i < NUMBER_UMAX_SIGNAL_FOR_RANG_INPUT; i++)
+        _SET_BIT(
+                 maska, 
+                 (
+                  NUMBER_GENERAL_SIGNAL_FOR_RANG_INPUT    + 
+                  NUMBER_MTZ_SIGNAL_FOR_RANG_INPUT        +
+                  NUMBER_MTZ04_SIGNAL_FOR_RANG_INPUT      +
+                  NUMBER_ZDZ_SIGNAL_FOR_RANG_INPUT        +
+                  NUMBER_ZZ_SIGNAL_FOR_RANG_INPUT         +
+                  NUMBER_TZNP_SIGNAL_FOR_RANG_INPUT       +
+                  NUMBER_APV_SIGNAL_FOR_RANG_INPUT        +
+                  NUMBER_ACHR_CHAPV_SIGNAL_FOR_RANG_INPUT +
+                  NUMBER_UROV_SIGNAL_FOR_RANG_INPUT       +
+                  NUMBER_ZOP_SIGNAL_FOR_RANG_INPUT        +
+                  NUMBER_UMIN_SIGNAL_FOR_RANG_INPUT       +
+                  i
+                 )
+                );
+     
+      for (unsigned int i = 0; i < N_BIG; i++ ) maska_1[i] = 0;
+      for (int i = 0; i < NUMBER_UMAX_SIGNAL_FOR_RANG_OUTPUT_LED_DF_REG; i++)
+        _SET_BIT(
+                 maska_1, 
+                 (
+                  NUMBER_GENERAL_SIGNAL_FOR_RANG_OUTPUT_LED_DF_REG    + 
+                  NUMBER_MTZ_SIGNAL_FOR_RANG_OUTPUT_LED_DF_REG        +
+                  NUMBER_MTZ04_SIGNAL_FOR_RANG_OUTPUT_LED_DF_REG      +
+                  NUMBER_ZDZ_SIGNAL_FOR_RANG_OUTPUT_LED_DF_REG        +
+                  NUMBER_ZZ_SIGNAL_FOR_RANG_OUTPUT_LED_DF_REG         +
+                  NUMBER_TZNP_SIGNAL_FOR_RANG_OUTPUT_LED_DF_REG       +
+                  NUMBER_APV_SIGNAL_FOR_RANG_OUTPUT_LED_DF_REG        +
+                  NUMBER_ACHR_CHAPV_SIGNAL_FOR_RANG_OUTPUT_LED_DF_REG +
+                  NUMBER_UROV_SIGNAL_FOR_RANG_OUTPUT_LED_DF_REG       +
+                  NUMBER_ZOP_SIGNAL_FOR_RANG_OUTPUT_LED_DF_REG        +
+                  NUMBER_UMIN_SIGNAL_FOR_RANG_OUTPUT_LED_DF_REG       +
+                  i
+                 )
+                );
+
+
+      maska_2 = 0;
+      for (int i = 0; i < NUMBER_UMAX_SIGNAL_FOR_RANG_BUTTON; i++) maska_2 = (maska_2 <<1) + 0x1;
+      maska_2 =(
+                maska_2 << (
+                            NUMBER_GENERAL_SIGNAL_FOR_RANG_BUTTON    + 
+                            NUMBER_MTZ_SIGNAL_FOR_RANG_BUTTON        +
+                            NUMBER_MTZ04_SIGNAL_FOR_RANG_BUTTON      +
+                            NUMBER_ZDZ_SIGNAL_FOR_RANG_BUTTON        +
+                            NUMBER_ZZ_SIGNAL_FOR_RANG_BUTTON         +
+                            NUMBER_TZNP_SIGNAL_FOR_RANG_BUTTON       +
+                            NUMBER_APV_SIGNAL_FOR_RANG_BUTTON        +
+                            NUMBER_ACHR_CHAPV_SIGNAL_FOR_RANG_BUTTON +
+                            NUMBER_UROV_SIGNAL_FOR_RANG_BUTTON       +
+                            NUMBER_ZOP_SIGNAL_FOR_RANG_BUTTON        +
+                            NUMBER_UMIN_SIGNAL_FOR_RANG_BUTTON
+                           )
+               );
+
+      //Знімаємо всі функції для ранжування входів, які відповідають за Umax
+      for (int i = 0; i < NUMBER_DEFINED_BUTTONS; i++)
+        target_label->ranguvannja_buttons[i] &= ~maska_2;
+      //Знімаємо всі функції для ранжування входів, які відповідають за Umax
+      for (int i = 0; i < NUMBER_INPUTS; i++)
+      {
+        target_label->ranguvannja_inputs[N_SMALL*i  ] &= ~maska[0];
+        target_label->ranguvannja_inputs[N_SMALL*i+1] &= ~maska[1];
+      }
+      //Знімаємо всі функції для ранжування виходів
+      for (int i = 0; i < NUMBER_OUTPUTS; i++)
+      {
+        for (unsigned int j = 0; j < N_BIG; j++ ) target_label->ranguvannja_outputs[N_BIG*i+j] &= ~maska_1[j];
+      }
+      //Знімаємо всі функції для ранжування світоіндикаторів
+      for (int i = 0; i < NUMBER_LEDS; i++)
+      {
+        for (unsigned int j = 0; j < N_BIG; j++ ) target_label->ranguvannja_leds[N_BIG*i+j] &= ~maska_1[j];
+      }
+      //Знімаємо всі функції для ранжування аналогового і дискретного реєстраторів
+      for (unsigned int j = 0; j < N_BIG; j++ ) 
+      {
+        target_label->ranguvannja_analog_registrator[j]  &= ~maska_1[j];
+        target_label->ranguvannja_digital_registrator[j] &= ~maska_1[j];
+      }
+      //Знімаємо всі функції для ранжування оприділювальних функцій
+      for (int i = 0; i < NUMBER_DEFINED_FUNCTIONS; i++)
+      {
+        for (unsigned int j = 0; j < N_BIG; j++ ) 
+        {
+          target_label->ranguvannja_df_source_plus[N_BIG*i+j]  &= ~maska_1[j];
+          target_label->ranguvannja_df_source_minus[N_BIG*i+j] &= ~maska_1[j];
+          target_label->ranguvannja_df_source_blk[N_BIG*i+j]   &= ~maska_1[j];
+        }
+      }
+      //Знімаємо всі функції для ранжування оприділювальних триґерів
+      for (int i = 0; i < NUMBER_DEFINED_TRIGGERS; i++)
+      {
+        for (unsigned int j = 0; j < N_BIG; j++ ) 
+        {
+          target_label->ranguvannja_set_dt_source_plus[N_BIG*i+j]    &= ~maska_1[j];
+          target_label->ranguvannja_set_dt_source_minus[N_BIG*i+j]   &= ~maska_1[j];
+          target_label->ranguvannja_reset_dt_source_plus[N_BIG*i+j]  &= ~maska_1[j];
+          target_label->ranguvannja_reset_dt_source_minus[N_BIG*i+j] &= ~maska_1[j];
+        }
+      }
+  
+      //Знімаємо всі функції для ранжування визначуваних "І"
+      for(unsigned int i = 0; i < NUMBER_DEFINED_AND; i++)
+      {
+        for (unsigned int j = 0; j < N_BIG; j++ ) target_label->ranguvannja_d_and[N_BIG*i+j] &= ~maska_1[j];
+      }
+  
+      //Знімаємо всі функції для ранжування визначуваних "АБО"
+      for(unsigned int i = 0; i < NUMBER_DEFINED_OR; i++)
+      {
+        for (unsigned int j = 0; j < N_BIG; j++ ) target_label->ranguvannja_d_or[N_BIG*i+j] &= ~maska_1[j];
+      }
+  
+      //Знімаємо всі функції для ранжування визначуваних "Викл.АБО"
+      for(unsigned int i = 0; i < NUMBER_DEFINED_XOR; i++)
+      {
+        for (unsigned int j = 0; j < N_BIG; j++ ) target_label->ranguvannja_d_xor[N_BIG*i+j] &= ~maska_1[j];
+      }
+  
+      //Знімаємо всі функції для ранжування визначуваних "НЕ"
+      for(unsigned int i = 0; i < NUMBER_DEFINED_NOT; i++)
+      {
+        for (unsigned int j = 0; j < N_BIG; j++ ) target_label->ranguvannja_d_not[N_BIG*i+j] &= ~maska_1[j];
+      }
+    }
+
+    //Перевіряємо, чи "Розширену логіку" зараз знято з конфігурації
+    if ((target_label->configuration & (1<<EL_BIT_CONFIGURATION)) == 0)
+    {
+      //Формуємо маски функцій Розширеної логіки
       maska[0] = 0;
       maska[1] = 0;
       for (int i = 0; i < NUMBER_UMAX_SIGNAL_FOR_RANG_INPUT; i++)
