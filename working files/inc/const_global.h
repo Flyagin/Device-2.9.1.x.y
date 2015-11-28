@@ -566,7 +566,7 @@ enum __mtz_abc_direction_const {
 )
 
 #define MASKA_FOR_INPUT_SIGNALS_1        (unsigned int)(                                \
-  | (1 << (RANG_OUTPUT_LED_DF_REG_BLOCK_MTZ3 - 32))                             /*32*/  \
+    (1 << (RANG_OUTPUT_LED_DF_REG_BLOCK_MTZ3 - 32))                             /*32*/  \
   | (1 << (RANG_OUTPUT_LED_DF_REG_BLOCK_MTZ4 - 32))                             /*33*/  \
 )
 
@@ -581,7 +581,7 @@ enum __mtz_abc_direction_const {
 )
     
 #define MASKA_FOR_INPUT_SIGNALS_3        (unsigned int)(                                \
-  | (1 << (RANG_OUTPUT_LED_DF_REG_BLOCK_TZNP3 - 96))                            /*105*/ \
+    (1 << (RANG_OUTPUT_LED_DF_REG_BLOCK_TZNP3 - 96))                            /*105*/ \
   | (1 << (RANG_OUTPUT_LED_DF_REG_STAT_BLK_APV - 96))                           /*115*/ \
   | (1 << (RANG_OUTPUT_LED_DF_REG_ACHR_CHAPV_VID_DV - 96))                      /*121*/ \
   | (1 << (RANG_OUTPUT_LED_DF_REG_BLOCK_ACHR1 - 96))                            /*122*/ \
@@ -601,7 +601,7 @@ enum __mtz_abc_direction_const {
 )
     
 #define MASKA_FOR_INPUT_SIGNALS_5        (unsigned int)(                                \
-  | (1 << (RANG_OUTPUT_LED_DF_REG_DF2_IN - 160))                                /*161*/ \
+    (1 << (RANG_OUTPUT_LED_DF_REG_DF2_IN - 160))                                /*161*/ \
   | (1 << (RANG_OUTPUT_LED_DF_REG_DF3_IN - 160))                                /*163*/ \
   | (1 << (RANG_OUTPUT_LED_DF_REG_DF4_IN - 160))                                /*165*/ \
   | (1 << (RANG_OUTPUT_LED_DF_REG_DF5_IN - 160))                                /*167*/ \
@@ -617,6 +617,9 @@ enum __mtz_abc_direction_const {
   | (1 << (RANG_OUTPUT_LED_DF_REG_DT4_SET - 160))                               /*184*/ \
   | (1 << (RANG_OUTPUT_LED_DF_REG_DT4_RESET - 160))                             /*185*/ \
 )
+
+#define MASKA_FOR_INPUT_SIGNALS_6                  0
+#define MASKA_FOR_INPUT_SIGNALS_7                  0
 /*****************************************/
 
 /*****************************************/
@@ -664,7 +667,7 @@ enum __mtz_abc_direction_const {
 )
 
 #define MASKA_MTZ_SIGNALS_2        (unsigned int)(                                     \
-   | (1 << (RANG_OUTPUT_LED_DF_REG_PO_MTZPN4 - 64))                             /* 64*/\
+     (1 << (RANG_OUTPUT_LED_DF_REG_PO_MTZPN4 - 64))                             /* 64*/\
    | (1 << (RANG_OUTPUT_LED_DF_REG_MTZ4 - 64))                                  /* 65*/\
    | (1 << (RANG_OUTPUT_LED_DF_REG_PO_BLOCK_U_MTZN - 64))                       /* 66*/\
    | (1 << (RANG_OUTPUT_LED_DF_REG_NCN_MTZ - 64))                               /* 67*/\
@@ -1149,35 +1152,35 @@ enum __mtz_abc_direction_const {
 //Макска моніторингу максимального фазного струму для дискретного реєстратора
 /*****************************************/
 #define MASKA_MONITOTYNG_PHASE_SIGNALES_0        0
-#define MASKA_MONITOTYNG_PHASE_SIGNALES_1        0
-#define MASKA_MONITOTYNG_PHASE_SIGNALES_2        0
 
-#define MASKA_MONITOTYNG_PHASE_SIGNALES_3 (unsigned int)(                \
-     (1 << (RANG_OUTPUT_LED_DF_REG_PO_MTZ1 - 96))               /*104*/  \
-   | (1 << (RANG_OUTPUT_LED_DF_REG_PO_MTZN1_VPERED - 96))       /*105*/  \
-   | (1 << (RANG_OUTPUT_LED_DF_REG_PO_MTZN1_NAZAD - 96))        /*106*/  \
-   | (1 << (RANG_OUTPUT_LED_DF_REG_PO_MTZPN1 - 96))             /*108*/  \
-   | (1 << (RANG_OUTPUT_LED_DF_REG_MTZ1 - 96))                  /*109*/  \
-   | (1 << (RANG_OUTPUT_LED_DF_REG_PO_MTZ2 - 96))               /*112*/  \
-   | (1 << (RANG_OUTPUT_LED_DF_REG_PO_MTZN2_VPERED - 96))       /*113*/  \
-   | (1 << (RANG_OUTPUT_LED_DF_REG_PO_MTZN2_NAZAD - 96))        /*114*/  \
-   | (1 << (RANG_OUTPUT_LED_DF_REG_PO_MTZPN2 - 96))             /*116*/  \
-   | (1 << (RANG_OUTPUT_LED_DF_REG_MTZ2 - 96))                  /*117*/  \
-   | (1 << (RANG_OUTPUT_LED_DF_REG_PO_MTZ3 - 96))               /*120*/  \
-   | (1 << (RANG_OUTPUT_LED_DF_REG_PO_MTZN3_VPERED - 96))       /*121*/  \
-   | (1 << (RANG_OUTPUT_LED_DF_REG_PO_MTZN3_NAZAD - 96))        /*122*/  \
-   | (1 << (RANG_OUTPUT_LED_DF_REG_PO_MTZPN3 - 96))             /*124*/  \
-   | (1 << (RANG_OUTPUT_LED_DF_REG_MTZ3 - 96))                  /*126*/  \
+#define MASKA_MONITOTYNG_PHASE_SIGNALES_1 (unsigned int)(                               \
+     (1 << (RANG_OUTPUT_LED_DF_REG_PO_MTZ1 - 32))                               /*36*/  \
+   | (1 << (RANG_OUTPUT_LED_DF_REG_PO_MTZN1_VPERED - 32))                       /*37*/  \
+   | (1 << (RANG_OUTPUT_LED_DF_REG_PO_MTZN1_NAZAD - 32))                        /*38*/  \
+   | (1 << (RANG_OUTPUT_LED_DF_REG_PO_MTZPN1 - 32))                             /*40*/  \
+   | (1 << (RANG_OUTPUT_LED_DF_REG_MTZ1 - 32))                                  /*41*/  \
+   | (1 << (RANG_OUTPUT_LED_DF_REG_PO_MTZ2 - 32))                               /*44*/  \
+   | (1 << (RANG_OUTPUT_LED_DF_REG_PO_MTZN2_VPERED - 32))                       /*45*/  \
+   | (1 << (RANG_OUTPUT_LED_DF_REG_PO_MTZN2_NAZAD - 32))                        /*46*/  \
+   | (1 << (RANG_OUTPUT_LED_DF_REG_PO_MTZPN2 - 32))                             /*48*/  \
+   | (1 << (RANG_OUTPUT_LED_DF_REG_MTZ2 - 32))                                  /*49*/  \
+   | (1 << (RANG_OUTPUT_LED_DF_REG_PO_MTZ3 - 32))                               /*52*/  \
+   | (1 << (RANG_OUTPUT_LED_DF_REG_PO_MTZN3_VPERED - 32))                       /*53*/  \
+   | (1 << (RANG_OUTPUT_LED_DF_REG_PO_MTZN3_NAZAD - 32))                        /*54*/  \
+   | (1 << (RANG_OUTPUT_LED_DF_REG_PO_MTZPN3 - 32))                             /*56*/  \
+   | (1 << (RANG_OUTPUT_LED_DF_REG_MTZ3 - 32))                                  /*58*/  \
+   | (1 << (RANG_OUTPUT_LED_DF_REG_PO_MTZ4 - 32))                               /*60*/ \
+   | (1 << (RANG_OUTPUT_LED_DF_REG_PO_MTZN4_VPERED - 32))                       /*61*/ \
+   | (1 << (RANG_OUTPUT_LED_DF_REG_PO_MTZN4_NAZAD - 32))                        /*62*/ \
 )
 
-#define MASKA_MONITOTYNG_PHASE_SIGNALES_4 (unsigned int)(                \
-     (1 << (RANG_OUTPUT_LED_DF_REG_PO_MTZ4 - 128))               /*128*/ \
-   | (1 << (RANG_OUTPUT_LED_DF_REG_PO_MTZN4_VPERED - 128))       /*129*/ \
-   | (1 << (RANG_OUTPUT_LED_DF_REG_PO_MTZN4_NAZAD - 128))        /*130*/ \
-   | (1 << (RANG_OUTPUT_LED_DF_REG_PO_MTZPN4 - 128))             /*132*/ \
-   | (1 << (RANG_OUTPUT_LED_DF_REG_MTZ4 - 128))                  /*133*/ \
+#define MASKA_MONITOTYNG_PHASE_SIGNALES_2 (unsigned int)(                              \
+     (1 << (RANG_OUTPUT_LED_DF_REG_PO_MTZPN4 - 64))                             /*64*/ \
+   | (1 << (RANG_OUTPUT_LED_DF_REG_MTZ4 - 64))                                  /*65*/ \
 )
 
+#define MASKA_MONITOTYNG_PHASE_SIGNALES_3        0
+#define MASKA_MONITOTYNG_PHASE_SIGNALES_4        0
 #define MASKA_MONITOTYNG_PHASE_SIGNALES_5        0
 #define MASKA_MONITOTYNG_PHASE_SIGNALES_6        0
 #define MASKA_MONITOTYNG_PHASE_SIGNALES_7        0
@@ -1188,16 +1191,16 @@ enum __mtz_abc_direction_const {
 /*****************************************/
 #define MASKA_MONITOTYNG_PHASE04_SIGNALES_0        0
 #define MASKA_MONITOTYNG_PHASE04_SIGNALES_1        0
-#define MASKA_MONITOTYNG_PHASE04_SIGNALES_2        0
-#define MASKA_MONITOTYNG_PHASE04_SIGNALES_3        0
 
-#define MASKA_MONITOTYNG_PHASE04_SIGNALES_4 (unsigned int)(        \
-     (1 << (RANG_OUTPUT_LED_DF_REG_PO_MTZ04_1 - 128))            /*139*/\
-   | (1 << (RANG_OUTPUT_LED_DF_REG_MTZ04_1 - 128))               /*140*/\
-   | (1 << (RANG_OUTPUT_LED_DF_REG_PO_MTZ04_2 - 128))            /*141*/\
-   | (1 << (RANG_OUTPUT_LED_DF_REG_MTZ04_2 - 128))               /*142*/\
+#define MASKA_MONITOTYNG_PHASE04_SIGNALES_2 (unsigned int)(                           \
+     (1 << (RANG_OUTPUT_LED_DF_REG_PO_MTZ04_1 - 64))                            /*71*/\
+   | (1 << (RANG_OUTPUT_LED_DF_REG_MTZ04_1 - 64))                               /*72*/\
+   | (1 << (RANG_OUTPUT_LED_DF_REG_PO_MTZ04_2 - 64))                            /*73*/\
+   | (1 << (RANG_OUTPUT_LED_DF_REG_MTZ04_2 - 64))                               /*74*/\
 )
 
+#define MASKA_MONITOTYNG_PHASE04_SIGNALES_3        0
+#define MASKA_MONITOTYNG_PHASE04_SIGNALES_4        0
 #define MASKA_MONITOTYNG_PHASE04_SIGNALES_5        0
 #define MASKA_MONITOTYNG_PHASE04_SIGNALES_6        0
 #define MASKA_MONITOTYNG_PHASE04_SIGNALES_7        0
@@ -1208,34 +1211,34 @@ enum __mtz_abc_direction_const {
 /*****************************************/
 #define MASKA_MONITOTYNG_3I0_SIGNALES_0        0
 #define MASKA_MONITOTYNG_3I0_SIGNALES_1        0
-#define MASKA_MONITOTYNG_3I0_SIGNALES_2        0
-#define MASKA_MONITOTYNG_3I0_SIGNALES_3        0
 
-#define MASKA_MONITOTYNG_3I0_SIGNALES_4        (unsigned int)(           \
-     (1 << (RANG_OUTPUT_LED_DF_REG_PO_NZZ - 128))               /*146*/  \
-   | (1 << (RANG_OUTPUT_LED_DF_REG_NZZ - 128))                  /*147*/  \
-   | (1 << (RANG_OUTPUT_LED_DF_REG_PO_3I0 - 128))               /*148*/  \
-   | (1 << (RANG_OUTPUT_LED_DF_REG_3I0 - 128))                  /*149*/  \
-   | (1 << (RANG_OUTPUT_LED_DF_REG_PO_3I0_TZNP1_VPERED - 128))  /*156*/  \
-   | (1 << (RANG_OUTPUT_LED_DF_REG_PO_3I0_TZNP1_NAZAD - 128))   /*157*/  \
+#define MASKA_MONITOTYNG_3I0_SIGNALES_2        (unsigned int)(                          \
+     (1 << (RANG_OUTPUT_LED_DF_REG_PO_NZZ - 64))                                /*78*/  \
+   | (1 << (RANG_OUTPUT_LED_DF_REG_NZZ - 64))                                   /*79*/  \
+   | (1 << (RANG_OUTPUT_LED_DF_REG_PO_3I0 - 64))                                /*80*/  \
+   | (1 << (RANG_OUTPUT_LED_DF_REG_3I0 - 64))                                   /*81*/  \
+   | (1 << (RANG_OUTPUT_LED_DF_REG_PO_3I0_TZNP1_VPERED - 64))                   /*88*/  \
+   | (1 << (RANG_OUTPUT_LED_DF_REG_PO_3I0_TZNP1_NAZAD - 64))                    /*89*/  \
+   | (1 << (RANG_OUTPUT_LED_DF_REG_PO_TZNP1_VPERED - 64))                       /* 92*/ \
+   | (1 << (RANG_OUTPUT_LED_DF_REG_PO_TZNP1_NAZAD - 64))                        /* 93*/ \
+   | (1 << (RANG_OUTPUT_LED_DF_REG_TZNP1 - 64))                                 /* 94*/ \
 )            
 
-#define MASKA_MONITOTYNG_3I0_SIGNALES_5        (unsigned int)(          \
-     (1 << (RANG_OUTPUT_LED_DF_REG_PO_TZNP1_VPERED - 160))     /*160*/  \
-   | (1 << (RANG_OUTPUT_LED_DF_REG_PO_TZNP1_NAZAD - 160))      /*161*/  \
-   | (1 << (RANG_OUTPUT_LED_DF_REG_TZNP1 - 160))               /*162*/  \
-   | (1 << (RANG_OUTPUT_LED_DF_REG_PO_3I0_TZNP2_VPERED - 160)) /*166*/  \
-   | (1 << (RANG_OUTPUT_LED_DF_REG_PO_3I0_TZNP2_NAZAD - 160))  /*167*/  \
-   | (1 << (RANG_OUTPUT_LED_DF_REG_PO_TZNP2_VPERED - 160))     /*170*/  \
-   | (1 << (RANG_OUTPUT_LED_DF_REG_PO_TZNP2_NAZAD - 160))      /*171*/  \
-   | (1 << (RANG_OUTPUT_LED_DF_REG_TZNP2 - 160))               /*172*/  \
-   | (1 << (RANG_OUTPUT_LED_DF_REG_PO_3I0_TZNP3_VPERED - 160)) /*176*/  \
-   | (1 << (RANG_OUTPUT_LED_DF_REG_PO_3I0_TZNP3_NAZAD - 160))  /*177*/  \
-   | (1 << (RANG_OUTPUT_LED_DF_REG_PO_TZNP3_VPERED - 160))     /*180*/  \
-   | (1 << (RANG_OUTPUT_LED_DF_REG_PO_TZNP3_NAZAD - 160))      /*181*/  \
-   | (1 << (RANG_OUTPUT_LED_DF_REG_TZNP3 - 160))               /*182*/  \
+#define MASKA_MONITOTYNG_3I0_SIGNALES_3        (unsigned int)(                           \
+     (1 << (RANG_OUTPUT_LED_DF_REG_PO_3I0_TZNP2_VPERED - 96))                   /* 98*/  \
+   | (1 << (RANG_OUTPUT_LED_DF_REG_PO_3I0_TZNP2_NAZAD - 96))                    /* 99*/  \
+   | (1 << (RANG_OUTPUT_LED_DF_REG_PO_TZNP2_VPERED - 96))                       /*102*/  \
+   | (1 << (RANG_OUTPUT_LED_DF_REG_PO_TZNP2_NAZAD - 96))                        /*103*/  \
+   | (1 << (RANG_OUTPUT_LED_DF_REG_TZNP2 - 96))                                 /*104*/  \
+   | (1 << (RANG_OUTPUT_LED_DF_REG_PO_3I0_TZNP3_VPERED - 96))                   /*108*/  \
+   | (1 << (RANG_OUTPUT_LED_DF_REG_PO_3I0_TZNP3_NAZAD - 96))                    /*109*/  \
+   | (1 << (RANG_OUTPUT_LED_DF_REG_PO_TZNP3_VPERED - 96))                       /*112*/  \
+   | (1 << (RANG_OUTPUT_LED_DF_REG_PO_TZNP3_NAZAD - 96))                        /*113*/  \
+   | (1 << (RANG_OUTPUT_LED_DF_REG_TZNP3 - 96))                                 /*114*/  \
 )            
 
+#define MASKA_MONITOTYNG_3I0_SIGNALES_4        0
+#define MASKA_MONITOTYNG_3I0_SIGNALES_5        0
 #define MASKA_MONITOTYNG_3I0_SIGNALES_6        0
 #define MASKA_MONITOTYNG_3I0_SIGNALES_7        0
 /*****************************************/
@@ -1245,34 +1248,34 @@ enum __mtz_abc_direction_const {
 /*****************************************/
 #define MASKA_MONITOTYNG_3U0_SIGNALES_0        0
 #define MASKA_MONITOTYNG_3U0_SIGNALES_1        0
-#define MASKA_MONITOTYNG_3U0_SIGNALES_2        0
-#define MASKA_MONITOTYNG_3U0_SIGNALES_3        0
 
-#define MASKA_MONITOTYNG_3U0_SIGNALES_4        (unsigned int)(           \
-     (1 << (RANG_OUTPUT_LED_DF_REG_PO_NZZ - 128))                /*146*/  \
-   | (1 << (RANG_OUTPUT_LED_DF_REG_NZZ - 128))                   /*147*/  \
-   | (1 << (RANG_OUTPUT_LED_DF_REG_PO_3U0 - 128))                /*150*/  \
-   | (1 << (RANG_OUTPUT_LED_DF_REG_3U0 - 128))                   /*151*/  \
-   | (1 << (RANG_OUTPUT_LED_DF_REG_PO_3U0_TZNP1_VPERED - 128))   /*158*/  \
-   | (1 << (RANG_OUTPUT_LED_DF_REG_PO_3U0_TZNP1_NAZAD - 128))    /*159*/  \
+#define MASKA_MONITOTYNG_3U0_SIGNALES_2        (unsigned int)(                           \
+     (1 << (RANG_OUTPUT_LED_DF_REG_PO_NZZ - 64))                                /* 78*/  \
+   | (1 << (RANG_OUTPUT_LED_DF_REG_NZZ - 64))                                   /* 79*/  \
+   | (1 << (RANG_OUTPUT_LED_DF_REG_PO_3U0 - 64))                                /* 82*/  \
+   | (1 << (RANG_OUTPUT_LED_DF_REG_3U0 - 64))                                   /* 83*/  \
+   | (1 << (RANG_OUTPUT_LED_DF_REG_PO_3U0_TZNP1_VPERED - 64))                   /* 90*/  \
+   | (1 << (RANG_OUTPUT_LED_DF_REG_PO_3U0_TZNP1_NAZAD - 64))                    /* 91*/  \
+   | (1 << (RANG_OUTPUT_LED_DF_REG_PO_TZNP1_VPERED - 64))                       /* 92*/  \
+   | (1 << (RANG_OUTPUT_LED_DF_REG_PO_TZNP1_NAZAD - 64))                        /* 93*/  \
+   | (1 << (RANG_OUTPUT_LED_DF_REG_TZNP1 - 64))                                 /* 94*/  \
 )            
 
-#define MASKA_MONITOTYNG_3U0_SIGNALES_5        (unsigned int)(           \
-     (1 << (RANG_OUTPUT_LED_DF_REG_PO_TZNP1_VPERED - 160))      /*160*/  \
-   | (1 << (RANG_OUTPUT_LED_DF_REG_PO_TZNP1_NAZAD - 160))       /*161*/  \
-   | (1 << (RANG_OUTPUT_LED_DF_REG_TZNP1 - 160))                /*162*/  \
-   | (1 << (RANG_OUTPUT_LED_DF_REG_PO_3U0_TZNP2_VPERED - 160))  /*168*/  \
-   | (1 << (RANG_OUTPUT_LED_DF_REG_PO_3U0_TZNP2_NAZAD - 160))   /*169*/  \
-   | (1 << (RANG_OUTPUT_LED_DF_REG_PO_TZNP2_VPERED - 160))      /*170*/  \
-   | (1 << (RANG_OUTPUT_LED_DF_REG_PO_TZNP2_NAZAD - 160))       /*171*/  \
-   | (1 << (RANG_OUTPUT_LED_DF_REG_TZNP2 - 160))                /*172*/  \
-   | (1 << (RANG_OUTPUT_LED_DF_REG_PO_3U0_TZNP3_VPERED - 160))  /*178*/  \
-   | (1 << (RANG_OUTPUT_LED_DF_REG_PO_3U0_TZNP3_NAZAD - 160))   /*179*/  \
-   | (1 << (RANG_OUTPUT_LED_DF_REG_PO_TZNP3_VPERED - 160))      /*180*/  \
-   | (1 << (RANG_OUTPUT_LED_DF_REG_PO_TZNP3_NAZAD - 160))       /*181*/  \
-   | (1 << (RANG_OUTPUT_LED_DF_REG_TZNP3 - 160))                /*182*/  \
+#define MASKA_MONITOTYNG_3U0_SIGNALES_3        (unsigned int)(                           \
+     (1 << (RANG_OUTPUT_LED_DF_REG_PO_3U0_TZNP2_VPERED - 96))                   /*100*/  \
+   | (1 << (RANG_OUTPUT_LED_DF_REG_PO_3U0_TZNP2_NAZAD - 96))                    /*101*/  \
+   | (1 << (RANG_OUTPUT_LED_DF_REG_PO_TZNP2_VPERED - 96))                       /*102*/  \
+   | (1 << (RANG_OUTPUT_LED_DF_REG_PO_TZNP2_NAZAD - 96))                        /*103*/  \
+   | (1 << (RANG_OUTPUT_LED_DF_REG_TZNP2 - 96))                                 /*104*/  \
+   | (1 << (RANG_OUTPUT_LED_DF_REG_PO_3U0_TZNP3_VPERED - 96))                   /*110*/  \
+   | (1 << (RANG_OUTPUT_LED_DF_REG_PO_3U0_TZNP3_NAZAD - 96))                    /*111*/  \
+   | (1 << (RANG_OUTPUT_LED_DF_REG_PO_TZNP3_VPERED - 96))                       /*112*/  \
+   | (1 << (RANG_OUTPUT_LED_DF_REG_PO_TZNP3_NAZAD - 96))                        /*113*/  \
+   | (1 << (RANG_OUTPUT_LED_DF_REG_TZNP3 - 96))                                 /*114*/  \
 )            
 
+#define MASKA_MONITOTYNG_3U0_SIGNALES_4        0
+#define MASKA_MONITOTYNG_3U0_SIGNALES_5        0
 #define MASKA_MONITOTYNG_3U0_SIGNALES_6        0
 #define MASKA_MONITOTYNG_3U0_SIGNALES_7        0
 /*****************************************/
@@ -1284,16 +1287,16 @@ enum __mtz_abc_direction_const {
 #define MASKA_MONITOTYNG_UMIN_SIGNALES_1        0
 #define MASKA_MONITOTYNG_UMIN_SIGNALES_2        0
 #define MASKA_MONITOTYNG_UMIN_SIGNALES_3        0
-#define MASKA_MONITOTYNG_UMIN_SIGNALES_4        0
-#define MASKA_MONITOTYNG_UMIN_SIGNALES_5        0
 
-#define MASKA_MONITOTYNG_UMIN_SIGNALES_6 (unsigned int)(   \
-     (1 << (RANG_OUTPUT_LED_DF_REG_PO_UMIN1 - 192))/*213*/ \
-   | (1 << (RANG_OUTPUT_LED_DF_REG_UMIN1 - 192))   /*216*/ \
-   | (1 << (RANG_OUTPUT_LED_DF_REG_PO_UMIN2 - 192))/*217*/ \
-   | (1 << (RANG_OUTPUT_LED_DF_REG_UMIN2 - 192))   /*221*/ \
+#define MASKA_MONITOTYNG_UMIN_SIGNALES_4 (unsigned int)(                                \
+     (1 << (RANG_OUTPUT_LED_DF_REG_PO_UMIN1 - 128))                             /*145*/ \
+   | (1 << (RANG_OUTPUT_LED_DF_REG_UMIN1 - 128))                                /*148*/ \
+   | (1 << (RANG_OUTPUT_LED_DF_REG_PO_UMIN2 - 128))                             /*149*/ \
+   | (1 << (RANG_OUTPUT_LED_DF_REG_UMIN2 - 128))                                /*152*/ \
 )
 
+#define MASKA_MONITOTYNG_UMIN_SIGNALES_5        0
+#define MASKA_MONITOTYNG_UMIN_SIGNALES_6        0
 #define MASKA_MONITOTYNG_UMIN_SIGNALES_7        0
 /*****************************************/
 
@@ -1304,18 +1307,17 @@ enum __mtz_abc_direction_const {
 #define MASKA_MONITOTYNG_UMAX_SIGNALES_1        0
 #define MASKA_MONITOTYNG_UMAX_SIGNALES_2        0
 #define MASKA_MONITOTYNG_UMAX_SIGNALES_3        0
-#define MASKA_MONITOTYNG_UMAX_SIGNALES_4        0
+
+#define MASKA_MONITOTYNG_UMAX_SIGNALES_4 (unsigned int)(                                \
+     (1 << (RANG_OUTPUT_LED_DF_REG_PO_UMAX1 - 128))                             /*154*/ \
+   | (1 << (RANG_OUTPUT_LED_DF_REG_UMAX1 - 128))                                /*155*/ \
+   | (1 << (RANG_OUTPUT_LED_DF_REG_PO_UMAX2 - 128))                             /*157*/ \
+   | (1 << (RANG_OUTPUT_LED_DF_REG_UMAX2 - 128))                                /*158*/ \
+)
+
 #define MASKA_MONITOTYNG_UMAX_SIGNALES_5        0
-
-#define MASKA_MONITOTYNG_UMAX_SIGNALES_6 (unsigned int)(   \
-     (1 << (RANG_OUTPUT_LED_DF_REG_PO_UMAX1 - 192))/*222*/ \
-   | (1 << (RANG_OUTPUT_LED_DF_REG_UMAX1 - 192))   /*223*/ \
-)
-
-#define MASKA_MONITOTYNG_UMAX_SIGNALES_7 (unsigned int)(   \
-     (1 << (RANG_OUTPUT_LED_DF_REG_PO_UMAX2 - 224))/*225*/ \
-   | (1 << (RANG_OUTPUT_LED_DF_REG_UMAX2 - 224))   /*226*/ \
-)
+#define MASKA_MONITOTYNG_UMAX_SIGNALES_6        0
+#define MASKA_MONITOTYNG_UMAX_SIGNALES_7        0
 /*****************************************/
 
 /*****************************************/
@@ -1325,14 +1327,14 @@ enum __mtz_abc_direction_const {
 #define MASKA_MONITOTYNG_ZOP_SIGNALES_1                  0
 #define MASKA_MONITOTYNG_ZOP_SIGNALES_2                  0
 #define MASKA_MONITOTYNG_ZOP_SIGNALES_3                  0
-#define MASKA_MONITOTYNG_ZOP_SIGNALES_4                  0
-#define MASKA_MONITOTYNG_ZOP_SIGNALES_5                  0
 
-#define MASKA_MONITOTYNG_ZOP_SIGNALES_6 (unsigned int)(   \
-     (1 << (RANG_OUTPUT_LED_DF_REG_PO_ZOP - 192))/*207*/  \
-   | (1 << (RANG_OUTPUT_LED_DF_REG_ZOP - 192))   /*208*/  \
+#define MASKA_MONITOTYNG_ZOP_SIGNALES_4 (unsigned int)(                                  \
+     (1 << (RANG_OUTPUT_LED_DF_REG_PO_ZOP - 128))                               /*139*/  \
+   | (1 << (RANG_OUTPUT_LED_DF_REG_ZOP - 128))                                  /*140*/  \
 )
 
+#define MASKA_MONITOTYNG_ZOP_SIGNALES_5                  0
+#define MASKA_MONITOTYNG_ZOP_SIGNALES_6                  0
 #define MASKA_MONITOTYNG_ZOP_SIGNALES_7                  0
 /*****************************************/
 
@@ -1343,16 +1345,16 @@ enum __mtz_abc_direction_const {
 #define MASKA_MONITOTYNG_F_MIN_ACHR_SIGNALES_1   0
 #define MASKA_MONITOTYNG_F_MIN_ACHR_SIGNALES_2   0
 #define MASKA_MONITOTYNG_F_MIN_ACHR_SIGNALES_3   0
-#define MASKA_MONITOTYNG_F_MIN_ACHR_SIGNALES_4   0
-#define MASKA_MONITOTYNG_F_MIN_ACHR_SIGNALES_5   0
 
-#define MASKA_MONITOTYNG_F_MIN_ACHR_SIGNALES_6   (unsigned int)(  \
-     (1 << (RANG_OUTPUT_LED_DF_REG_PO_ACHR1 - 192))    /*196*/  \
-   | (1 << (RANG_OUTPUT_LED_DF_REG_ACHR_CHAPV1 - 192)) /*198*/  \
-   | (1 << (RANG_OUTPUT_LED_DF_REG_PO_ACHR2 - 192))    /*199*/  \
-   | (1 << (RANG_OUTPUT_LED_DF_REG_ACHR_CHAPV2 - 192)) /*201*/  \
+#define MASKA_MONITOTYNG_F_MIN_ACHR_SIGNALES_4   (unsigned int)(                         \
+     (1 << (RANG_OUTPUT_LED_DF_REG_PO_ACHR1 - 128))                             /*128*/  \
+   | (1 << (RANG_OUTPUT_LED_DF_REG_ACHR_CHAPV1 - 128))                          /*130*/  \
+   | (1 << (RANG_OUTPUT_LED_DF_REG_PO_ACHR2 - 128))                             /*131*/  \
+   | (1 << (RANG_OUTPUT_LED_DF_REG_ACHR_CHAPV2 - 128))                          /*133*/  \
 )     
 
+#define MASKA_MONITOTYNG_F_MIN_ACHR_SIGNALES_5   0
+#define MASKA_MONITOTYNG_F_MIN_ACHR_SIGNALES_6   0
 #define MASKA_MONITOTYNG_F_MIN_ACHR_SIGNALES_7   0
 /*****************************************/
 
@@ -1360,31 +1362,31 @@ enum __mtz_abc_direction_const {
 //Макска моніторингу максимального фазного струму для фіксації КЗ
 /*****************************************/
 #define MASKA_MONITOTYNG_PHASE_SIGNALES_KZ_0        0
-#define MASKA_MONITOTYNG_PHASE_SIGNALES_KZ_1        0
-#define MASKA_MONITOTYNG_PHASE_SIGNALES_KZ_2        0
 
-#define MASKA_MONITOTYNG_PHASE_SIGNALES_KZ_3 (unsigned int)(             \
-     (1 << (RANG_OUTPUT_LED_DF_REG_PO_MTZ1 - 96))               /*104*/  \
-   | (1 << (RANG_OUTPUT_LED_DF_REG_PO_MTZN1_VPERED - 96))       /*105*/  \
-   | (1 << (RANG_OUTPUT_LED_DF_REG_PO_MTZN1_NAZAD - 96))        /*106*/  \
-   | (1 << (RANG_OUTPUT_LED_DF_REG_PO_MTZPN1 - 96))             /*108*/  \
-   | (1 << (RANG_OUTPUT_LED_DF_REG_PO_MTZ2 - 96))               /*112*/  \
-   | (1 << (RANG_OUTPUT_LED_DF_REG_PO_MTZN2_VPERED - 96))       /*113*/  \
-   | (1 << (RANG_OUTPUT_LED_DF_REG_PO_MTZN2_NAZAD - 96))        /*114*/  \
-   | (1 << (RANG_OUTPUT_LED_DF_REG_PO_MTZPN2 - 96))             /*116*/  \
-   | (1 << (RANG_OUTPUT_LED_DF_REG_PO_MTZ3 - 96))               /*120*/  \
-   | (1 << (RANG_OUTPUT_LED_DF_REG_PO_MTZN3_VPERED - 96))       /*121*/  \
-   | (1 << (RANG_OUTPUT_LED_DF_REG_PO_MTZN3_NAZAD - 96))        /*122*/  \
-   | (1 << (RANG_OUTPUT_LED_DF_REG_PO_MTZPN3 - 96))             /*124*/  \
+#define MASKA_MONITOTYNG_PHASE_SIGNALES_KZ_1 (unsigned int)(             \
+     (1 << (RANG_OUTPUT_LED_DF_REG_PO_MTZ1 - 32))                               /* 36*/  \
+   | (1 << (RANG_OUTPUT_LED_DF_REG_PO_MTZN1_VPERED - 32))                       /* 37*/  \
+   | (1 << (RANG_OUTPUT_LED_DF_REG_PO_MTZN1_NAZAD - 32))                        /* 38*/  \
+   | (1 << (RANG_OUTPUT_LED_DF_REG_PO_MTZPN1 - 32))                             /* 40*/  \
+   | (1 << (RANG_OUTPUT_LED_DF_REG_PO_MTZ2 - 32))                               /* 44*/  \
+   | (1 << (RANG_OUTPUT_LED_DF_REG_PO_MTZN2_VPERED - 32))                       /* 45*/  \
+   | (1 << (RANG_OUTPUT_LED_DF_REG_PO_MTZN2_NAZAD - 32))                        /* 46*/  \
+   | (1 << (RANG_OUTPUT_LED_DF_REG_PO_MTZPN2 - 32))                             /* 48*/  \
+   | (1 << (RANG_OUTPUT_LED_DF_REG_PO_MTZ3 - 32))                               /* 52*/  \
+   | (1 << (RANG_OUTPUT_LED_DF_REG_PO_MTZN3_VPERED - 32))                       /* 53*/  \
+   | (1 << (RANG_OUTPUT_LED_DF_REG_PO_MTZN3_NAZAD - 32))                        /* 54*/  \
+   | (1 << (RANG_OUTPUT_LED_DF_REG_PO_MTZPN3 - 32))                             /* 56*/  \
+   | (1 << (RANG_OUTPUT_LED_DF_REG_PO_MTZ4 - 32))                               /* 60*/  \
+   | (1 << (RANG_OUTPUT_LED_DF_REG_PO_MTZN4_VPERED - 32))                       /* 61*/  \
+   | (1 << (RANG_OUTPUT_LED_DF_REG_PO_MTZN4_NAZAD - 32))                        /* 62*/  \
 )
 
-#define MASKA_MONITOTYNG_PHASE_SIGNALES_KZ_4 (unsigned int)(             \
-     (1 << (RANG_OUTPUT_LED_DF_REG_PO_MTZ4 - 128))               /*128*/  \
-   | (1 << (RANG_OUTPUT_LED_DF_REG_PO_MTZN4_VPERED - 128))       /*129*/  \
-   | (1 << (RANG_OUTPUT_LED_DF_REG_PO_MTZN4_NAZAD - 128))        /*130*/ \
-   | (1 << (RANG_OUTPUT_LED_DF_REG_PO_MTZPN4 - 128))             /*132*/ \
+#define MASKA_MONITOTYNG_PHASE_SIGNALES_KZ_2 (unsigned int)(                            \
+     (1 << (RANG_OUTPUT_LED_DF_REG_PO_MTZPN4 - 64))                             /* 64*/ \
 )
 
+#define MASKA_MONITOTYNG_PHASE_SIGNALES_KZ_3        0
+#define MASKA_MONITOTYNG_PHASE_SIGNALES_KZ_4        0
 #define MASKA_MONITOTYNG_PHASE_SIGNALES_KZ_5        0
 #define MASKA_MONITOTYNG_PHASE_SIGNALES_KZ_6        0
 #define MASKA_MONITOTYNG_PHASE_SIGNALES_KZ_7        0

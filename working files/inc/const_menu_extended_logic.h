@@ -1,0 +1,15 @@
+#ifndef __CONST_MENU_EXTENDED_LIGIC__
+#define __CONST_MENU_EXTENDED_LIGIC__
+
+#define EKRAN_EXTENDED_LIGIC        (EKRAN_TIMEOUT_ANALOG_REGISTRATOR + 1)
+
+#define MAX_ROW_FOR_EXTENDED_LIGIC  6
+
+#define INDEX_OF_DEFINED_FUNCTIONS        0
+#define INDEX_OF_DEFINED_TRIGGERS         1
+#define INDEX_OF_DEFINED_AND              2
+#define INDEX_OF_DEFINED_OR               3
+#define INDEX_OF_DEFINED_XOR              4
+#define INDEX_OF_DEFINED_NOT              5
+
+#endif
