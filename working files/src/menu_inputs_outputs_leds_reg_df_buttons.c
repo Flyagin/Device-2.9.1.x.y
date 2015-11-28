@@ -372,7 +372,10 @@ void make_ekran_set_function_in_button(unsigned int number_ekran)
                                                      {-1,-1},
                                                      {-1,-1},
                                                      {-1,-1},
-                                                     {-1,-1}
+                                                     {
+                                                      (NUMBER_GENERAL_SIGNAL_FOR_RANG_BUTTON + NUMBER_MTZ_SIGNAL_FOR_RANG_BUTTON + NUMBER_MTZ04_SIGNAL_FOR_RANG_BUTTON + NUMBER_ZDZ_SIGNAL_FOR_RANG_BUTTON + NUMBER_ZZ_SIGNAL_FOR_RANG_BUTTON + NUMBER_TZNP_SIGNAL_FOR_RANG_BUTTON + NUMBER_APV_SIGNAL_FOR_RANG_BUTTON + NUMBER_ACHR_CHAPV_SIGNAL_FOR_RANG_BUTTON + NUMBER_UROV_SIGNAL_FOR_RANG_BUTTON + NUMBER_ZOP_SIGNAL_FOR_RANG_BUTTON + NUMBER_UMIN_SIGNAL_FOR_RANG_BUTTON + NUMBER_UMAX_SIGNAL_FOR_RANG_BUTTON + NUMBER_VMP_SIGNAL_FOR_RANG_BUTTON),
+                                                      (NUMBER_GENERAL_SIGNAL_FOR_RANG_BUTTON + NUMBER_MTZ_SIGNAL_FOR_RANG_BUTTON + NUMBER_MTZ04_SIGNAL_FOR_RANG_BUTTON + NUMBER_ZDZ_SIGNAL_FOR_RANG_BUTTON + NUMBER_ZZ_SIGNAL_FOR_RANG_BUTTON + NUMBER_TZNP_SIGNAL_FOR_RANG_BUTTON + NUMBER_APV_SIGNAL_FOR_RANG_BUTTON + NUMBER_ACHR_CHAPV_SIGNAL_FOR_RANG_BUTTON + NUMBER_UROV_SIGNAL_FOR_RANG_BUTTON + NUMBER_ZOP_SIGNAL_FOR_RANG_BUTTON + NUMBER_UMIN_SIGNAL_FOR_RANG_BUTTON + NUMBER_UMAX_SIGNAL_FOR_RANG_BUTTON + NUMBER_VMP_SIGNAL_FOR_RANG_BUTTON + NUMBER_EL_SIGNAL_FOR_RANG_BUTTON - 1)
+                                                     }
                                                     };
       
     /*************************************************************/
@@ -938,7 +941,10 @@ void make_ekran_set_function_in_input(unsigned int number_ekran)
        (NUMBER_GENERAL_SIGNAL_FOR_RANG_INPUT + NUMBER_MTZ_SIGNAL_FOR_RANG_INPUT + NUMBER_MTZ04_SIGNAL_FOR_RANG_INPUT + NUMBER_ZDZ_SIGNAL_FOR_RANG_INPUT + NUMBER_ZZ_SIGNAL_FOR_RANG_INPUT + NUMBER_TZNP_SIGNAL_FOR_RANG_INPUT + NUMBER_APV_SIGNAL_FOR_RANG_INPUT + NUMBER_ACHR_CHAPV_SIGNAL_FOR_RANG_INPUT + NUMBER_UROV_SIGNAL_FOR_RANG_INPUT + NUMBER_ZOP_SIGNAL_FOR_RANG_INPUT + NUMBER_UMIN_SIGNAL_FOR_RANG_INPUT + NUMBER_UMAX_SIGNAL_FOR_RANG_INPUT - 1)
       },
       {-1,-1},
-      {-1,-1}
+      {
+       (NUMBER_GENERAL_SIGNAL_FOR_RANG_INPUT + NUMBER_MTZ_SIGNAL_FOR_RANG_INPUT + NUMBER_MTZ04_SIGNAL_FOR_RANG_INPUT + NUMBER_ZDZ_SIGNAL_FOR_RANG_INPUT + NUMBER_ZZ_SIGNAL_FOR_RANG_INPUT + NUMBER_TZNP_SIGNAL_FOR_RANG_INPUT + NUMBER_APV_SIGNAL_FOR_RANG_INPUT + NUMBER_ACHR_CHAPV_SIGNAL_FOR_RANG_INPUT + NUMBER_UROV_SIGNAL_FOR_RANG_INPUT + NUMBER_ZOP_SIGNAL_FOR_RANG_INPUT + NUMBER_UMIN_SIGNAL_FOR_RANG_INPUT + NUMBER_UMAX_SIGNAL_FOR_RANG_INPUT + NUMBER_VMP_SIGNAL_FOR_RANG_INPUT),
+       (NUMBER_GENERAL_SIGNAL_FOR_RANG_INPUT + NUMBER_MTZ_SIGNAL_FOR_RANG_INPUT + NUMBER_MTZ04_SIGNAL_FOR_RANG_INPUT + NUMBER_ZDZ_SIGNAL_FOR_RANG_INPUT + NUMBER_ZZ_SIGNAL_FOR_RANG_INPUT + NUMBER_TZNP_SIGNAL_FOR_RANG_INPUT + NUMBER_APV_SIGNAL_FOR_RANG_INPUT + NUMBER_ACHR_CHAPV_SIGNAL_FOR_RANG_INPUT + NUMBER_UROV_SIGNAL_FOR_RANG_INPUT + NUMBER_ZOP_SIGNAL_FOR_RANG_INPUT + NUMBER_UMIN_SIGNAL_FOR_RANG_INPUT + NUMBER_UMAX_SIGNAL_FOR_RANG_INPUT + NUMBER_VMP_SIGNAL_FOR_RANG_INPUT + NUMBER_EL_SIGNAL_FOR_RANG_INPUT - 1)
+      }
      };
     
     /*************************************************************/
@@ -2025,7 +2031,7 @@ void make_ekran_set_function_in_output_led_df_dt_reg(unsigned int number_ekran, 
     };
     for (unsigned int index_1 = 0; index_1 < MAX_COL_LCD; index_1++)
     {
-      name_string_tmp[RANG_OUTPUT_LED_DF_REG_BLOCK_NZZ + NUMBER_ROW_FOR_NOTHING_INFORMATION][index_1] = name_block_zz[index_language][index_1];
+      name_string_tmp[RANG_BLOCK_NZZ + NUMBER_ROW_FOR_NOTHING_INFORMATION][index_1] = name_block_zz[index_language][index_1];
     }
   }
 
@@ -2436,58 +2442,61 @@ void make_ekran_set_function_in_output_led_df_dt_reg(unsigned int number_ekran, 
     int min_max_number[TOTAL_NUMBER_PROTECTION][2] =
     {
       {
-       (NUMBER_GENERAL_SIGNAL_FOR_RANG_OUTPUT_LED_DF_REG),
-       (NUMBER_GENERAL_SIGNAL_FOR_RANG_OUTPUT_LED_DF_REG + NUMBER_MTZ_SIGNAL_FOR_RANG_OUTPUT_LED_DF_REG - 1)
+       (NUMBER_GENERAL_SIGNAL_FOR_RANG),
+       (NUMBER_GENERAL_SIGNAL_FOR_RANG + NUMBER_MTZ_SIGNAL_FOR_RANG - 1)
       },
       {
-       (NUMBER_GENERAL_SIGNAL_FOR_RANG_OUTPUT_LED_DF_REG + NUMBER_MTZ_SIGNAL_FOR_RANG_OUTPUT_LED_DF_REG),
-       (NUMBER_GENERAL_SIGNAL_FOR_RANG_OUTPUT_LED_DF_REG + NUMBER_MTZ_SIGNAL_FOR_RANG_OUTPUT_LED_DF_REG + NUMBER_MTZ04_SIGNAL_FOR_RANG_OUTPUT_LED_DF_REG - 1)
+       (NUMBER_GENERAL_SIGNAL_FOR_RANG + NUMBER_MTZ_SIGNAL_FOR_RANG),
+       (NUMBER_GENERAL_SIGNAL_FOR_RANG + NUMBER_MTZ_SIGNAL_FOR_RANG + NUMBER_MTZ04_SIGNAL_FOR_RANG - 1)
       },
       {
-       (NUMBER_GENERAL_SIGNAL_FOR_RANG_OUTPUT_LED_DF_REG + NUMBER_MTZ_SIGNAL_FOR_RANG_OUTPUT_LED_DF_REG + NUMBER_MTZ04_SIGNAL_FOR_RANG_OUTPUT_LED_DF_REG),
-       (NUMBER_GENERAL_SIGNAL_FOR_RANG_OUTPUT_LED_DF_REG + NUMBER_MTZ_SIGNAL_FOR_RANG_OUTPUT_LED_DF_REG + NUMBER_MTZ04_SIGNAL_FOR_RANG_OUTPUT_LED_DF_REG + NUMBER_ZDZ_SIGNAL_FOR_RANG_OUTPUT_LED_DF_REG - 1)
+       (NUMBER_GENERAL_SIGNAL_FOR_RANG + NUMBER_MTZ_SIGNAL_FOR_RANG + NUMBER_MTZ04_SIGNAL_FOR_RANG),
+       (NUMBER_GENERAL_SIGNAL_FOR_RANG + NUMBER_MTZ_SIGNAL_FOR_RANG + NUMBER_MTZ04_SIGNAL_FOR_RANG + NUMBER_ZDZ_SIGNAL_FOR_RANG - 1)
       },
       {
-       (NUMBER_GENERAL_SIGNAL_FOR_RANG_OUTPUT_LED_DF_REG + NUMBER_MTZ_SIGNAL_FOR_RANG_OUTPUT_LED_DF_REG + NUMBER_MTZ04_SIGNAL_FOR_RANG_OUTPUT_LED_DF_REG + NUMBER_ZDZ_SIGNAL_FOR_RANG_OUTPUT_LED_DF_REG),
-       (NUMBER_GENERAL_SIGNAL_FOR_RANG_OUTPUT_LED_DF_REG + NUMBER_MTZ_SIGNAL_FOR_RANG_OUTPUT_LED_DF_REG + NUMBER_MTZ04_SIGNAL_FOR_RANG_OUTPUT_LED_DF_REG + NUMBER_ZDZ_SIGNAL_FOR_RANG_OUTPUT_LED_DF_REG + NUMBER_ZZ_SIGNAL_FOR_RANG_OUTPUT_LED_DF_REG - 1)
+       (NUMBER_GENERAL_SIGNAL_FOR_RANG + NUMBER_MTZ_SIGNAL_FOR_RANG + NUMBER_MTZ04_SIGNAL_FOR_RANG + NUMBER_ZDZ_SIGNAL_FOR_RANG),
+       (NUMBER_GENERAL_SIGNAL_FOR_RANG + NUMBER_MTZ_SIGNAL_FOR_RANG + NUMBER_MTZ04_SIGNAL_FOR_RANG + NUMBER_ZDZ_SIGNAL_FOR_RANG + NUMBER_ZZ_SIGNAL_FOR_RANG - 1)
       },
       {
-       (NUMBER_GENERAL_SIGNAL_FOR_RANG_OUTPUT_LED_DF_REG + NUMBER_MTZ_SIGNAL_FOR_RANG_OUTPUT_LED_DF_REG + NUMBER_MTZ04_SIGNAL_FOR_RANG_OUTPUT_LED_DF_REG + NUMBER_ZDZ_SIGNAL_FOR_RANG_OUTPUT_LED_DF_REG + NUMBER_ZZ_SIGNAL_FOR_RANG_OUTPUT_LED_DF_REG),
-       (NUMBER_GENERAL_SIGNAL_FOR_RANG_OUTPUT_LED_DF_REG + NUMBER_MTZ_SIGNAL_FOR_RANG_OUTPUT_LED_DF_REG + NUMBER_MTZ04_SIGNAL_FOR_RANG_OUTPUT_LED_DF_REG + NUMBER_ZDZ_SIGNAL_FOR_RANG_OUTPUT_LED_DF_REG + NUMBER_ZZ_SIGNAL_FOR_RANG_OUTPUT_LED_DF_REG + NUMBER_TZNP_SIGNAL_FOR_RANG_OUTPUT_LED_DF_REG - 1)
+       (NUMBER_GENERAL_SIGNAL_FOR_RANG + NUMBER_MTZ_SIGNAL_FOR_RANG + NUMBER_MTZ04_SIGNAL_FOR_RANG + NUMBER_ZDZ_SIGNAL_FOR_RANG + NUMBER_ZZ_SIGNAL_FOR_RANG),
+       (NUMBER_GENERAL_SIGNAL_FOR_RANG + NUMBER_MTZ_SIGNAL_FOR_RANG + NUMBER_MTZ04_SIGNAL_FOR_RANG + NUMBER_ZDZ_SIGNAL_FOR_RANG + NUMBER_ZZ_SIGNAL_FOR_RANG + NUMBER_TZNP_SIGNAL_FOR_RANG - 1)
       },
       {
-       (NUMBER_GENERAL_SIGNAL_FOR_RANG_OUTPUT_LED_DF_REG + NUMBER_MTZ_SIGNAL_FOR_RANG_OUTPUT_LED_DF_REG + NUMBER_MTZ04_SIGNAL_FOR_RANG_OUTPUT_LED_DF_REG + NUMBER_ZDZ_SIGNAL_FOR_RANG_OUTPUT_LED_DF_REG + NUMBER_ZZ_SIGNAL_FOR_RANG_OUTPUT_LED_DF_REG + NUMBER_TZNP_SIGNAL_FOR_RANG_OUTPUT_LED_DF_REG),
-       (NUMBER_GENERAL_SIGNAL_FOR_RANG_OUTPUT_LED_DF_REG + NUMBER_MTZ_SIGNAL_FOR_RANG_OUTPUT_LED_DF_REG + NUMBER_MTZ04_SIGNAL_FOR_RANG_OUTPUT_LED_DF_REG + NUMBER_ZDZ_SIGNAL_FOR_RANG_OUTPUT_LED_DF_REG + NUMBER_ZZ_SIGNAL_FOR_RANG_OUTPUT_LED_DF_REG + NUMBER_TZNP_SIGNAL_FOR_RANG_OUTPUT_LED_DF_REG + NUMBER_APV_SIGNAL_FOR_RANG_OUTPUT_LED_DF_REG - 1)
+       (NUMBER_GENERAL_SIGNAL_FOR_RANG + NUMBER_MTZ_SIGNAL_FOR_RANG + NUMBER_MTZ04_SIGNAL_FOR_RANG + NUMBER_ZDZ_SIGNAL_FOR_RANG + NUMBER_ZZ_SIGNAL_FOR_RANG + NUMBER_TZNP_SIGNAL_FOR_RANG),
+       (NUMBER_GENERAL_SIGNAL_FOR_RANG + NUMBER_MTZ_SIGNAL_FOR_RANG + NUMBER_MTZ04_SIGNAL_FOR_RANG + NUMBER_ZDZ_SIGNAL_FOR_RANG + NUMBER_ZZ_SIGNAL_FOR_RANG + NUMBER_TZNP_SIGNAL_FOR_RANG + NUMBER_APV_SIGNAL_FOR_RANG - 1)
       },
       {
-       (NUMBER_GENERAL_SIGNAL_FOR_RANG_OUTPUT_LED_DF_REG + NUMBER_MTZ_SIGNAL_FOR_RANG_OUTPUT_LED_DF_REG + NUMBER_MTZ04_SIGNAL_FOR_RANG_OUTPUT_LED_DF_REG + NUMBER_ZDZ_SIGNAL_FOR_RANG_OUTPUT_LED_DF_REG + NUMBER_ZZ_SIGNAL_FOR_RANG_OUTPUT_LED_DF_REG + NUMBER_TZNP_SIGNAL_FOR_RANG_OUTPUT_LED_DF_REG + NUMBER_APV_SIGNAL_FOR_RANG_OUTPUT_LED_DF_REG),
-       (NUMBER_GENERAL_SIGNAL_FOR_RANG_OUTPUT_LED_DF_REG + NUMBER_MTZ_SIGNAL_FOR_RANG_OUTPUT_LED_DF_REG + NUMBER_MTZ04_SIGNAL_FOR_RANG_OUTPUT_LED_DF_REG + NUMBER_ZDZ_SIGNAL_FOR_RANG_OUTPUT_LED_DF_REG + NUMBER_ZZ_SIGNAL_FOR_RANG_OUTPUT_LED_DF_REG + NUMBER_TZNP_SIGNAL_FOR_RANG_OUTPUT_LED_DF_REG + NUMBER_APV_SIGNAL_FOR_RANG_OUTPUT_LED_DF_REG + NUMBER_ACHR_CHAPV_SIGNAL_FOR_RANG_OUTPUT_LED_DF_REG - 1)
+       (NUMBER_GENERAL_SIGNAL_FOR_RANG + NUMBER_MTZ_SIGNAL_FOR_RANG + NUMBER_MTZ04_SIGNAL_FOR_RANG + NUMBER_ZDZ_SIGNAL_FOR_RANG + NUMBER_ZZ_SIGNAL_FOR_RANG + NUMBER_TZNP_SIGNAL_FOR_RANG + NUMBER_APV_SIGNAL_FOR_RANG),
+       (NUMBER_GENERAL_SIGNAL_FOR_RANG + NUMBER_MTZ_SIGNAL_FOR_RANG + NUMBER_MTZ04_SIGNAL_FOR_RANG + NUMBER_ZDZ_SIGNAL_FOR_RANG + NUMBER_ZZ_SIGNAL_FOR_RANG + NUMBER_TZNP_SIGNAL_FOR_RANG + NUMBER_APV_SIGNAL_FOR_RANG + NUMBER_ACHR_CHAPV_SIGNAL_FOR_RANG - 1)
       },
       {
-       (NUMBER_GENERAL_SIGNAL_FOR_RANG_OUTPUT_LED_DF_REG + NUMBER_MTZ_SIGNAL_FOR_RANG_OUTPUT_LED_DF_REG + NUMBER_MTZ04_SIGNAL_FOR_RANG_OUTPUT_LED_DF_REG + NUMBER_ZDZ_SIGNAL_FOR_RANG_OUTPUT_LED_DF_REG + NUMBER_ZZ_SIGNAL_FOR_RANG_OUTPUT_LED_DF_REG + NUMBER_TZNP_SIGNAL_FOR_RANG_OUTPUT_LED_DF_REG + NUMBER_APV_SIGNAL_FOR_RANG_OUTPUT_LED_DF_REG + NUMBER_ACHR_CHAPV_SIGNAL_FOR_RANG_OUTPUT_LED_DF_REG),
-       (NUMBER_GENERAL_SIGNAL_FOR_RANG_OUTPUT_LED_DF_REG + NUMBER_MTZ_SIGNAL_FOR_RANG_OUTPUT_LED_DF_REG + NUMBER_MTZ04_SIGNAL_FOR_RANG_OUTPUT_LED_DF_REG + NUMBER_ZDZ_SIGNAL_FOR_RANG_OUTPUT_LED_DF_REG + NUMBER_ZZ_SIGNAL_FOR_RANG_OUTPUT_LED_DF_REG + NUMBER_TZNP_SIGNAL_FOR_RANG_OUTPUT_LED_DF_REG + NUMBER_APV_SIGNAL_FOR_RANG_OUTPUT_LED_DF_REG + NUMBER_ACHR_CHAPV_SIGNAL_FOR_RANG_OUTPUT_LED_DF_REG  + NUMBER_UROV_SIGNAL_FOR_RANG_OUTPUT_LED_DF_REG - 1)
+       (NUMBER_GENERAL_SIGNAL_FOR_RANG + NUMBER_MTZ_SIGNAL_FOR_RANG + NUMBER_MTZ04_SIGNAL_FOR_RANG + NUMBER_ZDZ_SIGNAL_FOR_RANG + NUMBER_ZZ_SIGNAL_FOR_RANG + NUMBER_TZNP_SIGNAL_FOR_RANG + NUMBER_APV_SIGNAL_FOR_RANG + NUMBER_ACHR_CHAPV_SIGNAL_FOR_RANG),
+       (NUMBER_GENERAL_SIGNAL_FOR_RANG + NUMBER_MTZ_SIGNAL_FOR_RANG + NUMBER_MTZ04_SIGNAL_FOR_RANG + NUMBER_ZDZ_SIGNAL_FOR_RANG + NUMBER_ZZ_SIGNAL_FOR_RANG + NUMBER_TZNP_SIGNAL_FOR_RANG + NUMBER_APV_SIGNAL_FOR_RANG + NUMBER_ACHR_CHAPV_SIGNAL_FOR_RANG  + NUMBER_UROV_SIGNAL_FOR_RANG - 1)
       },
       {
-       (NUMBER_GENERAL_SIGNAL_FOR_RANG_OUTPUT_LED_DF_REG + NUMBER_MTZ_SIGNAL_FOR_RANG_OUTPUT_LED_DF_REG + NUMBER_MTZ04_SIGNAL_FOR_RANG_OUTPUT_LED_DF_REG + NUMBER_ZDZ_SIGNAL_FOR_RANG_OUTPUT_LED_DF_REG + NUMBER_ZZ_SIGNAL_FOR_RANG_OUTPUT_LED_DF_REG + NUMBER_TZNP_SIGNAL_FOR_RANG_OUTPUT_LED_DF_REG + NUMBER_APV_SIGNAL_FOR_RANG_OUTPUT_LED_DF_REG + NUMBER_ACHR_CHAPV_SIGNAL_FOR_RANG_OUTPUT_LED_DF_REG  + NUMBER_UROV_SIGNAL_FOR_RANG_OUTPUT_LED_DF_REG),
-       (NUMBER_GENERAL_SIGNAL_FOR_RANG_OUTPUT_LED_DF_REG + NUMBER_MTZ_SIGNAL_FOR_RANG_OUTPUT_LED_DF_REG + NUMBER_MTZ04_SIGNAL_FOR_RANG_OUTPUT_LED_DF_REG + NUMBER_ZDZ_SIGNAL_FOR_RANG_OUTPUT_LED_DF_REG + NUMBER_ZZ_SIGNAL_FOR_RANG_OUTPUT_LED_DF_REG + NUMBER_TZNP_SIGNAL_FOR_RANG_OUTPUT_LED_DF_REG + NUMBER_APV_SIGNAL_FOR_RANG_OUTPUT_LED_DF_REG + NUMBER_ACHR_CHAPV_SIGNAL_FOR_RANG_OUTPUT_LED_DF_REG  + NUMBER_UROV_SIGNAL_FOR_RANG_OUTPUT_LED_DF_REG + NUMBER_ZOP_SIGNAL_FOR_RANG_OUTPUT_LED_DF_REG - 1)
+       (NUMBER_GENERAL_SIGNAL_FOR_RANG + NUMBER_MTZ_SIGNAL_FOR_RANG + NUMBER_MTZ04_SIGNAL_FOR_RANG + NUMBER_ZDZ_SIGNAL_FOR_RANG + NUMBER_ZZ_SIGNAL_FOR_RANG + NUMBER_TZNP_SIGNAL_FOR_RANG + NUMBER_APV_SIGNAL_FOR_RANG + NUMBER_ACHR_CHAPV_SIGNAL_FOR_RANG  + NUMBER_UROV_SIGNAL_FOR_RANG),
+       (NUMBER_GENERAL_SIGNAL_FOR_RANG + NUMBER_MTZ_SIGNAL_FOR_RANG + NUMBER_MTZ04_SIGNAL_FOR_RANG + NUMBER_ZDZ_SIGNAL_FOR_RANG + NUMBER_ZZ_SIGNAL_FOR_RANG + NUMBER_TZNP_SIGNAL_FOR_RANG + NUMBER_APV_SIGNAL_FOR_RANG + NUMBER_ACHR_CHAPV_SIGNAL_FOR_RANG  + NUMBER_UROV_SIGNAL_FOR_RANG + NUMBER_ZOP_SIGNAL_FOR_RANG - 1)
       },
       {
-       (NUMBER_GENERAL_SIGNAL_FOR_RANG_OUTPUT_LED_DF_REG + NUMBER_MTZ_SIGNAL_FOR_RANG_OUTPUT_LED_DF_REG + NUMBER_MTZ04_SIGNAL_FOR_RANG_OUTPUT_LED_DF_REG + NUMBER_ZDZ_SIGNAL_FOR_RANG_OUTPUT_LED_DF_REG + NUMBER_ZZ_SIGNAL_FOR_RANG_OUTPUT_LED_DF_REG + NUMBER_TZNP_SIGNAL_FOR_RANG_OUTPUT_LED_DF_REG + NUMBER_APV_SIGNAL_FOR_RANG_OUTPUT_LED_DF_REG + NUMBER_ACHR_CHAPV_SIGNAL_FOR_RANG_OUTPUT_LED_DF_REG  + NUMBER_UROV_SIGNAL_FOR_RANG_OUTPUT_LED_DF_REG + NUMBER_ZOP_SIGNAL_FOR_RANG_OUTPUT_LED_DF_REG),
-       (NUMBER_GENERAL_SIGNAL_FOR_RANG_OUTPUT_LED_DF_REG + NUMBER_MTZ_SIGNAL_FOR_RANG_OUTPUT_LED_DF_REG + NUMBER_MTZ04_SIGNAL_FOR_RANG_OUTPUT_LED_DF_REG + NUMBER_ZDZ_SIGNAL_FOR_RANG_OUTPUT_LED_DF_REG + NUMBER_ZZ_SIGNAL_FOR_RANG_OUTPUT_LED_DF_REG + NUMBER_TZNP_SIGNAL_FOR_RANG_OUTPUT_LED_DF_REG + NUMBER_APV_SIGNAL_FOR_RANG_OUTPUT_LED_DF_REG + NUMBER_ACHR_CHAPV_SIGNAL_FOR_RANG_OUTPUT_LED_DF_REG  + NUMBER_UROV_SIGNAL_FOR_RANG_OUTPUT_LED_DF_REG + NUMBER_ZOP_SIGNAL_FOR_RANG_OUTPUT_LED_DF_REG + NUMBER_UMIN_SIGNAL_FOR_RANG_OUTPUT_LED_DF_REG - 1)
+       (NUMBER_GENERAL_SIGNAL_FOR_RANG + NUMBER_MTZ_SIGNAL_FOR_RANG + NUMBER_MTZ04_SIGNAL_FOR_RANG + NUMBER_ZDZ_SIGNAL_FOR_RANG + NUMBER_ZZ_SIGNAL_FOR_RANG + NUMBER_TZNP_SIGNAL_FOR_RANG + NUMBER_APV_SIGNAL_FOR_RANG + NUMBER_ACHR_CHAPV_SIGNAL_FOR_RANG  + NUMBER_UROV_SIGNAL_FOR_RANG + NUMBER_ZOP_SIGNAL_FOR_RANG),
+       (NUMBER_GENERAL_SIGNAL_FOR_RANG + NUMBER_MTZ_SIGNAL_FOR_RANG + NUMBER_MTZ04_SIGNAL_FOR_RANG + NUMBER_ZDZ_SIGNAL_FOR_RANG + NUMBER_ZZ_SIGNAL_FOR_RANG + NUMBER_TZNP_SIGNAL_FOR_RANG + NUMBER_APV_SIGNAL_FOR_RANG + NUMBER_ACHR_CHAPV_SIGNAL_FOR_RANG  + NUMBER_UROV_SIGNAL_FOR_RANG + NUMBER_ZOP_SIGNAL_FOR_RANG + NUMBER_UMIN_SIGNAL_FOR_RANG - 1)
       },
       {
-       (NUMBER_GENERAL_SIGNAL_FOR_RANG_OUTPUT_LED_DF_REG + NUMBER_MTZ_SIGNAL_FOR_RANG_OUTPUT_LED_DF_REG + NUMBER_MTZ04_SIGNAL_FOR_RANG_OUTPUT_LED_DF_REG + NUMBER_ZDZ_SIGNAL_FOR_RANG_OUTPUT_LED_DF_REG + NUMBER_ZZ_SIGNAL_FOR_RANG_OUTPUT_LED_DF_REG + NUMBER_TZNP_SIGNAL_FOR_RANG_OUTPUT_LED_DF_REG + NUMBER_APV_SIGNAL_FOR_RANG_OUTPUT_LED_DF_REG + NUMBER_ACHR_CHAPV_SIGNAL_FOR_RANG_OUTPUT_LED_DF_REG  + NUMBER_UROV_SIGNAL_FOR_RANG_OUTPUT_LED_DF_REG + NUMBER_ZOP_SIGNAL_FOR_RANG_OUTPUT_LED_DF_REG + NUMBER_UMIN_SIGNAL_FOR_RANG_OUTPUT_LED_DF_REG),
-       (NUMBER_GENERAL_SIGNAL_FOR_RANG_OUTPUT_LED_DF_REG + NUMBER_MTZ_SIGNAL_FOR_RANG_OUTPUT_LED_DF_REG + NUMBER_MTZ04_SIGNAL_FOR_RANG_OUTPUT_LED_DF_REG + NUMBER_ZDZ_SIGNAL_FOR_RANG_OUTPUT_LED_DF_REG + NUMBER_ZZ_SIGNAL_FOR_RANG_OUTPUT_LED_DF_REG + NUMBER_TZNP_SIGNAL_FOR_RANG_OUTPUT_LED_DF_REG + NUMBER_APV_SIGNAL_FOR_RANG_OUTPUT_LED_DF_REG + NUMBER_ACHR_CHAPV_SIGNAL_FOR_RANG_OUTPUT_LED_DF_REG  + NUMBER_UROV_SIGNAL_FOR_RANG_OUTPUT_LED_DF_REG + NUMBER_ZOP_SIGNAL_FOR_RANG_OUTPUT_LED_DF_REG + NUMBER_UMIN_SIGNAL_FOR_RANG_OUTPUT_LED_DF_REG + NUMBER_UMAX_SIGNAL_FOR_RANG_OUTPUT_LED_DF_REG - 1)
+       (NUMBER_GENERAL_SIGNAL_FOR_RANG + NUMBER_MTZ_SIGNAL_FOR_RANG + NUMBER_MTZ04_SIGNAL_FOR_RANG + NUMBER_ZDZ_SIGNAL_FOR_RANG + NUMBER_ZZ_SIGNAL_FOR_RANG + NUMBER_TZNP_SIGNAL_FOR_RANG + NUMBER_APV_SIGNAL_FOR_RANG + NUMBER_ACHR_CHAPV_SIGNAL_FOR_RANG  + NUMBER_UROV_SIGNAL_FOR_RANG + NUMBER_ZOP_SIGNAL_FOR_RANG + NUMBER_UMIN_SIGNAL_FOR_RANG),
+       (NUMBER_GENERAL_SIGNAL_FOR_RANG + NUMBER_MTZ_SIGNAL_FOR_RANG + NUMBER_MTZ04_SIGNAL_FOR_RANG + NUMBER_ZDZ_SIGNAL_FOR_RANG + NUMBER_ZZ_SIGNAL_FOR_RANG + NUMBER_TZNP_SIGNAL_FOR_RANG + NUMBER_APV_SIGNAL_FOR_RANG + NUMBER_ACHR_CHAPV_SIGNAL_FOR_RANG  + NUMBER_UROV_SIGNAL_FOR_RANG + NUMBER_ZOP_SIGNAL_FOR_RANG + NUMBER_UMIN_SIGNAL_FOR_RANG + NUMBER_UMAX_SIGNAL_FOR_RANG - 1)
       },
       {-1,-1},
-      {-1,-1}
+      {
+       (NUMBER_GENERAL_SIGNAL_FOR_RANG + NUMBER_MTZ_SIGNAL_FOR_RANG + NUMBER_MTZ04_SIGNAL_FOR_RANG + NUMBER_ZDZ_SIGNAL_FOR_RANG + NUMBER_ZZ_SIGNAL_FOR_RANG + NUMBER_TZNP_SIGNAL_FOR_RANG + NUMBER_APV_SIGNAL_FOR_RANG + NUMBER_ACHR_CHAPV_SIGNAL_FOR_RANG + NUMBER_UROV_SIGNAL_FOR_RANG + NUMBER_ZOP_SIGNAL_FOR_RANG + NUMBER_UMIN_SIGNAL_FOR_RANG + NUMBER_UMAX_SIGNAL_FOR_RANG + NUMBER_VMP_SIGNAL_FOR_RANG),
+       (NUMBER_GENERAL_SIGNAL_FOR_RANG + NUMBER_MTZ_SIGNAL_FOR_RANG + NUMBER_MTZ04_SIGNAL_FOR_RANG + NUMBER_ZDZ_SIGNAL_FOR_RANG + NUMBER_ZZ_SIGNAL_FOR_RANG + NUMBER_TZNP_SIGNAL_FOR_RANG + NUMBER_APV_SIGNAL_FOR_RANG + NUMBER_ACHR_CHAPV_SIGNAL_FOR_RANG + NUMBER_UROV_SIGNAL_FOR_RANG + NUMBER_ZOP_SIGNAL_FOR_RANG + NUMBER_UMIN_SIGNAL_FOR_RANG + NUMBER_UMAX_SIGNAL_FOR_RANG + NUMBER_VMP_SIGNAL_FOR_RANG + NUMBER_EL_SIGNAL_FOR_RANG - 1)
+      }
     };
     
     /*************************************************************/
     //Фільтруємо сигнали, яких у даній конфігурації неприсутні
     /*************************************************************/
     //Функції загального призначення пропускаємо (вони знаходяться у початку списку), тому починаємо з першого записту
-    int index_in_list = NUMBER_GENERAL_SIGNAL_FOR_RANG_OUTPUT_LED_DF_REG;
+    int index_in_list = NUMBER_GENERAL_SIGNAL_FOR_RANG;
     
     for (i = 0; i < TOTAL_NUMBER_PROTECTION; i++)
     {
@@ -2518,9 +2527,9 @@ void make_ekran_set_function_in_output_led_df_dt_reg(unsigned int number_ekran, 
             while(index_in_list <= min_max_number[i][1])
             {
               if (
-                  (index_in_list == RANG_OUTPUT_LED_DF_REG_PO_NZZ    ) ||
-                  (index_in_list == RANG_OUTPUT_LED_DF_REG_NZZ       ) ||
-                  (index_in_list == RANG_OUTPUT_LED_DF_REG_SECTOR_NZZ)
+                  (index_in_list == RANG_PO_NZZ    ) ||
+                  (index_in_list == RANG_NZZ       ) ||
+                  (index_in_list == RANG_SECTOR_NZZ)
                  )
               {
                 /***/
@@ -2642,9 +2651,9 @@ void make_ekran_set_function_in_output_led_df_dt_reg(unsigned int number_ekran, 
       unsigned int index_deleted_function;
       
       if (type_ekran == INDEX_VIEWING_A_REG)
-        index_deleted_function = RANG_OUTPUT_LED_DF_REG_WORK_A_REJESTRATOR;
+        index_deleted_function = RANG_WORK_A_REJESTRATOR;
       else
-        index_deleted_function = RANG_OUTPUT_LED_DF_REG_WORK_D_REJESTRATOR;
+        index_deleted_function = RANG_WORK_D_REJESTRATOR;
       
       /*************************************************************/
       //Відкидаємо ім'я даної функції і зміщаємо біти
@@ -2716,40 +2725,40 @@ void make_ekran_set_function_in_output_led_df_dt_reg(unsigned int number_ekran, 
         if (i == 0)
         {
           if(index_of_df == 0)
-            index_deleted_function = (RANG_OUTPUT_LED_DF_REG_DF1_OUT > RANG_OUTPUT_LED_DF_REG_DF1_IN) ? RANG_OUTPUT_LED_DF_REG_DF1_OUT : RANG_OUTPUT_LED_DF_REG_DF1_IN;
+            index_deleted_function = (RANG_DF1_OUT > RANG_DF1_IN) ? RANG_DF1_OUT : RANG_DF1_IN;
           else if(index_of_df == 1)
-            index_deleted_function = (RANG_OUTPUT_LED_DF_REG_DF2_OUT > RANG_OUTPUT_LED_DF_REG_DF2_IN) ? RANG_OUTPUT_LED_DF_REG_DF2_OUT : RANG_OUTPUT_LED_DF_REG_DF2_IN;
+            index_deleted_function = (RANG_DF2_OUT > RANG_DF2_IN) ? RANG_DF2_OUT : RANG_DF2_IN;
           else if(index_of_df == 2)
-            index_deleted_function = (RANG_OUTPUT_LED_DF_REG_DF3_OUT > RANG_OUTPUT_LED_DF_REG_DF3_IN) ? RANG_OUTPUT_LED_DF_REG_DF3_OUT : RANG_OUTPUT_LED_DF_REG_DF3_IN;
+            index_deleted_function = (RANG_DF3_OUT > RANG_DF3_IN) ? RANG_DF3_OUT : RANG_DF3_IN;
           else if(index_of_df == 3)
-            index_deleted_function = (RANG_OUTPUT_LED_DF_REG_DF4_OUT > RANG_OUTPUT_LED_DF_REG_DF4_IN) ? RANG_OUTPUT_LED_DF_REG_DF4_OUT : RANG_OUTPUT_LED_DF_REG_DF4_IN;
+            index_deleted_function = (RANG_DF4_OUT > RANG_DF4_IN) ? RANG_DF4_OUT : RANG_DF4_IN;
           else if(index_of_df == 4)
-            index_deleted_function = (RANG_OUTPUT_LED_DF_REG_DF5_OUT > RANG_OUTPUT_LED_DF_REG_DF5_IN) ? RANG_OUTPUT_LED_DF_REG_DF5_OUT : RANG_OUTPUT_LED_DF_REG_DF5_IN;
+            index_deleted_function = (RANG_DF5_OUT > RANG_DF5_IN) ? RANG_DF5_OUT : RANG_DF5_IN;
           else if(index_of_df == 5)
-            index_deleted_function = (RANG_OUTPUT_LED_DF_REG_DF6_OUT > RANG_OUTPUT_LED_DF_REG_DF6_IN) ? RANG_OUTPUT_LED_DF_REG_DF6_OUT : RANG_OUTPUT_LED_DF_REG_DF6_IN;
+            index_deleted_function = (RANG_DF6_OUT > RANG_DF6_IN) ? RANG_DF6_OUT : RANG_DF6_IN;
           else if(index_of_df == 6)
-            index_deleted_function = (RANG_OUTPUT_LED_DF_REG_DF7_OUT > RANG_OUTPUT_LED_DF_REG_DF7_IN) ? RANG_OUTPUT_LED_DF_REG_DF7_OUT : RANG_OUTPUT_LED_DF_REG_DF7_IN;
+            index_deleted_function = (RANG_DF7_OUT > RANG_DF7_IN) ? RANG_DF7_OUT : RANG_DF7_IN;
           else
-            index_deleted_function = (RANG_OUTPUT_LED_DF_REG_DF8_OUT > RANG_OUTPUT_LED_DF_REG_DF8_IN) ? RANG_OUTPUT_LED_DF_REG_DF8_OUT : RANG_OUTPUT_LED_DF_REG_DF8_IN;
+            index_deleted_function = (RANG_DF8_OUT > RANG_DF8_IN) ? RANG_DF8_OUT : RANG_DF8_IN;
         }
         else
         {
           if(index_of_df == 0)
-            index_deleted_function = (RANG_OUTPUT_LED_DF_REG_DF1_OUT > RANG_OUTPUT_LED_DF_REG_DF1_IN) ? RANG_OUTPUT_LED_DF_REG_DF1_IN : RANG_OUTPUT_LED_DF_REG_DF1_OUT;
+            index_deleted_function = (RANG_DF1_OUT > RANG_DF1_IN) ? RANG_DF1_IN : RANG_DF1_OUT;
           else if(index_of_df == 1)
-            index_deleted_function = (RANG_OUTPUT_LED_DF_REG_DF2_OUT > RANG_OUTPUT_LED_DF_REG_DF2_IN) ? RANG_OUTPUT_LED_DF_REG_DF2_IN : RANG_OUTPUT_LED_DF_REG_DF2_OUT;
+            index_deleted_function = (RANG_DF2_OUT > RANG_DF2_IN) ? RANG_DF2_IN : RANG_DF2_OUT;
           else if(index_of_df == 2)
-            index_deleted_function = (RANG_OUTPUT_LED_DF_REG_DF3_OUT > RANG_OUTPUT_LED_DF_REG_DF3_IN) ? RANG_OUTPUT_LED_DF_REG_DF3_IN : RANG_OUTPUT_LED_DF_REG_DF3_OUT;
+            index_deleted_function = (RANG_DF3_OUT > RANG_DF3_IN) ? RANG_DF3_IN : RANG_DF3_OUT;
           else if(index_of_df == 3)
-            index_deleted_function = (RANG_OUTPUT_LED_DF_REG_DF4_OUT > RANG_OUTPUT_LED_DF_REG_DF4_IN) ? RANG_OUTPUT_LED_DF_REG_DF4_IN : RANG_OUTPUT_LED_DF_REG_DF4_OUT;
+            index_deleted_function = (RANG_DF4_OUT > RANG_DF4_IN) ? RANG_DF4_IN : RANG_DF4_OUT;
           else if(index_of_df == 4)
-            index_deleted_function = (RANG_OUTPUT_LED_DF_REG_DF5_OUT > RANG_OUTPUT_LED_DF_REG_DF5_IN) ? RANG_OUTPUT_LED_DF_REG_DF5_IN : RANG_OUTPUT_LED_DF_REG_DF5_OUT;
+            index_deleted_function = (RANG_DF5_OUT > RANG_DF5_IN) ? RANG_DF5_IN : RANG_DF5_OUT;
           else if(index_of_df == 5)
-            index_deleted_function = (RANG_OUTPUT_LED_DF_REG_DF6_OUT > RANG_OUTPUT_LED_DF_REG_DF6_IN) ? RANG_OUTPUT_LED_DF_REG_DF6_IN : RANG_OUTPUT_LED_DF_REG_DF6_OUT;
+            index_deleted_function = (RANG_DF6_OUT > RANG_DF6_IN) ? RANG_DF6_IN : RANG_DF6_OUT;
           else if(index_of_df == 6)
-            index_deleted_function = (RANG_OUTPUT_LED_DF_REG_DF7_OUT > RANG_OUTPUT_LED_DF_REG_DF7_IN) ? RANG_OUTPUT_LED_DF_REG_DF7_IN : RANG_OUTPUT_LED_DF_REG_DF7_OUT;
+            index_deleted_function = (RANG_DF7_OUT > RANG_DF7_IN) ? RANG_DF7_IN : RANG_DF7_OUT;
           else
-            index_deleted_function = (RANG_OUTPUT_LED_DF_REG_DF8_OUT > RANG_OUTPUT_LED_DF_REG_DF8_IN) ? RANG_OUTPUT_LED_DF_REG_DF8_IN : RANG_OUTPUT_LED_DF_REG_DF8_OUT;
+            index_deleted_function = (RANG_DF8_OUT > RANG_DF8_IN) ? RANG_DF8_IN : RANG_DF8_OUT;
         }
         
         //Формуємо маску біт, які не треба переміщати при переміщенні імен полів
@@ -2818,35 +2827,35 @@ void make_ekran_set_function_in_output_led_df_dt_reg(unsigned int number_ekran, 
         if (i == 0)
         {
           if(index_of_dt == 0)
-            index_deleted_function = RANG_OUTPUT_LED_DF_REG_DT1_OUT;
+            index_deleted_function = RANG_DT1_OUT;
           else if(index_of_dt == 1)
-            index_deleted_function = RANG_OUTPUT_LED_DF_REG_DT2_OUT;
+            index_deleted_function = RANG_DT2_OUT;
           else if(index_of_dt == 2)
-            index_deleted_function = RANG_OUTPUT_LED_DF_REG_DT3_OUT;
+            index_deleted_function = RANG_DT3_OUT;
           else if(index_of_dt == 3)
-            index_deleted_function = RANG_OUTPUT_LED_DF_REG_DT4_OUT;
+            index_deleted_function = RANG_DT4_OUT;
         }
         else if (i == 1)
         {
           if(index_of_dt == 0)
-            index_deleted_function = RANG_OUTPUT_LED_DF_REG_DT1_RESET;
+            index_deleted_function = RANG_DT1_RESET;
           else if(index_of_dt == 1)
-            index_deleted_function = RANG_OUTPUT_LED_DF_REG_DT2_RESET;
+            index_deleted_function = RANG_DT2_RESET;
           else if(index_of_dt == 2)
-            index_deleted_function = RANG_OUTPUT_LED_DF_REG_DT3_RESET;
+            index_deleted_function = RANG_DT3_RESET;
           else if(index_of_dt == 3)
-            index_deleted_function = RANG_OUTPUT_LED_DF_REG_DT4_RESET;
+            index_deleted_function = RANG_DT4_RESET;
         }
         else
         {
           if(index_of_dt == 0)
-            index_deleted_function = RANG_OUTPUT_LED_DF_REG_DT1_SET;
+            index_deleted_function = RANG_DT1_SET;
           else if(index_of_dt == 1)
-            index_deleted_function = RANG_OUTPUT_LED_DF_REG_DT2_SET;
+            index_deleted_function = RANG_DT2_SET;
           else if(index_of_dt == 2)
-            index_deleted_function = RANG_OUTPUT_LED_DF_REG_DT3_SET;
+            index_deleted_function = RANG_DT3_SET;
           else if(index_of_dt == 3)
-            index_deleted_function = RANG_OUTPUT_LED_DF_REG_DT4_SET;
+            index_deleted_function = RANG_DT4_SET;
         }
         
         //Формуємо маску біт, які не треба переміщати при переміщенні імен полів
@@ -2906,7 +2915,7 @@ void make_ekran_set_function_in_output_led_df_dt_reg(unsigned int number_ekran, 
       /*************************************************************/
       //Визначаємо індекс функції, яку треба буде фільтрувати із сприску
       //Першою фільтруємо функцію з більшим номером, щоб не мати порблем з формуванням маски, коли вже попердньо перша фільтрація проведена
-      unsigned int index_deleted_function = RANG_OUTPUT_LED_DF_REG_D_AND1 + index_of_d_and;
+      unsigned int index_deleted_function = RANG_D_AND1 + index_of_d_and;
       
       //Формуємо маску біт, які не треба переміщати при переміщенні імен полів
       unsigned int maska[N_BIG] = {0, 0, 0, 0, 0, 0, 0, 0};
@@ -2965,7 +2974,7 @@ void make_ekran_set_function_in_output_led_df_dt_reg(unsigned int number_ekran, 
       /*************************************************************/
       //Визначаємо індекс функції, яку треба буде фільтрувати із сприску
       //Першою фільтруємо функцію з більшим номером, щоб не мати порблем з формуванням маски, коли вже попердньо перша фільтрація проведена
-      unsigned int index_deleted_function = RANG_OUTPUT_LED_DF_REG_D_OR1 + index_of_d_or;
+      unsigned int index_deleted_function = RANG_D_OR1 + index_of_d_or;
       
       //Формуємо маску біт, які не треба переміщати при переміщенні імен полів
       unsigned int maska[N_BIG] = {0, 0, 0, 0, 0, 0, 0, 0};
@@ -3024,7 +3033,7 @@ void make_ekran_set_function_in_output_led_df_dt_reg(unsigned int number_ekran, 
       /*************************************************************/
       //Визначаємо індекс функції, яку треба буде фільтрувати із сприску
       //Першою фільтруємо функцію з більшим номером, щоб не мати порблем з формуванням маски, коли вже попердньо перша фільтрація проведена
-      unsigned int index_deleted_function = RANG_OUTPUT_LED_DF_REG_D_XOR1 + index_of_d_xor;
+      unsigned int index_deleted_function = RANG_D_XOR1 + index_of_d_xor;
       
       //Формуємо маску біт, які не треба переміщати при переміщенні імен полів
       unsigned int maska[N_BIG] = {0, 0, 0, 0, 0, 0, 0, 0};
@@ -3083,7 +3092,7 @@ void make_ekran_set_function_in_output_led_df_dt_reg(unsigned int number_ekran, 
       /*************************************************************/
       //Визначаємо індекс функції, яку треба буде фільтрувати із сприску
       //Першою фільтруємо функцію з більшим номером, щоб не мати порблем з формуванням маски, коли вже попердньо перша фільтрація проведена
-      unsigned int index_deleted_function = RANG_OUTPUT_LED_DF_REG_D_NOT1 + index_of_d_not;
+      unsigned int index_deleted_function = RANG_D_NOT1 + index_of_d_not;
       
       //Формуємо маску біт, які не треба переміщати при переміщенні імен полів
       unsigned int maska[N_BIG] = {0, 0, 0, 0, 0, 0, 0, 0};
@@ -3151,11 +3160,11 @@ void make_ekran_set_function_in_output_led_df_dt_reg(unsigned int number_ekran, 
         //Першою фільтруємо функцію з більшим номером, щоб немати порблем з формуванням маски ,коли вже попердньо перша фільтрація проведена
         if (i == 0)
         {
-          index_deleted_function = (RANG_OUTPUT_LED_DF_REG_WORK_BV > RANG_OUTPUT_LED_DF_REG_WORK_BO) ? RANG_OUTPUT_LED_DF_REG_WORK_BV : RANG_OUTPUT_LED_DF_REG_WORK_BO;
+          index_deleted_function = (RANG_WORK_BV > RANG_WORK_BO) ? RANG_WORK_BV : RANG_WORK_BO;
         }
         else
         {
-          index_deleted_function = (RANG_OUTPUT_LED_DF_REG_WORK_BV > RANG_OUTPUT_LED_DF_REG_WORK_BO) ? RANG_OUTPUT_LED_DF_REG_WORK_BO : RANG_OUTPUT_LED_DF_REG_WORK_BV;
+          index_deleted_function = (RANG_WORK_BV > RANG_WORK_BO) ? RANG_WORK_BO : RANG_WORK_BV;
         }
         
         //Формуємо маску  для цієї функції
@@ -3311,7 +3320,8 @@ void check_current_index_is_presented_in_configuration(
                                                                   int number_zop_function,
                                                                   int number_Umin_function,
                                                                   int number_Umax_function,
-                                                                  int number_vmp_function
+                                                                  int number_vmp_function,
+                                                                  int number_el_function
                                                         )
 {
   if(plus_minus == 1)
@@ -3378,6 +3388,11 @@ void check_current_index_is_presented_in_configuration(
       {
         if ((current_settings.configuration & (1<<VMP_BIT_CONFIGURATION)) != 0) *found_new_index_tmp = 1;
         else current_ekran.index_position = number_general_function + number_mtz_function + number_mtz04_function + number_zdz_function + number_zz_function + number_tznp_function + number_apv_function + number_achr_chapv_function + number_urov_function + number_zop_function + number_Umin_function + number_Umax_function + number_vmp_function;
+      }
+      else if (current_ekran.index_position < (number_general_function + number_mtz_function + number_mtz04_function + number_zdz_function + number_zz_function + number_tznp_function + number_apv_function + number_achr_chapv_function + number_urov_function + number_zop_function + number_Umin_function + number_Umax_function + number_vmp_function + number_el_function))
+      {
+        if ((current_settings.configuration & (1<<EL_BIT_CONFIGURATION)) != 0) *found_new_index_tmp = 1;
+        else current_ekran.index_position = number_general_function + number_mtz_function + number_mtz04_function + number_zdz_function + number_zz_function + number_tznp_function + number_apv_function + number_achr_chapv_function + number_urov_function + number_zop_function + number_Umin_function + number_Umax_function + number_vmp_function + number_el_function;
       }
     }
 
@@ -3462,6 +3477,11 @@ void check_current_index_is_presented_in_configuration(
       {
         if ((current_settings.configuration & (1<<VMP_BIT_CONFIGURATION)) != 0) *found_new_index_tmp = 1;
         else current_ekran.index_position = number_general_function + number_mtz_function + number_mtz04_function + number_zdz_function + number_zz_function + number_tznp_function + number_apv_function + number_achr_chapv_function + number_urov_function + number_zop_function + number_Umin_function + number_Umax_function - 1;
+      }
+      else if (current_ekran.index_position < (number_general_function + number_mtz_function + number_mtz04_function + number_zdz_function + number_zz_function + number_tznp_function + number_apv_function + number_achr_chapv_function + number_urov_function + number_zop_function + number_Umin_function + number_Umax_function + number_vmp_function + number_el_function))
+      {
+        if ((current_settings.configuration & (1<<EL_BIT_CONFIGURATION)) != 0) *found_new_index_tmp = 1;
+        else current_ekran.index_position = number_general_function + number_mtz_function + number_mtz04_function + number_zdz_function + number_zz_function + number_tznp_function + number_apv_function + number_achr_chapv_function + number_urov_function + number_zop_function + number_Umin_function + number_Umax_function + number_vmp_function - 1;
       }
     }
 

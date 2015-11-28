@@ -16127,7 +16127,8 @@ void main_manu_function(void)
                                                                      NUMBER_ZOP_SIGNAL_FOR_RANG_INPUT,
                                                                      NUMBER_UMIN_SIGNAL_FOR_RANG_INPUT,
                                                                      NUMBER_UMAX_SIGNAL_FOR_RANG_INPUT,
-                                                                     NUMBER_VMP_SIGNAL_FOR_RANG_INPUT
+                                                                     NUMBER_VMP_SIGNAL_FOR_RANG_INPUT,
+                                                                     NUMBER_EL_SIGNAL_FOR_RANG_INPUT
                                                                     );
                     //Перевіряємо, чи ми не вийшли за допустиму кількість функцій
                     if(current_ekran.index_position >= MAX_ROW_RANGUVANNJA_INPUT)
@@ -16183,7 +16184,8 @@ void main_manu_function(void)
                                                                      NUMBER_ZOP_SIGNAL_FOR_RANG_BUTTON,
                                                                      NUMBER_UMIN_SIGNAL_FOR_RANG_BUTTON,
                                                                      NUMBER_UMAX_SIGNAL_FOR_RANG_BUTTON,
-                                                                     NUMBER_VMP_SIGNAL_FOR_RANG_BUTTON
+                                                                     NUMBER_VMP_SIGNAL_FOR_RANG_BUTTON,
+                                                                     NUMBER_EL_SIGNAL_FOR_RANG_BUTTON
                                                                     );
                     //Перевіряємо, чи ми не вийшли за допустиму кількість функцій
                     if(current_ekran.index_position >= MAX_ROW_RANGUVANNJA_BUTTON)
@@ -16346,9 +16348,9 @@ void main_manu_function(void)
                 unsigned int found_new_index = 0;
                 int add_filter[3 + 1] = 
                 {
-                  RANG_OUTPUT_LED_DF_REG_PO_NZZ,
-                  RANG_OUTPUT_LED_DF_REG_NZZ,
-                  RANG_OUTPUT_LED_DF_REG_SECTOR_NZZ,
+                  RANG_PO_NZZ,
+                  RANG_NZZ,
+                  RANG_SECTOR_NZZ,
                   -1 /*признак завершення масиву*/
                 };
                 
@@ -16358,19 +16360,20 @@ void main_manu_function(void)
                   check_current_index_is_presented_in_configuration(&found_new_index,
                                                                      add_filter,
                                                                      1,
-                                                                     NUMBER_GENERAL_SIGNAL_FOR_RANG_OUTPUT_LED_DF_REG,
-                                                                     NUMBER_MTZ_SIGNAL_FOR_RANG_OUTPUT_LED_DF_REG,
-                                                                     NUMBER_MTZ04_SIGNAL_FOR_RANG_OUTPUT_LED_DF_REG,
-                                                                     NUMBER_ZDZ_SIGNAL_FOR_RANG_OUTPUT_LED_DF_REG,
-                                                                     NUMBER_ZZ_SIGNAL_FOR_RANG_OUTPUT_LED_DF_REG,
-                                                                     NUMBER_TZNP_SIGNAL_FOR_RANG_OUTPUT_LED_DF_REG,
-                                                                     NUMBER_APV_SIGNAL_FOR_RANG_OUTPUT_LED_DF_REG,
-                                                                     NUMBER_ACHR_CHAPV_SIGNAL_FOR_RANG_OUTPUT_LED_DF_REG,
-                                                                     NUMBER_UROV_SIGNAL_FOR_RANG_OUTPUT_LED_DF_REG,
-                                                                     NUMBER_ZOP_SIGNAL_FOR_RANG_OUTPUT_LED_DF_REG,
-                                                                     NUMBER_UMIN_SIGNAL_FOR_RANG_OUTPUT_LED_DF_REG,
-                                                                     NUMBER_UMAX_SIGNAL_FOR_RANG_OUTPUT_LED_DF_REG,
-                                                                     NUMBER_VMP_SIGNAL_FOR_RANG_OUTPUT_LED_DF_REG
+                                                                     NUMBER_GENERAL_SIGNAL_FOR_RANG,
+                                                                     NUMBER_MTZ_SIGNAL_FOR_RANG,
+                                                                     NUMBER_MTZ04_SIGNAL_FOR_RANG,
+                                                                     NUMBER_ZDZ_SIGNAL_FOR_RANG,
+                                                                     NUMBER_ZZ_SIGNAL_FOR_RANG,
+                                                                     NUMBER_TZNP_SIGNAL_FOR_RANG,
+                                                                     NUMBER_APV_SIGNAL_FOR_RANG,
+                                                                     NUMBER_ACHR_CHAPV_SIGNAL_FOR_RANG,
+                                                                     NUMBER_UROV_SIGNAL_FOR_RANG,
+                                                                     NUMBER_ZOP_SIGNAL_FOR_RANG,
+                                                                     NUMBER_UMIN_SIGNAL_FOR_RANG,
+                                                                     NUMBER_UMAX_SIGNAL_FOR_RANG,
+                                                                     NUMBER_VMP_SIGNAL_FOR_RANG,
+                                                                     NUMBER_EL_SIGNAL_FOR_RANG
                                                                     );
                   
                   //Перевіряємо, чи ми не  на індексі функцій із списку загальних, яку треба викинути для даного типу ранжування
@@ -16382,9 +16385,9 @@ void main_manu_function(void)
                     unsigned int index_deleted_function;
 
                     if (current_ekran.current_level == EKRAN_RANGUVANNJA_ANALOG_REGISTRATOR)
-                      index_deleted_function = RANG_OUTPUT_LED_DF_REG_WORK_A_REJESTRATOR;
+                      index_deleted_function = RANG_WORK_A_REJESTRATOR;
                     else if (current_ekran.current_level == EKRAN_RANGUVANNJA_DIGITAL_REGISTRATOR)
-                      index_deleted_function = RANG_OUTPUT_LED_DF_REG_WORK_D_REJESTRATOR;
+                      index_deleted_function = RANG_WORK_D_REJESTRATOR;
                     
                     if(index_deleted_function == current_ekran.index_position)
                     {
@@ -16404,40 +16407,40 @@ void main_manu_function(void)
                       if (i == 0)
                       {
                         if(index_of_df == 0)
-                          index_deleted_function = (RANG_OUTPUT_LED_DF_REG_DF1_OUT > RANG_OUTPUT_LED_DF_REG_DF1_IN) ? RANG_OUTPUT_LED_DF_REG_DF1_IN : RANG_OUTPUT_LED_DF_REG_DF1_OUT;
+                          index_deleted_function = (RANG_DF1_OUT > RANG_DF1_IN) ? RANG_DF1_IN : RANG_DF1_OUT;
                         else if(index_of_df == 1)
-                          index_deleted_function = (RANG_OUTPUT_LED_DF_REG_DF2_OUT > RANG_OUTPUT_LED_DF_REG_DF2_IN) ? RANG_OUTPUT_LED_DF_REG_DF2_IN : RANG_OUTPUT_LED_DF_REG_DF2_OUT;
+                          index_deleted_function = (RANG_DF2_OUT > RANG_DF2_IN) ? RANG_DF2_IN : RANG_DF2_OUT;
                         else if(index_of_df == 2)
-                          index_deleted_function = (RANG_OUTPUT_LED_DF_REG_DF3_OUT > RANG_OUTPUT_LED_DF_REG_DF3_IN) ? RANG_OUTPUT_LED_DF_REG_DF3_IN : RANG_OUTPUT_LED_DF_REG_DF3_OUT;
+                          index_deleted_function = (RANG_DF3_OUT > RANG_DF3_IN) ? RANG_DF3_IN : RANG_DF3_OUT;
                         else if(index_of_df == 3)
-                          index_deleted_function = (RANG_OUTPUT_LED_DF_REG_DF4_OUT > RANG_OUTPUT_LED_DF_REG_DF4_IN) ? RANG_OUTPUT_LED_DF_REG_DF4_IN : RANG_OUTPUT_LED_DF_REG_DF4_OUT;
+                          index_deleted_function = (RANG_DF4_OUT > RANG_DF4_IN) ? RANG_DF4_IN : RANG_DF4_OUT;
                         else if(index_of_df == 4)
-                          index_deleted_function = (RANG_OUTPUT_LED_DF_REG_DF5_OUT > RANG_OUTPUT_LED_DF_REG_DF5_IN) ? RANG_OUTPUT_LED_DF_REG_DF5_IN : RANG_OUTPUT_LED_DF_REG_DF5_OUT;
+                          index_deleted_function = (RANG_DF5_OUT > RANG_DF5_IN) ? RANG_DF5_IN : RANG_DF5_OUT;
                         else if(index_of_df == 5)
-                          index_deleted_function = (RANG_OUTPUT_LED_DF_REG_DF6_OUT > RANG_OUTPUT_LED_DF_REG_DF6_IN) ? RANG_OUTPUT_LED_DF_REG_DF6_IN : RANG_OUTPUT_LED_DF_REG_DF6_OUT;
+                          index_deleted_function = (RANG_DF6_OUT > RANG_DF6_IN) ? RANG_DF6_IN : RANG_DF6_OUT;
                         else if(index_of_df == 6)
-                          index_deleted_function = (RANG_OUTPUT_LED_DF_REG_DF7_OUT > RANG_OUTPUT_LED_DF_REG_DF7_IN) ? RANG_OUTPUT_LED_DF_REG_DF7_IN : RANG_OUTPUT_LED_DF_REG_DF7_OUT;
+                          index_deleted_function = (RANG_DF7_OUT > RANG_DF7_IN) ? RANG_DF7_IN : RANG_DF7_OUT;
                         else
-                          index_deleted_function = (RANG_OUTPUT_LED_DF_REG_DF8_OUT > RANG_OUTPUT_LED_DF_REG_DF8_IN) ? RANG_OUTPUT_LED_DF_REG_DF8_IN : RANG_OUTPUT_LED_DF_REG_DF8_OUT;
+                          index_deleted_function = (RANG_DF8_OUT > RANG_DF8_IN) ? RANG_DF8_IN : RANG_DF8_OUT;
                       }
                       else
                       {
                         if(index_of_df == 0)
-                          index_deleted_function = (RANG_OUTPUT_LED_DF_REG_DF1_OUT > RANG_OUTPUT_LED_DF_REG_DF1_IN) ? RANG_OUTPUT_LED_DF_REG_DF1_OUT : RANG_OUTPUT_LED_DF_REG_DF1_IN;
+                          index_deleted_function = (RANG_DF1_OUT > RANG_DF1_IN) ? RANG_DF1_OUT : RANG_DF1_IN;
                         else if(index_of_df == 1)
-                          index_deleted_function = (RANG_OUTPUT_LED_DF_REG_DF2_OUT > RANG_OUTPUT_LED_DF_REG_DF2_IN) ? RANG_OUTPUT_LED_DF_REG_DF2_OUT : RANG_OUTPUT_LED_DF_REG_DF2_IN;
+                          index_deleted_function = (RANG_DF2_OUT > RANG_DF2_IN) ? RANG_DF2_OUT : RANG_DF2_IN;
                         else if(index_of_df == 2)
-                          index_deleted_function = (RANG_OUTPUT_LED_DF_REG_DF3_OUT > RANG_OUTPUT_LED_DF_REG_DF3_IN) ? RANG_OUTPUT_LED_DF_REG_DF3_OUT : RANG_OUTPUT_LED_DF_REG_DF3_IN;
+                          index_deleted_function = (RANG_DF3_OUT > RANG_DF3_IN) ? RANG_DF3_OUT : RANG_DF3_IN;
                         else if(index_of_df == 3)
-                          index_deleted_function = (RANG_OUTPUT_LED_DF_REG_DF4_OUT > RANG_OUTPUT_LED_DF_REG_DF4_IN) ? RANG_OUTPUT_LED_DF_REG_DF4_OUT : RANG_OUTPUT_LED_DF_REG_DF4_IN;
+                          index_deleted_function = (RANG_DF4_OUT > RANG_DF4_IN) ? RANG_DF4_OUT : RANG_DF4_IN;
                         else if(index_of_df == 4)
-                          index_deleted_function = (RANG_OUTPUT_LED_DF_REG_DF5_OUT > RANG_OUTPUT_LED_DF_REG_DF5_IN) ? RANG_OUTPUT_LED_DF_REG_DF5_OUT : RANG_OUTPUT_LED_DF_REG_DF5_IN;
+                          index_deleted_function = (RANG_DF5_OUT > RANG_DF5_IN) ? RANG_DF5_OUT : RANG_DF5_IN;
                         else if(index_of_df == 5)
-                          index_deleted_function = (RANG_OUTPUT_LED_DF_REG_DF6_OUT > RANG_OUTPUT_LED_DF_REG_DF6_IN) ? RANG_OUTPUT_LED_DF_REG_DF6_OUT : RANG_OUTPUT_LED_DF_REG_DF6_IN;
+                          index_deleted_function = (RANG_DF6_OUT > RANG_DF6_IN) ? RANG_DF6_OUT : RANG_DF6_IN;
                         else if(index_of_df == 6)
-                          index_deleted_function = (RANG_OUTPUT_LED_DF_REG_DF7_OUT > RANG_OUTPUT_LED_DF_REG_DF7_IN) ? RANG_OUTPUT_LED_DF_REG_DF7_OUT : RANG_OUTPUT_LED_DF_REG_DF7_IN;
+                          index_deleted_function = (RANG_DF7_OUT > RANG_DF7_IN) ? RANG_DF7_OUT : RANG_DF7_IN;
                         else
-                          index_deleted_function = (RANG_OUTPUT_LED_DF_REG_DF8_OUT > RANG_OUTPUT_LED_DF_REG_DF8_IN) ? RANG_OUTPUT_LED_DF_REG_DF8_OUT : RANG_OUTPUT_LED_DF_REG_DF8_IN;
+                          index_deleted_function = (RANG_DF8_OUT > RANG_DF8_IN) ? RANG_DF8_OUT : RANG_DF8_IN;
                       }
                     
                       if(index_deleted_function == current_ekran.index_position)
@@ -16459,35 +16462,35 @@ void main_manu_function(void)
                       if (i == 0)
                       {
                         if(index_of_dt == 0)
-                          index_deleted_function = RANG_OUTPUT_LED_DF_REG_DT1_SET;
+                          index_deleted_function = RANG_DT1_SET;
                         else if(index_of_dt == 1)
-                          index_deleted_function = RANG_OUTPUT_LED_DF_REG_DT2_SET;
+                          index_deleted_function = RANG_DT2_SET;
                         else if(index_of_dt == 2)
-                          index_deleted_function = RANG_OUTPUT_LED_DF_REG_DT3_SET;
+                          index_deleted_function = RANG_DT3_SET;
                         else if(index_of_dt == 3)
-                          index_deleted_function = RANG_OUTPUT_LED_DF_REG_DT4_SET;
+                          index_deleted_function = RANG_DT4_SET;
                       }
                       else if (i == 1)
                       {
                         if(index_of_dt == 0)
-                          index_deleted_function = RANG_OUTPUT_LED_DF_REG_DT1_RESET;
+                          index_deleted_function = RANG_DT1_RESET;
                         else if(index_of_dt == 1)
-                          index_deleted_function = RANG_OUTPUT_LED_DF_REG_DT2_RESET;
+                          index_deleted_function = RANG_DT2_RESET;
                         else if(index_of_dt == 2)
-                          index_deleted_function = RANG_OUTPUT_LED_DF_REG_DT3_RESET;
+                          index_deleted_function = RANG_DT3_RESET;
                         else if(index_of_dt == 3)
-                          index_deleted_function = RANG_OUTPUT_LED_DF_REG_DT4_RESET;
+                          index_deleted_function = RANG_DT4_RESET;
                       }
                       else
                       {
                         if(index_of_dt == 0)
-                          index_deleted_function = RANG_OUTPUT_LED_DF_REG_DT1_OUT;
+                          index_deleted_function = RANG_DT1_OUT;
                         else if(index_of_dt == 1)
-                          index_deleted_function = RANG_OUTPUT_LED_DF_REG_DT2_OUT;
+                          index_deleted_function = RANG_DT2_OUT;
                         else if(index_of_dt == 2)
-                          index_deleted_function = RANG_OUTPUT_LED_DF_REG_DT3_OUT;
+                          index_deleted_function = RANG_DT3_OUT;
                         else if(index_of_dt == 3)
-                          index_deleted_function = RANG_OUTPUT_LED_DF_REG_DT4_OUT;
+                          index_deleted_function = RANG_DT4_OUT;
                       }
                     
                       if(index_deleted_function == current_ekran.index_position)
@@ -16502,7 +16505,7 @@ void main_manu_function(void)
                     unsigned int index_of_d_and = current_ekran.current_level - EKRAN_RANGUVANNJA_D_AND1;
 
                     //Першою перевіряємо функцію з меншим номером, щоб за одну операцію циклу  можна було переміститися на функцію, яку можна ранжувати
-                    unsigned int index_deleted_function = RANG_OUTPUT_LED_DF_REG_D_AND1 + index_of_d_and;
+                    unsigned int index_deleted_function = RANG_D_AND1 + index_of_d_and;
                     
                     if(index_deleted_function == current_ekran.index_position)
                     {
@@ -16515,7 +16518,7 @@ void main_manu_function(void)
                     unsigned int index_of_d_or = current_ekran.current_level - EKRAN_RANGUVANNJA_D_OR1;
 
                     //Першою перевіряємо функцію з меншим номером, щоб за одну операцію циклу  можна було переміститися на функцію, яку можна ранжувати
-                    unsigned int index_deleted_function = RANG_OUTPUT_LED_DF_REG_D_OR1 + index_of_d_or;
+                    unsigned int index_deleted_function = RANG_D_OR1 + index_of_d_or;
                     
                     if(index_deleted_function == current_ekran.index_position)
                     {
@@ -16528,7 +16531,7 @@ void main_manu_function(void)
                     unsigned int index_of_d_xor = current_ekran.current_level - EKRAN_RANGUVANNJA_D_XOR1;
 
                     //Першою перевіряємо функцію з меншим номером, щоб за одну операцію циклу  можна було переміститися на функцію, яку можна ранжувати
-                    unsigned int index_deleted_function = RANG_OUTPUT_LED_DF_REG_D_XOR1 + index_of_d_xor;
+                    unsigned int index_deleted_function = RANG_D_XOR1 + index_of_d_xor;
                     
                     if(index_deleted_function == current_ekran.index_position)
                     {
@@ -16541,7 +16544,7 @@ void main_manu_function(void)
                     unsigned int index_of_d_not = current_ekran.current_level - EKRAN_RANGUVANNJA_D_NOT1;
 
                     //Першою перевіряємо функцію з меншим номером, щоб за одну операцію циклу  можна було переміститися на функцію, яку можна ранжувати
-                    unsigned int index_deleted_function = RANG_OUTPUT_LED_DF_REG_D_NOT1 + index_of_d_not;
+                    unsigned int index_deleted_function = RANG_D_NOT1 + index_of_d_not;
                     
                     if(index_deleted_function == current_ekran.index_position)
                     {
@@ -16562,11 +16565,11 @@ void main_manu_function(void)
                       //Першою перевіряємо функцію з меншим номером, щоб за одну операцію циклу  можна було переміститися на функцію, яку можна ранжувати
                       if (i == 0)
                       {
-                        index_deleted_function = (RANG_OUTPUT_LED_DF_REG_WORK_BV > RANG_OUTPUT_LED_DF_REG_WORK_BO) ? RANG_OUTPUT_LED_DF_REG_WORK_BO : RANG_OUTPUT_LED_DF_REG_WORK_BV;
+                        index_deleted_function = (RANG_WORK_BV > RANG_WORK_BO) ? RANG_WORK_BO : RANG_WORK_BV;
                       }
                       else
                       {
-                        index_deleted_function = (RANG_OUTPUT_LED_DF_REG_WORK_BV > RANG_OUTPUT_LED_DF_REG_WORK_BO) ? RANG_OUTPUT_LED_DF_REG_WORK_BV : RANG_OUTPUT_LED_DF_REG_WORK_BO;
+                        index_deleted_function = (RANG_WORK_BV > RANG_WORK_BO) ? RANG_WORK_BV : RANG_WORK_BO;
                       }
         
                       //Формуємо маску  для цієї функції
@@ -17133,7 +17136,7 @@ void main_manu_function(void)
                   unsigned int* point = edition_settings.ranguvannja_outputs;
                   if (count_number_set_bit(
                                            (point + N_BIG*(current_ekran.current_level - EKRAN_RANGUVANNJA_OUTPUT_1)),
-                                           NUMBER_TOTAL_SIGNAL_FOR_RANG_OUTPUT_LED_DF_REG
+                                           NUMBER_TOTAL_SIGNAL_FOR_RANG
                                           ) <= MAX_FUNCTIONS_IN_OUTPUT)
                   {
                     //Помічаємо, що поле структури зараз буде змінене
@@ -17156,7 +17159,7 @@ void main_manu_function(void)
                   unsigned int* point = edition_settings.ranguvannja_leds;
                   if (count_number_set_bit(
                                            (point + N_BIG*(current_ekran.current_level - EKRAN_RANGUVANNJA_LED_1)),
-                                           NUMBER_TOTAL_SIGNAL_FOR_RANG_OUTPUT_LED_DF_REG
+                                           NUMBER_TOTAL_SIGNAL_FOR_RANG
                                           ) <= MAX_FUNCTIONS_IN_LED)
                   {
                     //Помічаємо, що поле структури зараз буде змінене
@@ -17179,7 +17182,7 @@ void main_manu_function(void)
                   unsigned int* point = edition_settings.ranguvannja_analog_registrator;
                   if (count_number_set_bit(
                                            point,
-                                           NUMBER_TOTAL_SIGNAL_FOR_RANG_OUTPUT_LED_DF_REG
+                                           NUMBER_TOTAL_SIGNAL_FOR_RANG
                                           ) <= MAX_FUNCTIONS_IN_AREG)
                   {
                     //Помічаємо, що поле структури зараз буде змінене
@@ -17201,7 +17204,7 @@ void main_manu_function(void)
                   unsigned int* point = edition_settings.ranguvannja_digital_registrator;
                   if (count_number_set_bit(
                                            point,
-                                           NUMBER_TOTAL_SIGNAL_FOR_RANG_OUTPUT_LED_DF_REG
+                                           NUMBER_TOTAL_SIGNAL_FOR_RANG
                                           ) <= MAX_FUNCTIONS_IN_DREG)
                   {
                     //Помічаємо, що поле структури зараз буде змінене
@@ -17235,7 +17238,7 @@ void main_manu_function(void)
 
                   if (count_number_set_bit(
                                            (point + N_BIG*index_of_df),
-                                           NUMBER_TOTAL_SIGNAL_FOR_RANG_OUTPUT_LED_DF_REG
+                                           NUMBER_TOTAL_SIGNAL_FOR_RANG
                                           ) <= MAX_FUNCTIONS_IN_DF)
                   {
                     //Помічаємо, що поле структури зараз буде змінене
@@ -17295,7 +17298,7 @@ void main_manu_function(void)
 
                   if (count_number_set_bit(
                                            (point + 3*index_of_dt),
-                                           NUMBER_TOTAL_SIGNAL_FOR_RANG_OUTPUT_LED_DF_REG
+                                           NUMBER_TOTAL_SIGNAL_FOR_RANG
                                           ) <= MAX_FUNCTIONS_IN_DT)
                   {
                     //Помічаємо, що поле структури зараз буде змінене
@@ -17347,7 +17350,7 @@ void main_manu_function(void)
                   unsigned int* point = edition_settings.ranguvannja_d_and;
                   if (count_number_set_bit(
                                            (point + N_BIG*(current_ekran.current_level - EKRAN_RANGUVANNJA_D_AND1)),
-                                           NUMBER_TOTAL_SIGNAL_FOR_RANG_OUTPUT_LED_DF_REG
+                                           NUMBER_TOTAL_SIGNAL_FOR_RANG
                                           ) <= MAX_FUNCTIONS_IN_D_AND)
                   {
                     //Помічаємо, що поле структури зараз буде змінене
@@ -17370,7 +17373,7 @@ void main_manu_function(void)
                   unsigned int* point = edition_settings.ranguvannja_d_or;
                   if (count_number_set_bit(
                                            (point + N_BIG*(current_ekran.current_level - EKRAN_RANGUVANNJA_D_OR1)),
-                                           NUMBER_TOTAL_SIGNAL_FOR_RANG_OUTPUT_LED_DF_REG
+                                           NUMBER_TOTAL_SIGNAL_FOR_RANG
                                           ) <= MAX_FUNCTIONS_IN_D_OR)
                   {
                     //Помічаємо, що поле структури зараз буде змінене
@@ -17393,7 +17396,7 @@ void main_manu_function(void)
                   unsigned int* point = edition_settings.ranguvannja_d_xor;
                   if (count_number_set_bit(
                                            (point + N_BIG*(current_ekran.current_level - EKRAN_RANGUVANNJA_D_XOR1)),
-                                           NUMBER_TOTAL_SIGNAL_FOR_RANG_OUTPUT_LED_DF_REG
+                                           NUMBER_TOTAL_SIGNAL_FOR_RANG
                                           ) <= MAX_FUNCTIONS_IN_D_XOR)
                   {
                     //Помічаємо, що поле структури зараз буде змінене
@@ -17416,7 +17419,7 @@ void main_manu_function(void)
                   unsigned int* point = edition_settings.ranguvannja_d_not;
                   if (count_number_set_bit(
                                            (point + N_BIG*(current_ekran.current_level - EKRAN_RANGUVANNJA_D_NOT1)),
-                                           NUMBER_TOTAL_SIGNAL_FOR_RANG_OUTPUT_LED_DF_REG
+                                           NUMBER_TOTAL_SIGNAL_FOR_RANG
                                           ) <= MAX_FUNCTIONS_IN_D_NOT)
                   {
                     //Помічаємо, що поле структури зараз буде змінене
@@ -17533,7 +17536,8 @@ void main_manu_function(void)
                                                                        NUMBER_ZOP_SIGNAL_FOR_RANG_INPUT,
                                                                        NUMBER_UMIN_SIGNAL_FOR_RANG_INPUT,
                                                                        NUMBER_UMAX_SIGNAL_FOR_RANG_INPUT,
-                                                                       NUMBER_VMP_SIGNAL_FOR_RANG_INPUT
+                                                                       NUMBER_VMP_SIGNAL_FOR_RANG_INPUT,
+                                                                       NUMBER_EL_SIGNAL_FOR_RANG_INPUT
                                                                       );
                     //Перевіряємо, чи ми не вийшли за допустиму кількість функцій
                     if(current_ekran.index_position < 0)
@@ -17593,7 +17597,8 @@ void main_manu_function(void)
                                                                        NUMBER_ZOP_SIGNAL_FOR_RANG_BUTTON,
                                                                        NUMBER_UMIN_SIGNAL_FOR_RANG_BUTTON,
                                                                        NUMBER_UMAX_SIGNAL_FOR_RANG_BUTTON,
-                                                                       NUMBER_VMP_SIGNAL_FOR_RANG_BUTTON
+                                                                       NUMBER_VMP_SIGNAL_FOR_RANG_BUTTON,
+                                                                       NUMBER_EL_SIGNAL_FOR_RANG_BUTTON
                                                                       );
                     //Перевіряємо, чи ми не вийшли за допустиму кількість функцій
                     if(current_ekran.index_position < 0)
@@ -17803,9 +17808,9 @@ void main_manu_function(void)
                   unsigned int found_new_index = 0;
                   int add_filter[3 + 1] = 
                   {
-                    RANG_OUTPUT_LED_DF_REG_PO_NZZ,
-                    RANG_OUTPUT_LED_DF_REG_NZZ,
-                    RANG_OUTPUT_LED_DF_REG_SECTOR_NZZ,
+                    RANG_PO_NZZ,
+                    RANG_NZZ,
+                    RANG_SECTOR_NZZ,
                     -1 /*признак завершення масиву*/
                   };
                   
@@ -17817,19 +17822,20 @@ void main_manu_function(void)
                     check_current_index_is_presented_in_configuration(&found_new_index,
                                                                        add_filter,
                                                                        0,
-                                                                       NUMBER_GENERAL_SIGNAL_FOR_RANG_OUTPUT_LED_DF_REG,
-                                                                       NUMBER_MTZ_SIGNAL_FOR_RANG_OUTPUT_LED_DF_REG,
-                                                                       NUMBER_MTZ04_SIGNAL_FOR_RANG_OUTPUT_LED_DF_REG,
-                                                                       NUMBER_ZDZ_SIGNAL_FOR_RANG_OUTPUT_LED_DF_REG,
-                                                                       NUMBER_ZZ_SIGNAL_FOR_RANG_OUTPUT_LED_DF_REG,
-                                                                       NUMBER_TZNP_SIGNAL_FOR_RANG_OUTPUT_LED_DF_REG,
-                                                                       NUMBER_APV_SIGNAL_FOR_RANG_OUTPUT_LED_DF_REG,
-                                                                       NUMBER_ACHR_CHAPV_SIGNAL_FOR_RANG_OUTPUT_LED_DF_REG,
-                                                                       NUMBER_UROV_SIGNAL_FOR_RANG_OUTPUT_LED_DF_REG,
-                                                                       NUMBER_ZOP_SIGNAL_FOR_RANG_OUTPUT_LED_DF_REG,
-                                                                       NUMBER_UMIN_SIGNAL_FOR_RANG_OUTPUT_LED_DF_REG,
-                                                                       NUMBER_UMAX_SIGNAL_FOR_RANG_OUTPUT_LED_DF_REG,
-                                                                       NUMBER_VMP_SIGNAL_FOR_RANG_OUTPUT_LED_DF_REG
+                                                                       NUMBER_GENERAL_SIGNAL_FOR_RANG,
+                                                                       NUMBER_MTZ_SIGNAL_FOR_RANG,
+                                                                       NUMBER_MTZ04_SIGNAL_FOR_RANG,
+                                                                       NUMBER_ZDZ_SIGNAL_FOR_RANG,
+                                                                       NUMBER_ZZ_SIGNAL_FOR_RANG,
+                                                                       NUMBER_TZNP_SIGNAL_FOR_RANG,
+                                                                       NUMBER_APV_SIGNAL_FOR_RANG,
+                                                                       NUMBER_ACHR_CHAPV_SIGNAL_FOR_RANG,
+                                                                       NUMBER_UROV_SIGNAL_FOR_RANG,
+                                                                       NUMBER_ZOP_SIGNAL_FOR_RANG,
+                                                                       NUMBER_UMIN_SIGNAL_FOR_RANG,
+                                                                       NUMBER_UMAX_SIGNAL_FOR_RANG,
+                                                                       NUMBER_VMP_SIGNAL_FOR_RANG,
+                                                                       NUMBER_EL_SIGNAL_FOR_RANG
                                                                       );
                     //Перевіряємо, чи ми не  на індексі функцій із списку загальних, яку треба викинути для даного типу ранжування
                     if (
@@ -17840,9 +17846,9 @@ void main_manu_function(void)
                       unsigned int index_deleted_function;
                       
                       if (current_ekran.current_level == EKRAN_RANGUVANNJA_ANALOG_REGISTRATOR)
-                        index_deleted_function = RANG_OUTPUT_LED_DF_REG_WORK_A_REJESTRATOR;
+                        index_deleted_function = RANG_WORK_A_REJESTRATOR;
                       else if (current_ekran.current_level == EKRAN_RANGUVANNJA_DIGITAL_REGISTRATOR)
-                        index_deleted_function = RANG_OUTPUT_LED_DF_REG_WORK_D_REJESTRATOR;
+                        index_deleted_function = RANG_WORK_D_REJESTRATOR;
                     
                       if(index_deleted_function == current_ekran.index_position)
                       {
@@ -17862,40 +17868,40 @@ void main_manu_function(void)
                         if (i == 0)
                         {
                           if(index_of_df == 0)
-                            index_deleted_function = (RANG_OUTPUT_LED_DF_REG_DF1_OUT > RANG_OUTPUT_LED_DF_REG_DF1_IN) ? RANG_OUTPUT_LED_DF_REG_DF1_OUT : RANG_OUTPUT_LED_DF_REG_DF1_IN;
+                            index_deleted_function = (RANG_DF1_OUT > RANG_DF1_IN) ? RANG_DF1_OUT : RANG_DF1_IN;
                           else if(index_of_df == 1)
-                            index_deleted_function = (RANG_OUTPUT_LED_DF_REG_DF2_OUT > RANG_OUTPUT_LED_DF_REG_DF2_IN) ? RANG_OUTPUT_LED_DF_REG_DF2_OUT : RANG_OUTPUT_LED_DF_REG_DF2_IN;
+                            index_deleted_function = (RANG_DF2_OUT > RANG_DF2_IN) ? RANG_DF2_OUT : RANG_DF2_IN;
                           else if(index_of_df == 2)
-                            index_deleted_function = (RANG_OUTPUT_LED_DF_REG_DF3_OUT > RANG_OUTPUT_LED_DF_REG_DF3_IN) ? RANG_OUTPUT_LED_DF_REG_DF3_OUT : RANG_OUTPUT_LED_DF_REG_DF3_IN;
+                            index_deleted_function = (RANG_DF3_OUT > RANG_DF3_IN) ? RANG_DF3_OUT : RANG_DF3_IN;
                           else if(index_of_df == 3)
-                            index_deleted_function = (RANG_OUTPUT_LED_DF_REG_DF4_OUT > RANG_OUTPUT_LED_DF_REG_DF4_IN) ? RANG_OUTPUT_LED_DF_REG_DF4_OUT : RANG_OUTPUT_LED_DF_REG_DF4_IN;
+                            index_deleted_function = (RANG_DF4_OUT > RANG_DF4_IN) ? RANG_DF4_OUT : RANG_DF4_IN;
                           else if(index_of_df == 4)
-                            index_deleted_function = (RANG_OUTPUT_LED_DF_REG_DF5_OUT > RANG_OUTPUT_LED_DF_REG_DF5_IN) ? RANG_OUTPUT_LED_DF_REG_DF5_OUT : RANG_OUTPUT_LED_DF_REG_DF5_IN;
+                            index_deleted_function = (RANG_DF5_OUT > RANG_DF5_IN) ? RANG_DF5_OUT : RANG_DF5_IN;
                           else if(index_of_df == 5)
-                            index_deleted_function = (RANG_OUTPUT_LED_DF_REG_DF6_OUT > RANG_OUTPUT_LED_DF_REG_DF6_IN) ? RANG_OUTPUT_LED_DF_REG_DF6_OUT : RANG_OUTPUT_LED_DF_REG_DF6_IN;
+                            index_deleted_function = (RANG_DF6_OUT > RANG_DF6_IN) ? RANG_DF6_OUT : RANG_DF6_IN;
                           else if(index_of_df == 6)
-                            index_deleted_function = (RANG_OUTPUT_LED_DF_REG_DF7_OUT > RANG_OUTPUT_LED_DF_REG_DF7_IN) ? RANG_OUTPUT_LED_DF_REG_DF7_OUT : RANG_OUTPUT_LED_DF_REG_DF7_IN;
+                            index_deleted_function = (RANG_DF7_OUT > RANG_DF7_IN) ? RANG_DF7_OUT : RANG_DF7_IN;
                           else
-                            index_deleted_function = (RANG_OUTPUT_LED_DF_REG_DF8_OUT > RANG_OUTPUT_LED_DF_REG_DF8_IN) ? RANG_OUTPUT_LED_DF_REG_DF8_OUT : RANG_OUTPUT_LED_DF_REG_DF8_IN;
+                            index_deleted_function = (RANG_DF8_OUT > RANG_DF8_IN) ? RANG_DF8_OUT : RANG_DF8_IN;
                         }
                         else
                         {
                           if(index_of_df == 0)
-                            index_deleted_function = (RANG_OUTPUT_LED_DF_REG_DF1_OUT > RANG_OUTPUT_LED_DF_REG_DF1_IN) ? RANG_OUTPUT_LED_DF_REG_DF1_IN : RANG_OUTPUT_LED_DF_REG_DF1_OUT;
+                            index_deleted_function = (RANG_DF1_OUT > RANG_DF1_IN) ? RANG_DF1_IN : RANG_DF1_OUT;
                           else if(index_of_df == 1)
-                            index_deleted_function = (RANG_OUTPUT_LED_DF_REG_DF2_OUT > RANG_OUTPUT_LED_DF_REG_DF2_IN) ? RANG_OUTPUT_LED_DF_REG_DF2_IN : RANG_OUTPUT_LED_DF_REG_DF2_OUT;
+                            index_deleted_function = (RANG_DF2_OUT > RANG_DF2_IN) ? RANG_DF2_IN : RANG_DF2_OUT;
                           else if(index_of_df == 2)
-                            index_deleted_function = (RANG_OUTPUT_LED_DF_REG_DF3_OUT > RANG_OUTPUT_LED_DF_REG_DF3_IN) ? RANG_OUTPUT_LED_DF_REG_DF3_IN : RANG_OUTPUT_LED_DF_REG_DF3_OUT;
+                            index_deleted_function = (RANG_DF3_OUT > RANG_DF3_IN) ? RANG_DF3_IN : RANG_DF3_OUT;
                           else if(index_of_df == 3)
-                            index_deleted_function = (RANG_OUTPUT_LED_DF_REG_DF4_OUT > RANG_OUTPUT_LED_DF_REG_DF4_IN) ? RANG_OUTPUT_LED_DF_REG_DF4_IN : RANG_OUTPUT_LED_DF_REG_DF4_OUT;
+                            index_deleted_function = (RANG_DF4_OUT > RANG_DF4_IN) ? RANG_DF4_IN : RANG_DF4_OUT;
                           else if(index_of_df == 4)
-                            index_deleted_function = (RANG_OUTPUT_LED_DF_REG_DF5_OUT > RANG_OUTPUT_LED_DF_REG_DF5_IN) ? RANG_OUTPUT_LED_DF_REG_DF5_IN : RANG_OUTPUT_LED_DF_REG_DF5_OUT;
+                            index_deleted_function = (RANG_DF5_OUT > RANG_DF5_IN) ? RANG_DF5_IN : RANG_DF5_OUT;
                           else if(index_of_df == 5)
-                            index_deleted_function = (RANG_OUTPUT_LED_DF_REG_DF6_OUT > RANG_OUTPUT_LED_DF_REG_DF6_IN) ? RANG_OUTPUT_LED_DF_REG_DF6_IN : RANG_OUTPUT_LED_DF_REG_DF6_OUT;
+                            index_deleted_function = (RANG_DF6_OUT > RANG_DF6_IN) ? RANG_DF6_IN : RANG_DF6_OUT;
                           else if(index_of_df == 6)
-                            index_deleted_function = (RANG_OUTPUT_LED_DF_REG_DF7_OUT > RANG_OUTPUT_LED_DF_REG_DF7_IN) ? RANG_OUTPUT_LED_DF_REG_DF7_IN : RANG_OUTPUT_LED_DF_REG_DF7_OUT;
+                            index_deleted_function = (RANG_DF7_OUT > RANG_DF7_IN) ? RANG_DF7_IN : RANG_DF7_OUT;
                           else
-                            index_deleted_function = (RANG_OUTPUT_LED_DF_REG_DF8_OUT > RANG_OUTPUT_LED_DF_REG_DF8_IN) ? RANG_OUTPUT_LED_DF_REG_DF8_IN : RANG_OUTPUT_LED_DF_REG_DF8_OUT;
+                            index_deleted_function = (RANG_DF8_OUT > RANG_DF8_IN) ? RANG_DF8_IN : RANG_DF8_OUT;
                         }
                     
                         if(index_deleted_function == current_ekran.index_position)
@@ -17917,35 +17923,35 @@ void main_manu_function(void)
                         if (i == 0)
                         {
                           if(index_of_dt == 0)
-                            index_deleted_function = RANG_OUTPUT_LED_DF_REG_DT1_OUT;
+                            index_deleted_function = RANG_DT1_OUT;
                           else if(index_of_dt == 1)
-                            index_deleted_function = RANG_OUTPUT_LED_DF_REG_DT2_OUT;
+                            index_deleted_function = RANG_DT2_OUT;
                           else if(index_of_dt == 2)
-                            index_deleted_function = RANG_OUTPUT_LED_DF_REG_DT3_OUT;
+                            index_deleted_function = RANG_DT3_OUT;
                           else if(index_of_dt == 3)
-                            index_deleted_function = RANG_OUTPUT_LED_DF_REG_DT4_OUT;
+                            index_deleted_function = RANG_DT4_OUT;
                         }
                         else if (i == 1)
                         {
                           if(index_of_dt == 0)
-                            index_deleted_function = RANG_OUTPUT_LED_DF_REG_DT1_RESET;
+                            index_deleted_function = RANG_DT1_RESET;
                           else if(index_of_dt == 1)
-                            index_deleted_function = RANG_OUTPUT_LED_DF_REG_DT2_RESET;
+                            index_deleted_function = RANG_DT2_RESET;
                           else if(index_of_dt == 2)
-                            index_deleted_function = RANG_OUTPUT_LED_DF_REG_DT3_RESET;
+                            index_deleted_function = RANG_DT3_RESET;
                           else if(index_of_dt == 3)
-                            index_deleted_function = RANG_OUTPUT_LED_DF_REG_DT4_RESET;
+                            index_deleted_function = RANG_DT4_RESET;
                         }
                         else
                         {
                           if(index_of_dt == 0)
-                            index_deleted_function = RANG_OUTPUT_LED_DF_REG_DT1_SET;
+                            index_deleted_function = RANG_DT1_SET;
                           else if(index_of_dt == 1)
-                            index_deleted_function = RANG_OUTPUT_LED_DF_REG_DT2_SET;
+                            index_deleted_function = RANG_DT2_SET;
                           else if(index_of_dt == 2)
-                            index_deleted_function = RANG_OUTPUT_LED_DF_REG_DT3_SET;
+                            index_deleted_function = RANG_DT3_SET;
                           else if(index_of_dt == 3)
-                            index_deleted_function = RANG_OUTPUT_LED_DF_REG_DT4_SET;
+                            index_deleted_function = RANG_DT4_SET;
                         }
                     
                         if(index_deleted_function == current_ekran.index_position)
@@ -17960,7 +17966,7 @@ void main_manu_function(void)
                       unsigned int index_of_d_and = current_ekran.current_level - EKRAN_RANGUVANNJA_D_AND1;
 
                       //Першою перевіряємо функцію з меншим номером, щоб за одну операцію циклу  можна було переміститися на функцію, яку можна ранжувати
-                      unsigned int index_deleted_function = RANG_OUTPUT_LED_DF_REG_D_AND1 + index_of_d_and;
+                      unsigned int index_deleted_function = RANG_D_AND1 + index_of_d_and;
                     
                       if(index_deleted_function == current_ekran.index_position)
                       {
@@ -17973,7 +17979,7 @@ void main_manu_function(void)
                       unsigned int index_of_d_or = current_ekran.current_level - EKRAN_RANGUVANNJA_D_OR1;
 
                       //Першою перевіряємо функцію з меншим номером, щоб за одну операцію циклу  можна було переміститися на функцію, яку можна ранжувати
-                      unsigned int index_deleted_function = RANG_OUTPUT_LED_DF_REG_D_OR1 + index_of_d_or;
+                      unsigned int index_deleted_function = RANG_D_OR1 + index_of_d_or;
                     
                       if(index_deleted_function == current_ekran.index_position)
                       {
@@ -17986,7 +17992,7 @@ void main_manu_function(void)
                       unsigned int index_of_d_xor = current_ekran.current_level - EKRAN_RANGUVANNJA_D_XOR1;
 
                       //Першою перевіряємо функцію з меншим номером, щоб за одну операцію циклу  можна було переміститися на функцію, яку можна ранжувати
-                      unsigned int index_deleted_function = RANG_OUTPUT_LED_DF_REG_D_XOR1 + index_of_d_xor;
+                      unsigned int index_deleted_function = RANG_D_XOR1 + index_of_d_xor;
                     
                       if(index_deleted_function == current_ekran.index_position)
                       {
@@ -17999,7 +18005,7 @@ void main_manu_function(void)
                       unsigned int index_of_d_not = current_ekran.current_level - EKRAN_RANGUVANNJA_D_NOT1;
 
                       //Першою перевіряємо функцію з меншим номером, щоб за одну операцію циклу  можна було переміститися на функцію, яку можна ранжувати
-                      unsigned int index_deleted_function = RANG_OUTPUT_LED_DF_REG_D_NOT1 + index_of_d_not;
+                      unsigned int index_deleted_function = RANG_D_NOT1 + index_of_d_not;
                     
                       if(index_deleted_function == current_ekran.index_position)
                       {
@@ -18020,11 +18026,11 @@ void main_manu_function(void)
                         //Першою перевіряємо функцію з більшим номером, щоб за одну операцію циклу можна було переміститися на функцію, яку можна ранжувати
                         if (i == 0)
                         {
-                          index_deleted_function = (RANG_OUTPUT_LED_DF_REG_WORK_BV > RANG_OUTPUT_LED_DF_REG_WORK_BO) ? RANG_OUTPUT_LED_DF_REG_WORK_BV : RANG_OUTPUT_LED_DF_REG_WORK_BO;
+                          index_deleted_function = (RANG_WORK_BV > RANG_WORK_BO) ? RANG_WORK_BV : RANG_WORK_BO;
                         }
                         else
                         {
-                          index_deleted_function = (RANG_OUTPUT_LED_DF_REG_WORK_BV > RANG_OUTPUT_LED_DF_REG_WORK_BO) ? RANG_OUTPUT_LED_DF_REG_WORK_BO : RANG_OUTPUT_LED_DF_REG_WORK_BV;
+                          index_deleted_function = (RANG_WORK_BV > RANG_WORK_BO) ? RANG_WORK_BO : RANG_WORK_BV;
                         }
         
                         //Формуємо маску  для цієї функції
@@ -18157,7 +18163,8 @@ void main_manu_function(void)
                                                                        NUMBER_ZOP_SIGNAL_FOR_RANG_INPUT,
                                                                        NUMBER_UMIN_SIGNAL_FOR_RANG_INPUT,
                                                                        NUMBER_UMAX_SIGNAL_FOR_RANG_INPUT,
-                                                                       NUMBER_VMP_SIGNAL_FOR_RANG_INPUT
+                                                                       NUMBER_VMP_SIGNAL_FOR_RANG_INPUT,
+                                                                       NUMBER_EL_SIGNAL_FOR_RANG_INPUT
                                                                       );
                       //Перевіряємо, чи ми не вийшли за допустиму кількість функцій
                       if(current_ekran.index_position >= MAX_ROW_RANGUVANNJA_INPUT)
@@ -18217,7 +18224,8 @@ void main_manu_function(void)
                                                                        NUMBER_ZOP_SIGNAL_FOR_RANG_BUTTON,
                                                                        NUMBER_UMIN_SIGNAL_FOR_RANG_BUTTON,
                                                                        NUMBER_UMAX_SIGNAL_FOR_RANG_BUTTON,
-                                                                       NUMBER_VMP_SIGNAL_FOR_RANG_BUTTON
+                                                                       NUMBER_VMP_SIGNAL_FOR_RANG_BUTTON,
+                                                                       NUMBER_EL_SIGNAL_FOR_RANG_BUTTON
                                                                       );
                       //Перевіряємо, чи ми не вийшли за допустиму кількість функцій
                       if(current_ekran.index_position >= MAX_ROW_RANGUVANNJA_BUTTON)
@@ -18427,9 +18435,9 @@ void main_manu_function(void)
                   unsigned int found_new_index = 0;
                   int add_filter[3 + 1] = 
                   {
-                    RANG_OUTPUT_LED_DF_REG_PO_NZZ,
-                    RANG_OUTPUT_LED_DF_REG_NZZ,
-                    RANG_OUTPUT_LED_DF_REG_SECTOR_NZZ,
+                    RANG_PO_NZZ,
+                    RANG_NZZ,
+                    RANG_SECTOR_NZZ,
                     -1 /*признак завершення масиву*/
                   };
                   
@@ -18441,19 +18449,20 @@ void main_manu_function(void)
                     check_current_index_is_presented_in_configuration(&found_new_index,
                                                                        add_filter,
                                                                        1,
-                                                                       NUMBER_GENERAL_SIGNAL_FOR_RANG_OUTPUT_LED_DF_REG,
-                                                                       NUMBER_MTZ_SIGNAL_FOR_RANG_OUTPUT_LED_DF_REG,
-                                                                       NUMBER_MTZ04_SIGNAL_FOR_RANG_OUTPUT_LED_DF_REG,
-                                                                       NUMBER_ZDZ_SIGNAL_FOR_RANG_OUTPUT_LED_DF_REG,
-                                                                       NUMBER_ZZ_SIGNAL_FOR_RANG_OUTPUT_LED_DF_REG,
-                                                                       NUMBER_TZNP_SIGNAL_FOR_RANG_OUTPUT_LED_DF_REG,
-                                                                       NUMBER_APV_SIGNAL_FOR_RANG_OUTPUT_LED_DF_REG,
-                                                                       NUMBER_ACHR_CHAPV_SIGNAL_FOR_RANG_OUTPUT_LED_DF_REG,
-                                                                       NUMBER_UROV_SIGNAL_FOR_RANG_OUTPUT_LED_DF_REG,
-                                                                       NUMBER_ZOP_SIGNAL_FOR_RANG_OUTPUT_LED_DF_REG,
-                                                                       NUMBER_UMIN_SIGNAL_FOR_RANG_OUTPUT_LED_DF_REG,
-                                                                       NUMBER_UMAX_SIGNAL_FOR_RANG_OUTPUT_LED_DF_REG,
-                                                                       NUMBER_VMP_SIGNAL_FOR_RANG_OUTPUT_LED_DF_REG
+                                                                       NUMBER_GENERAL_SIGNAL_FOR_RANG,
+                                                                       NUMBER_MTZ_SIGNAL_FOR_RANG,
+                                                                       NUMBER_MTZ04_SIGNAL_FOR_RANG,
+                                                                       NUMBER_ZDZ_SIGNAL_FOR_RANG,
+                                                                       NUMBER_ZZ_SIGNAL_FOR_RANG,
+                                                                       NUMBER_TZNP_SIGNAL_FOR_RANG,
+                                                                       NUMBER_APV_SIGNAL_FOR_RANG,
+                                                                       NUMBER_ACHR_CHAPV_SIGNAL_FOR_RANG,
+                                                                       NUMBER_UROV_SIGNAL_FOR_RANG,
+                                                                       NUMBER_ZOP_SIGNAL_FOR_RANG,
+                                                                       NUMBER_UMIN_SIGNAL_FOR_RANG,
+                                                                       NUMBER_UMAX_SIGNAL_FOR_RANG,
+                                                                       NUMBER_VMP_SIGNAL_FOR_RANG,
+                                                                       NUMBER_EL_SIGNAL_FOR_RANG
                                                                       );
 
                     //Перевіряємо, чи ми не  на індексі функцій із списку загальних, яку треба викинути для даного типу ранжування
@@ -18465,9 +18474,9 @@ void main_manu_function(void)
                       unsigned int index_deleted_function;
                       
                       if (current_ekran.current_level == EKRAN_RANGUVANNJA_ANALOG_REGISTRATOR)
-                        index_deleted_function = RANG_OUTPUT_LED_DF_REG_WORK_A_REJESTRATOR;
+                        index_deleted_function = RANG_WORK_A_REJESTRATOR;
                       else if (current_ekran.current_level == EKRAN_RANGUVANNJA_DIGITAL_REGISTRATOR)
-                        index_deleted_function = RANG_OUTPUT_LED_DF_REG_WORK_D_REJESTRATOR;
+                        index_deleted_function = RANG_WORK_D_REJESTRATOR;
                     
                       if(index_deleted_function == current_ekran.index_position)
                       {
@@ -18487,40 +18496,40 @@ void main_manu_function(void)
                         if (i == 0)
                         {
                           if(index_of_df == 0)
-                            index_deleted_function = (RANG_OUTPUT_LED_DF_REG_DF1_OUT > RANG_OUTPUT_LED_DF_REG_DF1_IN) ? RANG_OUTPUT_LED_DF_REG_DF1_IN : RANG_OUTPUT_LED_DF_REG_DF1_OUT;
+                            index_deleted_function = (RANG_DF1_OUT > RANG_DF1_IN) ? RANG_DF1_IN : RANG_DF1_OUT;
                           else if(index_of_df == 1)
-                            index_deleted_function = (RANG_OUTPUT_LED_DF_REG_DF2_OUT > RANG_OUTPUT_LED_DF_REG_DF2_IN) ? RANG_OUTPUT_LED_DF_REG_DF2_IN : RANG_OUTPUT_LED_DF_REG_DF2_OUT;
+                            index_deleted_function = (RANG_DF2_OUT > RANG_DF2_IN) ? RANG_DF2_IN : RANG_DF2_OUT;
                           else if(index_of_df == 2)
-                            index_deleted_function = (RANG_OUTPUT_LED_DF_REG_DF3_OUT > RANG_OUTPUT_LED_DF_REG_DF3_IN) ? RANG_OUTPUT_LED_DF_REG_DF3_IN : RANG_OUTPUT_LED_DF_REG_DF3_OUT;
+                            index_deleted_function = (RANG_DF3_OUT > RANG_DF3_IN) ? RANG_DF3_IN : RANG_DF3_OUT;
                           else if(index_of_df == 3)
-                            index_deleted_function = (RANG_OUTPUT_LED_DF_REG_DF4_OUT > RANG_OUTPUT_LED_DF_REG_DF4_IN) ? RANG_OUTPUT_LED_DF_REG_DF4_IN : RANG_OUTPUT_LED_DF_REG_DF4_OUT;
+                            index_deleted_function = (RANG_DF4_OUT > RANG_DF4_IN) ? RANG_DF4_IN : RANG_DF4_OUT;
                           else if(index_of_df == 4)
-                            index_deleted_function = (RANG_OUTPUT_LED_DF_REG_DF5_OUT > RANG_OUTPUT_LED_DF_REG_DF5_IN) ? RANG_OUTPUT_LED_DF_REG_DF5_IN : RANG_OUTPUT_LED_DF_REG_DF5_OUT;
+                            index_deleted_function = (RANG_DF5_OUT > RANG_DF5_IN) ? RANG_DF5_IN : RANG_DF5_OUT;
                           else if(index_of_df == 5)
-                            index_deleted_function = (RANG_OUTPUT_LED_DF_REG_DF6_OUT > RANG_OUTPUT_LED_DF_REG_DF6_IN) ? RANG_OUTPUT_LED_DF_REG_DF6_IN : RANG_OUTPUT_LED_DF_REG_DF6_OUT;
+                            index_deleted_function = (RANG_DF6_OUT > RANG_DF6_IN) ? RANG_DF6_IN : RANG_DF6_OUT;
                           else if(index_of_df == 6)
-                            index_deleted_function = (RANG_OUTPUT_LED_DF_REG_DF7_OUT > RANG_OUTPUT_LED_DF_REG_DF7_IN) ? RANG_OUTPUT_LED_DF_REG_DF7_IN : RANG_OUTPUT_LED_DF_REG_DF7_OUT;
+                            index_deleted_function = (RANG_DF7_OUT > RANG_DF7_IN) ? RANG_DF7_IN : RANG_DF7_OUT;
                           else
-                            index_deleted_function = (RANG_OUTPUT_LED_DF_REG_DF8_OUT > RANG_OUTPUT_LED_DF_REG_DF8_IN) ? RANG_OUTPUT_LED_DF_REG_DF8_IN : RANG_OUTPUT_LED_DF_REG_DF8_OUT;
+                            index_deleted_function = (RANG_DF8_OUT > RANG_DF8_IN) ? RANG_DF8_IN : RANG_DF8_OUT;
                         }
                         else
                         {
                           if(index_of_df == 0)
-                            index_deleted_function = (RANG_OUTPUT_LED_DF_REG_DF1_OUT > RANG_OUTPUT_LED_DF_REG_DF1_IN) ? RANG_OUTPUT_LED_DF_REG_DF1_OUT : RANG_OUTPUT_LED_DF_REG_DF1_IN;
+                            index_deleted_function = (RANG_DF1_OUT > RANG_DF1_IN) ? RANG_DF1_OUT : RANG_DF1_IN;
                           else if(index_of_df == 1)
-                            index_deleted_function = (RANG_OUTPUT_LED_DF_REG_DF2_OUT > RANG_OUTPUT_LED_DF_REG_DF2_IN) ? RANG_OUTPUT_LED_DF_REG_DF2_OUT : RANG_OUTPUT_LED_DF_REG_DF2_IN;
+                            index_deleted_function = (RANG_DF2_OUT > RANG_DF2_IN) ? RANG_DF2_OUT : RANG_DF2_IN;
                           else if(index_of_df == 2)
-                            index_deleted_function = (RANG_OUTPUT_LED_DF_REG_DF3_OUT > RANG_OUTPUT_LED_DF_REG_DF3_IN) ? RANG_OUTPUT_LED_DF_REG_DF3_OUT : RANG_OUTPUT_LED_DF_REG_DF3_IN;
+                            index_deleted_function = (RANG_DF3_OUT > RANG_DF3_IN) ? RANG_DF3_OUT : RANG_DF3_IN;
                           else if(index_of_df == 3)
-                            index_deleted_function = (RANG_OUTPUT_LED_DF_REG_DF4_OUT > RANG_OUTPUT_LED_DF_REG_DF4_IN) ? RANG_OUTPUT_LED_DF_REG_DF4_OUT : RANG_OUTPUT_LED_DF_REG_DF4_IN;
+                            index_deleted_function = (RANG_DF4_OUT > RANG_DF4_IN) ? RANG_DF4_OUT : RANG_DF4_IN;
                           else if(index_of_df == 4)
-                            index_deleted_function = (RANG_OUTPUT_LED_DF_REG_DF5_OUT > RANG_OUTPUT_LED_DF_REG_DF5_IN) ? RANG_OUTPUT_LED_DF_REG_DF5_OUT : RANG_OUTPUT_LED_DF_REG_DF5_IN;
+                            index_deleted_function = (RANG_DF5_OUT > RANG_DF5_IN) ? RANG_DF5_OUT : RANG_DF5_IN;
                           else if(index_of_df == 5)
-                            index_deleted_function = (RANG_OUTPUT_LED_DF_REG_DF6_OUT > RANG_OUTPUT_LED_DF_REG_DF6_IN) ? RANG_OUTPUT_LED_DF_REG_DF6_OUT : RANG_OUTPUT_LED_DF_REG_DF6_IN;
+                            index_deleted_function = (RANG_DF6_OUT > RANG_DF6_IN) ? RANG_DF6_OUT : RANG_DF6_IN;
                           else if(index_of_df == 6)
-                            index_deleted_function = (RANG_OUTPUT_LED_DF_REG_DF7_OUT > RANG_OUTPUT_LED_DF_REG_DF7_IN) ? RANG_OUTPUT_LED_DF_REG_DF7_OUT : RANG_OUTPUT_LED_DF_REG_DF7_IN;
+                            index_deleted_function = (RANG_DF7_OUT > RANG_DF7_IN) ? RANG_DF7_OUT : RANG_DF7_IN;
                           else
-                            index_deleted_function = (RANG_OUTPUT_LED_DF_REG_DF8_OUT > RANG_OUTPUT_LED_DF_REG_DF8_IN) ? RANG_OUTPUT_LED_DF_REG_DF8_OUT : RANG_OUTPUT_LED_DF_REG_DF8_IN;
+                            index_deleted_function = (RANG_DF8_OUT > RANG_DF8_IN) ? RANG_DF8_OUT : RANG_DF8_IN;
                         }
                     
                         if(index_deleted_function == current_ekran.index_position)
@@ -18542,35 +18551,35 @@ void main_manu_function(void)
                         if (i == 0)
                         {
                           if(index_of_dt == 0)
-                            index_deleted_function = RANG_OUTPUT_LED_DF_REG_DT1_SET;
+                            index_deleted_function = RANG_DT1_SET;
                           else if(index_of_dt == 1)
-                            index_deleted_function = RANG_OUTPUT_LED_DF_REG_DT2_SET;
+                            index_deleted_function = RANG_DT2_SET;
                           else if(index_of_dt == 2)
-                            index_deleted_function = RANG_OUTPUT_LED_DF_REG_DT3_SET;
+                            index_deleted_function = RANG_DT3_SET;
                           else if(index_of_dt == 3)
-                            index_deleted_function = RANG_OUTPUT_LED_DF_REG_DT4_SET;
+                            index_deleted_function = RANG_DT4_SET;
                         }
                         else if (i == 1)
                         {
                           if(index_of_dt == 0)
-                            index_deleted_function = RANG_OUTPUT_LED_DF_REG_DT1_RESET;
+                            index_deleted_function = RANG_DT1_RESET;
                           else if(index_of_dt == 1)
-                            index_deleted_function = RANG_OUTPUT_LED_DF_REG_DT2_RESET;
+                            index_deleted_function = RANG_DT2_RESET;
                           else if(index_of_dt == 2)
-                            index_deleted_function = RANG_OUTPUT_LED_DF_REG_DT3_RESET;
+                            index_deleted_function = RANG_DT3_RESET;
                           else if(index_of_dt == 3)
-                            index_deleted_function = RANG_OUTPUT_LED_DF_REG_DT4_RESET;
+                            index_deleted_function = RANG_DT4_RESET;
                         }
                         else
                         {
                           if(index_of_dt == 0)
-                            index_deleted_function = RANG_OUTPUT_LED_DF_REG_DT1_OUT;
+                            index_deleted_function = RANG_DT1_OUT;
                           else if(index_of_dt == 1)
-                            index_deleted_function = RANG_OUTPUT_LED_DF_REG_DT2_OUT;
+                            index_deleted_function = RANG_DT2_OUT;
                           else if(index_of_dt == 2)
-                            index_deleted_function = RANG_OUTPUT_LED_DF_REG_DT3_OUT;
+                            index_deleted_function = RANG_DT3_OUT;
                           else if(index_of_dt == 3)
-                            index_deleted_function = RANG_OUTPUT_LED_DF_REG_DT4_OUT;
+                            index_deleted_function = RANG_DT4_OUT;
                         }
                     
                         if(index_deleted_function == current_ekran.index_position)
@@ -18585,7 +18594,7 @@ void main_manu_function(void)
                       unsigned int index_of_d_and = current_ekran.current_level - EKRAN_RANGUVANNJA_D_AND1;
 
                       //Першою перевіряємо функцію з меншим номером, щоб за одну операцію циклу  можна було переміститися на функцію, яку можна ранжувати
-                      unsigned int index_deleted_function = RANG_OUTPUT_LED_DF_REG_D_AND1 + index_of_d_and;
+                      unsigned int index_deleted_function = RANG_D_AND1 + index_of_d_and;
                     
                       if(index_deleted_function == current_ekran.index_position)
                       {
@@ -18598,7 +18607,7 @@ void main_manu_function(void)
                       unsigned int index_of_d_or = current_ekran.current_level - EKRAN_RANGUVANNJA_D_OR1;
 
                       //Першою перевіряємо функцію з меншим номером, щоб за одну операцію циклу  можна було переміститися на функцію, яку можна ранжувати
-                      unsigned int index_deleted_function = RANG_OUTPUT_LED_DF_REG_D_OR1 + index_of_d_or;
+                      unsigned int index_deleted_function = RANG_D_OR1 + index_of_d_or;
                     
                       if(index_deleted_function == current_ekran.index_position)
                       {
@@ -18611,7 +18620,7 @@ void main_manu_function(void)
                       unsigned int index_of_d_xor = current_ekran.current_level - EKRAN_RANGUVANNJA_D_XOR1;
 
                       //Першою перевіряємо функцію з меншим номером, щоб за одну операцію циклу  можна було переміститися на функцію, яку можна ранжувати
-                      unsigned int index_deleted_function = RANG_OUTPUT_LED_DF_REG_D_XOR1 + index_of_d_xor;
+                      unsigned int index_deleted_function = RANG_D_XOR1 + index_of_d_xor;
                     
                       if(index_deleted_function == current_ekran.index_position)
                       {
@@ -18624,7 +18633,7 @@ void main_manu_function(void)
                       unsigned int index_of_d_not = current_ekran.current_level - EKRAN_RANGUVANNJA_D_NOT1;
 
                       //Першою перевіряємо функцію з меншим номером, щоб за одну операцію циклу  можна було переміститися на функцію, яку можна ранжувати
-                      unsigned int index_deleted_function = RANG_OUTPUT_LED_DF_REG_D_NOT1 + index_of_d_not;
+                      unsigned int index_deleted_function = RANG_D_NOT1 + index_of_d_not;
                     
                       if(index_deleted_function == current_ekran.index_position)
                       {
@@ -18645,11 +18654,11 @@ void main_manu_function(void)
                         //Першою перевіряємо функцію з меншим номером, щоб за одну операцію циклу  можна було переміститися на функцію, яку можна ранжувати
                         if (i == 0)
                         {
-                          index_deleted_function = (RANG_OUTPUT_LED_DF_REG_WORK_BV > RANG_OUTPUT_LED_DF_REG_WORK_BO) ? RANG_OUTPUT_LED_DF_REG_WORK_BO : RANG_OUTPUT_LED_DF_REG_WORK_BV;
+                          index_deleted_function = (RANG_WORK_BV > RANG_WORK_BO) ? RANG_WORK_BO : RANG_WORK_BV;
                         }
                         else
                         {
-                          index_deleted_function = (RANG_OUTPUT_LED_DF_REG_WORK_BV > RANG_OUTPUT_LED_DF_REG_WORK_BO) ? RANG_OUTPUT_LED_DF_REG_WORK_BV : RANG_OUTPUT_LED_DF_REG_WORK_BO;
+                          index_deleted_function = (RANG_WORK_BV > RANG_WORK_BO) ? RANG_WORK_BV : RANG_WORK_BO;
                         }
         
                         //Формуємо маску  для цієї функції

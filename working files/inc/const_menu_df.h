@@ -51,7 +51,7 @@
 #define MAX_ROW_FOR_LIST_DF                      NUMBER_DEFINED_FUNCTIONS
 #define MAX_ROW_TIMEOUT_DF                       2
 #define MAX_ROW_LIST_TYPE_SOURCE_DF              3
-#define MAX_ROW_RANGUVANNJA_DF                   NUMBER_TOTAL_SIGNAL_FOR_RANG_OUTPUT_LED_DF_REG
+#define MAX_ROW_RANGUVANNJA_DF                   NUMBER_TOTAL_SIGNAL_FOR_RANG
 
 
 #define INDEX_ML_SETTING_DF_SOURCE            0

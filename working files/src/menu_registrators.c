@@ -1113,7 +1113,7 @@ void make_ekran_changing_signals_digital_registrator(void)
   if (buffer_for_manu_read_record[FIRST_INDEX_START_START_RECORD_DR] == LABEL_START_RECORD_DR)
   {
     //Пеший байт сходиться із міткою початку запису - вважаємо, що у буфері достовірні дані
-    const unsigned char name_string[MAX_NAMBER_LANGUAGE][NUMBER_TOTAL_SIGNAL_FOR_RANG_OUTPUT_LED_DF_REG][MAX_COL_LCD] = 
+    const unsigned char name_string[MAX_NAMBER_LANGUAGE][NUMBER_TOTAL_SIGNAL_FOR_RANG][MAX_COL_LCD] = 
     {
       {
         "  Блок.вкл.ВВ   ",
@@ -2094,11 +2094,11 @@ void make_ekran_changing_signals_digital_registrator(void)
         }
         while (
                (current_number_changes  < (index_of_ekran + 1)) &&
-               (index_of_function_in_the_slice < NUMBER_TOTAL_SIGNAL_FOR_RANG_OUTPUT_LED_DF_REG)  
+               (index_of_function_in_the_slice < NUMBER_TOTAL_SIGNAL_FOR_RANG)  
               );
         
         
-        if ((index_of_the_slice < MAX_EVENTS_IN_ONE_RECORD) && (index_of_function_in_the_slice < NUMBER_TOTAL_SIGNAL_FOR_RANG_OUTPUT_LED_DF_REG) )
+        if ((index_of_the_slice < MAX_EVENTS_IN_ONE_RECORD) && (index_of_function_in_the_slice < NUMBER_TOTAL_SIGNAL_FOR_RANG) )
         {
           for (unsigned int k = 0; k < 2; k++)
           {

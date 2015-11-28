@@ -34,7 +34,7 @@
 #define MAX_ROW_FOR_LIST_DT                      NUMBER_DEFINED_TRIGGERS
 #define MAX_ROW_FOR_LIST_SET_RESET_DT            2
 #define MAX_ROW_LIST_TYPE_SOURCE_DT              2
-#define MAX_ROW_RANGUVANNJA_DT                   NUMBER_TOTAL_SIGNAL_FOR_RANG_OUTPUT_LED_DF_REG
+#define MAX_ROW_RANGUVANNJA_DT                   NUMBER_TOTAL_SIGNAL_FOR_RANG
 
 #define INDEX_ML_SET_DT                          0
 #define INDEX_ML_RESET_DT                        1
