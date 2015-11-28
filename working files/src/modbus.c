@@ -195,7 +195,7 @@ void convert_order_list_function_to_gmm(unsigned int* input_array, unsigned shor
   _CONVERT_SIGNAL_TO_GMM(input_array, output_array, RANG_ACHR_CHAPV_VID_DV , (BIT_MA_ACHR_CHAPV_VID_DV - BIT_MA_CURRENT_AF_BASE));
   _CONVERT_SIGNAL_TO_GMM(input_array, output_array, RANG_BLOCK_ACHR1       , (BIT_MA_BLOCK_ACHR1        - BIT_MA_CURRENT_AF_BASE));
   _CONVERT_SIGNAL_TO_GMM(input_array, output_array, RANG_BLOCK_ACHR2       , (BIT_MA_BLOCK_ACHR2        - BIT_MA_CURRENT_AF_BASE));
-  _CONVERT_SIGNAL_TO_GMM(input_array, output_array, RANG_BLOCK_CHAPV1_VID_U, (BIT_MA_BLOCK_CHAPV1_VID_U - BIT_MA_CURRENT_AF_BASE));
+  _CONVERT_SIGNAL_TO_GMM(input_array, output_array, RANG_BLOCK_CHAPV_VID_U, (BIT_MA_BLOCK_CHAPV_VID_U  - BIT_MA_CURRENT_AF_BASE));
   _CONVERT_SIGNAL_TO_GMM(input_array, output_array, RANG_PO_ACHR1          , (BIT_MA_PO_ACHR1           - BIT_MA_CURRENT_AF_BASE));
   _CONVERT_SIGNAL_TO_GMM(input_array, output_array, RANG_PO_ACHR2          , (BIT_MA_PO_ACHR2           - BIT_MA_CURRENT_AF_BASE));
   _CONVERT_SIGNAL_TO_GMM(input_array, output_array, RANG_ACHR_CHAPV1       , (BIT_MA_ACHR_CHAPV1        - BIT_MA_CURRENT_AF_BASE));
@@ -1564,9 +1564,9 @@ unsigned int convert_order_list_oldr_to_gmm(unsigned int number, unsigned int nu
         rezultat = BIT_MA_RAZR_CHAPV;
         break;
       }
-    case RANG_BLOCK_CHAPV1_VID_U:
+    case RANG_BLOCK_CHAPV_VID_U:
       {
-        rezultat = BIT_MA_BLOCK_CHAPV1_VID_U;
+        rezultat = BIT_MA_BLOCK_CHAPV_VID_U;
         break;
       }
     case RANG_PO_ACHR1:
@@ -2714,7 +2714,7 @@ unsigned int save_new_rang_oldr_from_gmm(unsigned int number, unsigned int numbe
              (data == BIT_MA_ACHR_CHAPV_VID_DV ) ||
              (data == BIT_MA_BLOCK_ACHR1       ) ||
              (data == BIT_MA_BLOCK_ACHR2       ) ||
-             (data == BIT_MA_BLOCK_CHAPV1_VID_U) ||
+             (data == BIT_MA_BLOCK_CHAPV_VID_U) ||
              (data == BIT_MA_PO_ACHR1          ) ||
              (data == BIT_MA_PO_ACHR2          ) ||
              (data == BIT_MA_ACHR_CHAPV1       ) ||
@@ -3606,9 +3606,9 @@ unsigned int save_new_rang_oldr_from_gmm(unsigned int number, unsigned int numbe
         _SET_BIT(set_array_rang, RANG_BLOCK_ACHR2);
         break;
       }
-    case BIT_MA_BLOCK_CHAPV1_VID_U:
+    case BIT_MA_BLOCK_CHAPV_VID_U:
       {
-        _SET_BIT(set_array_rang, RANG_BLOCK_CHAPV1_VID_U);
+        _SET_BIT(set_array_rang, RANG_BLOCK_CHAPV_VID_U);
         break;
       }
     case BIT_MA_PO_ACHR1:
@@ -4743,9 +4743,19 @@ inline unsigned int Get_data(unsigned char *data, unsigned int address_data, uns
         temp_value = current_settings.setpoint_achr1_f_rab[num_gr]/10;
         break;
       }
+    case MA_STP_ACHR2_F_RAB:
+      {
+        temp_value = current_settings.setpoint_achr2_f_rab[num_gr]/10;
+        break;
+      }
     case MA_STP_CHAPV1_F_RAB:
       {
         temp_value = current_settings.setpoint_chapv1_f_rab[num_gr]/10;
+        break;
+      }
+    case MA_STP_CHAPV2_F_RAB:
+      {
+        temp_value = current_settings.setpoint_chapv2_f_rab[num_gr]/10;
         break;
       }
     case MA_STP_ACHR_CHAPV_UF:
@@ -5164,7 +5174,8 @@ inline unsigned int Get_data(unsigned char *data, unsigned int address_data, uns
         
         temp_value = (((input_value >> INDEX_CTR_ACHR1       ) & 0x1 ) << (BIT_MA_CONTROL_ACHR1_STATE        - BIT_MA_CONTROL_ACHR_CHAPV_BASE)) |
                      (((input_value >> INDEX_CTR_ACHR2       ) & 0x1 ) << (BIT_MA_CONTROL_ACHR2_STATE        - BIT_MA_CONTROL_ACHR_CHAPV_BASE)) |
-                     (((input_value >> INDEX_CTR_CHAPV1      ) & 0x1 ) << (BIT_MA_CONTROL_CHAPV_STATE        - BIT_MA_CONTROL_ACHR_CHAPV_BASE)) |
+                     (((input_value >> INDEX_CTR_CHAPV1      ) & 0x1 ) << (BIT_MA_CONTROL_CHAPV1_STATE       - BIT_MA_CONTROL_ACHR_CHAPV_BASE)) |
+                     (((input_value >> INDEX_CTR_CHAPV2      ) & 0x1 ) << (BIT_MA_CONTROL_CHAPV2_STATE       - BIT_MA_CONTROL_ACHR_CHAPV_BASE)) |
                      (((input_value >> INDEX_CTR_CHAPV_VID_DV) & 0x1 ) << (BIT_MA_CONTROL_CHAPV_VID_DV_STATE - BIT_MA_CONTROL_ACHR_CHAPV_BASE));
         break;
       }
@@ -5210,7 +5221,8 @@ inline unsigned int Get_data(unsigned char *data, unsigned int address_data, uns
       {
         int input_value = current_settings.configuration;
         
-        temp_value = (((input_value >> VMP_BIT_CONFIGURATION       ) & 0x1 ) << (BIT_MA_CONFIGURATION_VMP        - BIT_MA_CONFIGURATION_BASE_PART2));
+        temp_value = (((input_value >> VMP_BIT_CONFIGURATION) & 0x1 ) << (BIT_MA_CONFIGURATION_VMP - BIT_MA_CONFIGURATION_BASE_PART2)) |
+                     (((input_value >> EL_BIT_CONFIGURATION ) & 0x1 ) << (BIT_MA_CONFIGURATION_EL  - BIT_MA_CONFIGURATION_BASE_PART2));
         break;
       }
     case MA_TO_DEACTIVATION_PASSWORD_INTERFACE:
@@ -8057,12 +8069,34 @@ inline unsigned int Set_data(unsigned short int data, unsigned int address_data,
 
         break;
       }
+    case MA_STP_ACHR2_F_RAB:
+      {
+        temp_value = data*10;
+    
+        if ((temp_value >= SETPOINT_ACHR2_F_RAB_MIN) && (temp_value <= SETPOINT_ACHR2_F_RAB_MAX))
+          target_label->setpoint_achr2_f_rab[num_gr] = temp_value;
+        else
+          error = ERROR_ILLEGAL_DATA_VALUE;
+
+        break;
+      }
     case MA_STP_CHAPV1_F_RAB:
       {
         temp_value = data*10;
     
         if ((temp_value >= SETPOINT_CHAPV1_F_RAB_MIN) && (temp_value <= SETPOINT_CHAPV1_F_RAB_MAX))
           target_label->setpoint_chapv1_f_rab[num_gr] = temp_value;
+        else
+          error = ERROR_ILLEGAL_DATA_VALUE;
+
+        break;
+      }
+    case MA_STP_CHAPV2_F_RAB:
+      {
+        temp_value = data*10;
+    
+        if ((temp_value >= SETPOINT_CHAPV2_F_RAB_MIN) && (temp_value <= SETPOINT_CHAPV2_F_RAB_MAX))
+          target_label->setpoint_chapv2_f_rab[num_gr] = temp_value;
         else
           error = ERROR_ILLEGAL_DATA_VALUE;
 
@@ -9060,7 +9094,8 @@ inline unsigned int Set_data(unsigned short int data, unsigned int address_data,
 
           output_value |= ((data >> (BIT_MA_CONTROL_ACHR1_STATE        - BIT_MA_CONTROL_ACHR_CHAPV_BASE)) & 0x1) << INDEX_CTR_ACHR1;
           output_value |= ((data >> (BIT_MA_CONTROL_ACHR2_STATE        - BIT_MA_CONTROL_ACHR_CHAPV_BASE)) & 0x1) << INDEX_CTR_ACHR2;
-          output_value |= ((data >> (BIT_MA_CONTROL_CHAPV_STATE        - BIT_MA_CONTROL_ACHR_CHAPV_BASE)) & 0x1) << INDEX_CTR_CHAPV1;
+          output_value |= ((data >> (BIT_MA_CONTROL_CHAPV1_STATE       - BIT_MA_CONTROL_ACHR_CHAPV_BASE)) & 0x1) << INDEX_CTR_CHAPV1;
+          output_value |= ((data >> (BIT_MA_CONTROL_CHAPV2_STATE       - BIT_MA_CONTROL_ACHR_CHAPV_BASE)) & 0x1) << INDEX_CTR_CHAPV2;
           output_value |= ((data >> (BIT_MA_CONTROL_CHAPV_VID_DV_STATE - BIT_MA_CONTROL_ACHR_CHAPV_BASE)) & 0x1) << INDEX_CTR_CHAPV_VID_DV;
         
           target_label->control_achr_chapv = output_value;
@@ -9147,10 +9182,12 @@ inline unsigned int Set_data(unsigned short int data, unsigned int address_data,
       {
         int output_value = target_label->configuration & 
                             (unsigned int)(~(
-                                             (1 << VMP_BIT_CONFIGURATION)
+                                             (1 << VMP_BIT_CONFIGURATION) |
+                                             (1 << EL_BIT_CONFIGURATION )
                                             ));
 
         output_value |= ((data >> (BIT_MA_CONFIGURATION_VMP - BIT_MA_CONFIGURATION_BASE_PART2)) & 0x1) << VMP_BIT_CONFIGURATION;
+        output_value |= ((data >> (BIT_MA_CONFIGURATION_EL  - BIT_MA_CONFIGURATION_BASE_PART2)) & 0x1) << EL_BIT_CONFIGURATION;
         
         //Обновлюємо всі поля структури настройок. які зв'язані із конфігурацією приладу, якщо ця операція доступна (ми не знаходимося у вікні, яке не дозволяє конфігурацію)
         if(action_after_changing_of_configuration(output_value, target_label) != 0)

@@ -82,8 +82,8 @@
 #define M_ADDRESS_FIRST_SETPOINTS_ZACHYSTIV 307
 #define SHIFT_G1        0
 #define SHIFT_G2        (2307 - M_ADDRESS_FIRST_SETPOINTS_ZACHYSTIV)
-#define SHIFT_G3        (2453 - M_ADDRESS_FIRST_SETPOINTS_ZACHYSTIV)
-#define SHIFT_G4        (2599 - M_ADDRESS_FIRST_SETPOINTS_ZACHYSTIV)
+#define SHIFT_G3        (2455 - M_ADDRESS_FIRST_SETPOINTS_ZACHYSTIV)
+#define SHIFT_G4        (2603 - M_ADDRESS_FIRST_SETPOINTS_ZACHYSTIV)
 
 #define MA_STP_MTZ1                       307
 #define MA_STP_MTZ1_N_VPERED              308
@@ -220,108 +220,109 @@
 //#define MA_TO_APV_ZMN_ZAVERSHENNJA        444
 
 #define MA_STP_ACHR1_F_RAB                445
-#define MA_STP_CHAPV1_F_RAB               446
-#define MA_STP_ACHR_CHAPV_UF              447
-//#define MA_STP_ACHR_CHAPV_UF2             448
-#define MA_TO_ACHR_1                      449
-#define MA_TO_ACHR_2                      450
-#define MA_TO_CHAPV_1                     451
-#define MA_TO_CHAPV_2                     452
+#define MA_STP_ACHR2_F_RAB                446
+#define MA_STP_CHAPV1_F_RAB               447
+#define MA_STP_CHAPV2_F_RAB               448
+#define MA_STP_ACHR_CHAPV_UF              449
+#define MA_TO_ACHR_1                      451
+#define MA_TO_ACHR_2                      452
+#define MA_TO_CHAPV_1                     453
+#define MA_TO_CHAPV_2                     454
 
-#define M_ADDRESS_LAST_SETPOINTS_ZACHYSTIV 452
+#define M_ADDRESS_LAST_SETPOINTS_ZACHYSTIV 454
 
 #define M_ADDRESS_FIRST_SETPOINTS_CONTINUE 453
 
-#define MA_LINE_1                         453
-#define MA_DOVGYNA_1_1                    454
-#define MA_OPIR_1_1                       455
-#define MA_DOVGYNA_1_2                    456
-#define MA_OPIR_1_2                       457
-#define MA_DOVGYNA_1_3                    458
-#define MA_OPIR_1_3                       459
-#define MA_DOVGYNA_1_4                    460
-#define MA_OPIR_1_4                       461
-#define MA_DOVGYNA_1_5                    462
-#define MA_OPIR_1_5                       463
-#define MA_DOVGYNA_1_6                    464
-#define MA_OPIR_1_6                       465
-#define MA_DOVGYNA_1_7                    466
-#define MA_OPIR_1_7                       467
-#define MA_DOVGYNA_1_8                    468
-#define MA_OPIR_1_8                       469
-#define MA_LINE_2                         470
-#define MA_DOVGYNA_2_1                    471
-#define MA_OPIR_2_1                       472
-#define MA_DOVGYNA_2_2                    473
-#define MA_OPIR_2_2                       474
-#define MA_DOVGYNA_2_3                    475
-#define MA_OPIR_2_3                       476
-#define MA_DOVGYNA_2_4                    477
-#define MA_OPIR_2_4                       478
-#define MA_DOVGYNA_2_5                    479
-#define MA_OPIR_2_5                       480
-#define MA_DOVGYNA_2_6                    481
-#define MA_OPIR_2_6                       482
-#define MA_DOVGYNA_2_7                    483
-#define MA_OPIR_2_7                       484
-#define MA_DOVGYNA_2_8                    485
-#define MA_OPIR_2_8                       486
+#define MA_LINE_1                         455
+#define MA_DOVGYNA_1_1                    456
+#define MA_OPIR_1_1                       457
+#define MA_DOVGYNA_1_2                    458
+#define MA_OPIR_1_2                       459
+#define MA_DOVGYNA_1_3                    460
+#define MA_OPIR_1_3                       461
+#define MA_DOVGYNA_1_4                    462
+#define MA_OPIR_1_4                       463
+#define MA_DOVGYNA_1_5                    464
+#define MA_OPIR_1_5                       465
+#define MA_DOVGYNA_1_6                    466
+#define MA_OPIR_1_6                       467
+#define MA_DOVGYNA_1_7                    468
+#define MA_OPIR_1_7                       469
+#define MA_DOVGYNA_1_8                    470
+#define MA_OPIR_1_8                       471
+#define MA_LINE_2                         472
+#define MA_DOVGYNA_2_1                    473
+#define MA_OPIR_2_1                       474
+#define MA_DOVGYNA_2_2                    475
+#define MA_OPIR_2_2                       476
+#define MA_DOVGYNA_2_3                    477
+#define MA_OPIR_2_3                       478
+#define MA_DOVGYNA_2_4                    479
+#define MA_OPIR_2_4                       480
+#define MA_DOVGYNA_2_5                    481
+#define MA_OPIR_2_5                       482
+#define MA_DOVGYNA_2_6                    483
+#define MA_OPIR_2_6                       484
+#define MA_DOVGYNA_2_7                    485
+#define MA_OPIR_2_7                       486
+#define MA_DOVGYNA_2_8                    487
+#define MA_OPIR_2_8                       488
 
-#define MA_TN1                            487
+#define MA_TN1                            489
 
-#define MA_TT                             488
-#define MA_T0                             490
-#define MA_TT04                           491
+#define MA_TT                             491
+#define MA_T0                             492
+#define MA_TT04                           493
 
-#define MA_TO_SWCH_UDL_BLK_ON             492
-#define MA_TO_SWCH_ON                     493
-#define MA_TO_SWCH_OFF                    494
-#define MA_TO_FAULT_CONTROL_CIRCUIT       495
+#define MA_TO_SWCH_UDL_BLK_ON             494
+#define MA_TO_SWCH_ON                     495
+#define MA_TO_SWCH_OFF                    496
+#define MA_TO_FAULT_CONTROL_CIRCUIT       497
 
-#define MA_STP_Inom                       497
-#define MA_STP_RKS_Inom                   498
-#define MA_STP_Inom_vymk                  499
-#define MA_STP_RKS_Inom_vymk              500
-#define MA_STP_POCHATKOVYJ_RESURS_LSW     501
-#define MA_STP_POCHATKOVYJ_RESURS_MSW     502
-#define MA_STP_KRYTYCHNYJ_RESURS          503
-#define MA_POCHATKOVA_K_VYMK_LSW          504
-#define MA_POCHATKOVA_K_VYMK_MSW          505
+#define MA_STP_Inom                       499
+#define MA_STP_RKS_Inom                   500
+#define MA_STP_Inom_vymk                  501
+#define MA_STP_RKS_Inom_vymk              502
+#define MA_STP_POCHATKOVYJ_RESURS_LSW     503
+#define MA_STP_POCHATKOVYJ_RESURS_MSW     504
+#define MA_STP_KRYTYCHNYJ_RESURS          505
+#define MA_POCHATKOVA_K_VYMK_LSW          506
+#define MA_POCHATKOVA_K_VYMK_MSW          507
 
-#define MA_UVV_TYPE_SIGNAL_INPUT          510
-#define MA_UVV_TYPE_INPUT                 511
-#define MA_UVV_TYPE_OUTPUT                512
-#define MA_UVV_TYPE_OUTPUT_MODIF          513
-#define MA_TYPE_DF                        514
-#define MA_UVV_TYPE_LED                   515
+#define MA_UVV_TYPE_SIGNAL_INPUT          512
+#define MA_UVV_TYPE_INPUT                 513
+#define MA_UVV_TYPE_OUTPUT                514
+#define MA_UVV_TYPE_OUTPUT_MODIF          515
+#define MA_TYPE_DF                        516
+#define MA_UVV_TYPE_LED                   517
 
-#define MA_DOPUSK_DV_1                    516
-#define MA_DOPUSK_DV_2                    517
-#define MA_DOPUSK_DV_3                    518
-#define MA_DOPUSK_DV_4                    519
-#define MA_DOPUSK_DV_5                    520
-#define MA_DOPUSK_DV_6                    521
-#define MA_DOPUSK_DV_7                    522
-#define MA_DOPUSK_DV_8                    523
-#define MA_DOPUSK_DV_9                    524
-#define MA_DOPUSK_DV_10                   525
+#define MA_DOPUSK_DV_1                    518
+#define MA_DOPUSK_DV_2                    519
+#define MA_DOPUSK_DV_3                    520
+#define MA_DOPUSK_DV_4                    521
+#define MA_DOPUSK_DV_5                    522
+#define MA_DOPUSK_DV_6                    523
+#define MA_DOPUSK_DV_7                    524
+#define MA_DOPUSK_DV_8                    525
+#define MA_DOPUSK_DV_9                    526
+#define MA_DOPUSK_DV_10                   527
 
-#define MA_DF_PAUSE_1                     532
-#define MA_DF_PAUSE_2                     533
-#define MA_DF_PAUSE_3                     534
-#define MA_DF_PAUSE_4                     535
-#define MA_DF_PAUSE_5                     536
-#define MA_DF_PAUSE_6                     537
-#define MA_DF_PAUSE_7                     538
-#define MA_DF_PAUSE_8                     539
-#define MA_DF_WORK_1                      540
-#define MA_DF_WORK_2                      541
-#define MA_DF_WORK_3                      542
-#define MA_DF_WORK_4                      543
-#define MA_DF_WORK_5                      544
-#define MA_DF_WORK_6                      545
-#define MA_DF_WORK_7                      546
-#define MA_DF_WORK_8                      547
+#define MA_DF_PAUSE_1                     534
+#define MA_DF_PAUSE_2                     535
+#define MA_DF_PAUSE_3                     536
+#define MA_DF_PAUSE_4                     537
+#define MA_DF_PAUSE_5                     538
+#define MA_DF_PAUSE_6                     539
+#define MA_DF_PAUSE_7                     540
+#define MA_DF_PAUSE_8                     541
+#define MA_DF_WORK_1                      542
+#define MA_DF_WORK_2                      543
+#define MA_DF_WORK_3                      544
+#define MA_DF_WORK_4                      545
+#define MA_DF_WORK_5                      546
+#define MA_DF_WORK_6                      547
+#define MA_DF_WORK_7                      548
+#define MA_DF_WORK_8                      549
 
 #define MA_CONTROL_BASE                   550
 #define BIT_MA_CONTROL_BASE                   55000
@@ -388,8 +389,9 @@
 #define BIT_MA_CONTROL_ACHR_CHAPV_BASE        55096
 #define BIT_MA_CONTROL_ACHR1_STATE            55096
 #define BIT_MA_CONTROL_ACHR2_STATE            55097
-#define BIT_MA_CONTROL_CHAPV_STATE            55098
-#define BIT_MA_CONTROL_CHAPV_VID_DV_STATE     55099
+#define BIT_MA_CONTROL_CHAPV1_STATE           55098
+#define BIT_MA_CONTROL_CHAPV2_STATE           55099
+#define BIT_MA_CONTROL_CHAPV_VID_DV_STATE     55100
 
 #define MA_CONTROL_UMIN                   557
 #define BIT_MA_CONTROL_UMIN_BASE              55112
@@ -502,6 +504,7 @@
 #define BIT_MA_CONFIGURATION_BASE_PART2        55288
 //#define BIT_MA_CONFIGURATION_AVR               55288
 #define BIT_MA_CONFIGURATION_VMP               55289
+#define BIT_MA_CONFIGURATION_EL                55290
 
 #define MA_CONTROL_LAST                   568
 #define BIT_MA_CONTROL_LAST                   (BIT_MA_CONTROL_BASE + ((MA_CONTROL_LAST - MA_CONTROL_BASE + 1) << 4) - 1)
@@ -602,7 +605,6 @@
 #define BIT_MA_BLOCK_MTZ04_1                    60057
 #define BIT_MA_MTZ04_1                          60058
 #define BIT_MA_PO_MTZ04_1                       60059
-
 #define BIT_MA_BLOCK_MTZ04_2                    60060
 #define BIT_MA_MTZ04_2                          60061
 #define BIT_MA_PO_MTZ04_2                       60062
@@ -723,15 +725,14 @@
 #define BIT_MA_ACHR_CHAPV_VID_DV                60272
 #define BIT_MA_BLOCK_ACHR1                      60273
 #define BIT_MA_BLOCK_ACHR2                      60274
-#define BIT_MA_BLOCK_CHAPV1_VID_U               60275
+#define BIT_MA_BLOCK_CHAPV_VID_U               60275
 #define BIT_MA_PO_ACHR1                         60276
 #define BIT_MA_PO_ACHR2                         60277
 #define BIT_MA_ACHR_CHAPV1                      60278
 #define BIT_MA_ACHR_CHAPV2                      60279
-//#define BIT_MA_ACHR_CHAPV                       60280
-#define BIT_MA_RAZR_CHAPV                       60281
-#define BIT_MA_PO_CHAPV1                        60282
-#define BIT_MA_PO_CHAPV2                        60283
+#define BIT_MA_RAZR_CHAPV                       60280
+#define BIT_MA_PO_CHAPV1                        60281
+#define BIT_MA_PO_CHAPV2                        60282
 
 #define M_ADDRESS_DF                          618
 #define BIT_MA_DF_BASE                          60288
