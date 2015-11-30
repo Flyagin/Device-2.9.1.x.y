@@ -1146,5 +1146,9 @@
 #define SOURCE_SET_DT_MINUS_RANG              8
 #define SOURCE_RESET_DT_PLUS_RANG             9
 #define SOURCE_RESET_DT_MINUS_RANG            10
+#define SOURCE_D_AND_RANG                     11
+#define SOURCE_D_OR_RANG                      12
+#define SOURCE_D_XOR_RANG                     13
+#define SOURCE_D_NOT_RANG                     14
 
 #endif

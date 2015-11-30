@@ -236,6 +236,54 @@ void convert_order_list_function_to_gmm(unsigned int* input_array, unsigned shor
   _CONVERT_SIGNAL_TO_GMM(input_array, output_array, RANG_DT2_OUT  , (BIT_MA_DT2_OUT   - BIT_MA_CURRENT_AF_BASE));
   _CONVERT_SIGNAL_TO_GMM(input_array, output_array, RANG_DT3_OUT  , (BIT_MA_DT3_OUT   - BIT_MA_CURRENT_AF_BASE));
   _CONVERT_SIGNAL_TO_GMM(input_array, output_array, RANG_DT4_OUT  , (BIT_MA_DT4_OUT   - BIT_MA_CURRENT_AF_BASE));
+
+  //Визначцані "І"
+  _CONVERT_SIGNAL_TO_GMM(input_array, output_array, RANG_D_AND1, (BIT_MA_D_AND1 - BIT_MA_CURRENT_AF_BASE));
+  _CONVERT_SIGNAL_TO_GMM(input_array, output_array, RANG_D_AND2 (BIT_MA_D_AND2 - BIT_MA_CURRENT_AF_BASE));
+  _CONVERT_SIGNAL_TO_GMM(input_array, output_array, RANG_D_AND3, (BIT_MA_D_AND3 - BIT_MA_CURRENT_AF_BASE));
+  _CONVERT_SIGNAL_TO_GMM(input_array, output_array, RANG_D_AND4, (BIT_MA_D_AND4 - BIT_MA_CURRENT_AF_BASE));
+  _CONVERT_SIGNAL_TO_GMM(input_array, output_array, RANG_D_AND5, (BIT_MA_D_AND5 - BIT_MA_CURRENT_AF_BASE));
+  _CONVERT_SIGNAL_TO_GMM(input_array, output_array, RANG_D_AND6, (BIT_MA_D_AND6 - BIT_MA_CURRENT_AF_BASE));
+  _CONVERT_SIGNAL_TO_GMM(input_array, output_array, RANG_D_AND7, (BIT_MA_D_AND7 - BIT_MA_CURRENT_AF_BASE));
+  _CONVERT_SIGNAL_TO_GMM(input_array, output_array, RANG_D_AND8, (BIT_MA_D_AND8 - BIT_MA_CURRENT_AF_BASE));
+
+  //Визначцані "АБО"
+  _CONVERT_SIGNAL_TO_GMM(input_array, output_array, RANG_D_OR1, (BIT_MA_D_OR1 - BIT_MA_CURRENT_AF_BASE));
+  _CONVERT_SIGNAL_TO_GMM(input_array, output_array, RANG_D_OR2, (BIT_MA_D_OR2 - BIT_MA_CURRENT_AF_BASE));
+  _CONVERT_SIGNAL_TO_GMM(input_array, output_array, RANG_D_OR3, (BIT_MA_D_OR3 - BIT_MA_CURRENT_AF_BASE));
+  _CONVERT_SIGNAL_TO_GMM(input_array, output_array, RANG_D_OR4, (BIT_MA_D_OR4 - BIT_MA_CURRENT_AF_BASE));
+  _CONVERT_SIGNAL_TO_GMM(input_array, output_array, RANG_D_OR5, (BIT_MA_D_OR5 - BIT_MA_CURRENT_AF_BASE));
+  _CONVERT_SIGNAL_TO_GMM(input_array, output_array, RANG_D_OR6, (BIT_MA_D_OR6 - BIT_MA_CURRENT_AF_BASE));
+  _CONVERT_SIGNAL_TO_GMM(input_array, output_array, RANG_D_OR7, (BIT_MA_D_OR7 - BIT_MA_CURRENT_AF_BASE));
+  _CONVERT_SIGNAL_TO_GMM(input_array, output_array, RANG_D_OR8, (BIT_MA_D_OR8 - BIT_MA_CURRENT_AF_BASE));
+
+  //Визначцані "Викл.АБО"
+  _CONVERT_SIGNAL_TO_GMM(input_array, output_array, RANG_D_XOR1, (BIT_MA_D_XOR1 - BIT_MA_CURRENT_AF_BASE));
+  _CONVERT_SIGNAL_TO_GMM(input_array, output_array, RANG_D_XOR2, (BIT_MA_D_XOR2 - BIT_MA_CURRENT_AF_BASE));
+  _CONVERT_SIGNAL_TO_GMM(input_array, output_array, RANG_D_XOR3, (BIT_MA_D_XOR3 - BIT_MA_CURRENT_AF_BASE));
+  _CONVERT_SIGNAL_TO_GMM(input_array, output_array, RANG_D_XOR4, (BIT_MA_D_XOR4 - BIT_MA_CURRENT_AF_BASE));
+  _CONVERT_SIGNAL_TO_GMM(input_array, output_array, RANG_D_XOR5, (BIT_MA_D_XOR5 - BIT_MA_CURRENT_AF_BASE));
+  _CONVERT_SIGNAL_TO_GMM(input_array, output_array, RANG_D_XOR6, (BIT_MA_D_XOR6 - BIT_MA_CURRENT_AF_BASE));
+  _CONVERT_SIGNAL_TO_GMM(input_array, output_array, RANG_D_XOR7, (BIT_MA_D_XOR7 - BIT_MA_CURRENT_AF_BASE));
+  _CONVERT_SIGNAL_TO_GMM(input_array, output_array, RANG_D_XOR8, (BIT_MA_D_XOR8 - BIT_MA_CURRENT_AF_BASE));
+
+  //Визначцані "НЕ"
+  _CONVERT_SIGNAL_TO_GMM(input_array, output_array, RANG_D_NOT1 , (BIT_MA_D_NOT1  - BIT_MA_CURRENT_AF_BASE));
+  _CONVERT_SIGNAL_TO_GMM(input_array, output_array, RANG_D_NOT2 , (BIT_MA_D_NOT2  - BIT_MA_CURRENT_AF_BASE));
+  _CONVERT_SIGNAL_TO_GMM(input_array, output_array, RANG_D_NOT3 , (BIT_MA_D_NOT3  - BIT_MA_CURRENT_AF_BASE));
+  _CONVERT_SIGNAL_TO_GMM(input_array, output_array, RANG_D_NOT4 , (BIT_MA_D_NOT4  - BIT_MA_CURRENT_AF_BASE));
+  _CONVERT_SIGNAL_TO_GMM(input_array, output_array, RANG_D_NOT5 , (BIT_MA_D_NOT5  - BIT_MA_CURRENT_AF_BASE));
+  _CONVERT_SIGNAL_TO_GMM(input_array, output_array, RANG_D_NOT6 , (BIT_MA_D_NOT6  - BIT_MA_CURRENT_AF_BASE));
+  _CONVERT_SIGNAL_TO_GMM(input_array, output_array, RANG_D_NOT7 , (BIT_MA_D_NOT7  - BIT_MA_CURRENT_AF_BASE));
+  _CONVERT_SIGNAL_TO_GMM(input_array, output_array, RANG_D_NOT8 , (BIT_MA_D_NOT8  - BIT_MA_CURRENT_AF_BASE));
+  _CONVERT_SIGNAL_TO_GMM(input_array, output_array, RANG_D_NOT9 , (BIT_MA_D_NOT9  - BIT_MA_CURRENT_AF_BASE));
+  _CONVERT_SIGNAL_TO_GMM(input_array, output_array, RANG_D_NOT10, (BIT_MA_D_NOT10 - BIT_MA_CURRENT_AF_BASE));
+  _CONVERT_SIGNAL_TO_GMM(input_array, output_array, RANG_D_NOT11, (BIT_MA_D_NOT11 - BIT_MA_CURRENT_AF_BASE));
+  _CONVERT_SIGNAL_TO_GMM(input_array, output_array, RANG_D_NOT12, (BIT_MA_D_NOT12 - BIT_MA_CURRENT_AF_BASE));
+  _CONVERT_SIGNAL_TO_GMM(input_array, output_array, RANG_D_NOT13, (BIT_MA_D_NOT13 - BIT_MA_CURRENT_AF_BASE));
+  _CONVERT_SIGNAL_TO_GMM(input_array, output_array, RANG_D_NOT14, (BIT_MA_D_NOT14 - BIT_MA_CURRENT_AF_BASE));
+  _CONVERT_SIGNAL_TO_GMM(input_array, output_array, RANG_D_NOT15, (BIT_MA_D_NOT15 - BIT_MA_CURRENT_AF_BASE));
+  _CONVERT_SIGNAL_TO_GMM(input_array, output_array, RANG_D_NOT16, (BIT_MA_D_NOT16 - BIT_MA_CURRENT_AF_BASE));
   
   //Функції загального користування
   _CONVERT_SIGNAL_TO_GMM(input_array, output_array, RANG_VKL_VV                      , (BIT_MA_VKL_VV                       - BIT_MA_CURRENT_AF_BASE));
@@ -786,6 +834,22 @@ unsigned int convert_order_list_oldr_to_gmm(unsigned int number, unsigned int nu
   {
     for (unsigned int i = 0; i < N_BIG; i++ ) input_value[i] = current_settings.ranguvannja_reset_dt_source_minus[N_BIG*number + i];
   }
+  else if (source == SOURCE_D_AND_RANG)
+  {
+    for (unsigned int i = 0; i < N_BIG; i++ ) input_value[i] = current_settings.ranguvannja_d_and[N_BIG*number + i];
+  }
+  else if (source == SOURCE_D_OR_RANG)
+  {
+    for (unsigned int i = 0; i < N_BIG; i++ ) input_value[i] = current_settings.ranguvannja_d_or[N_BIG*number + i];
+  }
+  else if (source == SOURCE_D_XOR_RANG)
+  {
+    for (unsigned int i = 0; i < N_BIG; i++ ) input_value[i] = current_settings.ranguvannja_d_xor[N_BIG*number + i];
+  }
+  else if (source == SOURCE_D_NOT_RANG)
+  {
+    for (unsigned int i = 0; i < N_BIG; i++ ) input_value[i] = current_settings.ranguvannja_d_not[N_BIG*number + i];
+  }
   
   //Шукаємо потрібний індекс функції у полі бітових настройок
   unsigned int i = 0;
@@ -942,6 +1006,206 @@ unsigned int convert_order_list_oldr_to_gmm(unsigned int number, unsigned int nu
     case RANG_DT4_OUT:
       {
         rezultat = BIT_MA_DT4_OUT;
+        break;
+      }
+    case RANG_D_AND1:
+      {
+        rezultat = BIT_MA_D_AND1;
+        break;
+      }
+    case RANG_D_AND2:
+      {
+        rezultat = BIT_MA_D_AND2;
+        break;
+      }
+    case RANG_D_AND3:
+      {
+        rezultat = BIT_MA_D_AND3;
+        break;
+      }
+    case RANG_D_AND4:
+      {
+        rezultat = BIT_MA_D_AND4;
+        break;
+      }
+    case RANG_D_AND5:
+      {
+        rezultat = BIT_MA_D_AND5;
+        break;
+      }
+    case RANG_D_AND6:
+      {
+        rezultat = BIT_MA_D_AND6;
+        break;
+      }
+    case RANG_D_AND7:
+      {
+        rezultat = BIT_MA_D_AND7;
+        break;
+      }
+    case RANG_D_AND8:
+      {
+        rezultat = BIT_MA_D_AND8;
+        break;
+      }
+    case RANG_D_OR1:
+      {
+        rezultat = BIT_MA_D_OR1;
+        break;
+      }
+    case RANG_D_OR2:
+      {
+        rezultat = BIT_MA_D_OR2;
+        break;
+      }
+    case RANG_D_OR3:
+      {
+        rezultat = BIT_MA_D_OR3;
+        break;
+      }
+    case RANG_D_OR4:
+      {
+        rezultat = BIT_MA_D_OR4;
+        break;
+      }
+    case RANG_D_OR5:
+      {
+        rezultat = BIT_MA_D_OR5;
+        break;
+      }
+    case RANG_D_OR6:
+      {
+        rezultat = BIT_MA_D_OR6;
+        break;
+      }
+    case RANG_D_OR7:
+      {
+        rezultat = BIT_MA_D_OR7;
+        break;
+      }
+    case RANG_D_OR8:
+      {
+        rezultat = BIT_MA_D_OR8;
+        break;
+      }
+    case RANG_D_XOR1:
+      {
+        rezultat = BIT_MA_D_XOR1;
+        break;
+      }
+    case RANG_D_XOR2:
+      {
+        rezultat = BIT_MA_D_XOR2;
+        break;
+      }
+    case RANG_D_XOR3:
+      {
+        rezultat = BIT_MA_D_XOR3;
+        break;
+      }
+    case RANG_D_XOR4:
+      {
+        rezultat = BIT_MA_D_XOR4;
+        break;
+      }
+    case RANG_D_XOR5:
+      {
+        rezultat = BIT_MA_D_XOR5;
+        break;
+      }
+    case RANG_D_XOR6:
+      {
+        rezultat = BIT_MA_D_XOR6;
+        break;
+      }
+    case RANG_D_XOR7:
+      {
+        rezultat = BIT_MA_D_XOR7;
+        break;
+      }
+    case RANG_D_XOR8:
+      {
+        rezultat = BIT_MA_D_XOR8;
+        break;
+      }
+    case RANG_D_NOT1:
+      {
+        rezultat = BIT_MA_D_NOT1;
+        break;
+      }
+    case RANG_D_NOT2:
+      {
+        rezultat = BIT_MA_D_NOT2;
+        break;
+      }
+    case RANG_D_NOT3:
+      {
+        rezultat = BIT_MA_D_NOT3;
+        break;
+      }
+    case RANG_D_NOT4:
+      {
+        rezultat = BIT_MA_D_NOT4;
+        break;
+      }
+    case RANG_D_NOT5:
+      {
+        rezultat = BIT_MA_D_NOT5;
+        break;
+      }
+    case RANG_D_NOT6:
+      {
+        rezultat = BIT_MA_D_NOT6;
+        break;
+      }
+    case RANG_D_NOT7:
+      {
+        rezultat = BIT_MA_D_NOT7;
+        break;
+      }
+    case RANG_D_NOT8:
+      {
+        rezultat = BIT_MA_D_NOT8;
+        break;
+      }
+    case RANG_D_NOT9:
+      {
+        rezultat = BIT_MA_D_NOT9;
+        break;
+      }
+    case RANG_D_NOT10:
+      {
+        rezultat = BIT_MA_D_NOT10;
+        break;
+      }
+    case RANG_D_NOT11:
+      {
+        rezultat = BIT_MA_D_NOT11;
+        break;
+      }
+    case RANG_D_NOT12:
+      {
+        rezultat = BIT_MA_D_NOT12;
+        break;
+      }
+    case RANG_D_NOT13:
+      {
+        rezultat = BIT_MA_D_NOT13;
+        break;
+      }
+    case RANG_D_NOT14:
+      {
+        rezultat = BIT_MA_D_NOT14;
+        break;
+      }
+    case RANG_D_NOT15:
+      {
+        rezultat = BIT_MA_D_NOT15;
+        break;
+      }
+    case RANG_D_NOT16:
+      {
+        rezultat = BIT_MA_D_NOT16;
         break;
       }
     case RANG_BLOCK_VKL_VV:
@@ -2364,6 +2628,26 @@ unsigned int save_new_rang_oldr_from_gmm(unsigned int number, unsigned int numbe
     point_to_source = (unsigned int *)current_settings.ranguvannja_reset_dt_source_minus + N_BIG*number;
     point_to_target = (unsigned int *)target_label->ranguvannja_reset_dt_source_minus + N_BIG*number;
   }
+  else if (source == SOURCE_D_AND_RANG)
+  {
+    point_to_source = (unsigned int *)current_settings.ranguvannja_d_and + N_BIG*number;
+    point_to_target = (unsigned int *)target_label->ranguvannja_d_and + N_BIG*number;
+  }
+  else if (source == SOURCE_D_OR_RANG)
+  {
+    point_to_source = (unsigned int *)current_settings.ranguvannja_d_or + N_BIG*number;
+    point_to_target = (unsigned int *)target_label->ranguvannja_d_or + N_BIG*number;
+  }
+  else if (source == SOURCE_D_XOR_RANG)
+  {
+    point_to_source = (unsigned int *)current_settings.ranguvannja_d_xor + N_BIG*number;
+    point_to_target = (unsigned int *)target_label->ranguvannja_d_xor + N_BIG*number;
+  }
+  else if (source == SOURCE_D_NOT_RANG)
+  {
+    point_to_source = (unsigned int *)current_settings.ranguvannja_d_not + N_BIG*number;
+    point_to_target = (unsigned int *)target_label->ranguvannja_d_not + N_BIG*number;
+  }
 
   //Перевіряємо, чи треба попередні зміни (якщо такі були) ввести в цільовий масив
   if (point_to_edited_rang != NULL)
@@ -2393,34 +2677,6 @@ unsigned int save_new_rang_oldr_from_gmm(unsigned int number, unsigned int numbe
     //Якщо data == 0, то це означає, що треба якусь сункцію скинути
     
     if (
-        (data == BIT_MA_INPUT_DF1             ) || 
-        (data == BIT_MA_OUTPUT_DF1            ) || 
-        (data == BIT_MA_INPUT_DF2             ) || 
-        (data == BIT_MA_OUTPUT_DF2            ) ||
-        (data == BIT_MA_INPUT_DF3             ) || 
-        (data == BIT_MA_OUTPUT_DF3            ) || 
-        (data == BIT_MA_INPUT_DF4             ) || 
-        (data == BIT_MA_OUTPUT_DF4            ) ||
-        (data == BIT_MA_INPUT_DF5             ) || 
-        (data == BIT_MA_OUTPUT_DF5            ) || 
-        (data == BIT_MA_INPUT_DF6             ) || 
-        (data == BIT_MA_OUTPUT_DF6            ) || 
-        (data == BIT_MA_INPUT_DF7             ) || 
-        (data == BIT_MA_OUTPUT_DF7            ) || 
-        (data == BIT_MA_INPUT_DF8             ) || 
-        (data == BIT_MA_OUTPUT_DF8            ) || 
-        (data == BIT_MA_DT1_SET               ) ||
-        (data == BIT_MA_DT1_RESET             ) ||
-        (data == BIT_MA_DT1_OUT               ) ||
-        (data == BIT_MA_DT2_SET               ) ||
-        (data == BIT_MA_DT2_RESET             ) ||
-        (data == BIT_MA_DT2_OUT               ) ||
-        (data == BIT_MA_DT3_SET               ) ||
-        (data == BIT_MA_DT3_RESET             ) ||
-        (data == BIT_MA_DT3_OUT               ) ||
-        (data == BIT_MA_DT4_SET               ) ||
-        (data == BIT_MA_DT4_RESET             ) ||
-        (data == BIT_MA_DT4_OUT               ) ||
         (data == BIT_MA_BLOCK_VKL_VV          ) || 
         (data == BIT_MA_RESET_LEDS            ) ||
         (data == BIT_MA_RESET_RELES           ) || 
@@ -2457,41 +2713,6 @@ unsigned int save_new_rang_oldr_from_gmm(unsigned int number, unsigned int numbe
       //Перевіряємо, чи можна цю функцію встановляти на дане джерело
       if (
           (
-           (
-            (source == SOURCE_DF_PLUS_RANG)  ||
-            (source == SOURCE_DF_MINUS_RANG) ||
-            (source == SOURCE_DF_BLK_RANG)
-           )   
-           &
-           (
-            ((number == 0) && ((data == BIT_MA_INPUT_DF1) || (data == BIT_MA_OUTPUT_DF1))) ||
-            ((number == 1) && ((data == BIT_MA_INPUT_DF2) || (data == BIT_MA_OUTPUT_DF2))) ||
-            ((number == 2) && ((data == BIT_MA_INPUT_DF3) || (data == BIT_MA_OUTPUT_DF3))) ||
-            ((number == 3) && ((data == BIT_MA_INPUT_DF4) || (data == BIT_MA_OUTPUT_DF4))) ||
-            ((number == 4) && ((data == BIT_MA_INPUT_DF5) || (data == BIT_MA_OUTPUT_DF5))) ||
-            ((number == 5) && ((data == BIT_MA_INPUT_DF6) || (data == BIT_MA_OUTPUT_DF6))) ||
-            ((number == 6) && ((data == BIT_MA_INPUT_DF7) || (data == BIT_MA_OUTPUT_DF7))) ||
-            ((number == 7) && ((data == BIT_MA_INPUT_DF8) || (data == BIT_MA_OUTPUT_DF8)))
-           )
-          )
-          ||
-          (
-           (
-            (source == SOURCE_SET_DT_PLUS_RANG)    ||
-            (source == SOURCE_SET_DT_MINUS_RANG)   ||
-            (source == SOURCE_RESET_DT_PLUS_RANG)  ||
-            (source == SOURCE_RESET_DT_MINUS_RANG)
-           )
-           &
-           (
-            ( (number == 0) && ((data == BIT_MA_DT1_SET) || (data == BIT_MA_DT1_RESET) || (data == BIT_MA_DT1_OUT) ) ) ||
-            ( (number == 1) && ((data == BIT_MA_DT2_SET) || (data == BIT_MA_DT2_RESET) || (data == BIT_MA_DT2_OUT) ) ) ||
-            ( (number == 2) && ((data == BIT_MA_DT3_SET) || (data == BIT_MA_DT3_RESET) || (data == BIT_MA_DT3_OUT) ) ) ||
-            ( (number == 3) && ((data == BIT_MA_DT4_SET) || (data == BIT_MA_DT4_RESET) || (data == BIT_MA_DT4_OUT) ) )
-           )
-          )
-          ||
-          (
            (source == SOURCE_AR_RANG) & (data == BIT_MA_WORK_A_REJESTRATOR)
           )
           ||
@@ -2512,7 +2733,7 @@ unsigned int save_new_rang_oldr_from_gmm(unsigned int number, unsigned int numbe
         /*
         Зараз є спроба зранжувати "Работа БВ" або "Работа БО" на дискретний вихід
         минуючи тиблицю редагвання (тобто гарантовано у даній трансакції пізніше не буде
-        знятта умова ожногочаного ранжування цих функцій на різні дискретні виходи, що може
+        знята умова одногочаного ранжування цих функцій на різні дискретні виходи, що може
         мати місце при виконанні функції 16, коли спочатку встановлюємо якусь функцію, а потім знімаємо
         цю саму функцію з іншого реле але операція ця "запрограмована" у одному запиті)
         Треба перевірити, чи на іншому виході вони зранжовані чи ні
@@ -2781,6 +3002,115 @@ unsigned int save_new_rang_oldr_from_gmm(unsigned int number, unsigned int numbe
       if ((target_label->configuration & (1 << UMAX_BIT_CONFIGURATION)) !=0 ) error = 0;
       else error = ERROR_ILLEGAL_DATA_VALUE;
     }
+    else if (
+             (
+              (data >= BIT_MA_INPUT_DF1 ) && 
+              (data <= BIT_MA_INPUT_DF8 )
+             )
+             ||
+             (
+              (data >= BIT_MA_OUTPUT_DF1 ) && 
+              (data <= BIT_MA_OUTPUT_DF8 )
+             )
+             ||
+             (
+              (data >= BIT_MA_DT1_SET ) && 
+              (data <= BIT_MA_DT4_OUT )
+             )
+             ||
+             (
+              (data >= BIT_MA_D_AND1 ) && 
+              (data <= BIT_MA_D_AND8 )
+             )
+             ||
+             (
+              (data >= BIT_MA_D_OR1 ) && 
+              (data <= BIT_MA_D_OR8 )
+             )
+             ||
+             (
+              (data >= BIT_MA_D_XOR1 ) && 
+              (data <= BIT_MA_D_XOR8 )
+             )
+             ||
+             (
+              (data >= BIT_MA_D_NOT1 ) && 
+              (data <= BIT_MA_D_NOT16)
+             )
+            )
+    {
+      //Зараз є намагання зранжувати функцю розширеної логіки і номер її є допустимим
+
+      //Перевіряємо, чи можна цю функцію встановляти на дане джерело
+      if (
+          (
+           (
+            (source == SOURCE_DF_PLUS_RANG)  ||
+            (source == SOURCE_DF_MINUS_RANG) ||
+            (source == SOURCE_DF_BLK_RANG)
+           )   
+           &
+           (
+            ((number == 0) && ((data == BIT_MA_INPUT_DF1) || (data == BIT_MA_OUTPUT_DF1))) ||
+            ((number == 1) && ((data == BIT_MA_INPUT_DF2) || (data == BIT_MA_OUTPUT_DF2))) ||
+            ((number == 2) && ((data == BIT_MA_INPUT_DF3) || (data == BIT_MA_OUTPUT_DF3))) ||
+            ((number == 3) && ((data == BIT_MA_INPUT_DF4) || (data == BIT_MA_OUTPUT_DF4))) ||
+            ((number == 4) && ((data == BIT_MA_INPUT_DF5) || (data == BIT_MA_OUTPUT_DF5))) ||
+            ((number == 5) && ((data == BIT_MA_INPUT_DF6) || (data == BIT_MA_OUTPUT_DF6))) ||
+            ((number == 6) && ((data == BIT_MA_INPUT_DF7) || (data == BIT_MA_OUTPUT_DF7))) ||
+            ((number == 7) && ((data == BIT_MA_INPUT_DF8) || (data == BIT_MA_OUTPUT_DF8)))
+           )
+          )
+          ||
+          (
+           (
+            (source == SOURCE_SET_DT_PLUS_RANG)    ||
+            (source == SOURCE_SET_DT_MINUS_RANG)   ||
+            (source == SOURCE_RESET_DT_PLUS_RANG)  ||
+            (source == SOURCE_RESET_DT_MINUS_RANG)
+           )
+           &
+           (
+            ( (number == 0) && ((data == BIT_MA_DT1_SET) || (data == BIT_MA_DT1_RESET) || (data == BIT_MA_DT1_OUT) ) ) ||
+            ( (number == 1) && ((data == BIT_MA_DT2_SET) || (data == BIT_MA_DT2_RESET) || (data == BIT_MA_DT2_OUT) ) ) ||
+            ( (number == 2) && ((data == BIT_MA_DT3_SET) || (data == BIT_MA_DT3_RESET) || (data == BIT_MA_DT3_OUT) ) ) ||
+            ( (number == 3) && ((data == BIT_MA_DT4_SET) || (data == BIT_MA_DT4_RESET) || (data == BIT_MA_DT4_OUT) ) )
+           )
+          )
+          ||
+          (
+           (source == SOURCE_D_AND_RANG)
+           &
+           (data == (BIT_MA_D_AND1 + number))
+          )
+          ||
+          (
+           (source == SOURCE_D_OR_RANG)
+           &
+           (data == (BIT_MA_D_OR1 + number))
+          )
+          ||
+          (
+           (source == SOURCE_D_XOR_RANG)
+           &
+           (data == (BIT_MA_D_XOR1 + number))
+          )
+          ||
+          (
+           (source == SOURCE_D_NOT_RANG)
+           &
+           (data == (BIT_MA_D_NOT1 + number))
+          )
+          ||
+          (
+           (source == SOURCE_AR_RANG) & (data == BIT_MA_WORK_A_REJESTRATOR)
+          )
+          ||
+          (
+           (source == SOURCE_DR_RANG) & (data == BIT_MA_WORK_D_REJESTRATOR)
+          )
+         ) error = ERROR_ILLEGAL_DATA_VALUE;  
+    }
     else
     {
       error = ERROR_ILLEGAL_DATA_VALUE;
@@ -2984,6 +3314,206 @@ unsigned int save_new_rang_oldr_from_gmm(unsigned int number, unsigned int numbe
     case BIT_MA_DT4_OUT:
       {
         _SET_BIT(set_array_rang, RANG_DT4_OUT);
+        break;
+      }
+    case BIT_MA_D_AND1:
+      {
+        _SET_BIT(set_array_rang, RANG_D_AND1);
+        break;
+      }
+    case BIT_MA_D_AND2:
+      {
+        _SET_BIT(set_array_rang, RANG_D_AND2);
+        break;
+      }
+    case BIT_MA_D_AND3:
+      {
+        _SET_BIT(set_array_rang, RANG_D_AND3);
+        break;
+      }
+    case BIT_MA_D_AND4:
+      {
+        _SET_BIT(set_array_rang, RANG_D_AND4);
+        break;
+      }
+    case BIT_MA_D_AND5:
+      {
+        _SET_BIT(set_array_rang, RANG_D_AND5);
+        break;
+      }
+    case BIT_MA_D_AND6:
+      {
+        _SET_BIT(set_array_rang, RANG_D_AND6);
+        break;
+      }
+    case BIT_MA_D_AND7:
+      {
+        _SET_BIT(set_array_rang, RANG_D_AND7);
+        break;
+      }
+    case BIT_MA_D_AND8:
+      {
+        _SET_BIT(set_array_rang, RANG_D_AND8);
+        break;
+      }
+    case BIT_MA_D_OR1:
+      {
+        _SET_BIT(set_array_rang, RANG_D_OR1);
+        break;
+      }
+    case BIT_MA_D_OR2:
+      {
+        _SET_BIT(set_array_rang, RANG_D_OR2);
+        break;
+      }
+    case BIT_MA_D_OR3:
+      {
+        _SET_BIT(set_array_rang, RANG_D_OR3);
+        break;
+      }
+    case BIT_MA_D_OR4:
+      {
+        _SET_BIT(set_array_rang, RANG_D_OR4);
+        break;
+      }
+    case BIT_MA_D_OR5:
+      {
+        _SET_BIT(set_array_rang, RANG_D_OR5);
+        break;
+      }
+    case BIT_MA_D_OR6:
+      {
+        _SET_BIT(set_array_rang, RANG_D_OR6);
+        break;
+      }
+    case BIT_MA_D_OR7:
+      {
+        _SET_BIT(set_array_rang, RANG_D_OR7);
+        break;
+      }
+    case BIT_MA_D_OR8:
+      {
+        _SET_BIT(set_array_rang, RANG_D_OR8);
+        break;
+      }
+    case BIT_MA_D_XOR1:
+      {
+        _SET_BIT(set_array_rang, RANG_D_XOR1);
+        break;
+      }
+    case BIT_MA_D_XOR2:
+      {
+        _SET_BIT(set_array_rang, RANG_D_XOR2);
+        break;
+      }
+    case BIT_MA_D_XOR3:
+      {
+        _SET_BIT(set_array_rang, RANG_D_XOR3);
+        break;
+      }
+    case BIT_MA_D_XOR4:
+      {
+        _SET_BIT(set_array_rang, RANG_D_XOR4);
+        break;
+      }
+    case BIT_MA_D_XOR5:
+      {
+        _SET_BIT(set_array_rang, RANG_D_XOR5);
+        break;
+      }
+    case BIT_MA_D_XOR6:
+      {
+        _SET_BIT(set_array_rang, RANG_D_XOR6);
+        break;
+      }
+    case BIT_MA_D_XOR7:
+      {
+        _SET_BIT(set_array_rang, RANG_D_XOR7);
+        break;
+      }
+    case BIT_MA_D_XOR8:
+      {
+        _SET_BIT(set_array_rang, RANG_D_XOR8);
+        break;
+      }
+    case BIT_MA_D_NOT1:
+      {
+        _SET_BIT(set_array_rang, RANG_D_NOT1);
+        break;
+      }
+    case BIT_MA_D_NOT2:
+      {
+        _SET_BIT(set_array_rang, RANG_D_NOT2);
+        break;
+      }
+    case BIT_MA_D_NOT3:
+      {
+        _SET_BIT(set_array_rang, RANG_D_NOT3);
+        break;
+      }
+    case BIT_MA_D_NOT4:
+      {
+        _SET_BIT(set_array_rang, RANG_D_NOT4);
+        break;
+      }
+    case BIT_MA_D_NOT5:
+      {
+        _SET_BIT(set_array_rang, RANG_D_NOT5);
+        break;
+      }
+    case BIT_MA_D_NOT6:
+      {
+        _SET_BIT(set_array_rang, RANG_D_NOT6);
+        break;
+      }
+    case BIT_MA_D_NOT7:
+      {
+        _SET_BIT(set_array_rang, RANG_D_NOT7);
+        break;
+      }
+    case BIT_MA_D_NOT8:
+      {
+        _SET_BIT(set_array_rang, RANG_D_NOT8);
+        break;
+      }
+    case BIT_MA_D_NOT9:
+      {
+        _SET_BIT(set_array_rang, RANG_D_NOT9);
+        break;
+      }
+    case BIT_MA_D_NOT10:
+      {
+        _SET_BIT(set_array_rang, RANG_D_NOT10);
+        break;
+      }
+    case BIT_MA_D_NOT11:
+      {
+        _SET_BIT(set_array_rang, RANG_D_NOT11);
+        break;
+      }
+    case BIT_MA_D_NOT12:
+      {
+        _SET_BIT(set_array_rang, RANG_D_NOT12);
+        break;
+      }
+    case BIT_MA_D_NOT13:
+      {
+        _SET_BIT(set_array_rang, RANG_D_NOT13);
+        break;
+      }
+    case BIT_MA_D_NOT14:
+      {
+        _SET_BIT(set_array_rang, RANG_D_NOT14);
+        break;
+      }
+    case BIT_MA_D_NOT15:
+      {
+        _SET_BIT(set_array_rang, RANG_D_NOT15);
+        break;
+      }
+    case BIT_MA_D_NOT16:
+      {
+        _SET_BIT(set_array_rang, RANG_D_NOT16);
         break;
       }
     case BIT_MA_BLOCK_VKL_VV:
