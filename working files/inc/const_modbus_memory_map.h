@@ -1019,7 +1019,19 @@
 #define M_ADDRESS_FIRST_DT_RANG               1964
 #define M_ADDRESS_LAST_DT_RANG                2059
 
-#define M_ADDRESS_LAST_SETPOINTS_RANG         2059
+#define M_ADDRESS_FIRST_D_AND_RANG            2060
+#define M_ADDRESS_LAST_D_AND_RANG             2123
+
+#define M_ADDRESS_FIRST_D_OR_RANG             2124
+#define M_ADDRESS_LAST_D_OR_RANG              2187
+
+#define M_ADDRESS_FIRST_D_XOR_RANG            2188
+#define M_ADDRESS_LAST_D_XOR_RANG             2203
+
+#define M_ADDRESS_FIRST_D_NOT_RANG            2204
+#define M_ADDRESS_LAST_D_NOT_RANG             2219
+
+#define M_ADDRESS_LAST_SETPOINTS_RANG         2219
 /*****************************************************/
 
 /*****************************************************/

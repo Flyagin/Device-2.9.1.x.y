@@ -239,7 +239,7 @@ void convert_order_list_function_to_gmm(unsigned int* input_array, unsigned shor
 
   //Визначцані "І"
   _CONVERT_SIGNAL_TO_GMM(input_array, output_array, RANG_D_AND1, (BIT_MA_D_AND1 - BIT_MA_CURRENT_AF_BASE));
-  _CONVERT_SIGNAL_TO_GMM(input_array, output_array, RANG_D_AND2 (BIT_MA_D_AND2 - BIT_MA_CURRENT_AF_BASE));
+  _CONVERT_SIGNAL_TO_GMM(input_array, output_array, RANG_D_AND2, (BIT_MA_D_AND2 - BIT_MA_CURRENT_AF_BASE));
   _CONVERT_SIGNAL_TO_GMM(input_array, output_array, RANG_D_AND3, (BIT_MA_D_AND3 - BIT_MA_CURRENT_AF_BASE));
   _CONVERT_SIGNAL_TO_GMM(input_array, output_array, RANG_D_AND4, (BIT_MA_D_AND4 - BIT_MA_CURRENT_AF_BASE));
   _CONVERT_SIGNAL_TO_GMM(input_array, output_array, RANG_D_AND5, (BIT_MA_D_AND5 - BIT_MA_CURRENT_AF_BASE));
@@ -6593,7 +6593,7 @@ inline unsigned int Get_data(unsigned char *data, unsigned int address_data, uns
   }
   else if ((address_data >= M_ADDRESS_FIRST_DT_RANG) && (address_data <= M_ADDRESS_LAST_DT_RANG))
   {
-    //Визначаємо, який триггер зараз верхній рівень намагається прочитати
+    //Визначаємо, який триґер зараз верхній рівень намагається прочитати
     unsigned int number_defined_triggers = (address_data - M_ADDRESS_FIRST_DT_RANG) / MAX_FUNCTIONS_IN_DT;
     
     if(number_defined_triggers < (NUMBER_DEFINED_TRIGGERS << 2))
@@ -6601,6 +6601,50 @@ inline unsigned int Get_data(unsigned char *data, unsigned int address_data, uns
       temp_value = convert_order_list_oldr_to_gmm((number_defined_triggers >> 2),
                                (((address_data -  M_ADDRESS_FIRST_DT_RANG) % MAX_FUNCTIONS_IN_DT) + 1),
                                (SOURCE_SET_DT_PLUS_RANG + (number_defined_triggers % 4)));
+    }
+    else temp_value = 0;
+  }
+  else if ((address_data >= M_ADDRESS_FIRST_D_AND_RANG) && (address_data <= M_ADDRESS_LAST_D_AND_RANG))
+  {
+    //Визначаємо, який В-"І" зараз верхній рівень намагається прочитати
+    unsigned int number_defined_and = (address_data - M_ADDRESS_FIRST_D_AND_RANG) / MAX_FUNCTIONS_IN_D_AND;
+    
+    if(number_defined_and < NUMBER_DEFINED_AND)
+    {
+      temp_value = convert_order_list_oldr_to_gmm(number_defined_and, (((address_data -  M_ADDRESS_FIRST_D_AND_RANG) % MAX_FUNCTIONS_IN_D_AND) + 1), SOURCE_D_AND_RANG);
+    }
+    else temp_value = 0;
+  }
+  else if ((address_data >= M_ADDRESS_FIRST_D_OR_RANG) && (address_data <= M_ADDRESS_LAST_D_OR_RANG))
+  {
+    //Визначаємо, який В-"АБО" зараз верхній рівень намагається прочитати
+    unsigned int number_defined_or = (address_data - M_ADDRESS_FIRST_D_OR_RANG) / MAX_FUNCTIONS_IN_D_OR;
+    
+    if(number_defined_or < NUMBER_DEFINED_OR)
+    {
+      temp_value = convert_order_list_oldr_to_gmm(number_defined_or, (((address_data -  M_ADDRESS_FIRST_D_OR_RANG) % MAX_FUNCTIONS_IN_D_OR) + 1), SOURCE_D_OR_RANG);
+    }
+    else temp_value = 0;
+  }
+  else if ((address_data >= M_ADDRESS_FIRST_D_XOR_RANG) && (address_data <= M_ADDRESS_LAST_D_XOR_RANG))
+  {
+    //Визначаємо, який В-"Викл.АБО" зараз верхній рівень намагається прочитати
+    unsigned int number_defined_xor = (address_data - M_ADDRESS_FIRST_D_XOR_RANG) / MAX_FUNCTIONS_IN_D_XOR;
+    
+    if(number_defined_xor < NUMBER_DEFINED_XOR)
+    {
+      temp_value = convert_order_list_oldr_to_gmm(number_defined_xor, (((address_data -  M_ADDRESS_FIRST_D_XOR_RANG) % MAX_FUNCTIONS_IN_D_XOR) + 1), SOURCE_D_XOR_RANG);
+    }
+    else temp_value = 0;
+  }
+  else if ((address_data >= M_ADDRESS_FIRST_D_NOT_RANG) && (address_data <= M_ADDRESS_LAST_D_NOT_RANG))
+  {
+    //Визначаємо, який В-"НЕ" зараз верхній рівень намагається прочитати
+    unsigned int number_defined_not = (address_data - M_ADDRESS_FIRST_D_NOT_RANG) / MAX_FUNCTIONS_IN_D_NOT;
+    
+    if(number_defined_not < NUMBER_DEFINED_NOT)
+    {
+      temp_value = convert_order_list_oldr_to_gmm(number_defined_not, (((address_data -  M_ADDRESS_FIRST_D_NOT_RANG) % MAX_FUNCTIONS_IN_D_NOT) + 1), SOURCE_D_NOT_RANG);
     }
     else temp_value = 0;
   }
@@ -10029,7 +10073,7 @@ inline unsigned int Set_data(unsigned short int data, unsigned int address_data,
   }
   else if ((address_data >= M_ADDRESS_FIRST_DT_RANG) && (address_data <= M_ADDRESS_LAST_DT_RANG))
   {
-    //Запис ранжування триггера
+    //Запис ранжування триґера
     
     //Визначаємо, який триггер зараз верхній рівень намагається записати
     unsigned int number_defined_triggers = (address_data - M_ADDRESS_FIRST_DT_RANG) / MAX_FUNCTIONS_IN_DT;
@@ -10040,6 +10084,58 @@ inline unsigned int Set_data(unsigned short int data, unsigned int address_data,
       error = save_new_rang_oldr_from_gmm((number_defined_triggers >> 2),
                      (((address_data -  M_ADDRESS_FIRST_DT_RANG) % MAX_FUNCTIONS_IN_DT) + 1),
                      SOURCE_SET_DT_PLUS_RANG + (number_defined_triggers % 4), data, method_setting);
+    }
+  }
+  else if ((address_data >= M_ADDRESS_FIRST_D_AND_RANG) && (address_data <= M_ADDRESS_LAST_D_AND_RANG))
+  {
+    //Запис ранжування В-"І"
+    
+    //Визначаємо, який В-"І" зараз верхній рівень намагається записати
+    unsigned int number_defined_and = (address_data - M_ADDRESS_FIRST_D_AND_RANG) / MAX_FUNCTIONS_IN_D_AND;
+    
+    if(number_defined_and < NUMBER_DEFINED_AND)
+    {
+      
+      error = save_new_rang_oldr_from_gmm(number_defined_and, (((address_data -  M_ADDRESS_FIRST_D_AND_RANG) % MAX_FUNCTIONS_IN_D_AND) + 1), SOURCE_D_AND_RANG, data, method_setting);
+    }
+  }
+  else if ((address_data >= M_ADDRESS_FIRST_D_OR_RANG) && (address_data <= M_ADDRESS_LAST_D_OR_RANG))
+  {
+    //Запис ранжування В-"АБО"
+    
+    //Визначаємо, який В-"АБО" зараз верхній рівень намагається записати
+    unsigned int number_defined_or = (address_data - M_ADDRESS_FIRST_D_OR_RANG) / MAX_FUNCTIONS_IN_D_OR;
+    
+    if(number_defined_or < NUMBER_DEFINED_OR)
+    {
+      
+      error = save_new_rang_oldr_from_gmm(number_defined_or, (((address_data -  M_ADDRESS_FIRST_D_OR_RANG) % MAX_FUNCTIONS_IN_D_OR) + 1), SOURCE_D_OR_RANG, data, method_setting);
+    }
+  }
+  else if ((address_data >= M_ADDRESS_FIRST_D_XOR_RANG) && (address_data <= M_ADDRESS_LAST_D_XOR_RANG))
+  {
+    //Запис ранжування В-"Викл.АБО"
+    
+    //Визначаємо, який В-"Викл.АБО" зараз верхній рівень намагається записати
+    unsigned int number_defined_xor = (address_data - M_ADDRESS_FIRST_D_XOR_RANG) / MAX_FUNCTIONS_IN_D_XOR;
+    
+    if(number_defined_xor < NUMBER_DEFINED_XOR)
+    {
+      
+      error = save_new_rang_oldr_from_gmm(number_defined_xor, (((address_data -  M_ADDRESS_FIRST_D_XOR_RANG) % MAX_FUNCTIONS_IN_D_XOR) + 1), SOURCE_D_XOR_RANG, data, method_setting);
+    }
+  }
+  else if ((address_data >= M_ADDRESS_FIRST_D_NOT_RANG) && (address_data <= M_ADDRESS_LAST_D_NOT_RANG))
+  {
+    //Запис ранжування В-"НЕ"
+    
+    //Визначаємо, який В-"НЕ" зараз верхній рівень намагається записати
+    unsigned int number_defined_not = (address_data - M_ADDRESS_FIRST_D_NOT_RANG) / MAX_FUNCTIONS_IN_D_NOT;
+    
+    if(number_defined_not < NUMBER_DEFINED_NOT)
+    {
+      
+      error = save_new_rang_oldr_from_gmm(number_defined_not, (((address_data -  M_ADDRESS_FIRST_D_NOT_RANG) % MAX_FUNCTIONS_IN_D_NOT) + 1), SOURCE_D_NOT_RANG, data, method_setting);
     }
   }
   else if ((address_data >= M_ADDRESS_FIRST_SETPOINTS_RANG_AR) && (address_data <= M_ADDRESS_LAST_SETPOINTS_RANG_AR))
