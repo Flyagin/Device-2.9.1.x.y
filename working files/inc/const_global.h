@@ -1,8 +1,6 @@
 #ifndef __CONST_GLOBAL__
 #define __CONST_GLOBAL__
 
-/*Тест Test*/
-
 #define N_BIG   8
 #define N_SMALL 2
 
