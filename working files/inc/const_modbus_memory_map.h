@@ -224,14 +224,14 @@
 #define MA_STP_CHAPV1_F_RAB               447
 #define MA_STP_CHAPV2_F_RAB               448
 #define MA_STP_ACHR_CHAPV_UF              449
-#define MA_TO_ACHR_1                      451
-#define MA_TO_ACHR_2                      452
-#define MA_TO_CHAPV_1                     453
-#define MA_TO_CHAPV_2                     454
+#define MA_TO_ACHR_1                      450
+#define MA_TO_ACHR_2                      451
+#define MA_TO_CHAPV_1                     452
+#define MA_TO_CHAPV_2                     453
 
 #define M_ADDRESS_LAST_SETPOINTS_ZACHYSTIV 454
 
-#define M_ADDRESS_FIRST_SETPOINTS_CONTINUE 453
+#define M_ADDRESS_FIRST_SETPOINTS_CONTINUE 455
 
 #define MA_LINE_1                         455
 #define MA_DOVGYNA_1_1                    456
