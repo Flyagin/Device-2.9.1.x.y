@@ -132,6 +132,7 @@ extern void make_ekran_chose_registrators(void);
 extern void make_ekran_settings_analog_registrators(void);
 extern void make_ekran_timeout_analog_registrator(void);
 extern void make_ekran_extended_logic(void);
+extern void make_ekran_general_pickups_el(void);
 extern void make_ekran_chose_settings_df(void);
 extern void make_ekran_type_df(void);
 extern void make_ekran_timeout_df(unsigned int);

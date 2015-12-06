@@ -120,7 +120,7 @@ void make_ekran_transformator()
       if ((i & 0x1) == 0)
       {
         //У непарному номері рядку виводимо заголовок
-        for (unsigned int j = 0; j<MAX_COL_LCD; j++) working_ekran[i][j] = name_string[index_language][index_of_ekran>>1][j];
+        for (unsigned int j = 0; j<MAX_COL_LCD; j++) working_ekran[i][j] = name_string_tmp[index_of_ekran>>1][j];
         if ((index_of_ekran>>1) == INDEX_ML_T0)
         {
           vaga = 100; //максимальний ваговий коефіцієнт для коефіцієнта трансформації T0

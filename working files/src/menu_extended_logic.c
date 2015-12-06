@@ -8,6 +8,7 @@ void make_ekran_extended_logic(void)
   const unsigned char name_string[MAX_NAMBER_LANGUAGE][MAX_ROW_FOR_EXTENDED_LIGIC][MAX_COL_LCD] = 
   {
     {
+      " Общие уставки  ",
       " О-функции      ",
       " О-триггеры     ",
       " О-И            ",
@@ -16,6 +17,7 @@ void make_ekran_extended_logic(void)
       " О-НЕТ          "
     },
     {
+      " Заг.уставки    ",
       " В-функції      ",
       " В-триґери      ",
       " В-І            ",
@@ -24,6 +26,7 @@ void make_ekran_extended_logic(void)
       " В-НЕ           "
     },
     {
+      " General pickups",
       " UD Functions   ",
       " UD Flip-Flops  ",
       " UD AND         ",
@@ -32,6 +35,7 @@ void make_ekran_extended_logic(void)
       " UD NOT         "
     },
     {
+      " Общие уставки  ",
       " О-функции      ",
       " О-триггеры     ",
       " О-И            ",

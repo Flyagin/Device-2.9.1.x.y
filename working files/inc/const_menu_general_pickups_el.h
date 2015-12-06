@@ -1,0 +1,14 @@
+#ifndef __CONST_MENU_GENERAL_PICKUPS_EL__
+#define __CONST_MENU_GENERAL_PICKUPS_EL__
+
+#define EKRAN_GENERAL_PICKUPS_EL            (EKRAN_EXTENDED_LIGIC + 1)
+
+#define MAX_ROW_FOR_GENERAL_PICKUPS_EL      1  
+
+#define INDEX_ML_NUMBER_INERATION           0
+
+#define COL_NUMBER_INERATION_BEGIN          6
+#define COL_NUMBER_INERATION_END            7
+
+
+#endif

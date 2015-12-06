@@ -1657,6 +1657,8 @@ void min_settings(__SETTINGS *target_label)
     target_label->ranguvannja_analog_registrator[j]  = 0x0;
     target_label->ranguvannja_digital_registrator[j] = 0x0;
   }
+  
+  target_label->number_iteration_el = NUMBER_ITERATION_EL_MAX;
 
   target_label->type_df = 0x0;
   
