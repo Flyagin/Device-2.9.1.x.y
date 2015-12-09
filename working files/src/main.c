@@ -379,6 +379,7 @@ int main(void)
   /************************************************************/
   //Стартова ініціалізація
   /************************************************************/
+  SEGGER_SYSVIEW_Conf();            /* Configure and initialize SystemView  */
   
   //Виставляємо подію про зупинку пристрою у попередньому сеансі роботи, а час встановиться пізніше, RTC запм'ятовує час пропадання живлення
   _SET_BIT(set_diagnostyka, EVENT_STOP_SYSTEM_BIT);
@@ -543,6 +544,7 @@ int main(void)
   
   time_2_watchdog_input = time_2_watchdog_output = TIM4->CNT;
   restart_timing_watchdog = 0xff;
+  
 
   /* Періодичні задачі */
   while (1)
