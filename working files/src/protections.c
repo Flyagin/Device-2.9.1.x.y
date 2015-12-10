@@ -2231,6 +2231,204 @@ inline void dt_handler(volatile unsigned int *p_active_functions)
 /*****************************************************/
 
 /*****************************************************/
+//Опрацювання визначуваних "І"
+/*****************************************************/
+inline void d_and_handler(volatile unsigned int *p_active_functions)
+{
+  unsigned int state_defined_and = 0;
+
+  //Визначаємо стан всіх визначуваних "І" (не виставляючи поки що їх у робочому масиві)
+  for (unsigned int i = 0; i < NUMBER_DEFINED_AND; i++)
+  {
+    if (
+        ((current_settings_prt.ranguvannja_d_and[N_BIG*i + 0] & p_active_functions[0]) == current_settings_prt.ranguvannja_d_and[N_BIG*i + 0]) && 
+        ((current_settings_prt.ranguvannja_d_and[N_BIG*i + 1] & p_active_functions[1]) == current_settings_prt.ranguvannja_d_and[N_BIG*i + 1]) &&
+        ((current_settings_prt.ranguvannja_d_and[N_BIG*i + 2] & p_active_functions[2]) == current_settings_prt.ranguvannja_d_and[N_BIG*i + 2]) &&
+        ((current_settings_prt.ranguvannja_d_and[N_BIG*i + 3] & p_active_functions[3]) == current_settings_prt.ranguvannja_d_and[N_BIG*i + 3]) &&
+        ((current_settings_prt.ranguvannja_d_and[N_BIG*i + 4] & p_active_functions[4]) == current_settings_prt.ranguvannja_d_and[N_BIG*i + 4]) &&
+        ((current_settings_prt.ranguvannja_d_and[N_BIG*i + 5] & p_active_functions[5]) == current_settings_prt.ranguvannja_d_and[N_BIG*i + 5]) &&
+        ((current_settings_prt.ranguvannja_d_and[N_BIG*i + 6] & p_active_functions[6]) == current_settings_prt.ranguvannja_d_and[N_BIG*i + 6]) &&
+        ((current_settings_prt.ranguvannja_d_and[N_BIG*i + 7] & p_active_functions[7]) == current_settings_prt.ranguvannja_d_and[N_BIG*i + 7])
+       )
+    {
+      state_defined_and |= (1 << i);
+    }
+  }
+
+  //Установлюємо, або скидаємо визначувані "І" у масиві функцій, які зараз будуть активовуватися
+  /*
+  Цей цикл і попередній не об'єднаі в один, а навпаки розєднані, бо у першому ми використовуємо
+  масив p_active_functions у якому ще не встановлені нові значення виходів В-"І", тому що інші В-"І"
+  можуть бути джерелом , але джерелом може буте попереднє значення В-"І", а не те,
+  що зараз встановлюється. А оскілдьки ми встановлюємо значення у масиві
+  p_active_functions, які набувають зараз тільки ваги, то щоб не вийшло об'єднання попереднього значення
+  і теперішнього то цикли роз'єднані (цикл аналізу джерел і логіки з циклом встановлення/скидання)
+  */
+  for (unsigned int i = 0; i < NUMBER_DEFINED_AND; i++)
+  {
+    //Установлюємо, або скидаємо В-"І"
+    unsigned int index_d_and = RANG_D_AND1 + i;
+      
+    if ((state_defined_and & (1 << i)) != 0 ) _SET_BIT(p_active_functions, index_d_and);
+    else _CLEAR_BIT(p_active_functions, index_d_and);
+  }
+}
+/*****************************************************/
+
+/*****************************************************/
+//Опрацювання визначуваних "АБО"
+/*****************************************************/
+inline void d_or_handler(volatile unsigned int *p_active_functions)
+{
+  unsigned int state_defined_or = 0;
+
+  //Визначаємо стан всіх визначуваних "АБО" (не виставляючи поки що їх у робочому масиві)
+  for (unsigned int i = 0; i < NUMBER_DEFINED_OR; i++)
+  {
+    if (
+        ((current_settings_prt.ranguvannja_d_or[N_BIG*i + 0] & p_active_functions[0]) != 0) || 
+        ((current_settings_prt.ranguvannja_d_or[N_BIG*i + 1] & p_active_functions[1]) != 0) ||
+        ((current_settings_prt.ranguvannja_d_or[N_BIG*i + 2] & p_active_functions[2]) != 0) ||
+        ((current_settings_prt.ranguvannja_d_or[N_BIG*i + 3] & p_active_functions[3]) != 0) ||
+        ((current_settings_prt.ranguvannja_d_or[N_BIG*i + 4] & p_active_functions[4]) != 0) ||
+        ((current_settings_prt.ranguvannja_d_or[N_BIG*i + 5] & p_active_functions[5]) != 0) ||
+        ((current_settings_prt.ranguvannja_d_or[N_BIG*i + 6] & p_active_functions[6]) != 0) ||
+        ((current_settings_prt.ranguvannja_d_or[N_BIG*i + 7] & p_active_functions[7]) != 0)
+       )
+    {
+      state_defined_or |= (1 << i);
+    }
+  }
+
+  //Установлюємо, або скидаємо визначувані "АБО" у масиві функцій, які зараз будуть активовуватися
+  /*
+  Цей цикл і попередній не об'єднаі в один, а навпаки розєднані, бо у першому ми використовуємо
+  масив p_active_functions у якому ще не встановлені нові значення виходів В-"АБО", тому що інші В-"АБО"
+  можуть бути джерелом , але джерелом може буте попереднє значення В-"АБО", а не те,
+  що зараз встановлюється. А оскілдьки ми встановлюємо значення у масиві
+  p_active_functions, які набувають зараз тільки ваги, то щоб не вийшло об'єднання попереднього значення
+  і теперішнього то цикли роз'єднані (цикл аналізу джерел і логіки з циклом встановлення/скидання)
+  */
+  for (unsigned int i = 0; i < NUMBER_DEFINED_OR; i++)
+  {
+    //Установлюємо, або скидаємо В-"АБО"
+    unsigned int index_d_or = RANG_D_OR1 + i;
+      
+    if ((state_defined_or & (1 << i)) != 0 ) _SET_BIT(p_active_functions, index_d_or);
+    else _CLEAR_BIT(p_active_functions, index_d_or);
+  }
+}
+/*****************************************************/
+
+/*****************************************************/
+//Опрацювання визначуваних "Викл.АБО"
+/*****************************************************/
+inline void d_xor_handler(volatile unsigned int *p_active_functions)
+{
+  unsigned int state_defined_xor = 0;
+
+  //Визначаємо стан всіх визначуваних "Викл.АБО" (не виставляючи поки що їх у робочому масиві)
+  for (unsigned int i = 0; i < NUMBER_DEFINED_XOR; i++)
+  {
+    unsigned int temp_array[N_BIG];
+    temp_array[0] = current_settings_prt.ranguvannja_d_xor[N_BIG*i + 0] & p_active_functions[0];
+    temp_array[1] = current_settings_prt.ranguvannja_d_xor[N_BIG*i + 1] & p_active_functions[1];
+    temp_array[2] = current_settings_prt.ranguvannja_d_xor[N_BIG*i + 2] & p_active_functions[2];
+    temp_array[3] = current_settings_prt.ranguvannja_d_xor[N_BIG*i + 3] & p_active_functions[3];
+    temp_array[4] = current_settings_prt.ranguvannja_d_xor[N_BIG*i + 4] & p_active_functions[4];
+    temp_array[5] = current_settings_prt.ranguvannja_d_xor[N_BIG*i + 5] & p_active_functions[5];
+    temp_array[6] = current_settings_prt.ranguvannja_d_xor[N_BIG*i + 6] & p_active_functions[6];
+    temp_array[7] = current_settings_prt.ranguvannja_d_xor[N_BIG*i + 7] & p_active_functions[7];
+    
+    if (
+        (temp_array[0] != 0) || 
+        (temp_array[1] != 0) ||
+        (temp_array[2] != 0) ||
+        (temp_array[3] != 0) ||
+        (temp_array[4] != 0) ||
+        (temp_array[5] != 0) ||
+        (temp_array[6] != 0) ||
+        (temp_array[7] != 0)
+       )
+    {
+      unsigned int signals = 0;
+      for (unsigned int j = 0; j < N_BIG; j++)
+      {
+        for (unsigned int k = 0; k < 32; k++)
+        {
+          if ((temp_array[j] & (1 << k)) != 0) signals++;
+        }
+      }
+      if (signals == 1) state_defined_xor |= (1 << i);
+    }
+  }
+
+  //Установлюємо, або скидаємо визначувані "Викл.АБО" у масиві функцій, які зараз будуть активовуватися
+  /*
+  Цей цикл і попередній не об'єднаі в один, а навпаки розєднані, бо у першому ми використовуємо
+  масив p_active_functions у якому ще не встановлені нові значення виходів В-"Викл.АБО", тому що інші В-"Викл.АБО"
+  можуть бути джерелом , але джерелом може буте попереднє значення В-"Викл.АБО", а не те,
+  що зараз встановлюється. А оскілдьки ми встановлюємо значення у масиві
+  p_active_functions, які набувають зараз тільки ваги, то щоб не вийшло об'єднання попереднього значення
+  і теперішнього то цикли роз'єднані (цикл аналізу джерел і логіки з циклом встановлення/скидання)
+  */
+  for (unsigned int i = 0; i < NUMBER_DEFINED_XOR; i++)
+  {
+    //Установлюємо, або скидаємо В-"Викл.АБО"
+    unsigned int index_d_xor = RANG_D_XOR1 + i;
+      
+    if ((state_defined_xor & (1 << i)) != 0 ) _SET_BIT(p_active_functions, index_d_xor);
+    else _CLEAR_BIT(p_active_functions, index_d_xor);
+  }
+}
+/*****************************************************/
+
+/*****************************************************/
+//Опрацювання визначуваних "НЕ"
+/*****************************************************/
+inline void d_not_handler(volatile unsigned int *p_active_functions)
+{
+  unsigned int state_defined_not = 0;
+
+  //Визначаємо стан всіх визначуваних "НЕ" (не виставляючи поки що їх у робочому масиві)
+  for (unsigned int i = 0; i < NUMBER_DEFINED_NOT; i++)
+  {
+    if (
+        ((current_settings_prt.ranguvannja_d_not[N_BIG*i + 0] & p_active_functions[0]) == 0) &&
+        ((current_settings_prt.ranguvannja_d_not[N_BIG*i + 1] & p_active_functions[1]) == 0) &&
+        ((current_settings_prt.ranguvannja_d_not[N_BIG*i + 2] & p_active_functions[2]) == 0) &&
+        ((current_settings_prt.ranguvannja_d_not[N_BIG*i + 3] & p_active_functions[3]) == 0) &&
+        ((current_settings_prt.ranguvannja_d_not[N_BIG*i + 4] & p_active_functions[4]) == 0) &&
+        ((current_settings_prt.ranguvannja_d_not[N_BIG*i + 5] & p_active_functions[5]) == 0) &&
+        ((current_settings_prt.ranguvannja_d_not[N_BIG*i + 6] & p_active_functions[6]) == 0) &&
+        ((current_settings_prt.ranguvannja_d_not[N_BIG*i + 7] & p_active_functions[7]) == 0)
+       )
+    {
+      state_defined_not |= (1 << i);
+    }
+  }
+
+  //Установлюємо, або скидаємо визначувані "НЕ" у масиві функцій, які зараз будуть активовуватися
+  /*
+  Цей цикл і попередній не об'єднаі в один, а навпаки розєднані, бо у першому ми використовуємо
+  масив p_active_functions у якому ще не встановлені нові значення виходів В-"НЕ", тому що інші В-"НЕ"
+  можуть бути джерелом , але джерелом може буте попереднє значення В-"НЕ", а не те,
+  що зараз встановлюється. А оскілдьки ми встановлюємо значення у масиві
+  p_active_functions, які набувають зараз тільки ваги, то щоб не вийшло об'єднання попереднього значення
+  і теперішнього то цикли роз'єднані (цикл аналізу джерел і логіки з циклом встановлення/скидання)
+  */
+  for (unsigned int i = 0; i < NUMBER_DEFINED_NOT; i++)
+  {
+    //Установлюємо, або скидаємо В-"НЕ"
+    unsigned int index_d_not = RANG_D_NOT1 + i;
+      
+    if ((state_defined_not & (1 << i)) != 0 ) _SET_BIT(p_active_functions, index_d_not);
+    else _CLEAR_BIT(p_active_functions, index_d_not);
+  }
+}
+/*****************************************************/
+
+/*****************************************************/
 //Вираховування часової витримки  для залежної МТЗ2 (універсальна формула)
 /*
 -------------------------------------------------
@@ -9392,8 +9590,42 @@ inline void main_protection(void)
     /**************************/
     if ((current_settings_prt.configuration & (1 << EL_BIT_CONFIGURATION)) != 0)
     {
-      df_handler(active_functions);
-      dt_handler(active_functions);
+      unsigned int active_functions_tmp[N_BIG];
+      unsigned int iteration = 0;
+      do
+      {
+        active_functions_tmp[0] = active_functions[0];
+        active_functions_tmp[1] = active_functions[1];
+        active_functions_tmp[2] = active_functions[2];
+        active_functions_tmp[3] = active_functions[3];
+        active_functions_tmp[4] = active_functions[4];
+        active_functions_tmp[5] = active_functions[5];
+        active_functions_tmp[6] = active_functions[6];
+        active_functions_tmp[7] = active_functions[7];
+
+        d_and_handler(active_functions);
+        d_or_handler(active_functions);
+        d_xor_handler(active_functions);
+        d_not_handler(active_functions);
+        df_handler(active_functions);
+        dt_handler(active_functions);
+        
+        iteration++;
+      }
+      while (
+             (iteration < current_settings_prt.number_iteration_el)
+             &&
+             (
+              (active_functions_tmp[0] != active_functions[0]) ||
+              (active_functions_tmp[1] != active_functions[1]) ||
+              (active_functions_tmp[2] != active_functions[2]) ||
+              (active_functions_tmp[3] != active_functions[3]) ||
+              (active_functions_tmp[4] != active_functions[4]) ||
+              (active_functions_tmp[5] != active_functions[5]) ||
+              (active_functions_tmp[6] != active_functions[6]) ||
+              (active_functions_tmp[7] != active_functions[7])
+             ) 
+            ); 
     }
     else
     {
