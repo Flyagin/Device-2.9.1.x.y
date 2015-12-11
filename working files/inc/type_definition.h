@@ -67,6 +67,12 @@ typedef struct
                                                       //1 - Тригерний
     
   unsigned int number_iteration_el;                                             //Максимадбна кількість ітерацій для розширеної логіки
+  unsigned int number_defined_df;                                               //Кількість визначуваних функцій у конфігурації приладу
+  unsigned int number_defined_dt;                                               //Кількість визначуваних тригерів у конфігурації приладу
+  unsigned int number_defined_and;                                              //Кількість визначуваних "І" у конфігурації приладу
+  unsigned int number_defined_or;                                               //Кількість визначуваних "АБО" у конфігурації приладу
+  unsigned int number_defined_xor;                                              //Кількість визначуваних "Викл.ВБО" у конфігурації приладу
+  unsigned int number_defined_not;                                              //Кількість визначуваних "НЕ" у конфігурації приладу
 
   //Опреділювальні функції
   unsigned int type_df;                                                 //Тип опреділювальної функції
