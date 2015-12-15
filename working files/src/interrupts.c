@@ -284,7 +284,7 @@ void DMA_StreamI2C_Rx_IRQHandler(void)
 void TIM5_IRQHandler(void)
 {
 #ifdef SYSTEM_VIEWER_ENABLE
-  SEGGER_SYSVIEW_OnUserStart(1);
+  SEGGER_SYSVIEW_RecordEnterISR();
 #endif
   
   if (TIM_GetITStatus(TIM5, TIM_IT_CC1) != RESET)
@@ -482,7 +482,7 @@ void TIM5_IRQHandler(void)
   }
   
 #ifdef SYSTEM_VIEWER_ENABLE
-  SEGGER_SYSVIEW_OnUserStop(1);
+  SEGGER_SYSVIEW_RecordExitISR();
 #endif
 }
 /*****************************************************/
@@ -493,7 +493,7 @@ void TIM5_IRQHandler(void)
 void TIM4_IRQHandler(void)
 {
 #ifdef SYSTEM_VIEWER_ENABLE
-  SEGGER_SYSVIEW_OnUserStart(2);
+  SEGGER_SYSVIEW_RecordEnterISR();
 #endif
   
   if (TIM_GetITStatus(TIM4, TIM_IT_CC3) != RESET)
@@ -1197,7 +1197,7 @@ void TIM4_IRQHandler(void)
   }
 
 #ifdef SYSTEM_VIEWER_ENABLE
-  SEGGER_SYSVIEW_OnUserStop(2);
+  SEGGER_SYSVIEW_RecordExitISR();
 #endif
 }
 /*****************************************************/
