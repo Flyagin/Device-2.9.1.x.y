@@ -9719,36 +9719,51 @@ inline unsigned int Set_data(unsigned short int data, unsigned int address_data,
       }
     case MA_CONFIGURATION_PART1:
       {
-        int output_value = target_label->configuration & 
-                            (unsigned int)(~(
-                                             (1 << MTZ_BIT_CONFIGURATION       ) | 
-                                             (1 << MTZ04_BIT_CONFIGURATION     ) | 
-                                             (1 << ZDZ_BIT_CONFIGURATION       ) | 
-                                             (1 << ZZ_BIT_CONFIGURATION        ) |
-                                             (1 << TZNP_BIT_CONFIGURATION      ) | 
-                                             (1 << ZOP_BIT_CONFIGURATION       ) | 
-                                             (1 << ACHR_CHAPV_BIT_CONFIGURATION) |
-                                             (1 << UMIN_BIT_CONFIGURATION      ) | 
-                                             (1 << UMAX_BIT_CONFIGURATION      ) | 
-                                             (1 << APV_BIT_CONFIGURATION       ) | 
-                                             (1 << UROV_BIT_CONFIGURATION      )
-                                            ));
+        if (
+            (
+             ((target_label->control_extra_settings_1 & CTR_EXTRA_SETTINGS_1_CTRL_IB_I04) == 0) &&
+             ((data & (1 << (BIT_MA_CONFIGURATION_MTZ04 - BIT_MA_CONFIGURATION_BASE_PART1))) == 0)
+            )   
+            ||  
+            (
+             ((target_label->control_extra_settings_1 & CTR_EXTRA_SETTINGS_1_CTRL_IB_I04) != 0) &&
+             ((data & (1 << (BIT_MA_CONFIGURATION_TZNP - BIT_MA_CONFIGURATION_BASE_PART1))) == 0)
+            )   
+           )
+        {
+          int output_value = target_label->configuration & 
+                              (unsigned int)(~(
+                                               (1 << MTZ_BIT_CONFIGURATION       ) | 
+                                               (1 << MTZ04_BIT_CONFIGURATION     ) | 
+                                               (1 << ZDZ_BIT_CONFIGURATION       ) | 
+                                               (1 << ZZ_BIT_CONFIGURATION        ) |
+                                               (1 << TZNP_BIT_CONFIGURATION      ) | 
+                                               (1 << ZOP_BIT_CONFIGURATION       ) | 
+                                               (1 << ACHR_CHAPV_BIT_CONFIGURATION) |
+                                               (1 << UMIN_BIT_CONFIGURATION      ) | 
+                                               (1 << UMAX_BIT_CONFIGURATION      ) | 
+                                               (1 << APV_BIT_CONFIGURATION       ) | 
+                                               (1 << UROV_BIT_CONFIGURATION      )
+                                              ));
 
-        output_value |= ((data >> (BIT_MA_CONFIGURATION_MTZ        - BIT_MA_CONFIGURATION_BASE_PART1)) & 0x1) << MTZ_BIT_CONFIGURATION;
-        output_value |= ((data >> (BIT_MA_CONFIGURATION_MTZ04      - BIT_MA_CONFIGURATION_BASE_PART1)) & 0x1) << MTZ04_BIT_CONFIGURATION;
-        output_value |= ((data >> (BIT_MA_CONFIGURATION_ZDZ        - BIT_MA_CONFIGURATION_BASE_PART1)) & 0x1) << ZDZ_BIT_CONFIGURATION;
-        output_value |= ((data >> (BIT_MA_CONFIGURATION_ZZ         - BIT_MA_CONFIGURATION_BASE_PART1)) & 0x1) << ZZ_BIT_CONFIGURATION;
-        output_value |= ((data >> (BIT_MA_CONFIGURATION_TZNP       - BIT_MA_CONFIGURATION_BASE_PART1)) & 0x1) << TZNP_BIT_CONFIGURATION;
-        output_value |= ((data >> (BIT_MA_CONFIGURATION_ZOP        - BIT_MA_CONFIGURATION_BASE_PART1)) & 0x1) << ZOP_BIT_CONFIGURATION;
-        output_value |= ((data >> (BIT_MA_CONFIGURATION_ACHR_CHAPV - BIT_MA_CONFIGURATION_BASE_PART1)) & 0x1) << ACHR_CHAPV_BIT_CONFIGURATION;
-        output_value |= ((data >> (BIT_MA_CONFIGURATION_UMIN       - BIT_MA_CONFIGURATION_BASE_PART1)) & 0x1) << UMIN_BIT_CONFIGURATION;
-        output_value |= ((data >> (BIT_MA_CONFIGURATION_UMAX       - BIT_MA_CONFIGURATION_BASE_PART1)) & 0x1) << UMAX_BIT_CONFIGURATION;
-        output_value |= ((data >> (BIT_MA_CONFIGURATION_APV        - BIT_MA_CONFIGURATION_BASE_PART1)) & 0x1) << APV_BIT_CONFIGURATION;
-        output_value |= ((data >> (BIT_MA_CONFIGURATION_UROV       - BIT_MA_CONFIGURATION_BASE_PART1)) & 0x1) << UROV_BIT_CONFIGURATION;
+          output_value |= ((data >> (BIT_MA_CONFIGURATION_MTZ        - BIT_MA_CONFIGURATION_BASE_PART1)) & 0x1) << MTZ_BIT_CONFIGURATION;
+          output_value |= ((data >> (BIT_MA_CONFIGURATION_MTZ04      - BIT_MA_CONFIGURATION_BASE_PART1)) & 0x1) << MTZ04_BIT_CONFIGURATION;
+          output_value |= ((data >> (BIT_MA_CONFIGURATION_ZDZ        - BIT_MA_CONFIGURATION_BASE_PART1)) & 0x1) << ZDZ_BIT_CONFIGURATION;
+          output_value |= ((data >> (BIT_MA_CONFIGURATION_ZZ         - BIT_MA_CONFIGURATION_BASE_PART1)) & 0x1) << ZZ_BIT_CONFIGURATION;
+          output_value |= ((data >> (BIT_MA_CONFIGURATION_TZNP       - BIT_MA_CONFIGURATION_BASE_PART1)) & 0x1) << TZNP_BIT_CONFIGURATION;
+          output_value |= ((data >> (BIT_MA_CONFIGURATION_ZOP        - BIT_MA_CONFIGURATION_BASE_PART1)) & 0x1) << ZOP_BIT_CONFIGURATION;
+          output_value |= ((data >> (BIT_MA_CONFIGURATION_ACHR_CHAPV - BIT_MA_CONFIGURATION_BASE_PART1)) & 0x1) << ACHR_CHAPV_BIT_CONFIGURATION;
+          output_value |= ((data >> (BIT_MA_CONFIGURATION_UMIN       - BIT_MA_CONFIGURATION_BASE_PART1)) & 0x1) << UMIN_BIT_CONFIGURATION;
+          output_value |= ((data >> (BIT_MA_CONFIGURATION_UMAX       - BIT_MA_CONFIGURATION_BASE_PART1)) & 0x1) << UMAX_BIT_CONFIGURATION;
+          output_value |= ((data >> (BIT_MA_CONFIGURATION_APV        - BIT_MA_CONFIGURATION_BASE_PART1)) & 0x1) << APV_BIT_CONFIGURATION;
+          output_value |= ((data >> (BIT_MA_CONFIGURATION_UROV       - BIT_MA_CONFIGURATION_BASE_PART1)) & 0x1) << UROV_BIT_CONFIGURATION;
         
-        //Обновлюємо всі поля структури настройок. які зв'язані із конфігурацією приладу, якщо ця операція доступна (ми не знаходимося у вікні, яке не дозволяє конфігурацію)
-        if(action_after_changing_of_configuration(output_value, target_label) != 0)
-          error = ERROR_SLAVE_DEVICE_BUSY;
+          //Обновлюємо всі поля структури настройок. які зв'язані із конфігурацією приладу, якщо ця операція доступна (ми не знаходимося у вікні, яке не дозволяє конфігурацію)
+          if(action_after_changing_of_configuration(output_value, target_label) != 0)
+            error = ERROR_SLAVE_DEVICE_BUSY;
+        }
+        else
+          error = ERROR_ILLEGAL_DATA_ADDRESS;
 
         break;
       }
