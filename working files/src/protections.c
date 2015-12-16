@@ -9989,6 +9989,10 @@ inline void main_protection(void)
 /*****************************************************/
 void TIM2_IRQHandler(void)
 {
+#ifdef SYSTEM_VIEWER_ENABLE
+  SEGGER_SYSVIEW_RecordEnterISR();
+#endif
+  
   if (TIM_GetITStatus(TIM2, TIM_IT_CC1) != RESET)
   {
     /***********************************************************************************************/
@@ -10347,6 +10351,10 @@ void TIM2_IRQHandler(void)
   {
     total_error_sw_fixed(23);
   }
+  
+#ifdef SYSTEM_VIEWER_ENABLE
+  SEGGER_SYSVIEW_RecordExitISR();
+#endif
 }
 /*****************************************************/
 

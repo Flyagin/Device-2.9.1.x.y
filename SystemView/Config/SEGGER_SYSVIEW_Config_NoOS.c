@@ -38,7 +38,7 @@
 *                                                                    *
 **********************************************************************
 *                                                                    *
-*       SystemView version: V2.20a                                    *
+*       SystemView version: V2.22                                    *
 *                                                                    *
 **********************************************************************
 -------------------------- END-OF-HEADER -----------------------------
@@ -83,6 +83,21 @@ extern unsigned int SystemCoreClock;
 static void _cbSendSystemDesc(void) {
   SEGGER_SYSVIEW_SendSysDesc("N="SYSVIEW_APP_NAME",D="SYSVIEW_DEVICE_NAME);
   SEGGER_SYSVIEW_SendSysDesc("I#15=SysTick");
+  
+  SEGGER_SYSVIEW_SendSysDesc("I#22=EXITI_POWER");
+  SEGGER_SYSVIEW_SendSysDesc("I#27=DMA_I2C_Rx");
+  SEGGER_SYSVIEW_SendSysDesc("I#33=DMA_USART_Tx");
+  SEGGER_SYSVIEW_SendSysDesc("I#44=Protect.");
+  SEGGER_SYSVIEW_SendSysDesc("I#46=IF_KB_D");
+  SEGGER_SYSVIEW_SendSysDesc("I#47=I2C_EV");
+  SEGGER_SYSVIEW_SendSysDesc("I#48=I2C_ER");
+  SEGGER_SYSVIEW_SendSysDesc("I#51=SPI_DF");
+  SEGGER_SYSVIEW_SendSysDesc("I#52=SPI_Meas.");
+  SEGGER_SYSVIEW_SendSysDesc("I#54=USART_RS485");
+  SEGGER_SYSVIEW_SendSysDesc("I#63=DMA_I2C_Tx");
+  SEGGER_SYSVIEW_SendSysDesc("I#66=TIM_Meas.");
+  SEGGER_SYSVIEW_SendSysDesc("I#72=DMA_DF_Rx");
+  SEGGER_SYSVIEW_SendSysDesc("I#83=USB_OTG_FS");
 }
 
 /*********************************************************************
