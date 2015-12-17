@@ -16549,12 +16549,22 @@ void main_manu_function(void)
                 {
                   -1 /*признак завершення масиву*/
                 };
+                EL_FILTER_STRUCT el_filter[NUMBER_DEFINED_ELEMENTS] =
+                {
+                  {1, RANG_INPUT_DF1_IN , RANG_INPUT_DF8_IN   , 1, current_settings.number_defined_df },
+                  {1, RANG_INPUT_DT1_SET, RANG_INPUT_DT4_RESET, 2, current_settings.number_defined_dt },
+                  {0, 0                 , 0                   , 1, current_settings.number_defined_and},
+                  {0, 0                 , 0                   , 1, current_settings.number_defined_or },
+                  {0, 0                 , 0                   , 1, current_settings.number_defined_xor},
+                  {0, 0                 , 0                   , 1, current_settings.number_defined_not}
+                };
                 
                 //Перевіряємо, чи даний індекс функції присутній у даній конфігурації 
                 while (found_new_index == 0)
                 {
                   check_current_index_is_presented_in_configuration(&found_new_index,
                                                                      add_filter,
+                                                                     el_filter,
                                                                      1,
                                                                      NUMBER_GENERAL_SIGNAL_FOR_RANG_INPUT,
                                                                      NUMBER_MTZ_SIGNAL_FOR_RANG_INPUT,
@@ -16606,12 +16616,22 @@ void main_manu_function(void)
                 {
                   -1 /*признак завершення масиву*/
                 };
+                EL_FILTER_STRUCT el_filter[NUMBER_DEFINED_ELEMENTS] =
+                {
+                  {1, RANG_BUTTON_DF1_IN , RANG_BUTTON_DF8_IN   , 1, current_settings.number_defined_df },
+                  {1, RANG_BUTTON_DT1_SET, RANG_BUTTON_DT4_RESET, 2, current_settings.number_defined_dt },
+                  {0, 0                  , 0                    , 1, current_settings.number_defined_and},
+                  {0, 0                  , 0                    , 1, current_settings.number_defined_or },
+                  {0, 0                  , 0                    , 1, current_settings.number_defined_xor},
+                  {0, 0                  , 0                    , 1, current_settings.number_defined_not}
+                };
                 
                 //Перевіряємо, чи даний індекс функції присутній у даній конфігурації 
                 while (found_new_index == 0)
                 {
                   check_current_index_is_presented_in_configuration(&found_new_index,
                                                                      add_filter,
+                                                                     el_filter,
                                                                      1,
                                                                      NUMBER_GENERAL_SIGNAL_FOR_RANG_BUTTON,
                                                                      NUMBER_MTZ_SIGNAL_FOR_RANG_BUTTON,
@@ -16794,12 +16814,22 @@ void main_manu_function(void)
                   RANG_SECTOR_NZZ,
                   -1 /*признак завершення масиву*/
                 };
+                EL_FILTER_STRUCT el_filter[NUMBER_DEFINED_ELEMENTS] =
+                {
+                  {1, RANG_DF1_IN , RANG_DF8_OUT, 2, current_settings.number_defined_df },
+                  {1, RANG_DT1_SET, RANG_DT4_OUT, 3, current_settings.number_defined_dt },
+                  {1, RANG_D_AND1 , RANG_D_AND8 , 1, current_settings.number_defined_and},
+                  {1, RANG_D_OR1  , RANG_D_OR8  , 1, current_settings.number_defined_or },
+                  {1, RANG_D_XOR1 , RANG_D_XOR8 , 1, current_settings.number_defined_xor},
+                  {1, RANG_D_NOT1 , RANG_D_NOT16, 1, current_settings.number_defined_not}
+                };
                 
                 //Перевіряємо, чи даний індекс функції присутній у даній конфігурації 
                 while (found_new_index == 0)
                 {
                   check_current_index_is_presented_in_configuration(&found_new_index,
                                                                      add_filter,
+                                                                     el_filter,
                                                                      1,
                                                                      NUMBER_GENERAL_SIGNAL_FOR_RANG,
                                                                      NUMBER_MTZ_SIGNAL_FOR_RANG,
@@ -17956,6 +17986,15 @@ void main_manu_function(void)
                   {
                     -1 /*признак завершення масиву*/
                   };
+                  EL_FILTER_STRUCT el_filter[NUMBER_DEFINED_ELEMENTS] =
+                  {
+                    {1, RANG_INPUT_DF1_IN , RANG_INPUT_DF8_IN   , 1, current_settings.number_defined_df },
+                    {1, RANG_INPUT_DT1_SET, RANG_INPUT_DT4_RESET, 2, current_settings.number_defined_dt },
+                    {0, 0                 , 0                   , 1, current_settings.number_defined_and},
+                    {0, 0                 , 0                   , 1, current_settings.number_defined_or },
+                    {0, 0                 , 0                   , 1, current_settings.number_defined_xor},
+                    {0, 0                 , 0                   , 1, current_settings.number_defined_not}
+                  };
                 
                   //Переміщаємося на наступну функцію
                   if(--current_ekran.index_position < 0) current_ekran.index_position = MAX_ROW_RANGUVANNJA_INPUT - 1;
@@ -17964,6 +18003,7 @@ void main_manu_function(void)
                   {
                     check_current_index_is_presented_in_configuration(&found_new_index,
                                                                        add_filter,
+                                                                       el_filter,
                                                                        0,
                                                                        NUMBER_GENERAL_SIGNAL_FOR_RANG_INPUT,
                                                                        NUMBER_MTZ_SIGNAL_FOR_RANG_INPUT,
@@ -18017,6 +18057,15 @@ void main_manu_function(void)
                   {
                     -1 /*признак завершення масиву*/
                   };
+                  EL_FILTER_STRUCT el_filter[NUMBER_DEFINED_ELEMENTS] =
+                  {
+                    {1, RANG_BUTTON_DF1_IN , RANG_BUTTON_DF8_IN   , 1, current_settings.number_defined_df },
+                    {1, RANG_BUTTON_DT1_SET, RANG_BUTTON_DT4_RESET, 2, current_settings.number_defined_dt },
+                    {0, 0                  , 0                    , 1, current_settings.number_defined_and},
+                    {0, 0                  , 0                    , 1, current_settings.number_defined_or },
+                    {0, 0                  , 0                    , 1, current_settings.number_defined_xor},
+                    {0, 0                  , 0                    , 1, current_settings.number_defined_not}
+                  };
                 
                   //Переміщаємося на наступну функцію
                   if(--current_ekran.index_position < 0) current_ekran.index_position = MAX_ROW_RANGUVANNJA_BUTTON - 1;
@@ -18025,6 +18074,7 @@ void main_manu_function(void)
                   {
                     check_current_index_is_presented_in_configuration(&found_new_index,
                                                                        add_filter,
+                                                                       el_filter,
                                                                        0,
                                                                        NUMBER_GENERAL_SIGNAL_FOR_RANG_BUTTON,
                                                                        NUMBER_MTZ_SIGNAL_FOR_RANG_BUTTON,
@@ -18254,6 +18304,15 @@ void main_manu_function(void)
                     RANG_SECTOR_NZZ,
                     -1 /*признак завершення масиву*/
                   };
+                  EL_FILTER_STRUCT el_filter[NUMBER_DEFINED_ELEMENTS] =
+                  {
+                    {1, RANG_DF1_IN , RANG_DF8_OUT, 2, current_settings.number_defined_df },
+                    {1, RANG_DT1_SET, RANG_DT4_OUT, 3, current_settings.number_defined_dt },
+                    {1, RANG_D_AND1 , RANG_D_AND8 , 1, current_settings.number_defined_and},
+                    {1, RANG_D_OR1  , RANG_D_OR8  , 1, current_settings.number_defined_or },
+                    {1, RANG_D_XOR1 , RANG_D_XOR8 , 1, current_settings.number_defined_xor},
+                    {1, RANG_D_NOT1 , RANG_D_NOT16, 1, current_settings.number_defined_not}
+                  };
                   
                   //Переміщаємося на наступну функцію
                   if(--current_ekran.index_position < 0) current_ekran.index_position = max_row_ranguvannja - 1;
@@ -18262,6 +18321,7 @@ void main_manu_function(void)
                   {
                     check_current_index_is_presented_in_configuration(&found_new_index,
                                                                        add_filter,
+                                                                       el_filter,
                                                                        0,
                                                                        NUMBER_GENERAL_SIGNAL_FOR_RANG,
                                                                        NUMBER_MTZ_SIGNAL_FOR_RANG,
@@ -18583,6 +18643,15 @@ void main_manu_function(void)
                   {
                     -1 /*признак завершення масиву*/
                   };
+                  EL_FILTER_STRUCT el_filter[NUMBER_DEFINED_ELEMENTS] =
+                  {
+                    {1, RANG_INPUT_DF1_IN , RANG_INPUT_DF8_IN   , 1, current_settings.number_defined_df },
+                    {1, RANG_INPUT_DT1_SET, RANG_INPUT_DT4_RESET, 2, current_settings.number_defined_dt },
+                    {0, 0                 , 0                   , 1, current_settings.number_defined_and},
+                    {0, 0                 , 0                   , 1, current_settings.number_defined_or },
+                    {0, 0                 , 0                   , 1, current_settings.number_defined_xor},
+                    {0, 0                 , 0                   , 1, current_settings.number_defined_not}
+                  };
                   
                   //Переміщаємося на наступну функцію
                   if(++current_ekran.index_position >= MAX_ROW_RANGUVANNJA_INPUT) current_ekran.index_position = 0;
@@ -18591,6 +18660,7 @@ void main_manu_function(void)
                   {
                     check_current_index_is_presented_in_configuration(&found_new_index,
                                                                        add_filter,
+                                                                       el_filter,
                                                                        1,
                                                                        NUMBER_GENERAL_SIGNAL_FOR_RANG_INPUT,
                                                                        NUMBER_MTZ_SIGNAL_FOR_RANG_INPUT,
@@ -18644,6 +18714,15 @@ void main_manu_function(void)
                   {
                     -1 /*признак завершення масиву*/
                   };
+                  EL_FILTER_STRUCT el_filter[NUMBER_DEFINED_ELEMENTS] =
+                  {
+                    {1, RANG_BUTTON_DF1_IN , RANG_BUTTON_DF8_IN   , 1, current_settings.number_defined_df },
+                    {1, RANG_BUTTON_DT1_SET, RANG_BUTTON_DT4_RESET, 2, current_settings.number_defined_dt },
+                    {0, 0                  , 0                    , 1, current_settings.number_defined_and},
+                    {0, 0                  , 0                    , 1, current_settings.number_defined_or },
+                    {0, 0                  , 0                    , 1, current_settings.number_defined_xor},
+                    {0, 0                  , 0                    , 1, current_settings.number_defined_not}
+                  };
                 
                   //Переміщаємося на наступну функцію
                   if(++current_ekran.index_position >= MAX_ROW_RANGUVANNJA_BUTTON) current_ekran.index_position = 0;
@@ -18651,7 +18730,8 @@ void main_manu_function(void)
                   while (found_new_index == 0)
                   {
                     check_current_index_is_presented_in_configuration(&found_new_index,
-                                                                      add_filter,
+                                                                       add_filter,
+                                                                       el_filter,
                                                                        1,
                                                                        NUMBER_GENERAL_SIGNAL_FOR_RANG_BUTTON,
                                                                        NUMBER_MTZ_SIGNAL_FOR_RANG_BUTTON,
@@ -18881,6 +18961,15 @@ void main_manu_function(void)
                     RANG_SECTOR_NZZ,
                     -1 /*признак завершення масиву*/
                   };
+                  EL_FILTER_STRUCT el_filter[NUMBER_DEFINED_ELEMENTS] =
+                  {
+                    {1, RANG_DF1_IN , RANG_DF8_OUT, 2, current_settings.number_defined_df },
+                    {1, RANG_DT1_SET, RANG_DT4_OUT, 3, current_settings.number_defined_dt },
+                    {1, RANG_D_AND1 , RANG_D_AND8 , 1, current_settings.number_defined_and},
+                    {1, RANG_D_OR1  , RANG_D_OR8  , 1, current_settings.number_defined_or },
+                    {1, RANG_D_XOR1 , RANG_D_XOR8 , 1, current_settings.number_defined_xor},
+                    {1, RANG_D_NOT1 , RANG_D_NOT16, 1, current_settings.number_defined_not}
+                  };
                   
                   //Переміщаємося на наступну функцію
                   if(++current_ekran.index_position >= max_row_ranguvannja) current_ekran.index_position = 0;
@@ -18889,6 +18978,7 @@ void main_manu_function(void)
                   {
                     check_current_index_is_presented_in_configuration(&found_new_index,
                                                                        add_filter,
+                                                                       el_filter,
                                                                        1,
                                                                        NUMBER_GENERAL_SIGNAL_FOR_RANG,
                                                                        NUMBER_MTZ_SIGNAL_FOR_RANG,

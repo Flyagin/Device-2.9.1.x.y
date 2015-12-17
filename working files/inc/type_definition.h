@@ -486,4 +486,13 @@ typedef struct
   int U0_y2;
 } POPEREDNJY_PERECHID;
 
+typedef struct
+{
+  unsigned int present;
+  int start_index;
+  int stop_index;
+  int number_per_index;
+  int real_number;
+} EL_FILTER_STRUCT;
+
 #endif

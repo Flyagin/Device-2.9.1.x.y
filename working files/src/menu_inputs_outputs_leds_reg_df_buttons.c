@@ -2557,7 +2557,7 @@ void make_ekran_set_function_in_output_led_df_dt_reg(unsigned int number_ekran, 
                 /***/
                 for (unsigned int j = (index_in_list - offset); j < max_row_ranguvannja; j++)
                 {
-                  if ((j + 1) < max_row_ranguvannja)
+                  if ((j + 1) < (max_row_ranguvannja - offset))
                   {
                     for (unsigned int k = 0; k<MAX_COL_LCD; k++)
                       name_string_tmp[j + NUMBER_ROW_FOR_NOTHING_INFORMATION][k] = name_string_tmp[j + NUMBER_ROW_FOR_NOTHING_INFORMATION + 1][k];
@@ -2716,7 +2716,7 @@ void make_ekran_set_function_in_output_led_df_dt_reg(unsigned int number_ekran, 
           /***/
           for (unsigned int j = (index_in_list - offset); j < max_row_ranguvannja; j++)
           {
-            if ((j + 1) < max_row_ranguvannja)
+            if ((j + 1) < (max_row_ranguvannja - offset))
             {
               for (unsigned int k = 0; k<MAX_COL_LCD; k++)
                 name_string_tmp[j + NUMBER_ROW_FOR_NOTHING_INFORMATION][k] = name_string_tmp[j + NUMBER_ROW_FOR_NOTHING_INFORMATION + 1][k];
@@ -3448,6 +3448,7 @@ void make_ekran_set_function_in_output_led_df_dt_reg(unsigned int number_ekran, 
 void check_current_index_is_presented_in_configuration(
                                                          unsigned int* found_new_index_tmp,
                                                                   int* add_filter_point,
+                                                                  EL_FILTER_STRUCT el_filter[], 
                                                                   int plus_minus,
                                                                   int number_general_function,
                                                                   int number_mtz_function,
@@ -3552,43 +3553,21 @@ void check_current_index_is_presented_in_configuration(
         }
         else i++;
       }
-     }
-
-     if (
-         (
-          (current_ekran.index_position >= (int)(RANG_DF1_IN + 2*current_settings.number_defined_df)) &&
-          (current_ekran.index_position <= RANG_DF8_OUT)
-         )   
-         ||  
-         (
-          (current_ekran.index_position >= (int)(RANG_DT1_SET + 3*current_settings.number_defined_dt)) &&
-          (current_ekran.index_position <= RANG_DT4_OUT)
-         )   
-         ||  
-         (
-          (current_ekran.index_position >= (int)(RANG_D_AND1 + current_settings.number_defined_and)) &&
-          (current_ekran.index_position <= RANG_D_AND8)
-         )   
-         ||  
-         (
-          (current_ekran.index_position >= (int)(RANG_D_OR1 + current_settings.number_defined_or)) &&
-          (current_ekran.index_position <= RANG_D_OR8)
-         )   
-         ||  
-         (
-          (current_ekran.index_position >= (int)(RANG_D_XOR1 + current_settings.number_defined_xor)) &&
-          (current_ekran.index_position <= RANG_D_XOR8)
-         )   
-         ||  
-         (
-          (current_ekran.index_position >= (int)(RANG_D_NOT1 + current_settings.number_defined_not)) &&
-          (current_ekran.index_position <= RANG_D_NOT16)
-         )   
-        )
-        {
-          *found_new_index_tmp = 0;
-          current_ekran.index_position++;
-        }
+    }
+    
+    for (unsigned int i = 0; i < NUMBER_DEFINED_ELEMENTS; i++)
+    {
+      if (
+          (el_filter[i].present != 0) &&
+          (current_ekran.index_position >= (el_filter[i].start_index + el_filter[i].number_per_index*el_filter[i].real_number)) &&
+          (current_ekran.index_position <=  el_filter[i].stop_index)
+         )
+      {
+        *found_new_index_tmp = 0;
+        current_ekran.index_position++;
+        break; //вихід із циклу
+      }
+    }
   }
   else
   {
@@ -3678,43 +3657,20 @@ void check_current_index_is_presented_in_configuration(
         else i++;
       }
     }
-
-
-     if (
-         (
-          (current_ekran.index_position >= (int)(RANG_DF1_IN + 2*current_settings.number_defined_df)) &&
-          (current_ekran.index_position <= RANG_DF8_OUT)
-         )   
-         ||  
-         (
-          (current_ekran.index_position >= (int)(RANG_DT1_SET + 3*current_settings.number_defined_dt)) &&
-          (current_ekran.index_position <= RANG_DT4_OUT)
-         )   
-         ||  
-         (
-          (current_ekran.index_position >= (int)(RANG_D_AND1 + current_settings.number_defined_and)) &&
-          (current_ekran.index_position <= RANG_D_AND8)
-         )   
-         ||  
-         (
-          (current_ekran.index_position >= (int)(RANG_D_OR1 + current_settings.number_defined_or)) &&
-          (current_ekran.index_position <= RANG_D_OR8)
-         )   
-         ||  
-         (
-          (current_ekran.index_position >= (int)(RANG_D_XOR1 + current_settings.number_defined_xor)) &&
-          (current_ekran.index_position <= RANG_D_XOR8)
-         )   
-         ||  
-         (
-          (current_ekran.index_position >= (int)(RANG_D_NOT1 + current_settings.number_defined_not)) &&
-          (current_ekran.index_position <= RANG_D_NOT16)
-         )   
-        )
-        {
-          *found_new_index_tmp = 0;
-          current_ekran.index_position--;
-        }
+    
+    for (unsigned int i = 0; i < NUMBER_DEFINED_ELEMENTS; i++)
+    {
+      if (
+          (el_filter[i].present != 0) &&
+          (current_ekran.index_position >= (el_filter[i].start_index + el_filter[i].number_per_index*el_filter[i].real_number)) &&
+          (current_ekran.index_position <=  el_filter[i].stop_index)
+         )
+      {
+        *found_new_index_tmp = 0;
+        current_ekran.index_position--;
+        break; //вихід із циклу
+      }
+    }
   }
 }
 /*****************************************************/

@@ -63,7 +63,6 @@ void make_ekran_extended_logic(void)
   /******************************************/
   //Виключаємо поля, які не треба відображати
   /******************************************/
-#define NUMBER_DEFINED_ELEMENTS 6
   unsigned int number_defined_logic[NUMBER_DEFINED_ELEMENTS] =
   {
     current_settings.number_defined_df,
@@ -94,7 +93,6 @@ void make_ekran_extended_logic(void)
       additional_current++;
     }
   }
-#undef NUMBER_DEFINED_ELEMENTS
   /******************************************/
   
   index_of_ekran = (position_temp >> POWER_MAX_ROW_LCD) << POWER_MAX_ROW_LCD;
