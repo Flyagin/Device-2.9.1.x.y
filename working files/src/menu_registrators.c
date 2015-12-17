@@ -1782,7 +1782,7 @@ void make_ekran_changing_signals_digital_registrator(void)
         "    UD XOR3     ",
         "    UD XOR4     ",
         "    UD XOR5     ",
-        "    UDXOR6      ",
+        "    UD XOR6     ",
         "    UD XOR7     ",
         "    UD XOR8     ",
         "    UD NOT1     ",
