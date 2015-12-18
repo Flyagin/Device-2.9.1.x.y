@@ -1342,7 +1342,8 @@ void make_ekran_changing_signals_digital_registrator(void)
         "     О-НЕ13     ",
         "     О-НЕ14     ",
         "     О-НЕ15     ",
-        "     О-НЕ16     "
+        "     О-НЕ16     ",
+        " Ош.настр.р.лог."
       },
       {
         " Блок.ввімкн.ВВ ",
@@ -1571,7 +1572,8 @@ void make_ekran_changing_signals_digital_registrator(void)
         "     В-НЕ13     ",
         "     В-НЕ14     ",
         "     В-НЕ15     ",
-        "     В-НЕ16     "
+        "     В-НЕ16     ",
+        " Пом.нал.р.лог. "
       },
       {
         " ON CB Blocking ",
@@ -1800,7 +1802,8 @@ void make_ekran_changing_signals_digital_registrator(void)
         "    UD NOT13    ",
         "    UD NOT14    ",
         "    UD NOT15    ",
-        "    UD NOT16    "
+        "    UD NOT16    ",
+        " Ош.настр.р.лог."
       },
       {
         "  Блок.вкл.ВВ   ",
@@ -2029,7 +2032,8 @@ void make_ekran_changing_signals_digital_registrator(void)
         "     О-НЕ13     ",
         "     О-НЕ14     ",
         "     О-НЕ15     ",
-        "     О-НЕ16     "
+        "     О-НЕ16     ",
+        " Ош.настр.р.лог."
       }
     };
   

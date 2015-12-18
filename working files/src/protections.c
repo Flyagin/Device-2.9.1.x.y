@@ -1666,37 +1666,49 @@ inline void df_handler(volatile unsigned int *p_active_functions)
       }
     }
 
-    /***
-    Джерело активації ОФ-ії
-    ***/
-    source_activation_df |= ((p_active_functions[number_byte_in] & (1 << number_bit_in) ) >> number_bit_in ) << i;
-    //Перевіряємо ще, чи не іде утимування активним джерела ОФ через таймер-утримування (для активації через кнопки або інтерфейс)
-    if (global_timers[INDEX_TIMER_DF_PROLONG_SET_FOR_BUTTON_INTERFACE_START + i] >= 0)
+    if (i < current_settings_prt.number_defined_df)
     {
-      //Таймер запущений, або вже зупинився
-      //Факт запуску цього таймеру означає, що активація відбувалася через кнопку, або інтерфейс
-      //Тому для забеспечення роботи логічної схеми до кінця роботи цього таймеру виставляємо, що джерело активації активне
-      source_activation_df |= (1 << i);
+      /***
+      Джерело активації ОФ-ії
+      ***/
+      source_activation_df |= ((p_active_functions[number_byte_in] & (1 << number_bit_in) ) >> number_bit_in ) << i;
+      //Перевіряємо ще, чи не іде утимування активним джерела ОФ через таймер-утримування (для активації через кнопки або інтерфейс)
+      if (global_timers[INDEX_TIMER_DF_PROLONG_SET_FOR_BUTTON_INTERFACE_START + i] >= 0)
+      {
+        //Таймер запущений, або вже зупинився
+        //Факт запуску цього таймеру означає, що активація відбувалася через кнопку, або інтерфейс
+        //Тому для забеспечення роботи логічної схеми до кінця роботи цього таймеру виставляємо, що джерело активації активне
+        source_activation_df |= (1 << i);
       
-      //Відмічаємо, джерело активації утримуємться у активному стані у масиві активуючих функцій
-      p_active_functions[number_byte_in] |= (1 << number_bit_in);
+        //Відмічаємо, джерело активації утримуємться у активному стані у масиві активуючих функцій
+        p_active_functions[number_byte_in] |= (1 << number_bit_in);
       
-      //У випадку, якщо таймер дійшов до свого макисального значення, то скидаємо роботу цього таймеру
-      if (global_timers[INDEX_TIMER_DF_PROLONG_SET_FOR_BUTTON_INTERFACE_START + i] >= ((int)current_settings_prt.timeout_pause_df[i]))
-        global_timers[INDEX_TIMER_DF_PROLONG_SET_FOR_BUTTON_INTERFACE_START + i] = -1;
-    }
-    /***/
+        //У випадку, якщо таймер дійшов до свого макисального значення, то скидаємо роботу цього таймеру
+        if (global_timers[INDEX_TIMER_DF_PROLONG_SET_FOR_BUTTON_INTERFACE_START + i] >= ((int)current_settings_prt.timeout_pause_df[i]))
+          global_timers[INDEX_TIMER_DF_PROLONG_SET_FOR_BUTTON_INTERFACE_START + i] = -1;
+      }
+      /***/
 
-    /***
-    Формування маски до цього часу активних ОФ-ій
-    ***/
-    state_df |= ((p_active_functions[number_byte_out] & ((unsigned int)(1 << number_bit_out))) != 0) << i;
-    /***/
+      /***
+      Формування маски до цього часу активних ОФ-ій
+      ***/
+      state_df |= ((p_active_functions[number_byte_out] & ((unsigned int)(1 << number_bit_out))) != 0) << i;
+      /***/
+    }
+    else
+    {
+      //Таймери, які не задіяні скидаємо з роботи
+      global_timers[INDEX_TIMER_DF_PROLONG_SET_FOR_BUTTON_INTERFACE_START + i] = -1;
+      global_timers[INDEX_TIMER_DF_PAUSE_START + i] = -1;
+      global_timers[INDEX_TIMER_DF_WORK_START + i] = -1;
+      
+      etap_execution_df[i] = NONE_DF;
+    }
   }
   
   //Визначаємо, чи активовуються опреділювані функції через свої ранжовані функції-джерела
   unsigned int source_blk_df = 0;
-  for (unsigned int i = 0; i < NUMBER_DEFINED_FUNCTIONS; i++)
+  for (unsigned int i = 0; i < current_settings_prt.number_defined_df; i++)
   {
     if (
         (current_settings_prt.ranguvannja_df_source_plus[N_BIG*i    ] !=0) || 
@@ -1994,7 +2006,7 @@ inline void dt_handler(volatile unsigned int *p_active_functions)
   Джерела скидання формуємо в source_reset_dt
   */
   unsigned int state_defined_triggers = 0, source_set_dt = 0, source_reset_dt = 0;
-  for (unsigned int i = 0; i < NUMBER_DEFINED_TRIGGERS; i++)
+  for (unsigned int i = 0; i < current_settings_prt.number_defined_dt; i++)
   {
     unsigned int number_byte_set, number_bit_set, number_byte_reset, number_bit_reset;
     unsigned int index_dt;
@@ -2066,7 +2078,7 @@ inline void dt_handler(volatile unsigned int *p_active_functions)
   }
   
   //Визначаємо, чи встановлюються/скидаються опреділювані триґери через свої ранжовані функції-джерела
-  for (unsigned int i = 0; i < NUMBER_DEFINED_TRIGGERS; i++)
+  for (unsigned int i = 0; i < current_settings_prt.number_defined_dt; i++)
   {
     if (
         (current_settings_prt.ranguvannja_set_dt_source_plus[N_BIG*i    ] !=0) || 
@@ -2238,7 +2250,7 @@ inline void d_and_handler(volatile unsigned int *p_active_functions)
   unsigned int state_defined_and = 0;
 
   //Визначаємо стан всіх визначуваних "І" (не виставляючи поки що їх у робочому масиві)
-  for (unsigned int i = 0; i < NUMBER_DEFINED_AND; i++)
+  for (unsigned int i = 0; i < current_settings_prt.number_defined_and; i++)
   {
     if (
         ((current_settings_prt.ranguvannja_d_and[N_BIG*i + 0] & p_active_functions[0]) == current_settings_prt.ranguvannja_d_and[N_BIG*i + 0]) && 
@@ -2283,7 +2295,7 @@ inline void d_or_handler(volatile unsigned int *p_active_functions)
   unsigned int state_defined_or = 0;
 
   //Визначаємо стан всіх визначуваних "АБО" (не виставляючи поки що їх у робочому масиві)
-  for (unsigned int i = 0; i < NUMBER_DEFINED_OR; i++)
+  for (unsigned int i = 0; i < current_settings_prt.number_defined_or; i++)
   {
     if (
         ((current_settings_prt.ranguvannja_d_or[N_BIG*i + 0] & p_active_functions[0]) != 0) || 
@@ -2328,7 +2340,7 @@ inline void d_xor_handler(volatile unsigned int *p_active_functions)
   unsigned int state_defined_xor = 0;
 
   //Визначаємо стан всіх визначуваних "Викл.АБО" (не виставляючи поки що їх у робочому масиві)
-  for (unsigned int i = 0; i < NUMBER_DEFINED_XOR; i++)
+  for (unsigned int i = 0; i < current_settings_prt.number_defined_xor; i++)
   {
     unsigned int temp_array[N_BIG];
     temp_array[0] = current_settings_prt.ranguvannja_d_xor[N_BIG*i + 0] & p_active_functions[0];
@@ -2391,7 +2403,7 @@ inline void d_not_handler(volatile unsigned int *p_active_functions)
   unsigned int state_defined_not = 0;
 
   //Визначаємо стан всіх визначуваних "НЕ" (не виставляючи поки що їх у робочому масиві)
-  for (unsigned int i = 0; i < NUMBER_DEFINED_NOT; i++)
+  for (unsigned int i = 0; i < current_settings_prt.number_defined_not; i++)
   {
     if (
         ((current_settings_prt.ranguvannja_d_not[N_BIG*i + 0] & p_active_functions[0]) == 0) &&
@@ -9625,7 +9637,10 @@ inline void main_protection(void)
               (active_functions_tmp[6] != active_functions[6]) ||
               (active_functions_tmp[7] != active_functions[7])
              ) 
-            ); 
+            );
+      
+      if (iteration >= current_settings_prt.number_iteration_el) _SET_BIT(active_functions, RANG_ERROR_CONF_EL);
+      else _CLEAR_BIT(active_functions, RANG_ERROR_CONF_EL);
     }
     else
     {

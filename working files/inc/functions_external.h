@@ -165,6 +165,7 @@ extern void make_ekran_vidkluchenja(void);
 extern unsigned int action_after_changing_of_configuration(unsigned int, __SETTINGS *);
 extern unsigned int action_after_changing_Ib_I04(__SETTINGS *);
 extern void action_after_changing_zz1_type(__SETTINGS *);
+extern void action_after_changing_number_el(__SETTINGS *, unsigned int);
 extern void calculate_namber_bit_waiting_for_rs_485(void);
 extern void fix_change_settings(unsigned int, unsigned int);
 extern void restore_trigger_functions(unsigned int*);

@@ -38,6 +38,7 @@
 #define NUMBER_DEFINED_OR               8
 #define NUMBER_DEFINED_XOR              8
 #define NUMBER_DEFINED_NOT              16
+
 #define NUMBER_DEFINED_BUTTONS          6
 
 #define NUMBER_IN_AND                   8
@@ -473,7 +474,8 @@ RANG_D_NOT12,
 RANG_D_NOT13,
 RANG_D_NOT14,
 RANG_D_NOT15,
-RANG_D_NOT16
+RANG_D_NOT16,
+RANG_ERROR_CONF_EL
 };
 
 #define NUMBER_GENERAL_SIGNAL_FOR_RANG     29
@@ -489,7 +491,7 @@ RANG_D_NOT16
 #define NUMBER_UMIN_SIGNAL_FOR_RANG        12
 #define NUMBER_UMAX_SIGNAL_FOR_RANG        6
 #define NUMBER_VMP_SIGNAL_FOR_RANG         0
-#define NUMBER_EL_SIGNAL_FOR_RANG          68
+#define NUMBER_EL_SIGNAL_FOR_RANG          69
 
 #define NUMBER_TOTAL_SIGNAL_FOR_RANG       (                                                      \
                                                               NUMBER_GENERAL_SIGNAL_FOR_RANG    + \

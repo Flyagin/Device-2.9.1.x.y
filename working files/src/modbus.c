@@ -11474,6 +11474,7 @@ inline unsigned int Get_data_file(unsigned char* input_data, unsigned char* outp
           case (226 + NUMBER_ANALOG_CANALES):
           case (227 + NUMBER_ANALOG_CANALES):
           case (228 + NUMBER_ANALOG_CANALES):
+          case (229 + NUMBER_ANALOG_CANALES):
             {
               if (length <= 19)
               {
@@ -11717,7 +11718,8 @@ inline unsigned int Get_data_file(unsigned char* input_data, unsigned char* outp
                         "     Î-ÍÅ13     ",
                         "     Î-ÍÅ14     ",
                         "     Î-ÍÅ15     ",
-                        "     Î-ÍÅ16     "
+                        "     Î-ÍÅ16     ",
+                        " Îø.íàñòð.ð.ëîã."
                       },
                       {
                         " Áëîê.ââ³ìêí.ÂÂ ",
@@ -11946,7 +11948,8 @@ inline unsigned int Get_data_file(unsigned char* input_data, unsigned char* outp
                         "     Â-ÍÅ13     ",
                         "     Â-ÍÅ14     ",
                         "     Â-ÍÅ15     ",
-                        "     Â-ÍÅ16     "
+                        "     Â-ÍÅ16     ",
+                        " Ïîì.íàë.ð.ëîã. "
                       },
                       {
                         " ON CB Blocking ",
@@ -12175,7 +12178,8 @@ inline unsigned int Get_data_file(unsigned char* input_data, unsigned char* outp
                         "    UD NOT13    ",
                         "    UD NOT14    ",
                         "    UD NOT15    ",
-                        "    UD NOT16    "
+                        "    UD NOT16    ",
+                        " Îø.íàñòð.ð.ëîã."
                       },
                       {
                         "  Áëîê.âêë.ÂÂ   ",
@@ -12404,7 +12408,8 @@ inline unsigned int Get_data_file(unsigned char* input_data, unsigned char* outp
                         "     Î-ÍÅ13     ",
                         "     Î-ÍÅ14     ",
                         "     Î-ÍÅ15     ",
-                        "     Î-ÍÅ16     "
+                        "     Î-ÍÅ16     ",
+                        " Îø.íàñòð.ð.ëîã."
                       }
                     };
                     int index_language = index_language_in_array(current_settings.language);
@@ -13101,6 +13106,7 @@ inline unsigned int Get_data_file(unsigned char* input_data, unsigned char* outp
           case 226:
           case 227:
           case 228:
+          case 229:
             {
               if (length <= 19)
               {
@@ -13344,7 +13350,8 @@ inline unsigned int Get_data_file(unsigned char* input_data, unsigned char* outp
                         "     Î-ÍÅ13     ",
                         "     Î-ÍÅ14     ",
                         "     Î-ÍÅ15     ",
-                        "     Î-ÍÅ16     "
+                        "     Î-ÍÅ16     ",
+                        " Îø.íàñòð.ð.ëîã."
                       },
                       {
                         " Áëîê.ââ³ìêí.ÂÂ ",
@@ -13573,7 +13580,8 @@ inline unsigned int Get_data_file(unsigned char* input_data, unsigned char* outp
                         "     Â-ÍÅ13     ",
                         "     Â-ÍÅ14     ",
                         "     Â-ÍÅ15     ",
-                        "     Â-ÍÅ16     "
+                        "     Â-ÍÅ16     ",
+                        " Ïîì.íàë.ð.ëîã. "
                       },
                       {
                         " ON CB Blocking ",
@@ -13803,6 +13811,7 @@ inline unsigned int Get_data_file(unsigned char* input_data, unsigned char* outp
                         "    UD NOT14    ",
                         "    UD NOT15    ",
                         "    UD NOT16    ",
+                        " Îø.íàñòð.ð.ëîã."
                       },
                       {
                         "  Áëîê.âêë.ÂÂ   ",
@@ -14031,7 +14040,8 @@ inline unsigned int Get_data_file(unsigned char* input_data, unsigned char* outp
                         "     Î-ÍÅ13     ",
                         "     Î-ÍÅ14     ",
                         "     Î-ÍÅ15     ",
-                        "     Î-ÍÅ16     "
+                        "     Î-ÍÅ16     ",
+                        " Îø.íàñòð.ð.ëîã."
                       }
                     };
                     int index_language = index_language_in_array(current_settings.language);

@@ -1459,7 +1459,8 @@ void make_ekran_set_function_in_output_led_df_dt_reg(unsigned int number_ekran, 
       "     О-НЕ13     ",
       "     О-НЕ14     ",
       "     О-НЕ15     ",
-      "     О-НЕ16     "
+      "     О-НЕ16     ",
+      " Ош.настр.р.лог."
     },
     {
       "      Нема      ",
@@ -1691,6 +1692,7 @@ void make_ekran_set_function_in_output_led_df_dt_reg(unsigned int number_ekran, 
       "     В-НЕ14     ",
       "     В-НЕ15     ",
       "     В-НЕ16     ",
+      " Пом.нал.р.лог. "
     },
     {
       "       No       ",
@@ -1921,7 +1923,8 @@ void make_ekran_set_function_in_output_led_df_dt_reg(unsigned int number_ekran, 
       "    UD NOT13    ",
       "    UD NOT14    ",
       "    UD NOT15    ",
-      "    UD NOT16    "
+      "    UD NOT16    ",
+      " Ош.настр.р.лог."
     },
     {
       "      Нет       ",
@@ -2152,7 +2155,8 @@ void make_ekran_set_function_in_output_led_df_dt_reg(unsigned int number_ekran, 
       "     О-НЕ13     ",
       "     О-НЕ14     ",
       "     О-НЕ15     ",
-      "     О-НЕ16     "
+      "     О-НЕ16     ",
+      " Ош.настр.р.лог."
     }
   };
   unsigned char name_string_tmp[MAX_ROW_RANGUVANNJA_OUTPUT + NUMBER_ROW_FOR_NOTHING_INFORMATION][MAX_COL_LCD];

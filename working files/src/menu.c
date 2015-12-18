@@ -10333,6 +10333,9 @@ void main_manu_function(void)
                         changed_settings = CHANGED_ETAP_EXECUTION;
 
                         current_settings.number_defined_df = edition_settings.number_defined_df;
+                        //Обновляємо значення
+                        action_after_changing_number_el(&current_settings, 0);
+                      
                         //Формуємо запис у таблиці настройок про зміну конфігурації і ініціюємо запис у EEPROM нових настройок
                         fix_change_settings(0, 1);
                       }
@@ -10350,6 +10353,9 @@ void main_manu_function(void)
                         changed_settings = CHANGED_ETAP_EXECUTION;
 
                         current_settings.number_defined_dt = edition_settings.number_defined_dt;
+                        //Обновляємо значення
+                        action_after_changing_number_el(&current_settings, 1);
+
                         //Формуємо запис у таблиці настройок про зміну конфігурації і ініціюємо запис у EEPROM нових настройок
                         fix_change_settings(0, 1);
                       }
@@ -10367,6 +10373,9 @@ void main_manu_function(void)
                         changed_settings = CHANGED_ETAP_EXECUTION;
 
                         current_settings.number_defined_and = edition_settings.number_defined_and;
+                        //Обновляємо значення
+                        action_after_changing_number_el(&current_settings, 2);
+
                         //Формуємо запис у таблиці настройок про зміну конфігурації і ініціюємо запис у EEPROM нових настройок
                         fix_change_settings(0, 1);
                       }
@@ -10384,6 +10393,9 @@ void main_manu_function(void)
                         changed_settings = CHANGED_ETAP_EXECUTION;
 
                         current_settings.number_defined_or = edition_settings.number_defined_or;
+                        //Обновляємо значення
+                        action_after_changing_number_el(&current_settings, 3);
+
                         //Формуємо запис у таблиці настройок про зміну конфігурації і ініціюємо запис у EEPROM нових настройок
                         fix_change_settings(0, 1);
                       }
@@ -10401,6 +10413,9 @@ void main_manu_function(void)
                         changed_settings = CHANGED_ETAP_EXECUTION;
 
                         current_settings.number_defined_xor = edition_settings.number_defined_xor;
+                        //Обновляємо значення
+                        action_after_changing_number_el(&current_settings, 4);
+
                         //Формуємо запис у таблиці настройок про зміну конфігурації і ініціюємо запис у EEPROM нових настройок
                         fix_change_settings(0, 1);
                       }
@@ -10418,6 +10433,9 @@ void main_manu_function(void)
                         changed_settings = CHANGED_ETAP_EXECUTION;
 
                         current_settings.number_defined_not = edition_settings.number_defined_not;
+                        //Обновляємо значення
+                        action_after_changing_number_el(&current_settings, 5);
+
                         //Формуємо запис у таблиці настройок про зміну конфігурації і ініціюємо запис у EEPROM нових настройок
                         fix_change_settings(0, 1);
                       }
