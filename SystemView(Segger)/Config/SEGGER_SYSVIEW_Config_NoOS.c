@@ -41,82 +41,60 @@
 *       SystemView version: V2.24                                    *
 *                                                                    *
 **********************************************************************
-----------------------------------------------------------------------
-File        : SEGGER_SYSVIEW_Int.h
-Purpose     : SEGGER SysView internal header.
---------  END-OF-HEADER  ---------------------------------------------
+-------------------------- END-OF-HEADER -----------------------------
+
+File        : SEGGER_SYSVIEW_Config_NoOS.c
+Purpose     : Sample setup configuration of SystemView without an OS.
 */
-
-#ifndef SEGGER_SYSVIEW_INT_H
-#define SEGGER_SYSVIEW_INT_H
-
-/*********************************************************************
-*
-*       #include Section
-*
-**********************************************************************
-*/
-
 #include "SEGGER_SYSVIEW.h"
-#include "SEGGER_SYSVIEW_Conf.h"
-#include "SEGGER_SYSVIEW_ConfDefaults.h"
 
-#ifdef __cplusplus
-extern "C" {
-#endif
-
+// SystemcoreClock can be used in most CMSIS compatible projects.
+// In non-CMSIS projects define SYSVIEW_CPU_FREQ.
+extern unsigned int SystemCoreClock;
 
 /*********************************************************************
 *
-*       Private data types
+*       Defines, configurable
 *
 **********************************************************************
 */
+// The application name to be displayed in SystemViewer
+#define SYSVIEW_APP_NAME        "Demo Application"
 
-//
-// SYSVIEW events. First 32 IDs from 0 .. 31 are reserved for these
-//
-#define   SEGGER_SYSVIEW_EVENT_ID_NOP                0  // Dummy packet.
-#define   SEGGER_SYSVIEW_EVENT_ID_OVERFLOW           1
-#define   SEGGER_SYSVIEW_EVENT_ID_ISR_ENTER          2
-#define   SEGGER_SYSVIEW_EVENT_ID_ISR_EXIT           3
-#define   SEGGER_SYSVIEW_EVENT_ID_TASK_START_EXEC    4
-#define   SEGGER_SYSVIEW_EVENT_ID_TASK_STOP_EXEC     5
-#define   SEGGER_SYSVIEW_EVENT_ID_TASK_START_READY   6
-#define   SEGGER_SYSVIEW_EVENT_ID_TASK_STOP_READY    7
-#define   SEGGER_SYSVIEW_EVENT_ID_TASK_CREATE        8
-#define   SEGGER_SYSVIEW_EVENT_ID_TASK_INFO          9
-#define   SEGGER_SYSVIEW_EVENT_ID_TRACE_START       10
-#define   SEGGER_SYSVIEW_EVENT_ID_TRACE_STOP        11
-#define   SEGGER_SYSVIEW_EVENT_ID_SYSTIME_CYCLES    12
-#define   SEGGER_SYSVIEW_EVENT_ID_SYSTIME_US        13
-#define   SEGGER_SYSVIEW_EVENT_ID_SYSDESC           14
-#define   SEGGER_SYSVIEW_EVENT_ID_USER_START        15
-#define   SEGGER_SYSVIEW_EVENT_ID_USER_STOP         16
-#define   SEGGER_SYSVIEW_EVENT_ID_IDLE              17
-#define   SEGGER_SYSVIEW_EVENT_ID_ISR_TO_SCHEDULER  18
-#define   SEGGER_SYSVIEW_EVENT_ID_TIMER_ENTER       19
-#define   SEGGER_SYSVIEW_EVENT_ID_TIMER_EXIT        20
-#define   SEGGER_SYSVIEW_EVENT_ID_STACK_INFO        21
+// The target device name
+#define SYSVIEW_DEVICE_NAME     "Cortex-M4"
 
-#define   SEGGER_SYSVIEW_EVENT_ID_INIT              24
-#define   SEGGER_SYSVIEW_EVENT_ID_NAME_RESOURCE     25
+// Frequency of the timestamp. Must match SEGGER_SYSVIEW_Conf.h
+#define SYSVIEW_TIMESTAMP_FREQ  (SystemCoreClock >> 4)
 
-//
-// Commands that Host can send to target
-//
-typedef enum {
-  SEGGER_SYSVIEW_COMMAND_ID_START = 1,
-  SEGGER_SYSVIEW_COMMAND_ID_STOP,
-  SEGGER_SYSVIEW_COMMAND_ID_GET_SYSTIME,
-  SEGGER_SYSVIEW_COMMAND_ID_GET_TASKLIST,
-  SEGGER_SYSVIEW_COMMAND_ID_GET_SYSDESC,
-} SEGGER_SYSVIEW_COMMAND_ID;
+// System Frequency. SystemcoreClock is used in most CMSIS compatible projects.
+#define SYSVIEW_CPU_FREQ        (SystemCoreClock)
 
-#ifdef __cplusplus
+// The lowest RAM address used for IDs (pointers)
+#define SYSVIEW_RAM_BASE        (0x10000000)
+
+/********************************************************************* 
+*
+*       _cbSendSystemDesc()
+*
+*  Function description
+*    Sends SystemView description strings.
+*/
+static void _cbSendSystemDesc(void) {
+  SEGGER_SYSVIEW_SendSysDesc("N="SYSVIEW_APP_NAME",D="SYSVIEW_DEVICE_NAME);
+  SEGGER_SYSVIEW_SendSysDesc("I#15=SysTick");
 }
-#endif
 
-#endif
+/*********************************************************************
+*
+*       Global functions
+*
+**********************************************************************
+*/
+void SEGGER_SYSVIEW_Conf(void) {
+  SEGGER_SYSVIEW_Init(SYSVIEW_TIMESTAMP_FREQ, SYSVIEW_CPU_FREQ, 
+                      0, _cbSendSystemDesc);
+  SEGGER_SYSVIEW_SetRAMBase(SYSVIEW_RAM_BASE);
+}
 
-/****** End Of File *************************************************/
+/*************************** End of file ****************************/
