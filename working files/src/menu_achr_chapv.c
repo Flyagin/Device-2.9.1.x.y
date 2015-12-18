@@ -285,14 +285,14 @@ void make_ekran_timeout_achr_chapv(unsigned int group)
         }
         else if ((index_of_ekran>>1) == INDEX_ML_TMOACHR2)
         {
-          vaga = 10000; //максимальний ваговий коефіцієнт для вилілення старшого розряду для витримки
+          vaga = 100000; //максимальний ваговий коефіцієнт для вилілення старшого розряду для витримки
           if (current_ekran.edition == 0) value = current_settings.timeout_achr_2[group];
           else value = edition_settings.timeout_achr_2[group];
           first_symbol = 0; //помічаємо, що ще ніодин значущий символ не виведений
         }
         else if ((index_of_ekran>>1) == INDEX_ML_TMOCHAPV2)
         {
-          vaga = 10000; //максимальний ваговий коефіцієнт для вилілення старшого розряду для витримки
+          vaga = 100000; //максимальний ваговий коефіцієнт для вилілення старшого розряду для витримки
           if (current_ekran.edition == 0) value = current_settings.timeout_chapv_2[group];
           else value = edition_settings.timeout_chapv_2[group];
           first_symbol = 0; //помічаємо, що ще ніодин значущий символ не виведений
