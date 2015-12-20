@@ -4512,52 +4512,24 @@ void achr_chapv_handler(volatile unsigned int *p_active_functions, unsigned int 
     _SET_BIT(p_active_functions, RANG_ACHR_CHAPV1);
   else
     _CLEAR_BIT(p_active_functions, RANG_ACHR_CHAPV1);
-  
-  _Bool chapv_timer_1ms1 = 0;
- // _Bool razr_chapv_inv1 = 0;
-  _TIMER_0_T(INDEX_TIMER_CHAPV1_1MS, TIMEOUT_CHAPV_1MS, trigger_CHAPV1, 0, chapv_timer_1ms1, 0);
- // _INVERTOR(UF1_is_larger_than_U_setpoint_F1, 0, razr_chapv_inv1, 0);
-  _AND2(chapv_timer_1ms1, 0, /*razr_chapv_inv1, 0,*/UF1_is_smaller_than_U_setpoint_F1, 0, tmp_value1, 24);
-  _TIMER_0_T(INDEX_TIMER_BLOCK_CHAPV1_5MS, TIMEOUT_BLOCK_CHAPV_5MS, tmp_value1, 24, tmp_value1, 25);
-  if (_GET_OUTPUT_STATE(tmp_value1, 25))
-      _SET_BIT(p_active_functions, RANG_BLOCK_CHAPV1_VID_U);
-  else
-      _CLEAR_BIT(p_active_functions, RANG_BLOCK_CHAPV1_VID_U);
-  
+
 //----2----
   //АЧР/ЧАПВ
   if (_GET_OUTPUT_STATE(trigger_CHAPV2, 0)) 
     _SET_BIT(p_active_functions, RANG_ACHR_CHAPV2);
   else
     _CLEAR_BIT(p_active_functions, RANG_ACHR_CHAPV2);
-  
-  _Bool chapv_timer_1ms2 = 0;
-  //_Bool razr_chapv_inv2 = 0;
-  _TIMER_0_T(INDEX_TIMER_CHAPV2_1MS, TIMEOUT_CHAPV_1MS, trigger_CHAPV2, 0, chapv_timer_1ms2, 0);
-//  _INVERTOR(UF1_is_larger_than_U_setpoint_F1, 0, razr_chapv_inv2, 0);
-  _AND2(chapv_timer_1ms1, 0, /*razr_chapv_inv1, 0,*/UF1_is_smaller_than_U_setpoint_F1, 0, tmp_value2, 24);
-  _TIMER_0_T(INDEX_TIMER_BLOCK_CHAPV2_5MS, TIMEOUT_BLOCK_CHAPV_5MS, tmp_value2, 24, tmp_value2, 25);
-  if (_GET_OUTPUT_STATE(tmp_value2, 25))
-      _SET_BIT(p_active_functions, RANG_BLOCK_CHAPV2_VID_U);
+
+  //Блокування ЧАПВ від U
+  unsigned int tmp_value_g = 0;
+  _OR2(trigger_CHAPV1, 0, trigger_CHAPV2, 0, tmp_value_g, 0);
+  _TIMER_0_T(INDEX_TIMER_CHAPV_1MS, TIMEOUT_CHAPV_1MS, tmp_value_g, 0, tmp_value_g, 1);
+  _AND2(tmp_value_g, 1, UF1_is_smaller_than_U_setpoint_F1, 0, tmp_value_g, 2);
+  _TIMER_0_T(INDEX_TIMER_BLOCK_CHAPV_5MS, TIMEOUT_BLOCK_CHAPV_5MS, tmp_value_g, 2, tmp_value_g, 3);
+  if (_GET_OUTPUT_STATE(tmp_value_g, 3))
+      _SET_BIT(p_active_functions, RANG_BLOCK_CHAPV_VID_U);
   else
-      _CLEAR_BIT(p_active_functions, RANG_BLOCK_CHAPV2_VID_U);
-//---------
-/*  
-  //Block CHAPV vid U
-  if (_GET_OUTPUT_STATE(tmp_value, 25))
-  {
-    _SET_BIT(p_active_functions, RANG_BLOCK_CHAPV_VID_U);
-  }
-раздвоение
-*/
-unsigned int tmp_value3=0;
-    //L
-    _OR2(tmp_value1, 25, tmp_value2, 25, tmp_value3, 0);
-  //Block CHAPV vid U
-  if (_GET_OUTPUT_STATE(tmp_value3, 0))
-    _SET_BIT(p_active_functions, RANG_BLOCK_CHAPV_VID_U);
-  else
-    _CLEAR_BIT(p_active_functions, RANG_BLOCK_CHAPV_VID_U);
+      _CLEAR_BIT(p_active_functions, RANG_BLOCK_CHAPV_VID_U);
 }
 
 /*****************************************************/
@@ -9517,10 +9489,8 @@ inline void main_protection(void)
       global_timers[INDEX_TIMER_ACHR1] = -1;
       global_timers[INDEX_TIMER_CHAPV1] = -1;
       global_timers[INDEX_TIMER_ACHR_CHAPV_100MS_1] = -1;
-      global_timers[INDEX_TIMER_CHAPV1_1MS] = -1;
-      global_timers[INDEX_TIMER_BLOCK_CHAPV1_5MS] = -1;
-      global_timers[INDEX_TIMER_CHAPV2_1MS] = -1;
-      global_timers[INDEX_TIMER_BLOCK_CHAPV2_5MS] = -1;
+      global_timers[INDEX_TIMER_CHAPV_1MS] = -1;
+      global_timers[INDEX_TIMER_BLOCK_CHAPV_5MS] = -1;
       previous_state_po_achr_chapv_uaf1 = 0;
       previous_state_po_achr_chapv_ubf1 = 0;
       previous_state_po_achr_chapv_ucf1 = 0;

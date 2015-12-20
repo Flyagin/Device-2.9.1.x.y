@@ -11473,8 +11473,6 @@ inline unsigned int Get_data_file(unsigned char* input_data, unsigned char* outp
           case (225 + NUMBER_ANALOG_CANALES):
           case (226 + NUMBER_ANALOG_CANALES):
           case (227 + NUMBER_ANALOG_CANALES):
-          case (228 + NUMBER_ANALOG_CANALES):
-          case (229 + NUMBER_ANALOG_CANALES):
             {
               if (length <= 19)
               {
@@ -11617,8 +11615,6 @@ inline unsigned int Get_data_file(unsigned char* input_data, unsigned char* outp
                         "   Áëîê.À×Ð1    ",
                         "   Áëîê.À×Ð2    ",
                         "   Ðàçð.×ÀÏÂ    ",
-                        " Áëîê.×ÀÏÂ1 îò U",
-                        " Áëîê.×ÀÏÂ2 îò U",
                         " Áëîê.×ÀÏÂ îò U ",
                         "    ÏÎ À×Ð1     ",
                         "    ÏÎ ×ÀÏÂ1    ",
@@ -11847,8 +11843,6 @@ inline unsigned int Get_data_file(unsigned char* input_data, unsigned char* outp
                         "   Áëîê.À×Ð1    ",
                         "   Áëîê.À×Ð2    ",
                         "  Äîçâ³ë ×ÀÏÂ   ",
-                        "Áëîê.×ÀÏÂ1 â³ä U",
-                        "Áëîê.×ÀÏÂ2 â³ä U",
                         " Áëîê.×ÀÏÂ â³ä U",
                         "    ÏÎ À×Ð1     ",
                         "    ÏÎ ×ÀÏÂ1    ",
@@ -12077,8 +12071,6 @@ inline unsigned int Get_data_file(unsigned char* input_data, unsigned char* outp
                         "   Áëîê.À×Ð1    ",
                         "   Áëîê.À×Ð2    ",
                         "   Ðàçð.×ÀÏÂ    ",
-                        " Áëîê.×ÀÏÂ1 îò U",
-                        " Áëîê.×ÀÏÂ2 îò U",
                         " Áëîê.×ÀÏÂ îò U ",
                         "    ÏÎ À×Ð1     ",
                         "   ÏÎ ×ÀÏÂ1     ",
@@ -12307,8 +12299,6 @@ inline unsigned int Get_data_file(unsigned char* input_data, unsigned char* outp
                         "   Áëîê.À×Ð1    ",
                         "   Áëîê.À×Ð2    ",
                         "   Ðàçð.×ÀÏÂ    ",
-                        " Áëîê.×ÀÏÂ1 îò U",
-                        " Áëîê.×ÀÏÂ2 îò U",
                         " Áëîê.×ÀÏÂ îò U ",
                         "    ÏÎ À×Ð1     ",
                         "    ÏÎ ×ÀÏÂ1    ",
@@ -13105,8 +13095,6 @@ inline unsigned int Get_data_file(unsigned char* input_data, unsigned char* outp
           case 225:
           case 226:
           case 227:
-          case 228:
-          case 229:
             {
               if (length <= 19)
               {
@@ -13249,8 +13237,6 @@ inline unsigned int Get_data_file(unsigned char* input_data, unsigned char* outp
                         "   Áëîê.À×Ð1    ",
                         "   Áëîê.À×Ð2    ",
                         "   Ðàçð.×ÀÏÂ    ",
-                        " Áëîê.×ÀÏÂ1 îò U",
-                        " Áëîê.×ÀÏÂ2 îò U",
                         " Áëîê.×ÀÏÂ îò U ",
                         "    ÏÎ À×Ð1     ",
                         "    ÏÎ ×ÀÏÂ1    ",
@@ -13479,8 +13465,6 @@ inline unsigned int Get_data_file(unsigned char* input_data, unsigned char* outp
                         "   Áëîê.À×Ð1    ",
                         "   Áëîê.À×Ð2    ",
                         "  Äîçâ³ë ×ÀÏÂ   ",
-                        "Áëîê.×ÀÏÂ1 â³ä U",
-                        "Áëîê.×ÀÏÂ2 â³ä U",
                         " Áëîê.×ÀÏÂ â³ä U",
                         "    ÏÎ À×Ð1     ",
                         "    ÏÎ ×ÀÏÂ1    ",
@@ -13709,8 +13693,6 @@ inline unsigned int Get_data_file(unsigned char* input_data, unsigned char* outp
                         "   Áëîê.À×Ð1    ",
                         "   Áëîê.À×Ð2    ",
                         "   Ðàçð.×ÀÏÂ    ",
-                        " Áëîê.×ÀÏÂ1 îò U",
-                        " Áëîê.×ÀÏÂ2 îò U",
                         " Áëîê.×ÀÏÂ îò U ",
                         "    ÏÎ À×Ð1     ",
                         "   ÏÎ ×ÀÏÂ1     ",
@@ -13939,8 +13921,6 @@ inline unsigned int Get_data_file(unsigned char* input_data, unsigned char* outp
                         "   Áëîê.À×Ð1    ",
                         "   Áëîê.À×Ð2    ",
                         "   Ðàçð.×ÀÏÂ    ",
-                        " Áëîê.×ÀÏÂ1 îò U",
-                        " Áëîê.×ÀÏÂ2 îò U",
                         " Áëîê.×ÀÏÂ îò U ",
                         "    ÏÎ À×Ð1     ",
                         "    ÏÎ ×ÀÏÂ1    ",

@@ -368,8 +368,6 @@ RANG_ACHR_CHAPV_VID_DV,
 RANG_BLOCK_ACHR1,
 RANG_BLOCK_ACHR2,
 RANG_RAZR_CHAPV,
-RANG_BLOCK_CHAPV1_VID_U,
-RANG_BLOCK_CHAPV2_VID_U,
 RANG_BLOCK_CHAPV_VID_U,
 RANG_PO_ACHR1,
 RANG_PO_CHAPV1,
@@ -485,7 +483,7 @@ RANG_ERROR_CONF_EL
 #define NUMBER_ZZ_SIGNAL_FOR_RANG          8
 #define NUMBER_TZNP_SIGNAL_FOR_RANG        30
 #define NUMBER_APV_SIGNAL_FOR_RANG         6
-#define NUMBER_ACHR_CHAPV_SIGNAL_FOR_RANG  13
+#define NUMBER_ACHR_CHAPV_SIGNAL_FOR_RANG  11
 #define NUMBER_UROV_SIGNAL_FOR_RANG        4
 #define NUMBER_ZOP_SIGNAL_FOR_RANG         3
 #define NUMBER_UMIN_SIGNAL_FOR_RANG        12
@@ -593,33 +591,33 @@ enum __mtz_abc_direction_const {
 )
     
 #define MASKA_FOR_INPUT_SIGNALS_4        (unsigned int)(                                \
-    (1 << (RANG_PUSK_UROV_VID_DV - 128))                      /*134*/ \
-  | (1 << (RANG_BLOCK_ZOP - 128))                             /*138*/ \
-  | (1 << (RANG_BLOCK_UMIN1 - 128))                           /*141*/ \
-  | (1 << (RANG_START_UMIN1 - 128))                           /*142*/ \
-  | (1 << (RANG_BLOCK_UMIN2 - 128))                           /*143*/ \
-  | (1 << (RANG_START_UMIN2 - 128))                           /*144*/ \
-  | (1 << (RANG_BLOCK_UMAX1 - 128))                           /*153*/ \
-  | (1 << (RANG_BLOCK_UMAX2 - 128))                           /*156*/ \
-  | (1 << (RANG_DF1_IN - 128))                                /*159*/ \
+    (1 << (RANG_PUSK_UROV_VID_DV - 128))                      /*133*/ \
+  | (1 << (RANG_BLOCK_ZOP - 128))                             /*137*/ \
+  | (1 << (RANG_BLOCK_UMIN1 - 128))                           /*140*/ \
+  | (1 << (RANG_START_UMIN1 - 128))                           /*141*/ \
+  | (1 << (RANG_BLOCK_UMIN2 - 128))                           /*142*/ \
+  | (1 << (RANG_START_UMIN2 - 128))                           /*143*/ \
+  | (1 << (RANG_BLOCK_UMAX1 - 128))                           /*152*/ \
+  | (1 << (RANG_BLOCK_UMAX2 - 128))                           /*155*/ \
+  | (1 << (RANG_DF1_IN - 128))                                /*158*/ \
+  | (1 << (RANG_DF2_IN - 128))                                /*160*/ \
 )
     
 #define MASKA_FOR_INPUT_SIGNALS_5        (unsigned int)(                                \
-    (1 << (RANG_DF2_IN - 160))                                /*161*/ \
-  | (1 << (RANG_DF3_IN - 160))                                /*163*/ \
-  | (1 << (RANG_DF4_IN - 160))                                /*165*/ \
-  | (1 << (RANG_DF5_IN - 160))                                /*167*/ \
-  | (1 << (RANG_DF6_IN - 160))                                /*169*/ \
-  | (1 << (RANG_DF7_IN - 160))                                /*171*/ \
-  | (1 << (RANG_DF8_IN - 160))                                /*173*/ \
-  | (1 << (RANG_DT1_SET - 160))                               /*175*/ \
-  | (1 << (RANG_DT1_RESET - 160))                             /*176*/ \
-  | (1 << (RANG_DT2_SET - 160))                               /*178*/ \
-  | (1 << (RANG_DT2_RESET - 160))                             /*179*/ \
-  | (1 << (RANG_DT3_SET - 160))                               /*181*/ \
-  | (1 << (RANG_DT3_RESET - 160))                             /*182*/ \
-  | (1 << (RANG_DT4_SET - 160))                               /*184*/ \
-  | (1 << (RANG_DT4_RESET - 160))                             /*185*/ \
+    (1 << (RANG_DF3_IN - 160))                                /*162*/ \
+  | (1 << (RANG_DF4_IN - 160))                                /*164*/ \
+  | (1 << (RANG_DF5_IN - 160))                                /*166*/ \
+  | (1 << (RANG_DF6_IN - 160))                                /*168*/ \
+  | (1 << (RANG_DF7_IN - 160))                                /*170*/ \
+  | (1 << (RANG_DF8_IN - 160))                                /*172*/ \
+  | (1 << (RANG_DT1_SET - 160))                               /*174*/ \
+  | (1 << (RANG_DT1_RESET - 160))                             /*175*/ \
+  | (1 << (RANG_DT2_SET - 160))                               /*177*/ \
+  | (1 << (RANG_DT2_RESET - 160))                             /*178*/ \
+  | (1 << (RANG_DT3_SET - 160))                               /*180*/ \
+  | (1 << (RANG_DT3_RESET - 160))                             /*181*/ \
+  | (1 << (RANG_DT4_SET - 160))                               /*183*/ \
+  | (1 << (RANG_DT4_RESET - 160))                             /*184*/ \
 )
 
 #define MASKA_FOR_INPUT_SIGNALS_6                  0
@@ -831,18 +829,16 @@ enum __mtz_abc_direction_const {
    | (1 << (RANG_BLOCK_ACHR1 - 96))                           /*122*/\
    | (1 << (RANG_BLOCK_ACHR2 - 96))                           /*123*/\
    | (1 << (RANG_RAZR_CHAPV - 96))                            /*124*/\
-   | (1 << (RANG_BLOCK_CHAPV1_VID_U - 96))                    /*125*/\
-   | (1 << (RANG_BLOCK_CHAPV2_VID_U - 96))                    /*126*/\
-   | (1 << (RANG_BLOCK_CHAPV_VID_U - 96))                     /*127*/\
+   | (1 << (RANG_BLOCK_CHAPV_VID_U - 96))                     /*126*/\
+   | (1 << (RANG_PO_ACHR1 - 96))                              /*127*/\
 )
 
 #define MASKA_ACHR_CHAPV_SIGNALS_4 (unsigned int)(                                     \
-     (1 << (RANG_PO_ACHR1 - 128))                             /*128*/\
-   | (1 << (RANG_PO_CHAPV1 - 128))                            /*129*/\
-   | (1 << (RANG_ACHR_CHAPV1 - 128))                          /*130*/\
-   | (1 << (RANG_PO_ACHR2 - 128))                             /*131*/\
-   | (1 << (RANG_PO_CHAPV2 - 128))                            /*132*/\
-   | (1 << (RANG_ACHR_CHAPV2 - 128))                          /*133*/\
+     (1 << (RANG_PO_CHAPV1 - 128))                            /*128*/\
+   | (1 << (RANG_ACHR_CHAPV1 - 128))                          /*129*/\
+   | (1 << (RANG_PO_ACHR2 - 128))                             /*130*/\
+   | (1 << (RANG_PO_CHAPV2 - 128))                            /*131*/\
+   | (1 << (RANG_ACHR_CHAPV2 - 128))                          /*132*/\
 )
 
 #define MASKA_ACHR_CHAPV_SIGNALS_5           0
@@ -858,10 +854,10 @@ enum __mtz_abc_direction_const {
 #define MASKA_UROV_SIGNALS_2                 0
 
 #define MASKA_UROV_SIGNALS_3       (unsigned int)(                                     \
-     (1 << (RANG_PUSK_UROV_VID_DV - 128))                     /*134*/\
-   | (1 << (RANG_PO_UROV - 128))                              /*135*/\
-   | (1 << (RANG_UROV1 - 128))                                /*136*/\
-   | (1 << (RANG_UROV2 - 128))                                /*137*/\
+     (1 << (RANG_PUSK_UROV_VID_DV - 128))                     /*133*/\
+   | (1 << (RANG_PO_UROV - 128))                              /*134*/\
+   | (1 << (RANG_UROV1 - 128))                                /*135*/\
+   | (1 << (RANG_UROV2 - 128))                                /*136*/\
 )
 
 #define MASKA_UROV_SIGNALS_4                 0
@@ -879,9 +875,9 @@ enum __mtz_abc_direction_const {
 #define MASKA_ZOP_SIGNALS_3                  0
 
 #define MASKA_ZOP_SIGNALS_4        (unsigned int)(                                     \
-     (1 << (RANG_BLOCK_ZOP - 128))                            /*138*/\
-   | (1 << (RANG_PO_ZOP - 128))                               /*139*/\
-   | (1 << (RANG_ZOP - 128))                                  /*140*/\
+     (1 << (RANG_BLOCK_ZOP - 128))                            /*137*/\
+   | (1 << (RANG_PO_ZOP - 128))                               /*138*/\
+   | (1 << (RANG_ZOP - 128))                                  /*139*/\
 )
 
 #define MASKA_ZOP_SIGNALS_5                  0
@@ -898,18 +894,18 @@ enum __mtz_abc_direction_const {
 #define MASKA_UMIN_SIGNALS_3                 0
      
 #define MASKA_UMIN_SIGNALS_4       (unsigned int)(                                     \
-     (1 << (RANG_BLOCK_UMIN1 - 128))                          /*141*/\
-   | (1 << (RANG_START_UMIN1 - 128))                          /*142*/\
-   | (1 << (RANG_BLOCK_UMIN2 - 128))                          /*143*/\
-   | (1 << (RANG_START_UMIN2 - 128))                          /*144*/\
-   | (1 << (RANG_PO_UMIN1 - 128))                             /*145*/\
-   | (1 << (RANG_PO_UBLK_UMIN1 - 128))                        /*146*/\
-   | (1 << (RANG_PO_IBLK_UMIN1 - 128))                        /*147*/\
-   | (1 << (RANG_UMIN1 - 128))                                /*148*/\
-   | (1 << (RANG_PO_UMIN2 - 128))                             /*149*/\
-   | (1 << (RANG_PO_UBLK_UMIN2 - 128))                        /*150*/\
-   | (1 << (RANG_PO_IBLK_UMIN2 - 128))                        /*151*/\
-   | (1 << (RANG_UMIN2 - 128))                                /*152*/\
+     (1 << (RANG_BLOCK_UMIN1 - 128))                          /*140*/\
+   | (1 << (RANG_START_UMIN1 - 128))                          /*141*/\
+   | (1 << (RANG_BLOCK_UMIN2 - 128))                          /*142*/\
+   | (1 << (RANG_START_UMIN2 - 128))                          /*143*/\
+   | (1 << (RANG_PO_UMIN1 - 128))                             /*144*/\
+   | (1 << (RANG_PO_UBLK_UMIN1 - 128))                        /*145*/\
+   | (1 << (RANG_PO_IBLK_UMIN1 - 128))                        /*146*/\
+   | (1 << (RANG_UMIN1 - 128))                                /*147*/\
+   | (1 << (RANG_PO_UMIN2 - 128))                             /*148*/\
+   | (1 << (RANG_PO_UBLK_UMIN2 - 128))                        /*149*/\
+   | (1 << (RANG_PO_IBLK_UMIN2 - 128))                        /*150*/\
+   | (1 << (RANG_UMIN2 - 128))                                /*151*/\
 )
 
 #define MASKA_UMIN_SIGNALS_5                 0
@@ -926,12 +922,12 @@ enum __mtz_abc_direction_const {
 #define MASKA_UMAX_SIGNALS_3                 0
      
 #define MASKA_UMAX_SIGNALS_4       (unsigned int)(                                     \
-     (1 << (RANG_BLOCK_UMAX1 - 128))                          /*153*/\
-   | (1 << (RANG_PO_UMAX1 - 128))                             /*154*/\
-   | (1 << (RANG_UMAX1 - 128))                                /*155*/\
-   | (1 << (RANG_BLOCK_UMAX2 - 128))                          /*156*/\
-   | (1 << (RANG_PO_UMAX2 - 128))                             /*157*/\
-   | (1 << (RANG_UMAX2 - 128))                                /*158*/\
+     (1 << (RANG_BLOCK_UMAX1 - 128))                          /*152*/\
+   | (1 << (RANG_PO_UMAX1 - 128))                             /*153*/\
+   | (1 << (RANG_UMAX1 - 128))                                /*154*/\
+   | (1 << (RANG_BLOCK_UMAX2 - 128))                          /*155*/\
+   | (1 << (RANG_PO_UMAX2 - 128))                             /*156*/\
+   | (1 << (RANG_UMAX2 - 128))                                /*157*/\
 )
 
 #define MASKA_UMAX_SIGNALS_5                 0
@@ -948,83 +944,83 @@ enum __mtz_abc_direction_const {
 #define MASKA_EL_SIGNALS_3                  0
 
 #define MASKA_EL_SIGNALS_4        (unsigned int)(                     \
-    (1 << (RANG_DF1_IN - 128))                                /*159*/ \
+    (1 << (RANG_DF1_IN - 128))                                /*158*/ \
+  | (1 << (RANG_DF1_OUT - 128))                               /*159*/ \
+  | (1 << (RANG_DF2_IN - 128))                                /*160*/ \
 )
     
 #define MASKA_EL_SIGNALS_5        (unsigned int)(                     \
-    (1 << (RANG_DF1_OUT - 160))                               /*160*/ \
-  | (1 << (RANG_DF2_IN - 160))                                /*161*/ \
-  | (1 << (RANG_DF2_OUT - 160))                               /*162*/ \
-  | (1 << (RANG_DF3_IN - 160))                                /*163*/ \
+    (1 << (RANG_DF2_OUT - 160))                               /*161*/ \
+  | (1 << (RANG_DF3_IN - 160))                                /*162*/ \
   | (1 << (RANG_DF3_OUT - 160))                               /*163*/ \
-  | (1 << (RANG_DF4_IN - 160))                                /*165*/ \
-  | (1 << (RANG_DF4_OUT - 160))                               /*164*/ \
-  | (1 << (RANG_DF5_IN - 160))                                /*167*/ \
-  | (1 << (RANG_DF5_OUT - 160))                               /*165*/ \
-  | (1 << (RANG_DF6_IN - 160))                                /*169*/ \
-  | (1 << (RANG_DF6_OUT - 160))                               /*170*/ \
-  | (1 << (RANG_DF7_IN - 160))                                /*171*/ \
-  | (1 << (RANG_DF7_OUT - 160))                               /*172*/ \
-  | (1 << (RANG_DF8_IN - 160))                                /*173*/ \
-  | (1 << (RANG_DF8_OUT - 160))                               /*174*/ \
-  | (1 << (RANG_DT1_SET - 160))                               /*175*/ \
-  | (1 << (RANG_DT1_RESET - 160))                             /*176*/ \
-  | (1 << (RANG_DT1_OUT - 160))                               /*177*/ \
-  | (1 << (RANG_DT2_SET - 160))                               /*178*/ \
-  | (1 << (RANG_DT2_RESET - 160))                             /*179*/ \
-  | (1 << (RANG_DT2_OUT - 160))                               /*180*/ \
-  | (1 << (RANG_DT3_SET - 160))                               /*181*/ \
-  | (1 << (RANG_DT3_RESET - 160))                             /*182*/ \
-  | (1 << (RANG_DT3_OUT - 160))                               /*183*/ \
-  | (1 << (RANG_DT4_SET - 160))                               /*184*/ \
-  | (1 << (RANG_DT4_RESET - 160))                             /*185*/ \
-  | (1 << (RANG_DT4_OUT - 160))                               /*186*/ \
-  | (1 << (RANG_D_AND1 - 160))                                /*187*/ \
-  | (1 << (RANG_D_AND2 - 160))                                /*188*/ \
-  | (1 << (RANG_D_AND3 - 160))                                /*189*/ \
-  | (1 << (RANG_D_AND4 - 160))                                /*190*/ \
-  | (1 << (RANG_D_AND5 - 160))                                /*191*/ \
+  | (1 << (RANG_DF4_IN - 160))                                /*164*/ \
+  | (1 << (RANG_DF4_OUT - 160))                               /*165*/ \
+  | (1 << (RANG_DF5_IN - 160))                                /*166*/ \
+  | (1 << (RANG_DF5_OUT - 160))                               /*167*/ \
+  | (1 << (RANG_DF6_IN - 160))                                /*168*/ \
+  | (1 << (RANG_DF6_OUT - 160))                               /*169*/ \
+  | (1 << (RANG_DF7_IN - 160))                                /*170*/ \
+  | (1 << (RANG_DF7_OUT - 160))                               /*171*/ \
+  | (1 << (RANG_DF8_IN - 160))                                /*172*/ \
+  | (1 << (RANG_DF8_OUT - 160))                               /*173*/ \
+  | (1 << (RANG_DT1_SET - 160))                               /*174*/ \
+  | (1 << (RANG_DT1_RESET - 160))                             /*175*/ \
+  | (1 << (RANG_DT1_OUT - 160))                               /*176*/ \
+  | (1 << (RANG_DT2_SET - 160))                               /*177*/ \
+  | (1 << (RANG_DT2_RESET - 160))                             /*178*/ \
+  | (1 << (RANG_DT2_OUT - 160))                               /*179*/ \
+  | (1 << (RANG_DT3_SET - 160))                               /*180*/ \
+  | (1 << (RANG_DT3_RESET - 160))                             /*181*/ \
+  | (1 << (RANG_DT3_OUT - 160))                               /*182*/ \
+  | (1 << (RANG_DT4_SET - 160))                               /*183*/ \
+  | (1 << (RANG_DT4_RESET - 160))                             /*184*/ \
+  | (1 << (RANG_DT4_OUT - 160))                               /*185*/ \
+  | (1 << (RANG_D_AND1 - 160))                                /*186*/ \
+  | (1 << (RANG_D_AND2 - 160))                                /*187*/ \
+  | (1 << (RANG_D_AND3 - 160))                                /*188*/ \
+  | (1 << (RANG_D_AND4 - 160))                                /*189*/ \
+  | (1 << (RANG_D_AND5 - 160))                                /*190*/ \
+  | (1 << (RANG_D_AND6 - 160))                                /*191*/ \
+  | (1 << (RANG_D_AND7 - 160))                                /*192*/ \
 )
 
 #define MASKA_EL_SIGNALS_6        (unsigned int)(                     \
-    (1 << (RANG_D_AND6 - 192))                                /*192*/ \
-  | (1 << (RANG_D_AND7 - 192))                                /*193*/ \
-  | (1 << (RANG_D_AND8 - 192))                                /*194*/ \
-  | (1 << (RANG_D_OR1 - 192))                                 /*195*/ \
-  | (1 << (RANG_D_OR2 - 192))                                 /*196*/ \
-  | (1 << (RANG_D_OR3 - 192))                                 /*197*/ \
-  | (1 << (RANG_D_OR4 - 192))                                 /*198*/ \
-  | (1 << (RANG_D_OR5 - 192))                                 /*199*/ \
-  | (1 << (RANG_D_OR6 - 192))                                 /*200*/ \
-  | (1 << (RANG_D_OR7 - 192))                                 /*201*/ \
-  | (1 << (RANG_D_OR8 - 192))                                 /*202*/ \
-  | (1 << (RANG_D_XOR1 - 192))                                /*203*/ \
-  | (1 << (RANG_D_XOR2 - 192))                                /*204*/ \
-  | (1 << (RANG_D_XOR3 - 192))                                /*205*/ \
-  | (1 << (RANG_D_XOR4 - 192))                                /*206*/ \
-  | (1 << (RANG_D_XOR5 - 192))                                /*207*/ \
-  | (1 << (RANG_D_XOR6 - 192))                                /*208*/ \
-  | (1 << (RANG_D_XOR7 - 192))                                /*209*/ \
-  | (1 << (RANG_D_XOR8 - 192))                                /*210*/ \
-  | (1 << (RANG_D_NOT1 - 192))                                /*211*/ \
-  | (1 << (RANG_D_NOT2 - 192))                                /*212*/ \
-  | (1 << (RANG_D_NOT3 - 192))                                /*213*/ \
-  | (1 << (RANG_D_NOT4 - 192))                                /*214*/ \
-  | (1 << (RANG_D_NOT5 - 192))                                /*215*/ \
-  | (1 << (RANG_D_NOT6 - 192))                                /*216*/ \
-  | (1 << (RANG_D_NOT7 - 192))                                /*217*/ \
-  | (1 << (RANG_D_NOT8 - 192))                                /*218*/ \
-  | (1 << (RANG_D_NOT9 - 192))                                /*219*/ \
-  | (1 << (RANG_D_NOT10 - 192))                               /*220*/ \
-  | (1 << (RANG_D_NOT11 - 192))                               /*221*/ \
-  | (1 << (RANG_D_NOT12 - 192))                               /*222*/ \
-  | (1 << (RANG_D_NOT13 - 192))                               /*223*/ \
+    (1 << (RANG_D_AND8 - 192))                                /*193*/ \
+  | (1 << (RANG_D_OR1 - 192))                                 /*194*/ \
+  | (1 << (RANG_D_OR2 - 192))                                 /*195*/ \
+  | (1 << (RANG_D_OR3 - 192))                                 /*196*/ \
+  | (1 << (RANG_D_OR4 - 192))                                 /*197*/ \
+  | (1 << (RANG_D_OR5 - 192))                                 /*198*/ \
+  | (1 << (RANG_D_OR6 - 192))                                 /*199*/ \
+  | (1 << (RANG_D_OR7 - 192))                                 /*200*/ \
+  | (1 << (RANG_D_OR8 - 192))                                 /*201*/ \
+  | (1 << (RANG_D_XOR1 - 192))                                /*202*/ \
+  | (1 << (RANG_D_XOR2 - 192))                                /*203*/ \
+  | (1 << (RANG_D_XOR3 - 192))                                /*204*/ \
+  | (1 << (RANG_D_XOR4 - 192))                                /*205*/ \
+  | (1 << (RANG_D_XOR5 - 192))                                /*206*/ \
+  | (1 << (RANG_D_XOR6 - 192))                                /*207*/ \
+  | (1 << (RANG_D_XOR7 - 192))                                /*208*/ \
+  | (1 << (RANG_D_XOR8 - 192))                                /*209*/ \
+  | (1 << (RANG_D_NOT1 - 192))                                /*210*/ \
+  | (1 << (RANG_D_NOT2 - 192))                                /*211*/ \
+  | (1 << (RANG_D_NOT3 - 192))                                /*212*/ \
+  | (1 << (RANG_D_NOT4 - 192))                                /*213*/ \
+  | (1 << (RANG_D_NOT5 - 192))                                /*214*/ \
+  | (1 << (RANG_D_NOT6 - 192))                                /*215*/ \
+  | (1 << (RANG_D_NOT7 - 192))                                /*216*/ \
+  | (1 << (RANG_D_NOT8 - 192))                                /*217*/ \
+  | (1 << (RANG_D_NOT9 - 192))                                /*218*/ \
+  | (1 << (RANG_D_NOT10 - 192))                               /*219*/ \
+  | (1 << (RANG_D_NOT11 - 192))                               /*220*/ \
+  | (1 << (RANG_D_NOT12 - 192))                               /*221*/ \
+  | (1 << (RANG_D_NOT13 - 192))                               /*222*/ \
 )
 
 #define MASKA_EL_SIGNALS_7        (unsigned int)(                     \
-    (1 << (RANG_D_NOT14 - 224))                               /*224*/ \
-  | (1 << (RANG_D_NOT15 - 224))                               /*225*/ \
-  | (1 << (RANG_D_NOT16 - 224))                               /*226*/ \
+    (1 << (RANG_D_NOT14 - 224))                               /*223*/ \
+  | (1 << (RANG_D_NOT15 - 224))                               /*224*/ \
+  | (1 << (RANG_D_NOT16 - 224))                               /*225*/ \
 )
 /*****************************************/
 
@@ -1039,10 +1035,10 @@ enum __mtz_abc_direction_const {
 #define MASKA_TRIGGER_SIGNALES_4                  0
 
 #define MASKA_TRIGGER_SIGNALES_5               (unsigned int)(                          \
-     (1 << (RANG_DT1_OUT - 160))                              /*177*/ \
-   | (1 << (RANG_DT2_OUT - 160))                              /*180*/ \
-   | (1 << (RANG_DT3_OUT - 160))                              /*183*/ \
-   | (1 << (RANG_DT4_OUT - 160))                              /*186*/ \
+     (1 << (RANG_DT1_OUT - 160))                              /*176*/ \
+   | (1 << (RANG_DT2_OUT - 160))                              /*179*/ \
+   | (1 << (RANG_DT3_OUT - 160))                              /*182*/ \
+   | (1 << (RANG_DT4_OUT - 160))                              /*185*/ \
 )     
 
 #define MASKA_TRIGGER_SIGNALES_6                  0
@@ -1116,26 +1112,26 @@ enum __mtz_abc_direction_const {
    | (1 << (RANG_PO_TZNP3_NAZAD - 96))                        /*113*/\
    | (1 << (RANG_TZNP3 - 96))                                 /*114*/\
    | (1 << (RANG_APV_WORK - 96))                              /*115*/\
+   | (1 << (RANG_PO_ACHR1 - 96))                              /*127*/\
 )
 
 #define MASKA_SIGNALES_FOR_LOCK_GROUP_PICKUP_4         (unsigned int)(                 \
-     (1 << (RANG_PO_ACHR1 - 128))                             /*128*/\
-   | (1 << (RANG_ACHR_CHAPV1 - 128))                          /*130*/\
-   | (1 << (RANG_PO_ACHR2 - 128))                             /*131*/\
-   | (1 << (RANG_ACHR_CHAPV2 - 128))                          /*132*/\
-   | (1 << (RANG_PO_UROV - 128))                              /*135*/\
-   | (1 << (RANG_UROV1 - 128))                                /*136*/\
-   | (1 << (RANG_UROV2 - 128))                                /*137*/\
-   | (1 << (RANG_PO_ZOP - 128))                               /*139*/\
-   | (1 << (RANG_ZOP - 128))                                  /*140*/\
-   | (1 << (RANG_PO_UMIN1 - 128))                             /*145*/\
-   | (1 << (RANG_UMIN1 - 128))                                /*148*/\
-   | (1 << (RANG_PO_UMIN2 - 128))                             /*149*/\
-   | (1 << (RANG_UMIN2 - 128))                                /*152*/\
-   | (1 << (RANG_PO_UMAX1 - 128))                             /*154*/\
-   | (1 << (RANG_UMAX1 - 128))                                /*155*/\
-   | (1 << (RANG_PO_UMAX2 - 128))                             /*156*/\
-   | (1 << (RANG_UMAX2 - 128))                                /*158*/\
+     (1 << (RANG_ACHR_CHAPV1 - 128))                          /*129*/\
+   | (1 << (RANG_PO_ACHR2 - 128))                             /*130*/\
+   | (1 << (RANG_ACHR_CHAPV2 - 128))                          /*131*/\
+   | (1 << (RANG_PO_UROV - 128))                              /*134*/\
+   | (1 << (RANG_UROV1 - 128))                                /*135*/\
+   | (1 << (RANG_UROV2 - 128))                                /*136*/\
+   | (1 << (RANG_PO_ZOP - 128))                               /*138*/\
+   | (1 << (RANG_ZOP - 128))                                  /*139*/\
+   | (1 << (RANG_PO_UMIN1 - 128))                             /*144*/\
+   | (1 << (RANG_UMIN1 - 128))                                /*147*/\
+   | (1 << (RANG_PO_UMIN2 - 128))                             /*148*/\
+   | (1 << (RANG_UMIN2 - 128))                                /*151*/\
+   | (1 << (RANG_PO_UMAX1 - 128))                             /*153*/\
+   | (1 << (RANG_UMAX1 - 128))                                /*154*/\
+   | (1 << (RANG_PO_UMAX2 - 128))                             /*155*/\
+   | (1 << (RANG_UMAX2 - 128))                                /*157*/\
 )
 
 #define MASKA_SIGNALES_FOR_LOCK_GROUP_PICKUP_5  0
@@ -1225,16 +1221,16 @@ enum __mtz_abc_direction_const {
 )  
 
 #define MASKA_FOR_CONTINUE_GET_DR_ACTINE_WORD_4 (unsigned int)(                        \
-     (1 << (RANG_PUSK_UROV_VID_DV - 128))                     /*134*/\
-   | (1 << (RANG_PO_UROV - 128))                              /*135*/\
-   | (1 << (RANG_UROV1 - 128))                                /*136*/\
-   | (1 << (RANG_UROV2 - 128))                                /*137*/\
-   | (1 << (RANG_PO_ZOP - 128))                               /*139*/\
-   | (1 << (RANG_ZOP - 128))                                  /*140*/\
-   | (1 << (RANG_PO_UMAX1 - 128))                             /*154*/\
-   | (1 << (RANG_UMAX1 - 128))                                /*155*/\
-   | (1 << (RANG_PO_UMAX2 - 128))                             /*157*/\
-   | (1 << (RANG_UMAX2 - 128))                                /*158*/\
+     (1 << (RANG_PUSK_UROV_VID_DV - 128))                     /*133*/\
+   | (1 << (RANG_PO_UROV - 128))                              /*134*/\
+   | (1 << (RANG_UROV1 - 128))                                /*135*/\
+   | (1 << (RANG_UROV2 - 128))                                /*136*/\
+   | (1 << (RANG_PO_ZOP - 128))                               /*138*/\
+   | (1 << (RANG_ZOP - 128))                                  /*139*/\
+   | (1 << (RANG_PO_UMAX1 - 128))                             /*153*/\
+   | (1 << (RANG_UMAX1 - 128))                                /*154*/\
+   | (1 << (RANG_PO_UMAX2 - 128))                             /*156*/\
+   | (1 << (RANG_UMAX2 - 128))                                /*157*/\
 )
 
 #define MASKA_FOR_CONTINUE_GET_DR_ACTINE_WORD_5        0
@@ -1383,10 +1379,10 @@ enum __mtz_abc_direction_const {
 #define MASKA_MONITOTYNG_UMIN_SIGNALES_3        0
 
 #define MASKA_MONITOTYNG_UMIN_SIGNALES_4 (unsigned int)(                                \
-     (1 << (RANG_PO_UMIN1 - 128))                             /*145*/ \
-   | (1 << (RANG_UMIN1 - 128))                                /*148*/ \
-   | (1 << (RANG_PO_UMIN2 - 128))                             /*149*/ \
-   | (1 << (RANG_UMIN2 - 128))                                /*152*/ \
+     (1 << (RANG_PO_UMIN1 - 128))                             /*144*/ \
+   | (1 << (RANG_UMIN1 - 128))                                /*147*/ \
+   | (1 << (RANG_PO_UMIN2 - 128))                             /*148*/ \
+   | (1 << (RANG_UMIN2 - 128))                                /*151*/ \
 )
 
 #define MASKA_MONITOTYNG_UMIN_SIGNALES_5        0
@@ -1403,10 +1399,10 @@ enum __mtz_abc_direction_const {
 #define MASKA_MONITOTYNG_UMAX_SIGNALES_3        0
 
 #define MASKA_MONITOTYNG_UMAX_SIGNALES_4 (unsigned int)(                                \
-     (1 << (RANG_PO_UMAX1 - 128))                             /*154*/ \
-   | (1 << (RANG_UMAX1 - 128))                                /*155*/ \
-   | (1 << (RANG_PO_UMAX2 - 128))                             /*157*/ \
-   | (1 << (RANG_UMAX2 - 128))                                /*158*/ \
+     (1 << (RANG_PO_UMAX1 - 128))                             /*153*/ \
+   | (1 << (RANG_UMAX1 - 128))                                /*154*/ \
+   | (1 << (RANG_PO_UMAX2 - 128))                             /*156*/ \
+   | (1 << (RANG_UMAX2 - 128))                                /*157*/ \
 )
 
 #define MASKA_MONITOTYNG_UMAX_SIGNALES_5        0
@@ -1423,8 +1419,8 @@ enum __mtz_abc_direction_const {
 #define MASKA_MONITOTYNG_ZOP_SIGNALES_3                  0
 
 #define MASKA_MONITOTYNG_ZOP_SIGNALES_4 (unsigned int)(                                  \
-     (1 << (RANG_PO_ZOP - 128))                               /*139*/  \
-   | (1 << (RANG_ZOP - 128))                                  /*140*/  \
+     (1 << (RANG_PO_ZOP - 128))                               /*138*/  \
+   | (1 << (RANG_ZOP - 128))                                  /*139*/  \
 )
 
 #define MASKA_MONITOTYNG_ZOP_SIGNALES_5                  0
@@ -1438,13 +1434,14 @@ enum __mtz_abc_direction_const {
 #define MASKA_MONITOTYNG_F_MIN_ACHR_SIGNALES_0   0
 #define MASKA_MONITOTYNG_F_MIN_ACHR_SIGNALES_1   0
 #define MASKA_MONITOTYNG_F_MIN_ACHR_SIGNALES_2   0
-#define MASKA_MONITOTYNG_F_MIN_ACHR_SIGNALES_3   0
+
+#define MASKA_MONITOTYNG_F_MIN_ACHR_SIGNALES_3   (unsigned int)(                         \
+     (1 << (RANG_PO_ACHR1 - 96))                             /*127*/  \
 
 #define MASKA_MONITOTYNG_F_MIN_ACHR_SIGNALES_4   (unsigned int)(                         \
-     (1 << (RANG_PO_ACHR1 - 128))                             /*128*/  \
-   | (1 << (RANG_ACHR_CHAPV1 - 128))                          /*130*/  \
-   | (1 << (RANG_PO_ACHR2 - 128))                             /*131*/  \
-   | (1 << (RANG_ACHR_CHAPV2 - 128))                          /*133*/  \
+     (1 << (RANG_ACHR_CHAPV1 - 128))                          /*129*/  \
+   | (1 << (RANG_PO_ACHR2 - 128))                             /*130*/  \
+   | (1 << (RANG_ACHR_CHAPV2 - 128))                          /*132*/  \
 )     
 
 #define MASKA_MONITOTYNG_F_MIN_ACHR_SIGNALES_5   0
