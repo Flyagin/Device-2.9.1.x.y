@@ -5130,7 +5130,7 @@ inline void on_off_handler(volatile unsigned int *p_active_functions)
             _CLEAR_BIT(temp_array_of_outputs, RANG_MTZ4);
           }
           
-          //МТЗ04 1
+          //МТЗ1 04 кВ
           if(
              (_CHECK_SET_BIT(temp_array_of_outputs, RANG_MTZ04_1) != 0) &&
              (_CHECK_SET_BIT(previous_active_functions, RANG_MTZ04_1) == 0) /*умова, що сигнал тільки активується (щоб зафіксувати час старту)*/
@@ -5142,7 +5142,7 @@ inline void on_off_handler(volatile unsigned int *p_active_functions)
             _CLEAR_BIT(temp_array_of_outputs, RANG_MTZ04_1);
           }
           
-          //МТЗ04 2
+          //МТЗ2 04кВ
           if(
              (_CHECK_SET_BIT(temp_array_of_outputs, RANG_MTZ04_2) != 0) &&
              (_CHECK_SET_BIT(previous_active_functions, RANG_MTZ04_2) == 0) /*умова, що сигнал тільки активується (щоб зафіксувати час старту)*/

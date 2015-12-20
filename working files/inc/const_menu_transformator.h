@@ -20,6 +20,6 @@
 #define COL_TT04_END                        9
 
 #define COL_TN_BEGIN                        6
-#define COL_TN_END                          8
+#define COL_TN_END                          9
 
 #endif

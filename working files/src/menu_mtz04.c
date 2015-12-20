@@ -8,20 +8,20 @@ void make_ekran_setpoint_mtz04(unsigned int group)
   const unsigned char name_string[MAX_NAMBER_LANGUAGE][MAX_ROW_FOR_SETPOINT_MTZ04][MAX_COL_LCD] = 
   {
     {
-      "  ฬาว 0,4๊ย 1   ",
-      "  ฬาว 0,4๊ย 2   "
+      "   ฬาว1 0,4๊ย   ",
+      "   ฬาว2 0,4๊ย   "
     },
     {
-      "  ฬัว 0,4๊ย 1   ",
-      "  ฬัว 0,4๊ย 2   "
+      "   ฬัว1 0,4๊ย   ",
+      "   ฬัว2 0,4๊ย   "
     },
     {
-      "  OCP 0,4kV 1   ",
-      "  OCP 0,4kV 2   "
+      "   OCP1 0,4kV   ",
+      "   OCP2 0,4kV   "
     },
     {
-      "  ฬาว 0,4๊ย 1   ",
-      "  ฬาว 0,4๊ย 2   "
+      "   ฬาว1 0,4๊ย   ",
+      "   ฬาว2 0,4๊ย   "
     }
   };
   int index_language = index_language_in_array(current_settings.language);
@@ -136,28 +136,28 @@ void make_ekran_timeout_mtz04(unsigned int group)
   const unsigned char name_string[MAX_NAMBER_LANGUAGE][MAX_ROW_FOR_TIMEOUT_MTZ04][MAX_COL_LCD] = 
   {
     {
-      "  ฬาว 0,4๊ย 1   ",
-      "  ฬาว 0,4๊ย 2   ",
-      " ำ๑๊.ฬาว 0,4๊ย 2",
-      "ย.ำ๑.ฬาว 0,4๊ย 2"
+      "   ฬาว1 0,4๊ย   ",
+      "   ฬาว2 0,4๊ย   ",
+      " ำ๑๊.ฬาว2 0,4๊ย ",
+      " ย.ำ๑.ฬาว2 0,4๊ย"
     },
     {
-      "  ฬัว 0,4๊ย 1   ",
-      "  ฬัว 0,4๊ย 2   ",
-      " ฯ๐.ฬัว 0,4๊ย 2 ",
-      "ย.ฯ๐.ฬัว 0,4๊ย 2"
+      "   ฬัว1 0,4๊ย   ",
+      "   ฬัว2 0,4๊ย   ",
+      " ฯ๐.ฬัว2 0,4๊ย  ",
+      " ย.ฯ๐.ฬัว2 0,4๊ย"
     },
     {
-      "  OCP 0,4kV 1   ",
-      "  OCP 0,4kV 2   ",
-      " ฯ๐.ฬัว 0,4kV 2 ",
-      "ย.ฯ๐.ฬัว 0,4kV 2"
+      "   OCP1 0,4kV   ",
+      "   OCP2 0,4kV   ",
+      " ฯ๐.ฬัว2 0,4kV  ",
+      " ย.ฯ๐.ฬัว2 0,4kV"
     },
     {
-      "  ฬาว 0,4๊ย 1   ",
-      "  ฬาว 0,4๊ย 2   ",
-      " ำ๑๊.ฬาว 0,4๊ย 2",
-      "ย.ำ๑.ฬาว 0,4๊ย 2"
+      "   ฬาว1 0,4๊ย   ",
+      "   ฬาว2 0,4๊ย   ",
+      " ำ๑๊.ฬาว2 0,4๊ย ",
+      " ย.ำ๑.ฬาว2 0,4๊ย"
     }
   };
   int index_language = index_language_in_array(current_settings.language);
@@ -317,32 +317,32 @@ void make_ekran_control_mtz04()
   const unsigned char name_string[MAX_NAMBER_LANGUAGE][MAX_ROW_FOR_CONTROL_MTZ04][MAX_COL_LCD] = 
   {
     {
-      "  ฬาว 0,4๊ย 1   ",
-      "  ฬาว 0,4๊ย 2   ",
-      " า่๏ ฬาว 0,4๊ย 2",
-      " ำ-ๅ ฬาว 0,4๊ย 2",
-      " ำ-ÿ ฬาว 0,4๊ย 2"
+      "   ฬาว1 0,4๊ย   ",
+      "   ฬาว2 0,4๊ย   ",
+      " า่๏ ฬาว2 0,4๊ย ",
+      " ำ-ๅ ฬาว2 0,4๊ย ",
+      " ำ-ÿ ฬาว2 0,4๊ย "
     },
     {
-      "  ฬัว 0,4๊ย 1   ",
-      "  ฬัว 0,4๊ย 2   ",
-      " า่๏ ฬัว 0,4๊ย 2",
-      " ฯ-ÿ ฬัว 0,4๊ย 2",
-      " ฯ-เ ฬัว 0,4๊ย 2"
+      "   ฬัว1 0,4๊ย   ",
+      "   ฬัว2 0,4๊ย   ",
+      " า่๏ ฬัว2 0,4๊ย ",
+      " ฯ-ÿ ฬัว2 0,4๊ย ",
+      " ฯ-เ ฬัว2 0,4๊ย "
     },
     {
       " OCP 0,4kV St.1 ",
       " OCP 0,4kV St.2 ",
-      "OCP 0,4kV 2 Opt.",
-      "OCP 0,4kV 2 Acc.",
-      " Acc.OCP 0,4kV 2"
+      " OCP2 0,4kV Opt.",
+      " OCP2 0,4kV Acc.",
+      " Acc.OCP2 0,4kV "
     },
     {
-      "  ฬาว 0,4๊ย 1   ",
-      "  ฬาว 0,4๊ย 2   ",
-      " า่๏ ฬาว 0,4๊ย 2",
-      " ำ-ๅ ฬาว 0,4๊ย 2",
-      " ำ-ÿ ฬาว 0,4๊ย 2"
+      "   ฬาว1 0,4๊ย   ",
+      "   ฬาว2 0,4๊ย   ",
+      " า่๏ ฬาว2 0,4๊ย ",
+      " ำ-ๅ ฬาว2 0,4๊ย ",
+      " ำ-ÿ ฬาว2 0,4๊ย "
     }
   };
   int index_language = index_language_in_array(current_settings.language);

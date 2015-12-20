@@ -11,7 +11,7 @@
 #define KOEF_TT04_MAX                 2000
 
 #define KOEF_TN_MIN                   50
-#define KOEF_TN_MAX                   400
+#define KOEF_TN_MAX                   1800
 
 #define SETPOINT_GRUPA_USTAVOK_MIN    1
 #define SETPOINT_GRUPA_USTAVOK_MAX    4
