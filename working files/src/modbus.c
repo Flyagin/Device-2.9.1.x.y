@@ -10069,7 +10069,7 @@ inline unsigned int Set_data(unsigned short int data, unsigned int address_data,
     //Взначаємо, яку 0-функцію зараз верхній рівень намагається записати
     unsigned int number_df_mul_3 = (address_data -  M_ADDRESS_FIRST_DF_RANG)>>VAGA_MAX_FUNCTIONS_IN_DF;
     
-    if(number_df_mul_3 <  (NUMBER_DEFINED_FUNCTIONS*3))
+    if(number_df_mul_3 <  (target_label->number_defined_df*3))
     {
       error = save_new_rang_oldr_from_gmm((number_df_mul_3 / 3), (((address_data -  M_ADDRESS_FIRST_DF_RANG) & (MAX_FUNCTIONS_IN_DF - 1)) + 1), (SOURCE_DF_PLUS_RANG + (number_df_mul_3 % 3)), data, method_setting);
     }
@@ -10093,7 +10093,7 @@ inline unsigned int Set_data(unsigned short int data, unsigned int address_data,
     //Визначаємо, який триггер зараз верхній рівень намагається записати
     unsigned int number_defined_triggers = (address_data - M_ADDRESS_FIRST_DT_RANG) / MAX_FUNCTIONS_IN_DT;
     
-    if(number_defined_triggers < (NUMBER_DEFINED_TRIGGERS << 2))
+    if(number_defined_triggers < (target_label->number_defined_dt << 2))
     {
       
       error = save_new_rang_oldr_from_gmm((number_defined_triggers >> 2),
@@ -10108,7 +10108,7 @@ inline unsigned int Set_data(unsigned short int data, unsigned int address_data,
     //Визначаємо, який В-"І" зараз верхній рівень намагається записати
     unsigned int number_defined_and = (address_data - M_ADDRESS_FIRST_D_AND_RANG) / MAX_FUNCTIONS_IN_D_AND;
     
-    if(number_defined_and < NUMBER_DEFINED_AND)
+    if(number_defined_and < target_label->number_defined_and)
     {
       
       error = save_new_rang_oldr_from_gmm(number_defined_and, (((address_data -  M_ADDRESS_FIRST_D_AND_RANG) % MAX_FUNCTIONS_IN_D_AND) + 1), SOURCE_D_AND_RANG, data, method_setting);
@@ -10121,7 +10121,7 @@ inline unsigned int Set_data(unsigned short int data, unsigned int address_data,
     //Визначаємо, який В-"АБО" зараз верхній рівень намагається записати
     unsigned int number_defined_or = (address_data - M_ADDRESS_FIRST_D_OR_RANG) / MAX_FUNCTIONS_IN_D_OR;
     
-    if(number_defined_or < NUMBER_DEFINED_OR)
+    if(number_defined_or < target_label->number_defined_or)
     {
       
       error = save_new_rang_oldr_from_gmm(number_defined_or, (((address_data -  M_ADDRESS_FIRST_D_OR_RANG) % MAX_FUNCTIONS_IN_D_OR) + 1), SOURCE_D_OR_RANG, data, method_setting);
@@ -10134,7 +10134,7 @@ inline unsigned int Set_data(unsigned short int data, unsigned int address_data,
     //Визначаємо, який В-"Викл.АБО" зараз верхній рівень намагається записати
     unsigned int number_defined_xor = (address_data - M_ADDRESS_FIRST_D_XOR_RANG) / MAX_FUNCTIONS_IN_D_XOR;
     
-    if(number_defined_xor < NUMBER_DEFINED_XOR)
+    if(number_defined_xor < target_label->number_defined_xor)
     {
       
       error = save_new_rang_oldr_from_gmm(number_defined_xor, (((address_data -  M_ADDRESS_FIRST_D_XOR_RANG) % MAX_FUNCTIONS_IN_D_XOR) + 1), SOURCE_D_XOR_RANG, data, method_setting);
@@ -10147,7 +10147,7 @@ inline unsigned int Set_data(unsigned short int data, unsigned int address_data,
     //Визначаємо, який В-"НЕ" зараз верхній рівень намагається записати
     unsigned int number_defined_not = (address_data - M_ADDRESS_FIRST_D_NOT_RANG) / MAX_FUNCTIONS_IN_D_NOT;
     
-    if(number_defined_not < NUMBER_DEFINED_NOT)
+    if(number_defined_not < target_label->number_defined_not)
     {
       
       error = save_new_rang_oldr_from_gmm(number_defined_not, (((address_data -  M_ADDRESS_FIRST_D_NOT_RANG) % MAX_FUNCTIONS_IN_D_NOT) + 1), SOURCE_D_NOT_RANG, data, method_setting);
