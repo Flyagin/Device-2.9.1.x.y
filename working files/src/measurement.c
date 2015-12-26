@@ -1407,9 +1407,9 @@ void SPI_ADC_IRQHandler(void)
     semaphore_adc_irq  = false;
   }
   
-#ifdef SYSTEM_VIEWER_ENABLE
-  SEGGER_SYSVIEW_RecordExitISR();
-#endif
+//#ifdef SYSTEM_VIEWER_ENABLE
+//  SEGGER_SYSVIEW_RecordExitISR();
+//#endif
 }
 /*****************************************************/
 
