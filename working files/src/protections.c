@@ -1666,7 +1666,7 @@ inline void df_handler(volatile unsigned int *p_active_functions)
       }
     }
 
-    if (i < current_settings_prt.number_defined_df)
+    if (i < NUMBER_DEFINED_FUNCTIONS/*current_settings_prt.number_defined_df*/)
     {
       /***
       Джерело активації ОФ-ії
@@ -1708,7 +1708,7 @@ inline void df_handler(volatile unsigned int *p_active_functions)
   
   //Визначаємо, чи активовуються опреділювані функції через свої ранжовані функції-джерела
   unsigned int source_blk_df = 0;
-  for (unsigned int i = 0; i < current_settings_prt.number_defined_df; i++)
+  for (unsigned int i = 0; i < NUMBER_DEFINED_FUNCTIONS/*current_settings_prt.number_defined_df*/; i++)
   {
     if (
         (current_settings_prt.ranguvannja_df_source_plus[N_BIG*i    ] !=0) || 
@@ -2006,7 +2006,7 @@ inline void dt_handler(volatile unsigned int *p_active_functions)
   Джерела скидання формуємо в source_reset_dt
   */
   unsigned int state_defined_triggers = 0, source_set_dt = 0, source_reset_dt = 0;
-  for (unsigned int i = 0; i < current_settings_prt.number_defined_dt; i++)
+  for (unsigned int i = 0; i < NUMBER_DEFINED_TRIGGERS/*current_settings_prt.number_defined_dt*/; i++)
   {
     unsigned int number_byte_set, number_bit_set, number_byte_reset, number_bit_reset;
     unsigned int index_dt;
@@ -2078,7 +2078,7 @@ inline void dt_handler(volatile unsigned int *p_active_functions)
   }
   
   //Визначаємо, чи встановлюються/скидаються опреділювані триґери через свої ранжовані функції-джерела
-  for (unsigned int i = 0; i < current_settings_prt.number_defined_dt; i++)
+  for (unsigned int i = 0; i < NUMBER_DEFINED_TRIGGERS/*current_settings_prt.number_defined_dt*/; i++)
   {
     if (
         (current_settings_prt.ranguvannja_set_dt_source_plus[N_BIG*i    ] !=0) || 
@@ -2250,7 +2250,7 @@ inline void d_and_handler(volatile unsigned int *p_active_functions)
   unsigned int state_defined_and = 0;
 
   //Визначаємо стан всіх визначуваних "І" (не виставляючи поки що їх у робочому масиві)
-  for (unsigned int i = 0; i < current_settings_prt.number_defined_and; i++)
+  for (unsigned int i = 0; i < NUMBER_DEFINED_AND/*current_settings_prt.number_defined_and*/; i++)
   {
     if (
         ((current_settings_prt.ranguvannja_d_and[N_BIG*i + 0] & p_active_functions[0]) == current_settings_prt.ranguvannja_d_and[N_BIG*i + 0]) && 
@@ -2295,7 +2295,7 @@ inline void d_or_handler(volatile unsigned int *p_active_functions)
   unsigned int state_defined_or = 0;
 
   //Визначаємо стан всіх визначуваних "АБО" (не виставляючи поки що їх у робочому масиві)
-  for (unsigned int i = 0; i < current_settings_prt.number_defined_or; i++)
+  for (unsigned int i = 0; i < NUMBER_DEFINED_OR/*current_settings_prt.number_defined_or*/; i++)
   {
     if (
         ((current_settings_prt.ranguvannja_d_or[N_BIG*i + 0] & p_active_functions[0]) != 0) || 
@@ -2340,7 +2340,7 @@ inline void d_xor_handler(volatile unsigned int *p_active_functions)
   unsigned int state_defined_xor = 0;
 
   //Визначаємо стан всіх визначуваних "Викл.АБО" (не виставляючи поки що їх у робочому масиві)
-  for (unsigned int i = 0; i < current_settings_prt.number_defined_xor; i++)
+  for (unsigned int i = 0; i < NUMBER_DEFINED_XOR/*current_settings_prt.number_defined_xor*/; i++)
   {
     unsigned int temp_array[N_BIG];
     temp_array[0] = current_settings_prt.ranguvannja_d_xor[N_BIG*i + 0] & p_active_functions[0];
@@ -2403,7 +2403,7 @@ inline void d_not_handler(volatile unsigned int *p_active_functions)
   unsigned int state_defined_not = 0;
 
   //Визначаємо стан всіх визначуваних "НЕ" (не виставляючи поки що їх у робочому масиві)
-  for (unsigned int i = 0; i < current_settings_prt.number_defined_not; i++)
+  for (unsigned int i = 0; i < NUMBER_DEFINED_NOT/*current_settings_prt.number_defined_not*/; i++)
   {
     if (
         ((current_settings_prt.ranguvannja_d_not[N_BIG*i + 0] & p_active_functions[0]) == 0) &&
@@ -3880,8 +3880,7 @@ void mtz04_handler(volatile unsigned int *p_active_functions, unsigned int numbe
   _Bool I04_is_larger_than_ust2 = measurement[IM_I04] >= setpoint2;
   //М
   //ВКЛ-ОТКЛ  МТЗ04_1
-  unsigned int 
-  tmp_value = ((current_settings_prt.control_mtz04 & CTR_MTZ04_1) == 0)  << 0;
+  unsigned int tmp_value = ((current_settings_prt.control_mtz04 & CTR_MTZ04_1) != 0)  << 0;
   //ВКЛ-ОТКЛ  МТЗ04_2
   tmp_value |= ((current_settings_prt.control_mtz04 & CTR_MTZ04_2) != 0) << 1;
   //ВКЛ-ОТКЛ  УСКОРЕНИЕ МТЗ04_2
@@ -3917,7 +3916,7 @@ void mtz04_handler(volatile unsigned int *p_active_functions, unsigned int numbe
         //ВКЛ-ОТКЛ  МТЗ04_1
         tmp_value, 0,
         //INVERTOR
-        tmp_value, 7, tmp_value, 9);
+        tmp_value, 8, tmp_value, 9);
   //Сраб.ПО MTZ04_1
   if (_GET_OUTPUT_STATE(tmp_value, 9)) 
   {

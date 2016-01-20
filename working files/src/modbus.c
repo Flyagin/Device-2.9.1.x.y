@@ -284,6 +284,9 @@ void convert_order_list_function_to_gmm(unsigned int* input_array, unsigned shor
   _CONVERT_SIGNAL_TO_GMM(input_array, output_array, RANG_D_NOT14, (BIT_MA_D_NOT14 - BIT_MA_CURRENT_AF_BASE));
   _CONVERT_SIGNAL_TO_GMM(input_array, output_array, RANG_D_NOT15, (BIT_MA_D_NOT15 - BIT_MA_CURRENT_AF_BASE));
   _CONVERT_SIGNAL_TO_GMM(input_array, output_array, RANG_D_NOT16, (BIT_MA_D_NOT16 - BIT_MA_CURRENT_AF_BASE));
+
+  //Помилка параметрування розширеної логіки
+  _CONVERT_SIGNAL_TO_GMM(input_array, output_array, RANG_ERROR_CONF_EL, (BIT_MA_ERROR_CONF_EL - BIT_MA_CURRENT_AF_BASE));
   
   //Функції загального користування
   _CONVERT_SIGNAL_TO_GMM(input_array, output_array, RANG_VKL_VV                      , (BIT_MA_VKL_VV                       - BIT_MA_CURRENT_AF_BASE));
@@ -1206,6 +1209,11 @@ unsigned int convert_order_list_oldr_to_gmm(unsigned int number, unsigned int nu
     case RANG_D_NOT16:
       {
         rezultat = BIT_MA_D_NOT16;
+        break;
+      }
+    case RANG_ERROR_CONF_EL:
+      {
+        rezultat = BIT_MA_ERROR_CONF_EL;
         break;
       }
     case RANG_BLOCK_VKL_VV:
@@ -3037,78 +3045,76 @@ unsigned int save_new_rang_oldr_from_gmm(unsigned int number, unsigned int numbe
               (data >= BIT_MA_D_NOT1 ) && 
               (data <= BIT_MA_D_NOT16)
              )
+             ||
+             (data == BIT_MA_ERROR_CONF_EL)
             )
     {
       //Зараз є намагання зранжувати функцю розширеної логіки і номер її є допустимим
 
-      //Перевіряємо, чи можна цю функцію встановляти на дане джерело
+      //Перевіряємо, чи можна цю функцію встановляти на дане джерело, або чи розширена логіка зараз не знята з конфігурвації
       if (
-          (
+          ((target_label->configuration & (1 << EL_BIT_CONFIGURATION)) == 0 )
+          ||
+          (  
            (
-            (source == SOURCE_DF_PLUS_RANG)  ||
-            (source == SOURCE_DF_MINUS_RANG) ||
-            (source == SOURCE_DF_BLK_RANG)
-           )   
-           &
-           (
-            ((number == 0) && ((data == BIT_MA_INPUT_DF1) || (data == BIT_MA_OUTPUT_DF1))) ||
-            ((number == 1) && ((data == BIT_MA_INPUT_DF2) || (data == BIT_MA_OUTPUT_DF2))) ||
-            ((number == 2) && ((data == BIT_MA_INPUT_DF3) || (data == BIT_MA_OUTPUT_DF3))) ||
-            ((number == 3) && ((data == BIT_MA_INPUT_DF4) || (data == BIT_MA_OUTPUT_DF4))) ||
-            ((number == 4) && ((data == BIT_MA_INPUT_DF5) || (data == BIT_MA_OUTPUT_DF5))) ||
-            ((number == 5) && ((data == BIT_MA_INPUT_DF6) || (data == BIT_MA_OUTPUT_DF6))) ||
-            ((number == 6) && ((data == BIT_MA_INPUT_DF7) || (data == BIT_MA_OUTPUT_DF7))) ||
-            ((number == 7) && ((data == BIT_MA_INPUT_DF8) || (data == BIT_MA_OUTPUT_DF8)))
+            (
+             (source == SOURCE_DF_PLUS_RANG)  ||
+             (source == SOURCE_DF_MINUS_RANG) ||
+             (source == SOURCE_DF_BLK_RANG)
+            )   
+            &
+            (
+             ((number == 0) && ((data == BIT_MA_INPUT_DF1) || (data == BIT_MA_OUTPUT_DF1))) ||
+             ((number == 1) && ((data == BIT_MA_INPUT_DF2) || (data == BIT_MA_OUTPUT_DF2))) ||
+             ((number == 2) && ((data == BIT_MA_INPUT_DF3) || (data == BIT_MA_OUTPUT_DF3))) ||
+             ((number == 3) && ((data == BIT_MA_INPUT_DF4) || (data == BIT_MA_OUTPUT_DF4))) ||
+             ((number == 4) && ((data == BIT_MA_INPUT_DF5) || (data == BIT_MA_OUTPUT_DF5))) ||
+             ((number == 5) && ((data == BIT_MA_INPUT_DF6) || (data == BIT_MA_OUTPUT_DF6))) ||
+             ((number == 6) && ((data == BIT_MA_INPUT_DF7) || (data == BIT_MA_OUTPUT_DF7))) ||
+             ((number == 7) && ((data == BIT_MA_INPUT_DF8) || (data == BIT_MA_OUTPUT_DF8)))
+            )
            )
-          )
-          ||
-          (
+           ||
            (
-            (source == SOURCE_SET_DT_PLUS_RANG)    ||
-            (source == SOURCE_SET_DT_MINUS_RANG)   ||
-            (source == SOURCE_RESET_DT_PLUS_RANG)  ||
-            (source == SOURCE_RESET_DT_MINUS_RANG)
+            (
+             (source == SOURCE_SET_DT_PLUS_RANG)    ||
+             (source == SOURCE_SET_DT_MINUS_RANG)   ||
+             (source == SOURCE_RESET_DT_PLUS_RANG)  ||
+             (source == SOURCE_RESET_DT_MINUS_RANG)
+            )
+            &
+            (
+             ( (number == 0) && ((data == BIT_MA_DT1_SET) || (data == BIT_MA_DT1_RESET) || (data == BIT_MA_DT1_OUT) ) ) ||
+             ( (number == 1) && ((data == BIT_MA_DT2_SET) || (data == BIT_MA_DT2_RESET) || (data == BIT_MA_DT2_OUT) ) ) ||
+             ( (number == 2) && ((data == BIT_MA_DT3_SET) || (data == BIT_MA_DT3_RESET) || (data == BIT_MA_DT3_OUT) ) ) ||
+             ( (number == 3) && ((data == BIT_MA_DT4_SET) || (data == BIT_MA_DT4_RESET) || (data == BIT_MA_DT4_OUT) ) )
+            )
            )
-           &
+           ||
            (
-            ( (number == 0) && ((data == BIT_MA_DT1_SET) || (data == BIT_MA_DT1_RESET) || (data == BIT_MA_DT1_OUT) ) ) ||
-            ( (number == 1) && ((data == BIT_MA_DT2_SET) || (data == BIT_MA_DT2_RESET) || (data == BIT_MA_DT2_OUT) ) ) ||
-            ( (number == 2) && ((data == BIT_MA_DT3_SET) || (data == BIT_MA_DT3_RESET) || (data == BIT_MA_DT3_OUT) ) ) ||
-            ( (number == 3) && ((data == BIT_MA_DT4_SET) || (data == BIT_MA_DT4_RESET) || (data == BIT_MA_DT4_OUT) ) )
+            (source == SOURCE_D_AND_RANG)
+            &
+            (data == (BIT_MA_D_AND1 + number))
            )
-          )
-          ||
-          (
-           (source == SOURCE_D_AND_RANG)
-           &
-           (data == (BIT_MA_D_AND1 + number))
-          )
-          ||
-          (
-           (source == SOURCE_D_OR_RANG)
-           &
-           (data == (BIT_MA_D_OR1 + number))
-          )
-          ||
-          (
-           (source == SOURCE_D_XOR_RANG)
-           &
-           (data == (BIT_MA_D_XOR1 + number))
-          )
-          ||
-          (
-           (source == SOURCE_D_NOT_RANG)
-           &
-           (data == (BIT_MA_D_NOT1 + number))
-          )
-          ||
-          (
-           (source == SOURCE_AR_RANG) & (data == BIT_MA_WORK_A_REJESTRATOR)
-          )
-          ||
-          (
-           (source == SOURCE_DR_RANG) & (data == BIT_MA_WORK_D_REJESTRATOR)
-          )
+           ||
+           (
+            (source == SOURCE_D_OR_RANG)
+            &
+            (data == (BIT_MA_D_OR1 + number))
+           )
+           ||
+           (
+            (source == SOURCE_D_XOR_RANG)
+            &
+            (data == (BIT_MA_D_XOR1 + number))
+           )
+           ||
+           (
+            (source == SOURCE_D_NOT_RANG)
+            &
+            (data == (BIT_MA_D_NOT1 + number))
+           )
+          )   
          ) error = ERROR_ILLEGAL_DATA_VALUE;  
     }
     else
@@ -3514,6 +3520,11 @@ unsigned int save_new_rang_oldr_from_gmm(unsigned int number, unsigned int numbe
     case BIT_MA_D_NOT16:
       {
         _SET_BIT(set_array_rang, RANG_D_NOT16);
+        break;
+      }
+    case BIT_MA_ERROR_CONF_EL:
+      {
+        _SET_BIT(set_array_rang, RANG_ERROR_CONF_EL);
         break;
       }
     case BIT_MA_BLOCK_VKL_VV:
@@ -6865,6 +6876,10 @@ inline unsigned int Get_data(unsigned char *data, unsigned int address_data, uns
   {
     temp_value = phi_ustuvannja[address_data - MA_ADDRESS_FIRST_PHI_USTUVANNJA ];
   }
+  else if (address_data == MA_NUMBER_ITERATION_EL)
+  {
+    temp_value = current_settings.number_iteration_el;
+  }
   else if ((address_data >= M_ADDRESS_FIRST_MEASUREMENTS_2) && (address_data <= M_ADDRESS_LAST_MEASUREMENTS_2))
   {
     //Митєві вимірювання розраховані фетодом квадратного кореня суми квадратів миттєвих значень за період
@@ -10069,7 +10084,7 @@ inline unsigned int Set_data(unsigned short int data, unsigned int address_data,
     //Взначаємо, яку 0-функцію зараз верхній рівень намагається записати
     unsigned int number_df_mul_3 = (address_data -  M_ADDRESS_FIRST_DF_RANG)>>VAGA_MAX_FUNCTIONS_IN_DF;
     
-    if(number_df_mul_3 <  (target_label->number_defined_df*3))
+    if(number_df_mul_3 <  (NUMBER_DEFINED_FUNCTIONS/*target_label->number_defined_df*/*3))
     {
       error = save_new_rang_oldr_from_gmm((number_df_mul_3 / 3), (((address_data -  M_ADDRESS_FIRST_DF_RANG) & (MAX_FUNCTIONS_IN_DF - 1)) + 1), (SOURCE_DF_PLUS_RANG + (number_df_mul_3 % 3)), data, method_setting);
     }
@@ -10093,7 +10108,7 @@ inline unsigned int Set_data(unsigned short int data, unsigned int address_data,
     //Визначаємо, який триггер зараз верхній рівень намагається записати
     unsigned int number_defined_triggers = (address_data - M_ADDRESS_FIRST_DT_RANG) / MAX_FUNCTIONS_IN_DT;
     
-    if(number_defined_triggers < (target_label->number_defined_dt << 2))
+    if(number_defined_triggers < (NUMBER_DEFINED_TRIGGERS/*target_label->number_defined_dt*/ << 2))
     {
       
       error = save_new_rang_oldr_from_gmm((number_defined_triggers >> 2),
@@ -10108,7 +10123,7 @@ inline unsigned int Set_data(unsigned short int data, unsigned int address_data,
     //Визначаємо, який В-"І" зараз верхній рівень намагається записати
     unsigned int number_defined_and = (address_data - M_ADDRESS_FIRST_D_AND_RANG) / MAX_FUNCTIONS_IN_D_AND;
     
-    if(number_defined_and < target_label->number_defined_and)
+    if(number_defined_and < NUMBER_DEFINED_AND/*target_label->number_defined_and*/)
     {
       
       error = save_new_rang_oldr_from_gmm(number_defined_and, (((address_data -  M_ADDRESS_FIRST_D_AND_RANG) % MAX_FUNCTIONS_IN_D_AND) + 1), SOURCE_D_AND_RANG, data, method_setting);
@@ -10121,7 +10136,7 @@ inline unsigned int Set_data(unsigned short int data, unsigned int address_data,
     //Визначаємо, який В-"АБО" зараз верхній рівень намагається записати
     unsigned int number_defined_or = (address_data - M_ADDRESS_FIRST_D_OR_RANG) / MAX_FUNCTIONS_IN_D_OR;
     
-    if(number_defined_or < target_label->number_defined_or)
+    if(number_defined_or < NUMBER_DEFINED_OR/*target_label->number_defined_or*/)
     {
       
       error = save_new_rang_oldr_from_gmm(number_defined_or, (((address_data -  M_ADDRESS_FIRST_D_OR_RANG) % MAX_FUNCTIONS_IN_D_OR) + 1), SOURCE_D_OR_RANG, data, method_setting);
@@ -10134,7 +10149,7 @@ inline unsigned int Set_data(unsigned short int data, unsigned int address_data,
     //Визначаємо, який В-"Викл.АБО" зараз верхній рівень намагається записати
     unsigned int number_defined_xor = (address_data - M_ADDRESS_FIRST_D_XOR_RANG) / MAX_FUNCTIONS_IN_D_XOR;
     
-    if(number_defined_xor < target_label->number_defined_xor)
+    if(number_defined_xor < NUMBER_DEFINED_XOR/*target_label->number_defined_xor*/)
     {
       
       error = save_new_rang_oldr_from_gmm(number_defined_xor, (((address_data -  M_ADDRESS_FIRST_D_XOR_RANG) % MAX_FUNCTIONS_IN_D_XOR) + 1), SOURCE_D_XOR_RANG, data, method_setting);
@@ -10147,7 +10162,7 @@ inline unsigned int Set_data(unsigned short int data, unsigned int address_data,
     //Визначаємо, який В-"НЕ" зараз верхній рівень намагається записати
     unsigned int number_defined_not = (address_data - M_ADDRESS_FIRST_D_NOT_RANG) / MAX_FUNCTIONS_IN_D_NOT;
     
-    if(number_defined_not < target_label->number_defined_not)
+    if(number_defined_not < NUMBER_DEFINED_NOT/*target_label->number_defined_not*/)
     {
       
       error = save_new_rang_oldr_from_gmm(number_defined_not, (((address_data -  M_ADDRESS_FIRST_D_NOT_RANG) % MAX_FUNCTIONS_IN_D_NOT) + 1), SOURCE_D_NOT_RANG, data, method_setting);
@@ -10642,6 +10657,15 @@ inline unsigned int Set_data(unsigned short int data, unsigned int address_data,
       /*У разі повідомлення про помилку тип помилки ставиться такий ніби така адреса взагалі є недоступною, щоб зменшити ймовірність несанкціонованого запису юстування*/
       error = ERROR_ILLEGAL_DATA_ADDRESS;
     }
+  }
+  else if (address_data == MA_NUMBER_ITERATION_EL)
+  {
+    temp_value = data;
+    
+    if ((temp_value >= NUMBER_ITERATION_EL_MIN) && (temp_value <= NUMBER_ITERATION_EL_MAX))
+      target_label->number_iteration_el = temp_value;
+    else
+      error = ERROR_ILLEGAL_DATA_VALUE;
   }
   else if (address_data == MA_LSW_ADR_MEMORY_TO_WRITE)
   {
@@ -14929,7 +14953,8 @@ void modbus_rountines(unsigned int type_interface)
                   (add_data == MA_CLEAR_NUMBER_RECORD_DR                       )                                                                                                          || /*очищення дискретного реєстратора*/        
                   (add_data == MA_DEFAULT_SETTINGS                             )                                                                                                          || /*встановлення мінімальної конфігурації*/        
                   (add_data == MA_TEST_WATCHDOGS                               )                                                                                                          || /*тестування внутрішнього і зовнішнього watchdog*/        
-                  (add_data == MA_CLEAR_ENERGY                                 )                                                                                                             /*скидання соказів лічильника енергій*/        
+                  (add_data == MA_CLEAR_ENERGY                                 )                                                                                                          || /*скидання соказів лічильника енергій*/        
+                  (add_data == MA_NUMBER_ITERATION_EL                          )                                                                                                             /*встановленнямаксимальної кількості ітераційдля розширеної логіки*/        
                 )   
                )
             {
@@ -15122,7 +15147,8 @@ void modbus_rountines(unsigned int type_interface)
                 ((add_data >= M_ADDRESS_FIRST_SETPOINTS_RANG                  ) && (add_data <= M_ADDRESS_LAST_SETPOINTS_RANG                  )) ||
                 ((add_data >= M_ADDRESS_FIRST_SETPOINTS_RANG_AR               ) && (add_data <= M_ADDRESS_LAST_SETPOINTS_RANG_AR               )) ||
                 ((add_data >= MA_PREFAULT_INTERVAL_AR                         ) && (add_data <= MA_POSTFAULT_INTERVAL_AR                       )) ||
-                ((add_data >= M_ADDRESS_FIRST_SETPOINTS_RANG_DR               ) && (add_data <= M_ADDRESS_LAST_SETPOINTS_RANG_DR               )) 
+                ((add_data >= M_ADDRESS_FIRST_SETPOINTS_RANG_DR               ) && (add_data <= M_ADDRESS_LAST_SETPOINTS_RANG_DR               )) ||
+                (add_data == MA_NUMBER_ITERATION_EL)
                )
             {
               //Записуємо інформацю, яка відноситься до настройок
@@ -15671,7 +15697,8 @@ void modbus_rountines(unsigned int type_interface)
                    (add_data == MA_CLEAR_NUMBER_RECORD_DR                       )                                                                   || /*очищення дискретного реєстратора*/        
                    (add_data == MA_DEFAULT_SETTINGS                             )                                                                   || /*встановлення мінімальної конфігурації*/        
                    (add_data == MA_CLEAR_ENERGY                                 )                                                                   || /*скидання показів лічильника енергій*/        
-                   (add_data == MA_TEST_WATCHDOGS                               )                                                       /*тестування внутрішнього і зовнішнього watchdog*/        
+                   (add_data == MA_TEST_WATCHDOGS                               )                                                                   || /*тестування внутрішнього і зовнішнього watchdog*/        
+                   (add_data == MA_NUMBER_ITERATION_EL                          )                                                                      /*встановленнямаксимальної кількості ітераційдля розширеної логіки*/        
                  )
               {
                 if (
@@ -15819,7 +15846,8 @@ void modbus_rountines(unsigned int type_interface)
                   ((add_data >= M_ADDRESS_FIRST_SETPOINTS_RANG                  ) && (add_data <= M_ADDRESS_LAST_SETPOINTS_RANG                  )) ||
                   ((add_data >= M_ADDRESS_FIRST_SETPOINTS_RANG_AR               ) && (add_data <= M_ADDRESS_LAST_SETPOINTS_RANG_AR               )) || 
                   ((add_data >= MA_PREFAULT_INTERVAL_AR                         ) && (add_data <= MA_POSTFAULT_INTERVAL_AR                       )) ||
-                  ((add_data >= M_ADDRESS_FIRST_SETPOINTS_RANG_DR               ) && (add_data <= M_ADDRESS_LAST_SETPOINTS_RANG_DR               )) 
+                  ((add_data >= M_ADDRESS_FIRST_SETPOINTS_RANG_DR               ) && (add_data <= M_ADDRESS_LAST_SETPOINTS_RANG_DR               )) ||
+                  (add_data == MA_NUMBER_ITERATION_EL)
                  )
               {
                 //Записуємо інформацю, яка відноситься до настройок
