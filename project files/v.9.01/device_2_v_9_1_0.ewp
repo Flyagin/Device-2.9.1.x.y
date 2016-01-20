@@ -77,7 +77,7 @@
         </option>
         <option>
           <name>OGLastSavedByProductVersion</name>
-          <state>7.50.1.10270</state>
+          <state>7.50.2.10499</state>
         </option>
         <option>
           <name>GeneralEnableMisra</name>
@@ -2468,7 +2468,7 @@
               </option>
               <option>
                 <name>CCDiagSuppress</name>
-                <state>Pe177</state>
+                <state>Pe177, Pe1348</state>
               </option>
               <option>
                 <name>CCDiagRemark</name>

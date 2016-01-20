@@ -1210,6 +1210,9 @@
       </file>
       <file>
         <name>$PROJ_DIR$\..\..\SystemView\SEGGER\SEGGER_SYSVIEW.c</name>
+        <configuration>
+          <name>Flash-Debug</name>
+        </configuration>
       </file>
       <file>
         <name>$PROJ_DIR$\..\..\SystemView\SEGGER\SEGGER_SYSVIEW.h</name>
