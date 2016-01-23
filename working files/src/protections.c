@@ -3880,8 +3880,7 @@ void mtz04_handler(volatile unsigned int *p_active_functions, unsigned int numbe
   _Bool I04_is_larger_than_ust2 = measurement[IM_I04] >= setpoint2;
   //Ì
   //ÂÊË-ÎÒÊË  ÌÒÇ04_1
-  unsigned int 
-  tmp_value = ((current_settings_prt.control_mtz04 & CTR_MTZ04_1) == 0)  << 0;
+  unsigned int tmp_value = ((current_settings_prt.control_mtz04 & CTR_MTZ04_1) != 0)  << 0;
   //ÂÊË-ÎÒÊË  ÌÒÇ04_2
   tmp_value |= ((current_settings_prt.control_mtz04 & CTR_MTZ04_2) != 0) << 1;
   //ÂÊË-ÎÒÊË  ÓÑÊÎĞÅÍÈÅ ÌÒÇ04_2
@@ -3917,7 +3916,7 @@ void mtz04_handler(volatile unsigned int *p_active_functions, unsigned int numbe
         //ÂÊË-ÎÒÊË  ÌÒÇ04_1
         tmp_value, 0,
         //INVERTOR
-        tmp_value, 7, tmp_value, 9);
+        tmp_value, 8, tmp_value, 9);
   //Ñğàá.ÏÎ MTZ04_1
   if (_GET_OUTPUT_STATE(tmp_value, 9)) 
   {
@@ -3977,7 +3976,7 @@ void mtz04_handler(volatile unsigned int *p_active_functions, unsigned int numbe
 // if(current_settings_prt.type_mtz04_2==0){
 //   _SET_STATE(tmp3, 0);
 // }//if
-  _AND2(tmp2, 4, 
+  _AND2(tmp2, 5, 
         tmp2, 7, 
              tmp2, 10);
 //Çàâèñèìàÿ À B C
