@@ -3,7 +3,7 @@
 *       Solutions for real time microcontroller applications         *
 **********************************************************************
 *                                                                    *
-*       (c) 2015  SEGGER Microcontroller GmbH & Co. KG               *
+*       (c) 2015 - 2016  SEGGER Microcontroller GmbH & Co. KG        *
 *                                                                    *
 *       www.segger.com     Support: support@segger.com               *
 *                                                                    *
@@ -38,7 +38,7 @@
 *                                                                    *
 **********************************************************************
 *                                                                    *
-*       SystemView version: V2.24                                    *
+*       SystemView version: V2.28                                    *
 *                                                                    *
 **********************************************************************
 ----------------------------------------------------------------------
@@ -101,6 +101,7 @@ extern "C" {
 
 #define   SEGGER_SYSVIEW_EVENT_ID_INIT              24
 #define   SEGGER_SYSVIEW_EVENT_ID_NAME_RESOURCE     25
+#define   SEGGER_SYSVIEW_EVENT_ID_PRINT_FORMATTED   26
 
 //
 // Commands that Host can send to target

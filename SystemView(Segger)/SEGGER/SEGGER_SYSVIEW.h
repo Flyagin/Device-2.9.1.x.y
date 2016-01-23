@@ -3,7 +3,7 @@
 *       Solutions for real time microcontroller applications         *
 **********************************************************************
 *                                                                    *
-*       (c) 2015  SEGGER Microcontroller GmbH & Co. KG               *
+*       (c) 2015 - 2016  SEGGER Microcontroller GmbH & Co. KG        *
 *                                                                    *
 *       www.segger.com     Support: support@segger.com               *
 *                                                                    *
@@ -38,7 +38,7 @@
 *                                                                    *
 **********************************************************************
 *                                                                    *
-*       SystemView version: V2.24                                    *
+*       SystemView version: V2.28                                    *
 *                                                                    *
 **********************************************************************
 ----------------------------------------------------------------------
@@ -75,6 +75,11 @@ extern "C" {
 
 #define SEGGER_SYSVIEW_INFO_SIZE      9   // Minimum size, which has to be reserved for a packet. 1-2 byte of message type, 0-2  byte of payload length, 1-5 bytes of timestamp.
 #define SEGGER_SYSVIEW_QUANTA_U32     5   // Maximum number of bytes to encode a U32, should be reserved for each 32-bit value in a packet.
+
+#define SEGGER_SYSVIEW_LOG            (0u)
+#define SEGGER_SYSVIEW_WARNING        (1u)
+#define SEGGER_SYSVIEW_ERROR          (2u)
+#define SEGGER_SYSVIEW_FLAG_APPEND    (1u << 6)
 
 #define SEGGER_SYSVIEW_PREPARE_PACKET(p)  (p) + 4
 
@@ -157,6 +162,25 @@ U8*  SEGGER_SYSVIEW_EncodeData                    (U8* pPayload, const char* pSr
 U8*  SEGGER_SYSVIEW_EncodeString                  (U8* pPayload, const char* s, unsigned MaxLen);
 U8*  SEGGER_SYSVIEW_EncodeId                      (U8* pPayload, unsigned Id);
 unsigned SEGGER_SYSVIEW_ShrinkId                  (unsigned Id);
+
+/*********************************************************************
+*
+*       printf-Style functions
+*/
+void SEGGER_SYSVIEW_PrintfHostEx(const char* s, U32 Options, ...);
+void SEGGER_SYSVIEW_PrintfTargetEx(const char* s, U32 Options, ...);
+
+void SEGGER_SYSVIEW_PrintfHost(const char* s, ...);
+void SEGGER_SYSVIEW_PrintfTarget(const char* s, ...);
+void SEGGER_SYSVIEW_Print(const char* s);
+
+void SEGGER_SYSVIEW_WarnfHost(const char* s, ...);
+void SEGGER_SYSVIEW_WarnfTarget(const char* s, ...);
+void SEGGER_SYSVIEW_Warn(const char* s);
+
+void SEGGER_SYSVIEW_ErrorfHost(const char* s, ...);
+void SEGGER_SYSVIEW_ErrorfTarget(const char* s, ...);
+void SEGGER_SYSVIEW_Error(const char* s);
 
 /*********************************************************************
 *

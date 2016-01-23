@@ -836,6 +836,8 @@
 #define BIT_MA_WORK_A_REJESTRATOR               60390
 #define BIT_MA_WORK_D_REJESTRATOR               60391
 
+#define BIT_MA_ERROR_CONF_EL                    60397
+
 #define BIT_MA_OTKL_VID_ZOVN_ZAHYSTIV           60396                         
 
 //#define BIT_MA_DVERI_SHAFY_UPR_VIDKR            60400
@@ -1099,6 +1101,12 @@
 #define MA_ADDRESS_LAST_USTUVANNJA            (MA_ADDRESS_FIRST_USTUVANNJA  + NUMBER_ANALOG_CANALES - 1)
 #define MA_ADDRESS_FIRST_PHI_USTUVANNJA       (MA_ADDRESS_LAST_USTUVANNJA + 1)
 #define MA_ADDRESS_LAST_PHI_USTUVANNJA        (MA_ADDRESS_FIRST_PHI_USTUVANNJA  + NUMBER_ANALOG_CANALES - 1)
+/*****************************************************/
+
+/*****************************************************/
+/* Адреса установки максимальної кількості ітерацій для розширеної логіки */
+/*****************************************************/
+#define MA_NUMBER_ITERATION_EL                62000
 /*****************************************************/
 
 /*****************************************************/

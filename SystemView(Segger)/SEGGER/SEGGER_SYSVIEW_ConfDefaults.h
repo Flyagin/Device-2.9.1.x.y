@@ -3,7 +3,7 @@
 *       Solutions for real time microcontroller applications         *
 **********************************************************************
 *                                                                    *
-*       (c) 2015  SEGGER Microcontroller GmbH & Co. KG               *
+*       (c) 2015 - 2016  SEGGER Microcontroller GmbH & Co. KG        *
 *                                                                    *
 *       www.segger.com     Support: support@segger.com               *
 *                                                                    *
@@ -38,7 +38,7 @@
 *                                                                    *
 **********************************************************************
 *                                                                    *
-*       SystemView version: V2.24                                    *
+*       SystemView version: V2.28                                    *
 *                                                                    *
 **********************************************************************
 ----------------------------------------------------------------------
@@ -110,6 +110,14 @@ extern "C" {
 
 #ifndef   SEGGER_SYSVIEW_GET_INTERRUPT_ID
   #error "SEGGER_SYSVIEW_GET_INTERRUPT_ID has to be defined in SEGGER_SYSVIEW_Conf.h!"
+#endif
+
+#ifndef   SEGGER_SYSVIEW_MAX_ARGUMENTS
+  #define SEGGER_SYSVIEW_MAX_ARGUMENTS      16
+#endif
+
+#ifndef   SEGGER_SYSVIEW_MAX_STRING_LEN
+  #define SEGGER_SYSVIEW_MAX_STRING_LEN     128
 #endif
 
 // Lock SysView (nestable)

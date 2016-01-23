@@ -396,70 +396,70 @@ void make_ekran_set_function_in_button(unsigned int number_ekran)
         */
         if(min_max_number[i][0] >=0)
         {
-          if (i == EL_BIT_CONFIGURATION)
-          {
-            /*
-            Випадок коли деякі сигнали розширеної логіки треба відфільтрувати
-            */
-
-            //Відкидати імена функцій і зміщати біти треба тільки у тому випадку, якщо функції пристні у списку для ранжування для даного захисту
-            //Формуємо маску біт, які не треба переміщати при переміщенні імен полів
-            unsigned int maska = 0;
-            unsigned int j1 = 0;
-            for (j1 = 0; j1 < (min_max_number[i][0] - offset); j1++) maska |= (1 << j1);
-          
-            //Відкидаємо назви функцій із списку, які є зайвими
-            while(index_in_list <= min_max_number[i][1])
-            {
-              if (
-                  (
-                   (index_in_list >= (int)(RANG_BUTTON_DF1_IN + current_settings.number_defined_df)) &&
-                   (index_in_list <= RANG_BUTTON_DF8_IN)
-                  )
-                  ||  
-                  (
-                   (index_in_list >= (int)(RANG_BUTTON_DT1_SET + 2*current_settings.number_defined_dt)) &&
-                   (index_in_list <= RANG_BUTTON_DT4_RESET)
-                  )
-                 )
-              {
-                /***/
-                //Зміщуємо біти стану реанжування функцій разом із їх назвами
-                /***/
-                unsigned int new_temp_data_1, new_temp_data_2;
-                new_temp_data_1 = temp_data & maska;
-                new_temp_data_2 = temp_data & (~maska);
-                new_temp_data_2 = new_temp_data_2 >>1;
-                new_temp_data_2 &= (~maska);
-                temp_data = new_temp_data_1 | new_temp_data_2;
-                
-                /***/
-                for (unsigned int j = (index_in_list - offset); j < (MAX_ROW_RANGUVANNJA_BUTTON - offset); j++)
-                {
-                  if ((j + 1) < (MAX_ROW_RANGUVANNJA_BUTTON - offset))
-                  {
-                    for (unsigned int k = 0; k < MAX_COL_LCD; k++)
-                      name_string_tmp[j + NUMBER_ROW_FOR_NOTHING_INFORMATION][k] = name_string_tmp[j + NUMBER_ROW_FOR_NOTHING_INFORMATION + 1][k];
-                  }
-                  else 
-                  {
-                    for (unsigned int k = 0; k<MAX_COL_LCD; k++)
-                      name_string_tmp[j + NUMBER_ROW_FOR_NOTHING_INFORMATION][k] = ' ';
-                  }
-                }
-                if (current_ekran.index_position >= index_in_list) position_temp--;
-                offset++;
-              }
-              else
-              {
-                maska |= (1 << j1);
-                j1++;
-              }
-                
-              index_in_list++;
-            }
-          }
-          else
+//          if (i == EL_BIT_CONFIGURATION)
+//          {
+//            /*
+//            Випадок коли деякі сигнали розширеної логіки треба відфільтрувати
+//            */
+//
+//            //Відкидати імена функцій і зміщати біти треба тільки у тому випадку, якщо функції пристні у списку для ранжування для даного захисту
+//            //Формуємо маску біт, які не треба переміщати при переміщенні імен полів
+//            unsigned int maska = 0;
+//            unsigned int j1 = 0;
+//            for (j1 = 0; j1 < (min_max_number[i][0] - offset); j1++) maska |= (1 << j1);
+//          
+//            //Відкидаємо назви функцій із списку, які є зайвими
+//            while(index_in_list <= min_max_number[i][1])
+//            {
+//              if (
+//                  (
+//                   (index_in_list >= (int)(RANG_BUTTON_DF1_IN + current_settings.number_defined_df)) &&
+//                   (index_in_list <= RANG_BUTTON_DF8_IN)
+//                  )
+//                  ||  
+//                  (
+//                   (index_in_list >= (int)(RANG_BUTTON_DT1_SET + 2*current_settings.number_defined_dt)) &&
+//                   (index_in_list <= RANG_BUTTON_DT4_RESET)
+//                  )
+//                 )
+//              {
+//                /***/
+//                //Зміщуємо біти стану реанжування функцій разом із їх назвами
+//                /***/
+//                unsigned int new_temp_data_1, new_temp_data_2;
+//                new_temp_data_1 = temp_data & maska;
+//                new_temp_data_2 = temp_data & (~maska);
+//                new_temp_data_2 = new_temp_data_2 >>1;
+//                new_temp_data_2 &= (~maska);
+//                temp_data = new_temp_data_1 | new_temp_data_2;
+//                
+//                /***/
+//                for (unsigned int j = (index_in_list - offset); j < (MAX_ROW_RANGUVANNJA_BUTTON - offset); j++)
+//                {
+//                  if ((j + 1) < (MAX_ROW_RANGUVANNJA_BUTTON - offset))
+//                  {
+//                    for (unsigned int k = 0; k < MAX_COL_LCD; k++)
+//                      name_string_tmp[j + NUMBER_ROW_FOR_NOTHING_INFORMATION][k] = name_string_tmp[j + NUMBER_ROW_FOR_NOTHING_INFORMATION + 1][k];
+//                  }
+//                  else 
+//                  {
+//                    for (unsigned int k = 0; k<MAX_COL_LCD; k++)
+//                      name_string_tmp[j + NUMBER_ROW_FOR_NOTHING_INFORMATION][k] = ' ';
+//                  }
+//                }
+//                if (current_ekran.index_position >= index_in_list) position_temp--;
+//                offset++;
+//              }
+//              else
+//              {
+//                maska |= (1 << j1);
+//                j1++;
+//              }
+//                
+//              index_in_list++;
+//            }
+//          }
+//          else
             index_in_list += ((min_max_number[i][1] - min_max_number[i][0]) + 1);
         }
       }
@@ -1027,83 +1027,83 @@ void make_ekran_set_function_in_input(unsigned int number_ekran)
         //бо інкаше ми вже знаходимося на індексі наступного захисту
         if(min_max_number[i][0] >=0)
         {
-          if (i == EL_BIT_CONFIGURATION)
-          {
-            /*
-            Випадок коли деякі сигнали розширеної логіки треба відфільтрувати
-            */
-
-            //Відкидати імена функцій і зміщати біти треба тільки у тому випадку, якщо функції пристні у списку для ранжування для даного захисту
-            //Формуємо маску біт, які не треба переміщати при переміщенні імен полів
-            unsigned int maska[N_SMALL] = {0, 0};
-            unsigned int j1;
-            for (j1 = 0; j1 < (min_max_number[i][0] - offset); j1++) _SET_BIT(maska, j1);
-          
-            //Відкидаємо назви функцій із списку, які є зайвими
-            while(index_in_list <= min_max_number[i][1])
-            {
-              if (
-                  (
-                   (index_in_list >= (int)(RANG_INPUT_DF1_IN + current_settings.number_defined_df)) &&
-                   (index_in_list <= RANG_INPUT_DF8_IN)
-                  )   
-                  ||  
-                  (
-                   (index_in_list >= (int)(RANG_INPUT_DT1_SET + 2*current_settings.number_defined_dt)) &&
-                   (index_in_list <= RANG_INPUT_DT4_RESET)
-                  )   
-                 )
-              {
-                /***/
-                //Зміщуємо біти стану реанжування функцій разом із їх назвами
-                /***/
-                unsigned int new_temp_data_1[N_SMALL], new_temp_data_2[N_SMALL];
-
-                for (unsigned int k = 0; k < N_SMALL; k++)
-                {
-                  new_temp_data_1[k] = temp_data[k] & maska[k];
-
-                  new_temp_data_2[k] = temp_data[k] & (~maska[k]);
-                }
-
-                for (unsigned int k = 0; k < (N_SMALL - 1); k++)
-                {
-                  new_temp_data_2[k] = ( (new_temp_data_2[k] >> 1) | ((new_temp_data_2[k + 1] & 0x1) << 31) ) & (~maska[k]);
-                }
-                new_temp_data_2[N_SMALL - 1] =  (new_temp_data_2[N_SMALL - 1] >> 1) & (~maska[N_SMALL - 1]);
-                
-                for (unsigned int k = 0; k < N_SMALL; k++)
-                {
-                  temp_data[k] = new_temp_data_1[k] | new_temp_data_2[k];
-                }
-                /***/
-                for (unsigned int j = (index_in_list - offset); j < (MAX_ROW_RANGUVANNJA_INPUT - offset); j++)
-                {
-                  if ((j + 1) < (MAX_ROW_RANGUVANNJA_INPUT - offset))
-                  {
-                    for (unsigned int k = 0; k < MAX_COL_LCD; k++)
-                      name_string_tmp[j + NUMBER_ROW_FOR_NOTHING_INFORMATION][k] = name_string_tmp[j + NUMBER_ROW_FOR_NOTHING_INFORMATION + 1][k];
-                  }
-                  else 
-                  {
-                    for (unsigned int k = 0; k<MAX_COL_LCD; k++)
-                      name_string_tmp[j + NUMBER_ROW_FOR_NOTHING_INFORMATION][k] = ' ';
-                  }
-                }
-                if (current_ekran.index_position >= index_in_list) position_temp--;
-          
-                offset++;
-              }
-              else
-              {
-                _SET_BIT(maska, j1);
-                j1++;
-              }
-                
-              index_in_list++;
-            }
-          }
-          else
+//          if (i == EL_BIT_CONFIGURATION)
+//          {
+//            /*
+//            Випадок коли деякі сигнали розширеної логіки треба відфільтрувати
+//            */
+//
+//            //Відкидати імена функцій і зміщати біти треба тільки у тому випадку, якщо функції пристні у списку для ранжування для даного захисту
+//            //Формуємо маску біт, які не треба переміщати при переміщенні імен полів
+//            unsigned int maska[N_SMALL] = {0, 0};
+//            unsigned int j1;
+//            for (j1 = 0; j1 < (min_max_number[i][0] - offset); j1++) _SET_BIT(maska, j1);
+//          
+//            //Відкидаємо назви функцій із списку, які є зайвими
+//            while(index_in_list <= min_max_number[i][1])
+//            {
+//              if (
+//                  (
+//                   (index_in_list >= (int)(RANG_INPUT_DF1_IN + current_settings.number_defined_df)) &&
+//                   (index_in_list <= RANG_INPUT_DF8_IN)
+//                  )   
+//                  ||  
+//                  (
+//                   (index_in_list >= (int)(RANG_INPUT_DT1_SET + 2*current_settings.number_defined_dt)) &&
+//                   (index_in_list <= RANG_INPUT_DT4_RESET)
+//                  )   
+//                 )
+//              {
+//                /***/
+//                //Зміщуємо біти стану реанжування функцій разом із їх назвами
+//                /***/
+//                unsigned int new_temp_data_1[N_SMALL], new_temp_data_2[N_SMALL];
+//
+//                for (unsigned int k = 0; k < N_SMALL; k++)
+//                {
+//                  new_temp_data_1[k] = temp_data[k] & maska[k];
+//
+//                  new_temp_data_2[k] = temp_data[k] & (~maska[k]);
+//                }
+//
+//                for (unsigned int k = 0; k < (N_SMALL - 1); k++)
+//                {
+//                  new_temp_data_2[k] = ( (new_temp_data_2[k] >> 1) | ((new_temp_data_2[k + 1] & 0x1) << 31) ) & (~maska[k]);
+//                }
+//                new_temp_data_2[N_SMALL - 1] =  (new_temp_data_2[N_SMALL - 1] >> 1) & (~maska[N_SMALL - 1]);
+//                
+//                for (unsigned int k = 0; k < N_SMALL; k++)
+//                {
+//                  temp_data[k] = new_temp_data_1[k] | new_temp_data_2[k];
+//                }
+//                /***/
+//                for (unsigned int j = (index_in_list - offset); j < (MAX_ROW_RANGUVANNJA_INPUT - offset); j++)
+//                {
+//                  if ((j + 1) < (MAX_ROW_RANGUVANNJA_INPUT - offset))
+//                  {
+//                    for (unsigned int k = 0; k < MAX_COL_LCD; k++)
+//                      name_string_tmp[j + NUMBER_ROW_FOR_NOTHING_INFORMATION][k] = name_string_tmp[j + NUMBER_ROW_FOR_NOTHING_INFORMATION + 1][k];
+//                  }
+//                  else 
+//                  {
+//                    for (unsigned int k = 0; k<MAX_COL_LCD; k++)
+//                      name_string_tmp[j + NUMBER_ROW_FOR_NOTHING_INFORMATION][k] = ' ';
+//                  }
+//                }
+//                if (current_ekran.index_position >= index_in_list) position_temp--;
+//          
+//                offset++;
+//              }
+//              else
+//              {
+//                _SET_BIT(maska, j1);
+//                j1++;
+//              }
+//                
+//              index_in_list++;
+//            }
+//          }
+//          else
             index_in_list += ((min_max_number[i][1] - min_max_number[i][0]) + 1);
         }
       }
@@ -2908,11 +2908,13 @@ void make_ekran_set_function_in_output_led_df_dt_reg(unsigned int number_ekran, 
             {
               if (
                   (
+                   /*
                    (
                     (index_in_list >= (int)(RANG_DF1_IN + 2*current_settings.number_defined_df)) &&
                     (index_in_list <= RANG_DF8_OUT)
                    )
                    ||
+                   */
                    (
                     (type_ekran == INDEX_VIEWING_DF) &&
                     (
@@ -2923,11 +2925,13 @@ void make_ekran_set_function_in_output_led_df_dt_reg(unsigned int number_ekran, 
                   )   
                   ||  
                   (
+                   /*
                    (
                     (index_in_list >= (int)(RANG_DT1_SET + 3*current_settings.number_defined_dt)) &&
                     (index_in_list <= RANG_DT4_OUT)
                    )
-                   || 
+                   ||
+                   */
                    (
                     (type_ekran == INDEX_VIEWING_DT) &&
                     (
@@ -2939,11 +2943,13 @@ void make_ekran_set_function_in_output_led_df_dt_reg(unsigned int number_ekran, 
                   )   
                   ||  
                   (
+                   /*
                    (
                     (index_in_list >= (int)(RANG_D_AND1 + current_settings.number_defined_and)) &&
                     (index_in_list <= RANG_D_AND8)
                    )   
                    ||
+                   */
                    (
                     (type_ekran == INDEX_VIEWING_D_AND) &&
                     (index_in_list == (RANG_D_AND1 + (number_ekran - EKRAN_RANGUVANNJA_D_AND1)))
@@ -2951,11 +2957,13 @@ void make_ekran_set_function_in_output_led_df_dt_reg(unsigned int number_ekran, 
                   )   
                   ||  
                   (
+                   /*
                    (
                     (index_in_list >= (int)(RANG_D_OR1 + current_settings.number_defined_or)) &&
                     (index_in_list <= RANG_D_OR8)
                    )   
                    ||
+                   */
                    (
                     (type_ekran == INDEX_VIEWING_D_OR) &&
                     (index_in_list == (RANG_D_OR1 + (number_ekran - EKRAN_RANGUVANNJA_D_OR1)))
@@ -2963,11 +2971,13 @@ void make_ekran_set_function_in_output_led_df_dt_reg(unsigned int number_ekran, 
                   )   
                   ||  
                   (
+                   /*
                    (
                     (index_in_list >= (int)(RANG_D_XOR1 + current_settings.number_defined_xor)) &&
                     (index_in_list <= RANG_D_XOR8)
                    )   
                    ||
+                   */
                    (
                     (type_ekran == INDEX_VIEWING_D_XOR) &&
                     (index_in_list == (RANG_D_XOR1 + (number_ekran - EKRAN_RANGUVANNJA_D_XOR1)))
@@ -2975,11 +2985,13 @@ void make_ekran_set_function_in_output_led_df_dt_reg(unsigned int number_ekran, 
                   )   
                   ||  
                   (
+                   /*
                    (
                     (index_in_list >= (int)(RANG_D_NOT1 + current_settings.number_defined_not)) &&
                     (index_in_list <= RANG_D_NOT16)
                    )   
                    ||
+                   */
                    (
                     (type_ekran == INDEX_VIEWING_D_NOT) &&
                     (index_in_list == (RANG_D_NOT1 + (number_ekran - EKRAN_RANGUVANNJA_D_NOT1)))
@@ -3159,7 +3171,7 @@ void make_ekran_set_function_in_output_led_df_dt_reg(unsigned int number_ekran, 
 void check_current_index_is_presented_in_configuration(
                                                          unsigned int* found_new_index_tmp,
                                                                   int* add_filter_point,
-                                                                  EL_FILTER_STRUCT el_filter[], 
+                                                                  /*EL_FILTER_STRUCT el_filter[],*/
                                                                   int plus_minus,
                                                                   int number_general_function,
                                                                   int number_mtz_function,
@@ -3266,19 +3278,19 @@ void check_current_index_is_presented_in_configuration(
       }
     }
     
-    for (unsigned int i = 0; i < NUMBER_DEFINED_ELEMENTS; i++)
-    {
-      if (
-          (el_filter[i].present != 0) &&
-          (current_ekran.index_position >= (el_filter[i].start_index + el_filter[i].number_per_index*el_filter[i].real_number)) &&
-          (current_ekran.index_position <=  el_filter[i].stop_index)
-         )
-      {
-        *found_new_index_tmp = 0;
-        current_ekran.index_position++;
-        break; //вихід із циклу
-      }
-    }
+//    for (unsigned int i = 0; i < NUMBER_DEFINED_ELEMENTS; i++)
+//    {
+//      if (
+//          (el_filter[i].present != 0) &&
+//          (current_ekran.index_position >= (el_filter[i].start_index + el_filter[i].number_per_index*el_filter[i].real_number)) &&
+//          (current_ekran.index_position <=  el_filter[i].stop_index)
+//         )
+//      {
+//        *found_new_index_tmp = 0;
+//        current_ekran.index_position++;
+//        break; //вихід із циклу
+//      }
+//    }
   }
   else
   {
@@ -3369,19 +3381,19 @@ void check_current_index_is_presented_in_configuration(
       }
     }
     
-    for (unsigned int i = 0; i < NUMBER_DEFINED_ELEMENTS; i++)
-    {
-      if (
-          (el_filter[i].present != 0) &&
-          (current_ekran.index_position >= (el_filter[i].start_index + el_filter[i].number_per_index*el_filter[i].real_number)) &&
-          (current_ekran.index_position <=  el_filter[i].stop_index)
-         )
-      {
-        *found_new_index_tmp = 0;
-        current_ekran.index_position--;
-        break; //вихід із циклу
-      }
-    }
+//    for (unsigned int i = 0; i < NUMBER_DEFINED_ELEMENTS; i++)
+//    {
+//      if (
+//          (el_filter[i].present != 0) &&
+//          (current_ekran.index_position >= (el_filter[i].start_index + el_filter[i].number_per_index*el_filter[i].real_number)) &&
+//          (current_ekran.index_position <=  el_filter[i].stop_index)
+//         )
+//      {
+//        *found_new_index_tmp = 0;
+//        current_ekran.index_position--;
+//        break; //вихід із циклу
+//      }
+//    }
   }
 }
 /*****************************************************/

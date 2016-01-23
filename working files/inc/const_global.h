@@ -31,7 +31,7 @@
 
 #define NUMBER_LEDS                     8
 
-#define NUMBER_DEFINED_ELEMENTS         6
+//#define NUMBER_DEFINED_ELEMENTS         6
 #define NUMBER_DEFINED_FUNCTIONS        8
 #define NUMBER_DEFINED_TRIGGERS         4
 #define NUMBER_DEFINED_AND              8
