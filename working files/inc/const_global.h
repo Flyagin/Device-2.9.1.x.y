@@ -368,7 +368,7 @@ RANG_ACHR_CHAPV_VID_DV,
 RANG_BLOCK_ACHR1,
 RANG_BLOCK_ACHR2,
 RANG_RAZR_CHAPV,
-RANG_BLOCK_CHAPV_VID_U,
+RANG_VN_BLOCK_CHAPV,
 RANG_PO_ACHR1,
 RANG_PO_CHAPV1,
 RANG_ACHR_CHAPV1,
@@ -829,7 +829,7 @@ enum __mtz_abc_direction_const {
    | (1 << (RANG_BLOCK_ACHR1 - 96))                           /*122*/\
    | (1 << (RANG_BLOCK_ACHR2 - 96))                           /*123*/\
    | (1 << (RANG_RAZR_CHAPV - 96))                            /*124*/\
-   | (1 << (RANG_BLOCK_CHAPV_VID_U - 96))                     /*125*/\
+   | (1 << (RANG_VN_BLOCK_CHAPV - 96))                        /*125*/\
    | (1 << (RANG_PO_ACHR1 - 96))                              /*126*/\
    | (1 << (RANG_PO_CHAPV1 - 96))                             /*127*/\
 )

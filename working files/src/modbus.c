@@ -195,7 +195,7 @@ void convert_order_list_function_to_gmm(unsigned int* input_array, unsigned shor
   _CONVERT_SIGNAL_TO_GMM(input_array, output_array, RANG_ACHR_CHAPV_VID_DV , (BIT_MA_ACHR_CHAPV_VID_DV - BIT_MA_CURRENT_AF_BASE));
   _CONVERT_SIGNAL_TO_GMM(input_array, output_array, RANG_BLOCK_ACHR1       , (BIT_MA_BLOCK_ACHR1        - BIT_MA_CURRENT_AF_BASE));
   _CONVERT_SIGNAL_TO_GMM(input_array, output_array, RANG_BLOCK_ACHR2       , (BIT_MA_BLOCK_ACHR2        - BIT_MA_CURRENT_AF_BASE));
-  _CONVERT_SIGNAL_TO_GMM(input_array, output_array, RANG_BLOCK_CHAPV_VID_U, (BIT_MA_BLOCK_CHAPV_VID_U  - BIT_MA_CURRENT_AF_BASE));
+  _CONVERT_SIGNAL_TO_GMM(input_array, output_array, RANG_VN_BLOCK_CHAPV    , (BIT_MA_VN_BLOCK_CHAPV     - BIT_MA_CURRENT_AF_BASE));
   _CONVERT_SIGNAL_TO_GMM(input_array, output_array, RANG_PO_ACHR1          , (BIT_MA_PO_ACHR1           - BIT_MA_CURRENT_AF_BASE));
   _CONVERT_SIGNAL_TO_GMM(input_array, output_array, RANG_PO_ACHR2          , (BIT_MA_PO_ACHR2           - BIT_MA_CURRENT_AF_BASE));
   _CONVERT_SIGNAL_TO_GMM(input_array, output_array, RANG_ACHR_CHAPV1       , (BIT_MA_ACHR_CHAPV1        - BIT_MA_CURRENT_AF_BASE));
@@ -1836,9 +1836,9 @@ unsigned int convert_order_list_oldr_to_gmm(unsigned int number, unsigned int nu
         rezultat = BIT_MA_RAZR_CHAPV;
         break;
       }
-    case RANG_BLOCK_CHAPV_VID_U:
+    case RANG_VN_BLOCK_CHAPV:
       {
-        rezultat = BIT_MA_BLOCK_CHAPV_VID_U;
+        rezultat = BIT_MA_VN_BLOCK_CHAPV;
         break;
       }
     case RANG_PO_ACHR1:
@@ -2943,7 +2943,7 @@ unsigned int save_new_rang_oldr_from_gmm(unsigned int number, unsigned int numbe
              (data == BIT_MA_ACHR_CHAPV_VID_DV ) ||
              (data == BIT_MA_BLOCK_ACHR1       ) ||
              (data == BIT_MA_BLOCK_ACHR2       ) ||
-             (data == BIT_MA_BLOCK_CHAPV_VID_U) ||
+             (data == BIT_MA_VN_BLOCK_CHAPV    ) ||
              (data == BIT_MA_PO_ACHR1          ) ||
              (data == BIT_MA_PO_ACHR2          ) ||
              (data == BIT_MA_ACHR_CHAPV1       ) ||
@@ -4147,9 +4147,9 @@ unsigned int save_new_rang_oldr_from_gmm(unsigned int number, unsigned int numbe
         _SET_BIT(set_array_rang, RANG_BLOCK_ACHR2);
         break;
       }
-    case BIT_MA_BLOCK_CHAPV_VID_U:
+    case BIT_MA_VN_BLOCK_CHAPV:
       {
-        _SET_BIT(set_array_rang, RANG_BLOCK_CHAPV_VID_U);
+        _SET_BIT(set_array_rang, RANG_VN_BLOCK_CHAPV);
         break;
       }
     case BIT_MA_PO_ACHR1:
@@ -11639,7 +11639,7 @@ inline unsigned int Get_data_file(unsigned char* input_data, unsigned char* outp
                         "   Áëîê.À×Ğ1    ",
                         "   Áëîê.À×Ğ2    ",
                         "   Ğàçğ.×ÀÏÂ    ",
-                        " Áëîê.×ÀÏÂ îò U ",
+                        "  Âí.Áëîê.×ÀÏÂ  ",
                         "    ÏÎ À×Ğ1     ",
                         "    ÏÎ ×ÀÏÂ1    ",
                         "   À×Ğ/×ÀÏÂ1    ",
@@ -11867,7 +11867,7 @@ inline unsigned int Get_data_file(unsigned char* input_data, unsigned char* outp
                         "   Áëîê.À×Ğ1    ",
                         "   Áëîê.À×Ğ2    ",
                         "  Äîçâ³ë ×ÀÏÂ   ",
-                        " Áëîê.×ÀÏÂ â³ä U",
+                        "  Âí.Áëîê.×ÀÏÂ  ",
                         "    ÏÎ À×Ğ1     ",
                         "    ÏÎ ×ÀÏÂ1    ",
                         "   À×Ğ/×ÀÏÂ1    ",
@@ -12095,7 +12095,7 @@ inline unsigned int Get_data_file(unsigned char* input_data, unsigned char* outp
                         "   Áëîê.À×Ğ1    ",
                         "   Áëîê.À×Ğ2    ",
                         "   Ğàçğ.×ÀÏÂ    ",
-                        " Áëîê.×ÀÏÂ îò U ",
+                        "  Âí.Áëîê.×ÀÏÂ  ",
                         "    ÏÎ À×Ğ1     ",
                         "   ÏÎ ×ÀÏÂ1     ",
                         "   UFLS/FAR1    ",
@@ -12323,7 +12323,7 @@ inline unsigned int Get_data_file(unsigned char* input_data, unsigned char* outp
                         "   Áëîê.À×Ğ1    ",
                         "   Áëîê.À×Ğ2    ",
                         "   Ğàçğ.×ÀÏÂ    ",
-                        " Áëîê.×ÀÏÂ îò U ",
+                        "  Âí.Áëîê.×ÀÏÂ  ",
                         "    ÏÎ À×Ğ1     ",
                         "    ÏÎ ×ÀÏÂ1    ",
                         "   À×Ğ/×ÀÏÂ1    ",
@@ -13261,7 +13261,7 @@ inline unsigned int Get_data_file(unsigned char* input_data, unsigned char* outp
                         "   Áëîê.À×Ğ1    ",
                         "   Áëîê.À×Ğ2    ",
                         "   Ğàçğ.×ÀÏÂ    ",
-                        " Áëîê.×ÀÏÂ îò U ",
+                        "  Âí.Áëîê.×ÀÏÂ  ",
                         "    ÏÎ À×Ğ1     ",
                         "    ÏÎ ×ÀÏÂ1    ",
                         "   À×Ğ/×ÀÏÂ1    ",
@@ -13489,7 +13489,7 @@ inline unsigned int Get_data_file(unsigned char* input_data, unsigned char* outp
                         "   Áëîê.À×Ğ1    ",
                         "   Áëîê.À×Ğ2    ",
                         "  Äîçâ³ë ×ÀÏÂ   ",
-                        " Áëîê.×ÀÏÂ â³ä U",
+                        "  Âí.Áëîê.×ÀÏÂ  ",
                         "    ÏÎ À×Ğ1     ",
                         "    ÏÎ ×ÀÏÂ1    ",
                         "   À×Ğ/×ÀÏÂ1    ",
@@ -13717,7 +13717,7 @@ inline unsigned int Get_data_file(unsigned char* input_data, unsigned char* outp
                         "   Áëîê.À×Ğ1    ",
                         "   Áëîê.À×Ğ2    ",
                         "   Ğàçğ.×ÀÏÂ    ",
-                        " Áëîê.×ÀÏÂ îò U ",
+                        "  Âí.Áëîê.×ÀÏÂ  ",
                         "    ÏÎ À×Ğ1     ",
                         "   ÏÎ ×ÀÏÂ1     ",
                         "   UFLS/FAR1    ",
@@ -13945,7 +13945,7 @@ inline unsigned int Get_data_file(unsigned char* input_data, unsigned char* outp
                         "   Áëîê.À×Ğ1    ",
                         "   Áëîê.À×Ğ2    ",
                         "   Ğàçğ.×ÀÏÂ    ",
-                        " Áëîê.×ÀÏÂ îò U ",
+                        "  Âí.Áëîê.×ÀÏÂ  ",
                         "    ÏÎ À×Ğ1     ",
                         "    ÏÎ ×ÀÏÂ1    ",
                         "   À×Ğ/×ÀÏÂ1    ",

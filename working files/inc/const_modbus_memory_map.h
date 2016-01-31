@@ -725,7 +725,7 @@
 #define BIT_MA_ACHR_CHAPV_VID_DV                60272
 #define BIT_MA_BLOCK_ACHR1                      60273
 #define BIT_MA_BLOCK_ACHR2                      60274
-#define BIT_MA_BLOCK_CHAPV_VID_U               60275
+#define BIT_MA_VN_BLOCK_CHAPV                   60275
 #define BIT_MA_PO_ACHR1                         60276
 #define BIT_MA_PO_ACHR2                         60277
 #define BIT_MA_ACHR_CHAPV1                      60278
