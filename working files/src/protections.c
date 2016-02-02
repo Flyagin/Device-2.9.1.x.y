@@ -4757,7 +4757,7 @@ inline void apv_handler(volatile unsigned int *p_active_functions, unsigned int 
   _AND2(logic_APV_0, 17, logic_APV_1, 22, logic_APV_1, 24);
   _OR3(logic_APV_1, 23, logic_APV_1, 29, logic_APV_1, 24, logic_APV_0, 18)
 
-  //"Вн.Блок.ЧАПВ"
+  //"Блок.ЧАПВ"
   logic_APV_1 |= (_CHECK_SET_BIT(p_active_functions, RANG_VN_BLOCK_CHAPV) != 0) << 25;
   _OR2(logic_APV_0, 18, logic_APV_1, 25, logic_APV_1, 26);
     
