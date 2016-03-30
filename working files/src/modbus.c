@@ -6293,10 +6293,17 @@ inline unsigned int Get_data(unsigned char *data, unsigned int address_data, uns
           }
         case DR_OFFSET_MEASUREMENT_IB_1:
           {
-            index = FIRST_INDEX_FIRST_BLOCK_DR + (number_block*SIZE_ARRAY_FIX_MAX_MEASUREMENTS + 4)*sizeof(unsigned int);
-            value = *((unsigned int *)(point_to_buffer + index));
+            if ((control_extra_settings_1_tmp & CTR_EXTRA_SETTINGS_1_CTRL_IB_I04) == 0)
+            {
+              index = FIRST_INDEX_FIRST_BLOCK_DR + (number_block*SIZE_ARRAY_FIX_MAX_MEASUREMENTS + 4)*sizeof(unsigned int);
+              value = *((unsigned int *)(point_to_buffer + index));
             
-            temp_value = value >> 2;
+              temp_value = value >> 2;
+            }
+            else
+            {
+              temp_value = 0;
+            }
             break;
           }
         case DR_OFFSET_MEASUREMENT_IC_1:
@@ -6347,38 +6354,14 @@ inline unsigned int Get_data(unsigned char *data, unsigned int address_data, uns
             temp_value = value >> 2;
             break;
           }
-        case DR_OFFSET_MEASUREMENT_UAB_1:
+        case DR_OFFSET_MEASUREMENT_I04_1:
           {
-            index = FIRST_INDEX_FIRST_BLOCK_DR + (number_block*SIZE_ARRAY_FIX_MAX_MEASUREMENTS + 12)*sizeof(unsigned int);
-            value = *((unsigned int *)(point_to_buffer + index));
-            
-            temp_value = value >> 3;
-            break;
-          }
-        case DR_OFFSET_MEASUREMENT_UBC_1:
-          {
-            index = FIRST_INDEX_FIRST_BLOCK_DR + (number_block*SIZE_ARRAY_FIX_MAX_MEASUREMENTS + 13)*sizeof(unsigned int);
-            value = *((unsigned int *)(point_to_buffer + index));
-            
-            temp_value = value >> 3;
-            break;
-          }
-        case DR_OFFSET_MEASUREMENT_UCA_1:
-          {
-            index = FIRST_INDEX_FIRST_BLOCK_DR + (number_block*SIZE_ARRAY_FIX_MAX_MEASUREMENTS + 14)*sizeof(unsigned int);
-            value = *((unsigned int *)(point_to_buffer + index));
-            
-            temp_value = value >> 3;
-            break;
-          }
-        case DR_OFFSET_MEASUREMENT_UA_1:
-          {
-            if ((control_extra_settings_1_tmp & CTR_EXTRA_SETTINGS_1_CTRL_PHASE_LINE) == 0)
+            if ((control_extra_settings_1_tmp & CTR_EXTRA_SETTINGS_1_CTRL_IB_I04) != 0)
             {
               index = FIRST_INDEX_FIRST_BLOCK_DR + (number_block*SIZE_ARRAY_FIX_MAX_MEASUREMENTS + 8)*sizeof(unsigned int);
               value = *((unsigned int *)(point_to_buffer + index));
             
-              temp_value = value >> 3;
+              temp_value = value >> 2;
             }
             else
             {
@@ -6386,7 +6369,31 @@ inline unsigned int Get_data(unsigned char *data, unsigned int address_data, uns
             }
             break;
           }
-        case DR_OFFSET_MEASUREMENT_UB_1:
+        case DR_OFFSET_MEASUREMENT_UAB_1:
+          {
+            index = FIRST_INDEX_FIRST_BLOCK_DR + (number_block*SIZE_ARRAY_FIX_MAX_MEASUREMENTS + 13)*sizeof(unsigned int);
+            value = *((unsigned int *)(point_to_buffer + index));
+            
+            temp_value = value >> 3;
+            break;
+          }
+        case DR_OFFSET_MEASUREMENT_UBC_1:
+          {
+            index = FIRST_INDEX_FIRST_BLOCK_DR + (number_block*SIZE_ARRAY_FIX_MAX_MEASUREMENTS + 14)*sizeof(unsigned int);
+            value = *((unsigned int *)(point_to_buffer + index));
+            
+            temp_value = value >> 3;
+            break;
+          }
+        case DR_OFFSET_MEASUREMENT_UCA_1:
+          {
+            index = FIRST_INDEX_FIRST_BLOCK_DR + (number_block*SIZE_ARRAY_FIX_MAX_MEASUREMENTS + 15)*sizeof(unsigned int);
+            value = *((unsigned int *)(point_to_buffer + index));
+            
+            temp_value = value >> 3;
+            break;
+          }
+        case DR_OFFSET_MEASUREMENT_UA_1:
           {
             if ((control_extra_settings_1_tmp & CTR_EXTRA_SETTINGS_1_CTRL_PHASE_LINE) == 0)
             {
@@ -6401,7 +6408,7 @@ inline unsigned int Get_data(unsigned char *data, unsigned int address_data, uns
             }
             break;
           }
-        case DR_OFFSET_MEASUREMENT_UC_1:
+        case DR_OFFSET_MEASUREMENT_UB_1:
           {
             if ((control_extra_settings_1_tmp & CTR_EXTRA_SETTINGS_1_CTRL_PHASE_LINE) == 0)
             {
@@ -6416,9 +6423,24 @@ inline unsigned int Get_data(unsigned char *data, unsigned int address_data, uns
             }
             break;
           }
+        case DR_OFFSET_MEASUREMENT_UC_1:
+          {
+            if ((control_extra_settings_1_tmp & CTR_EXTRA_SETTINGS_1_CTRL_PHASE_LINE) == 0)
+            {
+              index = FIRST_INDEX_FIRST_BLOCK_DR + (number_block*SIZE_ARRAY_FIX_MAX_MEASUREMENTS + 11)*sizeof(unsigned int);
+              value = *((unsigned int *)(point_to_buffer + index));
+            
+              temp_value = value >> 3;
+            }
+            else
+            {
+              temp_value = 0;
+            }
+            break;
+          }
         case DR_OFFSET_MEASUREMENT_3U0_1:
           {
-            index = FIRST_INDEX_FIRST_BLOCK_DR + (number_block*SIZE_ARRAY_FIX_MAX_MEASUREMENTS + 11)*sizeof(unsigned int);
+            index = FIRST_INDEX_FIRST_BLOCK_DR + (number_block*SIZE_ARRAY_FIX_MAX_MEASUREMENTS + 12)*sizeof(unsigned int);
             value = *((unsigned int *)(point_to_buffer + index));
             
             temp_value = value >> 3;
@@ -6426,7 +6448,7 @@ inline unsigned int Get_data(unsigned char *data, unsigned int address_data, uns
           }
         case DR_OFFSET_FREQUENCY_1:
           {
-            index = FIRST_INDEX_FIRST_BLOCK_DR + (number_block*SIZE_ARRAY_FIX_MAX_MEASUREMENTS + 15)*sizeof(unsigned int);
+            index = FIRST_INDEX_FIRST_BLOCK_DR + (number_block*SIZE_ARRAY_FIX_MAX_MEASUREMENTS + 16)*sizeof(unsigned int);
             value = *((unsigned int *)(point_to_buffer + index));
             
             temp_value = value / 10;
@@ -6434,7 +6456,7 @@ inline unsigned int Get_data(unsigned char *data, unsigned int address_data, uns
           }
         case DR_OFFSET_VMP:
           {
-            index = FIRST_INDEX_FIRST_BLOCK_DR + (number_block*SIZE_ARRAY_FIX_MAX_MEASUREMENTS + 22)*sizeof(unsigned int);
+            index = FIRST_INDEX_FIRST_BLOCK_DR + (number_block*SIZE_ARRAY_FIX_MAX_MEASUREMENTS + 23)*sizeof(unsigned int);
             int value_int = *((int *)(point_to_buffer + index));
 
             if (((unsigned int)value_int) != ((unsigned int)UNDEF_VMP))
@@ -6457,7 +6479,7 @@ inline unsigned int Get_data(unsigned char *data, unsigned int address_data, uns
         case DR_OFFSET_LABEL_TIME_MSW:
         case DR_OFFSET_LABEL_PROTECT:
           {
-            index = FIRST_INDEX_FIRST_BLOCK_DR + (number_block*SIZE_ARRAY_FIX_MAX_MEASUREMENTS + 24)*sizeof(unsigned int);
+            index = FIRST_INDEX_FIRST_BLOCK_DR + (number_block*SIZE_ARRAY_FIX_MAX_MEASUREMENTS + 25)*sizeof(unsigned int);
             
             if (offset == DR_OFFSET_LABEL_TIME_LSW)
             {

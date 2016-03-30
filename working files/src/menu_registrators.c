@@ -781,6 +781,7 @@ void make_ekran_analog_value_records_digital_registrator(void)
       " Ic   =         ",
       " I2   =         ",
       " I1   =         ",
+      " I0.4 =         ",
       " Ua   =         ",
       " Ub   =         ",
       " Uc   =         ",
@@ -802,7 +803,7 @@ void make_ekran_analog_value_records_digital_registrator(void)
 
     for (unsigned int i = 0; i < MAX_ROW_FOR_EKRAN_ANALOG_VALUES_DR; i++)
     {
-      if (i < 15)
+      if (i < 16)
       {
        //Струми і напруги
        if (i == 2)
@@ -817,7 +818,7 @@ void make_ekran_analog_value_records_digital_registrator(void)
         else start_number_digit_after_point = 3;
         convert_and_insert_char_for_measurement(start_number_digit_after_point, temp_measurement, 1, 1, name_string[i], 7);
       }
-      else if (i == 15)
+      else if (i == 16)
       {
         //Частота
         int temp_measurement = *(((int *)point_unsigned_int) + i);
@@ -838,7 +839,7 @@ void make_ekran_analog_value_records_digital_registrator(void)
         }
         convert_and_insert_char_for_frequency(temp_measurement, name_string[i]);
       }
-      else if (i < 22)
+      else if (i < 23)
       {
        //Опори
         const unsigned int index_of_start_position_array[MAX_NAMBER_LANGUAGE] = {4, 4, 5, 4};
@@ -899,7 +900,7 @@ void make_ekran_analog_value_records_digital_registrator(void)
 #undef SIZE_UNDEF
         }
       }
-      else if ((i == 22) && (type_view_max_values_dr == IDENTIFIER_BIT_ARRAY_MAX_CURRENT_PHASE))
+      else if ((i == 23) && (type_view_max_values_dr == IDENTIFIER_BIT_ARRAY_MAX_CURRENT_PHASE))
       {
         //Місце пошкодження
 #define SIZE_NAME_FIELD         2
@@ -976,9 +977,9 @@ void make_ekran_analog_value_records_digital_registrator(void)
 #undef INDEX_LESS_EQUAL_MORE
       }
       
-      if (i < 7)
+      if (i < 9)
         name_string[i][MAX_COL_LCD - 1] = odynyci_vymirjuvannja[index_language][INDEX_A];
-      else if (i < 14)
+      else if (i < 16)
         name_string[i][MAX_COL_LCD - 1] = odynyci_vymirjuvannja[index_language][INDEX_V];
       else
       {
@@ -993,10 +994,31 @@ void make_ekran_analog_value_records_digital_registrator(void)
     //Виключаємо поля, які не треба відображати
     /******************************************/
     int additional_current = 0;
+    
+    {
+      int shift_ind;
+      
+      if ((control_extra_settings_1_dr_for_manu & CTR_EXTRA_SETTINGS_1_CTRL_IB_I04) == 0) shift_ind = 8 - additional_current;
+      else shift_ind = 4 - additional_current; 
+      
+      if ((shift_ind + 1) <= position_temp) position_temp--;
+      do  
+      {
+        for(unsigned int j = 0; j<MAX_COL_LCD; j++)
+        {
+          if ((shift_ind + 1) < (MAX_ROW_FOR_EKRAN_ANALOG_VALUES_DR - additional_current)) name_string[shift_ind][j] = name_string[shift_ind + 1][j];
+          else name_string[shift_ind][j] = ' ';
+        }
+        shift_ind++;
+      }
+      while (shift_ind < (MAX_ROW_FOR_EKRAN_ANALOG_VALUES_DR - additional_current));
+      additional_current++;
+    }
+
     if ((control_extra_settings_1_dr_for_manu & CTR_EXTRA_SETTINGS_1_CTRL_PHASE_LINE) != 0)
     {
-      int shift_ind_min = 7;
-      int shift_ind_max = 9;
+      int shift_ind_min = 9;
+      int shift_ind_max = 11;
       
       for (int i = 0; i <= (shift_ind_max - shift_ind_min); i++)
       {
@@ -1019,7 +1041,7 @@ void make_ekran_analog_value_records_digital_registrator(void)
 
     if (type_view_max_values_dr != IDENTIFIER_BIT_ARRAY_MAX_CURRENT_PHASE)
     {
-      int shift_ind = 22 - additional_current;
+      int shift_ind = 23 - additional_current;
       if ((shift_ind + 1) <= position_temp) position_temp--;
       do  
       {

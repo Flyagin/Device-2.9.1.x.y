@@ -7436,7 +7436,7 @@ inline void digital_registrator(volatile unsigned int* carrent_active_functions)
           for(unsigned int i = 0; i < 7; i++) buffer_for_save_dr_record[FIRST_INDEX_DATA_TIME_DR + i] = *(label_to_time_array + i);
           
           //Додаткові налаштування при яких було запущено дискретний реєстратор
-          unsigned int control_extra_settings_1_tmp = current_settings_prt.control_extra_settings_1 & (CTR_EXTRA_SETTINGS_1_CTRL_PHASE_LINE);
+          unsigned int control_extra_settings_1_tmp = current_settings_prt.control_extra_settings_1 & (CTR_EXTRA_SETTINGS_1_CTRL_PHASE_LINE | CTR_EXTRA_SETTINGS_1_CTRL_IB_I04);
           unsigned char *point_to_extra_settings = (unsigned char *)(&control_extra_settings_1_tmp);
           for (unsigned int i = 0; i < sizeof(control_extra_settings_1_tmp); i++)
             buffer_for_save_dr_record[FIRST_INDEX_EXTRA_SETTINGS_DR + i] = *(point_to_extra_settings + i);

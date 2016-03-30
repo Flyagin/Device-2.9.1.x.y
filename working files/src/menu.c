@@ -2130,7 +2130,17 @@ void main_manu_function(void)
                 while (
                        (
                         ((control_extra_settings_1_dr_for_manu & CTR_EXTRA_SETTINGS_1_CTRL_PHASE_LINE) != 0) &&
-                        (current_ekran.index_position >= 7) && (current_ekran.index_position <= 9)
+                        (current_ekran.index_position >= 9) && (current_ekran.index_position <= 11)
+                       )
+                       || 
+                       (
+                        ((control_extra_settings_1_dr_for_manu & CTR_EXTRA_SETTINGS_1_CTRL_IB_I04) == 0) &&
+                        (current_ekran.index_position == 8)
+                       )
+                       || 
+                       (
+                        ((control_extra_settings_1_dr_for_manu & CTR_EXTRA_SETTINGS_1_CTRL_IB_I04) != 0) &&
+                        (current_ekran.index_position == 4)
                        )
                        || 
                        (
@@ -4090,7 +4100,17 @@ void main_manu_function(void)
                   while (
                          (
                           ((control_extra_settings_1_dr_for_manu & CTR_EXTRA_SETTINGS_1_CTRL_PHASE_LINE) != 0) &&
-                          (current_ekran.index_position >= 7) && (current_ekran.index_position <= 9)
+                          (current_ekran.index_position >= 9) && (current_ekran.index_position <= 11)
+                         )
+                         || 
+                         (
+                          ((control_extra_settings_1_dr_for_manu & CTR_EXTRA_SETTINGS_1_CTRL_IB_I04) == 0) &&
+                          (current_ekran.index_position == 8)
+                         )
+                         || 
+                         (
+                          ((control_extra_settings_1_dr_for_manu & CTR_EXTRA_SETTINGS_1_CTRL_IB_I04) != 0) &&
+                          (current_ekran.index_position == 4)
                          )
                          || 
                          (
@@ -4747,8 +4767,18 @@ void main_manu_function(void)
                   while (
                          (
                           ((control_extra_settings_1_dr_for_manu & CTR_EXTRA_SETTINGS_1_CTRL_PHASE_LINE) != 0) &&
-                          (current_ekran.index_position >= 7) && (current_ekran.index_position <= 9)
+                          (current_ekran.index_position >= 9) && (current_ekran.index_position <= 11)
                          )   
+                         || 
+                         (
+                          ((control_extra_settings_1_dr_for_manu & CTR_EXTRA_SETTINGS_1_CTRL_IB_I04) == 0) &&
+                          (current_ekran.index_position == 8)
+                         )
+                         || 
+                         (
+                          ((control_extra_settings_1_dr_for_manu & CTR_EXTRA_SETTINGS_1_CTRL_IB_I04) != 0) &&
+                          (current_ekran.index_position == 4)
+                         )
                          || 
                          (
                           (type_view_max_values_dr != IDENTIFIER_BIT_ARRAY_MAX_CURRENT_PHASE) && 
