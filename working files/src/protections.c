@@ -7671,7 +7671,7 @@ inline void digital_registrator(volatile unsigned int* carrent_active_functions)
           buffer_for_save_dr_record[FIRST_INDEX_FIRST_DATA_DR + number_items_dr*33 + 18] = (carrent_active_functions[3] >> 24) & 0xff;
           buffer_for_save_dr_record[FIRST_INDEX_FIRST_DATA_DR + number_items_dr*33 + 19] =  carrent_active_functions[4]        & 0xff;
           buffer_for_save_dr_record[FIRST_INDEX_FIRST_DATA_DR + number_items_dr*33 + 20] = (carrent_active_functions[4] >> 8 ) & 0xff;
-          buffer_for_save_dr_record[FIRST_INDEX_FIRST_DATA_DR + number_items_dr*33 + 22] = (carrent_active_functions[4] >> 16) & 0xff;
+          buffer_for_save_dr_record[FIRST_INDEX_FIRST_DATA_DR + number_items_dr*33 + 21] = (carrent_active_functions[4] >> 16) & 0xff;
           buffer_for_save_dr_record[FIRST_INDEX_FIRST_DATA_DR + number_items_dr*33 + 22] = (carrent_active_functions[4] >> 24) & 0xff;
           buffer_for_save_dr_record[FIRST_INDEX_FIRST_DATA_DR + number_items_dr*33 + 23] =  carrent_active_functions[5]        & 0xff;
           buffer_for_save_dr_record[FIRST_INDEX_FIRST_DATA_DR + number_items_dr*33 + 24] = (carrent_active_functions[5] >> 8 ) & 0xff;
