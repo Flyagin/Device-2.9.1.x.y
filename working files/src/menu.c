@@ -2326,20 +2326,20 @@ void main_manu_function(void)
               }
               else if (current_ekran.current_level == EKRAN_CHOOSE_SETTINGS_MTZ04)
               {
-                //Натисну кнопка Enter у вікні вибору група1-...-групаN-настройки МТЗ 0,4кВ
+                //Натисну кнопка Enter у вікні вибору група1-...-групаN-настройки МТЗ 0.4кВ
                 if(
                    (current_ekran.index_position >= INDEX_ML_GROUP1) &&
                    (current_ekran.index_position <= INDEX_ML_GROUP4)
                   )  
                 {
                   //Запам'ятовуємо поперердній екран
-                  //Переходимо на меню відображення атбраної групи уставок для МТЗ 0,4кВ
+                  //Переходимо на меню відображення атбраної групи уставок для МТЗ 0.4кВ
                   current_ekran.current_level = EKRAN_CHOOSE_SETPOINT_TIMEOUT_GROUP1_MTZ04 + (current_ekran.index_position - INDEX_ML_GROUP1);
                 }
                 else if (current_ekran.index_position == INDEX_ML_CONTROL_WITH_GROUPS)
                 {
                   //Запам'ятовуємо поперердній екран
-                  //Переходимо на меню відображення управлінської інформації для МТЗ 0,4кВ
+                  //Переходимо на меню відображення управлінської інформації для МТЗ 0.4кВ
                   current_ekran.current_level = EKRAN_CONTROL_MTZ04;
                 } 
                 current_ekran.index_position = position_in_current_level_menu[current_ekran.current_level];
@@ -2352,17 +2352,17 @@ void main_manu_function(void)
                        (current_ekran.current_level <= EKRAN_CHOOSE_SETPOINT_TIMEOUT_GROUP4_MTZ04)
                       )
               {
-                //Натисну кнопка Enter у вікні вибору уставок-витримок МТЗ 0,4кВ
+                //Натисну кнопка Enter у вікні вибору уставок-витримок МТЗ 0.4кВ
                 if(current_ekran.index_position == INDEX_ML_SETPOINT)
                 {
                   //Запам'ятовуємо поперердній екран
-                  //Переходимо на меню відображення уставок для МТЗ 0,4кВ
+                  //Переходимо на меню відображення уставок для МТЗ 0.4кВ
                   current_ekran.current_level = EKRAN_SETPOINT_MTZ04_GROUP1 + (current_ekran.current_level - EKRAN_CHOOSE_SETPOINT_TIMEOUT_GROUP1_MTZ04);
                 }
                 else if(current_ekran.index_position == INDEX_ML_TIMEOUT)
                 {
                   //Запам'ятовуємо поперердній екран
-                  //Переходимо на меню відображення витримок для МТЗ 0,4кВ
+                  //Переходимо на меню відображення витримок для МТЗ 0.4кВ
                   current_ekran.current_level = EKRAN_TIMEOUT_MTZ04_GROUP1 + (current_ekran.current_level - EKRAN_CHOOSE_SETPOINT_TIMEOUT_GROUP1_MTZ04);
                 }
                 current_ekran.index_position = position_in_current_level_menu[current_ekran.current_level];
@@ -5011,7 +5011,7 @@ void main_manu_function(void)
               if(current_ekran.index_position >= MAX_ROW_FOR_SETPOINT_MTZ04) current_ekran.index_position = 0;
               position_in_current_level_menu[current_ekran.current_level] = current_ekran.index_position;
 
-              //Формуємо екран уставок МТЗ 0,4кВ
+              //Формуємо екран уставок МТЗ 0.4кВ
               int group = (current_ekran.current_level - EKRAN_SETPOINT_MTZ04_GROUP1);
               make_ekran_setpoint_mtz04(group);
             }
@@ -5023,7 +5023,7 @@ void main_manu_function(void)
               if(current_ekran.index_position >= MAX_ROW_FOR_TIMEOUT_MTZ04) current_ekran.index_position = 0;
               position_in_current_level_menu[current_ekran.current_level] = current_ekran.index_position;
 
-              //Формуємо екран витримок МТЗ 0,4кВ
+              //Формуємо екран витримок МТЗ 0.4кВ
               int group = (current_ekran.current_level - EKRAN_TIMEOUT_MTZ04_GROUP1);
               make_ekran_timeout_mtz04(group);
             }
@@ -5032,7 +5032,7 @@ void main_manu_function(void)
               if(current_ekran.index_position >= MAX_ROW_FOR_CONTROL_MTZ04) current_ekran.index_position = 0;
               position_in_current_level_menu[EKRAN_CONTROL_MTZ04] = current_ekran.index_position;
 
-              //Формуємо екран управлінської інформації для МТЗ 0,4кВ
+              //Формуємо екран управлінської інформації для МТЗ 0.4кВ
               make_ekran_control_mtz04();
             }
             else if(current_ekran.current_level == EKRAN_CONTROL_ZDZ)
@@ -10866,7 +10866,7 @@ void main_manu_function(void)
                   else if (current_ekran.index_position == INDEX_ML_STPMTZ04_2)
                     edition_settings.setpoint_mtz04_2[group] = edit_setpoint(1, edition_settings.setpoint_mtz04_2[group], 1, COL_SETPOINT_MTZ04_2_COMMA, COL_SETPOINT_MTZ04_2_END, 10);
                 }
-                //Формуємо екран уставок МТЗ 0,4кВ
+                //Формуємо екран уставок МТЗ 0.4кВ
                 make_ekran_setpoint_mtz04(group);
               }
               else if(
@@ -10893,14 +10893,14 @@ void main_manu_function(void)
                   else if (current_ekran.index_position == INDEX_ML_TMOMTZ04_2_VVID_PR)
                     edition_settings.timeout_mtz04_2_vvid_pr[group] = edit_setpoint(1, edition_settings.timeout_mtz04_2_vvid_pr[group], 1, COL_TMO_MTZ04_2_VVID_PR_COMMA, COL_TMO_MTZ04_2_VVID_PR_END, 10);
                 }
-                //Формуємо екран витримок МТЗ 0,4кВ
+                //Формуємо екран витримок МТЗ 0.4кВ
                 make_ekran_timeout_mtz04(group);
               }
               else if(current_ekran.current_level == EKRAN_CONTROL_MTZ04)
               {
                 if(--current_ekran.index_position < 0) current_ekran.index_position = MAX_ROW_FOR_CONTROL_MTZ04 - 1;
                 position_in_current_level_menu[EKRAN_CONTROL_MTZ04] = current_ekran.index_position;
-                //Формуємо екран управлінської інформації для МТЗ 0,4кВ
+                //Формуємо екран управлінської інформації для МТЗ 0.4кВ
                 make_ekran_control_mtz04();
               }
               else if(current_ekran.current_level == EKRAN_CONTROL_ZDZ)
@@ -12095,7 +12095,7 @@ void main_manu_function(void)
                   else if (current_ekran.index_position == INDEX_ML_STPMTZ04_2)
                     edition_settings.setpoint_mtz04_2[group] = edit_setpoint(0, edition_settings.setpoint_mtz04_2[group], 1, COL_SETPOINT_MTZ04_2_COMMA, COL_SETPOINT_MTZ04_2_END, 10);
                 }
-                //Формуємо екран уставок МТЗ 0,4кВ
+                //Формуємо екран уставок МТЗ 0.4кВ
                 make_ekran_setpoint_mtz04(group);
               }
               else if(
@@ -12122,14 +12122,14 @@ void main_manu_function(void)
                   else if (current_ekran.index_position == INDEX_ML_TMOMTZ04_2_VVID_PR)
                     edition_settings.timeout_mtz04_2_vvid_pr[group] = edit_setpoint(0, edition_settings.timeout_mtz04_2_vvid_pr[group], 1, COL_TMO_MTZ04_2_VVID_PR_COMMA, COL_TMO_MTZ04_2_VVID_PR_END, 10);
                 }
-                //Формуємо екран витримок МТЗ 0,4кВ
+                //Формуємо екран витримок МТЗ 0.4кВ
                 make_ekran_timeout_mtz04(group);
               }
               else if(current_ekran.current_level == EKRAN_CONTROL_MTZ04)
               {
                 if(++current_ekran.index_position >= MAX_ROW_FOR_CONTROL_MTZ04) current_ekran.index_position = 0;
                 position_in_current_level_menu[EKRAN_CONTROL_MTZ04] = current_ekran.index_position;
-                //Формуємо екран управлінської інформації для МТЗ 0,4кВ
+                //Формуємо екран управлінської інформації для МТЗ 0.4кВ
                 make_ekran_control_mtz04();
               }
               else if(current_ekran.current_level == EKRAN_CONTROL_ZDZ)
@@ -13566,7 +13566,7 @@ void main_manu_function(void)
                     current_ekran.position_cursor_x = COL_SETPOINT_MTZ04_2_BEGIN;
                 }
 
-                //Формуємо екран уставок МТЗ 0,4кВ
+                //Формуємо екран уставок МТЗ 0.4кВ
                 int group = (current_ekran.current_level - EKRAN_SETPOINT_MTZ04_GROUP1);
                 make_ekran_setpoint_mtz04(group);
               }
@@ -13604,7 +13604,7 @@ void main_manu_function(void)
                     current_ekran.position_cursor_x = COL_TMO_MTZ04_2_VVID_PR_BEGIN;
                 }
                 
-                //Формуємо екран витримок МТЗ 0,4кВ
+                //Формуємо екран витримок МТЗ 0.4кВ
                 int group = (current_ekran.current_level - EKRAN_TIMEOUT_MTZ04_GROUP1);
                 make_ekran_timeout_mtz04(group);
               }
@@ -13634,7 +13634,7 @@ void main_manu_function(void)
                   edition_settings.control_mtz04 ^= maska;
                 }
 
-                //Формуємо екран управлінської інформації для МТЗ 0,4кВ
+                //Формуємо екран управлінської інформації для МТЗ 0.4кВ
                  make_ekran_control_mtz04();
               }
               else if(current_ekran.current_level == EKRAN_CONTROL_ZDZ)
@@ -15119,7 +15119,7 @@ void main_manu_function(void)
                     current_ekran.position_cursor_x = COL_SETPOINT_MTZ04_2_END;
                 }
 
-                //Формуємо екран уставок МТЗ 0,4кВ
+                //Формуємо екран уставок МТЗ 0.4кВ
                 int group = (current_ekran.current_level - EKRAN_SETPOINT_MTZ04_GROUP1);
                 make_ekran_setpoint_mtz04(group);
               }
@@ -15157,7 +15157,7 @@ void main_manu_function(void)
                     current_ekran.position_cursor_x = COL_TMO_MTZ04_2_VVID_PR_END;
                 }
                 
-                //Формуємо екран витримок МТЗ 0,4кВ
+                //Формуємо екран витримок МТЗ 0.4кВ
                 int group = (current_ekran.current_level - EKRAN_TIMEOUT_MTZ04_GROUP1);
                 make_ekran_timeout_mtz04(group);
               }
@@ -15187,7 +15187,7 @@ void main_manu_function(void)
                   edition_settings.control_mtz04 ^= maska;
                 }
 
-                //Формуємо екран управлінської інформації для МТЗ 0,4кВ
+                //Формуємо екран управлінської інформації для МТЗ 0.4кВ
                  make_ekran_control_mtz04();
               }
               else if(current_ekran.current_level == EKRAN_CONTROL_ZDZ)

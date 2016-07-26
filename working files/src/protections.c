@@ -2669,8 +2669,8 @@ inline void mtz_handler(volatile unsigned int *p_active_functions, unsigned int 
            PORIG_CHUTLYVOSTI_VOLTAGE :
            PORIG_CHUTLYVOSTI_VOLTAGE * U_DOWN / 100;
     
-    tmp_value |= ((measurement[IM_UAB] <= po_block_u_mtzn_x_setpoint) &&
-                  (measurement[IM_UBC] <= po_block_u_mtzn_x_setpoint) &&
+    tmp_value |= ((measurement[IM_UAB] <= po_block_u_mtzn_x_setpoint) ||
+                  (measurement[IM_UBC] <= po_block_u_mtzn_x_setpoint) ||
                   (measurement[IM_UCA] <= po_block_u_mtzn_x_setpoint)) << 14; //ПО U блок. МТЗНх
     
     //ПО U блок. МТЗНх
@@ -6016,11 +6016,11 @@ inline void continue_monitoring_max_phase_current(unsigned int time_tmp)
 /*****************************************************/
 
 /*****************************************************/
-//Початок моніторингу максимального фазного струму зі сторони 0,4кВ
+//Початок моніторингу максимального фазного струму зі сторони 0.4кВ
 /*****************************************************/
 inline void start_monitoring_max_phase04_current(unsigned int time_tmp)
 {
-  //Збільшуємо кількість фіксованих значень максимального фазного струму зі сторони 0,4кВ
+  //Збільшуємо кількість фіксованих значень максимального фазного струму зі сторони 0.4кВ
   number_max_phase04_dr++;
   
   //Помічаємо, що будем виходити з того, що зараз значення тільки починають моніторитися, тому приймаємо їх за найбільші
@@ -6056,13 +6056,13 @@ inline void start_monitoring_max_phase04_current(unsigned int time_tmp)
   //Фіксуємо час з моменту початку аварійного запису
   measurements_phase04_max_dr[25] = time_tmp;
 
-  //Помічаємо, що ми на стадії моніторингу максимального фазного струму зі сторони 0,4кВ
+  //Помічаємо, що ми на стадії моніторингу максимального фазного струму зі сторони 0.4кВ
   state_current_monitoring |= (1<<IDENTIFIER_BIT_ARRAY_MAX_CURRENT_PHASE04);
 }
 /*****************************************************/
 
 /*****************************************************/
-//Продовження моніторингу максимального фазного струму зі сторони 0,4кВ
+//Продовження моніторингу максимального фазного струму зі сторони 0.4кВ
 /*****************************************************/
 inline void continue_monitoring_max_phase04_current(unsigned int time_tmp)
 {
@@ -6776,7 +6776,7 @@ inline void continue_monitoring_min_f(unsigned int time_tmp)
 //Завершення моніторингу максимального струму
 /*
   type_current == IDENTIFIER_BIT_ARRAY_MAX_CURRENT_PHASE        - завершення моніторингу максимального фазного струму
-  type_current == IDENTIFIER_BIT_ARRAY_MAX_CURRENT_PHASE04      - завершення моніторингу максимального фазного струму сторони 0,4кВ
+  type_current == IDENTIFIER_BIT_ARRAY_MAX_CURRENT_PHASE04      - завершення моніторингу максимального фазного струму сторони 0.4кВ
   type_current == IDENTIFIER_BIT_ARRAY_MAX_CURRENT_3I0          - завершення моніторингу максимального струму 3I0
   type_current == IDENTIFIER_BIT_ARRAY_MAX_VOLTAGE_3U0          - завершення моніторингу максимального струму 3U0
   type_current == IDENTIFIER_BIT_ARRAY_MIN_VOLTAGE              - завершення моніторингу мінімальної напруги
@@ -7128,7 +7128,7 @@ inline void digital_registrator(volatile unsigned int* carrent_active_functions)
         }
       }
 
-      //Перевіряємо чи стоїть умова почати моніторити максимальний фазний струм сторони 0,4кВ
+      //Перевіряємо чи стоїть умова почати моніторити максимальний фазний струм сторони 0.4кВ
       if(
          ((carrent_active_functions[0] & MASKA_MONITOTYNG_PHASE04_SIGNALES_0) != 0) ||
          ((carrent_active_functions[1] & MASKA_MONITOTYNG_PHASE04_SIGNALES_1) != 0) ||
@@ -7142,7 +7142,7 @@ inline void digital_registrator(volatile unsigned int* carrent_active_functions)
       {
         if((state_current_monitoring & (1<<IDENTIFIER_BIT_ARRAY_MAX_CURRENT_PHASE04)) == 0)
         {
-          //Є умова почати новий моніторинг максимального фазного струму сторони 0,4кВ
+          //Є умова почати новий моніторинг максимального фазного струму сторони 0.4кВ
           temp_value_for_max_min_fix_measurement++;
         }
       }
@@ -7316,7 +7316,7 @@ inline void digital_registrator(volatile unsigned int* carrent_active_functions)
         if((state_current_monitoring & (1<<IDENTIFIER_BIT_ARRAY_MAX_CURRENT_PHASE)) != 0)
           end_monitoring_min_max_measurement(IDENTIFIER_BIT_ARRAY_MAX_CURRENT_PHASE, carrent_active_functions);
 
-        //Перевіряємо чи треба завершити моніторинг максимального фазного струму сторони 0,4кВ
+        //Перевіряємо чи треба завершити моніторинг максимального фазного струму сторони 0.4кВ
         if((state_current_monitoring & (1<<IDENTIFIER_BIT_ARRAY_MAX_CURRENT_PHASE04)) != 0)
           end_monitoring_min_max_measurement(IDENTIFIER_BIT_ARRAY_MAX_CURRENT_PHASE04, carrent_active_functions);
 
@@ -7477,7 +7477,7 @@ inline void digital_registrator(volatile unsigned int* carrent_active_functions)
             start_monitoring_max_phase_current(time_from_start_record_dr);
           }
 
-          //Перевіряємо чи стоїть умова моніторити максимальний фазний струм сторони 0,4кВ
+          //Перевіряємо чи стоїть умова моніторити максимальний фазний струм сторони 0.4кВ
           if(
              ((carrent_active_functions[0] & MASKA_MONITOTYNG_PHASE04_SIGNALES_0) != 0) ||
              ((carrent_active_functions[1] & MASKA_MONITOTYNG_PHASE04_SIGNALES_1) != 0) ||
@@ -7734,7 +7734,7 @@ inline void digital_registrator(volatile unsigned int* carrent_active_functions)
           end_monitoring_min_max_measurement(IDENTIFIER_BIT_ARRAY_MAX_CURRENT_PHASE, carrent_active_functions);
       }
 
-      //Перевіряємо чи стоїть умова моніторити максимальний фазний струм сторони 0,4кВ
+      //Перевіряємо чи стоїть умова моніторити максимальний фазний струм сторони 0.4кВ
       if(
          ((carrent_active_functions[0] & MASKA_MONITOTYNG_PHASE04_SIGNALES_0) != 0) ||
          ((carrent_active_functions[1] & MASKA_MONITOTYNG_PHASE04_SIGNALES_1) != 0) ||
@@ -8076,7 +8076,7 @@ inline void digital_registrator(volatile unsigned int* carrent_active_functions)
           if((state_current_monitoring & (1<<IDENTIFIER_BIT_ARRAY_MAX_CURRENT_PHASE)) != 0)
             end_monitoring_min_max_measurement(IDENTIFIER_BIT_ARRAY_MAX_CURRENT_PHASE, carrent_active_functions);
 
-          //Перевіряємо чи треба завершити моніторинг максимального фазного струму сторони 0,4кВ
+          //Перевіряємо чи треба завершити моніторинг максимального фазного струму сторони 0.4кВ
           if((state_current_monitoring & (1<<IDENTIFIER_BIT_ARRAY_MAX_CURRENT_PHASE04)) != 0)
             end_monitoring_min_max_measurement(IDENTIFIER_BIT_ARRAY_MAX_CURRENT_PHASE04, carrent_active_functions);
 
@@ -8284,7 +8284,7 @@ inline void analog_registrator(volatile unsigned int* carrent_active_functions)
           header_ar.T0 = current_settings_prt.T0;
           //Коефіцієнт трансформації TT
           header_ar.TCurrent = current_settings_prt.TCurrent;
-          //Коефіцієнт трансформації TT сторони 0,4кВ
+          //Коефіцієнт трансформації TT сторони 0.4кВ
           header_ar.TCurrent04 = current_settings_prt.TCurrent04;
           //Коефіцієнт трансформації TН
           header_ar.TVoltage = current_settings_prt.TVoltage;
@@ -8918,7 +8918,7 @@ inline void main_protection(void)
       active_functions[RANG_BLOCK_MTZ3     >> 5] |= (_CHECK_SET_BIT(temp_value_for_activated_function_2, RANG_INPUT_BLOCK_MTZ3    ) != 0) << (RANG_BLOCK_MTZ3     & 0x1f);
       active_functions[RANG_BLOCK_MTZ4     >> 5] |= (_CHECK_SET_BIT(temp_value_for_activated_function_2, RANG_INPUT_BLOCK_MTZ4    ) != 0) << (RANG_BLOCK_MTZ4     & 0x1f);
 
-      //Блок для МТЗ 0,4кВ
+      //Блок для МТЗ 0.4кВ
       active_functions[RANG_BLOCK_MTZ04_1     >> 5] |= (_CHECK_SET_BIT(temp_value_for_activated_function_2, RANG_INPUT_BLOCK_MTZ04_1    ) != 0) << (RANG_BLOCK_MTZ04_1     & 0x1f);
       active_functions[RANG_BLOCK_MTZ04_2     >> 5] |= (_CHECK_SET_BIT(temp_value_for_activated_function_2, RANG_INPUT_BLOCK_MTZ04_2    ) != 0) << (RANG_BLOCK_MTZ04_2     & 0x1f);
       active_functions[RANG_BLOCK_USK_MTZ04_2 >> 5] |= (_CHECK_SET_BIT(temp_value_for_activated_function_2, RANG_INPUT_BLOCK_USK_MTZ04_2) != 0) << (RANG_BLOCK_USK_MTZ04_2 & 0x1f);
