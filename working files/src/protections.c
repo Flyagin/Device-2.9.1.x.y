@@ -3986,23 +3986,25 @@ void mtz04_handler(volatile unsigned int *p_active_functions, unsigned int numbe
     //    tmp3, 0, tmp2, 10);
 //ускорение
   _TIMER_T_0(INDEX_TIMER_MTZ04_3, current_settings_prt.timeout_mtz04_2_pr[number_group_stp], tmp2, 8, tmp3, 4);
-  int timout_univ=0;
 //Простая
- switch(current_settings_prt.type_mtz04_2){
-  case 0:
-   timout_univ = current_settings_prt.timeout_mtz04_2[number_group_stp];
-  break;
-  case TYPE_MTZ_DEPENDENT_A:
-  case TYPE_MTZ_DEPENDENT_B:
-  case TYPE_MTZ_DEPENDENT_C:
-//расчет выдержки
-   timout_univ = timeout_dependent_general(measurement[IM_I04], number_group_stp, current_settings_prt.type_mtz04_2);
-  break;
+ switch(current_settings_prt.type_mtz04_2)
+ {
+ case 0:
+   {
+     _TIMER_T_0(INDEX_TIMER_MTZ04_4, current_settings_prt.timeout_mtz04_2[number_group_stp], tmp2, 10, /*tmp3, 6*/ p_global_trigger_state_mtz04_2, 0);
+     break;
+   }
+ case TYPE_MTZ_DEPENDENT_A:
+ case TYPE_MTZ_DEPENDENT_B:
+ case TYPE_MTZ_DEPENDENT_C:
+   {
+     //расчет выдержки
+     _TIMER_T_0_LOCK(INDEX_TIMER_MTZ04_4,  timeout_dependent_general(measurement[IM_I04], number_group_stp, current_settings_prt.type_mtz04_2), tmp2, 10, /*tmp3, 6*/ p_global_trigger_state_mtz04_2, 0);
+     break;
+   }
  }
 
-  _TIMER_T_0(INDEX_TIMER_MTZ04_4, timout_univ, tmp2, 10, tmp3, 6);
-  _OR2(tmp3, 4, 
-       tmp3, 6, tmp3, 7);
+  _OR2(tmp3, 4, /*tmp3, 6*/p_global_trigger_state_mtz04_2, 0, tmp3, 7);
   //Сраб. MTZ04_2
   if (_GET_OUTPUT_STATE(tmp3, 7))
   {
