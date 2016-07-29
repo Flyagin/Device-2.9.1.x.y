@@ -2448,7 +2448,7 @@ inline void d_not_handler(volatile unsigned int *p_active_functions)
 -------------------------------------------------
 */
 /*****************************************************/
-inline int timeout_dependent_general(unsigned int i, unsigned int number_group_stp, int type_mtz2_tmp)
+inline int timeout_dependent_general(unsigned int i, unsigned int setpoint_mtz_2, int timeout_mtz_2, int type_mtz2_tmp)
 {
   int timeout_result = 0;
   
@@ -2487,7 +2487,7 @@ inline int timeout_dependent_general(unsigned int i, unsigned int number_group_s
       }
     }
     
-    unsigned int Iust = current_settings_prt.setpoint_mtz_2[number_group_stp];
+    unsigned int Iust = setpoint_mtz_2;
     if (i > Iust)
     {
       register float I_div_Iusy = ((float)i)/((float)Iust);
@@ -2502,7 +2502,7 @@ inline int timeout_dependent_general(unsigned int i, unsigned int number_group_s
         total_error_sw_fixed(42);
       }
   
-      register float timeout = (((float)current_settings_prt.timeout_mtz_2[number_group_stp])/1000.0f);
+      register float timeout = (((float)timeout_mtz_2)/1000.0f);
       register float timeout_dependent = K*timeout/(rising_to_power - 1);
 
       int timeout_dependent_int = (int)timeout_dependent;
@@ -2821,7 +2821,7 @@ inline void mtz_handler(volatile unsigned int *p_active_functions, unsigned int 
       unsigned int i_max = measurement[IM_IA];
       if (i_max < measurement[IM_IB]) i_max = measurement[IM_IB];
       if (i_max < measurement[IM_IC]) i_max = measurement[IM_IC];
-      _TIMER_T_0_LOCK(INDEX_TIMER_MTZ2_DEPENDENT, timeout_dependent_general(i_max, number_group_stp, current_settings_prt.type_mtz2), tmp, 5, p_global_trigger_state_mtz2, 0);
+      _TIMER_T_0_LOCK(INDEX_TIMER_MTZ2_DEPENDENT, timeout_dependent_general(i_max, current_settings_prt.setpoint_mtz_2[number_group_stp], current_settings_prt.timeout_mtz_2[number_group_stp], current_settings_prt.type_mtz2), tmp, 5, p_global_trigger_state_mtz2, 0);
       _TIMER_T_0(INDEX_TIMER_MTZ2_PR, current_settings_prt.timeout_mtz_2_pr[number_group_stp], tmp, 6, tmp, 15);
       _TIMER_T_0(INDEX_TIMER_MTZ2, current_settings_prt.timeout_mtz_2[number_group_stp], tmp, 7, tmp, 16);
       _TIMER_T_0(INDEX_TIMER_MTZ2_N_VPERED, current_settings_prt.timeout_mtz_2_n_vpered[number_group_stp], tmp, 8, tmp, 17);
@@ -3312,7 +3312,7 @@ inline void tznp_handler(volatile unsigned int *p_active_functions, unsigned int
         timeout_tznp_nazad  = current_settings_prt.timeout_tznp_1_nazad[number_group_stp]; 
         
         index_timer_vpered = INDEX_TIMER_TZNP1_VPERED; 
-        index_timer_nazad  = INDEX_TIMER_TZNP1_VPERED;
+        index_timer_nazad  = INDEX_TIMER_TZNP1_NAZAD;
         
         control_tznp = (current_settings_prt.control_tznp >> INDEX_ML_CTR_TZNP1) & maska_ctrl_bits;
         
@@ -3331,7 +3331,7 @@ inline void tznp_handler(volatile unsigned int *p_active_functions, unsigned int
         timeout_tznp_nazad  = current_settings_prt.timeout_tznp_2_nazad[number_group_stp]; 
         
         index_timer_vpered = INDEX_TIMER_TZNP2_VPERED; 
-        index_timer_nazad  = INDEX_TIMER_TZNP2_VPERED;
+        index_timer_nazad  = INDEX_TIMER_TZNP2_NAZAD;
         
         control_tznp = (current_settings_prt.control_tznp >> INDEX_ML_CTR_TZNP2) & maska_ctrl_bits;
         
@@ -3350,7 +3350,7 @@ inline void tznp_handler(volatile unsigned int *p_active_functions, unsigned int
         timeout_tznp_nazad  = current_settings_prt.timeout_tznp_3_nazad[number_group_stp]; 
         
         index_timer_vpered = INDEX_TIMER_TZNP3_VPERED; 
-        index_timer_nazad  = INDEX_TIMER_TZNP3_VPERED;
+        index_timer_nazad  = INDEX_TIMER_TZNP3_NAZAD;
         
         control_tznp = (current_settings_prt.control_tznp >> INDEX_ML_CTR_TZNP3) & maska_ctrl_bits;
         
@@ -3999,7 +3999,7 @@ void mtz04_handler(volatile unsigned int *p_active_functions, unsigned int numbe
  case TYPE_MTZ_DEPENDENT_C:
    {
      //расчет выдержки
-     _TIMER_T_0_LOCK(INDEX_TIMER_MTZ04_4,  timeout_dependent_general(measurement[IM_I04], number_group_stp, current_settings_prt.type_mtz04_2), tmp2, 10, /*tmp3, 6*/ p_global_trigger_state_mtz04_2, 0);
+     _TIMER_T_0_LOCK(INDEX_TIMER_MTZ04_4,  timeout_dependent_general(measurement[IM_I04], current_settings_prt.setpoint_mtz04_2[number_group_stp], current_settings_prt.timeout_mtz04_2[number_group_stp], current_settings_prt.type_mtz04_2), tmp2, 10, /*tmp3, 6*/ p_global_trigger_state_mtz04_2, 0);
      break;
    }
  }

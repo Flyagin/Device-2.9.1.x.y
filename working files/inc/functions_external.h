@@ -186,7 +186,7 @@ extern void d_not_handler(volatile unsigned int*);
 extern void mtz_handler(volatile unsigned int*, unsigned int);
 extern void mtz04_handler(volatile unsigned int*, unsigned int);
 extern void zdz_handler(volatile unsigned int*);
-extern int timeout_dependent_general(unsigned int, unsigned int, int);
+extern int timeout_dependent_general(unsigned int, unsigned int, int, int);
 extern void zz_handler(volatile unsigned int*, unsigned int);
 extern void tznp_handler(volatile unsigned int*, unsigned int);
 extern void zop_handler(volatile unsigned int*, unsigned int);
