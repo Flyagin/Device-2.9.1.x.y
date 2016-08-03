@@ -3682,6 +3682,7 @@ void umin1_handler(volatile unsigned int *p_active_functions, unsigned int numbe
           current_settings_prt.setpoint_Umin1_Iblk[number_group_stp];
   
   _Bool Ia_or_Ic_is_larger_than_Iust = (measurement[IM_IA] >= setpoint3) ||
+                                       (measurement[IM_IB] >= setpoint3) || 
                                        (measurement[IM_IC] >= setpoint3);
   //Ì
   unsigned int tmp_value = ((current_settings_prt.control_extra_settings_1 & CTR_EXTRA_SETTINGS_1_CTRL_PHASE_LINE) == 0)         << 0;
@@ -3793,6 +3794,7 @@ void umin2_handler(volatile unsigned int *p_active_functions, unsigned int numbe
           current_settings_prt.setpoint_Umin2_Iblk[number_group_stp];
   
   _Bool Ia_or_Ic_is_larger_than_Iust = (measurement[IM_IA] >= setpoint3) ||
+                                       (measurement[IM_IB] >= setpoint3) || 
                                        (measurement[IM_IC] >= setpoint3);
   //Ì
   unsigned int tmp_value = ((current_settings_prt.control_extra_settings_1 & CTR_EXTRA_SETTINGS_1_CTRL_PHASE_LINE) == 0)         << 0;
