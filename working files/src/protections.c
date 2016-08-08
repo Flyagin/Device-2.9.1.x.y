@@ -4245,8 +4245,8 @@ void achr_chapv_handler(volatile unsigned int *p_active_functions, unsigned int 
   _Bool po_f1_achr1_rab = F1 <= ((int)current_settings_prt.setpoint_achr1_f_rab[number_group_stp]);
   _Bool po_f1_chapv1_rab = F1 >= ((int)current_settings_prt.setpoint_chapv1_f_rab[number_group_stp]);
   _Bool po_f1_achr1 = 0;
-  _Bool po_f1_achr2_rab = F1 <= ((int)current_settings_prt.setpoint_achr1_f_rab[number_group_stp]);
-  _Bool po_f1_chapv2_rab = F1 >= ((int)current_settings_prt.setpoint_chapv1_f_rab[number_group_stp]);
+  _Bool po_f1_achr2_rab = F1 <= ((int)current_settings_prt.setpoint_achr2_f_rab[number_group_stp]);
+  _Bool po_f1_chapv2_rab = F1 >= ((int)current_settings_prt.setpoint_chapv2_f_rab[number_group_stp]);
   _Bool po_f1_achr2 = 0;
 //----------
 
