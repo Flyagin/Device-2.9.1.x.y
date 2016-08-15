@@ -348,10 +348,10 @@
 #define SETPOINT_UMAX2_MAX            140000
 
 #define TIMEOUT_UMAX1_MIN             0
-#define TIMEOUT_UMAX1_MAX             32000
+#define TIMEOUT_UMAX1_MAX             300000
 
 #define TIMEOUT_UMAX2_MIN             0
-#define TIMEOUT_UMAX2_MAX             32000
+#define TIMEOUT_UMAX2_MAX             300000
 
 #define SETPOINT_Inom_MIN             5
 #define SETPOINT_Inom_MAX             (SETPOINT_Inom_MIN*KOEF_TT_MAX)
@@ -428,10 +428,10 @@
 #define NUMBER_DEFINED_NOT_MAX        NUMBER_DEFINED_NOT
 
 #define TIMEOUT_DF_PAUSE_MIN          0
-#define TIMEOUT_DF_PAUSE_MAX          32000
+#define TIMEOUT_DF_PAUSE_MAX          300000
 
 #define TIMEOUT_DF_WORK_MIN           0
-#define TIMEOUT_DF_WORK_MAX           32000
+#define TIMEOUT_DF_WORK_MAX           300000
 
 #define TIMEOUT_PREFAULT_MIN          100
 #define TIMEOUT_PREFAULT_MAX          5000
