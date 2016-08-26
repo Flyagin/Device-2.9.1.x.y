@@ -852,15 +852,15 @@ enum __mtz_abc_direction_const {
 #define MASKA_UROV_SIGNALS_0                 0
 #define MASKA_UROV_SIGNALS_1                 0
 #define MASKA_UROV_SIGNALS_2                 0
+#define MASKA_UROV_SIGNALS_3                 0
 
-#define MASKA_UROV_SIGNALS_3       (unsigned int)(                   \
+#define MASKA_UROV_SIGNALS_4       (unsigned int)(                   \
      (1 << (RANG_PUSK_UROV_VID_DV - 128))                     /*132*/\
    | (1 << (RANG_PO_UROV - 128))                              /*133*/\
    | (1 << (RANG_UROV1 - 128))                                /*134*/\
    | (1 << (RANG_UROV2 - 128))                                /*135*/\
 )
 
-#define MASKA_UROV_SIGNALS_4                 0
 #define MASKA_UROV_SIGNALS_5                 0
 #define MASKA_UROV_SIGNALS_6                 0
 #define MASKA_UROV_SIGNALS_7                 0
