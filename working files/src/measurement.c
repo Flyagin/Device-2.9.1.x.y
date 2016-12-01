@@ -139,6 +139,9 @@ void control_reading_ADCs(void)
     while ((SPI_ADC->SR & SPI_I2S_FLAG_TXE) == RESET);      //Очікуємо, поки SPI стане вільним
     GPIO_SPI_ADC->BSRRH = GPIO_NSSPin_ADC;                  //Виставляємо chip_select
     SPI_ADC->DR = (uint16_t)command_word;                   //Відправляємо командне число
+    
+    channel_answer = channel_request;
+    channel_request = (active_adc_new - 1)*NUMBER_CANALs_ADC + ((command_word >> 10) & 0xf);
   }
   else 
   {
@@ -164,6 +167,8 @@ void control_reading_ADCs(void)
       while ((SPI_ADC->SR & SPI_I2S_FLAG_TXE) == RESET);      //Очікуємо, поки SPI стане вільним
       GPIO_SPI_ADC->BSRRH = GPIO_NSSPin_ADC;                  //Виставляємо chip_select
       SPI_ADC->DR = 0;                                        //Відправляємо число (але так, щоб нове контрольне слово не записувалося)
+    
+      channel_answer = channel_request;
     }
   }
 }
@@ -217,13 +222,18 @@ void operate_test_ADCs(void)
   else _SET_BIT(clear_diagnostyka, ERROR_VREF_ADC1_TEST_COARSE_BIT);
   
   //VREF для АЦП2
-  temp = output_adc[C_VREF_ADC2].value;
-  vref_adc2_averange_sum += temp;
-  vref_adc2_averange_sum -= vref_adc2_moment_value[index_array_of_one_value];
-  vref_adc2_moment_value[index_array_of_one_value] = temp;
-  vref_adc2 = vref_adc2_averange_sum >> VAGA_NUMBER_POINT;
-  if ((temp < 0x614) || (temp > 0x9EB)) _SET_BIT(set_diagnostyka, ERROR_VREF_ADC2_TEST_COARSE_BIT);
-  else _SET_BIT(clear_diagnostyka, ERROR_VREF_ADC2_TEST_COARSE_BIT);
+  unsigned int vref_tmp = 0;
+  for (unsigned int i = 0; i < NUMBER_VREF_ADC2; i++)
+  {
+    temp = output_adc[index_VREF_ADC2[i]].value;
+    vref_adc2_averange_sum[i] += temp;
+    vref_adc2_averange_sum[i] -= vref_adc2_moment_value[i][index_array_of_one_value];
+    vref_adc2_moment_value[i][index_array_of_one_value] = temp;
+    vref_tmp += vref_adc2_averange[i] = vref_adc2_averange_sum[i] >> VAGA_NUMBER_POINT;
+    if ((temp < 0x614) || (temp > 0x9EB)) _SET_BIT(set_diagnostyka, ERROR_VREF_ADC2_TEST_COARSE_BIT);
+    else _SET_BIT(clear_diagnostyka, ERROR_VREF_ADC2_TEST_COARSE_BIT);
+  }
+  vref_adc2 = vref_tmp / NUMBER_VREF_ADC2;
 
   //VDD для АЦП1
   temp = output_adc[C_VDD_ADC1].value; 
@@ -544,6 +554,9 @@ void SPI_ADC_IRQHandler(void)
   {
     unsigned int shift = ((GPIO_SELECT_ADC->ODR & GPIO_SELECTPin_ADC) == 0) ? 0 : NUMBER_CANALs_ADC;
     unsigned int number_canal = shift + ((read_value >> 12) & 0xf);
+    
+    if(channel_answer != number_canal) _SET_BIT(set_diagnostyka, ERROR_SPI_ADC_BIT);
+    else _SET_BIT(clear_diagnostyka, ERROR_SPI_ADC_BIT);
 
     output_adc[number_canal].tick = tick_output_adc_p;
     output_adc[number_canal].value = read_value & 0xfff;

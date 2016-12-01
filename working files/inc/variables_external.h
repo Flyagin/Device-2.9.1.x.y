@@ -8,6 +8,7 @@ extern ROZSHYRENA_VYBORKA rozshyrena_vyborka;
 
 extern unsigned int command_word_adc, command_word_adc_work, active_index_command_word_adc;
 extern unsigned int state_reading_ADCs;
+extern unsigned int channel_request, channel_answer;
 
 extern uint32_t step_timer_adc;
 extern uint32_t penultimate_tick_DATA_VAL, previous_tick_DATA_VAL;
@@ -46,8 +47,10 @@ extern unsigned int vref_adc1_moment_value[NUMBER_POINT];
 extern unsigned int vref_adc1_averange_sum;
 extern unsigned int vref_adc1;
 
-extern unsigned int vref_adc2_moment_value[NUMBER_POINT];
-extern unsigned int vref_adc2_averange_sum;
+extern const unsigned int index_VREF_ADC2[NUMBER_GND_ADC2];
+extern unsigned int vref_adc2_moment_value[NUMBER_VREF_ADC2][NUMBER_POINT];
+extern unsigned int vref_adc2_averange_sum[NUMBER_VREF_ADC2];
+extern unsigned int vref_adc2_averange[NUMBER_VREF_ADC2];
 extern unsigned int vref_adc2;
 
 extern unsigned int vdd_adc1_moment_value[NUMBER_POINT];
