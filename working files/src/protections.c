@@ -2599,7 +2599,7 @@ inline void mtz_handler(volatile unsigned int *p_active_functions, unsigned int 
   unsigned int direction_ABC_tmp;
   unsigned int po_mtzn_x_vpered_setpoint;
   unsigned int po_mtzn_x_nazad_setpoint;
-  unsigned int po_block_u_mtzn_x_setpoint;
+//  unsigned int po_block_u_mtzn_x_setpoint;
   unsigned int po_i_ncn_setpoint;
   unsigned int po_u_ncn_setpoint;
   unsigned int po_u_mtzpn_x_setpoint;
@@ -2635,6 +2635,25 @@ inline void mtz_handler(volatile unsigned int *p_active_functions, unsigned int 
     _CLEAR_BIT(p_active_functions, RANG_NCN_MTZ);
   /******Неисправность цепей напряжения для 4-х ступеней*******/
   
+  /******ПО U блок. МТЗНх***********************/
+  //Уставка ПО U блок. МТЗНх з врахуванням гістерезису
+  unsigned int po_block_u_mtzn_x_setpoint = (_CHECK_SET_BIT(p_active_functions, RANG_PO_BLOCK_U_MTZN) == 0) ? PORIG_CHUTLYVOSTI_VOLTAGE : PORIG_CHUTLYVOSTI_VOLTAGE * U_DOWN / 100;
+  
+  //ПО U блок. МТЗНх
+  if (
+      (measurement[IM_UAB] <= po_block_u_mtzn_x_setpoint) ||
+      (measurement[IM_UBC] <= po_block_u_mtzn_x_setpoint) ||
+      (measurement[IM_UCA] <= po_block_u_mtzn_x_setpoint)
+     )
+  {
+    _SET_BIT(p_active_functions, RANG_PO_BLOCK_U_MTZN);
+  }
+  else
+  {
+    _CLEAR_BIT(p_active_functions, RANG_PO_BLOCK_U_MTZN);
+  }
+  /******ПО U блок. МТЗНх***********************/
+
   for (int mtz_level = 0; mtz_level < NUMBER_LEVEL_MTZ; mtz_level++) {
     //Для отладки
 //    if (mtz_level == 0) {
@@ -2733,22 +2752,23 @@ inline void mtz_handler(volatile unsigned int *p_active_functions, unsigned int 
     _OR3(direction_ABC_tmp, 17, direction_ABC_tmp, 18, direction_ABC_tmp, 19, tmp_value, 13);
     /******Сектор МТЗНх Вперед/Назад**********/
     
-    /******ПО U блок. МТЗНх***********************/
-    //Уставка ПО U блок. МТЗНх с учетом гистерезиса
-    po_block_u_mtzn_x_setpoint = (_CHECK_SET_BIT(p_active_functions, RANG_PO_BLOCK_U_MTZN) != 0) ?
-           PORIG_CHUTLYVOSTI_VOLTAGE :
-           PORIG_CHUTLYVOSTI_VOLTAGE * U_DOWN / 100;
-    
-    tmp_value |= ((measurement[IM_UAB] <= po_block_u_mtzn_x_setpoint) ||
-                  (measurement[IM_UBC] <= po_block_u_mtzn_x_setpoint) ||
-                  (measurement[IM_UCA] <= po_block_u_mtzn_x_setpoint)) << 14; //ПО U блок. МТЗНх
-    
-    //ПО U блок. МТЗНх
-    if (_GET_OUTPUT_STATE(tmp_value, 14))
-      _SET_BIT(p_active_functions, RANG_PO_BLOCK_U_MTZN);
-    else
-      _CLEAR_BIT(p_active_functions, RANG_PO_BLOCK_U_MTZN);
-    /******ПО U блок. МТЗНх***********************/
+//    /******ПО U блок. МТЗНх***********************/
+//    //Уставка ПО U блок. МТЗНх с учетом гистерезиса
+//    po_block_u_mtzn_x_setpoint = (_CHECK_SET_BIT(p_active_functions, RANG_PO_BLOCK_U_MTZN) != 0) ?
+//           PORIG_CHUTLYVOSTI_VOLTAGE :
+//           PORIG_CHUTLYVOSTI_VOLTAGE * U_DOWN / 100;
+//    
+//    tmp_value |= ((measurement[IM_UAB] <= po_block_u_mtzn_x_setpoint) ||
+//                  (measurement[IM_UBC] <= po_block_u_mtzn_x_setpoint) ||
+//                  (measurement[IM_UCA] <= po_block_u_mtzn_x_setpoint)) << 14; //ПО U блок. МТЗНх
+//    
+//    //ПО U блок. МТЗНх
+//    if (_GET_OUTPUT_STATE(tmp_value, 14))
+//      _SET_BIT(p_active_functions, RANG_PO_BLOCK_U_MTZN);
+//    else
+//      _CLEAR_BIT(p_active_functions, RANG_PO_BLOCK_U_MTZN);
+//    /******ПО U блок. МТЗНх***********************/
+    tmp_value |= (_CHECK_SET_BIT(p_active_functions, RANG_PO_BLOCK_U_MTZN) != 0) << 14;
     
     //Неисправность цепей напряжения для ступени МТЗх
     tmp_value |= (
