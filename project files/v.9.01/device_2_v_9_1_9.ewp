@@ -619,7 +619,7 @@
         </option>
         <option>
           <name>OOCOutputFile</name>
-          <state>device_2_v_9_1_8.bin</state>
+          <state>device_2_v_9_1_9.bin</state>
         </option>
         <option>
           <name>OOCCommandLineProducer</name>
@@ -674,7 +674,7 @@
         </option>
         <option>
           <name>IlinkOutputFile</name>
-          <state>device_2_v_9_1_8.out</state>
+          <state>device_2_v_9_1_9.out</state>
         </option>
         <option>
           <name>IlinkDebugInfoEnable</name>
