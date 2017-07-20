@@ -1,6 +1,9 @@
 #ifndef __CONST_GLOBAL__
 #define __CONST_GLOBAL__
 
+#define BA1_VER2
+
+
 #define N_BIG   8
 #define N_SMALL 2
 
@@ -1607,7 +1610,7 @@ NUMBER_ODYNYCI_VYMIRJUVANNJA
 /*****************************************/
 #define VERSIA_PZ                                             9
 #define MODYFIKACIA_VERSII_PZ                                 1
-#define ZBIRKA_VERSII_PZ                                      10
+#define ZBIRKA_VERSII_PZ                                      11
 /*****************************************/
 
 /*****************************************/
