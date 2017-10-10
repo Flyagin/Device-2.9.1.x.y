@@ -159,6 +159,8 @@ extern unsigned int sector_directional_tznp[3];
 
 extern unsigned int i1_bilshe_porogu, i2_bilshe_porogu;
 
+extern uint32_t TIM_PRT_write_tick;
+
 extern volatile unsigned int state_inputs;
 extern volatile unsigned int active_inputs;
 extern unsigned int state_outputs;

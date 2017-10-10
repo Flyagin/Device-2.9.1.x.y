@@ -277,6 +277,8 @@ unsigned int sector_directional_tznp[3] = {0, 0, 0};
 
 unsigned int i1_bilshe_porogu = 0, i2_bilshe_porogu = 0;
 
+uint32_t TIM_PRT_write_tick;
+
 volatile unsigned int state_inputs = 0; //"є сигнал " - відповідає встановленому біту (1); "немає сигналу" - відповідає скинутому біту (0)
 volatile unsigned int active_inputs = 0; //"вхід активний" - відповідає встановленому біту (1); "вхід пасивний" - відповідає скинутому біту (0)
 unsigned int state_outputs = 0;
