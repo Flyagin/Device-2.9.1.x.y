@@ -1025,7 +1025,7 @@ enum __mtz_abc_direction_const {
 
 #define MASKA_EL_SIGNALS_7        (unsigned int)(                     \
     (1 << (RANG_D_NOT16 - 224))                               /*224*/ \
-  | (1 << (RANG_ERROR_CONF_EL - 225))                         /*225*/ \
+  | (1 << (RANG_ERROR_CONF_EL - 224))                         /*225*/ \
 )
 /*****************************************/
 
