@@ -6819,7 +6819,7 @@ inline void start_monitoring_min_f(unsigned int time_tmp)
 /*****************************************************/
 inline void continue_monitoring_min_f(unsigned int time_tmp)
 {
-  if (((int)measurements_f_min_achr_dr[15]) != (-2)) /*Не зафіксовано, що частота була нижче порогу визначеного константою MIN_FREQUENCY - інакше далі моніторити мінімальну частоту немає сенсу*/
+  if (((int)measurements_f_min_achr_dr[16]) != (-2)) /*Не зафіксовано, що частота була нижче порогу визначеного константою MIN_FREQUENCY - інакше далі моніторити мінімальну частоту немає сенсу*/
   {
     //Перевірка, чи не є зарза досліджувана частота менша, ніж та що помічена мінімальною
     int frequency_int = (int)frequency;
